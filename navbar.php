@@ -48,11 +48,7 @@ include('config.php');
 
 body {
     margin: 0;
-<<<<<<< HEAD
-    background: url('images/bottomrightvector.png');
-=======
     background: url('./images/Vector_Bottom_Right.svg');
->>>>>>> 56b9525c58d38c7b5792e7b715a2c89aae1cc8fd
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: bottom -51px right -40px;
@@ -81,17 +77,10 @@ body {
     display: flex;
     flex-direction: column;
     border-right: #E8ECF5 2px solid;
-<<<<<<< HEAD
-    background: url('images/topleftvector.png');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: 0 -60px
-=======
     background: url('./images/Vector_Top_Left.svg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 0 -60px;
->>>>>>> 56b9525c58d38c7b5792e7b715a2c89aae1cc8fd
 }
 
 .sidenav .sidenavlink {
