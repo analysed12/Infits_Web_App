@@ -23,7 +23,7 @@
   </head>
   <body>
 		
-		<?php include 'event_calendar.php';?>
+		
 		  
             <div class="row">
                 <div class="col-sm-7">
