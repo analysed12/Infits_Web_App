@@ -213,14 +213,14 @@ font-size: 15px;
         <div class="food_events">
             <div class="food_container">
               <div class="food_card">
-                <div class="food_image"><img src="images/alooparatha.png"></div>
+                <div class="food_image"><img src="images/alooparatha.svg"></div>
                 <div style="padding:18px">
                 <div class="food_text">Aloo Paratha</div>
                 <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
                 </div>
               </div>
               <div class="food_card">
-                <div class="food_image"><img src="images/pancake.png"></div>
+                <div class="food_image"><img src="images/pancake.svg"></div>
                 <div style="padding:18px">
                     <div class="food_text">Pancake</div>
                     <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
@@ -228,7 +228,7 @@ font-size: 15px;
                 </div>
               </div>
               <div class="food_card">
-                <div class="food_image"><img src="images/salad.png"></div>
+                <div class="food_image"><img src="images/salad.svg"></div>
                 <div style="padding:18px">
                     <div class="food_text">Healthy salad</div>
                     <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
@@ -239,14 +239,14 @@ font-size: 15px;
             </div>
             <div class="food_container">
                 <div class="food_card">
-                  <div class="food_image"><img src="images/alooparatha.png"></div>
+                  <div class="food_image"><img src="images/alooparatha.svg"></div>
                   <div style="padding:18px">
                   <div class="food_text">Aloo Paratha</div>
                   <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
                   </div>
                 </div>
                 <div class="food_card">
-                  <div class="food_image"><img src="images/pancake.png"></div>
+                  <div class="food_image"><img src="images/pancake.svg"></div>
                   <div style="padding:18px">
                       <div class="food_text">Pancake</div>
                       <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
@@ -254,7 +254,7 @@ font-size: 15px;
                   </div>
                 </div>
                 <div class="food_card">
-                  <div class="food_image"><img src="images/salad.png"></div>
+                  <div class="food_image"><img src="images/salad.svg"></div>
                   <div style="padding:18px">
                       <div class="food_text">Healthy salad</div>
                       <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
