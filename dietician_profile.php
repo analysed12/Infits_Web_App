@@ -5,13 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infits | Dietician Profile</title>
-    <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     
     <style>
 
 #content {
-    overflow: auto;
     display: flex;
     flex-direction: column;
     height: 90%;
@@ -88,22 +86,29 @@
   display: flex;
   justify-content: space-between;
 }
+
+.center-flex{
+display: flex;
+align-items: center;
+justify-content: center;
+}
     
 </style>
 </head>
 
 <body>
-<div id="page">
 <?php include 'event_calendar.php'; ?>
 
 <div id="content">
       <!------------------------------------------------DASHBOARD--------------------------------------------------------->
       <div class="dietician-box">
-      <img src="images/pp2.png" height="80px" style="margin-right: 20px;">
-<div class="task-text">
-        <h1 style="font-size: 16px; color: grey; font-weight: 400; margin-bottom: 0;">Welcome Back</h1>
-        <h3 style="font-size: 24px; color: #202224; font-weight: 500; margin:0px ;"><var>name</var></h3>
-      </div></div>
+
+        <img src="images/pp2.png" height="80px" style="margin-right: 20px;">
+          <div class="task-text">
+            <h1 style="font-size: 16px; color: grey; font-weight: 400; margin-bottom: 0;">Welcome Back</h1>
+             <h3 style="font-size: 24px; color: #202224; font-weight: 500; margin:0px ;"><var>name</var></h3>
+          </div>
+        </div>
 
       <!-----------------------------------------------EVENTS--------------------------------------------------------->
 <br>
