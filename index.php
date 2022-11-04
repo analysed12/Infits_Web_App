@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infits</title>
-    <link rel="stylesheet" href="./css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     
     <style>
@@ -140,8 +139,7 @@
   </head>
 
   <body>
-    <div id="page">
-    <?php include 'event_calendar.php'; ?>
+    <?php include 'event_calendar.php';?>
 
     <div id="content">
 

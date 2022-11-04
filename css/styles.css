@@ -1,0 +1,611 @@
+body{
+  font-family: 'Poppins' !important;
+}
+.center-flex{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.space-between-flex{
+  display: flex;
+  justify-content: space-between;
+}
+.different-ends-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@viewport {
+  width: device-width ;
+  zoom: 1.0 ;
+}/*
+@media screen and (max-width:320px) {
+  /* CSS for screens that are 320 pixels or less will be put in this section 
+}
+@media (min-width: 576px){
+
+}
+@media (min-width: 768px){
+
+}
+@media (min-width: 992px){
+
+}
+@media (min-width: 1300px){
+
+}
+@media (min-width: 1540px){
+  
+}*/
+@media screen and (min-width: 720px) {
+  /* Styles go here */
+  .mobile-menu {
+      display: none;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 720px) {
+.sidenav{
+  display: none;
+}
+.vertical{
+  display: none;
+}
+.main{
+  margin-left: 0px !important;
+}/*
+.header{  
+  width: max-content;
+}*/
+.box{
+  width: 30px;
+  margin-left: 10px !important;
+}
+.join-button{
+  margin-top: 15px !important;
+  font-size: 15px !important;
+}
+.text{
+  font-size: 18px !important;
+}
+.container {
+  padding: 0 !important;
+  flex-wrap: wrap;
+}
+.time{
+  font-size: 10px !important;
+}
+
+/*HAMBURGER MENU*/
+.sidenavv {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenavv a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenavv a:hover {
+  color: #f1f1f1;
+}
+
+.sidenavv .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+}
+
+
+/*SIDENAV*/
+.sidenav {
+    height: 100%;
+    width: 280px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 10px;
+  }
+  
+  .sidenav a {
+    padding: 6px 8px 6px 10px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  ul{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 5px;
+    padding: 10px;
+    line-height: 88%;
+ }
+li{
+    margin: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+   
+}
+a{
+  color: #131635 !important;
+  font-size: 18px;
+    font-weight: 500;
+}
+a:hover, .active{
+    align-items: center;
+    border:1px solid #E5F1FF;  
+    background-color: #E5F1FF;
+    color: #0177FB !important;
+    border-radius: 10px;
+   }
+div.bottom {
+    position: fixed;
+    bottom: 30px;
+  }
+
+/*SECTION SEPERATION*/
+.main {
+    margin-left: 260px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+  /*VERTICAL LINE*/
+  .vertical {
+    border-left: 2px solid #E8ECF5;
+    position: absolute;
+    min-height: 200%;
+    left: 240px;
+  }
+
+/*HEADER*/
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between !important;
+  margin-top: 3px;
+  color: #8D8D8D;
+  font-size: 25px;
+}
+.name{
+  display: flex;
+  flex-direction: column;
+}
+.left, .right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+  
+/*UPCOMING EVENTS*/
+.events{
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  padding: 32px;
+  display: flex;
+  flex: 1;
+}
+.card {
+  padding: 16px;
+  margin: 16px;
+  border: 1px solid #eee;
+  box-shadow: 2px 4px 16px rgba(0,0,0,.06);
+  border-radius: 10px;
+  
+  background-color: #EFF8FF;
+  color: black;
+  height: 200px;
+  width: 400px;
+}
+.time{
+  display: flex;
+  justify-content: flex-end;
+  font-size: 18px;
+  font-weight: 400;
+}
+.pp, .text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.join-button{
+
+  background: white;
+  border: 1px solid #4B9AFB;
+  border-radius: 30px;
+  color: black;
+  box-shadow: 2px 4px 16px rgba(0,0,0,.2);
+  color: #4B9AFB;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin-top: 25px;
+  font-size: 15px;
+}
+
+/*TASK LIST*/
+.list{
+  display: flex;
+  
+}
+.task-buts{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.box{
+  margin-left: 42px;
+  background: #FFFFFF;
+  border: 1px solid #F4F4F4;
+  box-shadow: 0px 64px 64px -64px rgba(50, 50, 50, 0.11);
+  border-radius: 12px;
+  width: 90%;
+}
+.small-box{
+  margin: 10px;
+  padding: 10px;
+  background: #FFFFFF;
+  border: 1px solid #EFEEEE;
+  border-radius: 12px;
+}
+.task-button{
+  background-color: #4B9AFB;
+  padding: 10px;
+  width: 40%;
+  border: 1px solid #4B9AFB;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+}
+.task-box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #EFF8FF;
+  padding: 10px;
+  width: 70%;
+  border: 1px solid #EFF8FF;
+  border-radius: 10px;
+  color: #120D26;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+.min-box{
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+  align-items: center;
+}
+.task-content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.task-text{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+}
+
+/*-----------------------------CLIENT DASHBOARD----------------------------------------*/
+.client-events{
+  display: flex;
+  flex-direction: column;
+}
+.client-container {
+  padding: 32px;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.client-card {
+  padding: 16px;
+  margin: 16px;
+  border: 1px solid; 
+  box-shadow: 2px 4px 16px rgba(0,0,0,.06);
+  border-radius: 10px;
+  height: 200px;
+  width: 230px;
+}
+
+/*------------------HELP-----------------------*/
+.help-box{
+  margin-left: 42px;
+  background: #FFFFFF;
+  border: 1px solid #F4F4F4;
+  box-shadow: 0px 8px 24px rgba(176, 190, 197, 0.32), 0px 3px 5px rgba(176, 190, 197, 0.32);
+  border-radius: 12px;
+  width: 90%;
+  padding: 5px;
+  margin: 10px;
+}
+.help-content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.help-text{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+justify-content: center;
+}
+/*-------------------------FORM-------------------*/
+
+/*---------------------FAQ---------------------*/
+input{
+  width: 100%;
+  border: 1px solid #0177FD;
+}
+::placeholder {
+  color: #B8D3F2;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: #B8D3F2;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color: #B8D3F2;
+}
+
+
+.accordion {
+  background-color: white;
+  padding: 18px;
+  width: 100%;
+  margin: 12px;
+  border: 2px solid #0177FD;
+  text-align: left;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+
+.accordion:after {
+  content: '\002B';
+  float: right;
+  margin-left: 5px;
+}
+
+.panel {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+/*-------------------------DIET CHART---------------------------*/
+/* Style the tab */
+.tab {
+  overflow:auto;  
+  background-color: white;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: white;
+  float: left;
+  border: 1px solid #9C74F5;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  min-width: 200px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #9C74F5;
+  color: white;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #9C74F5;
+  color: white !important;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+}
+
+.tab-box{
+  box-shadow: 0px 8px 24px rgba(176, 190, 197, 0.32), 0px 3px 5px rgba(176, 190, 197, 0.32);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 15px;
+}
+.tab-submit{
+  font-size: 20px;
+}
+
+/*-----------------REFER CODE------------------------*/
+input[type=copy-text]{
+  background-color: #0177FD;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px 2px;
+  width: 150px !important;
+  }
+    
+.copyButton{
+  background-color: #0177FD;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px 2px;
+}
+.refer-box{
+  background-color: #0177FD;
+  border: none;
+  border-radius: 10px;
+  margin: 4px 2px;
+  width: 35%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.side-by-side{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.refer-a-friend{
+  width: 500px;
+  border: none;
+  box-shadow: none;
+}
+
+/*---------------------------------------- DIETICIAN PROFILE ------------------------------------------*/
+.dietician-box{
+  display: flex;
+  flex-direction: row;
+}
+
+.view-message{
+  border-radius: 10px; 
+  background: #4B9AFB; 
+  color: white; 
+  padding: 10px; 
+  margin: 5px; 
+  border: none;
+}
+
+/*------------------------------------ CLIENT DASHBOARD ----------------------------------------------*/
+.client-flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+.client-top-div{
+  display: flex;
+  flex-direction: row;
+}
+.steps {
+  background: linear-gradient(rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  width: 50px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-borders{
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  width: 50px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.heart{
+  border: 1px solid #E266A9;
+}
+.water{
+  border: 1px solid #52A4FF;
+}
+.sleep{
+  border: 1px solid #7D5DE6;
+}
+.weight{
+  border: 1px solid #54AFAC;
+}
+.calorie{
+  border: 1px solid #E3738D;
+}
+
+.set-goals{
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.daily-steps{
+    background: #FFFFFF;
+    border: 1px solid #767676;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px;
+}
+
+#set{
+  background: linear-gradient(262.45deg, #FA8686 9.26%, #F1A680 93.19%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  color: white;
+  padding: 10px;
+}
+.graph-box{
+  border: 1px solid #F1F1F1;
+  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.16);
+  border-radius: 11px;
+  padding: 10px;
+  max-width: 80%;
+}
+
+.item-button{
+  border: 1px solid #F1F1F1;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 10px;
+}
+.together-text{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
