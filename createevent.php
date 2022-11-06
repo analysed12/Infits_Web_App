@@ -61,8 +61,8 @@ height: 190px; */
 
 .subject {
     display: block;
-    font-size: 18px;
-    font-weight: bold;
+    /* font-size: 18px;
+    font-weight: bold; */
     width: 100%;
 }
 
@@ -82,46 +82,6 @@ height: 190px; */
 
 
 
-.form {
-    width: 100%;
-    position: relative;
-    height: 50px;
-    overflow: hidden;
-    margin-bottom: 10px;
-}
-
-.form input {
-    width: 100%;
-    height: 100%;
-    /* padding-top: 20px; */
-    border: none;
-    outline: none;
-
-}
-
-.form label {
-    position: absolute;
-    bottom: 0px;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    font-size: 19px;
-    border-bottom: 1px solid black;
-}
-
-.form label::after {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0px;
-    bottom: -1px;
-    border-bottom: 3px solid #5fa8d3;
-    transform: translate(-100%);
-    transition: all 0.3s ease;
-}
-
 .content-name {
     position: absolute;
     bottom: 5px;
@@ -129,28 +89,113 @@ height: 190px; */
     transition: all 0.3s ease;
 }
 
-.form input:focus+.label-name .content-name,
-.form input:valid+.label-name .content-name {
-    transform: translateY(-150%);
-    /* font-size: 14px;
-    color: #5fa8d3; */
-}
 
-.form input:focus+.label-name::after,
-.form input:valid+.label-name::after {
-    transform: translateX(0%);
-}
 
-.form_btn{
-    width:100%;
+.form_btn {
+    width: 100%;
     background: #4B9AFB;
-border-radius: 10px;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:30px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
 }
 
+.txt {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.txt p{
+    padding-left:15px;
+}
+.txticon {
+    padding:10px;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.icon {
+    padding: 10px;
+    color: black;
+    min-width: 50px;
+}
+
+.input-field {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+}
+
+/* POPUP */
+
+.pop-box .button {
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+
+.bg-popContainer {
+    display: none;
+}
+
+.pop-box {
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+    border: 1px solid rgba(225, 225, 225, 0.66);
+    box-shadow: 0px 11px 25px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+}
+
+.cont {
+    border-radius: 20px;
+}
+
+input {
+    width: 50%;
+    display: block;
+    margin: 15px auto;
+    padding: 5px;
+}
+
+.closer {
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 30px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color: black;
+}
 /* MEDIA QUERY */
 
 
@@ -163,10 +208,13 @@ margin-top:30px;
 }
 
 @media (min-width: 0px) and (max-width: 720px) {
-    
+    #content {
+        /* padding: 0 !important; */
+    }
+
     .event-form {
         /* height: 100%; */
-        margin-left:5%;
+        margin-left: 0 !important;
         width: 100%;
         display: flex;
         /* justify-content: center; */
@@ -194,7 +242,12 @@ margin-top:30px;
             <br>
             <div class="eve_form">
                 <label for="subject" class="event_title">EVENT NAME</label>
-                <input class="subject" type="text" name="subject" style="padding:10px 0px;">
+                <!-- <input class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;"> -->
+                <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;">
+                    <option value="consultation">Consultation</option>
+                    <option value="dietplan">Diet Plan</option>
+                    <option value="followup">Follow Up</option>
+                </select>
                 <br>
                 <div class="reminder">
                     <div class="event_title">REMINDER TYPE</div>
@@ -214,67 +267,117 @@ margin-top:30px;
                     </div>
                     <br>
                     <div class=" event_title">EVENT DETAILS</div>
-                    <div class="form">
-                        <input type="text" name="name" required>
-                        <label for="name" class="label-name">
-                            <span class="content-name">
-                                <div style="display: inline-block;"><i class="fa-solid fa-user"
-                                        style="color: black; margin-right: 15px;"></i>Add Client</div>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="form">
-                        <input type="text" name="name" required>
-                        <label for="name" class="label-name">
-                            <span class="content-name">
-                                <div style="display: inline-block;"><i class="fa-solid fa-suitcase rem_icon"
-                                        style="color: black;margin-right: 15px;"></i>Meeting Type</div>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="form">
-                        <input type="text" name="name" required>
-                        <label for="name" class="label-name">
-                            <span class="content-name">
-                                <div style="display: inline-block;"><i class="fa-solid fa-calendar-days"
-                                        style="color: black;margin-right: 15px;"></i>Date and Time</div>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="form">
-                        <input type="text" name="name" required>
-                        <label for="name" class="label-name">
-                            <span class="content-name">
-                                <div style="display: inline-block;"><i class="fa-solid fa-location"
-                                        style="color: black;margin-right: 15px;"></i>Place of Meeting</div>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="form">
-                        <input type="text" name="name" required>
-                        <label for="name" class="label-name">
-                            <span class="content-name">
-                                <div style="display: inline-block;"><i class="fa-solid fa-bars"
-                                        style="color: black;margin-right: 15px;"></i>Add Description</div>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="form">
-                        <input type="text" name="name" required>
-                        <label for="name" class="label-name">
-                            <span class="content-name">
-                                <div style="display: inline-block;"><i class="fa-solid fa-paperclip"
-                                        style="color: black;margin-right: 15px;"></i>Attachment</div>
-                            </span>
-                        </label>
-                    </div>
+
+                    <form style="max-width:100%;margin:auto">
+                        <div class="input-icons">
+                            <i class="fa-solid fa-user icon">
+                            </i>
+                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                type="password" placeholder="Add Client">
+                        </div>
+                        <div class="input-icons">
+                            <i class="fa-solid fa-suitcase icon">
+                            </i>
+                            <select style="border-top:none;border-left:none;border-right:none" class="input-field">
+                                <option value="select">Meeting Type</option>
+                                <option value="videocall">Video Call</option>
+                                <option value="call">Call</option>
+                                <option value="3">In person</option>
+                            </select>
+                        </div>
+                        <div class="txt button" style="border-bottom:1.8px solid black;" id="button">
+                            <i class="fa-solid fa-calendar-days txticon" style="display:inline-block">
+                            </i>
+                            <p style="display:inline-block">Date and Time</p>
+                        </div>
+
+                        <div id="bg_container" class="bg-popContainer">
+                            <div class="pop-box">
+                                <div id="close" class="closer">+</div>
+                                <div>
+                                <p style="display:inline-block; margin-right:10px">Start Date</p>
+                               <input style="display:inline-block;" type="datetime-local" placeholder="Name">
+                               </div>
+                               <div>
+                               <p style="display:inline-block;margin-right:18px">End Date</p>
+                                <input style="display:inline-block;" type="datetime-local" placeholder="Username">
+                                </div>
+                                <button>Done</button>
+
+                            </div>
+                        </div>
+                        <div class="input-icons">
+                            <i class="fa-solid fa-location icon">
+                            </i>
+                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                type="password" placeholder="Place of meeting">
+                        </div>
+                        <div class="input-icons">
+                            <i class="fa-solid fa-bars icon">
+                            </i>
+                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                type="password" placeholder="Add Description">
+                        </div>
+                        <div class="input-icons">
+                            <i class="fa-solid fa-paperclip icon">
+                            </i>
+                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                type="password" placeholder="Attachment">
+                        </div>
+                    </form>
+
                     <div class="form_btn">Book Appointment</div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Contents End -->
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="title">Example Modal</div>
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quod alias ut illo doloremque eum ipsum
+            obcaecati distinctio debitis reiciendis quae quia soluta totam doloribus quos nesciunt necessitatibus,
+            consectetur quisquam accusamus ex, dolorum, dicta vel? Nostrum voluptatem totam, molestiae rem at ad autem
+            dolor ex aperiam. Amet assumenda eos architecto, dolor placeat deserunt voluptatibus tenetur sint officiis
+            perferendis atque! Voluptatem maxime eius eum dolorem dolor exercitationem quis iusto totam! Repudiandae
+            nobis nesciunt sequi iure! Eligendi, eius libero. Ex, repellat sapiente!
+        </div>
+    </div>
 
 </body>
+<script>
+// get elements by id
+
+const popOutButton = document.getElementById("button")
+
+const exitcontainer = document.getElementById("bg_container")
+const bg_container = document.querySelector(".bg-popContainer")
+// Add event listeners 
+
+popOutButton.addEventListener("click", popOutNow);
+
+function popOutNow(e) {
+    e.preventDefault();
+
+    document.querySelector(".bg-popContainer").style.display = "flex";
+
+}
+
+
+const cancelPop = document.getElementById("close");
+
+cancelPop.addEventListener("click", CancelPopOut);
+
+function CancelPopOut(e) {
+    e.preventDefault();
+    bg_container.style.display = "none";
+
+
+}
+
+</script>
 
 </html>
