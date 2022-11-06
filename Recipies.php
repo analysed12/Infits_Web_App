@@ -20,7 +20,7 @@
 		<script src="js/mobiscroll.javascript.min.js"></script>
   </head>
   <body>
-		
+  <div id="content">
 	<?php include 'event_calendar.php'; ?>
 
 
@@ -28,20 +28,22 @@
 		 
 			
 		  
-          
+<!--           
           <h2>Meal Tracker</h2>
 		  
 		  
           <div class="slider-wrap">
             <div class="slider">
                 <div id="slider-inner">
-    <!-- Content using javascript -->
+     Content using javascript 
                 </div>
             </div>
-        </div>
+        </div> -->
     
         <script src="./js/file1.js"></script>
-		  
+        <h4 class="header">Meal Tracker</h4>
+    <?php include("calendar.php");
+    ?>
 		  
           <div class="add-diet">
             <div class="food-type" id="food-type">
@@ -85,5 +87,6 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+</div>
   </body>
 </html>
