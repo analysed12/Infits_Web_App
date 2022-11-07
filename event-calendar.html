@@ -240,13 +240,12 @@
             <div class="left-side">
                  <div class="calendar">
                     <div class="month">
-                        <p class="current-date">Nevember 2022</p>
+                        <p class="current-date">November 2022</p>
                     </div>
-                    <div class="arrow">
-                        <button id="arrow1" name="arrow1" onclick="previous()"> > </button>
-                        <button id="arrow2" name="arrow2" onclick ="next()"> < </button>
-                    </div>
-                    
+                 
+                        <button onclick="previous()"> > </button>
+                        <button onclick ="next()"> next </button>
+                                    
                         <ul class="week-days" style="display:flex;list-style:none;">
                             <li>S</li>
                             <li >M</li>
@@ -326,13 +325,16 @@
 
              function previous()
              {
-                currMonth = currMonth-1;
-                currentdate.innerText = `${months[currMonth]} ${currYear}`;
-                if(currMonth < 1)
+                if (currMonth < 1)
                 {
-                    currYear =currYear -1;
-                    currentdate.innerText = `${months[currMonth]} ${currYear}`;
+                    currMonth = 12;
+                    currMonth = currMonth -1;
                 }
+                else
+                {
+                    currMonth =currMonth -1;
+                }
+                
 
                 newCalendar();
                 
@@ -341,8 +343,17 @@
 
              function next()
              {
-                currMonth = currMonth + 1;
-                currentdate.innerText = `${months[currMonth]} ${currYear}`;
+                if (currMonth > 12)
+                {
+                    currMonth =1;
+                    currMonth =currMonth +1;
+
+                }
+
+                else{
+                      currMonth = currMonth +1;
+                }
+    
             
 
                 newCalendar();
