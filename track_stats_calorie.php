@@ -53,97 +53,6 @@ background: #FFFFFF;
 border: 1px solid #E266A9;
 border-radius: 10px;
 }
-
-/* circualrProgressBar */
-.progress {
-  width: 150px;
-  height: 150px;
-  background: none;
-  position: relative;
-}
-
-.progress::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 6px solid #eee;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.progress>span {
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  z-index: 1;
-}
-
-.progress .progress-left {
-  left: 0;
-}
-
-.progress .progress-bar {
-  width: 100%;
-  height: 100%;
-  background: none;
-  border-width: 6px;
-  border-style: solid;
-  position: absolute;
-  top: 0;
-}
-
-.progress .progress-left .progress-bar {
-  left: 100%;
-  border-top-right-radius: 80px;
-  border-bottom-right-radius: 80px;
-  border-left: 0;
-  transform-origin: center left;
-}
-
-.progress .progress-right {
-  right: 0;
-}
-
-.progress .progress-right .progress-bar {
-  left: -100%;
-  border-top-left-radius: 80px;
-  border-bottom-left-radius: 80px;
-  border-right: 0;
-  transform-origin: center right;
-}
-
-.progress .progress-value {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-
-body {
-  
-  background: linear-gradient(to right, #a8ff78, #78ffd6);
-  min-height: 100vh;
-}
-
-.rounded-lg {
-  border-radius: 1rem;
-}
-
-.text-gray {
-  color: #aaa;
-}
-
-div.h4 {
-  line-height: 1rem;
-}
-
-h1{
-    color : black;
-}
 </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -162,25 +71,19 @@ h1{
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/Recipies.css">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-		
 </head>
 <body>
   <?php include 'event_calendar.php'; ?>
-  <div class="big">
-  		<div class="row">
-				<div class="col-sm-7">
+  <div class="row">
+				<div class="col-sm-8">
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="heart">
-								<div class="step_btn">
+								<div class="step_btn">  
 									<img src="images/steps.svg"> 
 									<span>Step</span>
 								</div>
-								<div class="heart_btn_unselected">
+								<div class="heart_btn">
 									<img src="images/heart_unselected.svg"> 
 									<span>Heart </span>
 									<span>Rate</span>
@@ -210,8 +113,7 @@ h1{
 							</div>
 						</div>
 					  </div>
-					  <div class="graph">
-					  
+					<div class="graph">
                         <br>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
             
@@ -241,9 +143,8 @@ h1{
                             }
                         });
                         </script>
-					
-				</div>
-				<div class="col-sm-5">
+				    </div>
+				<div class="col-sm-4">
 					<div class="goals_right">
 						<div class="set_goals_water">
 							<h3>Set Goals</h3>
@@ -252,107 +153,72 @@ h1{
 							<div class="num_box">
 								<p>0000</p>
 							</div>
-							<button id="set_goals_button" class="btn btn-primary" type="submit">Set</button>
+							<button id="set_goals_button_water" class="btn btn-primary" type="submit">Set</button>
 						</div>
 					</div>
 				</div>
 			  </div>
-			  </div>
-				
-			</div>
-			<div class="row">	
-				<div class="col-sm-7">
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="heart_bottom">
-									<div class="heart_info">
-										<span>Daily Count</span>
-										<span>72 BPM</span>
-									</div>
-									<div class="heart_info">
-										
-									</div>
+            
+				<div class="col-sm-8">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="heart_bottom">
+								<div class="heart_info">
+									<span>Daily Count</span>
+									<span>72 BPM</span>
+								</div>
+								<div class="heart_info">
+									
 								</div>
 							</div>
-							<div class="col-sm-6">
-								<div class="heart_bottom">
-									<div class="heart_info">
+						</div>
+						<div class="col-sm-6">
+							<div class="heart_bottom">
+								<div class="heart_info">
 
-									</div>
-									<div class="heart_info">
-										
-									</div>
+								</div>
+								<div class="heart_info">
+									
 								</div>
 							</div>
-							
-												
-						</div>
-
-					</div>
-				<!-- <div class="col-sm-5"> -->
-					<div class="col-xl-3 col-lg-6 mb-4">
-						<div class="bg-white rounded-lg p-5 shadow">
-							<h2 class="h6 font-weight-bold text-center mb-4">CSS</h2>
-
-							<div class="progress mx-auto" data-value='80'>
-							<span class="progress-left">
-											<span class="progress-bar border-primary"></span>
-							</span>
-							<span class="progress-right">
-											<span class="progress-bar border-primary"></span>
-							</span>
-							<div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-								<div class="h2 font-weight-bold">80<sup class="small">%</sup></div>
 						</div>
 					</div>
+					<div class="past">
+
+					</div>
+
+				</div>
+				<div class="col-sm-4">
+					<span>Daily Progress</span>
 					
-					<div class="row text-center mt-4">
-							<div class="col-6 border-right">
-								<div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
-							</div>
-							<div class="col-6">
-								<div class="h4 font-weight-bold mb-0">70%</div><span class="small text-gray">Last month</span>
-							</div>
-							</div>
-						
+					<div class="progress_report">
+						<div class="progress_info">
+							<span>
+								AVG
+							</span>
+							<span>
+								81
+							</span>
+						</div>
+						<div class="progress_info_middle">
+							<span>
+								MAX
+							</span>
+							<span>
+								152
+							</span>
+						</div>
+						<div class="progress_info">
+							<span>
+								LOW
+							</span>
+							<span>
+								55
+							</span>
 						</div>
 					</div>
-					<script >
-						$(function() {
-
-								$(".progress").each(function() {
-
-								var value = $(this).attr('data-value');
-								var left = $(this).find('.progress-left .progress-bar');
-								var right = $(this).find('.progress-right .progress-bar');
-
-								if (value > 0) {
-									if (value <= 50) {
-									right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
-									} else {
-									right.css('transform', 'rotate(180deg)')
-									left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
-									}
-								}
-
-								})
-
-								function percentageToDegrees(percentage) {
-
-								return percentage / 100 * 360
-
-								}
-
-							});
-					</script>
-				<!-- </div>	 -->
-			</div>			
-	</div>
-				
-				
-  </div>
-
- 
+				</div>
+			  </div>
 
 </body>
 
