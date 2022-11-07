@@ -1,3 +1,7 @@
+<?php
+include "config.php" ;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,11 +112,12 @@ height: 190px; */
     cursor: pointer;
 }
 
-.txt p{
-    padding-left:15px;
+.txt p {
+    padding-left: 15px;
 }
+
 .txticon {
-    padding:10px;
+    padding: 10px;
 }
 
 .input-icons i {
@@ -185,17 +190,21 @@ input {
 }
 
 ::placeholder {
-  color: black;
-  opacity: 1; /* Firefox */
+    color: black;
+    opacity: 1;
+    /* Firefox */
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
- color: black;
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: black;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
- color: black;
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: black;
 }
+
 /* MEDIA QUERY */
 
 
@@ -240,112 +249,129 @@ input {
                 <img class="event-image" src="images/eventlist.png" alt="">
             </div>
             <br>
-            <div class="eve_form">
-                <label for="subject" class="event_title">EVENT NAME</label>
-                <!-- <input class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;"> -->
-                <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;">
-                    <option value="consultation">Consultation</option>
-                    <option value="dietplan">Diet Plan</option>
-                    <option value="followup">Follow Up</option>
-                </select>
-                <br>
-                <div class="reminder">
-                    <div class="event_title">REMINDER TYPE</div>
-                    <div class="rem">
-                        <div style="display: inline-block;" class="rem-item"><i
-                                class="fa-solid fa-suitcase rem_icon"></i>Consultation</div>
-                        <div style="display: inline-block;" class="rem-item"><i
-                                class="fa-solid fa-apple-whole rem_icon"></i>Diet Plan</div>
-                        <div style="display: inline-block;" class="rem-item"><i
-                                class="fa-solid fa-phone rem_icon"></i>Call
-                        </div>
-                        <div style="display: inline-block;" class="rem-item"><i
-                                class="fa-solid fa-add rem_icon"></i>Others
-
-
-                        </div>
-                    </div>
+            <form action="createevent.php" method="post">
+                <div class="eve_form">
+                    <label for="subject" class="event_title">EVENT NAME</label>
+                    <!-- <input class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;"> -->
+                    <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;">
+                        <option value="consultation">Consultation</option>
+                        <option value="dietplan">Diet Plan</option>
+                        <option value="followup">Follow Up</option>
+                    </select>
                     <br>
-                    <div class=" event_title">EVENT DETAILS</div>
+                    <div class="reminder">
+                        <div class="event_title">REMINDER TYPE</div>
+                        <div class="rem">
+                            <div style="display: inline-block;" class="rem-item"><i
+                                    class="fa-solid fa-suitcase rem_icon"></i>Consultation</div>
+                            <div style="display: inline-block;" class="rem-item"><i
+                                    class="fa-solid fa-apple-whole rem_icon"></i>Diet Plan</div>
+                            <div style="display: inline-block;" class="rem-item"><i
+                                    class="fa-solid fa-phone rem_icon"></i>Call
+                            </div>
+                            <div style="display: inline-block;" class="rem-item"><i
+                                    class="fa-solid fa-add rem_icon"></i>Others
 
-                    <form style="max-width:100%;margin:auto">
-                        <div class="input-icons">
-                            <i class="fa-solid fa-user icon">
-                            </i>
-                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
-                                type="password" placeholder="Add Client">
-                        </div>
-                        <div class="input-icons">
-                            <i class="fa-solid fa-suitcase icon">
-                            </i>
-                            <select style="border-top:none;border-left:none;border-right:none" class="input-field">
-                                <option value="select">Meeting Type</option>
-                                <option value="videocall">Video Call</option>
-                                <option value="call">Call</option>
-                                <option value="3">In person</option>
-                            </select>
-                        </div>
-                        <div class="txt button" style="border-bottom:1.8px solid black;" id="button">
-                            <i class="fa-solid fa-calendar-days txticon" style="display:inline-block">
-                            </i>
-                            <p style="display:inline-block">Date and Time</p>
-                        </div>
-
-                        <div id="bg_container" class="bg-popContainer">
-                            <div class="pop-box">
-                                <div id="close" class="closer">+</div>
-                                <div>
-                                <p style="display:inline-block; margin-right:10px">Start Date</p>
-                               <input style="display:inline-block;" type="datetime-local" placeholder="Name">
-                               </div>
-                               <div>
-                               <p style="display:inline-block;margin-right:18px">End Date</p>
-                                <input style="display:inline-block;" type="datetime-local" placeholder="Username">
-                                </div>
-                                <button>Done</button>
 
                             </div>
                         </div>
-                        <div class="input-icons">
-                            <i class="fa-solid fa-location icon">
-                            </i>
-                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
-                                type="password" placeholder="Place of meeting">
-                        </div>
-                        <div class="input-icons">
-                            <i class="fa-solid fa-bars icon">
-                            </i>
-                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
-                                type="password" placeholder="Add Description">
-                        </div>
-                        <div class="input-icons">
-                            <i class="fa-solid fa-paperclip icon">
-                            </i>
-                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
-                                type="password" placeholder="Attachment">
-                        </div>
-                    </form>
+                        <br>
+                        <div class=" event_title">EVENT DETAILS</div>
 
-                    <div class="form_btn">Book Appointment</div>
+                        <form style="max-width:100%;margin:auto">
+                            <div class="input-icons">
+                                <i class="fa-solid fa-user icon">
+                                </i>
+                                <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                    placeholder="Add Client">
+                            </div>
+
+                            <div class="input-icons">
+                                <i class="fa-solid fa-suitcase icon">
+                                </i>
+                                <select style="border-top:none;border-left:none;border-right:none" name="meetingtype" class="input-field">
+                                    <option value="select">Meeting Type</option>
+                                    <option value="videocall">Video Call</option>
+                                    <option value="call">Call</option>
+                                    <option value="3">In person</option>
+                                </select>
+                            </div>
+                            <div class="txt button" style="border-bottom:1.8px solid black;" id="button">
+                                <i class="fa-solid fa-calendar-days txticon" style="display:inline-block">
+                                </i>
+                                <p style="display:inline-block">Date and Time</p>
+                            </div>
+
+                            <div id="bg_container" class="bg-popContainer">
+                                <div class="pop-box">
+                                    <div id="close" class="closer">+</div>
+                                    <div>
+                                        <p style="display:inline-block; margin-right:10px">Start Date</p>
+                                        <input style="display:inline-block;" type="datetime-local" name="startdate" placeholder="StartDate">
+                                    </div>
+                                    <div>
+                                        <p style="display:inline-block;margin-right:18px">End Date</p>
+                                        <input style="display:inline-block;" type="datetime-local"
+                                            placeholder="EndDate" name="enddate">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="input-icons">
+                                <i class="fa-solid fa-location icon">
+                                </i>
+                                <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                    type="password" placeholder="Place of meeting" name="placeofmeeting">
+                            </div>
+                            <div class="input-icons">
+                                <i class="fa-solid fa-bars icon">
+                                </i>
+                                <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                    type="password" placeholder="Add Description" name="description">
+                            </div>
+                            <div class="input-icons">
+                                <i class="fa-solid fa-paperclip icon">
+                                </i>
+                                <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                    type="password" placeholder="Attachment" name="attachment">
+                            </div>
+                        </form>
+
+                        <button class="form_btn" type="submit">Book Appointment</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <!-- Contents End -->
-    <div class="modal" id="modal">
-        <div class="modal-header">
-            <div class="title">Example Modal</div>
-            <button data-close-button class="close-button">&times;</button>
-        </div>
-        <div class="modal-body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quod alias ut illo doloremque eum ipsum
-            obcaecati distinctio debitis reiciendis quae quia soluta totam doloribus quos nesciunt necessitatibus,
-            consectetur quisquam accusamus ex, dolorum, dicta vel? Nostrum voluptatem totam, molestiae rem at ad autem
-            dolor ex aperiam. Amet assumenda eos architecto, dolor placeat deserunt voluptatibus tenetur sint officiis
-            perferendis atque! Voluptatem maxime eius eum dolorem dolor exercitationem quis iusto totam! Repudiandae
-            nobis nesciunt sequi iure! Eligendi, eius libero. Ex, repellat sapiente!
-        </div>
-    </div>
+
+    <!-- PHP INSERT QUERIES -->
+    <?php
+
+if ($_SERVER['REQUEST_METHOD'] == "POST"){
+    // value from session
+    $personid = 1;
+    $eventname = $_POST['subject'];
+    // Using session and getting it from add client page
+    $client_id = 2;
+    $meeting_type = $_POST['meetingtype'];
+    $start_date = $_POST['startdate'];
+    $end_date = $_POST['enddate'];
+    $place_of_meeting = $_POST['placeofmeeting'];
+    $description = $_POST['description'];
+    $attachment = "hello";
+
+    $sql = "INSERT INTO create_event (PersonID, eventname, client_id, meeting_type, start_date, end_date, place_of_meeting, description, attachment) VALUES ('$personid','$eventname','$client_id','$meeting_type','$start_date','$end_date','$place_of_meeting','$description','$attachment')";
+    $result=mysqli_query($conn,$sql);
+    if($result){
+        echo "Successful";
+        }
+        else {
+        echo "ERROR";
+        }
+        // mysqli_close();
+}
+    ?>
 
 </body>
 <script>
@@ -377,7 +403,6 @@ function CancelPopOut(e) {
 
 
 }
-
 </script>
 
 </html>
