@@ -3,7 +3,7 @@
       <?php
          if( isset($_POST['submit']) && isset($_FILES['my_image']))
          {     
-               $r_id = 6;  
+                 
                echo "hello";    
                $name =$_POST['R-name'];
                $course =$_POST['course'];
@@ -44,9 +44,9 @@
               
                            move_uploaded_file($tmp_name,$img_upload_path );  
            
-               $sql = "INSERT INTO `receipe_details`(`receipe_id`,`receipe_name`,`cousre`,`category`,`preparation_time`,`cooking_time`,`serving`,`calorie`,`protien`,`fats`,`carbs`,
+               $sql = "INSERT INTO `receipe_details`(`receipe_name`,`cousre`,`category`,`preparation_time`,`cooking_time`,`serving`,`calorie`,`protien`,`fats`,`carbs`,
                 `image`,`image_path`)
-                VALUES('$r_id','$name','$course','$cate','$p_time','$c_time','$serv','$calo',
+                VALUES('$name','$course','$cate','$p_time','$c_time','$serv','$calo',
                '$prot','$fat','$carbo','$new_name','$img_upload_path')";
                 if($conn -> query($sql)==true)
                 {

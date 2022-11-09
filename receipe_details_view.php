@@ -2,43 +2,32 @@
    include('config.php');?>
 <html>
 <head>
-	<link rel="stylesheet" href="receipe-add.css" />
+	
    <style>
     body{
             font-family: 'Poppins'!important;
   }
     
-#listt{
-  
-        border-radius: 25px;
-        background-color:  #F3F5F8;
-        margin-right: 20%;
-        padding:0px;
-        font-family:'NATS';
-        
-        
-       
-        font-style: normal;
-        font-weight: 400;
-        font-size: 30px;
-        line-height: 46px;
-        display: flex;
-        align-items: center;
-        
-        color: #000000;
+    .container {
+    position: absolute;
+    width: 1200px;
+    height: 920px;
+    left: 242px;
+    top: 75px;
+}
+.wrapper {
+    position: relative;
+    width: 1440px;
+    height: 1024px;
+    background: #FFFFFF;
 }
 .list-group
 {
     list-style: none;
 }
-#listofmenu{
-    background: #FFFFFF;
-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.07);
-border-radius: 5px;
-height: 0.5%;
 
 
-}
+
 .list-group-item{
 
     font-family: 'NATS';
@@ -53,18 +42,19 @@ color: #000000;
 
 position: absolute;
 width: 500px;
-height: 39px;
 
-left :280px;
+left :10px;
+box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.07);
 
 background: #FFFFFF;
-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.07);
 border-radius: 5px;
 }
+
  img{
      height: 100%;
      width:  100%;
  }
+
  .nutri-style
  {
   
@@ -95,7 +85,7 @@ color: #000000;
 width: 474px;
 height: 39px;
 left: 312px;
-top: 894px;
+top: 676px;
 
 background: linear-gradient(264.44deg, rgba(207, 87, 230, 0.66) 0%, rgba(110, 100, 254, 0.66) 91.11%);
 border-radius: 10px;
@@ -105,7 +95,7 @@ border-radius: 10px;
 width: 43px;
 height: 18px;
 left: 216px;
-top: 10px;
+padding-top: 5px;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 300;
@@ -131,6 +121,18 @@ align-items: center;
 color: #000000;
 
    }
+   .receipe-details
+{
+     width:500px;
+     height: 500px;
+    padding-left:514px;
+    padding-top: 310px;
+    justify-content: space-between;
+
+   
+}
+
+
    p{
     position: absolute;
 width: 146px;
@@ -147,32 +149,47 @@ line-height: 70px;
 color: #000000;
 
    }
+   .upload-photo{
+
+     position: absolute;
+width: 285px;
+height: 230px;
+left: 610px;
+top: 100px;
+
+background: #D9D9D9;
+opacity: 0.74;
+border-radius: 12px;
+}
+.buttons{
+    box-sizing: border-box;
+
+position: absolute;
+width: 459px;
+height: 50px;
+left: 556px;
+top: 335px;
+
+background: #E7E7E7;
+border: 1px solid #E7E7E7;
+border-radius: 44px;
+text-align: center;
+}
+
+
 
    </style>
 
 	</head>
 	<body>
-		<div class ="wrapper">
-        <!-----------sideNav--------->
-        <div class="vert-rectangle">
-            
-            
-</div>
+	<!-------sidenav----->
+     <?php include("event_calendar.php")?>
 
-</div>
-<div class="vline">
-</div>
-<div class="header">
-      <div class="left">
-        <p style="font-size: 20px; color: black;"> New Recipe </p>
-</div>
-<div class="right">
 
-</div>
-</div>
-  <div class="hline"></div>
+
+     
    <form id="form1" action="" method="post" enctype ="multipart/form/data">
-        <div class = "container">
+       
         	 <?php
            	  	$sql ="select * from `receipe_details` where `receipe_id`=7";
            	  	$res = mysqli_query($conn,$sql);
@@ -187,33 +204,36 @@ color: #000000;
 
     </div>
         	
-         <div class="buttons">
+        <div class="buttons" style="text-align: center;">
             <ul class="button-class" style="display:flex; list-style:none";>
-<li> <div class="p-2" style="width: 121px;height:32px;"><a href ="#">Recipies details</a></div></li>
-  <li><div class="p-2" style="width:88px; height:32px; margin-left: 55px;"><a href="#">Ingredients</a></div></li>
- <li> <div class="p-2" style="width:78px; height:32px; margin-left: 55px;"><a href="#">Direction</a></div></li>
+<li> <div class="p-2" style="width: 135px;height:32px; margin-top: 5%;padding-left:20px;background-color: white;  border-radius: 22px; "><a href ="#" style="text-decoration: none; color: black;  font-size:15;font-weight:400%; ">Recipies details</a></div></li>
+  <li><div class="p-2" style="width:100px; height:32px; margin-left: 50px;
+  margin-top: 5%;  text-align:center;">
+    <a href="#" style="text-decoration: none; color: black; font-size:15;font-weight:400% ;">Ingredients</a></div></li>
+ <li> <div class="p-2" style="width:78px; height:32px; margin-left: 40px; margin-top: 5%;" >
+    <a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;">Directions</a></div></li>
 </ul>
 </div>
 
            <div class="receipe-details">
            	  <!------<table id ="tbl-view">---->
-                 <ul class="list-group" id="listofmenu" style="margin-left:30%;margin-right: 30%; list-style: :none;  ">
-            <li class="list-group-item" style="top:345px;"><?php echo $row["receipe_name"];?></li>
-            <li class="list-group-item" style="top:394px;" ><<?php echo $row["cousre"]; ?></li>
-              <li class="list-group-item" style="top:445px;"> <?php echo $row["category"]; ?>
+                 <ul class="list-group" id="listofmenu" style="margin-left:30%;margin-right: 30%; list-style: :none; justify-content: space-between;  ">
+            <li class="list-group-item"  ><?php echo $row["receipe_name"];?></li>
+            <li class="list-group-item" style="padding-top:14px;" ><?php echo $row["cousre"]; ?></li>
+              <li class="list-group-item"> <?php echo $row["category"]; ?>
                 
               </li>
-            <li class="list-group-item" style="color:grey ; top:493px;"><?php echo $row["preparation_time"];?></li>
-            <li class="list-group-item" style="color:grey; top:543px;"><?php echo $row["cooking_time"];?></li>
-            <li class="list-group-item" style="color:grey ; top:592px;"><?php echo $row["serving"];?></li>
+            <li class="list-group-item" style="margin-bottom: 50%;padding-top:14px;"><?php echo $row["preparation_time"];?></li>
+            <li class="list-group-item"><?php echo $row["cooking_time"];?></li>
+            <li class="list-group-item"><?php echo $row["serving"];?></li>
         </ul>
              <div class="nutri-style"> <h6 class="h5-style">Nutritions</h6></div>
              <ul class="list-group" id="listofmenu" style="margin-left:30%;margin-right: 30%; ">
             
-             <li class="list-group-item" style="color:grey; top:689px;"> <?php echo $row["calorie"]; ?></li>
-             <li class="list-group-item" style="color:grey ; top:737px;"><?php echo $row["protien"]; ?></li>
-             <li class="list-group-item" style="color:grey ; top:791px;"> <?php echo $row["fats"];?></li>
-             <li class="list-group-item" style="color:grey ;top:831px;"><?php echo $row["carbs"];?></li>
+             <li class="list-group-item"> <?php echo $row["calorie"]; ?></li>
+             <li class="list-group-item"><?php echo $row["protien"]; ?></li>
+             <li class="list-group-item"> <?php echo $row["fats"];?></li>
+             <li class="list-group-item"><?php echo $row["carbs"];?></li>
            
 
           </ul>
@@ -227,8 +247,6 @@ color: #000000;
            	  	
                   
            	  	   <?php } } ?>
-           	</div>
-
-
+           
 	</body>
 </html>
