@@ -33,7 +33,7 @@ body{
    font-size: 16px;
    font-weight: 400;
   }
-  input[type=submit]{
+.btn{
     background-color: #7282FB;
     border: none;
     color: white;
@@ -67,3 +67,14 @@ body{
     align-items: center;
     justify-content: space-around;
     }
+
+.signup{
+      border: 1px solid #EBEBEB;
+      padding: 10px;
+      border-radius: 5px;
+      min-width: auto;
+      width: 150px;
+      background-color: #FFFFFF;
+      text-decoration: none;
+      color: black;
+  }
