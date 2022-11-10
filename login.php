@@ -1,4 +1,5 @@
 <?php include('server.php') ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,9 +117,9 @@ justify-content: center;
   <form method="post" action="login.php">
   	<?php include('errors.php'); ?>
 
-  		<input type="text" name="username" placeholder="Your Email">
-<br><br>
-  		<input type="password" name="password" placeholder="Password">
+  		<input type="text" name="email" placeholder="Your Email">
+      <br><br>
+  		<input type="password" name="password_1" placeholder="Password">
       <br><br>
   		<button type="submit" class="btn" name="login_user">Login</button>
 

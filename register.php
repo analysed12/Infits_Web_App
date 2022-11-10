@@ -113,11 +113,13 @@ justify-content: center;
   <form method="post" action="register.php">
   	<?php include('errors.php'); ?>
     <div class="login-area">
-  	  <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
+    <input type="text" name="dietitianuserID" placeholder="Username">
+        <br>
+  	  <input type="text" name="name" placeholder="Your Name " value="<?php echo $name; ?>">
         <br>
   	  <input type="email" name="email" placeholder="Your Email" value="<?php echo $email; ?>">
         <br>
-        <input type="text" name="phno" placeholder="Your Phone Number">
+        <input type="text" name="mobile" placeholder="Your Phone Number">
         <br>
   	  <input type="password" name="password_1" placeholder="Password">
         <br>
