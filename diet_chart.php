@@ -89,10 +89,18 @@
     <?php include 'event_calendar.php'; ?>
 
     <div id="content">
+    <?php include("calendar.php");?>
+    <br>
+    </div>
+
+    
+
+    <div id="content">
+
+    
 
       <!------------------------------------------------DASHBOARD--------------------------------------------------------->
         <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Meal Tracker</h1>
-        <h3 style="font-size: 24px; color: #202224; font-weight: 500; margin-bottom:0px ;">***calendar***</h3>
         <br>
 
 
