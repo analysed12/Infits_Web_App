@@ -146,21 +146,6 @@ div.h4 {
 h1{
     color : black;
 }
-.graph{
-  background: #FFFFFF;
-border: 1px solid #F1F1F1;
-box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.16);
-border-radius: 11px;
-width: 4870px;
-height: 240px;
-margin-bottom: 20px;
-/* margin: 30px; */
-/* margin-left: 50px; */
-}
-.all{
-	padding: 20px;
-	/* height: 500px; */
-}
 </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -187,10 +172,10 @@ margin-bottom: 20px;
 </head>
 <body>
   <?php include 'event_calendar.php'; ?>
-      <div class="all">
-		<div class="row">
-		<div class="col-12 col-md-8">
-		<div class="row">
+  <div class="container">
+  		<div class="row">
+				<div class="col-sm-7">
+					<div class="row">
 						<div class="col-sm-6">
 							<div class="heart">
 								<div class="step_btn">
@@ -227,8 +212,40 @@ margin-bottom: 20px;
 							</div>
 						</div>
 					  </div>
-		</div>
-		<div class="col-6 col-md-4">
+					  <div class="graph">
+					  
+                        <br>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+            
+                        <canvas id="myChart" ></canvas>
+					</div>
+                        <script>
+                            var xValues = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
+                            var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
+                
+                            new Chart("myChart", {
+                            type: "line",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                fill: false,
+                                lineTension: 0,
+                                backgroundColor: "#FF8B8B",
+                                borderColor: "#FF8B8B",
+                                data: yValues
+                                }]
+                            },
+                            options: {
+                                legend: {display: false},
+                                scales: {
+                                yAxes: [{ticks: {min: 1000, max:9000}}],
+                                }
+                            }
+                        });
+                        </script>
+					
+				</div>
+				<div class="col-sm-5">
 					<div class="goals_right">
 						<div class="set_goals_water">
 							<h3>Set Goals</h3>
@@ -240,51 +257,105 @@ margin-bottom: 20px;
 							<button id="set_goals_button" class="btn btn-primary" type="submit">Set</button>
 						</div>
 					</div>
-		</div>
-		</div>
-
-		</div>
-
-		<!-- Columns are always 50% wide, on mobile and desktop -->
-		<div class="row">
-		<div class="col-6">
-		<div class="graph">
-					  
-					  <br>
-					  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-		  
-					  <canvas id="myChart" ></canvas>
-				  </div>
-					  <script>
-						  var xValues = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
-						  var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
-			  
-						  new Chart("myChart", {
-						  type: "line",
-						  data: {
-							  labels: xValues,
-							  datasets: [{
-							  fill: false,
-							  lineTension: 0,
-							  backgroundColor: "#FF8B8B",
-							  borderColor: "#FF8B8B",
-							  data: yValues
-							  }]
-						  },
-						  options: {
-							  legend: {display: false},
-							  scales: {
-							  yAxes: [{ticks: {min: 1000, max:9000}}],
-							  }
-						  }
-					  });
-					  </script>
-				  
+				</div>
 			  </div>
-		</div>
-		<div class="col-6">.col-6</div>
-		</div>
-		
+			  </div>
+				
+			</div>
+			<div class="row">	
+				<div class="col-sm-7">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="heart_bottom">
+									<div class="heart_info">
+										<span>Daily Count</span>
+										<span>72 BPM</span>
+									</div>
+									<div class="heart_info">
+										
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="heart_bottom">
+									<div class="heart_info">
+
+									</div>
+									<div class="heart_info">
+										
+									</div>
+								</div>
+							</div>
+							
+												
+						</div>
+
+					</div>
+				<!-- <div class="col-sm-5"> -->
+					<div class="col-xl-3 col-lg-6 mb-4">
+						<div class="bg-white rounded-lg p-5 shadow">
+							<h2 class="h6 font-weight-bold text-center mb-4">CSS</h2>
+
+							<div class="progress mx-auto" data-value='80'>
+							<span class="progress-left">
+											<span class="progress-bar border-primary"></span>
+							</span>
+							<span class="progress-right">
+											<span class="progress-bar border-primary"></span>
+							</span>
+							<div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+								<div class="h2 font-weight-bold">80<sup class="small">%</sup></div>
+						</div>
+					</div>
+					
+					<div class="row text-center mt-4">
+							<div class="col-6 border-right">
+								<div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
+							</div>
+							<div class="col-6">
+								<div class="h4 font-weight-bold mb-0">70%</div><span class="small text-gray">Last month</span>
+							</div>
+							</div>
+						
+						</div>
+					</div>
+					<script >
+						$(function() {
+
+								$(".progress").each(function() {
+
+								var value = $(this).attr('data-value');
+								var left = $(this).find('.progress-left .progress-bar');
+								var right = $(this).find('.progress-right .progress-bar');
+
+								if (value > 0) {
+									if (value <= 50) {
+									right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+									} else {
+									right.css('transform', 'rotate(180deg)')
+									left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+									}
+								}
+
+								})
+
+								function percentageToDegrees(percentage) {
+
+								return percentage / 100 * 360
+
+								}
+
+							});
+					</script>
+				<!-- </div>	 -->
+			</div>			
+	</div>
+				
+				
+  </div>
+
+ 
+
 </body>
 
 </html>
