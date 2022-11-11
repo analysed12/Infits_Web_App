@@ -254,9 +254,9 @@ input {
                     <label for="subject" class="event_title">EVENT NAME</label>
                     <!-- <input class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;"> -->
                     <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;">
-                        <option value="consultation">Consultation</option>
-                        <option value="dietplan">Diet Plan</option>
-                        <option value="followup">Follow Up</option>
+                        <option value="Consultation">Consultation</option>
+                        <option value="Dietplan">Diet Plan</option>
+                        <option value="Followup">Follow Up</option>
                     </select>
                     <br>
                     <div class="reminder">
@@ -282,7 +282,7 @@ input {
                             <div class="input-icons">
                                 <i class="fa-solid fa-user icon">
                                 </i>
-                                <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                                <input style="border-top:none;border-left:none;border-right:none" class="input-field" name="client_name"
                                     placeholder="Add Client">
                             </div>
 
@@ -291,9 +291,9 @@ input {
                                 </i>
                                 <select style="border-top:none;border-left:none;border-right:none" name="meetingtype" class="input-field">
                                     <option value="select">Meeting Type</option>
-                                    <option value="videocall">Video Call</option>
-                                    <option value="call">Call</option>
-                                    <option value="3">In person</option>
+                                    <option value="Videocall">Video Call</option>
+                                    <option value="Call">Call</option>
+                                    <option value="In person">In person</option>
                                 </select>
                             </div>
                             <div class="txt button" style="border-bottom:1.8px solid black;" id="button">
@@ -305,6 +305,12 @@ input {
                             <div id="bg_container" class="bg-popContainer">
                                 <div class="pop-box">
                                     <div id="close" class="closer">+</div>
+                                    <?php
+                                    $sql = "SELECT * FROM create_event
+                                    WHERE ((start_date <= 2022-11-11 11:27:15 AND end_date > 2022-11-11 11:27:15) 
+                                     OR 
+                                     (start_date < 2022-11-11 14:30:00 AND EndDate >= 2022-11-11 14:30:00))";
+                                    ?>
                                     <div>
                                         <p style="display:inline-block; margin-right:10px">Start Date</p>
                                         <input style="display:inline-block;" type="datetime-local" name="startdate" placeholder="StartDate">
@@ -350,10 +356,10 @@ input {
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
     // value from session
-    $personid = 1;
+    // $eventid ;
     $eventname = $_POST['subject'];
     // Using session and getting it from add client page
-    $client_id = 2;
+    $clientuserid = "Azarudeen";
     $meeting_type = $_POST['meetingtype'];
     $start_date = $_POST['startdate'];
     $end_date = $_POST['enddate'];
@@ -361,7 +367,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     $description = $_POST['description'];
     $attachment = "hello";
 
-    $sql = "INSERT INTO create_event (PersonID, eventname, client_id, meeting_type, start_date, end_date, place_of_meeting, description, attachment) VALUES ('$personid','$eventname','$client_id','$meeting_type','$start_date','$end_date','$place_of_meeting','$description','$attachment')";
+    // ERROR HANDLING FOR DATE 
+    $sql1 = "SELECT * FROM create_event WHERE ((start_date <= $start_date AND end_date > $start_date) OR (start_date < $end_date AND end_date >= $end_date))";
+    $result1 = mysqli_query($conn,$sql1);
+    if(mysqli_num_rows($result) > 0){
+        header("Location: ../createevent.php?signup=booked");
+        exit();
+    }
+
+    $sql = "INSERT INTO create_event (eventname, clientuserid, meeting_type, start_date, end_date, place_of_meeting, description, attachment) VALUES ('$eventname','$clientuserid','$meeting_type','$start_date','$end_date','$place_of_meeting','$description','$attachment')";
     $result=mysqli_query($conn,$sql);
     if($result){
         echo "Successful";
