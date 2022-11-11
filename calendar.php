@@ -14,7 +14,7 @@
       
   position: absolute;
   height: 112px;
-  width: 100%;
+  width: 80%;
   overflow: scroll;
   border: 1px solid rgba(225, 225, 225, 0.66);
     box-shadow: 0px 11px 25px rgba(0, 0, 0, 0.1);
@@ -68,7 +68,7 @@
         width: 80px !important;
       }
       .slider{
-        width: 90% !important;
+        width: 80% !important;
       }
   }
 </style>
@@ -152,4 +152,5 @@ function getScrollPercentage(){
 }
 
 </script>
+<br><br><br><br>
 </html>
