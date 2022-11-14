@@ -1,3 +1,4 @@
+<?php session_start();?>
 <html>
 <title>
 	  Ingredients
@@ -102,13 +103,82 @@ align-items: center;
 color: #929292;
 
 }
-.popup-window{
-	width:409px;
-	height: 212px;
-	top : 140px;
+.add{
+	          display: none;
+	          box-sizing: border-box;
+                 position: fixed;
+                width: 409px;
+                height: 212px;
+                background: #FFFFFF;
+
+                border: 1px solid #E4E4E4;
+                box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.09);
+                border-radius:18px;
+             transform: translate(-50%,-50%);
+
 }
 
 
+}
+.div-header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                 padding: 5px 5px;
+                
+
+}
+.div-header .title{
+	font-family: 'NATS';
+	 font-style: normal;
+	 font-size: 24px;
+	 font-weight: 400;
+}
+
+.box{
+	padding-left: 61px;
+       justify-content: space-between;
+
+
+	align-items: center;
+}
+.input-text{
+
+box-sizing: border-box;
+
+position: absolute;
+width: 310px;
+height: 33px;
+
+background: #FFFFFF;
+border: 1px solid #D5D5D5;
+border-radius: 9px;
+
+
+}
+.link-add{
+margin-top: 25;
+	 padding-left: 15px;
+
+
+}
+
+
+
+.button-wrap{
+     top: 160px ;
+     left: 124px;
+     padding-left: 61px;
+	position: absolute;
+width: 162px;
+height: 31px;
+
+background: linear-gradient(267.44deg, rgba(204, 87, 231, 0.66) 0.01%, rgba(116, 99, 252, 0.66) 85.22%);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+cursor: pointer;
+
+}
 	 </style>
  
 
@@ -119,10 +189,10 @@ color: #929292;
 	  	 <?php include("event_calendar.php");?>
 	  	 
 	  	 <form id="form1" action="" method="post" enctype ="multipart/form/data">
-	  	 <div class="container">
+	  	 <div class="container" id ="cnt">
 	  	
         	 <?php
-           	  	$sql ="select `image`,`image_path` from `receipe_details` where `receipe_id`=6";
+           	  	$sql ="select `image`,`image_path` from `receipe_details` where `receipe_id`=7";
            	  	$res = mysqli_query($conn,$sql);
            	  	if(mysqli_num_rows($res) > 0)
            	  	{
@@ -148,15 +218,103 @@ color: #929292;
 </div>
            <div class="link-add">    
           <div class="link-container">
-          	<label id="lbl" name="lbl_symbol" onclick="window.open('Add-ingredients.php','_blank',
-          		'height=50px',
-          	'width=50px','top:100px')">+</label>
+          	<label id="lbl" name="lbl_symbol">+</label>
           		<div>
           			<div class="para">
           	<p id ="p-add" > Add Ingredients</p>
            </div>
 
+             <!--------popupwindow------->
 
+           <?php  if(isset($_POST['done']))
+        {
+       //$rec_id = $_SESSION['receipe_id'];
+       $rec_id = 7;
+         
+       $name = "juice";
+       $ingrd1 =$_POST['text1'];
+
+       $quantity1 =$_POST['text2'];
+       $sql = "UPDATE addingredients SET `ingredients1`='$ingrd1', `quantity1`= '$quantity1' WHERE `receipe_id`=7;";
+       if($conn-> query($sql)  === TRUE){?>
+          
+    <?php }}?>
+
+     
+
+            <div class="add" id="add" name="add">
+            	<div class="div-header">
+            		<div class="title"> Add-ingredients</div>
+            		<button class="close-button" id="cls-btn" style="background: none; border:none; cursor:pointer;outline: none; font-weight:bold;">
+            		 &times;</button>
+            	</div>
+            	<div class="div-body">
+            		<form action="Ingredients.php" method="post" enctype="multipart/form-data">
+    
+        <div class="box">
+        <input type= "text" id="text1" class="input-text" name = "text1" value="Name of Ingredients"><br>
+        <input type="text" id ="text2"  class="input-text" name ="text2" value="Quantity" 
+        style="margin-top: 13px;"><br>
+       <div  class="link-add"> <a href ="#" id="aid" name="aid">Add more Ingredients</a></div>
+
+        <div class="button-wrap" style="text-align:justify;">
+        
+       <button  id ="done"  name = "done" style="font-size:15; background:linear-gradient(267.44deg, rgba(204, 87, 231, 0.66) 0.01%, rgba(116, 99, 252, 0.66) 85.22%); color: white;"
+       onclick="m_display();">  Done </button>
+           
+        
+            	</div>
+
+            </div>
+
+           <!------code for popup------->
+            <script>
+            	var count=0;
+            	//button for open
+            	var btn = document.getElementById("lbl");
+            	//button for close
+            	var close_btn =document.getElementById("cls-btn");
+            	var modal = document.getElementById("add");
+            	//link to add
+            	var btn_add = document.getElementById("aid");
+            	// textboxes
+            	var txt_value1 = document.getElementById("text1");
+            	var txt_value2 = document.getElementById("text2");
+                      var btn_done =document.getElementById("done");
+            	 btn.onclick =function(){
+            		modal.style.display = "block";
+
+            	}
+            	close_btn.onclick = function(){
+            		modal.style.display ="none";
+            	       event.preventDefault();
+            		
+            	}
+            	btn_add.onclick = function () {
+            		 txt_value1.value = "Name of Ingredients";
+            		 txt_value2.value= "Quantity";
+            		 count++;
+            		 if(count == 1)
+            		 {
+            		 	txt_value2.value=1;
+            		 }
+                     
+               
+                     }
+
+            	function m_display() 
+
+            	       {
+            	       	//event.preventDefault();
+                        modal.style.display ="block";
+
+                         }
+    
+
+
+
+
+            </script>
    
              
 
