@@ -228,9 +228,10 @@ header .current-date {
     border-left: 2px solid #E8ECF5;
 }
 
-.schedule{
-    margin-left : 15px;
+.schedule {
+    margin-left: 15px;
 }
+
 /* Side Calendar */
 </style>
 
@@ -290,38 +291,40 @@ header .current-date {
 
                 <!-- Todays Schedule -->
                 <div class="schedule">
-                <p style="font-weight:bold;" >Todays Schedule</p>
-                <?php
+                    <p style="font-weight:bold;">Todays Schedule</p>
+                    <?php
                 // Rahul is taken as static dietitian name
                 $sql="SELECT dietitianuserID,newtable.clientuserID,name,eventname,meeting_type,place_of_meeting,start_date,end_date FROM
                 (SELECT create_client.dietitianuserID,clientuserID,name FROM client LEFT JOIN create_client ON create_client.clientName = client.clientuserID WHERE create_client.dietitianuserID = 'Rahul')newtable LEFT JOIN create_event ON create_event.clientuserid=newtable.clientuserID 
                 WHERE (start_date > CURRENT_TIMESTAMP);";
+
+
                 $result=mysqli_query($conn,$sql); 
                 while($row = mysqli_fetch_assoc($result)){ ?>
-                <div class="schedule-card">
-                    <div class="schedule-card-title"><?php echo $row['meeting_type'] ?></div>
-                    <div class="schedule-card-name"><?php echo $row['name'] ?></div>
-                    <div class="schedule-card-place"><?php echo $row['place_of_meeting'] ?></div>
-                </div>
-                <?php
+                    <div class="schedule-card">
+                        <div class="schedule-card-title"><?php echo $row['meeting_type'] ?></div>
+                        <div class="schedule-card-name"><?php echo $row['name'] ?></div>
+                        <div class="schedule-card-place"><?php echo $row['place_of_meeting'] ?></div>
+                    </div>
+                    <?php
                 }?>
                 </div>
-<style>
-    .schedule-card{
-        background: #EFF8FF;
-border-radius: 21px;
-width :90%;
-padding:20px;
-margin-bottom:20px;
-    }
+                <style>
+                .schedule-card {
+                    background: #EFF8FF;
+                    border-radius: 21px;
+                    width: 90%;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                }
 
-    .schedule-card-title{
-        font-weight: 600;
-font-size: 18px;
-color: #3C82D7;
+                .schedule-card-title {
+                    font-weight: 600;
+                    font-size: 18px;
+                    color: #3C82D7;
 
-    }
-</style>
+                }
+                </style>
             </div>
         </div>
     </div>

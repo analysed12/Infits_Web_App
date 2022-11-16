@@ -53,7 +53,7 @@ html {
 
 .event-image i {
     font-size: 85px;
-    padding:10px;
+    padding: 10px;
     /* width: 10%;
     height: 10%; */
 }
@@ -109,19 +109,22 @@ html {
 
 @media (min-width: 0px) and (max-width: 720px) {
     .plan_form {
-    margin-left: 0% !important;
-    width: 100% !important;
-    /* background-color: aquamarine; */
-}
-.event_form {
-    margin-left:15% !important;
-    width: 60%;
-}
-    .tag_title{
-        font-size:15px !important;
+        margin-left: 0% !important;
+        width: 100% !important;
+        /* background-color: aquamarine; */
     }
-    .tag-item{
-font-size:15px !important;
+
+    .event_form {
+        margin-left: 15% !important;
+        width: 60%;
+    }
+
+    .tag_title {
+        font-size: 15px !important;
+    }
+
+    .tag-item {
+        font-size: 15px !important;
     }
 }
 </style>
@@ -144,20 +147,31 @@ font-size:15px !important;
                 <div class="ev-img">
                     <i class="fa-solid fa-user"></i>
                 </div>
-               
+
             </div>
 
             <div class="event_form">
                 <div class="evt-form">
+
+                    
                     <div class="tags">
                         <div class="tag_title">Tags</div>
                         <div class="tag">
                             <div style="display: inline-block" class="tag-item">Keto Diet</div>
                             <div style="display: inline-block" class="tag-item">Vegan Diet</div>
                             <div style="display: inline-block" class="tag-item">Diet Chart</div>
-                            <div style="display: inline-block" class="tag-item">+</div>
+                            <p style="display: inline-block" class="tag-item" id="log"></p>
+                            <div style="display: inline-block" class="tag-item" id="add-tag">+</div>
+
                         </div>
                         <br>
+                        <div class="add_tag_popup">
+                            <form id="form">
+                                <label>Test field: <input type="text" id="new-tag" /></label>
+                                <br /><br />
+                                <button type="submit">Submit form</button>
+                            </form>
+                        </div>
                     </div>
                     <label for="subject" class="subject tag_title">Plan Duration</label>
                     <input class="subject subject-text" type="datetime-local" name="subject" style="height: 45px;" />
@@ -180,5 +194,17 @@ font-size:15px !important;
     </div>
     <!-- Contents End -->
 </body>
+<script>
+    var arr = new Array("Keto Diet", "Vegan Diet", "Diet Chart");
 
+    function logSubmit(event) {
+        log.textContent = ``;
+        event.preventDefault();
+    }
+
+    const form = document.getElementById('form');
+    const log = document.getElementById('log');
+    const new_tag = document.getElementById('new_tag');
+    form.addEventListener('submit', logSubmit);
+    </script>
 </html>
