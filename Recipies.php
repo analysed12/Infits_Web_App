@@ -96,6 +96,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+/*------------------PLUS BUTTON ------------------------ */
 .add-btn {
   background-color: white;
   border: none;
@@ -198,11 +199,12 @@
         
         <br><br>
     <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #9C74F5">Save Plan</button>
+    <br>
           </div>
 		</div>
 </div>
 
 
-</div>
+
   </body>
 </html>
