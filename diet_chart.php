@@ -30,6 +30,12 @@
     flex-wrap: wrap;
     
     }
+    @media (min-width: 0px) and (max-width: 720px) {
+.tab{
+  display: flex;
+  flex-wrap: wrap;
+}
+    }
 
     /* Style the buttons inside the tab */
     .tab button {
@@ -79,6 +85,8 @@
     .space-between-flex{
   display: flex;
   justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
 }
 
         </style>
@@ -86,16 +94,28 @@
 
   <body>
   <div id="page">
+    <!--------------sidenav------------------------->
     <?php include 'event_calendar.php'; ?>
 
     <div id="content">
-
       <!------------------------------------------------DASHBOARD--------------------------------------------------------->
-        <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Meal Tracker</h1>
-        <h3 style="font-size: 24px; color: #202224; font-weight: 500; margin-bottom:0px ;">***calendar***</h3>
-        <br>
+      <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Meal Tracker</h1>
+      <p id="topnav-content-1"><span id="topnav-content-1-name">
+      <?php  if (isset($_SESSION['name'])) : ?>
+        <?php echo $_SESSION['name']; ?></strong></p>
+      <?php endif ?>
+      </span></p>
+    </div>
 
+    <!------------------calendar----------------->
+    <div id="content">
+      <?php include("calendar.php");?>
+      <br>
+    </div>
 
+    
+
+    <div id="content">
       <!-----------------------------------------------EVENTS--------------------------------------------------------->
       
       <div class="tab">
