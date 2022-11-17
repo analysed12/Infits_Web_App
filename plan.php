@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>Plan</title>
 </head>
 <style>
@@ -28,7 +29,7 @@ html {
 
 .plan_form {
     margin-left: 10%;
-    width: 70%;
+    width: 80%;
     /* background-color: aquamarine; */
 }
 
@@ -85,6 +86,7 @@ html {
     padding: 10px;
     /* margin: 10px; */
     font-size: 20px;
+    width: auto;
 }
 
 .subject {
@@ -107,7 +109,89 @@ html {
     font-size: 18px;
 }
 
+.openBtn {
+    display: flex;
+    justify-content: left;
+}
+
+.openButton {
+    /* border: none;
+    padding: 14px 20px;
+    cursor: pointer; */
+    /* position: fixed; */
+}
+
+.loginPopup {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.formPopup {
+    display: none;
+    position: fixed;
+    left: 45%;
+    top: 5%;
+    transform: translate(-50%, 5%);
+    border: 3px solid #999999;
+    z-index: 9;
+}
+
+.formContainer {
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.formContainer input[type=text],
+.formContainer input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    border: none;
+    background: #eee;
+}
+
+.formContainer input[type=text]:focus,
+.formContainer input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.formContainer .btn {
+    padding: 12px 20px;
+    border: none;
+    background-color: #8ebf42;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.formContainer .cancel {
+    background-color: #cc0000;
+}
+
+.formContainer .btn:hover,
+.openButton:hover {
+    opacity: 1;
+}
+
+.plan_name{
+    text-align :center !important;
+    border-top:none !important;
+    border-left:none !important;
+    border-right:none !important;
+    outline:none;
+    font-size:25px;
+
+}
 @media (min-width: 0px) and (max-width: 720px) {
+    .plan_name_box{
+        text-align:center:
+        /* width:50% !important; */
+    }
     .plan_form {
         margin-left: 0% !important;
         width: 100% !important;
@@ -115,8 +199,8 @@ html {
     }
 
     .event_form {
-        margin-left: 15% !important;
-        width: 60%;
+        margin-left: 0% !important;
+        width: 100%;
     }
 
     .tag_title {
@@ -148,31 +232,51 @@ html {
                     <i class="fa-solid fa-user"></i>
                 </div>
 
-            </div>
 
+            </div>
+            <br>
+            <!-- <div style="text-align:center" class="plan_name_box">
+                <input type="text" placeholder="Plan Name"  class="plan_name">
+            </div> -->
             <div class="event_form">
                 <div class="evt-form">
 
-                    
+
                     <div class="tags">
                         <div class="tag_title">Tags</div>
                         <div class="tag">
-                            <div style="display: inline-block" class="tag-item">Keto Diet</div>
-                            <div style="display: inline-block" class="tag-item">Vegan Diet</div>
-                            <div style="display: inline-block" class="tag-item">Diet Chart</div>
-                            <p style="display: inline-block" class="tag-item" id="log"></p>
-                            <div style="display: inline-block" class="tag-item" id="add-tag">+</div>
+                            <?php
+                        include "config.php";
+                        $sql = "SELECT * FROM plans";
+                        $result=mysqli_query($conn,$sql);
+                        $num = mysqli_num_rows($result);
+                        if ($num >0){
+                            while ($row =mysqli_fetch_assoc($result)){
+                                ?>
+                            <div style="display: inline-block" class="tag-item" name="<?php echo $row['planname']?>">
+                                <?php echo $row['planname']?></div>
+                            <?php
+                        }
+                    }
+                        ?>
 
+                            <button type="submit" style="display: inline-block; border:none;"
+                                class="tag-item openButton openBtn" onclick="openForm()">+</button>
                         </div>
-                        <br>
-                        <div class="add_tag_popup">
-                            <form id="form">
-                                <label>Test field: <input type="text" id="new-tag" /></label>
-                                <br /><br />
-                                <button type="submit">Submit form</button>
-                            </form>
-                        </div>
+                        <!-- <br> -->
+
                     </div>
+                    <?php
+                             if($_SERVER['REQUEST_METHOD'] == "POST"){
+                             $planname = $_POST['tag_name']; 
+                             if ($planname != ""){
+                             $sql1 = "INSERT INTO plans  VALUES ('$planname')";
+                             $result1=mysqli_query($conn,$sql1);
+                             echo "<meta http-equiv='refresh' content='0'>";
+                             }
+                             }
+                             ?>
+                             <br>
                     <label for="subject" class="subject tag_title">Plan Duration</label>
                     <input class="subject subject-text" type="datetime-local" name="subject" style="height: 45px;" />
                     <br />
@@ -185,6 +289,16 @@ html {
                 </div>
             </div>
 
+
+            <!-- Pop up for adding new tags -->
+            <div class="loginPopup">
+                <div class="formPopup" id="popupForm">
+                    <form action="plan.php" method="post">
+                        <input type="text" name="tag_name">
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
             <div class="btns">
                 <button>Select</button>
                 <button style="float: right;">Save</button>
@@ -195,16 +309,13 @@ html {
     <!-- Contents End -->
 </body>
 <script>
-    var arr = new Array("Keto Diet", "Vegan Diet", "Diet Chart");
+function openForm() {
+    document.getElementById("popupForm").style.display = "block";
+}
 
-    function logSubmit(event) {
-        log.textContent = ``;
-        event.preventDefault();
-    }
+function closeForm() {
+    document.getElementById("popupForm").style.display = "none";
+}
+</script>
 
-    const form = document.getElementById('form');
-    const log = document.getElementById('log');
-    const new_tag = document.getElementById('new_tag');
-    form.addEventListener('submit', logSubmit);
-    </script>
 </html>
