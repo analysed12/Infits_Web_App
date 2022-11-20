@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <title>Plan</title>
 </head>
 <style>
@@ -178,20 +177,22 @@ html {
     opacity: 1;
 }
 
-.plan_name{
-    text-align :center !important;
-    border-top:none !important;
-    border-left:none !important;
-    border-right:none !important;
-    outline:none;
-    font-size:25px;
+.plan_name {
+    text-align: center !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    outline: none;
+    font-size: 25px;
 
 }
+
 @media (min-width: 0px) and (max-width: 720px) {
-    .plan_name_box{
-        text-align:center:
-        /* width:50% !important; */
+    .plan_name_box {
+        text-align: center:
+            /* width:50% !important; */
     }
+
     .plan_form {
         margin-left: 0% !important;
         width: 100% !important;
@@ -276,7 +277,7 @@ html {
                              }
                              }
                              ?>
-                             <br>
+                    <br>
                     <label for="subject" class="subject tag_title">Plan Duration</label>
                     <input class="subject subject-text" type="datetime-local" name="subject" style="height: 45px;" />
                     <br />
@@ -286,16 +287,17 @@ html {
                     <label for="subject" class="subject tag_title">Price</label>
                     <input class="subject subject-text" type="text" name="subject" placeholder="Rs. /month"
                         style="height: 45px;" />
+
+
                 </div>
             </div>
-
-
             <!-- Pop up for adding new tags -->
             <div class="loginPopup">
                 <div class="formPopup" id="popupForm">
                     <form action="plan.php" method="post">
                         <input type="text" name="tag_name">
                         <button type="submit">Add</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">X</button>
                     </form>
                 </div>
             </div>
@@ -317,5 +319,4 @@ function closeForm() {
     document.getElementById("popupForm").style.display = "none";
 }
 </script>
-
 </html>

@@ -18,7 +18,7 @@ include "config.php" ;
 
 <body>
     <!-- Navbar Start -->
-    <!--  -->
+    <?php include "event_calendar.php" ?>
     <!-- Navbar End -->
 
     <!-- Contents Start -->
