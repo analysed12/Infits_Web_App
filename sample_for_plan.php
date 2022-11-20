@@ -51,7 +51,7 @@
 <body>
     <!-- Navbar Start -->
     <?php
-include "navbar.php"
+
 ?>
     <!-- Navbar End -->
 
@@ -69,7 +69,7 @@ include "navbar.php"
                 </div>
             </div>
             <br>
-            <form action="plan.php" method="post">
+            <form action="sample_for_plan.php" method="post">
                 <!-- Plan name -->
                 <div style="text-align:center; !important" class="plan_name_box">
                     <input type="text" placeholder="Plan Name" class="plan_name" name="plan_name">
