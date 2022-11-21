@@ -286,7 +286,7 @@
         <div class="menu-bottom">
             <a class="sidenavlink"><img src="images/vec_gethelp.png" class="nav-icon">Get Help</a>
             <a class="sidenavlink"><img src="images/vec_settings.png" class="nav-icon">Settings</a>
-            <a class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
+            <a href="logout.php" class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
         </div>
     </div>
 
