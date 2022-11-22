@@ -17,7 +17,6 @@
             <!--<link rel="stylesheet" href="css/Recipies.css">-->
         
 		<link rel="stylesheet" href="css/mobiscroll.javascript.min.css">
-    <link rel="stylesheet" href="css/modal.css">
 		<script src="js/mobiscroll.javascript.min.js"></script>
         <style>
 
@@ -114,6 +113,131 @@
 .add-btn:hover {
   background-color: RoyalBlue;
 }
+
+/*---------- MODAL CSS -------------*/
+
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.popup-trigger {
+  display: block;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 260px;
+  background: #4EBD79;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+body {
+  background-color: #E3E3E3;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 240px;
+  text-align: center;
+}
+
+h1,
+p,
+h2,
+button {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+}
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+  color: #666666;
+  margin: 0 0 30px 0;
+}
+
+p {
+  color: #666666;
+  margin: 30px auto;
+  text-align: center;
+  font-size: 16px;
+}
+
+.popup {
+  background: rgba(100, 100, 100, 0.6);
+  position: fixed;
+  display: none;
+  z-index: 5000;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.popup>div {
+  border-radius: 10px;
+  position: fixed;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+  padding: 30px 15px;
+  /* Width of popup can be changed */
+  width: 70%;
+  max-width: 600px;
+  z-index: 5001;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  text-align: left;
+  border: 5px solid #f28920;
+}
+
+.popup-btn-close {
+  position: absolute;
+  background-color: #f28920;
+  color: white;
+  top: -15px;
+  right: -15px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Arial Black', Arial, sans-serif;
+  cursor: pointer;
+  -webkit-box-shadow: -4px -2px 6px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: -4px -2px 6px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: -3px 1px 6px 0px rgba(0, 0, 0, 0.1);
+}
+
+.popup-btn-close:hover {
+  background-color: #ac5918;
+  color: #fff;
+}
+
+.popup-text {
+  background: #fff;
+  color: #333;
+  font-size: 19px;
+  line-height: 30px;
+  z-index: 9999;
+}
+
     
 </style>
 </head>
@@ -141,6 +265,22 @@
     
 
     <div id="content">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <div class="container">
+  <a class="popup-trigger" data-target="#popup1">Open PopUp 1</a>
+  <a class="popup-trigger" data-target="#popup2">Open PopUp 2</a>
+</div>
+
+<div id="popup1" class="popup">
+  <div class="popup-text">This is my popup 1</div>
+  <span class="popup-btn-close">&times;</span>
+</div>
+<div id="popup2" class="popup">
+  <div class="popup-text">This is my popup 2</div>
+  <span class="popup-btn-close">&times;</span>
+</div>
+
     <div class="tab">
         <div class="space-between-flex">
         <button class="tablinks" onclick="openTab(event, 'Breakfast')">Breakfast</button>
@@ -152,8 +292,14 @@
       
       <div id="Breakfast" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;"> In Morning</p>
-            <?php include 'diet_chart_popup.php'; ?>
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;"> Dinner</p>
+            <div id="dinner"><?php include 'diet_chart_popup.php'; ?></div>
+        </div>
+        </div>
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;"> Dinner</p>
+            <div id="dinner2"><?php include 'diet_chart_popup.php'; ?></div>
         </div>
       </div>
       
@@ -179,19 +325,40 @@
       </div>
       
       <script>
-      function openTab(evt, food) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(food).style.display = "block";
-        evt.currentTarget.className += " active";
-      }
+function popupOpenClose(popup) {
+
+/* Add div inside popup for layout if one doesn't exist */
+if ($(".wrapper", popup).length == 0) {
+  $(popup).wrapInner("<div class='wrapper'></div>");
+}
+
+/* Open popup */
+$(popup).show();
+
+/* Close popup if user clicks on background */
+$(popup).click(function(e) {
+  if (e.target == this) {
+    if ($(popup).is(':visible')) {
+      $(popup).hide();
+    }
+  }
+});
+
+/* Close popup and remove errors if user clicks on cancel or close buttons */
+$(popup).find(".popup-btn-close").on("click", function() {
+  if ($(".formElementError").is(':visible')) {
+    $(".formElementError").remove();
+  }
+  $(popup).hide();
+});
+}
+
+$(document).ready(function() {
+$(".popup-trigger").on("click", function() {
+  var target = $(this).data('target');
+  popupOpenClose($(target));
+});
+});
       </script>
         
         <br><br>
@@ -201,7 +368,6 @@
 		</div>
 </div>
 
-<script src="js/modal.js"></script>
 
   </body>
 </html>
