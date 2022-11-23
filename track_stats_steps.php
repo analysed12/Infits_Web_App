@@ -11,7 +11,25 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+            $(".calendat_but").click(function(){
+                $(".calendar_pop").toggle();
+            });
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+            $(".cpb").click(function(){
+                $(".activity_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+        </script>
 </head>
+        
 <style>
 html {
     overflow-x: hidden;
@@ -77,10 +95,7 @@ html {
     border-radius: 14px;
     padding: 5px;
 }
-.client-card-calorie{
-background: linear-gradient(37.35deg, #E2809B 0%, #EBD3C8 100%);
 
-}
 .client-card p {
     font-size: 15px;
 }
@@ -119,13 +134,14 @@ background: linear-gradient(37.35deg, #E2809B 0%, #EBD3C8 100%);
     padding-left: 30px;
     padding-right: 30px;
     font-size: 20px;
-	background: linear-gradient(263.28deg, #E69BAF 0%, #E69EB0 0.01%, #E07498 93.31%);    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
+    background: linear-gradient(262.45deg, #FA8686 9.26%, #F1A680 93.19%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
 }
 
 .box-title {
     font-size: 15px;
-    color: #DF7296;
+    color: #FF8B8B;
 }
 
 .box-counter {
@@ -218,8 +234,8 @@ height: 57.45px;
 
 div[role="progressbar"] {
     --size: 10rem;
-    --fg: #E68AA1;
-    --bg: #F9E0E7;
+    --fg: #369;
+    --bg: #def;
     --pgPercentage: var(--value);
     animation: growProgressBar 3s 1 forwards;
     width: var(--size);
@@ -297,39 +313,9 @@ color: #5D5D5D;
     width: 100%;
     height: 100%;
     display: flex;
-	flex-direction: column;
-    align-items: center;
-   
+    align-items: top;
+    justify-content: center;
     margin-top: 20px;
-}
-.cpb>h3{
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 22px;
-line-height: 46px;
-
-color: #000000;
-width: 114px;
-height: 46px;
-
-}
-.pheader{
-	display :flex;
-	flex-direction:row;
-	justify-content:space-between;
-}
-.pheader>p{
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 34px;
-/* identical to box height */
-width: 77px;
-height: 34px;
-
-color: #E27998;
 }
 .table_top{
     display: flex;
@@ -346,12 +332,23 @@ line-height: 44px;
 
 color: #000000;
 }
+.calendar_pop{
+
+   
+    width: 323px;
+    height: 291px;
+    background: black;
+    border-radius: 5px;
+}
+.table{
+    z-index: -1;
+}
 .table_element{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     margin: 20px;
-    height:60px
+    height:60px;
 }
 .table_element>div{
     display: flex;
@@ -368,7 +365,7 @@ font-size: 20px;
 line-height: 42px;
 letter-spacing: 0.03em;
 
-color: #E47E9B;
+color: #C986CF;
 }
 .table_element>div>p{
 
@@ -379,20 +376,6 @@ font-size: 23px;
 line-height: 49px;
 
 
-}
-.remaining>h4{
-	
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-	font-size: 20px;
-}
-.consumed>h4{
-	
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-	font-size: 20px;
 }
 .date{
     
@@ -409,7 +392,30 @@ font-size: 19px;
 line-height: 40px;
 letter-spacing: 0.03em;
 color: #000000;
+
 opacity: 0.77;
+}
+
+.activity_pop{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 369px;
+    height: 545px;
+    background: #FFFEFE;
+    border-radius: 32px;
+    box-shadow: 0px 3px 4px rgba(0.16, 0.16, 0.16, 0.16);
+    margin-top:-520px;
+    padding: 2px;
+}
+.pop_box{
+    width: 344px;
+    height: 49px;
+    background: linear-gradient(180deg, rgba(255, 224, 209, 0.48) 0%, rgba(255, 139, 139, 0.48) 100%);
+    border-radius: 10px;
+    margin:5px;
 }
 </style>
 
@@ -442,7 +448,7 @@ opacity: 0.77;
                             <i class="fa-solid fa-moon"></i>
                             <p>Sleep</p>
                         </div>
-                        <div class="client-card client-card-calorie" style="color:#E3738D; border: 1px solid #E3738D;">
+                        <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
                             <i class="fa-solid fa-stopwatch-20"></i>
                             <p>Calorie Track</p>
                         </div>
@@ -462,9 +468,9 @@ opacity: 0.77;
                         Set Goals
                     </div>
                     <div class="inner21-image">
-                        <img src="images/fruits.svg" alt="">
+                        <img src="images/set_goals.png" alt="">
                     </div>
-                    <div class="box-title">Daily Calories Count</div>
+                    <div class="box-title">Daily Steps</div>
                     <div class="box-counter">00000</div>
                     <buttpn class="box-btn">Set</buttpn>
                 </div>
@@ -474,7 +480,7 @@ opacity: 0.77;
         <div id="wrapper-lower">
         <div class="row">
             <div class="col-sm-8">
-				
+
                 <div class="bottom-btns">
                     
                     <?php for ($i=0; $i <4 ; $i++) { 
@@ -494,14 +500,17 @@ opacity: 0.77;
                     <div class="col-sm-12">
                     <div class="table">
                         <div class="table_top">
-                     <span>Past Activity</span>
-                      </div>
+                            <span>Past Activity</span>
+                            <div class="calendat_but"><img src="images/calender_toggle.svg"></div>
+                     
+                        </div>
+                      
                      <?php
                      $a=1;
                      
                     while ($a <= 4) {
                         
-                     echo '<div class="table_element">';
+                     echo ' <div class="table_element">';
                      echo '<div class="date">';
                      echo '<span>Sep</span>';
                      echo ' <p>18</p>';
@@ -520,25 +529,36 @@ opacity: 0.77;
                      
                     
                      ?>
-                      </div> 
-
+                      </div>    
+                      <div class="calendar_pop">
+                      </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
+                
                 <div class="cpb">
-					<div class="pheader">
-						<h4>Daily Progress</h4>
-						<p>View Activity</p>
-					</div>
-					<div class="remaining pheader">
-						<h4>600 KCal </br>Consumed</h4>
-					</div>
                     <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
-					<div class="consumed pheader">
-						<h4>400 KCal </br>Remaining</h4>
-					</div>
-				</div>
+                </div>
+                <div class="activity_pop">
+                    <div class="pop_header">
+                        <span>Activity</span>
+                        
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+
+                </div>
             </div>
         </div>
            
