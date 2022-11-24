@@ -212,7 +212,57 @@ div[role="progressbar"]::before {
     content: counter(percentage) '%';
 }
 
+div[role="progressbar1"] {
+    --size: 18rem;
+    --fg: #369;
+    --bg: #def;
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 forwards;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    
+    box-shadow: -9px 9px 18px rgba(217, 217, 217, 0.2), 9px -9px 18px rgba(217, 217, 217, 0.2), -9px -9px 18px rgba(255, 255, 255, 0.9), 9px 9px 23px rgba(217, 217, 217, 0.9), inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(217, 217, 217, 0.5);
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: calc(var(--size) / 5);
+    color: var(--fg);
+}
 
+div[role="progressbar1"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
+
+div[role="progressbar2"] {
+    --size: 14rem;
+    --fg: #369;
+    --bg: #def;
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 forwards;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    
+    box-shadow: -9px 9px 18px rgba(217, 217, 217, 0.2), 9px -9px 18px rgba(217, 217, 217, 0.2), -9px -9px 18px rgba(255, 255, 255, 0.9), 9px 9px 23px rgba(217, 217, 217, 0.9), inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(217, 217, 217, 0.5);
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: calc(var(--size) / 5);
+    color: var(--fg);
+}
+
+div[role="progressbar2"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
 @media (min-width: 0px) and (max-width: 720px) {
     #inner1 {
         width: 100% !important;
@@ -320,8 +370,13 @@ div[role="progressbar"]::before {
                 <div id="inner12-lower">2
                 </div>
             </div>
-            <div id="inner2-lower">
-                <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+            <div id="inner2-lower" >
+            <div style="position: relative;">
+            <div role="progressbar1" style="position:absolute;top:0;--value:<?php $value = 50; echo $value; ?>"></div>
+            <div role="progressbar2" style="position:absolute;top:1rem;left:1rem;--value:<?php $value = 50; echo $value; ?>"></div>
+
+                <div role="progressbar" style="position:absolute;top:2rem;left:3rem;--value:<?php $value = 50; echo $value; ?>"></div>
+            </div>
             </div>
         </div>
     </div>
