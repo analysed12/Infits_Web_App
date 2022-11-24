@@ -9,19 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
     <title>Document</title>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
+        <!-- <script>
             $(document).ready(function(){
             $(".calendat_but").click(function(){
                 $(".calendar_pop").toggle();
             });
             });
+        </script> -->
+        <script>
+            $(document).ready(function(){
+            $(".calendat_but").click(function(){
+                $(".calendar_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
         </script>
         <script>
             $(document).ready(function(){
-            $(".cpb").click(function(){
+            $(".pheader p").click(function(){
                 $(".activity_pop").animate({
                     height: 'toggle'
                 });
@@ -95,7 +105,33 @@ html {
     border-radius: 14px;
     padding: 5px;
 }
-
+.flex-container-bottom {
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-container-bottom>div {
+    width: 134px;
+height: 57.45px;
+    /* background: pink; */
+    margin: 10px;
+    text-align: center;
+    /* line-height: 75px; */
+    font-size: 30px;
+    border-radius: 14px;
+    padding: 5px;
+}
+.client-card-steps{
+    
+background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+border-radius: 10px;
+}
+.client-card-steps p{
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+}
 .client-card p {
     font-size: 15px;
 }
@@ -234,8 +270,8 @@ height: 57.45px;
 
 div[role="progressbar"] {
     --size: 10rem;
-    --fg: #369;
-    --bg: #def;
+    --fg: #FF8B8B;
+    --bg: #FFE0D1;
     --pgPercentage: var(--value);
     animation: growProgressBar 3s 1 forwards;
     width: var(--size);
@@ -300,7 +336,11 @@ div[role="progressbar"]::before {
     }
 }
 .heart_info{
-
+    padding:2px;
+ display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
@@ -309,6 +349,29 @@ line-height: 40px;
 
 color: #5D5D5D;
 }
+.cpb_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cpb_up{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.cpb_goals{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 40px;
+}
 .cpb{
     width: 100%;
     height: 100%;
@@ -316,6 +379,62 @@ color: #5D5D5D;
     align-items: top;
     justify-content: center;
     margin-top: 20px;
+}
+.cpb_bottom{
+    display: flex;
+    align-items: bottom;
+    justify-content: center;
+    flex-direction:row;
+
+}
+.cpb_bottom>div{
+    margin: 15px;
+}
+.cpb_bottom>div h3{
+    
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+letter-spacing: 0.03em;
+
+color: #FF8B8B;
+}
+.cpb_bottom>div span{
+    letter-spacing: 0.03em;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+}
+.cpb_goals_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #FF8B8B;
+    border-radius: 10px;
+    width: 120px;
+    height: 56px;
+    margin:5px;
+}
+.cpb_goals_box span{
+    letter-spacing: 0.03em;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 38px;
+    color: #FFFFFF;
+}
+..cpb_goals_box h3{
+    letter-spacing: 0.03em;
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 44px;
+color: #FFFFFF;
 }
 .table_top{
     display: flex;
@@ -334,14 +453,16 @@ color: #000000;
 }
 .calendar_pop{
 
-   
+   z-index: -1;
+   margin-top:-450px;
+   margin-left: 50%;
     width: 323px;
     height: 291px;
     background: black;
     border-radius: 5px;
 }
 .table{
-    z-index: -1;
+    /* z-index: 1; */
 }
 .table_element{
     display: flex;
@@ -407,7 +528,7 @@ opacity: 0.77;
     background: #FFFEFE;
     border-radius: 32px;
     box-shadow: 0px 3px 4px rgba(0.16, 0.16, 0.16, 0.16);
-    margin-top:-520px;
+    margin-top: -220px;
     padding: 2px;
 }
 .pop_box{
@@ -416,6 +537,34 @@ opacity: 0.77;
     background: linear-gradient(180deg, rgba(255, 224, 209, 0.48) 0%, rgba(255, 139, 139, 0.48) 100%);
     border-radius: 10px;
     margin:5px;
+}
+
+.nav-pills{
+
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 27px;
+
+color: #4D4D4D;
+}
+.pheader{
+	display :flex;
+	flex-direction:row;
+	justify-content:space-between;
+}
+.pheader p{
+	font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 34px;
+/* identical to box height */
+width: 77px;
+height: 34px;
+margin-left: 20px;
+color: #9C74F5;
 }
 </style>
 
@@ -428,12 +577,12 @@ opacity: 0.77;
             <div id="inner1">
                 <div id="inner11">
                     <div class="flex-container">
-                        <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                            <i class="fa-solid fa-shoe-prints" style="rotate: -90deg;"></i>
-                            <p>Step</p>
+                        <div class="client-card-steps client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                            <img src="images/steps_selected.svg" alt="">
+                            <p>Steps</p>
                         </div>
-                        <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                            <i class="fa-solid fa-heart-pulse"></i>
+                        <div class=" client-card" style="color:#E266A9; border: 1px solid #E266A9;">
+                        <i class="fa-solid fa-heart-pulse"></i>
                             <p>Heart Rate</p>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
@@ -456,10 +605,39 @@ opacity: 0.77;
 
                 </div>
                 <div id="inner12">
-                    <div class="graph">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                        <canvas id="myChart"></canvas>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="graph">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                            <canvas id="myChart"></canvas>
+                        </div>
                     </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="graph">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <div class="graph">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                    
+                   
                 </div>
             </div>
             <div id="inner2">
@@ -482,18 +660,43 @@ opacity: 0.77;
             <div class="col-sm-8">
 
                 <div class="bottom-btns">
+                    <div class="flex-container-bottom">
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Daily Count</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Weekly Avg</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
                     
-                    <?php for ($i=0; $i <4 ; $i++) { 
-                        echo'<div class="bottom-stats-btn">';
-								echo'<div class="heart_info">';
-									echo'<span>Daily Count</span>';
-									echo'<span>72 BPM</span>';
-								echo'</div>';
-								echo'<div class="heart_info">';
-									
-								echo'</div>';
-							echo'</div>';
-                    }?>
+                      
+                      
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Monthly Avg</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Total</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+                    </div>
                            
                 </div>
                 <div class="row">
@@ -536,9 +739,53 @@ opacity: 0.77;
                 </div>
             </div>
             <div class="col-sm-4">
-                
-                <div class="cpb">
-                    <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                    <div class="pheader">
+						<h4>Daily Progress</h4>
+						<p>View Activity</p>
+					</div>
+                <div class="cpb_container">
+                    <div class="cpb_up">
+                        <div class="cpb">
+                            <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                        </div>
+                        <div class="cpb_goals">
+                            <div class="cpb_goals_box">
+                                <span>Daily goal</span>
+                                <h3>9200</h3>
+                            </div>
+                            <div class="cpb_goals_box">
+                                 <span>Weekly goal</span>
+                                <h3>50,000</h3>
+                            </div>
+                            <div class="cpb_goals_box">
+                                <span>Monthly goal</span>
+                                <h3>3,0000</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cpb_bottom">
+                        <div>   
+                            <span>
+                            <img src="images/footsteps.svg" alt="">
+                                Steps
+                            </span>
+                            <h3>9000</h3>
+                        </div>
+                        <div>
+                            <span>
+                            <img src="images/distance.svg" alt="">
+                                Distance
+                            </span>
+                            <h3>4.76 Kms</h3>
+                        </div>
+                        <div>
+                            <span>
+                                <img src="images/fire.svg" alt="">
+                                Burned
+                            </span>
+                            <h3>920 kcal</h3>
+                        </div>
+                    </div>
                 </div>
                 <div class="activity_pop">
                     <div class="pop_header">

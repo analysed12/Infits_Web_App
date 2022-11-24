@@ -12,7 +12,24 @@
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
-    
+    <script>
+            $(document).ready(function(){
+            $(".calendat_but").click(function(){
+                $(".calendar_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+            $(".pheader p").click(function(){
+                $(".activity_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+        </script>
 </head>
 <style>
 html {
@@ -79,7 +96,21 @@ html {
     border-radius: 14px;
     padding: 5px;
 }
-
+.flex-container-bottom {
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-container-bottom>div {
+    width: 134px;
+height: 57.45px;
+    /* background: pink; */
+    margin: 10px;
+    text-align: center;
+    /* line-height: 75px; */
+    font-size: 30px;
+    border-radius: 14px;
+    padding: 5px;
+}
 .client-card p {
     font-size: 15px;
     
@@ -404,7 +435,23 @@ color: #000000;
 
 opacity: 0.77;
 }
-
+.pheader{
+	display :flex;
+	flex-direction:row;
+	justify-content:space-between;
+}
+.pheader p{
+	font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 34px;
+/* identical to box height */
+width: 77px;
+height: 34px;
+margin-left: 20px;
+color: #9C74F5;
+}
 </style>
 
 <body>
@@ -471,17 +518,43 @@ opacity: 0.77;
 
                 <div class="bottom-btns">
                     
-                    <?php for ($i=0; $i <4 ; $i++) { 
-                        echo'<div class="bottom-stats-btn">';
-								echo'<div class="heart_info">';
-									echo'<span>Daily Count</span>';
-									echo'<span>72 BPM</span>';
-								echo'</div>';
-								echo'<div class="heart_info">';
-									
-								echo'</div>';
-							echo'</div>';
-                    }?>
+                <div class="flex-container-bottom">
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Daily Count</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Weekly Avg</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+                    
+                      
+                      
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Monthly Avg</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Total</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+                    </div>
                            
                 </div>
                 <div class="row">
@@ -526,6 +599,10 @@ opacity: 0.77;
                  $result = $conn->query($sql);
                  $row = $result->fetch_assoc()
                 ?>
+                <div class="pheader">
+						<h4>Daily Progress</h4>
+						<p>View Activity</p>
+					</div>
                 <div class="cpb">
                     <div role="progressbar" style="--value:<?php $value = 73; echo $value; ?>"></div>
                 </div>

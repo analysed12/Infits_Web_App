@@ -10,7 +10,24 @@
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
-    
+    <script>
+            $(document).ready(function(){
+            $(".calendat_but").click(function(){
+                $(".calendar_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+            $(".pheader p").click(function(){
+                $(".activity_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+        </script>
 </head>
 <style>
 html {
@@ -80,6 +97,18 @@ html {
 .client-card-calorie{
 background: linear-gradient(37.35deg, #E2809B 0%, #EBD3C8 100%);
 
+}
+.client-card-calorie p{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 19px;
+
+/* or 16px */
+
+text-align: center;
+
+color: #FFFFFF;
 }
 .client-card p {
     font-size: 15px;
@@ -331,6 +360,21 @@ height: 34px;
 
 color: #E27998;
 }
+.flex-container-bottom {
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-container-bottom>div {
+    width: 134px;
+height: 57.45px;
+    /* background: pink; */
+    margin: 10px;
+    text-align: center;
+    /* line-height: 75px; */
+    font-size: 30px;
+    border-radius: 14px;
+    padding: 5px;
+}
 .table_top{
     display: flex;
     flex-direction: row;
@@ -443,7 +487,7 @@ opacity: 0.77;
                             <p>Sleep</p>
                         </div>
                         <div class="client-card client-card-calorie" style="color:#E3738D; border: 1px solid #E3738D;">
-                            <i class="fa-solid fa-stopwatch-20"></i>
+                            <img src="images/calorie_big.svg" alt="">
                             <p>Calorie Track</p>
                         </div>
                     </div>

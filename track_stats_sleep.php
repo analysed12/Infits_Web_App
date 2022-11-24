@@ -11,6 +11,25 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
     
+
+    <script>
+            $(document).ready(function(){
+            $(".calendat_but").click(function(){
+                $(".calendar_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+            $(".pheader p").click(function(){
+                $(".activity_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+        </script>
 </head>
 <style>
 html {
@@ -69,6 +88,21 @@ html {
 .flex-container>div {
     width: 90px;
     height: auto;
+    /* background: pink; */
+    margin: 10px;
+    text-align: center;
+    /* line-height: 75px; */
+    font-size: 30px;
+    border-radius: 14px;
+    padding: 5px;
+}
+.flex-container-bottom {
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-container-bottom>div {
+    width: 134px;
+height: 57.45px;
     /* background: pink; */
     margin: 10px;
     text-align: center;
@@ -490,17 +524,43 @@ opacity: 0.77;
 
                 <div class="bottom-btns">
                     
-                    <?php for ($i=0; $i <4 ; $i++) { 
-                        echo'<div class="bottom-stats-btn">';
-								echo'<div class="heart_info">';
-									echo'<span>Daily Count</span>';
-									echo'<span>72 BPM</span>';
-								echo'</div>';
-								echo'<div class="heart_info">';
-									
-								echo'</div>';
-							echo'</div>';
-                    }?>
+                <div class="flex-container-bottom">
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Daily Count</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Weekly Avg</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+                    
+                      
+                      
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Monthly Avg</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Total</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+                    </div>
                            
                 </div>
                 <div class="row">
