@@ -4,9 +4,9 @@
          if( isset($_POST['submit']) && isset($_FILES['my_image']))
          {     
                  
-               echo "hello";    
+               
                $name =$_POST['R-name'];
-               $course =$_POST['course'];
+               $course =$_POST['c-name'];
                  
                $cate = $_POST['catgry'];
                 
@@ -18,6 +18,7 @@
                $prot  = $_POST['prt'];
                $fat = $_POST['fats'];
                $carbo =$_POST['carbs'];
+               $fibr = $_POST['fibre'];
 
                $img_name= $_FILES['my_image']['name'];
              $img_size = $_FILES['my_image']['size'];
@@ -44,9 +45,10 @@
               
                            move_uploaded_file($tmp_name,$img_upload_path );  
            
-               $sql = "INSERT INTO `receipe_details`(`receipe_name`,`cousre`,`category`,`preparation_time`,`cooking_time`,`serving`,`calorie`,`protien`,`fats`,`carbs`,
-                `image`,`image_path`)
-                VALUES('$name','$course','$cate','$p_time','$c_time','$serv','$calo',
+               $sql = "INSERT INTO `dietian_recipies`(`name`,`time`,`serving`,`calories`,`protiens`,
+                `fats`,`carbs`,`category`,`dietitianuserID`,
+                `image`,`file`)
+                VALUES('$name',`$p_time','$serv','$calo',
                '$prot','$fat','$carbo','$new_name','$img_upload_path')";
                 if($conn -> query($sql)==true)
                 {
@@ -69,94 +71,238 @@
 <html>
     <head>
     <link rel="stylesheet" href="receipe-add.css" />
+    <style>
+      .upload-photo{
+         width: 350px;
+         height: 230px;
+         left: 355px;
+         top: 18px;
+         background: #D9D9D9;
+         opacity: 0.74;
+         border-radius: 12px;
+      }
+
+      .buttons{
+        .buttons
+    box-sizing: border-box;
+
+position: absolute;
+width: 459px;
+height: 45px;
+left: 315px;
+top: 265px;
+
+background: #E7E7E7;
+border: 1px solid #E7E7E7;
+border-radius: 44px;
+text-align: center;
+
+
+      }
+      .receipe-details{
+        width: 550px;
+        height: 498px;
+
+      }
+      .course{
+        display: none;
+        position: fixed;
+        width: 455px;
+height: 236px;
+  
+background: #FFFFFF;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+border-radius: 31px;
+ transform: translate(-50%,-50%);
+ top: 30%;
+ left: 50%;
+
+
+      }
+      .div-course{
+        box-sizing: border-box;
+      
+        width: 101px;
+        height: 37px;
+        border: 1px solid #D257E6;
+        border-radius: 24px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .course-header{
+        height: 50px;
+        width: 455px;
+
+      }
+      .category{
+        display: none;
+        position: fixed;
+      height: 236px;
+  
+background: #FFFFFF;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+border-radius: 31px;
+ transform: translate(-50%,-50%);
+ top: 30%;
+ left: 50%;
+      }
+    
+
+      .category-header{
+        height: 50px;
+        width: 455px;
+
+    }
+    .div-category{
+      box-sizing: border-box;
+      
+        width: 101px;
+        height: 37px;
+        border-radius: 24px;
+        text-align: center;
+        cursor: pointer;
+
+    }
+    
+    .in-st-cs{
+       width :400px;
+       border-color: #0xFFF5F5F5;
+
+    
+    }
+     
+
+
+
+    </style>
+
+    <!------JS for course popoup------>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+                $(".course-body").ready(function()
+                {
+                   $(".div-course").click(function(){
+                    $(this).css("background-color" , "blue");
+                    $("#course-input").val($(this).text());
+                    $(".course").css("display","none");
+                   });
+                });
+
+             
+         </script>
+
+         <!------code for upload image---->
+         <script>
+          $(function(){
+
+          
+          $('#camera').on('click',function(){
+            $('#my_image').trigger('click');
+          });
+        });
+
+          </script>
+
+
 </head>
 <body>
+           <!-------sidenav---->
+         <?php include("recipe_navbar.php");?>
 
-     <div class ="wrapper">
-        <!-----------sideNav--------->
-        <div class="vert-rectangle">
-            <div class="sidenav">
-</div>
-          <div class="bottom">
-</div>
-
-</div>
-<div class="vline">
-</div>
-<div class="header">
-      <div class="left">
-        <h3> New Receipes</h3>
-</div>
-<div class="right">
-</div>
-</div>
-  <div class="hline"></div>
             <form id="form1" action="receipes-add.php" method="post" enctype="multipart/form-data">
         <div class = "container">
             <div class="upload-photo">
-                
-                <input type="file" id="my_image" name="my_image" />
+                <img id="camera" src=".\images\camera.svg" style="margin-top:25%; margin-left:35%; cursor:pointer;">
+                <input type="file" id="my_image" name="my_image" style="display:none;" />
 
 </div>
          <div class="buttons">
             <ul class="button-class" style="display:flex; list-style:none";>
-                <li><button class="button-class" id="receipe-details"> Receipe Details </button></li>
-                <li> <button class="button-class" id="Ingredients"> Ingredients </button></li>
-                <li>  <button class="button-class" id="Directions"> Directions </button> </li>
+                <li><div class="p-2" style="width: 135px;height:32px; background-color: white; margin-top: 5%; border-radius: 22px;"><a href ="#" style="text-decoration: none; color: black; font-size:15;font-weight:400% ">Receipe Details</li>
+                <li><div class="p-2" style="width:100px; height:32px; margin-left: 50px;text-align:center; margin-top:4%;"> 
+                <a href="#" style="text-decoration: none; color: black; font-size:15;font-weight:400%;">Ingredients </a></li>
+                <li><div class="p-2" style="width:78px; height:32px; margin-left: 50px; margin-top: 4%;"> 
+                  <a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;" >Directions</a> </li>
 </ul>
 </div>
-         <div class="receipe-details">
-            <ul style="list-style:none; ">
-          <li>  <label id="details" class="lbl-style"> Recipie Name</label> <input id="details-input" name="R-name" type="text"></li>
-            <li> <label id="details" class="lbl-style">Courses</label> <select name="course">
-              <option value=" ">select courses </option>
-              <?php $sql= "Select `course_name` from `courses`";
-                    $result = mysqli_query($conn ,$sql);
-                    if($result > 0)
-                    {
-                      while($row = $result-> fetch_assoc())
-                    {?>
-                     <option value ="<?php echo htmlentities($row["course_name"]);?>"> <?php echo htmlentities($row["course_name"]);?></option>
-                    <?php }} ?>
-            </select>
+         <div class="receipe-details" style="padding-top:325px;">
+            <ul class="res-cs" style="list-style:none; height:498px;width:500p;">
+          <li><input class="in-st-cs" id="details-input" name="R-name" type="text" placeholder="Recipe name"></li>
+            <li> 
+             <input class="in-st-cs" type="text" id="course-input" name="c-name" placeholder ="Course" style="background:url('.\images\ad_ar.svg');" />
+             
+               
+              
+            
           </li>
-           <li>  <label id ="category" class="lbl-style">Category</label> 
-            <select name="catgry">
-              <option value=" ">select category </option>
-              <?php $sql= "Select `category_name` from `category`";
-                    $result = mysqli_query($conn ,$sql);
-                    if($result > 0)
-                    {
-                      while($row = $result-> fetch_assoc())
-                    {?>
-                     <option value ="<?php echo htmlentities($row["category_name"]);?>"> <?php echo htmlentities($row["category_name"]);?></option>
-                    <?php }} ?>
+           <li> <select class="in-st-cs" name="catgry">
+              <option value=" " >Category </option>
+                  <option value="South-Indian">South Indian</option>
+                  <option value="North-Indian">North Indian</option>
              
-           </select></li>
-          <li>   <label id="Preparation-time" class="lbl-style">Preparation time</label>
-             <input type="text" name="p-time" id="p-time"> </li>
-           <li>  <label id="Cooking-time" class="lbl-style"> Cooking Time</label>
-             <input id="text" name="c-time" id="c-time"> </li>
-            <li> <label id="Servings" class="lbl-style">Servings</label>
-             <input id="text" name="serve" id="serve"> </li>
+           </select> </li>
+          <li>
+       <input class="in-st-cs" type="text" name="p-time" id="p-time" placeholder="Prepration time"> </li>
+         <li><input class="in-st-cs" id="text" name="c-time" id="c-time" placeholder ="cooking time"></li>
+        <li><input class="in-st-cs" id="text" name="serve" id="serve" placeholder="servings">  </li>
 
-            <li> <label id="nu" class="lbl-style"><h3> Nutritions </h3></label> </li>
-           <li>  <label id="Calories" class="lbl-style">Calories</label>
-             <input id="cal" name="cal" id="cal" tyep="text"> </li>
-           <li>  <label id="Protien" class="lbl-style"> Protien</label>
-             <input id="prt" type="text" id="prt" name="prt"> </li>
-           <li>   <label id="Fats" class="lbl-style"> Fats </label>
-             <input id="fts" type="text" name="fats" id="fats"> </li>
-            <li> <label id="Carbs" class="lbl-style">Carbs</label>
-             <input id="carbs" id="carbs" name="carbs" type="text"></li>
+        <li> <label id="nu" class="lbl-style"><h5> Nutritions </h5></label> </li>
+           <li><input class="in-st-cs" id="cal" name="cal" id="cal" tyep="text" placeholder="Calories"> </li>
+           <li> <input class="in-st-cs" id="prt" type="text" id="prt" name="prt" placeholder ="protien"> </li>
+        <li> <input class="in-st-cs" id="fts" type="text" name="fats" id="fats" placeholder = "Fats">  </li>
+         <li> <input class="in-st-cs" id="carbs" id="carbs" name="carbs" type="text" placeholder ="Carbs"> </li>
+         <li> <input class="in-st-cs" id="fibre" id="fibre" name="fibre" type="text" placeholder ="fibre"> </li>
+
 </ul>   
-             <button type="Submit" class="btn-primary" name="submit" id="submit">Submit</button>
-             
 </div>
-</form>
+             <div class="btn-class" style="padding-top:200px;padding-left: 300px;">
+             <button type="Submit" class="btn-primary" name="submit" id="submit"  style="background:linear-gradient(264.44deg, rgba(207, 87, 230, 0.66) 0%, rgba(110, 100,254, 0.66) 91.11%); 
+             border-style: none;width: 474px;height: 39px;border-radius: 44px;color: white;">Next</button>
+             </div>
 
-      </div>
-       </div>
 
+
+  
+
+  <!------popup for course ------>
+
+    <div class="course" id="course">
+       <div class="course-header" style="text-align: center;">
+        <p style="color: #C0B9B9;font-size: 15;text-align:center;top:25px;">Courses</p></div>
+        <div class="course-body" id="c-id">
+          <ul style="list-style: none; display:flex; margin-left: 7px;top:60px;justify-content: space-between; margin-right: 7px;r ">
+          <li><div class="div-course" id="cou-id1"><p class="p-course" id="course1">Breakfast</p></div></li>
+          <li><div class="div-course" id="cou-id2"><p class="p-course" id="course2">Elevenses</p></div></li>
+          <li><div class="div-course" id="cou-id3"><p class="p-course" id="course3">Lunch</p></div></li>
+        </ul>
+        <ul style="list-style: none; display:flex;margin-left:7px;top: 90px;justify-content: space-between; margin-right:7px;">
+         <li>  <div class="div-course"><p class="p-course" id="course4">Snack</p></div></li>
+          <li><div class="div-course"><p class="p-course" id="course5">Tea</p></div></li>
+          <li><div class="div-course"><p class="p-course" id="course6">Dinner</p></div></li>
+        </ul>
+        <ul style="list-style:none;display: flex;margin-left: 7px; top: 130px;justify-content:space-between ; margin-right:7px;">
+         <li> <div class="div-course"><p class="p-course" id="course7"> Others</p></div></li>
+       </ul>
+        </div>
+    </div>
+
+
+         <script>
+            var cou_btn = document.getElementById("lbl1");
+            var modal1= document.getElementById("course");
+            var value1= document.getElementById("course-input");
+             
+            cou_btn.onclick = function(){
+              modal1.style.display = "block";
+            } 
+             
+
+          
+         </script>
+    
+
+
+    </form>
 </body>
     </html>
