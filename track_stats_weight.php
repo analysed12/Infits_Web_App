@@ -94,16 +94,33 @@ html {
     border-radius: 14px;
     padding: 5px;
 }
-.client-card-calorie{
-background: linear-gradient(37.35deg, #E2809B 0%, #EBD3C8 100%);
-
+.flex-container-bottom {
+    display: flex;
+    flex-wrap: wrap;
 }
-.client-card-calorie p{
+.flex-container-bottom>div {
+    width: 134px;
+height: 57.45px;
+    /* background: pink; */
+    margin: 10px;
+    text-align: center;
+    /* line-height: 75px; */
+    font-size: 30px;
+    border-radius: 14px;
+    padding: 5px;
+}
+.client-card-weight{
+    
+background: linear-gradient(38.98deg, #768B93 7.65%, #8FC4C3 87.93%);
+border: 1px solid #54AFAC;
+border-radius: 10px;
+}
+.client-card-weight p{
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
-font-size: 19px;
-
+font-size: 29px;
+line-height: 85%;
 /* or 16px */
 
 text-align: center;
@@ -148,13 +165,14 @@ color: #FFFFFF;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 20px;
-	background: linear-gradient(263.28deg, #E69BAF 0%, #E69EB0 0.01%, #E07498 93.31%);    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
+    background: linear-gradient(263.28deg, #8EC2C1 0%, #8CBFBE 0.01%, #788F97 93.31%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
 }
 
 .box-title {
     font-size: 15px;
-    color: #DF7296;
+    color: #FF8B8B;
 }
 
 .box-counter {
@@ -247,8 +265,8 @@ height: 57.45px;
 
 div[role="progressbar"] {
     --size: 10rem;
-    --fg: #E68AA1;
-    --bg: #F9E0E7;
+    --bg:#D7EDEC;
+     --fg:#87A9AC;
     --pgPercentage: var(--value);
     animation: growProgressBar 3s 1 forwards;
     width: var(--size);
@@ -326,54 +344,9 @@ color: #5D5D5D;
     width: 100%;
     height: 100%;
     display: flex;
-	flex-direction: column;
-    align-items: center;
-   
+    align-items: top;
+    justify-content: center;
     margin-top: 20px;
-}
-.cpb>h3{
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 22px;
-line-height: 46px;
-
-color: #000000;
-width: 114px;
-height: 46px;
-
-}
-.pheader{
-	display :flex;
-	flex-direction:row;
-	justify-content:space-between;
-}
-.pheader>p{
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 34px;
-/* identical to box height */
-width: 77px;
-height: 34px;
-
-color: #E27998;
-}
-.flex-container-bottom {
-    display: flex;
-    flex-wrap: wrap;
-}
-.flex-container-bottom>div {
-    width: 134px;
-height: 57.45px;
-    /* background: pink; */
-    margin: 10px;
-    text-align: center;
-    /* line-height: 75px; */
-    font-size: 30px;
-    border-radius: 14px;
-    padding: 5px;
 }
 .table_top{
     display: flex;
@@ -412,7 +385,7 @@ font-size: 20px;
 line-height: 42px;
 letter-spacing: 0.03em;
 
-color: #E47E9B;
+color: #C986CF;
 }
 .table_element>div>p{
 
@@ -423,20 +396,6 @@ font-size: 23px;
 line-height: 49px;
 
 
-}
-.remaining>h4{
-	
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-	font-size: 20px;
-}
-.consumed>h4{
-	
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-	font-size: 20px;
 }
 .date{
     
@@ -453,7 +412,25 @@ font-size: 19px;
 line-height: 40px;
 letter-spacing: 0.03em;
 color: #000000;
+
 opacity: 0.77;
+}
+.pheader{
+	display :flex;
+	flex-direction:row;
+	justify-content:space-between;
+}
+.pheader p{
+	font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 34px;
+/* identical to box height */
+width: 77px;
+height: 34px;
+margin-left: 20px;
+color: #9C74F5;
 }
 </style>
 
@@ -478,16 +455,16 @@ opacity: 0.77;
                             <i class="fa-solid fa-droplet"></i>
                             <p>Water</p>
                         </div>
-                        <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                            <i class="fa-solid fa-weight-hanging"></i>
+                        <div class="client-card client-card-weight" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                        <img src="images/weight_selected.svg" alt="">
                             <p>Weight Track</p>
                         </div>
                         <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
                             <i class="fa-solid fa-moon"></i>
                             <p>Sleep</p>
                         </div>
-                        <div class="client-card client-card-calorie" style="color:#E3738D; border: 1px solid #E3738D;">
-                            <img src="images/calorie_big.svg" alt="">
+                        <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
+                            <i class="fa-solid fa-stopwatch-20"></i>
                             <p>Calorie Track</p>
                         </div>
                     </div>
@@ -506,9 +483,9 @@ opacity: 0.77;
                         Set Goals
                     </div>
                     <div class="inner21-image">
-                        <img src="images/fruits.svg" alt="">
+                        <img src="images/obesity.svg" alt="">
                     </div>
-                    <div class="box-title">Daily Calories Count</div>
+                    <div class="box-title">Daily Steps</div>
                     <div class="box-counter">00000</div>
                     <buttpn class="box-btn">Set</buttpn>
                 </div>
@@ -518,20 +495,46 @@ opacity: 0.77;
         <div id="wrapper-lower">
         <div class="row">
             <div class="col-sm-8">
-				
+
                 <div class="bottom-btns">
                     
-                    <?php for ($i=0; $i <4 ; $i++) { 
-                        echo'<div class="bottom-stats-btn">';
-								echo'<div class="heart_info">';
-									echo'<span>Daily Count</span>';
-									echo'<span>72 BPM</span>';
-								echo'</div>';
-								echo'<div class="heart_info">';
-									
-								echo'</div>';
-							echo'</div>';
-                    }?>
+                <div class="flex-container-bottom">
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Daily Count</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Weekly Avg</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+                    
+                      
+                      
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Monthly Avg</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Total</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+                    </div>
                            
                 </div>
                 <div class="row">
@@ -545,7 +548,7 @@ opacity: 0.77;
                      
                     while ($a <= 4) {
                         
-                     echo '<div class="table_element">';
+                     echo ' <div class="table_element">';
                      echo '<div class="date">';
                      echo '<span>Sep</span>';
                      echo ' <p>18</p>';
@@ -570,19 +573,13 @@ opacity: 0.77;
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="cpb">
-					<div class="pheader">
+                    <div class="pheader">
 						<h4>Daily Progress</h4>
 						<p>View Activity</p>
 					</div>
-					<div class="remaining pheader">
-						<h4>600 KCal </br>Consumed</h4>
-					</div>
+                <div class="cpb">
                     <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
-					<div class="consumed pheader">
-						<h4>400 KCal </br>Remaining</h4>
-					</div>
-				</div>
+                </div>
             </div>
         </div>
            

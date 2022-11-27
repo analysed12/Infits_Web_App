@@ -1,3 +1,4 @@
+<?php  include('config.php');?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +10,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
     <title>Document</title>
-    <script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- <script>
+            $(document).ready(function(){
+            $(".calendat_but").click(function(){
+                $(".calendar_pop").toggle();
+            });
+            });
+        </script> -->
+        <script>
             $(document).ready(function(){
             $(".calendat_but").click(function(){
                 $(".calendar_pop").animate({
@@ -29,6 +40,7 @@
             });
         </script>
 </head>
+        
 <style>
 html {
     overflow-x: hidden;
@@ -109,6 +121,18 @@ height: 57.45px;
     border-radius: 14px;
     padding: 5px;
 }
+.client-card-steps{
+    
+background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+border-radius: 10px;
+}
+.client-card-steps p{
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+}
 .client-card p {
     font-size: 15px;
 }
@@ -116,24 +140,7 @@ height: 57.45px;
 .client-card i {
     font-size: 15px;
 }
-.client-card-water{
-    background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
-    border: 1px solid #52A4FF;
-    border-radius: 10px;
-}
-.client-card-water p{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 120%;
-    /* or 23px */
 
-    text-align: center;
-
-    color: #FFFFFF;
-
-}
 .graph {
     width: 450px;
     margin-left: 20px;
@@ -264,8 +271,8 @@ height: 57.45px;
 
 div[role="progressbar"] {
     --size: 10rem;
-    --fg: #369;
-    --bg: #def;
+    --fg: #FF8B8B;
+    --bg: #FFE0D1;
     --pgPercentage: var(--value);
     animation: growProgressBar 3s 1 forwards;
     width: var(--size);
@@ -330,7 +337,11 @@ div[role="progressbar"]::before {
     }
 }
 .heart_info{
-
+    padding:2px;
+ display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
@@ -338,6 +349,29 @@ font-size: 19px;
 line-height: 40px;
 
 color: #5D5D5D;
+}
+.cpb_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cpb_up{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.cpb_goals{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 40px;
 }
 .cpb{
     width: 100%;
@@ -347,27 +381,61 @@ color: #5D5D5D;
     justify-content: center;
     margin-top: 20px;
 }
-.cpb_box{
+.cpb_bottom{
     display: flex;
-    flex-direction: row;
-    justify-content: center;    
-    align-items: center;
+    align-items: bottom;
+    justify-content: center;
+    flex-direction:row;
+
 }
-.cpb_box_right{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;    
-    align-items: space-between;
+.cpb_bottom>div{
+    margin: 15px;
 }
-.cpb_box_right span{
+.cpb_bottom>div h3{
+    
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+letter-spacing: 0.03em;
+
+color: #FF8B8B;
+}
+.cpb_bottom>div span{
+    letter-spacing: 0.03em;
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 46px;
-    letter-spacing: 0.03em;
-
+    font-size: 20px;
     color: #000000;
+}
+.cpb_goals_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #FF8B8B;
+    border-radius: 10px;
+    width: 120px;
+    height: 56px;
+    margin:5px;
+}
+.cpb_goals_box span{
+    letter-spacing: 0.03em;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 38px;
+    color: #FFFFFF;
+}
+..cpb_goals_box h3{
+    letter-spacing: 0.03em;
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 44px;
+color: #FFFFFF;
 }
 .table_top{
     display: flex;
@@ -384,12 +452,25 @@ line-height: 44px;
 
 color: #000000;
 }
+.calendar_pop{
+
+   z-index: -1;
+   margin-top:-450px;
+   margin-left: 50%;
+    width: 323px;
+    height: 291px;
+    background: black;
+    border-radius: 5px;
+}
+.table{
+    /* z-index: 1; */
+}
 .table_element{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     margin: 20px;
-    height:60px
+    height:60px;
 }
 .table_element>div{
     display: flex;
@@ -436,6 +517,39 @@ color: #000000;
 
 opacity: 0.77;
 }
+
+.activity_pop{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 369px;
+    height: 545px;
+    background: #FFFEFE;
+    border-radius: 32px;
+    box-shadow: 0px 3px 4px rgba(0.16, 0.16, 0.16, 0.16);
+    margin-top: -220px;
+    padding: 2px;
+}
+.pop_box{
+    width: 344px;
+    height: 49px;
+    background: linear-gradient(180deg, rgba(255, 224, 209, 0.48) 0%, rgba(255, 139, 139, 0.48) 100%);
+    border-radius: 10px;
+    margin:5px;
+}
+
+.nav-pills{
+
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 27px;
+
+color: #4D4D4D;
+}
 .pheader{
 	display :flex;
 	flex-direction:row;
@@ -457,23 +571,87 @@ color: #9C74F5;
 
 <body>
     <?php include 'navbar.php' ?>
+    
+    <?php
+    /* queries for weekly, monthly and yearly steps data */
+    // $userID = $_POST['userID'];
+    $userID='Azarudeen';
+	$stmnt = $conn -> prepare("SELECT SUM(steps) FROM steptracker
+     WHERE WEEKOFYEAR(cast(steptracker.dateandtime as DATE))=WEEKOFYEAR(NOW()) AND clientid=?"
+    );
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($stepsSum);
+	
+	$products = array();
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['stepsSumWeek']= $stepsSum;
+	   
+	  array_push($products,$temp);
+	}
 
+	$stmnt = $conn -> prepare("SELECT SUM(steps) FROM steptracker WHERE YEAR(cast(steptracker.dateandtime as DATE)) = YEAR(NOW()) AND MONTH(cast(steptracker.dateandtime as DATE))=MONTH(NOW()) AND clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($stepsSum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['stepsSumMonth']= $stepsSum;
+	   
+	  array_push($products,$temp);
+	}
+
+	$stmnt = $conn -> prepare("SELECT SUM(steps) FROM steptracker WHERE cast(steptracker.dateandtime as DATE)=CURRENT_DATE AND clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($stepsSum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['stepsSumDaily']= $stepsSum;
+	   
+	  array_push($products,$temp);
+	}
+
+	$stmnt = $conn -> prepare("SELECT SUM(steps) FROM steptracker WHERE clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($stepsSum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['stepsSumTotal']= $stepsSum;
+	   
+	  array_push($products,$temp);
+	}
+    ?>
     <div id="content">
 
         <div id="wrapper">
             <div id="inner1">
                 <div id="inner11">
                     <div class="flex-container">
-                        <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                            <i class="fa-solid fa-shoe-prints" style="rotate: -90deg;"></i>
-                            <p>Step</p>
+                        <div class="client-card-steps client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                            <img src="images/steps_selected.svg" alt="">
+                            <p>Steps</p>
                         </div>
-                        <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                            <i class="fa-solid fa-heart-pulse"></i>
+                        <div class=" client-card" style="color:#E266A9; border: 1px solid #E266A9;">
+                        <i class="fa-solid fa-heart-pulse"></i>
                             <p>Heart Rate</p>
                         </div>
-                        <div class="client-card client-card-water " style="color:#52A4FF; border: 1px solid #52A4FF;">
-                            <img src="images/water_selected.svg" alt="">
+                        <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
+                            <i class="fa-solid fa-droplet"></i>
                             <p>Water</p>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
@@ -492,10 +670,75 @@ color: #9C74F5;
 
                 </div>
                 <div id="inner12">
-                    <div class="graph">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                        <canvas id="myChart"></canvas>
-                    </div>
+                
+
+<?php
+/* queries for graph */
+function date_compare($a, $b)
+{
+    $t1 = $a['date'];
+    $t2 = $b['date'];
+    return $t1 - $t2;
+}
+$clientID = 'Azarudeen';
+// $clientID = $_POST['clientuserID'];
+$from = date('Y-m-d', strtotime("-6 day"));
+
+$to = date('Y-m-d');
+
+$end = date('Y-m-d',strtotime("1 day"));
+
+
+$sql = "SELECT * FROM steptracker where clientID = '$clientID' and cast(dateandtime as date) between '$from' and '$to' GROUP BY cast(dateandtime as date) order by dateandtime";
+
+$full = array();
+
+$dateArr = array();
+
+$dateArray = array();
+
+$result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+    while($row =mysqli_fetch_assoc($result))
+    {
+
+      $emparray['date'] = date("d",strtotime($row['dateandtime']));
+      $emparray['steps'] = $row['steps'];
+      
+      $dateArray[] = date("d",strtotime($row['dateandtime']));
+
+      $full[] = $emparray;
+    
+    }
+
+    $missingDates = array();
+
+    $dateStart = date_create($from);
+    $dateEnd   = date_create($end);
+
+    $interval  = new DateInterval('P1D');
+    $period    = new DatePeriod($dateStart, $interval, $dateEnd);
+
+    foreach($period as $day) {
+      $formatted = $day->format("d");
+      // echo gettype($formatted);
+      if(!in_array($formatted, $dateArray)) {
+        $missingDates['date'] = $formatted;
+        $missingDates['steps'] = '0';
+        $full[] = $missingDates;
+    }}
+
+    usort($full, 'date_compare');
+
+    $dateArr = array_column($full, 'date');
+    $stepsArr = array_column($full, 'steps');
+
+    // echo json_encode(['steps' => $full]);
+?>
+                <div class="graph">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                            <canvas id="myChart"></canvas>
+                </div>
+                   
                 </div>
             </div>
             <div id="inner2">
@@ -504,7 +747,7 @@ color: #9C74F5;
                         Set Goals
                     </div>
                     <div class="inner21-image">
-                        <img src="images/man_drinking_water.svg" alt="">
+                        <img src="images/set_goals.png" alt="">
                     </div>
                     <div class="box-title">Daily Steps</div>
                     <div class="box-counter">00000</div>
@@ -518,8 +761,7 @@ color: #9C74F5;
             <div class="col-sm-8">
 
                 <div class="bottom-btns">
-                    
-                <div class="flex-container-bottom">
+                    <div class="flex-container-bottom">
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Daily Count</span>
@@ -562,14 +804,17 @@ color: #9C74F5;
                     <div class="col-sm-12">
                     <div class="table">
                         <div class="table_top">
-                     <span>Past Activity</span>
-                      </div>
+                            <span>Past Activity</span>
+                            <div class="calendat_but"><img src="images/calender_toggle.svg"></div>
+                     
+                        </div>
+                      
                      <?php
                      $a=1;
                      
                     while ($a <= 4) {
                         
-                     echo '<div class="table_element">';
+                     echo ' <div class="table_element">';
                      echo '<div class="date">';
                      echo '<span>Sep</span>';
                      echo ' <p>18</p>';
@@ -588,40 +833,104 @@ color: #9C74F5;
                      
                     
                      ?>
-                      </div> 
-               
+                      </div>    
+                      <div class="calendar_pop">
+                      </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
-            <div class="pheader">
+                    <div class="pheader">
 						<h4>Daily Progress</h4>
 						<p>View Activity</p>
 					</div>
-                <div class="cpb_box">
-                    <div class="cpb">
-                        <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                <div class="cpb_container">
+                    <div class="cpb_up">
+                        <div class="cpb">
+                            <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                        </div>
+                        <div class="cpb_goals">
+                            <div class="cpb_goals_box">
+                                <span>Daily goal</span>
+                                <h3>9200</h3>
+                            </div>
+                            <div class="cpb_goals_box">
+                                 <span>Weekly goal</span>
+                                <h3>50,000</h3>
+                            </div>
+                            <div class="cpb_goals_box">
+                                <span>Monthly goal</span>
+                                <h3>3,0000</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cpb_bottom">
+                    <?php
+                        $userid='Azarudeen';
+                        $sql = "SELECT steps, distance, calories  FROM steptracker WHERE clientid='$userid'ORDER BY clientID DESC LIMIT 1";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                    ?>
+                        <div>   
+                            <span>
+                            <img src="images/footsteps.svg" alt="">
+                                Steps
+                            </span>
+                            <h3><?php echo $row["steps"];?></h3>
+                        </div>
+                        <div>
+                            <span>
+                            <img src="images/distance.svg" alt="">
+                                Distance
+                            </span>
+                            <h3>><?php echo $row["distance"];?> Kms</h3>
+                        </div>
+                        <div>
+                            <span>
+                                <img src="images/fire.svg" alt="">
+                                Burned
+                            </span>
+                            <h3>><?php echo $row["calories"];?> kcal</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity_pop">
+                    <div class="pop_header">
+                        <span>Activity</span>
+                        
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
+                    </div>
+                    <div class="pop_box">
                     </div>
 
-                    <div class="cpb_box_right">
-                        <span>3 Liter</span>                    
-                        <span>Remaining</span>
-                        <span>600 ML</span>
-                        <span>Consumed</span>
-                     </div>
                 </div>
-              
-
             </div>
         </div>
            
         </div>
     </div>
 </body>
-<script>
-var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
 
+<script>
+/* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
+
+
+/* var yValues = <?php $stepsArr ?> ; */
+ <?php 
+
+// var $graphJson=json_encode(['steps' => $full]);
+
+?> 
 new Chart("myChart", {
     type: "line",
     data: {

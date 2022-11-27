@@ -1,3 +1,5 @@
+<?php  include('config.php');?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,30 +96,35 @@ html {
     border-radius: 14px;
     padding: 5px;
 }
-.client-card-calorie{
-background: linear-gradient(37.35deg, #E2809B 0%, #EBD3C8 100%);
-
+.flex-container-bottom {
+    display: flex;
+    flex-wrap: wrap;
 }
-.client-card-calorie p{
-    font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 19px;
-
-/* or 16px */
-
-text-align: center;
-
-color: #FFFFFF;
+.flex-container-bottom>div {
+    width: 134px;
+height: 57.45px;
+    /* background: pink; */
+    margin: 10px;
+    text-align: center;
+    /* line-height: 75px; */
+    font-size: 30px;
+    border-radius: 14px;
+    padding: 5px;
 }
 .client-card p {
     font-size: 15px;
+    
 }
 
 .client-card i {
     font-size: 15px;
 }
-
+.client-card-heart {
+    background: linear-gradient(217.35deg, #F97EAA 0%, #C389D5 100%);
+}
+.client-card-heart p{
+    color: #FFFFFF;
+} 
 .graph {
     width: 450px;
     margin-left: 20px;
@@ -148,13 +155,14 @@ color: #FFFFFF;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 20px;
-	background: linear-gradient(263.28deg, #E69BAF 0%, #E69EB0 0.01%, #E07498 93.31%);    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
+    background: linear-gradient(262.45deg, #FA8686 9.26%, #F1A680 93.19%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
 }
 
 .box-title {
     font-size: 15px;
-    color: #DF7296;
+    color: #FF8B8B;
 }
 
 .box-counter {
@@ -262,13 +270,13 @@ div[role="progressbar"] {
         radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
         conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
     font-family: Helvetica, Arial, sans-serif;
-    font-size: calc(var(--size) / 5);
+    font-size: calc(var(--size) / 7);
     color: var(--fg);
 }
 
 div[role="progressbar"]::before {
     counter-reset: percentage var(--value);
-    content: counter(percentage) '%';
+    content: '❤️' counter(percentage)' ' 'bpm';
 }
 
 
@@ -324,56 +332,41 @@ color: #5D5D5D;
 }
 .cpb{
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
-	flex-direction: column;
-    align-items: center;
-   
+    align-items: top;
+    justify-content: center;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
-.cpb>h3{
-	font-family: 'NATS';
+.max{
+    border-left: 2px solid #C986CF;
+    border-right: 2px solid #C986CF;
+    width:120px;
+
+}
+
+.heart_beat_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background: #FFE8F2;
+border-radius: 10px;
+width: 355px;
+height: 108px;
+padding:7px;
+}
+.heart_beat_box>p{
+    font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
-font-size: 22px;
-line-height: 46px;
+font-size: 23px;
+line-height: 42px;
+/* identical to box height */
+
+letter-spacing: 0.03em;
 
 color: #000000;
-width: 114px;
-height: 46px;
-
-}
-.pheader{
-	display :flex;
-	flex-direction:row;
-	justify-content:space-between;
-}
-.pheader>p{
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 34px;
-/* identical to box height */
-width: 77px;
-height: 34px;
-
-color: #E27998;
-}
-.flex-container-bottom {
-    display: flex;
-    flex-wrap: wrap;
-}
-.flex-container-bottom>div {
-    width: 134px;
-height: 57.45px;
-    /* background: pink; */
-    margin: 10px;
-    text-align: center;
-    /* line-height: 75px; */
-    font-size: 30px;
-    border-radius: 14px;
-    padding: 5px;
 }
 .table_top{
     display: flex;
@@ -412,7 +405,7 @@ font-size: 20px;
 line-height: 42px;
 letter-spacing: 0.03em;
 
-color: #E47E9B;
+color: #C986CF;
 }
 .table_element>div>p{
 
@@ -423,20 +416,6 @@ font-size: 23px;
 line-height: 49px;
 
 
-}
-.remaining>h4{
-	
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-	font-size: 20px;
-}
-.consumed>h4{
-	
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-	font-size: 20px;
 }
 .date{
     
@@ -453,7 +432,25 @@ font-size: 19px;
 line-height: 40px;
 letter-spacing: 0.03em;
 color: #000000;
+
 opacity: 0.77;
+}
+.pheader{
+	display :flex;
+	flex-direction:row;
+	justify-content:space-between;
+}
+.pheader p{
+	font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 34px;
+/* identical to box height */
+width: 77px;
+height: 34px;
+margin-left: 20px;
+color: #9C74F5;
 }
 </style>
 
@@ -470,8 +467,8 @@ opacity: 0.77;
                             <i class="fa-solid fa-shoe-prints" style="rotate: -90deg;"></i>
                             <p>Step</p>
                         </div>
-                        <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                            <i class="fa-solid fa-heart-pulse"></i>
+                        <div class="client-card client-card-heart " style="color:#E266A9; border: 1px solid #E266A9;">
+                            <img src="images/heart.svg" alt=""/>
                             <p>Heart Rate</p>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
@@ -486,8 +483,8 @@ opacity: 0.77;
                             <i class="fa-solid fa-moon"></i>
                             <p>Sleep</p>
                         </div>
-                        <div class="client-card client-card-calorie" style="color:#E3738D; border: 1px solid #E3738D;">
-                            <img src="images/calorie_big.svg" alt="">
+                        <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
+                            <i class="fa-solid fa-stopwatch-20"></i>
                             <p>Calorie Track</p>
                         </div>
                     </div>
@@ -506,9 +503,9 @@ opacity: 0.77;
                         Set Goals
                     </div>
                     <div class="inner21-image">
-                        <img src="images/fruits.svg" alt="">
+                        <img src="images/equipment.svg" alt="">
                     </div>
-                    <div class="box-title">Daily Calories Count</div>
+                    <div class="box-title">Daily Heart Rate</div>
                     <div class="box-counter">00000</div>
                     <buttpn class="box-btn">Set</buttpn>
                 </div>
@@ -518,20 +515,46 @@ opacity: 0.77;
         <div id="wrapper-lower">
         <div class="row">
             <div class="col-sm-8">
-				
+
                 <div class="bottom-btns">
                     
-                    <?php for ($i=0; $i <4 ; $i++) { 
-                        echo'<div class="bottom-stats-btn">';
-								echo'<div class="heart_info">';
-									echo'<span>Daily Count</span>';
-									echo'<span>72 BPM</span>';
-								echo'</div>';
-								echo'<div class="heart_info">';
-									
-								echo'</div>';
-							echo'</div>';
-                    }?>
+                <div class="flex-container-bottom">
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Daily Count</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Weekly Avg</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+                    
+                      
+                      
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Monthly Avg</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Total</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+                    </div>
                            
                 </div>
                 <div class="row">
@@ -565,24 +588,38 @@ opacity: 0.77;
                     
                      ?>
                       </div> 
-
+                         
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="cpb">
-					<div class="pheader">
+                <?php
+                 $userid='Azarudeen';
+                 $sql = "SELECT average, maximum, minimum FROM heartrate WHERE clientID = '$userid' ORDER BY clientID DESC LIMIT 1";
+                 $result = $conn->query($sql);
+                 $row = $result->fetch_assoc();
+                ?>
+                <div class="pheader">
 						<h4>Daily Progress</h4>
 						<p>View Activity</p>
 					</div>
-					<div class="remaining pheader">
-						<h4>600 KCal </br>Consumed</h4>
-					</div>
-                    <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
-					<div class="consumed pheader">
-						<h4>400 KCal </br>Remaining</h4>
-					</div>
-				</div>
+                <div class="cpb">
+                    <div role="progressbar" style="--value:<?php $value = 73; echo $value; ?>"></div>
+                </div>
+                <div class="heart_beat_box">
+                    <div class="avg">
+                        <span>Avg</span>
+                        <p><?php echo $row["average"];?> BPM</p>
+                    </div>
+                    <div class="max">
+                        <span>Max</span>
+                        <p><?php echo $row["maximum"];?> BPM</p>
+                    </div>
+                    <div class="low">
+                        <span>Low</span>
+                        <p><?php echo $row["minimum"];?> BPM</p>
+                    </div>
+                </div>
             </div>
         </div>
            

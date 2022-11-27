@@ -1,0 +1,407 @@
+﻿.wrapper {
+    position: relative;
+    width: 1440px;
+    height: 1024px;
+    background: #FFFFFF;
+}
+
+.container {
+    position: absolute;
+    width: 1200px;
+    height: 920px;
+    left: 242px;
+    top: 103px;
+}
+
+.vert-rectangle {
+    position: absolute;
+    width: 240px;
+    height: 1024px;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+}
+
+.vline {
+    position: absolute;
+    width: 2px;
+    height: 1024px;
+    top: 0px;
+    left: 240px;
+    background: #E8ECF5;
+}
+
+.hline {
+    position: absolute;
+    width: 1198px;
+    height: 1px;
+    left: 242px;
+    top: 103px;
+    background: #E0E0E0;
+}
+
+.header {
+    height: 103px;
+    width: 1198px;
+    padding-left: 242px;
+    top: 0px;
+}
+
+.blank {
+    position: absolute;
+    width: 855px;
+    height: 151px;
+    left: 0px;
+    top: 0px;
+}
+
+.grid {
+    position: absolute;
+    width: 848px;
+    height: 769px;
+    left: 0px;
+    top: 151px;
+}
+
+.left-side {
+    position: absolute;
+    width: 350px;
+    height: 920px;
+    left: 856px;
+    padding-top: 105px;
+}
+
+.left-line {
+    position: absolute;
+    height: 921px;
+    left: 854px;
+    padding-top: 110px;
+    border: 2px solid #E0E0E0;
+}
+
+.calendar {
+    position: absolute;
+    width: 319px;
+    height: 296px;
+    left: 0px;
+    top: 25px;
+    background: #FFFFFF;
+    border-radius: 5px;
+}
+
+.consultation1 {
+    position: absolute;
+    width: 282px;
+    height: 146px;
+    left: 11px;
+    top: 398px;
+    background: #EFF8FF;
+    border-radius: 21px
+}
+
+.consultation2 {
+    position: absolute;
+    width: 282px;
+    height: 146px;
+    left: 11px;
+    top: 562px;
+    background: #EFF8FF;
+    border-radius: 21px;
+}
+
+.client-recipe {
+    position: absolute;
+    width: 282px;
+    height: 146px;
+    left: 11px;
+    top: 730px;
+    background: #EEF1F4;
+    border-radius: 16px;
+}
+
+.row-line {
+    position: absolute;
+    width: 855px;
+    height: 0px;
+    left: 0px;
+    top: 151px;
+    border: 2px solid #E0E0E0;
+}
+
+.month {
+    width: 180px;
+    height: 35px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 150%;
+    /* identical to box height, or 34px */
+
+    text-align: center;
+    color: #444444;
+    flex: none;
+    order: 0;
+    flex-grow: 0
+}
+.arrow {
+    position: absolute;
+    width: 75px;
+    height: 25px;
+    left: 225px;
+    top: 20px;
+   
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+   
+}
+.arrow1 .arrow2{
+
+    text-align: center;
+    size: 2rem;
+    background: #EFEFEF;
+    cursor: pointer;
+}
+
+.calendar .week-days{
+    color: #737373;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 22px;
+    font-family: 'NATS';
+    font-style: normal;
+    padding-left: 26px;
+    top: 7px;
+}
+
+.calendar .days {
+    color: #444444;
+    justify-content: space-between;
+    padding-left: 26px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+
+ 
+   
+
+}
+.calendar .days li{
+
+    top: 93px;
+    cursor: pointer;
+    
+} 
+
+.calendar ul
+{
+    flex-wrap: wrap;
+    text-align: center;
+}
+.calendar ul li{
+    display: flex;
+    
+  width : calc(100% /7);
+}
+
+.text1 {
+    position: absolute;
+    width: 132px;
+    height: 22px;
+    left: 13px;
+    top: 15px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 22px;
+    /* identical to box height, or 92% */
+
+    letter-spacing: -0.408px;
+    color: #3C82D7;
+}
+
+.line1 {
+    position: absolute;
+    width: 801px;
+    height: 0px;
+    left: 51px;
+    border: 2px solid #E0E0E0;
+}
+
+.line2 {
+    position: absolute;
+    width: 682px;
+    height: 0px;
+    padding-left: 0px;
+    top: 429px;
+    border: 2px solid #E0E0E0;
+    transform: rotate(90deg);
+}
+
+table, tr, th, td {
+    border: 1px solid#E0E0E0;
+}
+
+td {
+    height: 50px;
+    width: 110.56px;
+}
+
+th {
+    height: 55px;
+    width: 110.56px;
+}
+
+.w-days {
+    position: absolute;
+    width: 50px;
+    height: 22px;
+    top: 0px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    /* identical to box height, or 116% */
+
+    letter-spacing: -0.312px;
+    color: #AAAAAA;
+    justify-content: space-between;
+}
+
+.w-date {
+    position: absolute;
+    width: 6px;
+    height: 22px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    /* identical to box height, or 116% */
+
+    letter-spacing: -0.312px;
+    color: #AAAAAA;
+}
+
+.box1 {
+    box-sizing: border-box;
+    position: absolute;
+    width: 96px;
+    height: 84px;
+    left: 190px;
+    top: 220px;
+    background: #EFF8FF;
+    border: 1px solid #7A78FD;
+    border-radius: 6px;
+}
+
+.box2 {
+    box-sizing: border-box;
+    position: absolute;
+    width: 96px;
+    height: 83px;
+    left: 190px;
+    top: 313px;
+    background: #EFF8FF;
+    border: 1px solid #7A78FD;
+    border-radius: 6px;
+}
+
+.box3 {
+    box-sizing: border-box;
+    position: absolute;
+    width: 96px;
+    height: 112px;
+    left: 190px;
+    top: 425px;
+    background: #EFF8FF;
+    border: 1px solid #7A78FD;
+    border-radius: 6px;
+}
+
+p {
+    top: 0px;
+    position: absolute;
+    width: 95px;
+    height: 22px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height, or 138% */
+
+
+    color: #7A78FD;
+}
+
+.time {
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height, or 138% */
+
+    letter-spacing: -0.312px;
+    color: #AAAAAA;
+}
+
+h2 {
+    position: absolute;
+    top: 300px;
+    left: 5px;
+}
+
+#view {
+    position: absolute;
+    width: 52px;
+    height: 21px;
+    left: 240px;
+    top: 320px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+
+    text-align: center;
+    color: #4B9AFB;
+}
+
+#month {
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 150%;
+    /* identical to box height, or 28px */
+    left: 5px;
+    color: #A8A8A8;
+}
+
+.event-class {
+    left: 644px;
+    top: 50px;
+}
+
+
+
+.calendar__month {
+    width: 180px;
+    height: 35px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 150%;
+    position: relative;
+  }
+  
+  
