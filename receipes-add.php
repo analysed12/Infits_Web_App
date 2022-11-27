@@ -3,8 +3,8 @@
       <?php
          if( isset($_POST['submit']) && isset($_FILES['my_image']))
          {     
-                 
-               
+            //$id= $_SESSION['dit_id']; 
+               $id ='John';
                $name =$_POST['R-name'];
                $course =$_POST['c-name'];
                  
@@ -18,7 +18,15 @@
                $prot  = $_POST['prt'];
                $fat = $_POST['fats'];
                $carbo =$_POST['carbs'];
-               $fibr = $_POST['fibre'];
+             //  $fibr = $_POST['fibre'];
+             $fibr= '90';
+               $link ="HELLO HOW R U?";
+               $file1= "file";
+               $ingrt = "abcdefg";
+               $inst ="oioooooo";
+
+               $total_time ="$p_time|$c_time";
+
 
                $img_name= $_FILES['my_image']['name'];
              $img_size = $_FILES['my_image']['size'];
@@ -44,12 +52,12 @@
                            $img_upload_path = 'uploads'.$new_name;
               
                            move_uploaded_file($tmp_name,$img_upload_path );  
+                           $imageandpath="$new_name|$img_upload_path";
            
-               $sql = "INSERT INTO `dietian_recipies`(`name`,`time`,`serving`,`calories`,`protiens`,
-                `fats`,`carbs`,`category`,`dietitianuserID`,
-                `image`,`file`)
-                VALUES('$name',`$p_time','$serv','$calo',
-               '$prot','$fat','$carbo','$new_name','$img_upload_path')";
+               $sql = "INSERT INTO `dietian_recipies`(`name`,`time`,`serving`,`link`,`calories`,`proteins`,
+                `fats`,`fibres`,`carbs`,`ingredient`,`instruction`,`category`,`dietitianuserID`,`image`,`file`,`course`)
+                VALUES('$name','$total_time','$serv','$link','$calo',
+               '$prot','$fat','$fibr','$carbo','$ingrt','$inst','$cate','$id','$imageandpath','$file1','$course')";
                 if($conn -> query($sql)==true)
                 {
                        echo "One receipe added";
@@ -70,27 +78,36 @@
 
 <html>
     <head>
-    <link rel="stylesheet" href="receipe-add.css" />
+  
     <style>
+      .container{
+        position: absolute;
+    width: 1198px;
+    height: 948px;
+    left: 242px;
+    top: 76px;
+}
+
+      
       .upload-photo{
          width: 350px;
          height: 230px;
-         left: 355px;
-         top: 18px;
+         margin-left: 357px;
+         margin-top: 15px;
          background: #D9D9D9;
          opacity: 0.74;
          border-radius: 12px;
       }
 
       .buttons{
-        .buttons
+      
     box-sizing: border-box;
 
 position: absolute;
 width: 459px;
 height: 45px;
-left: 315px;
-top: 265px;
+margin-left: 315px;
+margin-top: 10px;
 
 background: #E7E7E7;
 border: 1px solid #E7E7E7;
@@ -102,6 +119,8 @@ text-align: center;
       .receipe-details{
         width: 550px;
         height: 498px;
+        padding-top:70px;
+        margin-left:330px;
 
       }
       .course{
@@ -170,6 +189,21 @@ border-radius: 31px;
 
     
     }
+    .btn-pp{
+    
+      margin-top:7px;
+      text-align: center;
+      border-radius: 22px;
+      height: 32px;
+      margin-left:25px;
+
+    }
+    .aa-btn{
+      text-decoration:none;
+      color:black;
+      font-weight: 400;
+      font-size: 17px;
+    }
      
 
 
@@ -204,6 +238,15 @@ border-radius: 31px;
 
           </script>
 
+        <!------ js code for buttons---->
+          <script>
+            $(function(){
+              %('.btn-pp').on('click',function(){
+                $(this).css("background-color", "blue");
+              });
+            });
+            </script>
+
 
 </head>
 <body>
@@ -218,19 +261,31 @@ border-radius: 31px;
 
 </div>
          <div class="buttons">
-            <ul class="button-class" style="display:flex; list-style:none";>
-                <li><div class="p-2" style="width: 135px;height:32px; background-color: white; margin-top: 5%; border-radius: 22px;"><a href ="#" style="text-decoration: none; color: black; font-size:15;font-weight:400% ">Receipe Details</li>
-                <li><div class="p-2" style="width:100px; height:32px; margin-left: 50px;text-align:center; margin-top:4%;"> 
-                <a href="#" style="text-decoration: none; color: black; font-size:15;font-weight:400%;">Ingredients </a></li>
-                <li><div class="p-2" style="width:78px; height:32px; margin-left: 50px; margin-top: 4%;"> 
-                  <a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;" >Directions</a> </li>
-</ul>
-</div>
-         <div class="receipe-details" style="padding-top:325px;">
-            <ul class="res-cs" style="list-style:none; height:498px;width:500p;">
+          <ul id="ul-btn" style="list-style:none; display:flex;">
+          <li> <div class= "btn-pp" style="background-color:white;" > <a class="aa-btn" href="#">Receipe Details </a></div></li>
+          <li><div class="btn-pp"><a class="aa-btn" href="#">Ingredients</a></div></li>
+          <li><div class="btn-pp"><a class="aa-btn" href="#">Directions</a></div></li>
+
+            
+            <ul>
+
+          
+
+            
+      </div>
+
+         <div class="receipe-details" >
+            <ul class="res-cs" style="list-style:none;">
           <li><input class="in-st-cs" id="details-input" name="R-name" type="text" placeholder="Recipe name"></li>
             <li> 
-             <input class="in-st-cs" type="text" id="course-input" name="c-name" placeholder ="Course" style="background:url('.\images\ad_ar.svg');" />
+              <ul style="display:flex; list-style:none; padding-left:0px;">
+                <li>
+             <input class="in-st-cs" type="text" id="course-input" name="c-name" placeholder ="Course"/>
+      </li>
+
+        <li><div class="add-cou-img" style="color:black;left:380px; border:1px solid;"><img id = "lbl1" src=".\images\ad_ar.svg" style="cursor:pointer; color:black;">
+        </div></li>
+      </ul>
              
                
               
@@ -252,11 +307,11 @@ border-radius: 31px;
            <li> <input class="in-st-cs" id="prt" type="text" id="prt" name="prt" placeholder ="protien"> </li>
         <li> <input class="in-st-cs" id="fts" type="text" name="fats" id="fats" placeholder = "Fats">  </li>
          <li> <input class="in-st-cs" id="carbs" id="carbs" name="carbs" type="text" placeholder ="Carbs"> </li>
-         <li> <input class="in-st-cs" id="fibre" id="fibre" name="fibre" type="text" placeholder ="fibre"> </li>
+     <!----    <li> <input class="in-st-cs" id="fibre" id="fibre" name="fibre" type="text" placeholder ="fibre"> </li>---->
 
 </ul>   
 </div>
-             <div class="btn-class" style="padding-top:200px;padding-left: 300px;">
+             <div class="btn-class" style="padding-top:-1px;padding-left: 300px;">
              <button type="Submit" class="btn-primary" name="submit" id="submit"  style="background:linear-gradient(264.44deg, rgba(207, 87, 230, 0.66) 0%, rgba(110, 100,254, 0.66) 91.11%); 
              border-style: none;width: 474px;height: 39px;border-radius: 44px;color: white;">Next</button>
              </div>

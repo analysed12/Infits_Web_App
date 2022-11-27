@@ -21,38 +21,11 @@
     height: 1024px;
     background: #FFFFFF;
 }
-.list-group
-{
-    list-style: none;
-}
 
-
-
-.list-group-item{
-
-    font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 21px;
-line-height: 44px;
-
-color: #000000;
-
-    box-sizing: border-box;
-
-position: absolute;
-width: 500px;
-
-left :10px;
-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.07);
-
-background: #FFFFFF;
-border-radius: 5px;
-}
 
  img{
-     height: 100%;
-     width:  100%;
+     height: 225px;
+     width:  280;
  }
 
  .nutri-style
@@ -60,42 +33,32 @@ border-radius: 5px;
   
     position: absolute;
 width: 95px;
-height: 20px;
-left: 272px;
-top: 600px;
+height: 18px;
+left: 530px;
+top: 590px;
  }
 
  .h5-style
  {
     
 
-font-family: 'NATS';
+
 font-style: normal;
 font-weight: 400;
-font-size: 20px;
-line-height: 150%;
+font-size: 18px;
+line-height: 140%;
 align-items: center;
 
 color: #000000;
 
  }
- .d-grid-gap-2
- {
+
+ .btn-btn-primary{
     position: absolute;
 width: 474px;
 height: 39px;
-left: 312px;
-top: 676px;
-
-background: linear-gradient(264.44deg, rgba(207, 87, 230, 0.66) 0%, rgba(110, 100, 254, 0.66) 91.11%);
-border-radius: 10px;
- }
- .btn-btn-primary{
-    position: absolute;
-width: 43px;
-height: 18px;
-left: 216px;
-padding-top: 5px;
+left: 520px;
+top: 750px;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 300;
@@ -121,16 +84,6 @@ align-items: center;
 color: #000000;
 
    }
-   .receipe-details
-{
-     width:500px;
-     height: 500px;
-    padding-left:514px;
-    padding-top: 310px;
-    justify-content: space-between;
-
-   
-}
 
 
    p{
@@ -168,12 +121,13 @@ position: absolute;
 width: 459px;
 height: 50px;
 left: 556px;
-top: 335px;
+top: 390px;
 
 background: #E7E7E7;
 border: 1px solid #E7E7E7;
 border-radius: 44px;
 text-align: center;
+
 }
 
 
@@ -183,20 +137,20 @@ text-align: center;
 	</head>
 	<body>
 	<!-------sidenav----->
-     <?php include("event_calendar.php")?>
+     <?php include("recipe_navbar.php")?>
 
 
-
+     <div class="container">
      
    <form id="form1" action="" method="post" enctype ="multipart/form/data">
        
         	 <?php
-           	  	$sql ="select * from `receipe_details` where `receipe_id`=7";
+           	  	$sql ="select * from `dietian_recipies` where `dietitianuserID`=7";
            	  	$res = mysqli_query($conn,$sql);
            	  	if(mysqli_num_rows($res) > 0)
            	  	{
            	  		while ($row = $res -> fetch_assoc()){
-           	  			$path = $row["image_path"];?>
+           	  			$path = $row["file"];?>
                        
             <div class="upload-photo">
                 
@@ -217,36 +171,29 @@ text-align: center;
 
            <div class="receipe-details">
            	  <!------<table id ="tbl-view">---->
-                 <ul class="list-group" id="listofmenu" style="margin-left:30%;margin-right: 30%; list-style: :none; justify-content: space-between;  ">
-            <li class="list-group-item"  ><?php echo $row["receipe_name"];?></li>
-            <li class="list-group-item" style="padding-top:14px;" ><?php echo $row["cousre"]; ?></li>
-              <li class="list-group-item"> <?php echo $row["category"]; ?>
-                
-              </li>
-            <li class="list-group-item" style="margin-bottom: 50%;padding-top:14px;"><?php echo $row["preparation_time"];?></li>
-            <li class="list-group-item"><?php echo $row["cooking_time"];?></li>
-            <li class="list-group-item"><?php echo $row["serving"];?></li>
-        </ul>
-             <div class="nutri-style"> <h6 class="h5-style">Nutritions</h6></div>
-             <ul class="list-group" id="listofmenu" style="margin-left:30%;margin-right: 30%; ">
-            
-             <li class="list-group-item"> <?php echo $row["calorie"]; ?></li>
-             <li class="list-group-item"><?php echo $row["protien"]; ?></li>
-             <li class="list-group-item"> <?php echo $row["fats"];?></li>
-             <li class="list-group-item"><?php echo $row["carbs"];?></li>
-           
-
-          </ul>
-          <div class="d-grid-gap-2">
+                 <table class="tbl-view">
+                     <tr><td><?php echo $row["name"];?></td></tr>
+                     <tr><td><?php echo $row["course"];?></td></tr>
+                     <tr><td><?php $row["category"];?></td></tr>
+                     <tr><td><?php echo $row["time"];?></td></tr>
+                     <tr><td>Nutritions</td></tr>
+                     <tr> <td><?php echo $row["serving"];?></td></tr>
+                     <tr><td><?php echo $row["calories"];?></td></tr>
+                     <tr><td><?php echo $row["protiens"];?></td></tr>
+                     <tr><td><?php echo $row["fats"];?></td></tr>
+                     <tr><td><?php echo $row["carbs"];?></td></tr>
+                       
+                   <?php } } ?>
+                 </table>
+                 </div>
             <button class="btn-btn-primary" type="button" id="button"
             style=" color:#FFFFFF; background:linear-gradient(264.44deg, rgba(207, 87, 230, 0.66) 0%, rgba(110, 100, 254, 0.66) 91.11%); border-style: none;">
             Next</button>
             
-          </div>
+          
            	  	
            	  	
-                  
-           	  	   <?php } } ?>
-           
+             </form>   
+           </div>
 	</body>
 </html>

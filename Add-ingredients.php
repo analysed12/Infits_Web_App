@@ -1,27 +1,27 @@
-// <?php 
+<?php include ('config.php');
     
-     //   if(isset($_POST['Done']))
-       // {
+        if(isset($_POST['Done']))
+        {
        //$rec_id = $_SESSION['receipe_id'];
-      // $rec_id = 5;
+       $rec_id = 7;
     
-     //  $name = "juice";
-      // $ingrd1 =$_POST['text1'];
+       $name = "juice";
+       $ingrd1 =$_POST['text1'];
 
-     //  $quantity1 =$_POST['text2'];
-      // $sql = "INSERT INTO addingredients(receipe_id, receipe_name, ingredients1, quantity1) values 
-      // ('$rec_id','$name','$ingrd1','$quantity1')";
-      // if($conn-> query($sql)  === TRUE)
-      // {
-        // echo "Data Inserted";
+       $quantity1 =$_POST['text2'];
+       $sql = "INSERT INTO addingredients(receipe_id, receipe_name, ingredients1, quantity1) values 
+       ('$rec_id','$name','$ingrd1','$quantity1')";
+       if($conn-> query($sql)  === TRUE)
+       {
+         echo "Data Inserted";
 
-       // }
-      //  else
-     //   {
-      //      echo "error";
-       // }
+        }
+        else
+        {
+            echo "error";
+        }
 
- // } ?>
+  } ?>
 
 
 <!Doctype html>
@@ -96,6 +96,10 @@ align-items: center;
 color: #FFFFFF;
 
              }
+
+                
+            
+
             </style>
 </head>
 <body>
@@ -120,9 +124,6 @@ color: #FFFFFF;
 
           
 </div>
-
-<style>
-    </styel>
 
 
 </body>
