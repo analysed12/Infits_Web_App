@@ -415,6 +415,23 @@ color: #000000;
 
 opacity: 0.77;
 }
+.pheader{
+	display :flex;
+	flex-direction:row;
+	justify-content:space-between;
+}
+.pheader p{
+	font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 34px;
+/* identical to box height */
+width: 77px;
+height: 34px;
+margin-left: 20px;
+color: #9C74F5;
+}
 </style>
 
 <body>
@@ -556,6 +573,10 @@ opacity: 0.77;
                 </div>
             </div>
             <div class="col-sm-4">
+                    <div class="pheader">
+						<h4>Daily Progress</h4>
+						<p>View Activity</p>
+					</div>
                 <div class="cpb">
                     <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
                 </div>

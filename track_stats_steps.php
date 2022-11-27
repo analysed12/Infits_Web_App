@@ -1,3 +1,4 @@
+<?php  include('config.php');?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -570,7 +571,71 @@ color: #9C74F5;
 
 <body>
     <?php include 'navbar.php' ?>
+    
+    <?php
+    /* queries for weekly, monthly and yearly steps data */
+    // $userID = $_POST['userID'];
+    $userID='Azarudeen';
+	$stmnt = $conn -> prepare("SELECT SUM(steps) FROM steptracker
+     WHERE WEEKOFYEAR(cast(steptracker.dateandtime as DATE))=WEEKOFYEAR(NOW()) AND clientid=?"
+    );
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($stepsSum);
+	
+	$products = array();
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['stepsSumWeek']= $stepsSum;
+	   
+	  array_push($products,$temp);
+	}
 
+	$stmnt = $conn -> prepare("SELECT SUM(steps) FROM steptracker WHERE YEAR(cast(steptracker.dateandtime as DATE)) = YEAR(NOW()) AND MONTH(cast(steptracker.dateandtime as DATE))=MONTH(NOW()) AND clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($stepsSum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['stepsSumMonth']= $stepsSum;
+	   
+	  array_push($products,$temp);
+	}
+
+	$stmnt = $conn -> prepare("SELECT SUM(steps) FROM steptracker WHERE cast(steptracker.dateandtime as DATE)=CURRENT_DATE AND clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($stepsSum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['stepsSumDaily']= $stepsSum;
+	   
+	  array_push($products,$temp);
+	}
+
+	$stmnt = $conn -> prepare("SELECT SUM(steps) FROM steptracker WHERE clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($stepsSum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['stepsSumTotal']= $stepsSum;
+	   
+	  array_push($products,$temp);
+	}
+    ?>
     <div id="content">
 
         <div id="wrapper">
@@ -605,38 +670,74 @@ color: #9C74F5;
 
                 </div>
                 <div id="inner12">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <div class="graph">
+                
+
+<?php
+/* queries for graph */
+function date_compare($a, $b)
+{
+    $t1 = $a['date'];
+    $t2 = $b['date'];
+    return $t1 - $t2;
+}
+$clientID = 'Azarudeen';
+// $clientID = $_POST['clientuserID'];
+$from = date('Y-m-d', strtotime("-6 day"));
+
+$to = date('Y-m-d');
+
+$end = date('Y-m-d',strtotime("1 day"));
+
+
+$sql = "SELECT * FROM steptracker where clientID = '$clientID' and cast(dateandtime as date) between '$from' and '$to' GROUP BY cast(dateandtime as date) order by dateandtime";
+
+$full = array();
+
+$dateArr = array();
+
+$dateArray = array();
+
+$result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+    while($row =mysqli_fetch_assoc($result))
+    {
+
+      $emparray['date'] = date("d",strtotime($row['dateandtime']));
+      $emparray['steps'] = $row['steps'];
+      
+      $dateArray[] = date("d",strtotime($row['dateandtime']));
+
+      $full[] = $emparray;
+    
+    }
+
+    $missingDates = array();
+
+    $dateStart = date_create($from);
+    $dateEnd   = date_create($end);
+
+    $interval  = new DateInterval('P1D');
+    $period    = new DatePeriod($dateStart, $interval, $dateEnd);
+
+    foreach($period as $day) {
+      $formatted = $day->format("d");
+      // echo gettype($formatted);
+      if(!in_array($formatted, $dateArray)) {
+        $missingDates['date'] = $formatted;
+        $missingDates['steps'] = '0';
+        $full[] = $missingDates;
+    }}
+
+    usort($full, 'date_compare');
+
+    $dateArr = array_column($full, 'date');
+    $stepsArr = array_column($full, 'steps');
+
+    // echo json_encode(['steps' => $full]);
+?>
+                <div class="graph">
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                             <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="graph">
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="graph">
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
                 </div>
-                    
                    
                 </div>
             </div>
@@ -764,26 +865,32 @@ color: #9C74F5;
                         </div>
                     </div>
                     <div class="cpb_bottom">
+                    <?php
+                        $userid='Azarudeen';
+                        $sql = "SELECT steps, distance, calories  FROM steptracker WHERE clientid='$userid'ORDER BY clientID DESC LIMIT 1";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                    ?>
                         <div>   
                             <span>
                             <img src="images/footsteps.svg" alt="">
                                 Steps
                             </span>
-                            <h3>9000</h3>
+                            <h3><?php echo $row["steps"];?></h3>
                         </div>
                         <div>
                             <span>
                             <img src="images/distance.svg" alt="">
                                 Distance
                             </span>
-                            <h3>4.76 Kms</h3>
+                            <h3>><?php echo $row["distance"];?> Kms</h3>
                         </div>
                         <div>
                             <span>
                                 <img src="images/fire.svg" alt="">
                                 Burned
                             </span>
-                            <h3>920 kcal</h3>
+                            <h3>><?php echo $row["calories"];?> kcal</h3>
                         </div>
                     </div>
                 </div>
@@ -812,10 +919,18 @@ color: #9C74F5;
         </div>
     </div>
 </body>
-<script>
-var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
 
+<script>
+/* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
+
+
+/* var yValues = <?php $stepsArr ?> ; */
+ <?php 
+
+// var $graphJson=json_encode(['steps' => $full]);
+
+?> 
 new Chart("myChart", {
     type: "line",
     data: {

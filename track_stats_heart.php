@@ -597,7 +597,7 @@ color: #9C74F5;
                  $userid='Azarudeen';
                  $sql = "SELECT average, maximum, minimum FROM heartrate WHERE clientID = '$userid' ORDER BY clientID DESC LIMIT 1";
                  $result = $conn->query($sql);
-                 $row = $result->fetch_assoc()
+                 $row = $result->fetch_assoc();
                 ?>
                 <div class="pheader">
 						<h4>Daily Progress</h4>

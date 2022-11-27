@@ -356,8 +356,8 @@ color: #5D5D5D;
 .cpb_box_right{
     display: flex;
     flex-direction: column;
-    justify-content: center;    
-    align-items: center;
+    justify-content: space-between;    
+    align-items: space-between;
 }
 .cpb_box_right span{
     font-family: 'NATS';
