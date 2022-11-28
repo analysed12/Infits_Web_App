@@ -14,13 +14,13 @@
     <title>Document</title>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!-- <script>
+        <script>
             $(document).ready(function(){
-            $(".calendat_but").click(function(){
-                $(".calendar_pop").toggle();
+            $(".pheader p").click(function(){
+                $(".activity_pop").toggle();
             });
             });
-        </script> -->
+        </script>
         <script>
             $(document).ready(function(){
             $(".calendat_but").click(function(){
@@ -30,7 +30,7 @@
             }); 
             });
         </script>
-        <script>
+        <!-- <script>
             $(document).ready(function(){
             $(".pheader p").click(function(){
                 $(".activity_pop").animate({
@@ -38,7 +38,7 @@
                 });
             }); 
             });
-        </script>
+        </script> -->
 </head>
         
 <style>
@@ -738,7 +738,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
     // json_encode($dateArr);
     // echo var_dump($stepsArr);
     // echo var_dump($full);
-    // echo json_encode($full);
+    // echo var_dump($full);
 ?>
                 <div class="graph">
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -926,10 +926,10 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
 </body>
 
 <script>
- var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; 
+ /* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  */
  /* var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
- var yValues =[<?php echo $row["steps"];?>];
-/* var xValues = [ <?php echo $row["steps"];?> ]; */
+ var yValues =[<?php echo '"'.implode('","',  $stepsArr ).'"' ?>];
+var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
 
 new Chart("myChart", {
     type: "line",
@@ -951,7 +951,7 @@ new Chart("myChart", {
             yAxes: [{
                 ticks: {
                     min: 1000,
-                    max: 9000
+                    max: 12000
                 }
             }],
         }
