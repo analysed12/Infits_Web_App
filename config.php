@@ -6,7 +6,7 @@ This file contains database configuration assuming you are running mysql using u
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'mysql');
+define('DB_NAME', 'infits');
 // Try connecting to the Database
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $conn2= mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
