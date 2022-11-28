@@ -9,7 +9,7 @@ define('DB_PASSWORD', '');
 define('DB_NAME', 'mysql');
 // Try connecting to the Database
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
+$conn2=mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 //Check the connection
 if($conn == false){
     dir('Error: Cannot connect');

@@ -452,7 +452,7 @@ line-height: 44px;
 
 color: #000000;
 }
-.calendar_pop{
+/* .calendar_pop{
 
    z-index: -1;
    margin-top:-450px;
@@ -461,7 +461,7 @@ color: #000000;
     height: 291px;
     background: black;
     border-radius: 5px;
-}
+} */
 .table{
     /* z-index: 1; */
 }
@@ -731,8 +731,14 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
 
     $dateArr = array_column($full, 'date');
     $stepsArr = array_column($full, 'steps');
-
-    // echo json_encode(['steps' => $full]);
+    for ($i=0; $i <7 ; $i++) { 
+        $stepsArr[$i]= $stepsArr[$i]-'0';
+    }
+   
+    // json_encode($dateArr);
+    // echo var_dump($stepsArr);
+    // echo var_dump($full);
+    // echo json_encode($full);
 ?>
                 <div class="graph">
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -834,8 +840,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                     
                      ?>
                       </div>    
-                      <div class="calendar_pop">
-                      </div>
+                      
                     </div>
                 </div>
             </div>
@@ -921,16 +926,11 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
 </body>
 
 <script>
-/* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
+ var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; 
+ /* var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
+ var yValues =[<?php echo $row["steps"];?>];
+/* var xValues = [ <?php echo $row["steps"];?> ]; */
 
-
-/* var yValues = <?php $stepsArr ?> ; */
- <?php 
-
-// var $graphJson=json_encode(['steps' => $full]);
-
-?> 
 new Chart("myChart", {
     type: "line",
     data: {
