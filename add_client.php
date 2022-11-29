@@ -94,7 +94,7 @@
   	<?php include('errors.php'); ?> 
     <br>
 
-        dietitianID <br> <input type="text" name="dietitianuserID" placeholder="<?php echo $_SESSION['name']; ?>" value="<?php isset($name)?$name:""; ?>" />
+        dietitianID <br> <input type="text" name="dietitianuserID" placeholder="<?php echo $_SESSION['name']; ?>" value="<?php isset($name)?$name:''; ?>" />
         <br><br>
 
         clientName <br> <input type="text" name="clientName">
