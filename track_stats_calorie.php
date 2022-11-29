@@ -455,6 +455,57 @@ letter-spacing: 0.03em;
 color: #000000;
 opacity: 0.77;
 }
+
+/* css for graph tabs */
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+.tab_button_side{
+   border-radius: 12px;
+}
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background: #FFFFFF;
+    border: 1px solid #FCFBFB;
+    border-radius: 0px;
+    height: 27px;
+    width: 76px;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  /* padding: 14px 16px; */
+  transition: 0.3s;
+  font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 27px;
+
+color: #4D4D4D;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #C986CF;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #C986CF;
+  color: white;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  /* border: 1px solid #ccc; */
+  border-top: none;
+}
 </style>
 
 <body>
@@ -494,10 +545,62 @@ opacity: 0.77;
 
                 </div>
                 <div id="inner12">
-                    <div class="graph">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                        <canvas id="myChart"></canvas>
-                    </div>
+                <div class="graph">
+                                           
+                                           <div class="tab">
+                                           <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Custom Dates</button>
+                                           <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
+                                           <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
+                                           <button class="tablinks" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                                           </div>
+               
+                                           <!-- Tab content -->
+                                           <div id="London" id="defaultOpen"class="tabcontent">
+                                          
+                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                           <canvas id="myChart"></canvas>
+                                           </div>
+               
+                                           <div id="Year" class="tabcontent">
+                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                           <canvas id="myChartYearly"></canvas>
+                                           </div>
+               
+                                           <div id="Month" class="tabcontent">
+                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                           <canvas id="myChartMonthly"></canvas>
+                                           </div>
+                                           
+                                           <div id="Week" class="tabcontent">
+                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                           <canvas id="myChartWeekly"></canvas>
+                                           </div>
+                                       <script>
+                                       function openCity(evt, cityName) {
+                                           /* Declare all variables */
+                                           var i, tabcontent, tablinks;
+               
+                                           /* // Get all elements with class="tabcontent" and hide them */
+                                           tabcontent = document.getElementsByClassName("tabcontent");
+                                           for (i = 0; i < tabcontent.length; i++) {
+                                               tabcontent[i].style.display = "none";
+                                           }
+               
+                                           /* // Get all elements with class="tablinks" and remove the class "active" */
+                                           tablinks = document.getElementsByClassName("tablinks");
+                                           for (i = 0; i < tablinks.length; i++) {
+                                               tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                           }
+               
+                                           /* // Show the current tab, and add an "active" class to the button that opened the tab */
+                                           document.getElementById(cityName).style.display = "block";
+                                           evt.currentTarget.className += " active";
+                                       }
+               
+                                       /* // Get the element with id="defaultOpen" and click on it */
+                                       document.getElementById("defaultOpen").focus();
+                                       </script> 
+                               </div>
                 </div>
             </div>
             <div id="inner2">
@@ -590,35 +693,116 @@ opacity: 0.77;
     </div>
 </body>
 <script>
-var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
+ /* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  */
+ /* var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
+ var yValues =[<?php echo '"'.implode('","',  $stepsArr ).'"' ?>];
+var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
+                    new Chart("myChart", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "#FF8B8B",
+                                        borderColor: "#FF8B8B",
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 1000,
+                                                max: 12000
+                                            }
+                                        }],
+                                    }
+                                }
+                            });
+                        new Chart("myChartYearly", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "#FF8B8B",
+                                        borderColor: "#FF8B8B",
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 1000,
+                                                max: 12000
+                                            }
+                                        }],
+                                    }
+                                }
+                            });
+                            
+                            new Chart("myChartMonthly", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "#FF8B8B",
+                                        borderColor: "#FF8B8B",
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 1000,
+                                                max: 12000
+                                            }
+                                        }],
+                                    }
+                                }
+                            });
+                            new Chart("myChartWeekly", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "#FF8B8B",
+                                        borderColor: "#FF8B8B",
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 1000,
+                                                max: 12000
+                                            }
+                                        }],
+                                    }
+                                }
+                            });
 
-new Chart("myChart", {
-    type: "line",
-    data: {
-        labels: xValues,
-        datasets: [{
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "#FF8B8B",
-            borderColor: "#FF8B8B",
-            data: yValues
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    min: 1000,
-                    max: 9000
-                }
-            }],
-        }
-    }
-});
 </script>
 
 </html>
