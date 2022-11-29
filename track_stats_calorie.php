@@ -506,6 +506,20 @@ color: #4D4D4D;
   /* border: 1px solid #ccc; */
   border-top: none;
 }
+.bottom-stats-btn{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    width: 88px;
+height: 38.95px;
+    background: #FFFFFF;
+border: 1px solid #F1F1F1;
+padding:8px;
+box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
+border-radius: 16px;
+width: 134px;
+height: 57.45px;
+}
 </style>
 
 <body>
@@ -622,19 +636,43 @@ color: #4D4D4D;
         <div class="row">
             <div class="col-sm-8">
 				
-                <div class="bottom-btns">
+            <div class="flex-container-bottom">
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Daily Count</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                    <span>Weekly Avg</span>
+                                    <span>72 BPM</span>
+                                </div>
+                                
+                            </div>
                     
-                    <?php for ($i=0; $i <4 ; $i++) { 
-                        echo'<div class="bottom-stats-btn">';
-								echo'<div class="heart_info">';
-									echo'<span>Daily Count</span>';
-									echo'<span>72 BPM</span>';
-								echo'</div>';
-								echo'<div class="heart_info">';
-									
-								echo'</div>';
-							echo'</div>';
-                    }?>
+                      
+                      
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Monthly Avg</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+
+                            <div class="bottom-stats-btn">
+                                <div class="heart_info">
+                                <span>Total</span>
+                                <span>72 BPM</span>
+                                </div>
+                                <div class="heart_info">
+                                </div>
+                            </div>
+                    </div>
                            
                 </div>
                 <div class="row">
