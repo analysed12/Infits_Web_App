@@ -322,6 +322,16 @@ line-height: 40px;
 
 color: #5D5D5D;
 }
+.heart_info span span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+/* font-size: 15px; */
+
+text-align: center;
+
+color: #000000;
+}
 .cpb{
     width: 100%;
     height: 100%;
@@ -506,20 +516,6 @@ color: #4D4D4D;
   /* border: 1px solid #ccc; */
   border-top: none;
 }
-.bottom-stats-btn{
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    width: 88px;
-height: 38.95px;
-    background: #FFFFFF;
-border: 1px solid #F1F1F1;
-padding:8px;
-box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
-border-radius: 16px;
-width: 134px;
-height: 57.45px;
-}
 </style>
 
 <body>
@@ -636,7 +632,9 @@ height: 57.45px;
         <div class="row">
             <div class="col-sm-8">
 				
-            <div class="flex-container-bottom">
+                <div class="bottom-btns">
+                    
+                <div class="flex-container-bottom">
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Daily Count</span>
@@ -672,7 +670,9 @@ height: 57.45px;
                                 <div class="heart_info">
                                 </div>
                             </div>
-                    </div>
+                    
+                           
+                </div>
                            
                 </div>
                 <div class="row">

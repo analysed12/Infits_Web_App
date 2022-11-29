@@ -321,7 +321,11 @@ div[role="progressbar"]::before {
     }
 }
 .heart_info{
-
+    padding:2px;
+ display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
@@ -329,6 +333,16 @@ font-size: 19px;
 line-height: 40px;
 
 color: #5D5D5D;
+}
+.heart_info span span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+/* font-size: 15px; */
+
+text-align: center;
+
+color: #000000;
 }
 .cpb{
     width: 100%;
@@ -340,11 +354,25 @@ color: #5D5D5D;
     margin-bottom: 50px;
 }
 .max{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-left: 2px solid #C986CF;
     border-right: 2px solid #C986CF;
     width:120px;
 
 }
+/* .max span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 42px;
+letter-spacing: 0.03em;
+
+color: #000000;
+} */
 
 .heart_beat_box{
     display: flex;
@@ -356,7 +384,7 @@ width: 355px;
 height: 108px;
 padding:7px;
 }
-.heart_beat_box>p{
+.heart_beat_box p{
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
@@ -367,6 +395,23 @@ line-height: 42px;
 letter-spacing: 0.03em;
 
 color: #000000;
+}
+.heart_beat_box>div span{
+    
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 42px;
+letter-spacing: 0.03em;
+
+color: #000000;
+}
+.heart_beat_box>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .table_top{
     display: flex;
@@ -508,39 +553,7 @@ color: #4D4D4D;
 <body>
     <?php include 'navbar.php' ?>
     <?php 
-        $today = date('Y-m-d');
-
-        $from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
-        
-        $to = date('Y-m-d', strtotime('1 days', strtotime($today)));
-        
-        // $clientID = $_POST['clientID'];
-        
-        $clientID = "Azarudeen";
-        
-        $sql = "select cast(date as time),cast(date as date),maximum from heartrate where clientID='$clientID' AND cast(date as date) between '$from' and '$to' AND cast(date as time) IN (
-            SELECT MAX(cast(date as time)) 
-            FROM heartrate
-                
-            GROUP BY DATE(cast(date as date))
-            );";
-        
-        
-        $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
-        
-            $emparray = array();
-            while($row =mysqli_fetch_assoc($result))
-            {
-                $emparray['date'] = $row['cast(date as time)'];
-                $a = json_decode($row['maximum']);
-                $average = array_sum($a)/count($a);
-                $emparray['avg'] = $average;
-                $emparray['min'] = min($a);
-                $emparray['max'] = max($a);
-        
-                $full[] = $emparray;
-            }
-            echo json_encode(['heart' => $full]);
+       
     ?>
     <div id="content">
 
@@ -586,50 +599,50 @@ color: #4D4D4D;
                                            </div>
                
                                            <!-- Tab content -->
-                                           <div id="London" id="defaultOpen"class="tabcontent">
-                                          
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChart"></canvas>
-                                           </div>
-               
-                                           <div id="Year" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartYearly"></canvas>
-                                           </div>
-               
-                                           <div id="Month" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartMonthly"></canvas>
-                                           </div>
-                                           
-                                           <div id="Week" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartWeekly"></canvas>
-                                           </div>
+                                <div id="London" id="defaultOpen"class="tabcontent">
+                                
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartwater"></canvas>
+                                </div>
+
+                                <div id="Year" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartYearly"></canvas>
+                                </div>
+
+                                <div id="Month" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartMonthly"></canvas>
+                                </div>
+                                
+                                <div id="Week" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartWeekly"></canvas>
+                                </div>
                                        <script>
-                                       function openCity(evt, cityName) {
-                                           /* Declare all variables */
-                                           var i, tabcontent, tablinks;
-               
-                                           /* // Get all elements with class="tabcontent" and hide them */
-                                           tabcontent = document.getElementsByClassName("tabcontent");
-                                           for (i = 0; i < tabcontent.length; i++) {
-                                               tabcontent[i].style.display = "none";
-                                           }
-               
-                                           /* // Get all elements with class="tablinks" and remove the class "active" */
-                                           tablinks = document.getElementsByClassName("tablinks");
-                                           for (i = 0; i < tablinks.length; i++) {
-                                               tablinks[i].className = tablinks[i].className.replace(" active", "");
-                                           }
-               
-                                           /* // Show the current tab, and add an "active" class to the button that opened the tab */
-                                           document.getElementById(cityName).style.display = "block";
-                                           evt.currentTarget.className += " active";
-                                       }
-               
-                                       /* // Get the element with id="defaultOpen" and click on it */
-                                       document.getElementById("defaultOpen").click();
+                                            function openCity(evt, cityName) {
+                                                /* Declare all variables */
+                                                var i, tabcontent, tablinks;
+                    
+                                                /* // Get all elements with class="tabcontent" and hide them */
+                                                tabcontent = document.getElementsByClassName("tabcontent");
+                                                for (i = 0; i < tabcontent.length; i++) {
+                                                    tabcontent[i].style.display = "none";
+                                                }
+                    
+                                                /* // Get all elements with class="tablinks" and remove the class "active" */
+                                                tablinks = document.getElementsByClassName("tablinks");
+                                                for (i = 0; i < tablinks.length; i++) {
+                                                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                                }
+                    
+                                                /* // Show the current tab, and add an "active" class to the button that opened the tab */
+                                                document.getElementById(cityName).style.display = "block";
+                                                evt.currentTarget.className += " active";
+                                            }
+                    
+                                            /* // Get the element with id="defaultOpen" and click on it */
+                                            document.getElementById("defaultOpen").click();
                                        </script> 
                                </div>
                 </div>
@@ -656,10 +669,48 @@ color: #4D4D4D;
                 <div class="bottom-btns">
                     
                 <div class="flex-container-bottom">
+                   <?php
+                                                        
+                            $today = date('Y-m-d');
+
+                            $from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
+
+                            $to = date('Y-m-d', strtotime('1 days', strtotime($today)));
+
+                            // $clientID = $_POST['clientID'];
+
+                            $clientID = "Azarudeen";
+
+                            $sql = "SELECT * 
+                                FROM heartrate
+                                WHERE clientID='$clientID' AND `dateandtime` = '$today';";
+
+
+                            $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+
+                                $emparray = array();
+                                $full=array();
+                                while($row =mysqli_fetch_assoc($result))
+                                {
+                                    $emparray['date'] = $row['dateandtime'];
+                                    $a = json_decode($row['maximum']);
+                                    $average = array_sum($a)/count($a);
+                                    $emparray['avg'] = $average;
+                                    $emparray['min'] = min($a);
+                                    $emparray['max'] = max($a);
+
+                                    $full[] = $emparray;
+                                }
+                                // echo json_encode(['heart' => $full]);
+                                $avg=array_column($full,'avg');
+                                $minh=array_column($full,'min');
+                                $maxh=array_column($full,'max');
+                                 
+                   ?>          
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Daily Count</span>
-                                    <span>72 BPM</span>
+                                    <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
                                 </div>
                                 
                             </div>
@@ -667,7 +718,7 @@ color: #4D4D4D;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Weekly Avg</span>
-                                    <span>72 BPM</span>
+                                    <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
                                 </div>
                                 
                             </div>
@@ -677,54 +728,80 @@ color: #4D4D4D;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Monthly Avg</span>
-                                <span>72 BPM</span>
+                                <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                               
                             </div>
 
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Total</span>
-                                <span>72 BPM</span>
+                                <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                               
                             </div>
                     </div>
                            
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
+                    <?php   
+                        // pastActivity query
+                        $today = date('Y-m-d');
+
+                        $from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
+
+                        $to = date('Y-m-d', strtotime('1 days', strtotime($today)));
+
+
+                        // $clientID = $_POST['clientID'];
+
+                        $clientID = 'Azarudeen';
+
+                        $sql = "select steps,dateandtime from steptracker where clientID = '$clientID' and dateandtime between '$from' and '$to';";
+
+                        $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+
+                            $emparray = array();
+                            while($row =mysqli_fetch_assoc($result))
+                            {
+                            $emparray['date'] = date("d-m-Y",strtotime($row['dateandtime']));
+                            $emparray['steps'] = $row['steps'];
+                            $full[] = $emparray;
+                            }
+                            $pastDate= array_column($full, 'date');
+                            $pastSteps= array_column($full, 'steps');
+                    ?>
                     <div class="table">
                         <div class="table_top">
-                     <span>Past Activity</span>
-                      </div>
+                            <span>Past Activity</span>
+                            <div class="calendat_but"><img src="images/calender_toggle.svg"></div>
+                     
+                        </div>
+                      
                      <?php
                      $a=1;
-                     
-                    while ($a <= 4) {
-                        
-                     echo '<div class="table_element">';
-                     echo '<div class="date">';
-                     echo '<span>Sep</span>';
-                     echo ' <p>18</p>';
-                     echo '</div>';
-                     echo '<div class="table_activity">';
-                     echo '<span>Sep</span>';
-                     echo '<p>18</p>';
-                     echo ' </div>';
-                     echo '<div class="table_time">';
-                     echo '   <span>9:10 AM</span>';
-                     echo ' </div>';
-                     echo '</div>';
-                     
-                     $a++;
-                    }
+                     for ($i=0; $i <4 ; $i++) { ?>
+                         <div class="table_element">
+                        <div class="date">
+                        <span>Sep</span>
+                        <p><?php echo $pastDate[$i]?></p>
+                        </div>
+                        <div class="table_activity">
+                        <span>Steps</span>
+                        <p><?php echo $pastSteps[$i]?></p>
+                        <?php
+                        echo ' </div>';
+                        echo '<div class="table_time">';
+                        echo '   <span>9:10 AM</span>';
+                        echo ' </div>';
+                        echo '</div>';
+                     }
+
                      
                     
                      ?>
-                      </div> 
+                      </div>   
                          
                     </div>
                 </div>
@@ -764,11 +841,10 @@ color: #4D4D4D;
     </div>
 </body>
 <script>
- /* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  */
- /* var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
- var yValues =[<?php echo '"'.implode('","',  $stepsArr ).'"' ?>];
-var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
-                    new Chart("myChart", {
+var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  
+ var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
+ 
+                    new Chart("myChartwater", {
                                 type: "line",
                                 data: {
                                     labels: xValues,
@@ -782,7 +858,7 @@ var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
                                 },
                                 options: {
                                     legend: {
-                                        display: false
+                                        display: true
                                     },
                                     scales: {
                                         yAxes: [{

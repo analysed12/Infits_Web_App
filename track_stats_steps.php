@@ -1035,8 +1035,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                                 <span>Monthly Avg</span>
                                 <span><span><?php echo json_encode((int) (($stepsSumM[0]-'0')/30));?>  </span> Steps</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                                
                             </div>
 
                             <div class="bottom-stats-btn">
@@ -1044,8 +1043,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                                 <span>Total</span>
                                 <span><span><?php echo json_encode($stepsSumT[0]-'0');?></span> Steps</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                                
                             </div>
                     </div>
                            

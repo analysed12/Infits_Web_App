@@ -1,3 +1,5 @@
+<?php  include('config.php');?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -331,7 +335,11 @@ div[role="progressbar"]::before {
     }
 }
 .heart_info{
-
+    padding:2px;
+ display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
@@ -339,6 +347,16 @@ font-size: 19px;
 line-height: 40px;
 
 color: #5D5D5D;
+}
+.heart_info span span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+/* font-size: 15px; */
+
+text-align: center;
+
+color: #000000;
 }
 .cpb{
     width: 100%;
@@ -483,11 +501,19 @@ color: #4D4D4D;
   /* border: 1px solid #ccc; */
   border-top: none;
 }
+#setgoalweight{
+    background: #FFFFFF;
+border: 0px solid #DFDFDF;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+border-radius: 10px;
+width: 163px;
+height: 45px;
+}
 </style>
 
 <body>
     <?php include 'navbar.php' ?>
-
+  
     <div id="content">
 
         <div id="wrapper">
@@ -522,6 +548,113 @@ color: #4D4D4D;
 
                 </div>
                 <div id="inner12">
+
+                <?php 
+            //weight fragment
+	// $userID = $_POST['userID'];
+	$userID = "Azarudeen";
+	
+	$stmnt = $conn -> prepare("SELECT AVG(weight) FROM weighttracker WHERE WEEKOFYEAR(cast(weighttracker.date as DATE) )=WEEKOFYEAR(NOW()) AND clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($Sum);
+	
+	$products = array();
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['SumWeek']= $Sum;
+	   
+	  array_push($products,$temp);
+	}
+
+	$stmnt = $conn -> prepare("SELECT AVG(weight) FROM weighttracker WHERE YEAR(cast(weighttracker.date as DATE)) = YEAR(NOW()) AND MONTH(cast(weighttracker.date as DATE))=MONTH(NOW()) AND clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($Sum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['SumMonth']= $Sum;
+	   
+	  array_push($products,$temp);
+	}
+
+	$stmnt = $conn -> prepare("SELECT AVG(weight) FROM weighttracker WHERE cast(weighttracker.date as DATE)=CURRENT_DATE AND clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($Sum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['SumDaily']= $Sum;
+	   
+	  array_push($products,$temp);
+	}
+
+	$stmnt = $conn -> prepare("SELECT AVG(weight) FROM weighttracker WHERE clientid=?");
+	
+	$stmnt-> bind_param("s",$userID);
+	$stmnt-> execute();
+	$stmnt-> bind_result($Sum);
+	
+	while($stmnt->fetch()){
+	  $temp = array();
+	  
+	  $temp['SumTotal']= $Sum;
+	   
+	  array_push($products,$temp);
+	}
+
+    if(count($products)>-1){
+    // echo json_encode($products);
+    }
+
+    else {
+    echo "failure";
+    }
+    $dailyCount = array_column($products, 'SumDaily');
+    $weeklyCount = array_column($products, 'SumWeek');
+    $monthlyCount = array_column($products, 'SumMonth');
+    $totalCount = array_column($products, 'SumTotal');
+    
+
+    //month graph
+        $from = date("Y-m-d", strtotime("first day of this month"));
+    $to = date("Y-m-d", strtotime("last day of this month"));
+
+    // $clientID = $_POST['userID'];
+
+    $sql = "select weight,date from weighttracker where clientID = '$userID' and date between '$from' and '$to';";
+
+    $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+
+        $emparray = array();
+        while($row =mysqli_fetch_assoc($result))
+        {
+            $emparray['date'] = date("d",strtotime($row['date']));
+            $emparray['weight'] = $row['weight'];
+            $full[] = $emparray;
+        }
+        // echo json_encode(['weight' => $full]);
+        $dateArrM = array_column($full, 'date');
+        $weightArrM = array_column($full, 'weight');
+        
+    
+           for($i=0;$i<count($dateArrM);$i++){
+            // $dateArrM[$i] = $dateArrM[$i]-'0';
+            $weightArrM[$i] = $weightArrM[$i]-'0';
+            }
+
+    //week graph
+    ?>
+
                 <div class="graph">
                                            
                                            <div class="tab">
@@ -532,55 +665,95 @@ color: #4D4D4D;
                                            </div>
                
                                            <!-- Tab content -->
-                                           <div id="London" id="defaultOpen"class="tabcontent">
-                                          
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChart"></canvas>
-                                           </div>
-               
-                                           <div id="Year" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartYearly"></canvas>
-                                           </div>
-               
-                                           <div id="Month" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartMonthly"></canvas>
-                                           </div>
-                                           
-                                           <div id="Week" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartWeekly"></canvas>
-                                           </div>
+                                <div id="London" id="defaultOpen"class="tabcontent">
+                                
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartwater"></canvas>
+                                </div>
+
+                                <div id="Year" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartYearly"></canvas>
+                                </div>
+
+                                <div id="Month" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartMonthly"></canvas>
+                                </div>
+                                
+                                <div id="Week" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartWeekly"></canvas>
+                                </div>
                                        <script>
-                                       function openCity(evt, cityName) {
-                                           /* Declare all variables */
-                                           var i, tabcontent, tablinks;
-               
-                                           /* // Get all elements with class="tabcontent" and hide them */
-                                           tabcontent = document.getElementsByClassName("tabcontent");
-                                           for (i = 0; i < tabcontent.length; i++) {
-                                               tabcontent[i].style.display = "none";
-                                           }
-               
-                                           /* // Get all elements with class="tablinks" and remove the class "active" */
-                                           tablinks = document.getElementsByClassName("tablinks");
-                                           for (i = 0; i < tablinks.length; i++) {
-                                               tablinks[i].className = tablinks[i].className.replace(" active", "");
-                                           }
-               
-                                           /* // Show the current tab, and add an "active" class to the button that opened the tab */
-                                           document.getElementById(cityName).style.display = "block";
-                                           evt.currentTarget.className += " active";
-                                       }
-               
-                                       /* // Get the element with id="defaultOpen" and click on it */
-                                       document.getElementById("defaultOpen").click();
+                                            function openCity(evt, cityName) {
+                                                /* Declare all variables */
+                                                var i, tabcontent, tablinks;
+                    
+                                                /* // Get all elements with class="tabcontent" and hide them */
+                                                tabcontent = document.getElementsByClassName("tabcontent");
+                                                for (i = 0; i < tabcontent.length; i++) {
+                                                    tabcontent[i].style.display = "none";
+                                                }
+                    
+                                                /* // Get all elements with class="tablinks" and remove the class "active" */
+                                                tablinks = document.getElementsByClassName("tablinks");
+                                                for (i = 0; i < tablinks.length; i++) {
+                                                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                                }
+                    
+                                                /* // Show the current tab, and add an "active" class to the button that opened the tab */
+                                                document.getElementById(cityName).style.display = "block";
+                                                evt.currentTarget.className += " active";
+                                            }
+                    
+                                            /* // Get the element with id="defaultOpen" and click on it */
+                                            document.getElementById("defaultOpen").click();
                                        </script> 
                                </div>
                 </div>
             </div>
             <div id="inner2">
+                        <?php
+                        // $userID = $_POST['userID'];
+                        // $date = $_POST['date'];
+                        // $weight = $_POST['weight'];
+                        // $height = $_POST['height'];
+                        // $bmi = $_POST['bmi'];
+                        // $goal = $_POST['goal'];
+                        $userID="Azarudeen";
+                        $date = date('Y-m-d', strtotime('1 days'));
+                        $weight = 70;
+                        $height = 170;
+                        $bmi = 24;
+                        $goal = 60;
+                        $sql = "select weight from weighttracker where clientID='$userID' and date = '$date'";
+                        
+                        $result = mysqli_query($conn, $sql);
+                        
+                        if(mysqli_num_rows($result) == 0){
+                        $sql = "insert into weighttracker values('$date',$height,$weight,$bmi,$goal,'$userID')";
+                        if (mysqli_query($conn,$sql)) {
+                            $sql = "update client set height='$height',weight = '$weight' where clientuserID = '$userID'";
+                            mysqli_query($conn,$sql);
+                            echo "updated";
+                        }
+                        else{
+                            echo "error";
+                        }
+                        }
+                        else{
+                            $sql = "update weighttracker set height='$height',weight = '$weight',goal = '$goal',bmi = '$bmi' where date = '$date' and clientID = '$userID'";
+                            if (mysqli_query($conn,$sql)) {
+                                $sql = "update client set height='$height',weight = '$weight' where clientuserID = '$userID'";
+                                mysqli_query($conn,$sql);
+                                // echo "updated";
+                            }
+                            else{
+                                echo "error";
+                            }   
+                        }
+                        ?>
                 <div class="inner21">
                     <div class="inner21-title">
                         Set Goals
@@ -589,7 +762,9 @@ color: #4D4D4D;
                         <img src="images/obesity.svg" alt="">
                     </div>
                     <div class="box-title">Daily Steps</div>
-                    <div class="box-counter">00000</div>
+                    <div class="box-counter">
+                    <input type="number" id="setgoalweight" name="fname">
+                    </div>
                     <buttpn class="box-btn">Set</buttpn>
                 </div>
             </div>
@@ -605,7 +780,7 @@ color: #4D4D4D;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Daily Count</span>
-                                    <span>72 BPM</span>
+                                    <span><span><?php echo json_encode((int) $dailyCount[0]-'0');?></span> Kgs</span>
                                 </div>
                                 
                             </div>
@@ -613,7 +788,7 @@ color: #4D4D4D;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Weekly Avg</span>
-                                    <span>72 BPM</span>
+                                    <span><span><?php echo json_encode((int) $weeklyCount[0]-'0');?></span> Kgs</span>
                                 </div>
                                 
                             </div>
@@ -623,19 +798,17 @@ color: #4D4D4D;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Monthly Avg</span>
-                                <span>72 BPM</span>
+                                <span><span><?php echo json_encode((int) $monthlyCount[0]-'0');?></span> Kgs</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                                
                             </div>
 
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Total</span>
-                                <span>72 BPM</span>
+                                <span><span><?php echo json_encode((int) $totalCount[0]-'0');?></span> Kgs</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                               
                             </div>
                     </div>
                            
@@ -690,11 +863,10 @@ color: #4D4D4D;
     </div>
 </body>
 <script>
- /* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  */
- /* var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
- var yValues =[<?php echo '"'.implode('","',  $stepsArr ).'"' ?>];
-var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
-                    new Chart("myChart", {
+ var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  
+ var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
+ 
+                    new Chart("myChartwater", {
                                 type: "line",
                                 data: {
                                     labels: xValues,
@@ -708,7 +880,7 @@ var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
                                 },
                                 options: {
                                     legend: {
-                                        display: false
+                                        display: true
                                     },
                                     scales: {
                                         yAxes: [{

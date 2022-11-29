@@ -1,3 +1,4 @@
+<?php  include('config.php');?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -330,7 +331,11 @@ div[role="progressbar"]::before {
     }
 }
 .heart_info{
-
+    padding:2px;
+ display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
@@ -338,6 +343,16 @@ font-size: 19px;
 line-height: 40px;
 
 color: #5D5D5D;
+}
+.heart_info span span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+/* font-size: 15px; */
+
+text-align: center;
+
+color: #000000;
 }
 .cpb{
     width: 100%;
@@ -544,58 +559,58 @@ color: #4D4D4D;
                 <div id="inner12">
                 <div class="graph">
                                            
-                                           <div class="tab">
-                                           <button class="tablinks" onclick="openCity(event, 'London')">Custom Dates</button>
-                                           <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
-                                           <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
-                                           <button class="tablinks" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
-                                           </div>
+                            <div class="tab">
+                            <button class="tablinks" onclick="openCity(event, 'London')">Custom Dates</button>
+                            <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
+                            <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
+                            <button class="tablinks" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                            </div>
                
-                                           <!-- Tab content -->
-                                           <div id="London" id="defaultOpen"class="tabcontent">
-                                          
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChart"></canvas>
-                                           </div>
-               
-                                           <div id="Year" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartYearly"></canvas>
-                                           </div>
-               
-                                           <div id="Month" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartMonthly"></canvas>
-                                           </div>
-                                           
-                                           <div id="Week" class="tabcontent">
-                                           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                           <canvas id="myChartWeekly"></canvas>
-                                           </div>
+                                <!-- Tab content -->
+                                <div id="London" id="defaultOpen"class="tabcontent">
+                                
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartwater"></canvas>
+                                </div>
+
+                                <div id="Year" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartYearly"></canvas>
+                                </div>
+
+                                <div id="Month" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartMonthly"></canvas>
+                                </div>
+                                
+                                <div id="Week" class="tabcontent">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                <canvas id="myChartWeekly"></canvas>
+                                </div>
                                        <script>
-                                       function openCity(evt, cityName) {
-                                           /* Declare all variables */
-                                           var i, tabcontent, tablinks;
-               
-                                           /* // Get all elements with class="tabcontent" and hide them */
-                                           tabcontent = document.getElementsByClassName("tabcontent");
-                                           for (i = 0; i < tabcontent.length; i++) {
-                                               tabcontent[i].style.display = "none";
-                                           }
-               
-                                           /* // Get all elements with class="tablinks" and remove the class "active" */
-                                           tablinks = document.getElementsByClassName("tablinks");
-                                           for (i = 0; i < tablinks.length; i++) {
-                                               tablinks[i].className = tablinks[i].className.replace(" active", "");
-                                           }
-               
-                                           /* // Show the current tab, and add an "active" class to the button that opened the tab */
-                                           document.getElementById(cityName).style.display = "block";
-                                           evt.currentTarget.className += " active";
-                                       }
-               
-                                       /* // Get the element with id="defaultOpen" and click on it */
-                                       document.getElementById("defaultOpen").click();
+                                            function openCity(evt, cityName) {
+                                                /* Declare all variables */
+                                                var i, tabcontent, tablinks;
+                    
+                                                /* // Get all elements with class="tabcontent" and hide them */
+                                                tabcontent = document.getElementsByClassName("tabcontent");
+                                                for (i = 0; i < tabcontent.length; i++) {
+                                                    tabcontent[i].style.display = "none";
+                                                }
+                    
+                                                /* // Get all elements with class="tablinks" and remove the class "active" */
+                                                tablinks = document.getElementsByClassName("tablinks");
+                                                for (i = 0; i < tablinks.length; i++) {
+                                                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                                }
+                    
+                                                /* // Show the current tab, and add an "active" class to the button that opened the tab */
+                                                document.getElementById(cityName).style.display = "block";
+                                                evt.currentTarget.className += " active";
+                                            }
+                    
+                                            /* // Get the element with id="defaultOpen" and click on it */
+                                            document.getElementById("defaultOpen").click();
                                        </script> 
                                </div>
                 </div>
@@ -625,7 +640,8 @@ color: #4D4D4D;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Daily Count</span>
-                                    <span>72 BPM</span>
+                                    <span><span>4  </span> Glasses</span>
+
                                 </div>
                                 
                             </div>
@@ -633,7 +649,7 @@ color: #4D4D4D;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Weekly Avg</span>
-                                    <span>72 BPM</span>
+                                    <span><span>3  </span> Glasses</span>
                                 </div>
                                 
                             </div>
@@ -643,53 +659,92 @@ color: #4D4D4D;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Monthly Avg</span>
-                                <span>72 BPM</span>
+                                <span><span>4  </span> Glasses</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                             
                             </div>
 
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Total</span>
-                                <span>72 BPM</span>
+                                <span><span>112  </span> Glasses</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                                
                             </div>
                     </div>
                            
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
+                    <?php
+                    //pastActivity
+                    $today = date('Y-m-d');
+
+                    $from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
+                    
+                    $to = date('Y-m-d', strtotime('1 days', strtotime($today)));
+                    
+                    // $clientID = $_POST['clientID'];
+                    
+                    $clientID = "Azarudeen";
+                    
+                    // $sql = "SELECT * 
+                    // FROM watertracker
+                    // WHERE clientID='$clientID' AND `date` between '$from' and '$to' AND `time` IN (
+                    //   SELECT MAX(`time`) 
+                    //   FROM watertracker
+                        
+                    //   GROUP BY DATE(`date`)
+                    //  );";
+                    
+                    $sql = "SELECT SUM(amount) ,date
+                    FROM watertracker
+                    WHERE clientID='$clientID' AND `date` between '$from' and '$to' GROUP BY Cast(date as date) ORDER BY Cast(date as date)";
+                    
+                    $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+                    
+                        $emparray = array();
+                        while($row =mysqli_fetch_assoc($result))
+                        {
+                          $emparray['date'] = date("d-m-Y",strtotime($row['date']));
+                          $emparray['water'] = $row['SUM(amount)'];
+                          // $emparray['water'] = $row['drinkConsumed'];
+                          $full[] = $emparray;
+                        }
+                        // echo json_encode(['water' => $full]);
+                        $pastDate= array_column($full, 'date');
+                        $pastWater= array_column($full, 'water');
+                    ?>
                     <div class="table">
                         <div class="table_top">
                      <span>Past Activity</span>
                       </div>
+                     
+                     
                      <?php
                      $a=1;
-                     
-                    while ($a <= 4) {
-                        
-                     echo '<div class="table_element">';
-                     echo '<div class="date">';
-                     echo '<span>Sep</span>';
-                     echo ' <p>18</p>';
-                     echo '</div>';
-                     echo '<div class="table_activity">';
-                     echo '<span>Sep</span>';
-                     echo '<p>18</p>';
-                     echo ' </div>';
-                     echo '<div class="table_time">';
-                     echo '   <span>9:10 AM</span>';
-                     echo ' </div>';
-                     echo '</div>';
-                     
-                     $a++;
-                    }
+                     for ($i=0; $i <4 ; $i++) { ?>
+                         <div class="table_element">
+                        <div class="date">
+                        <span>Sep</span>
+                        <p><?php echo $pastDate[$i]?></p>
+                        </div>
+                        <div class="table_activity">
+                        <span>Water</span>
+                        <p><?php echo $pastWater[$i]?></p>
+                        <?php
+                        echo ' </div>';
+                        echo '<div class="table_time">';
+                        echo '   <span>9:10 AM</span>';
+                        echo ' </div>';
+                        echo '</div>';
+                     }
+
                      
                     
                      ?>
+                    
+                     
                       </div> 
                
                     </div>
@@ -721,11 +776,10 @@ color: #4D4D4D;
     </div>
 </body>
 <script>
- /* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  */
- /* var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
- var yValues =[<?php echo '"'.implode('","',  $stepsArr ).'"' ?>];
-var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
-                    new Chart("myChart", {
+ var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  
+ var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
+ 
+                    new Chart("myChartwater", {
                                 type: "line",
                                 data: {
                                     labels: xValues,
@@ -739,7 +793,7 @@ var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
                                 },
                                 options: {
                                     legend: {
-                                        display: false
+                                        display: true
                                     },
                                     scales: {
                                         yAxes: [{
