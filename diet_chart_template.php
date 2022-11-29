@@ -17,6 +17,7 @@
             <!--<link rel="stylesheet" href="css/Recipies.css">-->
         
 		<link rel="stylesheet" href="css/mobiscroll.javascript.min.css">
+    <link rel="stylesheet" href="css/modal.css">
 		<script src="js/mobiscroll.javascript.min.js"></script>
         <style>
 
@@ -142,47 +143,43 @@
     <div id="content">
     <div class="tab">
         <div class="space-between-flex">
-        <button class="tablinks" onclick="openCity(event, 'Breakfast')">Breakfast</button>
-        <button class="tablinks" onclick="openCity(event, 'Lunch')">Lunch</button>
-        <button class="tablinks" onclick="openCity(event, 'Snack')">Snack</button>
-        <button class="tablinks" onclick="openCity(event, 'Dinner')">Dinner</button>
+        <button class="tablinks" onclick="openTab(event, 'Breakfast')">Breakfast</button>
+        <button class="tablinks" onclick="openTab(event, 'Lunch')">Lunch</button>
+        <button class="tablinks" onclick="openTab(event, 'Snack')">Snack</button>
+        <button class="tablinks" onclick="openTab(event, 'Dinner')">Dinner</button>
       </div>
     </div>
       
       <div id="Breakfast" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> In Morning</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
-        </div>
-        <div class="tab-box">
-            <p style="color:black; font-size: 25px;"> After Break</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <?php include 'diet_chart_popup.php'; ?>
         </div>
       </div>
       
       <div id="Lunch" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> Afternoon</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <?php include 'diet_chart_popup.php'; ?>
         </div>
       </div>
       
       <div id="Snack" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;">Snack</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <?php include 'diet_chart_popup.php'; ?>
         </div>
       </div>
 
       <div id="Dinner" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> Dinner</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <?php include 'diet_chart_popup.php'; ?>
         </div>
       </div>
       
       <script>
-      function openCity(evt, food) {
+      function openTab(evt, food) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -204,7 +201,7 @@
 		</div>
 </div>
 
-
+<script src="js/modal.js"></script>
 
   </body>
 </html>

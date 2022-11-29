@@ -119,7 +119,7 @@ justify-content: center;
 
   		<input type="text" name="email" placeholder="Your Email">
       <br><br>
-  		<input type="password" name="password_1" placeholder="Password">
+  		<input type="password" name="password" placeholder="Password">
       <br><br>
   		<button type="submit" class="btn" name="login_user">Login</button>
 

@@ -1,7 +1,8 @@
+<?php include('add_client_server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Infits | Log In</title>
+<title>Infits | Add Client</title>
   <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
 
 
   <style>
-        body{
+  body{
     font-family: 'Poppins' !important;
   }
   .add-client-area{
@@ -49,7 +50,7 @@
     border-radius: 10px;
     text-decoration: none;
     margin: 4px 2px;
-    width: 100%;
+    width: 60%;
 }
 .center-flex{
     display: flex;
@@ -68,52 +69,55 @@
       color: black;
   }
   .center-flex{
-display: flex;
-align-items: center;
-justify-content: center;
-}
-        </style>
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  .float-right{
+    float: right;
+  }
+  
+      
+
+</style>
 
 </head>
+
 <body>
 <div id="page">
     <?php include 'event_calendar.php'; ?>
 
-    <div id="content">
+  <div id="content">	 
 
-
-<br><br>
-	 
   <div class="add-client-area">
   <form method="post" action="add_client.php">
+  	<?php include('errors.php'); ?> 
+    <br>
 
-  		Name <br> <input type="text" name="name">
+        dietitianID <br> <input type="text" name="dietitianuserID" placeholder="<?php echo $_SESSION['name']; ?>" value="<?php isset($name)?$name:''; ?>" />
         <br><br>
 
-        <p>Gender</p>
-        <input type="radio" id="f" name="gender" value="f" style="margin-bottom: 0px;">
-        <label for="age1" style="margin-bottom: 0px;">Female</label><br>
-        <input type="radio" id="m" name="gender" value="m" style="margin-bottom: 0px;">
-        <label for="m" style="margin-bottom: 0px;">Male</label><br>  
+        clientName <br> <input type="text" name="clientName">
         <br><br>
 
-        Email <br><input type="email" name="email">
+        Gender: <br> <input type="text" name="gender">
         <br><br>
 
-        Phone Number <br><input type="text" name="phno">
+        Height <br><input type="text" name="height">
         <br><br>
 
-        Height <br><input type="text" name="ht">
+        Weight <br><input type="text" name="weight">
         <br><br>
 
-        Weight <br><input type="text" name="wt">
+        About <br><input type="text" name="about">
         <br><br>
 
-        About <br><input type="text" name="abt">
-        <br><br>
+        Plan
+        <div class="float-right"><?php include 'add_client_popup.php'; ?></div>
 
-  		<button type="submit" class="addBtn" name="login_user">Save</button>
-      <br>
+<!---------------------------SUBMIT BUTTON ----------------------------------->
+  		<button type="submit" class="addBtn" name="add_client">Save</button>
+      <br><br>
       
   </form>
   </div>
