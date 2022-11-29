@@ -14,13 +14,13 @@
     <title>Document</title>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!-- <script>
+        <script>
             $(document).ready(function(){
-            $(".calendat_but").click(function(){
-                $(".calendar_pop").toggle();
+            $(".pheader p").click(function(){
+                $(".activity_pop").toggle();
             });
             });
-        </script> -->
+        </script>
         <script>
             $(document).ready(function(){
             $(".calendat_but").click(function(){
@@ -29,8 +29,10 @@
                 });
             }); 
             });
+            var cl=document.getElementById("defaultOpen");
+                        cl.click();
         </script>
-        <script>
+        <!-- <script>
             $(document).ready(function(){
             $(".pheader p").click(function(){
                 $(".activity_pop").animate({
@@ -38,7 +40,7 @@
                 });
             }); 
             });
-        </script>
+        </script> -->
 </head>
         
 <style>
@@ -350,6 +352,16 @@ line-height: 40px;
 
 color: #5D5D5D;
 }
+.heart_info span span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+/* font-size: 15px; */
+
+text-align: center;
+
+color: #000000;
+}
 .cpb_container{
     display: flex;
     flex-direction: column;
@@ -452,7 +464,7 @@ line-height: 44px;
 
 color: #000000;
 }
-.calendar_pop{
+/* .calendar_pop{
 
    z-index: -1;
    margin-top:-450px;
@@ -461,7 +473,7 @@ color: #000000;
     height: 291px;
     background: black;
     border-radius: 5px;
-}
+} */
 .table{
     /* z-index: 1; */
 }
@@ -567,6 +579,57 @@ height: 34px;
 margin-left: 20px;
 color: #9C74F5;
 }
+
+/* css for graph tabs */
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+.tab_button_side{
+   border-radius: 12px;
+}
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background: #FFFFFF;
+    border: 1px solid #FCFBFB;
+    border-radius: 0px;
+    height: 27px;
+    width: 76px;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  /* padding: 14px 16px; */
+  transition: 0.3s;
+  font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 27px;
+
+color: #4D4D4D;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #C986CF;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #C986CF;
+  color: white;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  /* border: 1px solid #ccc; */
+  border-top: none;
+}
 </style>
 
 <body>
@@ -635,6 +698,12 @@ color: #9C74F5;
 	   
 	  array_push($products,$temp);
 	}
+    $stepsSumT = array_column($products, 'stepsSumTotal');
+    $stepsSumM = array_column($products, 'stepsSumMonth');
+    $stepsSumW = array_column($products, 'stepsSumWeek');
+    $stepsSumD = array_column($products, 'stepsSumDaily');
+
+    // echo json_encode($stepsSumM);
     ?>
     <div id="content">
 
@@ -731,12 +800,169 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
 
     $dateArr = array_column($full, 'date');
     $stepsArr = array_column($full, 'steps');
+    for ($i=0; $i <7 ; $i++) { 
+        $stepsArr[$i]= $stepsArr[$i]-'0';
+    }
+   
+    // json_encode($dateArr);
+    // echo var_dump($stepsArr);
+    // echo var_dump($full);
+    // echo var_dump($full);
 
+// monthly graph query
+
+$from = date("Y-m-d", strtotime("first day of this month"));
+$to = date("Y-m-d", strtotime("last day of this month"));
+
+
+
+$sql = "select steps,dateandtime from steptracker where clientID = 'Azarudeen' and dateandtime between '$from' and '$to';";
+
+$result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+
+    $emparray = array();
+    while($row =mysqli_fetch_assoc($result))
+    {
+        $emparray['date'] = date("d",strtotime($row['dateandtime']));
+        $emparray['steps'] = $row['steps'];
+        $full[] = $emparray;
+    }
+    // echo json_encode(['steps' => $full]);
+    $dateArrM = array_column($full, 'date');
+    $stepsArrM = array_column($full, 'steps');
+    for ($i=0; $i <7 ; $i++) { 
+        $stepsArrM[$i]= $stepsArrM[$i]-'0';
+    }
+    // year graph query
+
+
+//     $from = date("Y-m-d", strtotime("first day of this year"));
+// $to = date("Y-m-d", strtotime("last day of this year"));
+  
+//             $sql = "select steps,dateandtime from steptracker where clientID = '$clientID' and dateandtime between '$from' and '$to';";
+        
+//             $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+            
+//                 $emparray = array();
+//                 $mon = array();
+//                 while($row =mysqli_fetch_assoc($result))
+//                 {
+//                     $emparray['date'] = date("Y-m-d",strtotime($row['dateandtime']));
+//                     $emparray['steps'] = $row['steps'];
+//                     $full[] = $emparray;
+//                     $mon[] = $row['steps'];
+//                 }
+                
+//                 $sig = 0;
+//                 for ($i=0; $i < count($mon) ; $i++) { 
+//                     $sig = $sig + $mon[$i];
+//                 }
+//                 return $sig/count($mon);
+    
+        
+//         $from = array("2022-01-01","2022-02-01","2022-03-01","2022-04-01","2022-05-01","2022-06-01","2022-07-01","2022-08-01","2022-09-01","2022-10-01","2022-11-01","2022-12-01");
+//         $to = array("2022-01-31","2022-02-28","2022-03-31","2022-04-30","2022-05-31","2022-06-30","2022-07-31","2022-08-30","2022-09-31","2022-10-30","2022-11-31","2022-12-30");
+//         // $clientID = $_POST['userID'];
+//             $avgArr = array();
+//             for ($i=0; $i < 12 ; $i++) { 
+//                 $avgArr['av'] = getArr($from[$i],$to[$i],$clientID);
+//                 $avgJson[] = $avgArr;
+//             }
+//             echo json_encode(['steps'=>$avgJson]);
+
+// pastActivity query
+$today = date('Y-m-d');
+
+$from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
+
+$to = date('Y-m-d', strtotime('1 days', strtotime($today)));
+
+
+// $clientID = $_POST['clientID'];
+
+$clientID = 'Azarudeen';
+
+$sql = "select steps,dateandtime from steptracker where clientID = '$clientID' and dateandtime between '$from' and '$to';";
+
+$result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+
+    $emparray = array();
+    while($row =mysqli_fetch_assoc($result))
+    {
+      $emparray['date'] = date("d-m-Y",strtotime($row['dateandtime']));
+      $emparray['steps'] = $row['steps'];
+      $full[] = $emparray;
+    }
+    $pastDate= array_column($full, 'date');
+    $pastSteps= array_column($full, 'steps');
+    // for ($i=0; $i <7 ; $i++) { 
+    //     $pastDate[$i]= $pastDate[$i]-'0';
+    // }
+    // for ($i=0; $i <7 ; $i++) { 
+    //     $pastSteps[$i]= $pastSteps[$i]-'0';
+    // }
     // echo json_encode(['steps' => $full]);
 ?>
+
+
                 <div class="graph">
+                                           
+                            <div class="tab">
+                            <button class="tablinks" onclick="openCity(event, 'London')">Custom Dates</button>
+                            <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
+                            <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
+                            <button class="tablinks" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                            </div>
+
+                            <!-- Tab content -->
+                            <div id="London" id="defaultOpen"class="tabcontent">
+                           
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                             <canvas id="myChart"></canvas>
+                            </div>
+
+                            <div id="Year" class="tabcontent">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                            <canvas id="myChartYearly"></canvas>
+                            </div>
+
+                            <div id="Month" class="tabcontent">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                            <canvas id="myChartMonthly"></canvas>
+                            </div>
+                            
+                            <div id="Week" class="tabcontent">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                            <canvas id="myChartWeekly"></canvas>
+                            </div>
+                        <script>
+                        function openCity(evt, cityName) {
+                            /* Declare all variables */
+                            var i, tabcontent, tablinks;
+
+                            /* // Get all elements with class="tabcontent" and hide them */
+                            tabcontent = document.getElementsByClassName("tabcontent");
+                            for (i = 0; i < tabcontent.length; i++) {
+                                tabcontent[i].style.display = "none";
+                            }
+
+                            /* // Get all elements with class="tablinks" and remove the class "active" */
+                            tablinks = document.getElementsByClassName("tablinks");
+                            for (i = 0; i < tablinks.length; i++) {
+                                tablinks[i].className = tablinks[i].className.replace(" active", "");
+                            }
+
+                            /* // Show the current tab, and add an "active" class to the button that opened the tab */
+                            document.getElementById(cityName).style.display = "block";
+                            evt.currentTarget.className += " active";
+                            
+                        }
+
+                        /* // Get the element with id="defaultOpen" and click on it */
+                        
+                         document.getElementById(defaultOpen).click();
+                         
+                        </script> 
                 </div>
                    
                 </div>
@@ -759,13 +985,37 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
         <div id="wrapper-lower">
         <div class="row">
             <div class="col-sm-8">
+                <?php
+                $today = date('Y-m-d');
 
+                // $clientID = $_POST['userID'];
+                
+                $clientID = 'Azarudeen';
+                
+                $sql = "SELECT * 
+                FROM stepTracker
+                WHERE clientID='$clientID' AND `dateandtime` = '$today';";
+                
+                $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+                
+                    $emparray = array();
+                    while($row =mysqli_fetch_assoc($result))
+                    {
+                        $emparray['steps'] = $row['steps'];
+                        $emparray['date'] = date("d-m-Y",strtotime($row['dateandtime']));
+                        $emparray['avgspeed'] = $row['avgspeed'];
+                        $emparray['distance'] = $row['distance'];
+                        $emparray['calories'] = $row['calories'];
+                        $full[] = $emparray;
+                    }
+                    // echo json_encode(['water' => $full]);
+                ?>
                 <div class="bottom-btns">
                     <div class="flex-container-bottom">
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Daily Count</span>
-                                    <span>72 BPM</span>
+                                    <span><span><?php echo json_encode((int) $stepsSumD[0]-'0');?></span> Steps</span>
                                 </div>
                                 
                             </div>
@@ -773,7 +1023,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Weekly Avg</span>
-                                    <span>72 BPM</span>
+                                    <span><span><?php echo json_encode((int) (($stepsSumW[0]-'0')/7));?> </span> Steps</span>
                                 </div>
                                 
                             </div>
@@ -783,7 +1033,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Monthly Avg</span>
-                                <span>72 BPM</span>
+                                <span><span><?php echo json_encode((int) (($stepsSumM[0]-'0')/30));?>  </span> Steps</span>
                                 </div>
                                 <div class="heart_info">
                                 </div>
@@ -792,7 +1042,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Total</span>
-                                <span>72 BPM</span>
+                                <span><span><?php echo json_encode($stepsSumT[0]-'0');?></span> Steps</span>
                                 </div>
                                 <div class="heart_info">
                                 </div>
@@ -811,31 +1061,28 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                       
                      <?php
                      $a=1;
-                     
-                    while ($a <= 4) {
-                        
-                     echo ' <div class="table_element">';
-                     echo '<div class="date">';
-                     echo '<span>Sep</span>';
-                     echo ' <p>18</p>';
-                     echo '</div>';
-                     echo '<div class="table_activity">';
-                     echo '<span>Sep</span>';
-                     echo '<p>18</p>';
-                     echo ' </div>';
-                     echo '<div class="table_time">';
-                     echo '   <span>9:10 AM</span>';
-                     echo ' </div>';
-                     echo '</div>';
-                     
-                     $a++;
-                    }
+                     for ($i=0; $i <4 ; $i++) { ?>
+                         <div class="table_element">
+                        <div class="date">
+                        <span>Sep</span>
+                        <p><?php echo $pastDate[$i]?></p>
+                        </div>
+                        <div class="table_activity">
+                        <span>Steps</span>
+                        <p><?php echo $pastSteps[$i]?></p>
+                        <?php
+                        echo ' </div>';
+                        echo '<div class="table_time">';
+                        echo '   <span>9:10 AM</span>';
+                        echo ' </div>';
+                        echo '</div>';
+                     }
+
                      
                     
                      ?>
                       </div>    
-                      <div class="calendar_pop">
-                      </div>
+                      
                     </div>
                 </div>
             </div>
@@ -865,12 +1112,12 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                         </div>
                     </div>
                     <div class="cpb_bottom">
-                    <?php
+                     <?php
                         $userid='Azarudeen';
                         $sql = "SELECT steps, distance, calories  FROM steptracker WHERE clientid='$userid'ORDER BY clientID DESC LIMIT 1";
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
-                    ?>
+                    ?> 
                         <div>   
                             <span>
                             <img src="images/footsteps.svg" alt="">
@@ -883,14 +1130,14 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                             <img src="images/distance.svg" alt="">
                                 Distance
                             </span>
-                            <h3>><?php echo $row["distance"];?> Kms</h3>
+                            <h3><?php echo $row["distance"];?> Kms</h3>
                         </div>
                         <div>
                             <span>
                                 <img src="images/fire.svg" alt="">
                                 Burned
                             </span>
-                            <h3>><?php echo $row["calories"];?> kcal</h3>
+                            <h3><?php echo $row["calories"];?> kcal</h3>
                         </div>
                     </div>
                 </div>
@@ -921,42 +1168,118 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
 </body>
 
 <script>
-/* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
+ /* var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  */
+ /* var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000]; */
+ var yValues =[<?php echo '"'.implode('","',  $stepsArr ).'"' ?>];
+var xValues = [<?php echo '"'.implode('","',  $dateArr ).'"' ?>];
+var yValuesM =[<?php echo '"'.implode('","',  $stepsArrM ).'"' ?>];
+var xValuesM = [<?php echo '"'.implode('","',  $dateArrM ).'"' ?>];
+                    new Chart("myChart", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "#FF8B8B",
+                                        borderColor: "#FF8B8B",
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 1000,
+                                                max: 12000
+                                            }
+                                        }],
+                                    }
+                                }
+                            });
+                        new Chart("myChartYearly", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "#FF8B8B",
+                                        borderColor: "#FF8B8B",
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 1000,
+                                                max: 12000
+                                            }
+                                        }],
+                                    }
+                                }
+                            });
+                            
+                            new Chart("myChartMonthly", {
+                                type: "line",
+                                data: {
+                                    labels: xValuesM,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "#FF8B8B",
+                                        borderColor: "#FF8B8B",
+                                        data: yValuesM
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 1000,
+                                                max: 12000
+                                            }
+                                        }],
+                                    }
+                                }
+                            });
+                            new Chart("myChartWeekly", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "#FF8B8B",
+                                        borderColor: "#FF8B8B",
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 1000,
+                                                max: 12000
+                                            }
+                                        }],
+                                    }
+                                }
+                            });
 
-
-/* var yValues = <?php $stepsArr ?> ; */
- <?php 
-
-// var $graphJson=json_encode(['steps' => $full]);
-
-?> 
-new Chart("myChart", {
-    type: "line",
-    data: {
-        labels: xValues,
-        datasets: [{
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "#FF8B8B",
-            borderColor: "#FF8B8B",
-            data: yValues
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    min: 1000,
-                    max: 9000
-                }
-            }],
-        }
-    }
-});
 </script>
 
 </html>
