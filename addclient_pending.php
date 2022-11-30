@@ -1,3 +1,4 @@
+<?php  include('config.php');?>
 <html>
 
 <head>
@@ -139,16 +140,24 @@
                 <p id="addclient-topnav-pending"><a href="./addclient_pending.php">Pending</a></p>
             </div>
             <div id="clients">
-                <?php
-                for($i=0;$i<7;$i++){
+            <?php 
+                //  $sql= "Select `name` from `addclient`";
+         
+                    $sql = "SELECT name FROM addclient";
+                    $result = mysqli_query($conn, $sql);
+                    if(mysqli_num_rows($result) > 0)
+                    {
+                      while($row = mysqli_fetch_assoc($result))
+                    {
+                
                     echo "<div class='client'>";
                     echo "<div><img src='./icons/profile6.png'></div>";
-                    echo "<div class='clientname'>".$name."</div>";
+                    echo "<div class='clientname'>".$row["name"]."</div>";
                     echo "<div class='buttons'><button>Muslce Plan</button><button>2 Months</button></div>";
                     echo "<div class='profile'>Profile</div>";
                     echo "</div>";
-                }
-                ?>
+                
+                 }} ?>
             </div>
         </div>
     </div>

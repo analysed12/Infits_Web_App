@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
+    
 </head>
 <style>
 html {
@@ -168,6 +170,32 @@ html {
     clear: left;
 }
 
+.bottom-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+.bottom-stats-btn{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    width: 88px;
+height: 38.95px;
+    background: #FFFFFF;
+border: 1px solid #F1F1F1;
+padding:8px;
+box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
+border-radius: 16px;
+width: 134px;
+height: 57.45px;
+}
+.table{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    margin: 2%;
+
+}
 @keyframes growProgressBar {
 
     0%,
@@ -253,6 +281,91 @@ div[role="progressbar"]::before {
         padding: 5px;
     }
 }
+.heart_info{
+
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 19px;
+line-height: 40px;
+
+color: #5D5D5D;
+}
+.cpb{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    margin-top: 20px;
+}
+.table_top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px;
+}
+.table_top>span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 44px;
+
+color: #000000;
+}
+.table_element{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 20px;
+    height:60px
+}
+.table_element>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:200px
+}
+
+.table_element>div>span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 42px;
+letter-spacing: 0.03em;
+
+color: #C986CF;
+}
+.table_element>div>p{
+
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 23px;
+line-height: 49px;
+
+
+}
+.date{
+    
+    border-right: 1px solid #C986CF;
+
+}
+.table_time>span{
+    width: 103.19px;
+height: 40px;
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 19px;
+line-height: 40px;
+letter-spacing: 0.03em;
+color: #000000;
+
+opacity: 0.77;
+}
 </style>
 
 <body>
@@ -314,15 +427,82 @@ div[role="progressbar"]::before {
         </div>
 
         <div id="wrapper-lower">
-            <div id="inner1-lower">
-                <div id="inner11-lower">1
+        <div class="row">
+            <div class="col-sm-8">
+
+                <div class="bottom-btns">
+                    
+                    <?php for ($i=0; $i <4 ; $i++) { 
+                        echo'<div class="bottom-stats-btn">';
+								echo'<div class="heart_info">';
+									echo'<span>Daily Count</span>';
+									echo'<span>72 BPM</span>';
+								echo'</div>';
+								echo'<div class="heart_info">';
+									
+								echo'</div>';
+							echo'</div>';
+                    }?>
+                           
                 </div>
-                <div id="inner12-lower">2
+                <div class="row">
+                    <div class="col-sm-12">
+                    <div class="table">
+                        <div class="table_top">
+                     <span>Past Activity</span>
+                      </div>
+                     <?php
+                     $a=1;
+                     
+                    while ($a <= 4) {
+                        
+                     echo '<span> <div class="table_element"></span>';
+                     echo '<div class="date">';
+                     echo '<span>Sep</span>';
+                     echo ' <p>18</p>';
+                     echo '</div>';
+                     echo '<div class="table_activity">';
+                     echo '<span>Sep</span>';
+                     echo '<p>18</p>';
+                     echo ' </div>';
+                     echo '<div class="table_time">';
+                     echo '   <span>9:10 AM</span>';
+                     echo ' </div>';
+                     echo '</div>';
+                     
+                     $a++;
+                    }
+                     
+                    
+                     ?>
+                      </div> 
+                         
+                                
+                           
+                           
+                      
+                                    
+                                   
+                                
+                                
+                                    
+                                    
+                               
+                                
+                                 
+                               
+                            
+    
+                    </div>
                 </div>
             </div>
-            <div id="inner2-lower">
-                <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+            <div class="col-sm-4">
+                <div class="cpb">
+                    <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                </div>
             </div>
+        </div>
+           
         </div>
     </div>
 </body>
