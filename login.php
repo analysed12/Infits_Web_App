@@ -115,6 +115,7 @@ justify-content: center;
 	 
   <div class="login-area">
   <form method="post" action="login.php">
+  <?php include('errors.php'); ?>
 
   		<input type="text" name="dietitianuserID" placeholder="Username">
       <br><br>
