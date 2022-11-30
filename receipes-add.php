@@ -4,7 +4,7 @@
          if( isset($_POST['submit']) && isset($_FILES['my_image']))
          {     
             //$id= $_SESSION['dit_id']; 
-               $id ='John';
+               $id ='Sam';
                $name =$_POST['R-name'];
                $course =$_POST['c-name'];
                  
@@ -49,7 +49,7 @@
                           if(in_array($img_ex_lc, $allowed_ex))
                          {
                             $new_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                           $img_upload_path = 'uploads'.$new_name;
+                           $img_upload_path = "./images/" .$new_name;
               
                            move_uploaded_file($tmp_name,$img_upload_path );  
                            $imageandpath="$new_name|$img_upload_path";
@@ -60,7 +60,7 @@
                '$prot','$fat','$fibr','$carbo','$ingrt','$inst','$cate','$id','$imageandpath','$file1','$course')";
                 if($conn -> query($sql)==true)
                 {
-                       echo "One receipe added";
+                  header('location:receipe_details_view.php');
                 }
                 else
                 {
@@ -311,9 +311,9 @@ border-radius: 31px;
 
 </ul>   
 </div>
-             <div class="btn-class" style="padding-top:-1px;padding-left: 300px;">
+             <div class="btn-class" style="margin-top:2px;padding-left: 300px;">
              <button type="Submit" class="btn-primary" name="submit" id="submit"  style="background:linear-gradient(264.44deg, rgba(207, 87, 230, 0.66) 0%, rgba(110, 100,254, 0.66) 91.11%); 
-             border-style: none;width: 474px;height: 39px;border-radius: 44px;color: white;">Next</button>
+             border-style: none;width: 474px;height: 39px;border-radius: 44px;color: white; position:absolute;">Next</button>
              </div>
 
 

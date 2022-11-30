@@ -1,27 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title>Sidebar 03</title>
-	  <title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
-	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	  <!--<link rel="stylesheet" type="text/css" href="./styles/event_calendar.css">-->
-	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infits</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		
-            <!--<link rel="stylesheet" href="css/Recipies.css">-->
-        
-		<link rel="stylesheet" href="css/mobiscroll.javascript.min.css">
-		<script src="js/mobiscroll.javascript.min.js"></script>
-        <style>
+   
+    
+  </head>
 
-#content {
-    overflow: auto;
+  <style>
+    #content {
     display: flex;
     flex-direction: column;
     height: 90%;
@@ -30,7 +21,8 @@
     padding: 10px;
     margin: 0px;
 }
-/*-------------------------DIET CHART---------------------------*/
+
+    /*-------------------------DIET CHART---------------------------*/
     /* Style the tab */
     .tab {
     overflow:hidden;  
@@ -96,34 +88,18 @@
   display: flex;
   flex-wrap: wrap;
 }
-/*------------------PLUS BUTTON ------------------------ */
-.add-btn {
-  background-color: white;
-  border: none;
-  box-shadow: 0px 8px 24px rgba(176, 190, 197, 0.32), 0px 3px 5px rgba(176, 190, 197, 0.32);
-  color: #DF6293;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
-  width: 140px;
-  border-radius: 10px;
-}
 
-/* Darker background on mouse-over */
-.add-btn:hover {
-  background-color: RoyalBlue;
-}
-    
-</style>
-</head>
+        </style>
+  </head>
 
-<div id="page">
+  <body>
+  <div id="page">
     <!--------------sidenav------------------------->
     <?php include 'event_calendar.php'; ?>
 
     <div id="content">
       <!------------------------------------------------DASHBOARD--------------------------------------------------------->
-      <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Diet Chart</h1>
+      <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Meal Tracker</h1>
       <p id="topnav-content-1"><span id="topnav-content-1-name">
       <?php  if (isset($_SESSION['name'])) : ?>
         <?php echo $_SESSION['name']; ?></strong></p>
@@ -140,7 +116,9 @@
     
 
     <div id="content">
-    <div class="tab">
+      <!-----------------------------------------------EVENTS--------------------------------------------------------->
+      
+      <div class="tab">
         <div class="space-between-flex">
         <button class="tablinks" onclick="openCity(event, 'Breakfast')">Breakfast</button>
         <button class="tablinks" onclick="openCity(event, 'Lunch')">Lunch</button>
@@ -151,34 +129,48 @@
       
       <div id="Breakfast" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;"> In Morning</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <p style="font-size: 20px;margin-top: 0; float: right; color: #A6A1A1;"><var>Kcal 200</var></p>
+            <h3 style="font-size: 30px; margin-top: 0;">In Morning</h3><img src="images/food.png">
+            <p style="font-size: 20px;margin-top: 0;">Aloo Paratha</p>
         </div>
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;"> After Break</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <p style="font-size: 20px;margin-top: 0; float: right; color: #A6A1A1;"><var>Kcal 200</var></p>
+            <h3 style="font-size: 30px; margin-top: 0;">In Morning</h3>
+            <img src="images/food.png">
+            <p style="font-size: 20px;margin-top: 0;">Aloo Paratha</p>
         </div>
+        <br><input type="submit" name="submit" value="Save Plan">
       </div>
       
       <div id="Lunch" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;"> Afternoon</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <p style="font-size: 20px;margin-top: 0; float: right; color: #A6A1A1;"><var>Kcal 200</var></p>
+            <h3 style="font-size: 30px; margin-top: 0;">In Morning</h3>
+            <img src="images/food.png">
+            <p style="font-size: 20px;margin-top: 0;">Aloo Paratha</p>
         </div>
+        <br><input type="submit" name="submit" value="Save Plan">
       </div>
       
       <div id="Snack" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;">Snack</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <p style="font-size: 20px;margin-top: 0; float: right; color: #A6A1A1;"><var>Kcal 200</var></p>
+            <h3 style="font-size: 30px; margin-top: 0;">In Morning</h3>
+            <img src="images/food.png">
+            <p style="font-size: 20px;margin-top: 0;">Aloo Paratha</p>
         </div>
+        <br>
+        <input type="submit" name="submit" value="Save Plan">
       </div>
 
       <div id="Dinner" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;"> Dinner</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <p style="font-size: 20px;margin-top: 0; float: right; color: #A6A1A1;"><var>Kcal 200</var></p>
+            <h3 style="font-size: 30px; margin-top: 0;">In Morning</h3>
+            <img src="images/food.png">
+            <p style="font-size: 20px;margin-top: 0;">Aloo Paratha</p>
         </div>
+        <br><input type="submit" name="tab-submit" value="Save Plan">
       </div>
       
       <script>
@@ -196,15 +188,9 @@
         evt.currentTarget.className += " active";
       }
       </script>
-        
-        <br><br>
-    <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #9C74F5">Save Plan</button>
-    <br>
-          </div>
-		</div>
-</div>
 
+    
+    </div>
 
-
-  </body>
+</body>
 </html>

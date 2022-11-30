@@ -10,24 +10,7 @@
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
-    <script>
-            $(document).ready(function(){
-            $(".calendat_but").click(function(){
-                $(".calendar_pop").animate({
-                    height: 'toggle'
-                });
-            }); 
-            });
-        </script>
-        <script>
-            $(document).ready(function(){
-            $(".pheader p").click(function(){
-                $(".activity_pop").animate({
-                    height: 'toggle'
-                });
-            }); 
-            });
-        </script>
+    
 </head>
 <style>
 html {
@@ -94,21 +77,7 @@ html {
     border-radius: 14px;
     padding: 5px;
 }
-.flex-container-bottom {
-    display: flex;
-    flex-wrap: wrap;
-}
-.flex-container-bottom>div {
-    width: 134px;
-height: 57.45px;
-    /* background: pink; */
-    margin: 10px;
-    text-align: center;
-    /* line-height: 75px; */
-    font-size: 30px;
-    border-radius: 14px;
-    padding: 5px;
-}
+
 .client-card p {
     font-size: 15px;
 }
@@ -116,24 +85,7 @@ height: 57.45px;
 .client-card i {
     font-size: 15px;
 }
-.client-card-water{
-    background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
-    border: 1px solid #52A4FF;
-    border-radius: 10px;
-}
-.client-card-water p{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 120%;
-    /* or 23px */
 
-    text-align: center;
-
-    color: #FFFFFF;
-
-}
 .graph {
     width: 450px;
     margin-left: 20px;
@@ -347,28 +299,6 @@ color: #5D5D5D;
     justify-content: center;
     margin-top: 20px;
 }
-.cpb_box{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;    
-    align-items: center;
-}
-.cpb_box_right{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;    
-    align-items: space-between;
-}
-.cpb_box_right span{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 46px;
-    letter-spacing: 0.03em;
-
-    color: #000000;
-}
 .table_top{
     display: flex;
     flex-direction: row;
@@ -436,23 +366,6 @@ color: #000000;
 
 opacity: 0.77;
 }
-.pheader{
-	display :flex;
-	flex-direction:row;
-	justify-content:space-between;
-}
-.pheader p{
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 34px;
-/* identical to box height */
-width: 77px;
-height: 34px;
-margin-left: 20px;
-color: #9C74F5;
-}
 </style>
 
 <body>
@@ -472,8 +385,8 @@ color: #9C74F5;
                             <i class="fa-solid fa-heart-pulse"></i>
                             <p>Heart Rate</p>
                         </div>
-                        <div class="client-card client-card-water " style="color:#52A4FF; border: 1px solid #52A4FF;">
-                            <img src="images/water_selected.svg" alt="">
+                        <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
+                            <i class="fa-solid fa-droplet"></i>
                             <p>Water</p>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
@@ -504,7 +417,7 @@ color: #9C74F5;
                         Set Goals
                     </div>
                     <div class="inner21-image">
-                        <img src="images/man_drinking_water.svg" alt="">
+                        <img src="images/set_goals.png" alt="">
                     </div>
                     <div class="box-title">Daily Steps</div>
                     <div class="box-counter">00000</div>
@@ -519,43 +432,17 @@ color: #9C74F5;
 
                 <div class="bottom-btns">
                     
-                <div class="flex-container-bottom">
-                            <div class="bottom-stats-btn">
-                                <div class="heart_info">
-                                    <span>Daily Count</span>
-                                    <span>72 BPM</span>
-                                </div>
-                                
-                            </div>
-
-                            <div class="bottom-stats-btn">
-                                <div class="heart_info">
-                                    <span>Weekly Avg</span>
-                                    <span>72 BPM</span>
-                                </div>
-                                
-                            </div>
-                    
-                      
-                      
-                            <div class="bottom-stats-btn">
-                                <div class="heart_info">
-                                <span>Monthly Avg</span>
-                                <span>72 BPM</span>
-                                </div>
-                                <div class="heart_info">
-                                </div>
-                            </div>
-
-                            <div class="bottom-stats-btn">
-                                <div class="heart_info">
-                                <span>Total</span>
-                                <span>72 BPM</span>
-                                </div>
-                                <div class="heart_info">
-                                </div>
-                            </div>
-                    </div>
+                    <?php for ($i=0; $i <4 ; $i++) { 
+                        echo'<div class="bottom-stats-btn">';
+								echo'<div class="heart_info">';
+									echo'<span>Daily Count</span>';
+									echo'<span>72 BPM</span>';
+								echo'</div>';
+								echo'<div class="heart_info">';
+									
+								echo'</div>';
+							echo'</div>';
+                    }?>
                            
                 </div>
                 <div class="row">
@@ -569,7 +456,7 @@ color: #9C74F5;
                      
                     while ($a <= 4) {
                         
-                     echo '<div class="table_element">';
+                     echo '<span> <div class="table_element"></span>';
                      echo '<div class="date">';
                      echo '<span>Sep</span>';
                      echo ' <p>18</p>';
@@ -589,29 +476,30 @@ color: #9C74F5;
                     
                      ?>
                       </div> 
-               
+                         
+                                
+                           
+                           
+                      
+                                    
+                                   
+                                
+                                
+                                    
+                                    
+                               
+                                
+                                 
+                               
+                            
+    
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
-            <div class="pheader">
-						<h4>Daily Progress</h4>
-						<p>View Activity</p>
-					</div>
-                <div class="cpb_box">
-                    <div class="cpb">
-                        <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
-                    </div>
-
-                    <div class="cpb_box_right">
-                        <span>3 Liter</span>                    
-                        <span>Remaining</span>
-                        <span>600 ML</span>
-                        <span>Consumed</span>
-                     </div>
+                <div class="cpb">
+                    <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
                 </div>
-              
-
             </div>
         </div>
            

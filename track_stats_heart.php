@@ -1,3 +1,5 @@
+<?php  include('config.php');?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,29 +113,18 @@ height: 57.45px;
 }
 .client-card p {
     font-size: 15px;
+    
 }
 
 .client-card i {
     font-size: 15px;
 }
-.client-card-water{
-    background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
-    border: 1px solid #52A4FF;
-    border-radius: 10px;
+.client-card-heart {
+    background: linear-gradient(217.35deg, #F97EAA 0%, #C389D5 100%);
 }
-.client-card-water p{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 120%;
-    /* or 23px */
-
-    text-align: center;
-
+.client-card-heart p{
     color: #FFFFFF;
-
-}
+} 
 .graph {
     width: 450px;
     margin-left: 20px;
@@ -264,8 +255,8 @@ height: 57.45px;
 
 div[role="progressbar"] {
     --size: 10rem;
-    --fg: #369;
-    --bg: #def;
+    --fg: #E68AA1;
+    --bg: #F9E0E7;
     --pgPercentage: var(--value);
     animation: growProgressBar 3s 1 forwards;
     width: var(--size);
@@ -279,13 +270,13 @@ div[role="progressbar"] {
         radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
         conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
     font-family: Helvetica, Arial, sans-serif;
-    font-size: calc(var(--size) / 5);
+    font-size: calc(var(--size) / 7);
     color: var(--fg);
 }
 
 div[role="progressbar"]::before {
     counter-reset: percentage var(--value);
-    content: counter(percentage) '%';
+    content: '❤️' counter(percentage)' ' 'bpm';
 }
 
 
@@ -341,33 +332,41 @@ color: #5D5D5D;
 }
 .cpb{
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     align-items: top;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
-.cpb_box{
+.max{
+    border-left: 2px solid #C986CF;
+    border-right: 2px solid #C986CF;
+    width:120px;
+
+}
+
+.heart_beat_box{
     display: flex;
     flex-direction: row;
-    justify-content: center;    
-    align-items: center;
+    justify-content: space-evenly;
+    background: #FFE8F2;
+border-radius: 10px;
+width: 355px;
+height: 108px;
+padding:7px;
 }
-.cpb_box_right{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;    
-    align-items: space-between;
-}
-.cpb_box_right span{
+.heart_beat_box>p{
     font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 46px;
-    letter-spacing: 0.03em;
+font-style: normal;
+font-weight: 400;
+font-size: 23px;
+line-height: 42px;
+/* identical to box height */
 
-    color: #000000;
+letter-spacing: 0.03em;
+
+color: #000000;
 }
 .table_top{
     display: flex;
@@ -468,12 +467,12 @@ color: #9C74F5;
                             <i class="fa-solid fa-shoe-prints" style="rotate: -90deg;"></i>
                             <p>Step</p>
                         </div>
-                        <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                            <i class="fa-solid fa-heart-pulse"></i>
+                        <div class="client-card client-card-heart " style="color:#E266A9; border: 1px solid #E266A9;">
+                            <img src="images/heart.svg" alt=""/>
                             <p>Heart Rate</p>
                         </div>
-                        <div class="client-card client-card-water " style="color:#52A4FF; border: 1px solid #52A4FF;">
-                            <img src="images/water_selected.svg" alt="">
+                        <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
+                            <i class="fa-solid fa-droplet"></i>
                             <p>Water</p>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
@@ -504,9 +503,9 @@ color: #9C74F5;
                         Set Goals
                     </div>
                     <div class="inner21-image">
-                        <img src="images/man_drinking_water.svg" alt="">
+                        <img src="images/equipment.svg" alt="">
                     </div>
-                    <div class="box-title">Daily Steps</div>
+                    <div class="box-title">Daily Heart Rate</div>
                     <div class="box-counter">00000</div>
                     <buttpn class="box-btn">Set</buttpn>
                 </div>
@@ -589,29 +588,38 @@ color: #9C74F5;
                     
                      ?>
                       </div> 
-               
+                         
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
-            <div class="pheader">
+                <?php
+                 $userid='Azarudeen';
+                 $sql = "SELECT average, maximum, minimum FROM heartrate WHERE clientID = '$userid' ORDER BY clientID DESC LIMIT 1";
+                 $result = $conn->query($sql);
+                 $row = $result->fetch_assoc();
+                ?>
+                <div class="pheader">
 						<h4>Daily Progress</h4>
 						<p>View Activity</p>
 					</div>
-                <div class="cpb_box">
-                    <div class="cpb">
-                        <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
-                    </div>
-
-                    <div class="cpb_box_right">
-                        <span>3 Liter</span>                    
-                        <span>Remaining</span>
-                        <span>600 ML</span>
-                        <span>Consumed</span>
-                     </div>
+                <div class="cpb">
+                    <div role="progressbar" style="--value:<?php $value = 73; echo $value; ?>"></div>
                 </div>
-              
-
+                <div class="heart_beat_box">
+                    <div class="avg">
+                        <span>Avg</span>
+                        <p><?php echo $row["average"];?> BPM</p>
+                    </div>
+                    <div class="max">
+                        <span>Max</span>
+                        <p><?php echo $row["maximum"];?> BPM</p>
+                    </div>
+                    <div class="low">
+                        <span>Low</span>
+                        <p><?php echo $row["minimum"];?> BPM</p>
+                    </div>
+                </div>
             </div>
         </div>
            

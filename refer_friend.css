@@ -7,11 +7,12 @@
     position: absolute;
 width: 296px;
 height: 270.84px;
-left: 630px;
-padding-top: 150px;
-
+left: 580px;
+padding-top: 2px;
+text-align: center;
 border-radius: 11px;
 }
+
 .earn-title{
     position: absolute;
 width: 274px;
@@ -182,4 +183,31 @@ bottom: 527px;
     cursor: pointer;
     padding-right: 20px;
     padding-top: 20px;
+}
+
+td{
+    width: 30px;
+    height: 8px;
+}
+.dv-id-dsp{
+
+     position:absolute;
+    height:66px;
+    width:285px;
+    left:62px;
+    top:210px;
+    text-align: center;
+
+}
+.dv-id-dsp #nm-id-dsp{
+    font-family: 'NATS';
+    font-size:23px;
+    font-style: normal;
+    line-height: 18px;
+    font-weight: 300;
+    
+    color: purple;
+
+
+
 }

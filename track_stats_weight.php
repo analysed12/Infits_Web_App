@@ -109,6 +109,24 @@ height: 57.45px;
     border-radius: 14px;
     padding: 5px;
 }
+.client-card-weight{
+    
+background: linear-gradient(38.98deg, #768B93 7.65%, #8FC4C3 87.93%);
+border: 1px solid #54AFAC;
+border-radius: 10px;
+}
+.client-card-weight p{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 29px;
+line-height: 85%;
+/* or 16px */
+
+text-align: center;
+
+color: #FFFFFF;
+}
 .client-card p {
     font-size: 15px;
 }
@@ -116,24 +134,7 @@ height: 57.45px;
 .client-card i {
     font-size: 15px;
 }
-.client-card-water{
-    background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
-    border: 1px solid #52A4FF;
-    border-radius: 10px;
-}
-.client-card-water p{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 120%;
-    /* or 23px */
 
-    text-align: center;
-
-    color: #FFFFFF;
-
-}
 .graph {
     width: 450px;
     margin-left: 20px;
@@ -164,7 +165,7 @@ height: 57.45px;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 20px;
-    background: linear-gradient(262.45deg, #FA8686 9.26%, #F1A680 93.19%);
+    background: linear-gradient(263.28deg, #8EC2C1 0%, #8CBFBE 0.01%, #788F97 93.31%);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
 }
@@ -264,8 +265,8 @@ height: 57.45px;
 
 div[role="progressbar"] {
     --size: 10rem;
-    --fg: #369;
-    --bg: #def;
+    --bg:#D7EDEC;
+     --fg:#87A9AC;
     --pgPercentage: var(--value);
     animation: growProgressBar 3s 1 forwards;
     width: var(--size);
@@ -346,28 +347,6 @@ color: #5D5D5D;
     align-items: top;
     justify-content: center;
     margin-top: 20px;
-}
-.cpb_box{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;    
-    align-items: center;
-}
-.cpb_box_right{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;    
-    align-items: space-between;
-}
-.cpb_box_right span{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 46px;
-    letter-spacing: 0.03em;
-
-    color: #000000;
 }
 .table_top{
     display: flex;
@@ -472,12 +451,12 @@ color: #9C74F5;
                             <i class="fa-solid fa-heart-pulse"></i>
                             <p>Heart Rate</p>
                         </div>
-                        <div class="client-card client-card-water " style="color:#52A4FF; border: 1px solid #52A4FF;">
-                            <img src="images/water_selected.svg" alt="">
+                        <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
+                            <i class="fa-solid fa-droplet"></i>
                             <p>Water</p>
                         </div>
-                        <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                            <i class="fa-solid fa-weight-hanging"></i>
+                        <div class="client-card client-card-weight" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                        <img src="images/weight_selected.svg" alt="">
                             <p>Weight Track</p>
                         </div>
                         <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
@@ -504,7 +483,7 @@ color: #9C74F5;
                         Set Goals
                     </div>
                     <div class="inner21-image">
-                        <img src="images/man_drinking_water.svg" alt="">
+                        <img src="images/obesity.svg" alt="">
                     </div>
                     <div class="box-title">Daily Steps</div>
                     <div class="box-counter">00000</div>
@@ -569,7 +548,7 @@ color: #9C74F5;
                      
                     while ($a <= 4) {
                         
-                     echo '<div class="table_element">';
+                     echo ' <div class="table_element">';
                      echo '<div class="date">';
                      echo '<span>Sep</span>';
                      echo ' <p>18</p>';
@@ -589,29 +568,18 @@ color: #9C74F5;
                     
                      ?>
                       </div> 
-               
+
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
-            <div class="pheader">
+                    <div class="pheader">
 						<h4>Daily Progress</h4>
 						<p>View Activity</p>
 					</div>
-                <div class="cpb_box">
-                    <div class="cpb">
-                        <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
-                    </div>
-
-                    <div class="cpb_box_right">
-                        <span>3 Liter</span>                    
-                        <span>Remaining</span>
-                        <span>600 ML</span>
-                        <span>Consumed</span>
-                     </div>
+                <div class="cpb">
+                    <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
                 </div>
-              
-
             </div>
         </div>
            

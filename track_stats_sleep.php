@@ -10,6 +10,8 @@
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
+    
+
     <script>
             $(document).ready(function(){
             $(".calendat_but").click(function(){
@@ -109,6 +111,14 @@ height: 57.45px;
     border-radius: 14px;
     padding: 5px;
 }
+.client-card-sleep{
+    background: linear-gradient(212.32deg, #633FDD 0%, #AB83F0 93.37%);
+    
+
+}
+.client-card-sleep p{
+    color: #FFFFFF;
+}
 .client-card p {
     font-size: 15px;
 }
@@ -116,24 +126,7 @@ height: 57.45px;
 .client-card i {
     font-size: 15px;
 }
-.client-card-water{
-    background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
-    border: 1px solid #52A4FF;
-    border-radius: 10px;
-}
-.client-card-water p{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 120%;
-    /* or 23px */
 
-    text-align: center;
-
-    color: #FFFFFF;
-
-}
 .graph {
     width: 450px;
     margin-left: 20px;
@@ -164,9 +157,9 @@ height: 57.45px;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 20px;
-    background: linear-gradient(262.45deg, #FA8686 9.26%, #F1A680 93.19%);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
-    border-radius: 10px;
+    background: linear-gradient(263.28deg, #AB84F0 0%, #9FB0F2 0.01%, #633FDD 93.31%);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
+border-radius: 10px;
 }
 
 .box-title {
@@ -343,32 +336,30 @@ color: #5D5D5D;
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: top;
-    justify-content: center;
-    margin-top: 20px;
-}
-.cpb_box{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;    
+    flex-direction:column;
     align-items: center;
-}
-.cpb_box_right{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;    
-    align-items: space-between;
-}
-.cpb_box_right span{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 46px;
-    letter-spacing: 0.03em;
+    /* justify-content: center; */
+    margin-top: 20px;
 
-    color: #000000;
 }
+.pheader{
+	display :flex;
+	flex-direction:row;
+	justify-content:space-between;
+}
+.pheader p{
+	font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 34px;
+/* identical to box height */
+width: 77px;
+height: 34px;
+margin-left: 20px;
+color: #9C74F5;
+}
+
 .table_top{
     display: flex;
     flex-direction: row;
@@ -418,6 +409,37 @@ line-height: 49px;
 
 
 }
+.pbottom{
+    display: flex;
+    flex-direction: row;
+    align-items:;
+    padding:2px;
+}
+.pbottom-element{
+    margin:2px;
+}
+.pbottom-element p{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 42px;
+letter-spacing: 0.03em;
+
+color: #000000;
+}
+.pbottom-element span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 51px;
+/* identical to box height */
+
+letter-spacing: 0.03em;
+
+color: #6844E2;
+}
 .date{
     
     border-right: 1px solid #C986CF;
@@ -435,23 +457,6 @@ letter-spacing: 0.03em;
 color: #000000;
 
 opacity: 0.77;
-}
-.pheader{
-	display :flex;
-	flex-direction:row;
-	justify-content:space-between;
-}
-.pheader p{
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 34px;
-/* identical to box height */
-width: 77px;
-height: 34px;
-margin-left: 20px;
-color: #9C74F5;
 }
 </style>
 
@@ -472,16 +477,16 @@ color: #9C74F5;
                             <i class="fa-solid fa-heart-pulse"></i>
                             <p>Heart Rate</p>
                         </div>
-                        <div class="client-card client-card-water " style="color:#52A4FF; border: 1px solid #52A4FF;">
-                            <img src="images/water_selected.svg" alt="">
+                        <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
+                            <i class="fa-solid fa-droplet"></i>
                             <p>Water</p>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
                             <i class="fa-solid fa-weight-hanging"></i>
                             <p>Weight Track</p>
                         </div>
-                        <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                            <i class="fa-solid fa-moon"></i>
+                        <div class="client-card client-card-sleep" style="color:#54AFAC; border: 1px solid #54AFAC;">
+                            <img src="images/moon.svg" alt="">
                             <p>Sleep</p>
                         </div>
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
@@ -504,7 +509,7 @@ color: #9C74F5;
                         Set Goals
                     </div>
                     <div class="inner21-image">
-                        <img src="images/man_drinking_water.svg" alt="">
+                        <img src="images/sleep_table.svg" alt="">
                     </div>
                     <div class="box-title">Daily Steps</div>
                     <div class="box-counter">00000</div>
@@ -589,29 +594,80 @@ color: #9C74F5;
                     
                      ?>
                       </div> 
-               
+
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
-            <div class="pheader">
+                <div class="cpb">
+                <div class="pheader">
 						<h4>Daily Progress</h4>
 						<p>View Activity</p>
 					</div>
-                <div class="cpb_box">
-                    <div class="cpb">
-                        <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                    <div class="concentric">
+                        <script>
+                            var clock = jQuery("#container").radialMultiProgress("init", {
+                            'fill': 25,
+                            'font-size': 14,
+                            'data': [
+                                {'color':"#2DB1E4",'range': [0, 12]},
+                                {'color':"#9CCA13",'range': [0, 59]},
+                                {'color':"#A4075E",'range': [0, 59]}
+                            ]
+                            });
+                            
+                            var startClock =function() {
+                            var dh, dm, ds;
+                            setInterval(function() {
+                                var date =new Date(),
+                                    h = date.getHours() % 12,
+                                    m = date.getMinutes(),
+                                    s = date.getSeconds();
+                                if (dh !== h) { clock.radialMultiProgress("to", {
+                                "index": 0,'perc': h,'time': (h ? 100 : 10)
+                                }); dh = h; }
+                                if (dm !== m) { clock.radialMultiProgress("to", {
+                                "index": 1,'perc': m,'time': (m ? 100 : 10)
+                                }); dm = m; }
+                                if (ds !== s) { clock.radialMultiProgress("to", {
+                                "index": 2,'perc': s,'time': (s ? 100 : 10)
+                                }); ds = s; }
+                            }, 1000);
+                            
+                            };
+                            
+                            
+                            
+                            startClock();
+                        
+                                jQuery("#container").radialProgress("init", {
+                            
+                                'size': 20,
+                            
+                                'fill': 2,
+                            
+                                'text-color':"transparent"
+                            
+                                }).radialProgress("to", {'perc': 66});
+
+                        </script>    
                     </div>
-
-                    <div class="cpb_box_right">
-                        <span>3 Liter</span>                    
-                        <span>Remaining</span>
-                        <span>600 ML</span>
-                        <span>Consumed</span>
-                     </div>
+                <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                <div class="pbottom">
+                    <div class="pbottom-element">
+                        <p>Light Sleep</p>
+                        <span>16%</span> 
+                    </div>
+                    <div class="pbottom-element">
+                        <p>Awake Period</p>
+                        <span>64%</span> 
+                    </div>
+                    <div class="pbottom-element">
+                        <p>Deep Sleep</p>
+                        <span>28%</span> 
+                    </div>
                 </div>
-              
-
+                </div>
             </div>
         </div>
            
@@ -649,5 +705,6 @@ new Chart("myChart", {
     }
 });
 </script>
-
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="radial-progress-bar.js"></script>
 </html>

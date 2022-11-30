@@ -5,7 +5,7 @@ if(isset($_POST['done']))
 //$name = $_SESSION['client_name'];
 $name='John';
  $code= $_POST['referral_code'];
- $sql="update create_client set `referalcode`='$code' where `clientName`='$name'";
+ $sql="update `dietitian` set `referral_code`='$code' where `name`='$name'";
 $conn ->query($sql);
 
 }?>

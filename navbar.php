@@ -1,17 +1,3 @@
-/*<?php 
-  session_start(); 
-
-  if (!isset($_SESSION['name'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
-  }
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['name']);
-  	header("location: login.php");
-  }
-?>*/
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -238,10 +224,9 @@
 </style>
 
 <script>
-    <?php  if (isset($_SESSION['name'])) : ?>
-    	<p>Welcome <strong><?php echo $_SESSION['name']; ?></strong></p>
-    	<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
-    <?php endif ?>
+    <?php
+        $name = "John Wayne";
+    ?>
 </script>
 
 <body>
@@ -293,9 +278,7 @@
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-            <?php  if (isset($_SESSION['name'])) : ?>
-                <?php echo $_SESSION['name']; ?></strong></p>
-            <?php endif ?>
+                    <?php echo $name; ?>
                 </span></p>
             <p id="topnav-content-2">Your performance summary this week</p>
         </div>

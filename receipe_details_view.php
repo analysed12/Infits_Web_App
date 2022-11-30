@@ -4,54 +4,54 @@
 <head>
 	
    <style>
-    body{
-            font-family: 'Poppins'!important;
-  }
     
     .container {
-    position: absolute;
-    width: 1200px;
-    height: 920px;
+      position: absolute;
+    width: 1198px;
+    height: 948px;
     left: 242px;
-    top: 75px;
+    top: 76px;
 }
-.wrapper {
-    position: relative;
-    width: 1440px;
-    height: 1024px;
-    background: #FFFFFF;
+.upload_photo{
+            position: absolute;
+           width: 350px;
+         height: 230px;
+           padding-left:355px;
+         margin-top: 15px;
+         background: #D9D9D9;
+         opacity: 0.74;
+         border-radius: 12px;
 }
-
 
  img{
      height: 225px;
      width:  280;
  }
 
- .nutri-style
+ .buttons
  {
-  
-    position: absolute;
-width: 95px;
-height: 18px;
-left: 530px;
-top: 590px;
- }
+  box-sizing: border-box;
 
- .h5-style
- {
-    
+position: absolute;
+width: 459px;
+height: 45px;
+margin-left: 315px;
+margin-top: 10px;
 
-
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 140%;
-align-items: center;
-
-color: #000000;
+background: #E7E7E7;
+border: 1px solid #E7E7E7;
+border-radius: 44px;
+text-align: center;
 
  }
+ .receipe-details{
+        width: 550px;
+        height: 498px;
+        padding-top:70px;
+        margin-left:330px;
+
+
+
 
  .btn-btn-primary{
     position: absolute;
@@ -67,71 +67,27 @@ line-height: 75%;
 text-align: center;
 
  }
+ .btn-pp{
+    
+    margin-top:7px;
+    text-align: center;
+    border-radius: 22px;
+    height: 32px;
+    margin-left:25px;
 
+  }
+  .aa-btn{
+    text-decoration:none;
+    color:black;
+    font-weight: 400;
+    font-size: 17px;
+  }
+
+  .tbl-view
+  {
+    
+  }
  
-   a{
-  
-font-style: normal;
-font-weight: 200;
-font-size: 19px;
-line-height: 100%;
-/* identical to box height, or 32px */
-text-decoration: none;
-
-display: flex;
-align-items: center;
-
-color: #000000;
-
-   }
-
-
-   p{
-    position: absolute;
-width: 146px;
-height: 55px;
-left: 269px;
-top: 2px;
-
-font-family: 'poppins' !important;
-font-style: normal;
-font-weight: 300;
-font-size: 33px;
-line-height: 70px;
-
-color: #000000;
-
-   }
-   .upload-photo{
-
-     position: absolute;
-width: 285px;
-height: 230px;
-left: 610px;
-top: 100px;
-
-background: #D9D9D9;
-opacity: 0.74;
-border-radius: 12px;
-}
-.buttons{
-    box-sizing: border-box;
-
-position: absolute;
-width: 459px;
-height: 50px;
-left: 556px;
-top: 390px;
-
-background: #E7E7E7;
-border: 1px solid #E7E7E7;
-border-radius: 44px;
-text-align: center;
-
-}
-
-
-
    </style>
 
 	</head>
@@ -145,41 +101,45 @@ text-align: center;
    <form id="form1" action="" method="post" enctype ="multipart/form/data">
        
         	 <?php
-           	  	$sql ="select * from `dietian_recipies` where `dietitianuserID`=7";
+           	  	$sql ="select * from `dietian_recipies` where `dietitianuserID`='Sam'";
            	  	$res = mysqli_query($conn,$sql);
            	  	if(mysqli_num_rows($res) > 0)
            	  	{
            	  		while ($row = $res -> fetch_assoc()){
-           	  			$path = $row["file"];?>
+           	  		
+                  //$path = $row["file"];
+                  $ext= explode('|',$row['image']);
+                  $path = $ext[1];?>
+                  
                        
             <div class="upload-photo">
                 
-             <img src=<?php echo $path;?> alt="" title="<?php($row["image"]);?>"/>  
+             <img src=<?php echo $path;?> alt="" title="<?php($ext[0]);?>"/>  
 
     </div>
         	
         <div class="buttons" style="text-align: center;">
-            <ul class="button-class" style="display:flex; list-style:none";>
-<li> <div class="p-2" style="width: 135px;height:32px; margin-top: 5%;padding-left:20px;background-color: white;  border-radius: 22px; "><a href ="#" style="text-decoration: none; color: black;  font-size:15;font-weight:400%; ">Recipies details</a></div></li>
-  <li><div class="p-2" style="width:100px; height:32px; margin-left: 50px;
-  margin-top: 5%;  text-align:center;">
-    <a href="#" style="text-decoration: none; color: black; font-size:15;font-weight:400% ;">Ingredients</a></div></li>
- <li> <div class="p-2" style="width:78px; height:32px; margin-left: 40px; margin-top: 5%;" >
-    <a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;">Directions</a></div></li>
-</ul>
-</div>
+        <ul id="ul-btn" style="list-style:none; display:flex;">
+          <li> <div class= "btn-pp" style="background-color:white;" > <a class="aa-btn" href="#">Receipe Details </a></div></li>
+          <li><div class="btn-pp"><a class="aa-btn" href="#">Ingredients</a></div></li>
+          <li><div class="btn-pp"><a class="aa-btn" href="#">Directions</a></div></li>
 
+</div>
+             <?php   
+                $time = explode('|',$row['time']);?>
            <div class="receipe-details">
            	  <!------<table id ="tbl-view">---->
                  <table class="tbl-view">
                      <tr><td><?php echo $row["name"];?></td></tr>
                      <tr><td><?php echo $row["course"];?></td></tr>
                      <tr><td><?php $row["category"];?></td></tr>
-                     <tr><td><?php echo $row["time"];?></td></tr>
-                     <tr><td>Nutritions</td></tr>
+                     <tr><td><?php echo $time[0];?></td></tr>
+                     <tr><td><?php echo $time[1];?></td></tr>
                      <tr> <td><?php echo $row["serving"];?></td></tr>
+                     <tr><td>Nutritions</td></tr>
+                    
                      <tr><td><?php echo $row["calories"];?></td></tr>
-                     <tr><td><?php echo $row["protiens"];?></td></tr>
+                     <tr><td><?php echo $row["proteins"];?></td></tr>
                      <tr><td><?php echo $row["fats"];?></td></tr>
                      <tr><td><?php echo $row["carbs"];?></td></tr>
                        

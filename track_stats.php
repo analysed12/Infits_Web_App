@@ -61,7 +61,34 @@
 						</div>
 					  </div>
 					  <div class="graph">
-					
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+            
+                        <canvas id="myChart" ></canvas>
+					</div>
+                        <script>
+                            var xValues = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
+                            var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
+                
+                            new Chart("myChart", {
+                            type: "line",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                fill: false,
+                                lineTension: 0,
+                                backgroundColor: "#FF8B8B",
+                                borderColor: "#FF8B8B",
+                                data: yValues
+                                }]
+                            },
+                            options: {
+                                legend: {display: false},
+                                scales: {
+                                yAxes: [{ticks: {min: 1000, max:9000}}],
+                                }
+                            }
+                        });
+                        </script>
 					</div>
 				</div>
 				<div class="col-sm-4">
