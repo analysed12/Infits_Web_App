@@ -1,7 +1,4 @@
 <?php
-/*
-This file contains database configuration assuming you are running mysql using user "root" and password ""
-*/
 
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
