@@ -518,6 +518,14 @@ color: #4D4D4D;
   /* border: 1px solid #ccc; */
   border-top: none;
 }
+#setgoalweight{
+    background: #FFFFFF;
+border: 0px solid #DFDFDF;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+border-radius: 10px;
+width: 163px;
+height: 45px;
+}
 </style>
 
 <body>
@@ -624,7 +632,9 @@ color: #4D4D4D;
                         <img src="images/man_drinking_water.svg" alt="">
                     </div>
                     <div class="box-title">Daily Steps</div>
-                    <div class="box-counter">00000</div>
+                    <div class="box-counter">
+                    Goal:<input type="number" id="setgoalweight" name="weightgoal">
+                    </div>
                     <buttpn class="box-btn">Set</buttpn>
                 </div>
             </div>

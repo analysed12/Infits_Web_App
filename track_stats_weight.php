@@ -726,6 +726,8 @@ height: 45px;
                         $weight = 70;
                         $height = 170;
                         $bmi = 24;
+                        
+                        // $goal = $_POST["weightgoal"];
                         $goal = 60;
                         $sql = "select weight from weighttracker where clientID='$userID' and date = '$date'";
                         
@@ -747,7 +749,7 @@ height: 45px;
                             if (mysqli_query($conn,$sql)) {
                                 $sql = "update client set height='$height',weight = '$weight' where clientuserID = '$userID'";
                                 mysqli_query($conn,$sql);
-                                // echo "updated";
+                                echo "updated";
                             }
                             else{
                                 echo "error";
@@ -762,10 +764,14 @@ height: 45px;
                         <img src="images/obesity.svg" alt="">
                     </div>
                     <div class="box-title">Daily Steps</div>
+                    <form action="">
                     <div class="box-counter">
-                    <input type="number" id="setgoalweight" name="fname">
+                    Goal:<input type="number" id="setgoalweight" name="weightgoal">
                     </div>
-                    <buttpn class="box-btn">Set</buttpn>
+                    <buttpn class="box-btn"><input type="submit" name="submit" value="Submit"></buttpn>
+                    </form>
+                    
+                    
                 </div>
             </div>
         </div>
