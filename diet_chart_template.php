@@ -1,24 +1,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Sidebar 03</title>
-	  <title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
-	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	  <!--<link rel="stylesheet" type="text/css" href="./styles/event_calendar.css">-->
+  	<title>Diet Chart</title>
+	  
 	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		
-            <!--<link rel="stylesheet" href="css/Recipies.css">-->
-        
-		<link rel="stylesheet" href="css/mobiscroll.javascript.min.css">
-    <link rel="stylesheet" href="css/modal.css">
-		<script src="js/mobiscroll.javascript.min.js"></script>
         <style>
 
 #content {
@@ -114,6 +104,79 @@
 .add-btn:hover {
   background-color: RoyalBlue;
 }
+
+/*--------------MODAL CSS------------------*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 50%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    /*position: relative;*/
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 5px;
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
     
 </style>
 </head>
@@ -153,14 +216,50 @@
       <div id="Breakfast" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> In Morning</p>
-            <?php include 'diet_chart_popup.php'; ?>
+
+            <!-- Trigger/Open The Modal -->
+            <button class="modal-button" href="#myModal1">Open Modal</button>
+
+            <!-- The Modal -->
+            <div id="myModal1" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+              <div class="modal-header">
+                  <span class="close">×</span>
+                  <center><h2>Choose Template</h2></center>
+                </div>
+                <div class="modal-body">
+                    <img src="images/add_btn.svg" style="padding: 15px;">
+
+                </div>
+              </div>
+            </div>
         </div>
       </div>
       
       <div id="Lunch" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> Afternoon</p>
-            <?php include 'diet_chart_popup.php'; ?>
+            <!-- Trigger/Open The Modal -->
+            <button class="modal-button" href="#myModal2">Open Modal</button>
+
+            <!-- The Modal -->
+            <div id="myModal2" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+              <div class="modal-header">
+                  <span class="close">×</span>
+                  <h2>Choose Template</h2>
+                </div>
+                <div class="modal-body">
+                  <div class="dashed-border">
+                    <img src="images/add_btn.svg" style="padding: 15px;">
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
       
@@ -194,14 +293,55 @@
       }
       </script>
         
+
+        <script>// Get the button that opens the modal
+        var btn = document.querySelectorAll("button.modal-button");
+
+        // All page modals
+        var modals = document.querySelectorAll('.modal');
+
+        // Get the <span> element that closes the modal
+        var spans = document.getElementsByClassName("close");
+
+        // When the user clicks the button, open the modal
+        for (var i = 0; i < btn.length; i++) {
+        btn[i].onclick = function(e) {
+            e.preventDefault();
+            modal = document.querySelector(e.target.getAttribute("href"));
+            modal.style.display = "block";
+        }
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        for (var i = 0; i < spans.length; i++) {
+        spans[i].onclick = function() {
+            for (var index in modals) {
+              if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+            }
+        }
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+            for (var index in modals) {
+              if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+            }
+            }
+        }
+        //keep page from refreshing
+        function m_display(){
+            event.preventDefault();
+            modal.style.display ="block";
+        }
+        </script>
+
         <br><br>
     <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #9C74F5">Save Plan</button>
     <br>
           </div>
 		</div>
 </div>
-
-<script src="js/modal.js"></script>
 
   </body>
 </html>

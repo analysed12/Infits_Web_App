@@ -1,4 +1,30 @@
-<?php include('server.php') ?>
+<?php
+include "config.php";
+
+if(isset($_POST['login_user'])){
+
+    $dietitianuserID = mysqli_real_escape_string($con,$_POST['dietitianuserID']);
+    $password = mysqli_real_escape_string($con,$_POST['password']);
+
+    if ($dietitianuserID != "" && $password != ""){
+
+        $sql_query = "select count(*) as cntUser from dietitian where dietitianuserID='".$dietitianuserID."' and password='".$password."'";
+        $result = mysqli_query($con,$sql_query);
+        $row = mysqli_fetch_array($result);
+
+        $count = $row['cntUser'];
+
+        if($count > 0){
+            $_SESSION['name'] = $dietitianuserID;
+            header('Location: index.php');
+        }else{
+            echo "Invalid username and password";
+        }
+
+    }
+
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -115,9 +141,8 @@ justify-content: center;
 	 
   <div class="login-area">
   <form method="post" action="login.php">
-  	<?php include('errors.php'); ?>
 
-  		<input type="text" name="email" placeholder="Your Email">
+  		<input type="text" name="dietitianuserID" placeholder="Username">
       <br><br>
   		<input type="password" name="password" placeholder="Password">
       <br><br>

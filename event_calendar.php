@@ -237,12 +237,7 @@
     }
 </style>
 
-<script>
-    <?php  if (isset($_SESSION['name'])) : ?>
-    	<p>Welcome <strong><?php echo $_SESSION['name']; ?></strong></p>
-    	<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
-    <?php endif ?>
-</script>
+
 
 <body>
 
