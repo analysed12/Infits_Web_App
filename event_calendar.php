@@ -237,12 +237,7 @@
     }
 </style>
 
-<script>
-    <?php  if (isset($_SESSION['name'])) : ?>
-    	<p>Welcome <strong><?php echo $_SESSION['name']; ?></strong></p>
-    	<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
-    <?php endif ?>
-</script>
+
 
 <body>
 
@@ -286,7 +281,7 @@
         <div class="menu-bottom">
             <a class="sidenavlink"><img src="images/vec_gethelp.png" class="nav-icon">Get Help</a>
             <a class="sidenavlink"><img src="images/vec_settings.png" class="nav-icon">Settings</a>
-            <a class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
+            <a href="logout.php" class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
         </div>
     </div>
 
