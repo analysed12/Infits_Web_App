@@ -1,3 +1,17 @@
+<?php 
+ // profile settings
+ $connectQuery = mysqli_connect('localhost', 'root', '', 'infits');
+
+ $currentUser = $_SESSION['name'];
+  $selectQuery = "SELECT * FROM `dietitian` WHERE `dietitianuserID` = '$currentUser'";
+  $result = mysqli_query($connectQuery,$selectQuery);
+  if(mysqli_num_rows($result) > 0){
+  }else{
+      $msg = "No Record found";
+  }
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +25,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
-  <style>
+<style>
+
   body{
     font-family: 'Poppins' !important;
   }
@@ -36,32 +51,32 @@
     width: auto;
   }
   /* Shared */
-.addBtn {
-    background-color: RoyalBlue;
-    border: none;
-    color: white;
-    padding: 10px 22px;
-    border-radius: 10px;
-    text-decoration: none;
-    margin: 5px;
-    width: 60%;
-}
-.center-flex{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    }
-
-.signup{
-      border: 1px solid #EBEBEB;
-      padding: 10px;
-      border-radius: 5px;
-      min-width: auto;
-      width: 150px;
-      background-color: #FFFFFF;
+  .addBtn {
+      background-color: RoyalBlue;
+      border: none;
+      color: white;
+      padding: 10px 22px;
+      border-radius: 10px;
       text-decoration: none;
-      color: black;
+      margin: 5px;
+      width: 60%;
   }
+  .center-flex{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      }
+
+  .signup{
+        border: 1px solid #EBEBEB;
+        padding: 10px;
+        border-radius: 5px;
+        min-width: auto;
+        width: 150px;
+        background-color: #FFFFFF;
+        text-decoration: none;
+        color: black;
+    }
 
   .float-right{
     float: right;
@@ -80,7 +95,11 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-content: flex-start;
-}
+  }
+
+  .align-middle{
+    margin-left: 15%;
+  }
 
 </style>
 
@@ -103,10 +122,10 @@
         User ID <br> <input type="text" name="dietitianuserID">
         <br>
 
-        Name <br> <input type="text" name="Name">
+        Name <br> <input type="text" name="Name" value="<?php echo $_SESSION['name']; ?>" disabled required />
         <br>
 
-        Email <br> <input type="email" name="email" value="<?php echo $email; ?>">
+        Email <br>  <input type="email" name="email" value="<?php echo $email ?>" disabled required />
         <br>
 
         Mobile Number <br> <input type="text" name="mobile">
@@ -144,7 +163,7 @@
       <br><br>
       </div>
 
-      <div class="center-flex"><button type="submit" class="addBtn" name="add_client">Save</button></div>
+      <div class="center-flex align-middle"><button type="submit" class="addBtn" name="add_client">Save</button></div>
       
   </form>
   </div>
