@@ -1,16 +1,64 @@
 <?php 
  // profile settings
- $connectQuery = mysqli_connect('localhost', 'root', '', 'infits');
+ session_start();
+ $db = mysqli_connect('localhost', 'root', '', 'infits');
 
- $currentUser = $_SESSION['name'];
-  $selectQuery = "SELECT * FROM `dietitian` WHERE `dietitianuserID` = '$currentUser'";
-  $result = mysqli_query($connectQuery,$selectQuery);
-  if(mysqli_num_rows($result) > 0){
-  }else{
-      $msg = "No Record found";
-  }
+
+    $currentUser = $_SESSION['name'];
+   $query = "select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
+    $result = mysqli_query($db, $query); // Use curly braces to access array members inside strings
+    if($result->num_rows > 0){ 
+      while($row = $result->fetch_assoc()){
+        $dietitianuserID = $row['dietitianuserID'];
+        $name = $row['name'];
+        $email = $row['email'];
+        $mobile = $row['mobile'];
+
+      }
+    }
+
+//profile updation save button 
+if (isset($_POST['update'])) {
+  // receive all input values from the form
+  $qualification = mysqli_real_escape_string($db, $_POST['qualification']);
+  $location = mysqli_real_escape_string($db, $_POST['location']);
+  $gender = mysqli_real_escape_string($db, $_POST['gender']);
+  $experience = mysqli_real_escape_string($db, $_POST['experience']);
+  $ref_code = mysqli_real_escape_string($db, $_POST['ref_code']);
+  $age = mysqli_real_escape_string($db, $_POST['age']);
+  $profilePhoto = mysqli_real_escape_string($db, $_POST['profilePhoto']);
+
+  //profile pic
+  $imageName = "$dietitianuserID.jpg";
+  $image = 'upload/'.$imageName;
+   $type = pathinfo($image, PATHINFO_EXTENSION);
+   $data = file_get_contents($image);
+   $profilePhoto= base64_encode($data);
+
+  
+
+
+  //updating to db
+  $query = "UPDATE dietitian SET qualification = '$qualification',
+              location = '$location',
+              gender = '$gender',
+              experience = '$experience',
+              age = '$age',
+              profilePhoto = $profilePhoto'
+              where `dietitianuserID` = '$currentUser'";
+    mysqli_query($db, $query);
+
+  	$_SESSION['success'] = "Information Updated";
+  
+
+}   
+
+
+
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -119,22 +167,22 @@
     <div class="flex-main">
 
         <div class="flex-left">
-        User ID <br> <input type="text" name="dietitianuserID">
+        User ID <br> <input type="text" name="dietitianuserID" value="<?php echo $dietitianuserID; ?>" disabled required />
         <br>
 
-        Name <br> <input type="text" name="Name" value="<?php echo $_SESSION['name']; ?>" disabled required />
+        Name <br> <input type="text" name="Name" value="<?php echo $name; ?>" disabled required />
         <br>
 
-        Email <br>  <input type="email" name="email" value="<?php echo $email ?>" disabled required />
+        Email <br>  <input type="email" name="email" value="<?php echo $email; ?>" disabled required />
         <br>
 
-        Mobile Number <br> <input type="text" name="mobile">
+        Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" disabled required />
         <br>
 
-        Qualification <br> <input type="text" name="qualification">
+        Qualification <br> <input type="text" name="qualification" required />
         <br>
 
-        Location <br> <input type="text" name="location">
+        Location <br> <input type="text" name="location" required>
         <br>
 
         </div>
@@ -143,16 +191,20 @@
 
         <div class="flex-right">
 
-        Gender: <br> <input type="text" name="gender">
+        Profile Picture: 
+		    <input type="file" name="profilePhoto" value="" />
         <br>
 
-        Experience <br><input type="text" name="experience">
+        Gender: <br> <input type="text" name="gender" required>
+        <br>
+
+        Experience <br><input type="text" name="experience" required>
         <br>
 
         Referral Code <br><input type="text" name="ref_code">
         <br>
 
-        Age <br><input type="text" name="age">
+        Age <br><input type="text" name="age" required>
         <br>
 
 </div>
@@ -163,7 +215,7 @@
       <br><br>
       </div>
 
-      <div class="center-flex align-middle"><button type="submit" class="addBtn" name="add_client">Save</button></div>
+      <div class="center-flex align-middle"><button type="submit" class="addBtn" name="update">Save</button></div>
       
   </form>
   </div>
