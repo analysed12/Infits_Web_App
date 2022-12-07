@@ -1,16 +1,4 @@
-/*<?php 
-  session_start(); 
 
-  if (!isset($_SESSION['name'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
-  }
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['name']);
-  	header("location: login.php");
-  }
-?>*/
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -288,9 +276,9 @@
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-            <?php  if (isset($_SESSION['name'])) : ?>
-                <?php echo $_SESSION['name']; ?></strong></p>
-            <?php endif ?>
+     
+                </strong></p>
+           
                 </span></p>
             <p id="topnav-content-2">Your performance summary this week</p>
         </div>
