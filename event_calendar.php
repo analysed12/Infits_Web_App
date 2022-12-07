@@ -1,5 +1,21 @@
 
 
+=======
+<?php 
+include('config.php');
+  session_start(); 
+
+  if (!isset($_SESSION['name'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['name']);
+  	header("location: login.php");
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -223,6 +239,7 @@
         font-size: 36px;
         margin-left: 50px;
     }
+
 </style>
 
 
@@ -284,9 +301,28 @@
         </div>
         <div class="topnav-icons">
             <img src="images/pp.png" style="height: 24px; width: 24; display:none;" id="addusermale">
+
             <img src="images/vec_search.png" style="height: 20px; width: 20px;">
             <img src="images/vec_notification.png" style="height: 20px; width: 20px;">
-            <img src="images/pp.png" style="height: 33px; width: 33px; border-radius: 100%;">
+
+            <?php
+                $currentUser = $_SESSION['name'];
+           	  	$sql ="select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
+           	  	$res = mysqli_query($conn,$sql);
+           	  	if(mysqli_num_rows($res) > 0)
+           	  	{
+           	  		while ($row = $res -> fetch_assoc()){
+           	  		
+                  //$path = $row["file"];
+                  $ext= explode('|',$row['profilePhoto']);
+                  $path = $ext[1] . "/" .$ext[0];
+                  ?>
+                  
+                <img src=<?php echo $path;?> style="height: 33px; width: 33px; border-radius: 100%;" alt="" />  
+
+    
+            <?php }} ?>
+
         </div>
 
     </div>
