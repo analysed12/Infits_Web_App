@@ -1,21 +1,5 @@
 
 
-=======
-<?php 
-include('config.php');
-  session_start(); 
-
-  if (!isset($_SESSION['name'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
-  }
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['name']);
-  	header("location: login.php");
-  }
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -138,7 +122,8 @@ include('config.php');
     #topnav-content-1 {
         font-size: 20px;
         letter-spacing: 0.05em;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        margin-left: 15px;
     }
 
     #topnav-content-2 {
@@ -239,10 +224,13 @@ include('config.php');
         font-size: 36px;
         margin-left: 50px;
     }
-
 </style>
 
-
+<script>
+    <?php
+        $name = "John Wayne";
+    ?>
+</script>
 
 <body>
 
@@ -286,43 +274,21 @@ include('config.php');
         <div class="menu-bottom">
             <a class="sidenavlink"><img src="images/vec_gethelp.png" class="nav-icon">Get Help</a>
             <a class="sidenavlink"><img src="images/vec_settings.png" class="nav-icon">Settings</a>
-            <a href="logout.php" class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
+            <a class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
         </div>
     </div>
 
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
-            <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-     
-                </strong></p>
-           
-                </span></p>
-            <p id="topnav-content-2">Your performance summary this week</p>
+            <p id="topnav-content-1">New Recipe
+         </p>
+        
         </div>
         <div class="topnav-icons">
             <img src="images/pp.png" style="height: 24px; width: 24; display:none;" id="addusermale">
-
             <img src="images/vec_search.png" style="height: 20px; width: 20px;">
             <img src="images/vec_notification.png" style="height: 20px; width: 20px;">
-
-            <?php
-                $currentUser = $_SESSION['name'];
-           	  	$sql ="select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
-           	  	$res = mysqli_query($conn,$sql);
-           	  	if(mysqli_num_rows($res) > 0)
-           	  	{
-           	  		while ($row = $res -> fetch_assoc()){
-           	  		
-                  //$path = $row["file"];
-                  $ext= explode('|',$row['profilePhoto']);
-                  $path = $ext[1] . "/" .$ext[0];
-                  ?>
-                  
-                <img src=<?php echo $path;?> style="height: 33px; width: 33px; border-radius: 100%;" alt="" />  
-
-    
-            <?php }} ?>
-
+            <img src="images/pp.png" style="height: 33px; width: 33px; border-radius: 100%;">
         </div>
 
     </div>
