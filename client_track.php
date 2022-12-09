@@ -1,182 +1,171 @@
-<?php include('connection.php'); ?>
+<?php //include('config.php'); ?>
 <?php 
   //$id= $_SESSION['client_id'];
   $GLOBAS['id']= 'coo1';
-  ?>
+?>
 
 <html>
     <title> Client Profile</title>
     <head>
-        <link rel="stylesheet" href="client_dash_track.css">
+       <link rel="stylesheet" href="client_dash_track.css">
         <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="jQuery-plugin-progressbar.js"></script>
-<link rel="stylesheet" href="progresscircle.css">
-        <head>
-            <body>
-                <?php include('event_calendar.php');?>
-                <div class="wrapper">
-                    <div class="header">
-                        <p id="p-header">Client Profile</p>
-              </div>
-                <div class="calendar">
-               </div>
-               <div class="blank">
-               
-                 
-               <!-----php for steps table---->
-               <?php
-               $sql ="select `goal` from `steptracker` where `clientid` = 'c001'";
-               $result = $conn -> query($sql);
-               if($result -> num_rows > 0)
-               {
-                while($row = $result -> fetch_assoc()){?>
+        <script src="jQuery-plugin-progressbar.js"></script>
+        <link rel="stylesheet" href="progresscircle.css">
 
+        <style>
+#content {
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    font-family: 'Poppins';
+    font-style: normal;
+    padding: 10px;
+    margin: 0px;
+}
+.client-events{
+  display: flex;
+  flex-direction: row;
+}
+.client-container {
+  padding: 32px;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.client-card {
+  padding: 16px;
+  margin: 16px;
+  border: 1px solid; 
+  box-shadow: 2px 4px 16px rgba(0,0,0,.06);
+  border-radius: 10px;
+  height: 200px;
+  width: 230px;
+}
 
-                <div class="steps-div">
-                    <div class="steps-text" style="top:0px; padding-left:40px;">
-                        <p class="text-track"> Steps </p>
-                       </div>
-                       <div class ="container-cir">
-                       <div class="circlechart" 
-                     data-percentage= "<?php echo $row['goal'];}}?>">
-                            
-                  </div>
-                 
-                 <!------php for heart table---->
-                 <?php
-               $sql ="select `average` from `heartrate` where `clientid` = 'c001'";
-               $result = $conn -> query($sql);
-               if($result -> num_rows > 0)
-               {
-                while($row = $result -> fetch_assoc()){
-                    ?>
+            
+        </style>
+    </head>
+        
+<body>
+                
 
-                <div class="heart-rate-div">
-                    <div class="hr-text" style="padding-top:0px; padding-left:30%;">
-                        <p class="text-track">Heart Rate</p>
-                     </div>
-                       <div class="container-cir">
-                     <div class="circlechart" 
-                     data-percentage="<?php echo $row['average'];}}?>">
-                            
-                  </div>
-              </div>
+    <!--------------sidenav------------------------->
+    <?php include 'event_calendar.php'; ?>
 
-    
-                    <!-----<div class="image-heart">
-                        <img src="hr_vector.svg">
-</div>----->
+<div id="content">
+    <!------------------calendar----------------->
+ 
+      <?php include("calendar.php");?>
+      <br> <br>
+      <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Client Profile</h1>
+            
+<div class="client-events">
+    <div class="client-container"> 
+
+    <!-----php for steps table---->
+    <div class="box-div steps-col">
+    <?php
+        $sql ="select `goal` from `steptracker` where `clientid` = 'test'";
+        $result = $conn -> query($sql);
+        if($result -> num_rows > 0)
+        {
+            while($row = $result -> fetch_assoc()){?>
+                <p class="text-track"> Steps </p>
+                <div class ="container-cir">
+                    <div class="circlechart" 
+                        data-percentage= "<?php echo $row['goal'];}}?>">
                     </div>
+                </div>
+            
+    </div>
+            
+
+    <!------php for water table---->
+    <div class="box-div water-col">
+    <?php
+        $sql ="select `goal` from `watertracker` where `clientid` = 'Eden'";
+        $result = $conn -> query($sql);
+        if($result -> num_rows > 0)
+        {
+        while($row = $result -> fetch_assoc()){?>
+            <p class="text-track">Water</p>
+            <div class="container-cir">
+                <div class="circlechart" 
+                    data-percentage="<?php echo $row['goal'];}}?>">
+                </div>
+            </div>
+    </div>
 
 
-
-
-                <!------php for water table---->
-                <?php
-               $sql ="select `goal` from `watertracker` where `clientid` = 'c001'";
-               $result = $conn -> query($sql);
-               if($result -> num_rows > 0)
-               {
-                while($row = $result -> fetch_assoc()){?>
-
-
-                 <div class="water-div">
-                    <!------<div class="img-water" style="position:absolute; top:0%;left:-1px;">
-                        <img src=".\images\water-drop.svg">
-
-                       </div>------>
-                    <div class="wt-text" style="top:0px; padding-left:40%;">
-                        <p class="text-track">Water</p>
-                      </div>
-                       <div class="container-cir">
-                      <div class="circlechart" 
-                     data-percentage="<?php echo $row['goal'];}}?>">
-                            
-                  </div>
-              </div>
-                       </div>
-
-
-                       <!----php for weighttable------>
-                       <?php
-               $sql ="select `goal` from `weighttracker` where `clientid` = 'c001'";
-               $result = $conn -> query($sql);
-               if($result -> num_rows > 0)
-               {
-                while($row = $result -> fetch_assoc()){?>
-
-
-
-                 <div class="weight-track-div">
-                    <div class="wt-text" style="top:0px; padding-left:25%;">
-                        <p class="text-track">weight Track</p>
-                     </div>
-                       <div class="container-cir">
-                     <div class="circlechart" 
-                     data-percentage="<?php echo $row['goal'];}}?>">
-                            
-                  </div>
-              </div>
-
-                     </div>
+<!----php for weighttable------>
+<div class="box-div weight-track-col">
+<?php
+    $sql ="select `goal` from `weighttracker` where `clientid` = 'dilip'";
+    $result = $conn -> query($sql);
+    if($result -> num_rows > 0)
+    {
+    while($row = $result -> fetch_assoc()){?>
+        <p class="text-track">weight Track</p>
+        <div class="container-cir">
+            <div class="circlechart" 
+                data-percentage="<?php echo $row['goal'];}}?>">
+            </div>
+        </div>
+</div>
         
 
-        <!-------php for  sleeptracker---->
-        <?php
-               $sql ="select `goal` from `sleeptracker` where `clientid` = 'c001'";
-               $result = $conn -> query($sql);
-               if($result -> num_rows > 0)
-               {
-                while($row = $result -> fetch_assoc()){?>
-
-
-                 <div class="sleep-track-div">
-                      <div class="sleep-text" style="top:0px;padding-left:40%">   
-                        <p class="text-track">Sleep</p>
-                       </div>
-                   <!----- <div class="img-sleep" style="padding:-10px -10px; text-align:center; ">
-                        <img src=".\images\sleep-track.svg">                
-                        </div>------>
-                         <div class="container-cir">
-                        <div class="circlechart" 
-                     data-percentage="<?php echo $row['goal'];}}?>">
-                            
-                  </div>
-
-                   </div>
-                
-                      </div>
+<!-------php for  sleeptracker---->
+<div class="box-div sleep-track-col">
+<?php
+    $sql ="select `goal` from `sleeptracker` where `clientid` = 'Lee_Sol'";
+    $result = $conn -> query($sql);
+    if($result -> num_rows > 0)
+    {
+    while($row = $result -> fetch_assoc()){?>
+        <p class="text-track">Sleep</p>
+        <div class="container-cir">
+            <div class="circlechart" 
+                data-percentage="<?php echo $row['goal'];}}?>">
+            </div>
+        </div>
+</div>
 
 
 
-                      <!-------php for calorie---->
-
-                      <?php
-               $sql ="select `goal` from `calorietracker` where `clientid` = 'c001'";
-               $result = $conn -> query($sql);
-               if($result -> num_rows > 0)
-               {
-                while($row = $result -> fetch_assoc()){?>
-                   <div class="calorie-track-div">
-                    <div class="ct-text" style="top:0px; padding-left:25%;">
-                        <p class="text-track">Calories Track</p>
-                    </div>
-
-                    <div class="container-cir">
-    
-                    <div class="circlechart" 
-                     data-percentage="<?php echo $row['goal'];}}?>">
-                            
-                  </div>
-
-                
-              </div>
-
-                    <div class="img-cal" style="padding:5px 44px; position:absolute; text-align:center; z-index:-1;">
-                        <img src=".\images\cal_track.svg">
-
-
+<!-------php for calorie---->
+<div class="box-div calorie-track-col">
+    <?php
+    $sql ="select `goal` from `calorietracker` where `clientid` = 'dilip'";
+    $result = $conn -> query($sql);
+    if($result -> num_rows > 0)
+    {
+    while($row = $result -> fetch_assoc()){?>
+        <p class="text-track">Calories Track</p>
+            <div class="container-cir">
+                <div class="circlechart" 
+                    data-percentage="<?php echo $row['goal'];}}?>">
                 </div>
+            </div>
+</div>
+
+    <!------php for heart table---->
+ 
+    <div class="box-div heart-col">
+    <?php
+        $sql ="select `average` from `heartrate` where `clientid` = 'Eden'";
+        $result = $conn -> query($sql);
+        if($result -> num_rows > 0)
+        {
+        while($row = $result -> fetch_assoc()){?>
+            <p class="text-track">Heart Rate</p>
+            <div class="container-cir">
+                <div class="circlechart" 
+                    data-percentage="<?php echo $row['average'];}}?>">
+                </div>
+            </div>
+    </div>
+                    
                     
 </div>
 </div>
@@ -196,11 +185,11 @@ $(function(){
 $('.circlechart').circlechart();
 
 });
-    </script>
+</script>
 
 
                     
-
+</div> 
 
 </body>
-    </html>
+</html>

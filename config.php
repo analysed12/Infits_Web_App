@@ -1,4 +1,3 @@
-
 <?php
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
@@ -12,4 +11,3 @@ if($conn == false){
 }
 
 ?>
->>>>>>> 50fe664e8c8776af0f1c8b6f1b765bf4836156ac

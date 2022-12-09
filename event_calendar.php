@@ -1,6 +1,3 @@
-
-
-=======
 <?php 
 include('config.php');
   session_start(); 
@@ -293,7 +290,7 @@ include('config.php');
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-     
+            <?php echo ($_SESSION['name'])?>
                 </strong></p>
            
                 </span></p>
