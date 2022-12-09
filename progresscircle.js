@@ -17,7 +17,7 @@ function makesvg(percentage, inner_text=""){
      + '<circle class="circle-chart__circle '+classes+'"'
      + 'stroke-dasharray="'+ abs_percentage+',100"    cx="16.9" cy="16.9" r="15.9" />'
      + '<g class="circle-chart__info">'
-     + '   <text class="circle-chart__percent" x="17.9" y="15.5"></text>';
+     + '   <text class="circle-chart__percent" x="17.9" y="15.5">'+percentage_str+'%</text>';
 
   if(inner_text){
     svg += '<text class="circle-chart__subline" x="16.91549431" y="22">'+inner_text+'</text>'
