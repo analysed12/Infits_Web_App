@@ -1,4 +1,4 @@
-.blank{
+/*.blank{
     position: absolute;
     left:240;
     top:350px;
@@ -28,101 +28,54 @@
     font-weight: 600;
     font-size: 29px;
     line-height: 48px;
-    /* identical to box height */
+    /* identical to box height *//*
     
     letter-spacing: -0.114286px;
     
     color: #202224;
     
 
+}*/
+
+.box-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 270px;
+    height: 276px;
+    padding: 16px;
+    margin: 16px;
+    box-shadow: 2px 4px 16px rgba(0,0,0,.06);
+    border-radius: 10px;
+
+}
+.steps-col{
+    background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.891) 40.23%, rgba(255, 92, 0, 0.468) 95.3%);
 }
 
-.steps-div{
-    position: absolute;
-width: 278px;
-height: 276px;
-left: 78px;
-padding-top: 66px;
-
-background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.891) 40.23%, rgba(255, 92, 0, 0.468) 95.3%);
-border-radius: 14px;
-}
-
-.heart-rate-div{
-    position: absolute;
-width: 278px;
-height: 274px;
-left: 460px;
-padding-top: 66px;
-
+.heart-col{
 background: linear-gradient(206.14deg, rgba(255, 96, 145, 0.81) 0%, rgba(81, 39, 221, 0.468) 145.34%);
-border-radius: 14px;
-
 }
-.water-div{
-    position: absolute;
-width: 278px;
-height: 274px;
-left: 840px;
-top: 66px;
 
+.water-col{
 background: linear-gradient(208.27deg, rgba(39, 142, 255, 0.72) 41.57%, rgba(98, 113, 255, 0.416) 93.17%);
-border-radius: 14px;
-
 }
-.weight-track-div{
-    
-    position: absolute;
-width: 278px;
-height: 275px;
-left: 78px;
-top: 380px;
-
+.weight-track-col{
 background: linear-gradient(237.6deg, rgba(78, 205, 196, 0.468) -24.24%, rgba(85, 98, 112, 0.81) 100%);
-border-radius: 14px;
 }
-.sleep-track-div{
-    position: absolute;
-width: 279px;
-height: 275px;
-left: 460px;
-top: 380px;
-
+.sleep-track-col{
 background: linear-gradient(208.27deg, rgba(69, 24, 219, 0.81) 30.7%, rgba(123, 41, 255, 0.468) 95.3%);
-border-radius: 14px;
-
 }
-.calorie-track-div{
-    
-position: absolute;
-width: 278px;
-height: 275px;
-left: 840px;
-top: 380px;
-
+.calorie-track-col{
 background: linear-gradient(61.08deg, rgba(221, 94, 137, 0.9) 0%, rgba(247, 187, 151, 0.52) 130.74%);
-border-radius: 14px;
 }
-.image-heart{
-    text-align: center;
-    padding-top:203px;
-    padding-left:14px;
-}
-.steps-text{
-    top:0;
-    padding-left: 40%;
-    
-}
+
 .text-track{
-    font-family: 'Poppins';
-font-style: normal;
+font-family: 'Poppins';
 font-weight: 500;
 font-size: 24px;
-line-height: 36px;
-/* identical to box height */
-
-
 color: #FFFFFF;
+padding-top: 5px;
 }
 
 
