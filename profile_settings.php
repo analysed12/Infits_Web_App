@@ -182,6 +182,10 @@ if(isset($_POST['submit']) || isset($_FILES['my_image'])) {
     margin-left: 15%;
   }
 
+  .reset a{
+    color: RoyalBlue;
+  }
+
 </style>
 
 </head>
@@ -245,7 +249,7 @@ if(isset($_POST['submit']) || isset($_FILES['my_image'])) {
         <br>
 
         Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled required />
-        <p style="align: right; color: blue; font-size: 12px;">Reset Password?</p>
+        <a href="reset-pw.php" class='reset'><p style="align: right; color: blue; font-size: 12px;">Reset Password?</p></a>
         <br>
 
         Gender: <br> 
