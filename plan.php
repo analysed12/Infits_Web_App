@@ -1,5 +1,4 @@
-<?php include "config.php";
-?>
+<?php include "config.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,11 +21,8 @@
     </script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
-
 </head>
 <style>
-.btn-group {}
-
 .caret {
     display: none !important;
 }
@@ -68,7 +64,6 @@ include "navbar.php"
                     <i class="fa-solid fa-user"></i>
                 </div>
             </div>
-            <br>
             <form action="plan.php" method="post">
                 <!-- Plan name -->
                 <div style="text-align:center; !important" class="plan_name_box">

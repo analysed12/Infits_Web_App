@@ -101,7 +101,7 @@ html {
                     <i class="fa-solid fa-plus"></i>
                 </div>
                 <p class="text">You have not created any plan yet</p>
-                <br>
+
                 <a href="./plan.php"><p  class="add_btn"> Add Plan</p></a>
             </div>
 

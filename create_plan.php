@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan</title>
-    <link rel="stylesheet" href="plan.css">
+    <title>Infits | Create Plan</title>
+    <link rel="stylesheet" href="create_plan.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -24,34 +24,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
 </head>
-<style>
-.btn-group {}
-
-.caret {
-    display: none !important;
-}
-
-.btn-default {
-    text-shadow: none !important;
-}
-
-.multiselect {
-    background: #7282fb !important;
-    border-radius: 10px !important;
-    color: white !important;
-    padding: 10px !important;
-    /* margin: 10px; */
-    /* font-weight:100 !important; */
-    font-size: 15px !important;
-    width: auto !important;
-
-}
-</style>
 
 <body>
     <!-- Navbar Start -->
     <?php
-
+include "navbar.php"
 ?>
     <!-- Navbar End -->
 
@@ -69,7 +46,7 @@
                 </div>
             </div>
             <br>
-            <form action="sample_for_plan.php" method="post">
+            <form action="create_plan.php" method="post">
                 <!-- Plan name -->
                 <div style="text-align:center; !important" class="plan_name_box">
                     <input type="text" placeholder="Plan Name" class="plan_name" name="plan_name">
@@ -101,25 +78,14 @@
                                     }?>
                                     </select>
                                 </div>
-
-                                <button type="submit" style="display: inline-block; border:none;"
-                                    class="tag-item openButton openBtn" onclick="openForm()">+</button>
-                                <?php
-                             if (isset($_POST['add_to_tags_btn'])) {
-                             $planname = $_POST['tag_name']; 
-                             if ($planname != ""){
-                             $sql1 = "INSERT INTO plans  VALUES ('$planname')";
-                             $result1=mysqli_query($conn,$sql1);
-                             echo "<meta http-equiv='refresh' content='0'>";
-                             }
-                             }
-            ?>
+                                
+                                <!-- <button  style="display: inline-block; border:none;"
+                                    class="tag-item openButton openBtn" >
+                                    
+                                </button> -->
+                                <?php include 'add_plan_popup.php'; ?>
                             </div>
-                            <!-- <br> -->
-
                         </div>
-
-
                         <!-- Tags end here -->
 
                         <br>
@@ -159,11 +125,6 @@ if (isset($_POST['final_save_btn'])){
     // For tags
     $name_arr = $_POST['languages'];
     $tags = implode(" , ",$name_arr);
-    echo "$tags";
-    // $sql = "INSERT INTO `sampleplan`(`plantags`) VALUES ('$names_str')" ;
-    // $result=mysqli_query($conn,$sql);
-
-    // For the rest
         $planname = $_POST['plan_name'];
         $profile = "hello";
         $duration="hello";
@@ -181,7 +142,7 @@ if (isset($_POST['final_save_btn'])){
 
 
     <!-- Pop up for adding new tags -->
-    <div class="loginPopup">
+    <!-- <div class="loginPopup">
         <div class="formPopup" id="popupForm">
             <form action="sample_for_plan.php" method="post">
                 <input type="text" name="tag_name">
@@ -189,18 +150,21 @@ if (isset($_POST['final_save_btn'])){
                 <button type="button" class="btn cancel " onclick="closeForm()">X</button>
             </form>
         </div>
-    </div>
+    </div> -->
+    <!-- <?php
+                             if (isset($_POST['add_to_tags_btn'])) {
+                             $planname = $_POST['tag_name']; 
+                             if ($planname != ""){
+                             $sql1 = "INSERT INTO plans  VALUES ('$planname')";
+                             $result1=mysqli_query($conn,$sql1);
+                             echo "<meta http-equiv='refresh' content='0'>";
+                             }
+                             }
+            ?> -->
     <!-- Pop up ends -->
 
 </body>
 <script>
-function openForm() {
-    document.getElementById("popupForm").style.display = "block";
-}
-
-function closeForm() {
-    document.getElementById("popupForm").style.display = "none";
-}
 $(document).ready(function() {
     $('#languages').multiselect({
         nonSelectedText: 'Select Tags'

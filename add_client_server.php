@@ -1,3 +1,4 @@
+<?php include('add_client_server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,13 +91,13 @@
 
   <div class="add-client-area">
   <form method="post" action="add_client.php">
-  	<?php //include('errors.php'); ?> 
+  	<?php include('errors.php'); ?> 
     <br>
 
-        <!-- dietitianID <br> <input type="text" name="dietitianuserID" placeholder="<?php echo $_SESSION['name']; ?>" value="<?php isset($name)?$name:''; ?>" />
-        <br><br> -->
+        dietitianID <br> <input type="text" name="dietitianuserID" placeholder="<?php echo $_SESSION['name']; ?>" value="<?php isset($name)?$name:''; ?>" />
+        <br><br>
 
-        ClientName <br> <input type="text" name="clientName">
+        clientName <br> <input type="text" name="clientName">
         <br><br>
 
         Gender: <br> <input type="text" name="gender">
