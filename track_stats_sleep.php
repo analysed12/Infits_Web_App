@@ -12,18 +12,19 @@
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
-    
-
-    <script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
             $(document).ready(function(){
-            $(".calendat_but").click(function(){
-                $(".calendar_pop").animate({
-                    height: 'toggle'
-                });
-            }); 
+            $(".graph_button_left").click();
+            });
+            $(document).ready(function(){
+            $("#defaultOpen").click(function(){
+                
+            });
             });
         </script>
         <script>
+
             $(document).ready(function(){
             $(".pheader p").click(function(){
                 $(".activity_pop").animate({
@@ -31,6 +32,16 @@
                 });
             }); 
             });
+            $(document).ready(function(){
+            $(".activity_pop img").click(function(){
+                $(".activity_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+            
+            var cl=document.getElementById('defaultOpen');
+                        cl.click();
         </script>
 </head>
 <style>
@@ -258,9 +269,9 @@ height: 57.45px;
 }
 
 div[role="progressbar"] {
-    --size: 10rem;
-    --fg: #369;
-    --bg: #def;
+    --size: 218px;
+    --fg: #6844E2;
+    --bg: #D9D0F7;
     --pgPercentage: var(--value);
     animation: growProgressBar 3s 1 forwards;
     width: var(--size);
@@ -283,7 +294,63 @@ div[role="progressbar"]::before {
     content: counter(percentage) '%';
 }
 
+div[role="progressbar1"] {
+    --size:  163.21px;;
+    --fg: #6844E2;
+    --bg: #D9D0F7;
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 forwards;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    
+    /* box-shadow: -9px 9px 18px rgba(217, 217, 217, 0.2), 9px -9px 18px rgba(217, 217, 217, 0.2), -9px -9px 18px rgba(255, 255, 255, 0.9), 9px 9px 23px rgba(217, 217, 217, 0.9), inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(217, 217, 217, 0.5); */
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: calc(var(--size) / 5);
+    color: var(--fg);
+    z-index: 1;
+    margin-top: -190px;
 
+}
+
+div[role="progressbar1"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
+div[role="progressbar2"] {
+    --size: 115.28px;
+    --fg: #6844E2;
+    --bg: #D9D0F7;
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 forwards;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    /* border-width: 2px; */
+    display: grid;
+    place-items: center;
+    
+    /* box-shadow: -9px 9px 18px rgba(217, 217, 217, 0.2), 9px -9px 18px rgba(217, 217, 217, 0.2), -9px -9px 18px rgba(255, 255, 255, 0.9), 9px 9px 23px rgba(217, 217, 217, 0.9), inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(217, 217, 217, 0.5); */
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: calc(var(--size) / 5);
+    color: var(--fg);
+    z-index: 2;
+    margin-top: -140px;
+    /* margin-bottom:200px; */
+}
+
+div[role="progressbar2"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
 @media (min-width: 0px) and (max-width: 720px) {
     #inner1 {
         width: 100% !important;
@@ -325,7 +392,11 @@ div[role="progressbar"]::before {
     }
 }
 .heart_info{
-
+    padding:2px;
+ display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
@@ -426,6 +497,7 @@ line-height: 49px;
     flex-direction: row;
     align-items:;
     padding:2px;
+    margin-top:100px;
 }
 .pbottom-element{
     margin:2px;
@@ -470,6 +542,73 @@ color: #000000;
 
 opacity: 0.77;
 }
+.activity_pop{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 369px;
+    height: 545px;
+    background: #FFFEFE;
+    border-radius: 32px;
+    box-shadow: 0px 3px 4px rgba(0.16, 0.16, 0.16, 0.16);
+    margin-top: -220px;
+    padding: 2px;
+  z-index: 5;
+}
+.activity_pop img{
+    align-self: flex-end;
+    margin-right: 20px;
+}
+.pop_header span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 53px;
+/* identical to box height */
+
+
+color: #FF7B44;
+}
+.pop_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    margin: 10 px;
+    padding: 10px;
+}
+.pop_box_info{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    height: 49px;
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 20px;
+padding : 0 px !important;
+color: #000000;
+}
+/* a:hover, .active {
+    align-items: center;
+    border: 1px solid #E5F1FF;
+    background-color:  #FF8B8B !important;
+    color: #FFFFFF !important;
+    border-radius: 10px;
+} */
+.pop_box{
+
+    width: 344px;
+    height: 49px;
+    background: linear-gradient(135deg, rgba(217, 208, 247, 0.48) 0%, rgba(104, 68, 226, 0.48) 100%);
+    border-radius: 10px;
+    margin:5px;
+}
 /* css for graph tabs */
 /* Style the tab */
 .tab {
@@ -481,12 +620,28 @@ opacity: 0.77;
    border-radius: 12px;
 }
 /* Style the buttons that are used to open the tab content */
+.tab {
+  overflow: hidden;
+  /* border: 1px solid #ccc;
+  background-color: #f1f1f1; */
+  border: 1px solid #F8F5F5;
+  width: 365px;
+height: 27px;
+margin-left: 3%;
+border-top-left-radius: 1em!important;
+border-bottom-left-radius: 1em!important;
+border-top-right-radius: 1em!important;
+  border-bottom-right-radius: 1em!important;
+}
+
+
+/* Style the buttons that are used to open the tab content */
 .tab button {
     background: #FFFFFF;
     border: 1px solid #FCFBFB;
     border-radius: 0px;
-    height: 27px;
-    width: 76px;
+    width: 85.35px;
+height: 24px;
   float: left;
   border: none;
   outline: none;
@@ -501,16 +656,25 @@ line-height: 27px;
 
 color: #4D4D4D;
 }
-
+.graph_button_side{
+    border: 1px solid #F8F5F5;
+  border-top-right-radius: 1em!important;
+  border-bottom-right-radius: 1em!important;
+}
+.graph_button_left{
+  width: 106.69px !important;
+border-top-left-radius: 1em!important;
+border-bottom-left-radius: 1em!important;
+}
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #C986CF;
+  background-color: #9C74F5;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #C986CF;
-  color: white;
+  background-color: #9C74F5;
+  color: white !important;
 }
 
 /* Style the tab content */
@@ -527,6 +691,37 @@ box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 border-radius: 10px;
 width: 163px;
 height: 45px;
+}
+.graph_button{
+    width: 365px !important;
+    height: 27px !important;
+        
+    font-family: 'NATS' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    line-height: 27px !important;
+
+    color: #4D4D4D;
+}
+.graph_button_side{
+  
+    border-top-right-radius: 1em!important;
+    border-bottom-right-radius: 1em!important;
+}
+.graph_button_left{
+    width: 106.69px !important;
+  border-top-left-radius: 1em!important;
+  border-bottom-left-radius: 1em!important;
+}
+.graph_button>button{
+    width: 76px;
+    height: 27px;
+    background: #FFFFFF;
+    border: 1px solid #FCFBFB;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: 'NATS';
 }
 </style>
 
@@ -567,18 +762,19 @@ height: 45px;
 
                 </div>
                 <div id="inner12">
+                                        <div class="tab">
+                                           <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
+                                           <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
+                                           <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
+                                           <button class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                                        </div>
                 <div class="graph">
                                            
                                               
-                                         <div class="tab">
-                                           <button class="tablinks" onclick="openCity(event, 'London')">Custom Dates</button>
-                                           <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
-                                           <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
-                                           <button class="tablinks" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
-                                        </div>
+                                        
                
                                            <!-- Tab content -->
-                                <div id="London" id="defaultOpen"class="tabcontent">
+                                <div id="London" id="defaultOpen" class="tabcontent">
                                 
                                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                                 <canvas id="myChartwater"></canvas>
@@ -725,26 +921,104 @@ height: 45px;
             </div>
             <div class="col-sm-4">
                 <div class="cpb">
-                <div class="pheader">
-						<h4>Daily Progress</h4>
-						<p>View Activity</p>
-					</div>
-                    <div class="concentric">
-                           
+                    <div class="pheader">
+                            <h4>Daily Progress</h4>
+                            <p>View Activity</p>
+                        </div>
+                        <div class="concentric">
+                            
+                        </div>
+                        <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                        <div class="light_sleep" role="progressbar1" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                        <div class="deep_sleep" role="progressbar2" style="--value:<?php $value = 50; echo $value; ?>"></div>
+                    <div class="pbottom">
+                        <div class="pbottom-element">
+                            <p>Light Sleep</p>
+                            <span>16%</span> 
+                        </div>
+                        <div class="pbottom-element">
+                            <p>Awake Period</p>
+                            <span>64%</span> 
+                        </div>
+                        <div class="pbottom-element">
+                            <p>Deep Sleep</p>
+                            <span>28%</span> 
+                        </div>
                     </div>
-                <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
-                <div class="pbottom">
-                    <div class="pbottom-element">
-                        <p>Light Sleep</p>
-                        <span>16%</span> 
+                    <div class="activity_pop">
+                
+                <?php
+                   
+                ?>
+                <img src="images/exit.svg" alt="">
+                    <div class="pop_header">
+                        <span>Activity</span>
                     </div>
-                    <div class="pbottom-element">
-                        <p>Awake Period</p>
-                        <span>64%</span> 
+                    <div class="pop_box">
+                       <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>m</p>
+                        </div>
                     </div>
-                    <div class="pbottom-element">
-                        <p>Deep Sleep</p>
-                        <span>28%</span> 
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p> m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p> m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p>m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <pm</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
                     </div>
                 </div>
                 </div>

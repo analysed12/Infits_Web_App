@@ -12,16 +12,19 @@
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
             $(document).ready(function(){
-            $(".calendat_but").click(function(){
-                $(".calendar_pop").animate({
-                    height: 'toggle'
-                });
-            }); 
+            $(".graph_button_left").click();
+            });
+            $(document).ready(function(){
+            $("#defaultOpen").click(function(){
+                
+            });
             });
         </script>
         <script>
+
             $(document).ready(function(){
             $(".pheader p").click(function(){
                 $(".activity_pop").animate({
@@ -29,6 +32,16 @@
                 });
             }); 
             });
+            $(document).ready(function(){
+            $(".activity_pop img").click(function(){
+                $(".activity_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+            
+            var cl=document.getElementById('defaultOpen');
+                        cl.click();
         </script>
 </head>
 <style>
@@ -155,7 +168,8 @@ height: 57.45px;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 20px;
-    background: linear-gradient(262.45deg, #FA8686 9.26%, #F1A680 93.19%);
+    background: linear-gradient(264.28deg, #D483C6 1.62%, #F37FAF 93.12%);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
 }
@@ -497,7 +511,73 @@ height: 34px;
 margin-left: 20px;
 color: #9C74F5;
 }
+.activity_pop{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 369px;
+    height: 545px;
+    background: #FFFEFE;
+    border-radius: 32px;
+    box-shadow: 0px 3px 4px rgba(0.16, 0.16, 0.16, 0.16);
+    margin-top: -250px;
+    padding: 2px;
 
+}
+.activity_pop img{
+    align-self: flex-end;
+    margin-right: 20px;
+}
+.pop_header span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 53px;
+/* identical to box height */
+
+
+color: #FF7B44;
+}
+.pop_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    margin: 10 px;
+    padding: 10px;
+}
+.pop_box_info{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    height: 49px;
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 20px;
+padding : 0 px !important;
+color: #000000;
+}
+/* a:hover, .active {
+    align-items: center;
+    border: 1px solid #E5F1FF;
+    background-color:  #FF8B8B !important;
+    color: #FFFFFF !important;
+    border-radius: 10px;
+} */
+.pop_box{
+
+    width: 344px;
+    height: 49px;
+    background: linear-gradient(135deg, rgba(255, 232, 242, 0.48) 0%, rgba(201, 134, 207, 0.48) 100%);
+    border-radius: 10px;
+    margin:5px;
+}
 /* css for graph tabs */
 /* Style the tab */
 .tab {
@@ -509,12 +589,28 @@ color: #9C74F5;
    border-radius: 12px;
 }
 /* Style the buttons that are used to open the tab content */
+.tab {
+  overflow: hidden;
+  /* border: 1px solid #ccc;
+  background-color: #f1f1f1; */
+  border: 1px solid #F8F5F5;
+  width: 365px;
+height: 27px;
+margin-left: 3%;
+border-top-left-radius: 1em!important;
+border-bottom-left-radius: 1em!important;
+border-top-right-radius: 1em!important;
+  border-bottom-right-radius: 1em!important;
+}
+
+
+/* Style the buttons that are used to open the tab content */
 .tab button {
     background: #FFFFFF;
     border: 1px solid #FCFBFB;
     border-radius: 0px;
-    height: 27px;
-    width: 76px;
+    width: 85.35px;
+height: 24px;
   float: left;
   border: none;
   outline: none;
@@ -529,7 +625,16 @@ line-height: 27px;
 
 color: #4D4D4D;
 }
-
+.graph_button_side{
+    border: 1px solid #F8F5F5;
+  border-top-right-radius: 1em!important;
+  border-bottom-right-radius: 1em!important;
+}
+.graph_button_left{
+  width: 106.69px !important;
+border-top-left-radius: 1em!important;
+border-bottom-left-radius: 1em!important;
+}
 /* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #C986CF;
@@ -538,7 +643,7 @@ color: #4D4D4D;
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #C986CF;
-  color: white;
+  color: white !important;
 }
 
 /* Style the tab content */
@@ -556,6 +661,38 @@ border-radius: 10px;
 width: 163px;
 height: 45px;
 }
+.graph_button{
+    width: 365px !important;
+    height: 27px !important;
+        
+    font-family: 'NATS' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    line-height: 27px !important;
+
+    color: #4D4D4D;
+}
+.graph_button_side{
+  
+    border-top-right-radius: 1em!important;
+    border-bottom-right-radius: 1em!important;
+}
+.graph_button_left{
+    width: 106.69px !important;
+  border-top-left-radius: 1em!important;
+  border-bottom-left-radius: 1em!important;
+}
+.graph_button>button{
+    width: 76px;
+    height: 27px;
+    background: #FFFFFF;
+    border: 1px solid #FCFBFB;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: 'NATS';
+}
+
 </style>
 
 <body>
@@ -597,17 +734,19 @@ height: 45px;
 
                 </div>
                 <div id="inner12">
-                <div class="graph">
-                                           
-                                           <div class="tab">
-                                           <button class="tablinks" onclick="openCity(event, 'London')">Custom Dates</button>
+
+                                        <div class="tab">
+                                           <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
                                            <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
                                            <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
-                                           <button class="tablinks" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
-                                           </div>
+                                           <button class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                                        </div>
+                <div class="graph">
+                                           
+                                           
                
                                            <!-- Tab content -->
-                                <div id="London" id="defaultOpen"class="tabcontent">
+                                <div id="London" id='defaultOpen' class="tabcontent">
                                 
                                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                                 <canvas id="myChartwater"></canvas>
@@ -627,6 +766,9 @@ height: 45px;
                                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                                 <canvas id="myChartWeekly"></canvas>
                                 </div>
+                                
+                                </script>
+                               
                                        <script>
                                             function openCity(evt, cityName) {
                                                 /* Declare all variables */
@@ -637,7 +779,7 @@ height: 45px;
                                                 for (i = 0; i < tabcontent.length; i++) {
                                                     tabcontent[i].style.display = "none";
                                                 }
-                    
+                                                
                                                 /* // Get all elements with class="tablinks" and remove the class "active" */
                                                 tablinks = document.getElementsByClassName("tablinks");
                                                 for (i = 0; i < tablinks.length; i++) {
@@ -646,11 +788,13 @@ height: 45px;
                     
                                                 /* // Show the current tab, and add an "active" class to the button that opened the tab */
                                                 document.getElementById(cityName).style.display = "block";
+                                                
                                                 evt.currentTarget.className += " active";
                                             }
                     
                                             /* // Get the element with id="defaultOpen" and click on it */
                                             document.getElementById("defaultOpen").click();
+                                            /* document.getElementById("defaultOpen").onclick(); */
                                        </script> 
                                </div>
                 </div>
@@ -844,6 +988,81 @@ height: 45px;
                         <p><?php echo $row["minimum"];?> BPM</p>
                     </div>
                 </div>
+                <div class="activity_pop">
+                
+                <?php
+                   
+                ?>
+                <img src="images/exit.svg" alt="">
+                    <div class="pop_header">
+                        <span>Activity</span>
+                    </div>
+                    <div class="pop_box">
+                       <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p> m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p> m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p>m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <pm</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
+                    </div>
+                    <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
+                    </div>
             </div>
         </div>
            
@@ -861,8 +1080,8 @@ var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                                     datasets: [{
                                         fill: false,
                                         lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
+                                        backgroundColor: "#C986CF",
+                                        borderColor: "#C986CF",
                                         data: yValues
                                     }]
                                 },
@@ -887,8 +1106,8 @@ var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                                     datasets: [{
                                         fill: false,
                                         lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
+                                        backgroundColor: "#C986CF",
+                                        borderColor: "#C986CF",
                                         data: yValues
                                     }]
                                 },
@@ -914,8 +1133,8 @@ var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                                     datasets: [{
                                         fill: false,
                                         lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
+                                        backgroundColor: "#C986CF",
+                                        borderColor: "#C986CF",
                                         data: yValues
                                     }]
                                 },
@@ -940,8 +1159,8 @@ var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                                     datasets: [{
                                         fill: false,
                                         lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
+                                        backgroundColor: "#C986CF",
+                                        borderColor: "#C986CF",
                                         data: yValues
                                     }]
                                 },
@@ -959,7 +1178,7 @@ var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                                     }
                                 }
                             });
-
+                           
 </script>
 
 </html>
