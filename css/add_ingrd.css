@@ -1,0 +1,143 @@
+  .container{
+                width:1440px;
+                height: 1024px;
+            }
+             
+             
+             .buttons
+ {
+  box-sizing: border-box;
+
+position: absolute;
+width: 459px;
+height: 45px;
+left: 557px;
+top: 380px;
+
+background: #E7E7E7;
+border: 1px solid #E7E7E7;
+border-radius: 44px;
+text-align: center;
+
+ }
+ .btn-pp{
+    
+    margin-top:7px;
+    text-align: center;
+    border-radius: 22px;
+    height: 32px;
+    margin-left:25px;
+
+  }
+  .aa-btn{
+    text-decoration:none;
+    color:black;
+    font-weight: 400;
+    font-size: 17px;
+  }
+
+ 
+
+             .popup-ingredients{
+                box-sizing: border-box;
+                 position: relative;
+                width: 409px;
+                height: 212px;
+                top: 450px;
+                left: 50%;
+                background: #FFFFFF;
+                border: 1px solid #E4E4E4;
+                box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.09);
+                border-radius:18px;
+             }
+             .box{
+                position: absolute;
+                  margin-top:40px;
+                  height: 330px;
+                  width: 310px;
+                  padding-left:61px;
+                  padding-right:17px;
+             }
+             .sign{
+          
+                width: 24.22px;
+                height: 74px;
+                font-weight: 400;
+                font-size: 46px;
+                line-height: 150%;
+                display: flex;
+                background: linear-gradient(180deg, #7963FB 0%, #BD59EB 100%);
+             }
+
+             .input-text{
+                box-sizing: border-box;
+                
+                width: 310px;
+                height: 33px;
+                
+                border: 1px solid #D5D5D5;
+                border-radius:9px;
+                left: 61px;
+             }
+
+
+             
+
+.img-upload{
+    padding-left: 597px;
+    position: absolute;
+    padding-top: 23px;
+    border-radius: 14px;
+    height: 230px;
+    width: 350px;
+}
+.btn-symbol-head{
+    
+    justify-content: space-evenly;
+    position: absolute;
+    left: 580px;
+    top: 457px;
+    height:55px;
+    width: 200px;
+}
+                
+img{
+     height: 225px;
+     width:  280;
+ }
+ #add-ind{
+    color: #929292;
+    display: flex;
+    font-size: 19px;
+    font-weight: 400;
+    height: 33px;
+    width: 125px;
+    margin-left: 60px;
+    margin-top:  15px;
+    line-height: 150%;
+ }
+ #header{
+    position: absolute;
+width: 141px;
+height: 18px;
+
+font-family: 'NATS';
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 75%;
+/* identical to box height, or 18px */
+
+display: flex;
+align-items: center;
+
+color: #000000;
+ }
+   .header{
+    height: 15px;
+    position: absolute;
+    margin-top: 5px;
+    justify-content: space-evenly;
+    margin-left:40px;
+
+   }
