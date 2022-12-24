@@ -76,9 +76,33 @@ if(isset($_POST['sendbtn']))
 </div>
 
 </div>
+ 
+
+
+
 
 <!----------Pending request------->
 <div class = "pending-request">
+
+<table>
+    <thead>
+         <tr>
+            <th></th>
+            <th>  </th>
+            <th>  </th>
+            <th>  </th>
+            <th colspan ="4"> </th>
+        </tr>
+        </thead>
+        <tbody>
+               <tr>
+                <th><?php $cnt ?></th>
+                <th></th>
+                <th></th>
+                <th colspan = "4"> </th>
+        </tr>
+        </tbody>
+        </table>
 
 </div>
 </div>

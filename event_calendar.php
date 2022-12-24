@@ -1,6 +1,4 @@
-
-
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" dir="ltr">
 
 <head>
@@ -223,6 +221,7 @@
         font-size: 36px;
         margin-left: 50px;
     }
+
 </style>
 
 
@@ -276,7 +275,7 @@
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-     
+        
                 </strong></p>
            
                 </span></p>
@@ -284,9 +283,11 @@
         </div>
         <div class="topnav-icons">
             <img src="images/pp.png" style="height: 24px; width: 24; display:none;" id="addusermale">
+
             <img src="images/vec_search.png" style="height: 20px; width: 20px;">
             <img src="images/vec_notification.png" style="height: 20px; width: 20px;">
-            <img src="images/pp.png" style="height: 33px; width: 33px; border-radius: 100%;">
+
+         
         </div>
 
     </div>

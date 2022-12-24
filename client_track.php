@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 <?php include('connection.php'); ?>
 //<?php 
   //$id= $_SESSION['client_id'];
   //$GLOBAS['id']= 'coo1';
 //?>
+=======
+<?php //include('config.php'); ?>
+<?php 
+  //$id= $_SESSION['client_id'];
+  $GLOBAS['id']= 'coo1';
+?>
+>>>>>>> 83acd52beed71a2351d96ec88dbcbcec3b715cd3
 
 <html>
     <title> Client Profile</title>
@@ -11,6 +19,7 @@
         <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="jQuery-plugin-progressbar.js"></script>
         <link rel="stylesheet" href="progresscircle.css">
+<<<<<<< HEAD
 
         <style>
 #content {
@@ -51,8 +60,41 @@
     margin-top: 60px;
 
 }
+=======
+>>>>>>> 83acd52beed71a2351d96ec88dbcbcec3b715cd3
 
+        <style>
+#content {
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    font-family: 'Poppins';
+    font-style: normal;
+    padding: 10px;
+    margin: 0px;
+}
+.client-events{
+  display: flex;
+  flex-direction: row;
+}
+.client-container {
+  padding: 32px;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.client-card {
+  padding: 16px;
+  margin: 16px;
+  border: 1px solid; 
+  box-shadow: 2px 4px 16px rgba(0,0,0,.06);
+  border-radius: 10px;
+  height: 200px;
+  width: 230px;
+}
 
+<<<<<<< HEAD
 .circular-progress-cal {
   position: relative;
   height: 150px;
@@ -253,6 +295,24 @@
       <?php include("calendar.php");?>
       <br> 
       
+=======
+            
+        </style>
+    </head>
+        
+<body>
+                
+
+    <!--------------sidenav------------------------->
+    <?php include 'event_calendar.php'; ?>
+
+<div id="content">
+    <!------------------calendar----------------->
+ 
+      <?php include("calendar.php");?>
+      <br> <br>
+      <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Client Profile</h1>
+>>>>>>> 83acd52beed71a2351d96ec88dbcbcec3b715cd3
             
 <div class="client-events">
     <div class="client-container"> 
@@ -260,6 +320,7 @@
     <!-----php for steps table---->
     <div class="box-div steps-col">
     <?php
+<<<<<<< HEAD
         $sql ="select `goal`,`steps` from `steptracker` where `clientid` = 'c002' AND 
         cast(`dateandtime` as Date) = '2022-01-01'";
         $result = $conn -> query($sql);
@@ -309,11 +370,27 @@ let progressSteps = setInterval(() => {
 
 
 
+=======
+        $sql ="select `goal` from `steptracker` where `clientid` = 'test'";
+        $result = $conn -> query($sql);
+        if($result -> num_rows > 0)
+        {
+            while($row = $result -> fetch_assoc()){?>
+                <p class="text-track"> Steps </p>
+                <div class ="container-cir">
+                    <div class="circlechart" 
+                        data-percentage= "<?php echo $row['goal'];}}?>">
+                    </div>
+                </div>
+            
+    </div>
+>>>>>>> 83acd52beed71a2351d96ec88dbcbcec3b715cd3
             
 
     <!------php for water table---->
     <div class="box-div water-col">
     <?php
+<<<<<<< HEAD
         $sql ="select `goal`,`drinkConsumed` from `watertracker` where `clientid` = 'c002' AND 
         cast(date as Date) = '2022-01-01'";
         $result = $conn -> query($sql);
@@ -414,11 +491,43 @@ let progress = setInterval(() => {
 
 </script>
 
+=======
+        $sql ="select `goal` from `watertracker` where `clientid` = 'Eden'";
+        $result = $conn -> query($sql);
+        if($result -> num_rows > 0)
+        {
+        while($row = $result -> fetch_assoc()){?>
+            <p class="text-track">Water</p>
+            <div class="container-cir">
+                <div class="circlechart" 
+                    data-percentage="<?php echo $row['goal'];}}?>">
+                </div>
+            </div>
+    </div>
+
+
+<!----php for weighttable------>
+<div class="box-div weight-track-col">
+<?php
+    $sql ="select `goal` from `weighttracker` where `clientid` = 'dilip'";
+    $result = $conn -> query($sql);
+    if($result -> num_rows > 0)
+    {
+    while($row = $result -> fetch_assoc()){?>
+        <p class="text-track">weight Track</p>
+        <div class="container-cir">
+            <div class="circlechart" 
+                data-percentage="<?php echo $row['goal'];}}?>">
+            </div>
+        </div>
+</div>
+>>>>>>> 83acd52beed71a2351d96ec88dbcbcec3b715cd3
         
 
 <!-------php for  sleeptracker---->
 <div class="box-div sleep-track-col">
 <?php
+<<<<<<< HEAD
     $sql ="select `goal`,`hrsSlept`, `minsSlept` from `sleeptracker` where `clientid` = 'c002' AND 
     cast(waketime as Date) = '2022-01-01'";
     $result = $conn -> query($sql);
@@ -442,6 +551,57 @@ let progress = setInterval(() => {
         </div> 
 
 
+=======
+    $sql ="select `goal` from `sleeptracker` where `clientid` = 'Lee_Sol'";
+    $result = $conn -> query($sql);
+    if($result -> num_rows > 0)
+    {
+    while($row = $result -> fetch_assoc()){?>
+        <p class="text-track">Sleep</p>
+        <div class="container-cir">
+            <div class="circlechart" 
+                data-percentage="<?php echo $row['goal'];}}?>">
+            </div>
+        </div>
+</div>
+
+
+
+<!-------php for calorie---->
+<div class="box-div calorie-track-col">
+    <?php
+    $sql ="select `goal` from `calorietracker` where `clientid` = 'dilip'";
+    $result = $conn -> query($sql);
+    if($result -> num_rows > 0)
+    {
+    while($row = $result -> fetch_assoc()){?>
+        <p class="text-track">Calories Track</p>
+            <div class="container-cir">
+                <div class="circlechart" 
+                    data-percentage="<?php echo $row['goal'];}}?>">
+                </div>
+            </div>
+</div>
+
+    <!------php for heart table---->
+ 
+    <div class="box-div heart-col">
+    <?php
+        $sql ="select `average` from `heartrate` where `clientid` = 'Eden'";
+        $result = $conn -> query($sql);
+        if($result -> num_rows > 0)
+        {
+        while($row = $result -> fetch_assoc()){?>
+            <p class="text-track">Heart Rate</p>
+            <div class="container-cir">
+                <div class="circlechart" 
+                    data-percentage="<?php echo $row['average'];}}?>">
+                </div>
+            </div>
+    </div>
+                    
+                    
+>>>>>>> 83acd52beed71a2351d96ec88dbcbcec3b715cd3
 </div>
 <script>
     let progressBarSleep = document.querySelector(".circular-progress-sleep");
@@ -604,7 +764,10 @@ $('.circlechart').circlechart();
 
                     
 </div> 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 83acd52beed71a2351d96ec88dbcbcec3b715cd3
 
 </body>
 </html>

@@ -1,74 +1,3 @@
-<?php include('connection.php');?>
-<?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require 'C:\xampp\htdocs\analysed\infits\PHPMailer\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\htdocs\analysed\infits\PHPMailer\PHPMailer-master\src\SMTP.php';
-require 'C:\xampp\htdocs\analysed\infits\PHPMailer\PHPMailer-master\src\Exception.php';
-
-if(isset($_POST['get_otp']))
-{
-$otp = rand(100000,999999);
-$_SESSION['otp'] = $otp;
-//echo $otp;
-
-$mail = new PHPMailer();
-$mail->CharSet = "utf-8";
-
-$mail->isSMTP();              
-$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-$mail->Username   = 'user@gmail.com';                  //SMTP user name
-$mail->Password  ='password';                                //Password
-$mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-$mail->Port       = 587;              //Default port 587
-$mail->SMTPDebug = 0;
-//Receipents
-
-$mail->setFrom('user@gmail.com','password');
- $mail->addAddress($_POST['email']);     //Add a recipient
-
-  //Attachments
-// $mail->addAttachment('/file');         //Add attachments
-
-   //Set email format to HTML
-   $mail->Subject = 'Verify your code';
-   //$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-     $mail->Body=(" Your otp number.".$otp);
-    //$mail->AltBody = 'This is the body in plain text for
-    $mail->isHTML(true);  
-
-     if(!$mail -> send())
-     {
-     	
-       echo("Mail not send, try again");
-        
-          
-  
-                //$mail->setFrom('email account', 'OTP Verification');
-    } 
-
-    else {
-    
-         echo("Mail send Please check your email for otp");
-        
- }
-    }
-   ?>
-   
-   
-
-   
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -395,44 +324,6 @@ margin: 10px;
     width:10px;
     height:10px;
 }
-.blue_line{
-    width: 86px;
-    height: 5px;
-    background: #4B99FB;
-     border-radius: 1em;
-}
-.title{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin-top: 40px;
-}
-.get_otp{
-    display: flex;
-    justify-content: space-between;
-    align-items: space-between;
-    flex-direction: row;
-    margin-top: 10px;
-}
-.get_otp_btn{
-    background: #4B99FB;
-border-radius: 15px;
-border:none;
-width: 120px;
-height: 40px;
-margin-right: 40px;
-
-font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 15px;
-/* line-height: 74px; */
-/* identical to box height */
-
-
-color: #FFFFFF;
-}
 </style>
 <body>
     <div class="top_bar">
@@ -455,24 +346,34 @@ color: #FFFFFF;
                 <div class="sform">
                     <div class="header_sigin">
                         <img src="images/bg_patch_small.svg" alt="">
-                        <span>Forgot Password</span>
+                        <span>Sign In</span>
 
                     </div>
-                    <form action="forgot_password.php" method="post">
-                    <div class="title">
-                        <div class="blue_line"></div>
-                        <span>Enter email to get OTP</span>
+                    <div class="gf_btns">
+                        <button class="google">
+                            <img src="images/google.svg" alt="">
+                            <span>Google</span>
+                        </button>
+                        <button class="facebook">
+                            <img src="images/facebook.svg" alt="">
+                            <span>Facebook</span>
+                        </button>
                     </div>
-                    <div class="form_inputs">    
-                        <input id="email"  name ="email" type="text" placeholder="Email">
+                    <div class="or">
+                        <span>OR</span>
                     </div>
-                    <div class="get_otp">
-                        <button class="get_otp_btn" name="get_otp" id="get_otp">Get OTP</button>
-                        <span><-Back to Sign In</span>
+                    <div class="form_inputs">
+                        
+                        <!-- <div class="input_container email">
+                            <input type="text" class="input" placeholder="Email" value>
+                            <img src="images/sletter.svg" class="input_img">
+                        </div> -->
+                        <input id="email" type="text" placeholder="Email">
+                        <input id="password" type="text" placeholder="Password">
+
                     </div>
                 </div>
             </div>
-</form>
             <div class="col-sm-6">
                 <div class="mobile">
                 <img src="images/mobile.svg" alt="">
@@ -538,5 +439,4 @@ color: #FFFFFF;
         </div>
         </div>
 </body>
-
 </html>

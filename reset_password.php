@@ -1,70 +1,32 @@
-<?php include('connection.php');?>
-<?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+<?php include('connection.php');
+session_start(); ?>
 
-require 'C:\xampp\htdocs\analysed\infits\PHPMailer\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\htdocs\analysed\infits\PHPMailer\PHPMailer-master\src\SMTP.php';
-require 'C:\xampp\htdocs\analysed\infits\PHPMailer\PHPMailer-master\src\Exception.php';
-
-if(isset($_POST['get_otp']))
+//comapring otp  values
+<?php 
+$opt1 = $_SESSION['otp'];
+if(isset($_POST['otp_input']))
 {
-$otp = rand(100000,999999);
-$_SESSION['otp'] = $otp;
-//echo $otp;
-
-$mail = new PHPMailer();
-$mail->CharSet = "utf-8";
-
-$mail->isSMTP();              
-$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-$mail->Username   = 'user@gmail.com';                  //SMTP user name
-$mail->Password  ='password';                                //Password
-$mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-$mail->Port       = 587;              //Default port 587
-$mail->SMTPDebug = 0;
-//Receipents
-
-$mail->setFrom('user@gmail.com','password');
- $mail->addAddress($_POST['email']);     //Add a recipient
-
-  //Attachments
-// $mail->addAttachment('/file');         //Add attachments
-
-   //Set email format to HTML
-   $mail->Subject = 'Verify your code';
-   //$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-     $mail->Body=(" Your otp number.".$otp);
-    //$mail->AltBody = 'This is the body in plain text for
-    $mail->isHTML(true);  
-
-     if(!$mail -> send())
-     {
-     	
-       echo("Mail not send, try again");
-        
-          
-  
-                //$mail->setFrom('email account', 'OTP Verification');
-    } 
-
-    else {
-    
-         echo("Mail send Please check your email for otp");
-        
- }
+    $otp_var = $_POST['otp_input'];
+    if($otp_var == $otp1  )
+    {
+           location('');
     }
-   ?>
-   
-   
+    else{
+        echo "Some problem, click on resend password";
+    }
+}
 
-   
+ ?>
 
+ // Resend out
+ <?php
 
+ if(isset($_POST['resend_otp']))
+ {
+    header("Location:forgot_password.php");
+ }
 
-
+ ?>
 
 
 
@@ -360,7 +322,7 @@ margin-left: 10px;
     flex-direction: column;
     padding: 50px;  
 }
-#email{
+#otp{
     background: #F9F9FF;
 border: 1px solid #F9F9FF;
 border-radius: 15px;
@@ -455,20 +417,19 @@ color: #FFFFFF;
                 <div class="sform">
                     <div class="header_sigin">
                         <img src="images/bg_patch_small.svg" alt="">
-                        <span>Forgot Password</span>
-
+                        <span>Reset Password</span>
+                  <form action="reset_password.php" method="post">
                     </div>
-                    <form action="forgot_password.php" method="post">
                     <div class="title">
                         <div class="blue_line"></div>
-                        <span>Enter email to get OTP</span>
+                        <span>An OTP has been sent to your email</span>
                     </div>
                     <div class="form_inputs">    
-                        <input id="email"  name ="email" type="text" placeholder="Email">
+                        <input id="otp" name="otp_input" type="text" placeholder="otp">
                     </div>
                     <div class="get_otp">
-                        <button class="get_otp_btn" name="get_otp" id="get_otp">Get OTP</button>
-                        <span><-Back to Sign In</span>
+                        <button class="get_otp_btn" name="otp_btn" id="otp_btn">Confirm</button>
+                        <span name="resend_otp" id="resend_otp">Resend OTP</span>
                     </div>
                 </div>
             </div>
@@ -538,5 +499,4 @@ color: #FFFFFF;
         </div>
         </div>
 </body>
-
 </html>
