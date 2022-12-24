@@ -1,3 +1,36 @@
+<?php include('connection.php');
+session_start(); ?>
+
+//comapring otp  values
+<?php 
+$opt1 = $_SESSION['otp'];
+if(isset($_POST['otp_input']))
+{
+    $otp_var = $_POST['otp_input'];
+    if($otp_var == $otp1  )
+    {
+           location('');
+    }
+    else{
+        echo "Some problem, click on resend password";
+    }
+}
+
+ ?>
+
+ // Resend out
+ <?php
+
+ if(isset($_POST['resend_otp']))
+ {
+    header("Location:forgot_password.php");
+ }
+
+ ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -385,21 +418,22 @@ color: #FFFFFF;
                     <div class="header_sigin">
                         <img src="images/bg_patch_small.svg" alt="">
                         <span>Reset Password</span>
-
+                  <form action="reset_password.php" method="post">
                     </div>
                     <div class="title">
                         <div class="blue_line"></div>
                         <span>An OTP has been sent to your email</span>
                     </div>
                     <div class="form_inputs">    
-                        <input id="otp" type="text" placeholder="otp">
+                        <input id="otp" name="otp_input" type="text" placeholder="otp">
                     </div>
                     <div class="get_otp">
-                        <button class="get_otp_btn">Confirm</button>
-                        <span>Resend OTP</span>
+                        <button class="get_otp_btn" name="otp_btn" id="otp_btn">Confirm</button>
+                        <span name="resend_otp" id="resend_otp">Resend OTP</span>
                     </div>
                 </div>
             </div>
+</form>
             <div class="col-sm-6">
                 <div class="mobile">
                 <img src="images/mobile.svg" alt="">

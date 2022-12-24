@@ -49,6 +49,7 @@ text-align: center;
         height: 498px;
         padding-top:70px;
         margin-left:330px;
+    }
 
 
 
