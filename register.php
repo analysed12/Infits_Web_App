@@ -11,7 +11,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <style>
+<style>
         body{
     font-family: 'Poppins' !important;
   }
@@ -47,7 +47,7 @@
    font-size: 16px;
    font-weight: 400;
   }
-.btn{
+  .btn{
     background-color: #7282FB;
     border: none;
     color: white;
@@ -68,36 +68,36 @@
     width: 50%;
   }
   /* Shared */
-.loginBtn {
-    border: 1px solid #EBEBEB;
-    padding: 10px;
-    border-radius: 5px;
-    min-width: auto;
-    width: 150px;
-    background-color: #FFFFFF;
-}
-.center-flex{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    }
-
-.signup{
+  .loginBtn {
       border: 1px solid #EBEBEB;
       padding: 10px;
       border-radius: 5px;
       min-width: auto;
       width: 150px;
       background-color: #FFFFFF;
-      text-decoration: none;
-      color: black;
   }
   .center-flex{
-display: flex;
-align-items: center;
-justify-content: center;
-}
-        </style>
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      }
+
+  .signup{
+        border: 1px solid #EBEBEB;
+        padding: 10px;
+        border-radius: 5px;
+        min-width: auto;
+        width: 150px;
+        background-color: #FFFFFF;
+        text-decoration: none;
+        color: black;
+    }
+    .center-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+</style>
 
 </head>
 <body>
@@ -110,7 +110,7 @@ justify-content: center;
         <br>
       </center>
 	
-  <form method="post" action="register.php">
+  <form method="POST" action="register.php">
   	<?php include('errors.php'); ?>
     <div class="login-area">
     <input type="text" name="dietitianuserID" placeholder="Username">
@@ -121,7 +121,7 @@ justify-content: center;
         <br>
         <input type="text" name="mobile" placeholder="Your Phone Number">
         <br>
-  	  <input type="password" name="password_1" placeholder="Password">
+  	  <input type="password" name="password" placeholder="Password">
         <br>
   	  <input type="password" name="password_2" placeholder="Confirm Password">
         <br>

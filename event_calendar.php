@@ -1,18 +1,4 @@
-<?php 
-  session_start(); 
-
-  if (!isset($_SESSION['name'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
-  }
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['name']);
-  	header("location: login.php");
-  }
-?>
-
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" dir="ltr">
 
 <head>
@@ -235,14 +221,10 @@
         font-size: 36px;
         margin-left: 50px;
     }
+
 </style>
 
-<script>
-    <?php  if (isset($_SESSION['name'])) : ?>
-    	<p>Welcome <strong><?php echo $_SESSION['name']; ?></strong></p>
-    	<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
-    <?php endif ?>
-</script>
+
 
 <body>
 
@@ -286,24 +268,26 @@
         <div class="menu-bottom">
             <a class="sidenavlink"><img src="images/vec_gethelp.png" class="nav-icon">Get Help</a>
             <a class="sidenavlink"><img src="images/vec_settings.png" class="nav-icon">Settings</a>
-            <a class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
+            <a href="logout.php" class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
         </div>
     </div>
 
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-            <?php  if (isset($_SESSION['name'])) : ?>
-                <?php echo $_SESSION['name']; ?></strong></p>
-            <?php endif ?>
+        
+                </strong></p>
+           
                 </span></p>
             <p id="topnav-content-2">Your performance summary this week</p>
         </div>
         <div class="topnav-icons">
             <img src="images/pp.png" style="height: 24px; width: 24; display:none;" id="addusermale">
+
             <img src="images/vec_search.png" style="height: 20px; width: 20px;">
             <img src="images/vec_notification.png" style="height: 20px; width: 20px;">
-            <img src="images/pp.png" style="height: 33px; width: 33px; border-radius: 100%;">
+
+         
         </div>
 
     </div>

@@ -1,0 +1,109 @@
+.container{
+    position: absolute;
+width: 1440px;
+height: 1025px;
+left: 0px;
+top: 0px;
+
+background: #f7f2f2;
+opacity: 0.92;
+
+}
+.wrapper{
+    box-sizing: border-box;
+
+position: absolute;
+width: 485px;
+height: 792px;
+left: 478px;
+top: 170px;
+
+background: #19214F;
+border: 1px solid #E7E7E7;
+border-radius: 20px;
+}
+.image{
+    position: absolute;
+width: 256px;
+height: 216px;
+left: 132px;
+top: 48px;
+}
+.plan-title{
+    position: absolute;
+width: 121px;
+height: 63px;
+left: 182px;
+top: 283px;
+text-align: center;
+}
+#plan-p-tt{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 59px;
+color: white;
+
+}
+.para-space{
+    position: absolute;
+width: 277px;
+height: 83px;
+left: 104px;
+top: 361px;
+text-align: center;
+
+}
+.text-para{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 300;
+font-size: 24px;
+line-height: 102.3%;
+color: white;
+opacity: 0.6;
+}
+#referral-title{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 300;
+font-size: 25px;
+line-height: 111.34%;
+/* or 33px */
+
+
+color: #FFFFFF;
+}
+.referral-space{
+    position: absolute;
+width: 143px;
+height: 33px;
+left: 171px;
+top: 480px;
+text-align: center;
+}
+#referral_code_input{
+    box-sizing: border-box;
+
+position: absolute;
+width: 224px;
+height: 32px;
+left: 131px;
+top: 550px;
+
+background: #FFFFFF;
+border: 1px solid #F8EEEE;
+border-radius: 6px;
+}
+#done{
+    position: absolute;
+width: 250px;
+height: 53px;
+left: 118px;
+top: 632px;
+
+background: #7282FB;
+border-radius: 10px;
+color: white;
+}
