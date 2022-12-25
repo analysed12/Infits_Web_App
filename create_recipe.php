@@ -219,3 +219,5 @@ function openCity(evt, cityName) {
   evt.currentTarget.className += " activee";
 }
 </script>
+</body>
+</html>
