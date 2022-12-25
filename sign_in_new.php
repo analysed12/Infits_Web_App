@@ -324,6 +324,57 @@ margin: 10px;
     width:10px;
     height:10px;
 }
+.ip_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    
+}
+.ip_box img{
+    z-index: 2;
+    margin-right: -45px;
+}
+.sign_up{
+    background: #4B99FB;
+border-radius: 15px;
+width: 130px;
+height: 50px;
+border : none;
+color: #FFFFFF;
+}
+.sign_btn_section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    
+}
+.sign_in_sec{
+    margin-left: 30px;
+}
+.input_bar{
+    background: #F9F9FF;
+border: 1px solid #F9F9FF;
+border-radius: 15px;
+padding-left: 40px !important;
+width: 300px;
+height : 50px;
+margin: 10px;
+}
+.sign_in_sec span{
+    
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 121.34%;
+/* or 30px */
+
+text-align: right;
+
+color: #4B99FB;
+}
 </style>
 <body>
     <div class="top_bar">
@@ -364,13 +415,23 @@ margin: 10px;
                     </div>
                     <div class="form_inputs">
                         
-                        <!-- <div class="input_container email">
-                            <input type="text" class="input" placeholder="Email" value>
-                            <img src="images/sletter.svg" class="input_img">
-                        </div> -->
-                        <input id="email" type="text" placeholder="Email">
-                        <input id="password" type="text" placeholder="Password">
-
+                    <div class="ip_box">
+                        <img src="images/letter.svg" alt="">
+                            <input class="input_bar" id="email" type="text" placeholder="       Email">
+                        </div>
+                        <div class="ip_box">
+                        <img src="images/shield.svg" alt="">
+                            <input class="input_bar" id="password" type="text" placeholder="       Password">
+                        </div>
+                        <div class="sign_btn_section">
+                            <div class="sign_btn">
+                                <button class="sign_up">Sign In</button>
+                            </div>
+                            <div class="sign_in_sec">
+                                <span>Don't have an account?</span>
+                                <div>Sign Up</div>
+                            </div>
+                        </div>    
                     </div>
                 </div>
             </div>
