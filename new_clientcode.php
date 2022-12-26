@@ -4,16 +4,17 @@ $diet_id = $_SESSION['dietitianuserID'];?>
 
 <!-----send requests------>
 <?php
+ $code = $_POST[''];
 if(isset($_POST['sendbtn']))
 {
-    $sql ="select `name`,`dietitianuserID` from `dietitian` where `dietitianuserID` != '{$diet_id}'";
+    $sql ="select * from `client` where `referalcode` = '{$code}' and `dietitianuserID` = `diet_id`";
     $result = $conn ->query($sql);
     $cnt =1;
     if($result -> num_rows > 0)
     {
         while($row = $result -> fetch_assoc())
         {?>
-    <?php }}}?>
+    <?php ?>
 
 
 
@@ -42,6 +43,10 @@ if(isset($_POST['sendbtn']))
                 
             }
             </style>
+
+<script src="jquery-3.6.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 
 </head>
 <body>
@@ -97,8 +102,19 @@ if(isset($_POST['sendbtn']))
         <tbody>
                <tr>
                 <th><?php $cnt ?></th>
-                <th></th>
-                <th></th>
+                <th> </th>
+                <th> <?php echo $row['clientName']; }}}?> </th>
+                <th> <span id="invite" color="blue">Profile </span>
+                <script>
+                    $(Document).ready(function(){
+
+                    $("#invite").click(function({
+                        <?php   ?>
+                    });
+                    });
+                    
+
+                </script>
                 <th colspan = "4"> </th>
         </tr>
         </tbody>
