@@ -309,19 +309,22 @@ include('config.php');
            	  	if(mysqli_num_rows($res) > 0)
            	  	{
            	  		while ($row = $res -> fetch_assoc()){
-                    if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {?>
-                    <img src="./upload/pp.jpg" style="height: 33px; width: 33px; border-radius: 100%;" alt="" />
-                    <?php } else { 
-                  //$path = $row["file"];
-                  $ext= explode('|',$row['profilePhoto']);
-                  $path = $ext[1] . "/" .$ext[0];
-                  ?>
+                        if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
+                            $path = "./upload/pp.jpg";
+                            ?>
+                        
+                            <!--<img src="./upload/pp.jpg" style="height: 33px; width: 33px; border-radius: 100%;" alt="" />-->
+                        <?php } else { 
+                    //$path = $row["file"];
+                            $ext= explode('|',$row['profilePhoto']);
+                            $path = $ext[1] . "/" .$ext[0];
+                        }}?>
                 
                 
                 <img src=<?php echo $path;?> style="height: 33px; width: 33px; border-radius: 100%;" alt="" />  
-                <?php } ?>
+                <?php  ?>
     
-            <?php }} ?>
+            <?php } ?>
 
         </div>
 
