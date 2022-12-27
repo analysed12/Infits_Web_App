@@ -18,7 +18,9 @@
         $password = $row['password'];
         $qualification = $row['qualification'];
         $location = $row['location'];
+        $experience = $row['experience'];
         $gender = $row['gender'];
+        $age = $row['age'];
       }
     }
 
@@ -163,7 +165,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     float: right;
   }
 
-  .flex-left, .flex-right{
+  .flex-left, .flex-right, .flex-middle{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -225,7 +227,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
           <option value="phd">PhD</option>
         </select>
         <?php } else { ?>
-          <input type="text" name="qualification" value="<?php echo $qualification; ?>" required>
+          <input type="text" name="qualification" value="<?php echo $qualification; ?>" disabled required>
         <?php } ?>
         <br>
 
@@ -241,7 +243,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
 <br><br>
 
-        <div class="flex-right">
+        <div class="flex-middle">
 
         Profile Picture: 
 
@@ -269,7 +271,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
         <?php if (is_null($experience) or $experience=='') { ?>
           <input type="text" name="experience" required>
           <?php } else { ?>
-            <input type="text" name="experience" value="<?php echo $experience; ?>" disabled required>
+            <input type="text" name="experience" value="<?php echo $experience; ?>" >
           <?php } ?>
         <br>
 
@@ -284,6 +286,10 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
           <?php } ?>
         <br>
 
+</div>
+
+<div class="flex-right">
+  <p>hello</p>
 </div>
 
 

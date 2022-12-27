@@ -2,6 +2,16 @@
 <title>Directions</title>
 <head>
   <style>
+	#content {
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        height: 90%;
+        font-family: 'Poppins';
+        font-style: normal;
+        padding: 10px;
+        margin: 0px;
+    }
 	 	.upload-photo{
 
     position: absolute;
@@ -82,22 +92,17 @@ text-align: center;
 }
 .para{
 	position: absolute;
-width: 140px;
-height: 33px;
-left: 65px;
+
+
+left: 40px;
 top: 24px;
-
-font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 22px;
-line-height: 150%;
 /* identical to box height, or 33px */
-
 display: flex;
-align-items: center;
-
+flex-direction: row;
+justify-content:space-between;
 color: #929292;
+margin:10px;
+float:right;
 
 }
 .add-direction{
@@ -116,7 +121,7 @@ color: #929292;
 }
 
 
-}
+
 .div-header{
                 display: flex;
                 justify-content: space-between;
@@ -163,52 +168,83 @@ margin-top: 25;
 
 
 }
+.up-btn{
+	background: #FFFFFF;
+	border: 2px solid #A45DF2;
+	border-radius: 10px;
+	color: #A45DF2;
+	width: 250px;
+}
 
 	 </style>
+
+	 <!------js code to open upload file on image click----->
+	  <!------code for upload image---->
+	  <script>
+          $(function(){
+
+          
+          $('#up-symbol').on('click',function(){
+            $('#video-upload').trigger('click');
+          });
+        });
+
+          </script>
+
  
 
 
 	</head>
 	<body>
-		<?php include("config.php")?>;
+	
 	  	 <!------Side Nav----->
-	  	 <?php include("event_calendar.php");?>
-	  	 
-	  	 <form id="form1" action="" method="post" enctype ="multipart/form/data">
-	  	 <div class="container" id ="cnt">
+		   <div id="page">
+    		<?php include 'event_calendar.php'; ?>
+
+    		<div id="content">
 	  	
-        	 <?php
-           	  	$sql ="select `image`,`image_path` from `receipe_details` where `receipe_id`=7";
-           	  	$res = mysqli_query($conn,$sql);
-           	  	if(mysqli_num_rows($res) > 0)
-           	  	{
-           	  		while ($row = $res -> fetch_assoc()){
-           	  			$path = $row["image_path"];?>
-                       
-            <div class="upload-photo">
-                
-             <img src=<?php echo $path;?> alt="" title="<?php($row["image"]);?>">  
-         <?php } }?>
-     </div>
+        
+  
 
-
+<!--
          <div class="buttons" style="text-align: center;">
             <ul class="button-class" style="display:flex; list-style:none";>
-<li> <div class="p-2" style="width: 135px;height:32px; margin-top: 5%;"><a href ="receipe_details_view.php" style="text-decoration: none; color: black; font-size:15;font-weight:400% ">Recipies details</a></div></li>
-  <li><div class="p-2" style="width:100px; height:32px; margin-left: 50px;">
-  	<a href="Ingredients.php" style="text-decoration: none; color: black; font-size:15;font-weight:400%  ">Ingredients</a></div></li>
- <li> <div class="p-2" style="width:78px; height:32px; margin-left: 50px; background-color: white;
-  margin-top: 5%; border-radius: 22px; text-align:center;margin-top: 5%;" >
- 	<a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;">Directions</a></div></li>
-</ul>
-</div>
-           <div class="link-add">    
-          <div class="link-container">
+			<li> <div class="p-2" style="width: 135px;height:32px; margin-top: 5%;"><a href ="receipe_details_view.php" style="text-decoration: none; color: black; font-size:15;font-weight:400% ">Recipies details</a></div></li>
+			<li><div class="p-2" style="width:100px; height:32px; margin-left: 50px;">
+				<a href="Ingredients.php" style="text-decoration: none; color: black; font-size:15;font-weight:400%  ">Ingredients</a></div></li>
+			<li> <div class="p-2" style="width:78px; height:32px; margin-left: 50px; background-color: white;
+			margin-top: 5%; border-radius: 22px; text-align:center;margin-top: 5%;" >
+				<a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;">Directions</a></div></li>
+			</ul>
+			</div>-->
+
+<form action=" " method="post" enctype="multipart/form-data">
+
+
           	<label id="lbl" name="lbl_symbol">+</label>
-          		<div>
-          			<div class="para">
-          	<p id ="p-add" > Add Directions</p>
+          	<p > Add Directions</p>
+
+
+    
+                <!------image upload----->
+             <!--<div class="up-link" style="display:flex; flex-direction:row; position:absolute;  height: 58px; width:160px;"> -->
+		
+			 <img src=".\images\upload.svg" id="up-symbol"  style="height:15px; width:15px;">  
+				<input type="file" name="video-upload" style="display:none;">
+			<button id="upload" name="upload" class="up-btn" style="left:450px;"> upload video</button> 
+</div> 
+
+
+               <!----------upload url-------->
+           <!--<div class="up-url" style="display:flex; flex-direction:row;position:absolute;  height: 58px; width:160px;>-->
+		  
+
+		   <img src=".\images\url.svg" id="url-symbol" style="height:15px; width:15px;">
+		   <input type="file" name="url-upload" style="display:none;">
+			<button id="url" name="url" class="up-btn" style="margin-left:190px;"> upload url </button>
            </div>
+
+ 
 
 
             <!-------popup for add directions--->
@@ -220,7 +256,7 @@ margin-top: 25;
             		 &times;</button>
             	</div>
             	<div class="div-body">
-            		<form action="Ingredients.php" method="post" enctype="multipart/form-data">
+            		
     
         <div class="box">
         <input type= "text" id="text1" class="input-text" name = "text1" value="Directions"><br>
@@ -233,8 +269,8 @@ margin-top: 25;
        <button  id ="done"  name = "done" style="font-size:15; background:linear-gradient(267.44deg, rgba(204, 87, 231, 0.66) 0.01%, rgba(116, 99, 252, 0.66) 85.22%); color: white; height: 31px; width: 162px; border-radius:10px;left:124px;border-color:none;margin-top: -10%;" onclick="m_display();">  Done </button>
            
             </div>
-
-             <!------code for popup ingredients------->
+</form>
+             <!------code for popup directions------->
             <script>
             	var count=0;
             	//button for open
