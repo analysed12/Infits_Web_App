@@ -113,6 +113,18 @@
         padding: 10px;
         width: 450px;
     }
+.center-flex{
+  display: flex;
+  justify-content: space-around;
+}
+    
+    .box{
+      border-radius: 9px;
+      border: 1px solid #7963FB;
+      width: fit-content;
+      padding: 10px;
+      background: white;
+    }
     </style>
   </head>
 
@@ -199,7 +211,11 @@
 </div>
 
 <div id="directions" class="tabcontent">
-  <!--    CONTENT FOR DIRECTIONS-->
+  <div class="center-flex">
+  <button class = "box"><img src="images/plus.svg" style="width:25px; float: left;"> &nbsp; Add Directions</button>
+  <button class = "box"><img src="images/upload.svg" style="width:25px; float: left;"> &nbsp; Upload Video</button>
+  <button class = "box"><img src="images/link.svg" style="width:25px; float: left;"> &nbsp; Upload URL</button>
+</div>
 </div>
 
 
