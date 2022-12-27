@@ -1,10 +1,12 @@
 <?php 
  // profile settings
+
  session_start();
+
  $db = mysqli_connect('localhost', 'root', '', 'infits');
 
 
-    $currentUser = $_SESSION['name'];
+  $currentUser = $_SESSION['name'];
    $query = "select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
     $result = mysqli_query($db, $query); // Use curly braces to access array members inside strings
     if($result->num_rows > 0){ 
@@ -13,12 +15,15 @@
         $name = $row['name'];
         $email = $row['email'];
         $mobile = $row['mobile'];
-
+        $password = $row['password'];
+        $qualification = $row['qualification'];
+        $location = $row['location'];
+        $gender = $row['gender'];
       }
     }
 
 //profile updation save button 
-if (isset($_POST['update'])) {
+if(isset($_POST['update']) || isset($_FILES['my_image'])) {
   // receive all input values from the form
   $qualification = mysqli_real_escape_string($db, $_POST['qualification']);
   $location = mysqli_real_escape_string($db, $_POST['location']);
@@ -26,36 +31,52 @@ if (isset($_POST['update'])) {
   $experience = mysqli_real_escape_string($db, $_POST['experience']);
   $ref_code = mysqli_real_escape_string($db, $_POST['ref_code']);
   $age = mysqli_real_escape_string($db, $_POST['age']);
-  $profilePhoto = mysqli_real_escape_string($db, $_POST['profilePhoto']);
 
-  //profile pic
-  $imageName = "$dietitianuserID.jpg";
-  $image = 'upload/'.$imageName;
-   $type = pathinfo($image, PATHINFO_EXTENSION);
-   $data = file_get_contents($image);
-   $profilePhoto= base64_encode($data);
 
-  
+  //saving image
+  $img_name= $_FILES['my_image']['name'];
+  $img_size = $_FILES['my_image']['size'];
+  $tmp_name = $_FILES['my_image']['tmp_name'];
+    $error =$_FILES['my_image']['error'];
+     $file_type= $_FILES['my_image']['type'];
+   if($error === 0)
+   {
+      if($img_size > 209712)
+      {
+            echo("file too large");
+
+       }
+       else
+      {
+               $img_ex=pathinfo($img_name, PATHINFO_EXTENSION);
+              $img_ex_lc=strtolower($img_ex);
+             $allowed_ex = array("jpg","png");
+
+               if(in_array($img_ex_lc, $allowed_ex))
+              {
+                 $new_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+                $img_upload_path = "./images/" .$new_name;
+   
+                move_uploaded_file($tmp_name,$img_upload_path );  
+                $imageandpath="$new_name|$img_upload_path";
 
 
   //updating to db
-  $query = "UPDATE dietitian SET qualification = '$qualification',
+  $query = "UPDATE `dietitian` SET qualification = '$qualification',
               location = '$location',
               gender = '$gender',
               experience = '$experience',
               age = '$age',
-              profilePhoto = $profilePhoto'
+              profilePhoto = '$imageandpath'
               where `dietitianuserID` = '$currentUser'";
     mysqli_query($db, $query);
 
   	$_SESSION['success'] = "Information Updated";
-  
+              }
+            }
+          }
 
 }   
-
-
-
-
 ?>
 
 
@@ -80,6 +101,15 @@ if (isset($_POST['update'])) {
   }
 
   input{
+    background: #EFF8FFD9;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    min-width: 400px;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+  select{
     background: #EFF8FFD9;
     border: none;
     border-radius: 4px;
@@ -160,7 +190,7 @@ if (isset($_POST['update'])) {
   <div id="content">	 
 
   <!--<div class="add-client-area">-->
-  <form method="post" action="profile_settings.php">
+  <form method="post" action="profile_settings.php" enctype="multipart/form-data">
   	
     <br>
 
@@ -179,10 +209,17 @@ if (isset($_POST['update'])) {
         Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" disabled required />
         <br>
 
-        Qualification <br> <input type="text" name="qualification" required />
+        Qualification <br>
+        <select name="qualification" id="qualification" required>
+          <option value="bachelors">Bachelors</option>
+          <option value="masters">Masters</option>
+          <option value="highschool">High School</option>
+          <option value="phd">PhD</option>
+        </select>
         <br>
 
-        Location <br> <input type="text" name="location" required>
+        Location <br> 
+          <input type="text" name="location" required>
         <br>
 
         </div>
@@ -192,10 +229,21 @@ if (isset($_POST['update'])) {
         <div class="flex-right">
 
         Profile Picture: 
-		    <input type="file" name="profilePhoto" value="" />
+
+		    <input type="file" name="my_image" value="" required/>
         <br>
 
-        Gender: <br> <input type="text" name="gender" required>
+        Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled required />
+        <p style="align: right; color: blue; font-size: 12px;">Reset Password?</p>
+        <br>
+
+        Gender: <br> 
+        <select name="gender" id="gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+          <option value="choosenot">Choose not to say</option>
+        </select>
         <br>
 
         Experience <br><input type="text" name="experience" required>
@@ -216,7 +264,7 @@ if (isset($_POST['update'])) {
       </div>
 
       <div class="center-flex align-middle"><button type="submit" class="addBtn" name="update">Save</button></div>
-      
+      <br>
   </form>
   </div>
 </body>

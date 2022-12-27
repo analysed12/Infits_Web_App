@@ -23,7 +23,7 @@
     }
 
 //profile updation save button 
-if(isset($_POST['submit']) || isset($_FILES['my_image'])) {
+if(isset($_POST['update']) || isset($_FILES['my_image'])) {
   // receive all input values from the form
   $qualification = mysqli_real_escape_string($db, $_POST['qualification']);
   $location = mysqli_real_escape_string($db, $_POST['location']);
@@ -182,6 +182,10 @@ if(isset($_POST['submit']) || isset($_FILES['my_image'])) {
     margin-left: 15%;
   }
 
+  .reset a{
+    color: RoyalBlue;
+  }
+
 </style>
 
 </head>
@@ -213,7 +217,7 @@ if(isset($_POST['submit']) || isset($_FILES['my_image'])) {
         <br>
 
         Qualification <br>
-        <?php if (is_null($qualification)) { ?>
+        <?php if (is_null($qualification) or $qualification=='') { ?>
         <select name="qualification" id="qualification" required>
           <option value="bachelors">Bachelors</option>
           <option value="masters">Masters</option>
@@ -226,7 +230,7 @@ if(isset($_POST['submit']) || isset($_FILES['my_image'])) {
         <br>
 
         Location <br> 
-        <?php if (is_null($qualification)) { ?>
+        <?php if (is_null($location) or $location=='') { ?>
           <input type="text" name="location" required>
           <?php } else { ?>
           <input type="text" name="location" value="<?php echo $location; ?>" disabled required>
@@ -241,15 +245,15 @@ if(isset($_POST['submit']) || isset($_FILES['my_image'])) {
 
         Profile Picture: 
 
-		    <input type="file" name="my_image" value="" />
+		    <input type="file" name="my_image" value="" required/>
         <br>
 
         Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled required />
-        <p style="align: right; color: blue; font-size: 12px;">Reset Password?</p>
+        <a href="reset-pw.php" class='reset'><p style="align: right; color: blue; font-size: 12px;">Reset Password?</p></a>
         <br>
 
         Gender: <br> 
-        <?php if (is_null($gender)) { ?>
+        <?php if (is_null($gender) or $gender=='') { ?>
         <select name="gender" id="gender" required>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -261,13 +265,23 @@ if(isset($_POST['submit']) || isset($_FILES['my_image'])) {
         <?php } ?>
         <br>
 
-        Experience <br><input type="text" name="experience" required>
+        Experience <br>
+        <?php if (is_null($experience) or $experience=='') { ?>
+          <input type="text" name="experience" required>
+          <?php } else { ?>
+            <input type="text" name="experience" value="<?php echo $experience; ?>" disabled required>
+          <?php } ?>
         <br>
 
         Referral Code <br><input type="text" name="ref_code">
         <br>
 
-        Age <br><input type="text" name="age" required>
+        Age <br>
+        <?php if (is_null($age) or $age=='') { ?>
+          <input type="text" name="age" required>
+          <?php } else { ?>
+            <input type="text" name="age" value="<?php echo $age; ?>" disabled required>
+          <?php } ?>
         <br>
 
 </div>
