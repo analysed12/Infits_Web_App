@@ -264,7 +264,7 @@
       <br><br>
       </div>
 
-      <div class="center-flex align-middle"><button class="addBtn" a href="profile_settings_edit.php">Make Changes</button></div>
+      <div class="center-flex align-middle"><button class="addBtn" a href="profile_settings_edit.php">Edit Profile Details</button></div>
       <br>
   </form>
   </div>

@@ -21,6 +21,16 @@
         $experience = $row['experience'];
         $gender = $row['gender'];
         $age = $row['age'];
+
+        if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
+          $path = "./upload/pp.jpg";
+          
+      
+      } else { 
+
+          $ext= explode('|',$row['profilePhoto']);
+          $path = $ext[1] . "/" .$ext[0];
+      }
       }
     }
 
@@ -105,12 +115,12 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     font-family: 'Poppins' !important;
   }
 
-  input{
+  input, input[type=file]{
     background: #EFF8FFD9;
     border: none;
     border-radius: 4px;
     width: 100%;
-    min-width: 400px;
+    min-width: 250px;
     padding: 8px 16px;
     gap: 8px;
   }
@@ -119,10 +129,11 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     border: none;
     border-radius: 4px;
     width: 100%;
-    min-width: 400px;
+    min-width: 250px;
     padding: 8px 16px;
     gap: 8px;
   }
+
   input[type=sign-up]{
     border: 1px solid #EBEBEB;
     color: #7282FB;
@@ -187,6 +198,10 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
   .reset a{
     color: RoyalBlue;
   }
+  .socials{
+    border:none;
+    background: white;
+  }
 
 </style>
 
@@ -199,7 +214,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
   <div id="content">	 
 
   <!--<div class="add-client-area">-->
-  <form method="post" action="profile_settings.php" enctype="multipart/form-data">
+  <form method="post" action="profile_settings_edit.php" enctype="multipart/form-data">
   	
     <br>
 
@@ -215,7 +230,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
         Email <br>  <input type="email" name="email" value="<?php echo $email; ?>" disabled required />
         <br>
 
-        Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" disabled required />
+        Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" required />
         <br>
 
         Qualification <br>
@@ -227,7 +242,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
           <option value="phd">PhD</option>
         </select>
         <?php } else { ?>
-          <input type="text" name="qualification" value="<?php echo $qualification; ?>" disabled required>
+          <input type="text" name="qualification" value="<?php echo $qualification; ?>" required>
         <?php } ?>
         <br>
 
@@ -235,7 +250,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
         <?php if (is_null($location) or $location=='') { ?>
           <input type="text" name="location" required>
           <?php } else { ?>
-          <input type="text" name="location" value="<?php echo $location; ?>" disabled required>
+          <input type="text" name="location" value="<?php echo $location; ?>" required>
           <?php } ?>
         <br>
 
@@ -247,7 +262,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
         Profile Picture: 
 
-		    <input type="file" name="my_image" value="" required/>
+		    <input type="file" name="my_image" style="width: 250px;" value="" required/>
         <br>
 
         Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled required />
@@ -282,14 +297,20 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
         <?php if (is_null($age) or $age=='') { ?>
           <input type="text" name="age" required>
           <?php } else { ?>
-            <input type="text" name="age" value="<?php echo $age; ?>" disabled required>
+            <input type="text" name="age" value="<?php echo $age; ?>" required>
           <?php } ?>
         <br>
 
 </div>
 
 <div class="flex-right">
-  <p>hello</p>
+<img src=<?php echo $path;?> style="height: 100px; width: 100px; border-radius: 30%;" alt="" />  <br>
+
+<button class='socials'><img src="images/WhatsApp.svg" style="height: 33px;"> &nbsp; WhatsApp</button><br>
+<button class='socials'><img src="images/Twitter.svg" style="height: 33px;"> &nbsp; Twitter</button><br>
+<button class='socials'><img src="images/LinkedIn.svg" style="height: 33px;"> &nbsp; LinkedIn</button><br>
+<button class='socials'><img src="images/Instagram.svg" style="height: 33px;"> &nbsp; Instagram</button><br>
+<button class='socials'><img src="images/Facebook.svg" style="height: 33px;"> &nbsp; Facebook</button><br>
 </div>
 
 
@@ -298,7 +319,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
       <br><br>
       </div>
 
-      <div class="center-flex align-middle"><button type="submit" class="addBtn" name="update">Save</button></div>
+      <div class="center-flex align-middle"><button type="submit" class="addBtn" name="update">Save Changes</button></div>
       <br>
   </form>
   </div>
