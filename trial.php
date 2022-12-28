@@ -1,46 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infits</title>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <style>
+<!-- Trigger/Open The Modal -->
+<button id="myBtn" onclick="m_display()";>Open Modal</button>
 
-    #content {
-        overflow: auto;
-        display: flex;
-        flex-direction: column;
-        height: 90%;
-        font-family: 'Poppins';
-        font-style: normal;
-        padding: 10px;
-        margin: 0px;
-    }
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
-    .box{
-      border-radius: 9px;
-      border: 1px solid #7963FB;
-      width: fit-content;
-      padding: 10px;
-      background: white;
-    }
-        
-    </style>
-  </head>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <select name="socials" id="socials" placeholder="Platform">
+          <option value="whatsapp">WhatsApp</option>
+          <option value="twitter">Twitter</option>
+          <option value="facebook">Facebook</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="instagram">Instagram</option>
+      </select>
+      <br>
+     <input type="text" placeholder="Copy Link Here">
+     <br>
+     <div class="center-flex align-middle"><button type="submit" class="addBtn" name="save_socials">Save</button></div>
+  </div>
 
-  <body>
-  <div id="page">
-    <?php include 'event_calendar.php'; ?>
+</div>
 
-    <div id="content">
-      <p>Tab here</p>
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
 
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
 
-        <button class = "box"><img src="images/plus.svg" style="width:25px; float: left;"> &nbsp; Add Directions</button>
-        <button class = "box"><img src="images/upload.svg" style="width:25px; float: left;"> &nbsp; Upload Video</button>
-        <button class = "box"><img src="images/link.svg" style="width:25px; float: left;"> &nbsp; Upload URL</button>
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
-  </body>
-  </html>
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  event.preventDefault(); //keeps page from refreshing
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>-->
