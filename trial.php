@@ -1,271 +1,372 @@
-<?php 
- // profile settings
+<!--  DIET CHART OLD W/ POPUPS  -->
+<?php session_start();?>
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Diet Chart</title>
+	  
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
- session_start();
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+        <style>
 
- $db = mysqli_connect('localhost', 'root', '', 'infits');
-
-
-  $currentUser = $_SESSION['name'];
-   $query = "select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
-    $result = mysqli_query($db, $query); // Use curly braces to access array members inside strings
-    if($result->num_rows > 0){ 
-      while($row = $result->fetch_assoc()){
-        $dietitianuserID = $row['dietitianuserID'];
-        $name = $row['name'];
-        $email = $row['email'];
-        $mobile = $row['mobile'];
-        $password = $row['password'];
-        $qualification = $row['qualification'];
-        $location = $row['location'];
-        $gender = $row['gender'];
-      }
+#content {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    font-family: 'Poppins';
+    font-style: normal;
+    padding: 10px;
+    margin: 0px;
+}
+/*-------------------------DIET CHART---------------------------*/
+    /* Style the tab */
+    .tab {
+    overflow:hidden;  
+    background-color: white;
+    flex-wrap: wrap;
+    
+    }
+    @media (min-width: 0px) and (max-width: 720px) {
+.tab{
+  display: flex;
+  flex-wrap: wrap;
+}
     }
 
-//profile updation save button 
-if(isset($_POST['update']) || isset($_FILES['my_image'])) {
-  // receive all input values from the form
-  $qualification = mysqli_real_escape_string($db, $_POST['qualification']);
-  $location = mysqli_real_escape_string($db, $_POST['location']);
-  $gender = mysqli_real_escape_string($db, $_POST['gender']);
-  $experience = mysqli_real_escape_string($db, $_POST['experience']);
-  $ref_code = mysqli_real_escape_string($db, $_POST['ref_code']);
-  $age = mysqli_real_escape_string($db, $_POST['age']);
-
-
-  //saving image
-  $img_name= $_FILES['my_image']['name'];
-  $img_size = $_FILES['my_image']['size'];
-  $tmp_name = $_FILES['my_image']['tmp_name'];
-    $error =$_FILES['my_image']['error'];
-     $file_type= $_FILES['my_image']['type'];
-   if($error === 0)
-   {
-      if($img_size > 209712)
-      {
-            echo("file too large");
-
-       }
-       else
-      {
-               $img_ex=pathinfo($img_name, PATHINFO_EXTENSION);
-              $img_ex_lc=strtolower($img_ex);
-             $allowed_ex = array("jpg","png");
-
-               if(in_array($img_ex_lc, $allowed_ex))
-              {
-                 $new_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                $img_upload_path = "./images/" .$new_name;
-   
-                move_uploaded_file($tmp_name,$img_upload_path );  
-                $imageandpath="$new_name|$img_upload_path";
-
-
-  //updating to db
-  $query = "UPDATE `dietitian` SET qualification = '$qualification',
-              location = '$location',
-              gender = '$gender',
-              experience = '$experience',
-              age = '$age',
-              profilePhoto = '$imageandpath'
-              where `dietitianuserID` = '$currentUser'";
-    mysqli_query($db, $query);
-
-  	$_SESSION['success'] = "Information Updated";
-              }
-            }
-          }
-
-}   
-?>
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Infits | Add Client</title>
-  <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
-<style>
-
-  body{
-    font-family: 'Poppins' !important;
-  }
-
-  input{
-    background: #EFF8FFD9;
-    border: none;
-    border-radius: 4px;
-    width: 100%;
-    min-width: 400px;
-    padding: 8px 16px;
-    gap: 8px;
-  }
-  select{
-    background: #EFF8FFD9;
-    border: none;
-    border-radius: 4px;
-    width: 100%;
-    min-width: 400px;
-    padding: 8px 16px;
-    gap: 8px;
-  }
-  input[type=sign-up]{
-    border: 1px solid #EBEBEB;
-    color: #7282FB;
-    align-items: center;
-    padding: 10px 22px;
+    /* Style the buttons inside the tab */
+    .tab button {
+    background-color: white;
+    float: left;
+    border: 1px solid #9C74F5;
     border-radius: 10px;
-    text-decoration: none;
-    margin: 4px 2px;
-    width: auto;
-  }
-  /* Shared */
-  .addBtn {
-      background-color: RoyalBlue;
-      border: none;
-      color: white;
-      padding: 10px 22px;
-      border-radius: 10px;
-      text-decoration: none;
-      margin: 5px;
-      width: 60%;
-  }
-  .center-flex{
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      }
-
-  .signup{
-        border: 1px solid #EBEBEB;
-        padding: 10px;
-        border-radius: 5px;
-        min-width: auto;
-        width: 150px;
-        background-color: #FFFFFF;
-        text-decoration: none;
-        color: black;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    min-width: 200px;
+    
     }
 
-  .float-right{
-    float: right;
-  }
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+    background-color: #9C74F5;
+    color: white;
+    }
 
-  .flex-left, .flex-right{
+    /* Create an active/current tablink class */
+    .tab button.active {
+    background-color: #9C74F5;
+    color: white !important;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    max-width: 95%;
+    }
+
+    .tab-box{
+    box-shadow: 0px 8px 24px rgba(176, 190, 197, 0.32), 0px 3px 5px rgba(176, 190, 197, 0.32);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 15px;
+    }
+    .tab-submit{
+    font-size: 20px;
+    }
+
+    .space-between-flex{
+  display: flex;
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+}
+/*------------------PLUS BUTTON ------------------------ */
+.add-btn {
+  background-color: white;
+  border: none;
+  box-shadow: 0px 8px 24px rgba(176, 190, 197, 0.32), 0px 3px 5px rgba(176, 190, 197, 0.32);
+  color: #DF6293;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 140px;
+  border-radius: 10px;
+}
+
+/* Darker background on mouse-over */
+.add-btn:hover {
+  background-color: RoyalBlue;
+}
+
+/*--------------MODAL CSS------------------*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 50%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    /*position: relative;*/
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 5px;
+    background-color: white;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-  }
+}
 
-  .flex-main{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-content: flex-start;
-  }
+.modal-body {padding: 2px 16px;}
 
-  .align-middle{
-    margin-left: 15%;
-  }
-
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+    
+    /*   days buttons  */
+    .day-band{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      width: 80%;
+    }
+    .day{
+      color: black;
+      padding: 10px;
+      border:none;
+      background: none;
+    }
+    .day:hover{
+      color:white;
+      background:#9C74F5;
+      border-radius:10px;
+    }
 </style>
-
 </head>
 
-<body>
+<div id="page">
+    <!--------------sidenav------------------------->
     <?php include 'event_calendar.php'; ?>
 
+    <div id="content">
+      <!------------------------------------------------DASHBOARD--------------------------------------------------------->
+      <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Diet Chart</h1>
+      <p>!!! client name !!!</p>
 
-  <div id="content">	 
-
-  <!--<div class="add-client-area">-->
-  <form method="post" action="profile_settings.php" enctype="multipart/form-data">
-  	
-    <br>
-
-    <div class="flex-main">
-
-        <div class="flex-left">
-        User ID <br> <input type="text" name="dietitianuserID" value="<?php echo $dietitianuserID; ?>" disabled required />
-        <br>
-
-        Name <br> <input type="text" name="Name" value="<?php echo $name; ?>" disabled required />
-        <br>
-
-        Email <br>  <input type="email" name="email" value="<?php echo $email; ?>" disabled required />
-        <br>
-
-        Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" disabled required />
-        <br>
-
-        Qualification <br>
-        <select name="qualification" id="qualification" required>
-          <option value="bachelors">Bachelors</option>
-          <option value="masters">Masters</option>
-          <option value="highschool">High School</option>
-          <option value="phd">PhD</option>
-        </select>
-        <br>
-
-        Location <br> 
-          <input type="text" name="location" required>
-        <br>
-
-        </div>
-
-<br><br>
-
-        <div class="flex-right">
-
-        Profile Picture: 
-
-		    <input type="file" name="my_image" value="" required/>
-        <br>
-
-        Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled required />
-        <p style="align: right; color: blue; font-size: 12px;">Reset Password?</p>
-        <br>
-
-        Gender: <br> 
-        <select name="gender" id="gender" required>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-          <option value="choosenot">Choose not to say</option>
-        </select>
-        <br>
-
-        Experience <br><input type="text" name="experience" required>
-        <br>
-
-        Referral Code <br><input type="text" name="ref_code">
-        <br>
-
-        Age <br><input type="text" name="age" required>
-        <br>
-
+    <!------------------days of the week----------------->
+    <center>
+<div class="day-band">
+  <button class="day">Mon</button>
+  <button class="day">Tue</button>
+  <button class="day">Wed</button>
+  <button class="day">Thu</button>
+  <button class="day">Fri</button>
+  <button class="day">Sat</button>
+  <button class="day">Sun</button>
 </div>
 
+  </center>
+    <br>
 
-<!---------------------------SUBMIT BUTTON ----------------------------------->
-  		
-      <br><br>
+        <!------------------food of the day----------------->
+
+    <div id="content">
+    <div class="tab">
+        <div class="space-between-flex">
+        <button class="tablinks" onclick="openTab(event, 'Breakfast')">Breakfast</button>
+        <button class="tablinks" onclick="openTab(event, 'Lunch')">Lunch</button>
+        <button class="tablinks" onclick="openTab(event, 'Snack')">Snack</button>
+        <button class="tablinks" onclick="openTab(event, 'Dinner')">Dinner</button>
+      </div>
+    </div>
+      
+      <div id="Breakfast" class="tabcontent">
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;"> In Morning</p>
+
+            <!-- Trigger/Open The Modal -->
+            <button class="modal-button" href="#myModal1">Open Modal</button>
+
+            <!-- The Modal -->
+            <div id="myModal1" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+              <div class="modal-header">
+                  <span class="close">×</span>
+                  <center><h2>Choose Template</h2></center>
+                </div>
+                <div class="modal-body">
+                    <img src="images/add_btn.svg" style="padding: 15px;">
+
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      
+      <div id="Lunch" class="tabcontent">
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;"> Afternoon</p>
+            <!-- Trigger/Open The Modal -->
+            <button class="modal-button" href="#myModal2">Open Modal</button>
+
+            <!-- The Modal -->
+            <div id="myModal2" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+              <div class="modal-header">
+                  <span class="close">×</span>
+                  <h2>Choose Template</h2>
+                </div>
+                <div class="modal-body">
+                  <div class="dashed-border">
+                    <img src="images/add_btn.svg" style="padding: 15px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      
+      <div id="Snack" class="tabcontent">
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;">Snack</p>
+            <?php include 'diet_chart_popup.php'; ?>
+        </div>
       </div>
 
-      <div class="center-flex align-middle"><button type="submit" class="addBtn" name="update">Save</button></div>
-      <br>
-  </form>
-  </div>
-</body>
+      <div id="Dinner" class="tabcontent">
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;"> Dinner</p>
+            <?php include 'diet_chart_popup.php'; ?>
+        </div>
+      </div>
+      
+      <script>
+      function openTab(evt, food) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(food).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+      </script>
+        
+
+        <script>// Get the button that opens the modal
+        var btn = document.querySelectorAll("button.modal-button");
+
+        // All page modals
+        var modals = document.querySelectorAll('.modal');
+
+        // Get the <span> element that closes the modal
+        var spans = document.getElementsByClassName("close");
+
+        // When the user clicks the button, open the modal
+        for (var i = 0; i < btn.length; i++) {
+        btn[i].onclick = function(e) {
+            e.preventDefault();
+            modal = document.querySelector(e.target.getAttribute("href"));
+            modal.style.display = "block";
+        }
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        for (var i = 0; i < spans.length; i++) {
+        spans[i].onclick = function() {
+            for (var index in modals) {
+              if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+            }
+        }
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+            for (var index in modals) {
+              if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+            }
+            }
+        }
+        //keep page from refreshing
+        function m_display(){
+            event.preventDefault();
+            modal.style.display ="block";
+        }
+        </script>
+
+        <br><br>
+    <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #9C74F5">Save Plan</button>
+    <br>
+          </div>
+		</div>
+</div>
+
+  </body>
 </html>

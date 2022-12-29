@@ -18,67 +18,26 @@
         $password = $row['password'];
         $qualification = $row['qualification'];
         $location = $row['location'];
+        $experience = $row['experience'];
         $gender = $row['gender'];
+        $age = $row['age'];
+        $facebook = $row['facebook'];
+        $whatsapp = $row['whatsapp'];
+        $twitter = $row['twitter'];
+        $linkedin = $row['linkedin'];
+        $instagram = $row['instagram'];
+
+        if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
+          $path = "./upload/pp.jpg";
+          
+      
+      } else { 
+
+          $ext= explode('|',$row['profilePhoto']);
+          $path = $ext[1] . "/" .$ext[0];
+      }
       }
     }
-
-//profile updation save button 
-if(isset($_POST['update']) || isset($_FILES['my_image'])) {
-  // receive all input values from the form
-  $qualification = mysqli_real_escape_string($db, $_POST['qualification']);
-  $location = mysqli_real_escape_string($db, $_POST['location']);
-  $gender = mysqli_real_escape_string($db, $_POST['gender']);
-  $experience = mysqli_real_escape_string($db, $_POST['experience']);
-  $ref_code = mysqli_real_escape_string($db, $_POST['ref_code']);
-  $age = mysqli_real_escape_string($db, $_POST['age']);
-
-
-  $img_name= $_FILES['my_image']['name'];
-  $img_size = $_FILES['my_image']['size'];
-  $tmp_name = $_FILES['my_image']['tmp_name'];
-    $error =$_FILES['my_image']['error'];
-     $file_type= $_FILES['my_image']['type'];
-   if($error === 0)
-   {
-      if($img_size > 209712)
-      {
-            echo("file too large");
-
-       }
-       else
-      {
-               $img_ex=pathinfo($img_name, PATHINFO_EXTENSION);
-              $img_ex_lc=strtolower($img_ex);
-             $allowed_ex = array("jpg","png");
-
-               if(in_array($img_ex_lc, $allowed_ex))
-              {
-                 $new_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                $img_upload_path = "./images/" .$new_name;
-   
-                move_uploaded_file($tmp_name,$img_upload_path );  
-                $imageandpath="$new_name|$img_upload_path";
-
-
-  //updating to db
-  $query = "UPDATE dietitian SET qualification = '$qualification',
-              location = '$location',
-              gender = '$gender',
-              experience = '$experience',
-              age = '$age',
-              profilePhoto = '$imageandpath'
-              where `dietitianuserID` = '$currentUser'";
-    mysqli_query($db, $query);
-
-  	$_SESSION['success'] = "Information Updated";
-              }
-            }
-          }
-
-}   
-
-
-
 
 ?>
 
@@ -101,14 +60,15 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
   body{
     font-family: 'Poppins' !important;
+
   }
 
-  input{
+  input, input[type=file]{
     background: #EFF8FFD9;
     border: none;
     border-radius: 4px;
     width: 100%;
-    min-width: 400px;
+    min-width: 250px;
     padding: 8px 16px;
     gap: 8px;
   }
@@ -117,7 +77,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     border: none;
     border-radius: 4px;
     width: 100%;
-    min-width: 400px;
+    min-width: 250px;
     padding: 8px 16px;
     gap: 8px;
   }
@@ -163,7 +123,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     float: right;
   }
 
-  .flex-left, .flex-right{
+  .flex-left, .flex-right, .flex-middle{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -186,6 +146,20 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     color: RoyalBlue;
   }
 
+  .socials{
+    border:none;
+    background: white;
+  }
+  #content{
+    
+    background-image: "images/bottom_vec.svg";
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+  }
+  
+
 </style>
 
 </head>
@@ -204,34 +178,31 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     <div class="flex-main">
 
         <div class="flex-left">
-        User ID <br> <input type="text" name="dietitianuserID" value="<?php echo $dietitianuserID; ?>" disabled required />
+        User ID <br> <input name="dietitianuserID" value="<?php echo $dietitianuserID; ?>" disabled  />
         <br>
 
-        Name <br> <input type="text" name="Name" value="<?php echo $name; ?>" disabled required />
+        Name <br> <input name="Name" value="<?php echo $name; ?>" disabled  />
         <br>
 
-        Email <br>  <input type="email" name="email" value="<?php echo $email; ?>" disabled required />
+        Email <br>  <input  name="email" value="<?php echo $email; ?>" disabled  />
         <br>
 
-        Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" disabled required />
+        Mobile Number <br> <input name="mobile" value="<?php echo $mobile; ?>" disabled  />
         <br>
 
-        Qualification <br>
+        Qualification <br><br>
         <?php if (is_null($qualification) or $qualification=='') { ?>
-        <select name="qualification" id="qualification" required>
-          <option value="bachelors">Bachelors</option>
-          <option value="masters">Masters</option>
-          <option value="highschool">High School</option>
-          <option value="phd">PhD</option>
-        </select>
+          <input type="text" name="qualification" value="<?php echo 'XXXXXX'; ?>" disabled >
         <?php } else { ?>
-          <input type="text" name="qualification" value="<?php echo $qualification; ?>" required>
+          <input  name="qualification" value="<?php echo $qualification; ?>" disabled >
         <?php } ?>
+        <br>
+
         <br>
 
         Location <br> 
         <?php if (is_null($location) or $location=='') { ?>
-          <input type="text" name="location" required>
+          <input type="text" name="location" value="<?php echo 'XXXXXX'; ?>" disabled >
           <?php } else { ?>
           <input type="text" name="location" value="<?php echo $location; ?>" disabled required>
           <?php } ?>
@@ -241,35 +212,29 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
 <br><br>
 
-        <div class="flex-right">
+        <div class="flex-middle">
 
         Profile Picture: 
-
-		    <input type="file" name="my_image" value="" required/>
+		    <input type="file" name="my_image" style="width: 250px;" value="" required/>
         <br>
 
-        Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled required />
+        Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled />
         <a href="reset-pw.php" class='reset'><p style="align: right; color: blue; font-size: 12px;">Reset Password?</p></a>
         <br>
 
         Gender: <br> 
         <?php if (is_null($gender) or $gender=='') { ?>
-        <select name="gender" id="gender" required>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-          <option value="choosenot">Choose not to say</option>
-        </select>
+          <input type="text" name="gender" value="<?php echo 'Male'; ?>" disabled >
         <?php } else { ?>
-          <input type="text" name="gender" value="<?php echo $gender; ?>" disabled required>
+          <input type="text" name="gender" value="<?php echo $gender; ?>" disabled >
         <?php } ?>
         <br>
 
         Experience <br>
         <?php if (is_null($experience) or $experience=='') { ?>
-          <input type="text" name="experience" required>
+          <input type="text" name="experience" value="<?php echo 'XX Years'; ?>" disabled >
           <?php } else { ?>
-            <input type="text" name="experience" value="<?php echo $experience; ?>" disabled required>
+            <input type="text" name="experience" value="<?php echo $experience; ?>" disabled>
           <?php } ?>
         <br>
 
@@ -278,11 +243,23 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
         Age <br>
         <?php if (is_null($age) or $age=='') { ?>
-          <input type="text" name="age" required>
+          <input type="text" name="experience" value="<?php echo 'XX Years'; ?>" disabled >
           <?php } else { ?>
             <input type="text" name="age" value="<?php echo $age; ?>" disabled required>
           <?php } ?>
         <br>
+
+</div>
+
+<div class="flex-right">
+
+  <img src=<?php echo $path;?> style="height: 100px; width: 100px; border-radius: 30%;" alt="" />  <br>
+
+  <button class='socials'><img src="images/WhatsApp.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $whatsapp; ?>" style="text-decoration:none; color:black;">WhatsApp</button><br>
+  <button class='socials'><img src="images/Twitter.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $twitter; ?>" style="text-decoration:none; color:black;">Twitter</button><br>
+  <button class='socials'><img src="images/LinkedIn.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $linkedin; ?>" style="text-decoration:none; color:black;">LinkedIn</button><br>
+  <button class='socials'><img src="images/Instagram.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $instagram; ?>" style="text-decoration:none; color:black;">Instagram</button><br>
+  <button class='socials'><img src="images/Facebook.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $facebook; ?>" style="text-decoration:none; color:black;">Facebook </button><br>
 
 </div>
 
@@ -292,9 +269,13 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
       <br><br>
       </div>
 
-      <div class="center-flex align-middle"><button type="submit" class="addBtn" name="update">Save</button></div>
+      <div class="center-flex align-middle">
+        <button class="addBtn" a href="profile_settings_edit.php">Edit Profile Details</button>  <!--link not working to move to next page-->
+      </div>
       <br>
   </form>
   </div>
+
+
 </body>
 </html>
