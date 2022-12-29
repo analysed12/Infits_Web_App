@@ -33,7 +33,7 @@
       <center>
         <h1 style="font-size: 28px; color: #0177FD; font-weight: 700; margin-bottom: 0;">Let’s Have a chat</h1>
         <h3 style="font-size: 40px; color: #202224; font-weight: 700; margin-top: 0;">An expert at your services</h3>
-    </center>
+      </center>
 
       <!-----------------------------------------------FORM--------------------------------------------------------->
       <div class="email-area">
