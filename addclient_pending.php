@@ -1,11 +1,11 @@
-<?php  include('config.php');?>
+<?php  //include('config.php');?>
 <html>
 
 <head>
     <style>
         body {
             height: 100vh;
-            overflow: hidden;
+            overflow: auto;
         }
         #contents {
             display: flex;

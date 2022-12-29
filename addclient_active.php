@@ -1,4 +1,5 @@
-<?php  include('config.php');?>
+<?php  //include('config.php');
+//session_start();?>
 
 <html>
 
@@ -6,7 +7,7 @@
     <style>
         body {
             height: 100vh;
-            overflow: hidden;
+            overflow: auto;
         }
         #contents {
             display: flex;
