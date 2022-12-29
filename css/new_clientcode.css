@@ -1,0 +1,43 @@
+.header{
+    position: absolute;
+    height:43px;
+    width: 215px;
+    text-align: center;
+    left: 321px;
+    padding-top: 45px;
+}
+.header #header{
+    position: absolute;
+    font-family: NATS;
+    font-style: normal;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+.header-send{
+    position: absolute;
+
+     justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    top: 210pxpx;
+    left:300px;
+
+}
+.pp-cs-st{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 600;
+font-size: 30px;
+line-height: 63px;
+
+color: #000000;
+
+}
+.box- req{
+    position: absolute;
+    justify-content: space-evenly;
+    text-align: center;
+    display: flex;
+    margin-top: 5px auto;
+}

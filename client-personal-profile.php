@@ -1,4 +1,4 @@
-<?php  include('config.php');?>
+<?php  include('connection.php');?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,91 +17,34 @@
 		<link rel="stylesheet" href="css/mobiscroll.javascript.min.css">
 		<script src="js/mobiscroll.javascript.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
+	  <title>Client Personal Profile</title>
 	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	  <link rel="stylesheet" type="text/css" href="./styles/event_calendar.css">
 	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2">
   </head>
   <body>
 		<?php 
-        
-            // $clientuserID = $_POST['clientuserID'];
-            $clientuserID = "Azarudeen";
-            // $dietitianID = $_POST['dietitianID'];
-            $dietitianID = "Rahul";
-            $stmnt = $conn -> prepare("SELECT * FROM client,diet_chart where client.clientuserID = ? and diet_chart.dietitianuserID = ?");
-            
-            $stmnt-> bind_param("ss",$clientuserID,$dietitianID);
-            $stmnt-> execute();
-            $stmnt-> bind_result($clientuserID,$password,$name,$location,$email,$mobile,$plancl,$profilePhoto,$dietitianID,$gender,$age,$verification,$height,$weight,$dietitianID,$clientID,$dun,$mon,$tue,$wed,$thur,$fri,$sat);
-            
-        
-            $stmnt2 = $conn2 -> prepare("select  clientID FROM diet_chart where diet_chart.dietitianuserID = ?");
-            
-            $stmnt2-> bind_param("s",$dietitianID);
-            $stmnt2-> execute();
-            $stmnt2-> bind_result($clientID);
-        
-            $products = array();
-            
-            $plan = "null";
-        
-            $dietChartClient = array();
-        
-            while ($stmnt2 -> fetch()) {
-                array_push($dietChartClient,$clientID);
-            }
-        
-            // print_r($dietChartClient);
-        
-            while($stmnt->fetch()){
-        
-                // echo $clientID." <br> ".$clientuserID;
-        
-              $temp = array();
-              
-                  $imageName = "$clientuserID.jpg";
-                 $image = 'upload/'.$imageName;
-                $type = pathinfo($image, PATHINFO_EXTENSION);
-                $data = file_get_contents($image);
-        
-              $temp['clientuserID']= $clientuserID;
-              $temp['password']= $password;
-              $temp['name']= $name;
-              $temp['location']= $location;
-              $temp['email']= $email;
-              $temp['location']= $location;
-              $temp['email']= $email;
-              $temp['mobile']= $mobile;
-              $temp['age']= $age;
-              if(in_array($clientuserID,$dietChartClient)){
-                $plan = "Diet Chart";
-            }
-            else if(!in_array($clientuserID,$dietChartClient)){
-            $plan = "null";
-            }
-              $temp['plan']= $plan;
-              $temp['profilePhoto']= base64_encode($data);
-              $temp['gender']= $gender;
-              $temp['dietitianID']= $dietitianID;
-              $temp['height'] = $height;
-              $temp['weight'] = $weight;
-              
-              array_push($products,$temp);
-            }
-            // echo json_encode($products);
-        ?>
+           // $clientuserID =$_SESSION['clientuserID'];
+                   //Session variable for client Id
+             $clientuserID = "c002";
+              $sql = "select * from `client` where `clientuserID` = '{$clientuserID}'";
+              $result = $conn -> query($sql);
+              if($result ->num_rows > 0)
+              {
+                while($row = $result -> fetch_assoc())
+                {?>
+
 		<?php include 'event_calendar.php';?>
         <div class="form-body">
             <img src="images/profile_pic.svg" style="width: 300; height: 300;">
-            <span>Ronald Richards</span>
-            <p>25 years old</p>
+            <span> <?php echo $row['name']; ?> </span>
+            <p><?php echo $row['age'];?> years old</p>
             <div class="profile-box">
                 <div class="attribute-box">
                     <div class="attribute-dot"></div>
                     <p>Gender</p>
                 </div>
-                <span><?php echo $gender ?></span>
+                <span><?php echo $row['gender']; ?></span>
                 
             </div>
             <div class="profile-box">
@@ -109,7 +52,7 @@
                     <div class="attribute-dot"></div>
                     <p>Weight</p>
                 </div>
-                <span><?php echo $weight ?> kg</span>
+                <span><?php echo $row['weight']; ?> kg</span>
                 
             </div>
             <div class="profile-box">
@@ -117,7 +60,7 @@
                     <div class="attribute-dot"></div>
                     <p>BMI</p>
                 </div>
-                <span>20.2</span>
+                <span>?php ?></span>
                 
             </div>
             <div class="profile-box">
@@ -125,7 +68,7 @@
                     <div class="attribute-dot"></div>
                     <p>Height</p>
                 </div>
-                <span><?php echo $height ?> feet</span>
+                <span><?php echo $row['height']; ?> feet</span>
                 
             </div>
             <div class="profile-box">
@@ -133,7 +76,7 @@
                     <div class="attribute-dot"></div>
                     <p>Phone No</p>
                 </div>
-                <span><?php echo $mobile ?></span>
+                <span><?php echo $row['mobile']; ?></span>
                 
             </div>
             <div class="profile-box">
@@ -141,7 +84,7 @@
                     <div class="attribute-dot"></div>
                     <p>Email Id</p>
                 </div>
-                <span><?php echo $weight ?></span>
+                <span><?php echo $row['email']; ?></span>
                 
             </div>
             <div class="profile-box">
@@ -149,7 +92,7 @@
                     <div class="attribute-dot"></div>
                     <p>Subscribed Plan</p>
                 </div>
-                <span><?php echo $plan ?></span>
+                <span><?php echo $row['plan']; }}?></span>
                 
             </div>
             <div class="profile-box">
@@ -157,7 +100,15 @@
                     <div class="attribute-dot"></div>
                     <p>Duration</p>
                 </div>
-                <span><?php echo $weight ?> months</span>
+                <?php 
+                $sql1 = "select `duration` from `createplan` , `client` where `createplan`.`name` = `client`.`plan`";
+                $result1 = $conn -> query($sql1);
+                if($result1 ->num_rows >0)
+                {
+                    while($row1 = $result1 -> fetch_assoc()){?>
+
+                
+                <span>  <?php echo $row1['duration']; }} ?> months</span>
                 
             </div>
         

@@ -1,23 +1,15 @@
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Sidebar 03</title>
-	  <title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
-	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	  <!--<link rel="stylesheet" type="text/css" href="./styles/event_calendar.css">-->
+  	<title>Diet Chart</title>
+	  
 	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		
-            <!--<link rel="stylesheet" href="css/Recipies.css">-->
-        
-		<link rel="stylesheet" href="css/mobiscroll.javascript.min.css">
-		<script src="js/mobiscroll.javascript.min.js"></script>
         <style>
 
 #content {
@@ -107,13 +99,36 @@
   cursor: pointer;
   width: 140px;
   border-radius: 10px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 /* Darker background on mouse-over */
 .add-btn:hover {
   background-color: RoyalBlue;
 }
+
     
+    /*   days buttons  */
+    .day-band{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      width: 80%;
+    }
+    .day{
+      color: black;
+      padding: 10px;
+      border:none;
+      background: none;
+    }
+    .day:hover, .active{
+      color:white;
+      background:#9C74F5;
+      border-radius:10px;
+    }
 </style>
 </head>
 
@@ -124,65 +139,93 @@
     <div id="content">
       <!------------------------------------------------DASHBOARD--------------------------------------------------------->
       <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Diet Chart</h1>
-      <p id="topnav-content-1"><span id="topnav-content-1-name">
-      <?php  if (isset($_SESSION['name'])) : ?>
-        <?php echo $_SESSION['name']; ?></strong></p>
-      <?php endif ?>
-      </span></p>
-    </div>
+      <p>Client Name: </p>
+      <?php 
+        $clientID = "Eden";
+        echo $clientID;
+      ?>
 
-    <!------------------calendar----------------->
-    <div id="content">
-      <?php include("calendar.php");?>
-      <br>
-    </div>
+    <!------------------days of the week----------------->
+    <center>
 
     
+<div class="day-band">
+  <button class="day" id="daybtn">Mon</button>
+  <button class="day" id="daybtn">Tue</button>
+  <button class="day" id="daybtn">Wed</button>
+  <button class="day" id="daybtn">Thu</button>
+  <button class="day" id="daybtn">Fri</button>
+  <button class="day" id="daybtn">Sat</button>
+  <button class="day" id="daybtn">Sun</button>
+</div>
+
+<script>
+const btn = document.getElementById('daybtn');
+
+btn.addEventListener('click', function onClick() {
+  btn.style.backgroundColor = 'salmon';
+  btn.style.color = 'white';
+});
+</script>
+  </center>
+    <br>
+
+        <!------------------food of the day----------------->
 
     <div id="content">
     <div class="tab">
         <div class="space-between-flex">
-        <button class="tablinks" onclick="openCity(event, 'Breakfast')">Breakfast</button>
-        <button class="tablinks" onclick="openCity(event, 'Lunch')">Lunch</button>
-        <button class="tablinks" onclick="openCity(event, 'Snack')">Snack</button>
-        <button class="tablinks" onclick="openCity(event, 'Dinner')">Dinner</button>
+        <button class="tablinks" onclick="openTab(event, 'Breakfast')">Breakfast</button>
+        <button class="tablinks" onclick="openTab(event, 'Lunch')">Lunch</button>
+        <button class="tablinks" onclick="openTab(event, 'Snack')">Snack</button>
+        <button class="tablinks" onclick="openTab(event, 'Dinner')">Dinner</button>
       </div>
     </div>
       
       <div id="Breakfast" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> In Morning</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <div class="add-btn">+</div>
         </div>
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> After Break</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <div class="add-btn">+</div>
         </div>
       </div>
       
       <div id="Lunch" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> Afternoon</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <div class="add-btn">+</div>
         </div>
       </div>
       
       <div id="Snack" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;">Snack</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <p style="color:black; font-size: 25px;">High Tea</p>
+            <div class="add-btn">+</div>
+        </div>
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;">Evening Snack</p>
+            <div class="add-btn">+</div>
         </div>
       </div>
 
       <div id="Dinner" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;"> Dinner</p>
-            <button class="add-btn"><i class="fa fa-plus"></i></button>
+            <p style="color:black; font-size: 25px;"> Night</p>
+            <div class="add-btn">+</div>
+        </div>
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;"> Late Night Food</p>
+            <div class="add-btn">+</div>
         </div>
       </div>
       
+
+      <!-- js for tabs -->
       <script>
-      function openCity(evt, food) {
+      function openTab(evt, food) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -197,14 +240,13 @@
       }
       </script>
         
+
         <br><br>
     <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #9C74F5">Save Plan</button>
     <br>
           </div>
 		</div>
 </div>
-
-
 
   </body>
 </html>
