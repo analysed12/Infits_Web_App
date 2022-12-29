@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -98,6 +99,9 @@
   cursor: pointer;
   width: 140px;
   border-radius: 10px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 /* Darker background on mouse-over */
@@ -105,79 +109,26 @@
   background-color: RoyalBlue;
 }
 
-/*--------------MODAL CSS------------------*/
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 50%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    /*position: relative;*/
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 40%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-/* The Close Button */
-.close {
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-header {
-    padding: 5px;
-    background-color: white;
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-body {padding: 2px 16px;}
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
     
+    /*   days buttons  */
+    .day-band{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      width: 80%;
+    }
+    .day{
+      color: black;
+      padding: 10px;
+      border:none;
+      background: none;
+    }
+    .day:hover, .active{
+      color:white;
+      background:#9C74F5;
+      border-radius:10px;
+    }
 </style>
 </head>
 
@@ -188,20 +139,38 @@
     <div id="content">
       <!------------------------------------------------DASHBOARD--------------------------------------------------------->
       <h1 style="font-size: 32px; color: #202224; font-weight: 600;">Diet Chart</h1>
-      <p id="topnav-content-1"><span id="topnav-content-1-name">
-      <?php  if (isset($_SESSION['name'])) : ?>
-        <?php echo $_SESSION['name']; ?></strong></p>
-      <?php endif ?>
-      </span></p>
-    </div>
+      <p>Client Name: </p>
+      <?php 
+        $clientID = "Eden";
+        echo $clientID;
+      ?>
 
-    <!------------------calendar----------------->
-    <div id="content">
-      <?php include("calendar.php");?>
-      <br>
-    </div>
+    <!------------------days of the week----------------->
+    <center>
 
     
+<div class="day-band">
+  <button class="day" id="daybtn">Mon</button>
+  <button class="day" id="daybtn">Tue</button>
+  <button class="day" id="daybtn">Wed</button>
+  <button class="day" id="daybtn">Thu</button>
+  <button class="day" id="daybtn">Fri</button>
+  <button class="day" id="daybtn">Sat</button>
+  <button class="day" id="daybtn">Sun</button>
+</div>
+
+<script>
+const btn = document.getElementById('daybtn');
+
+btn.addEventListener('click', function onClick() {
+  btn.style.backgroundColor = 'salmon';
+  btn.style.color = 'white';
+});
+</script>
+  </center>
+    <br>
+
+        <!------------------food of the day----------------->
 
     <div id="content">
     <div class="tab">
@@ -216,67 +185,45 @@
       <div id="Breakfast" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> In Morning</p>
-
-            <!-- Trigger/Open The Modal -->
-            <button class="modal-button" href="#myModal1">Open Modal</button>
-
-            <!-- The Modal -->
-            <div id="myModal1" class="modal">
-
-              <!-- Modal content -->
-              <div class="modal-content">
-              <div class="modal-header">
-                  <span class="close">×</span>
-                  <center><h2>Choose Template</h2></center>
-                </div>
-                <div class="modal-body">
-                    <img src="images/add_btn.svg" style="padding: 15px;">
-
-                </div>
-              </div>
-            </div>
+            <div class="add-btn">+</div>
+        </div>
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;"> After Break</p>
+            <div class="add-btn">+</div>
         </div>
       </div>
       
       <div id="Lunch" class="tabcontent">
         <div class="tab-box">
             <p style="color:black; font-size: 25px;"> Afternoon</p>
-            <!-- Trigger/Open The Modal -->
-            <button class="modal-button" href="#myModal2">Open Modal</button>
-
-            <!-- The Modal -->
-            <div id="myModal2" class="modal">
-
-              <!-- Modal content -->
-              <div class="modal-content">
-              <div class="modal-header">
-                  <span class="close">×</span>
-                  <h2>Choose Template</h2>
-                </div>
-                <div class="modal-body">
-                  <div class="dashed-border">
-                    <img src="images/add_btn.svg" style="padding: 15px;">
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="add-btn">+</div>
         </div>
       </div>
       
       <div id="Snack" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;">Snack</p>
-            <?php include 'diet_chart_popup.php'; ?>
+            <p style="color:black; font-size: 25px;">High Tea</p>
+            <div class="add-btn">+</div>
+        </div>
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;">Evening Snack</p>
+            <div class="add-btn">+</div>
         </div>
       </div>
 
       <div id="Dinner" class="tabcontent">
         <div class="tab-box">
-            <p style="color:black; font-size: 25px;"> Dinner</p>
-            <?php include 'diet_chart_popup.php'; ?>
+            <p style="color:black; font-size: 25px;"> Night</p>
+            <div class="add-btn">+</div>
+        </div>
+        <div class="tab-box">
+            <p style="color:black; font-size: 25px;"> Late Night Food</p>
+            <div class="add-btn">+</div>
         </div>
       </div>
       
+
+      <!-- js for tabs -->
       <script>
       function openTab(evt, food) {
         var i, tabcontent, tablinks;
@@ -293,48 +240,6 @@
       }
       </script>
         
-
-        <script>// Get the button that opens the modal
-        var btn = document.querySelectorAll("button.modal-button");
-
-        // All page modals
-        var modals = document.querySelectorAll('.modal');
-
-        // Get the <span> element that closes the modal
-        var spans = document.getElementsByClassName("close");
-
-        // When the user clicks the button, open the modal
-        for (var i = 0; i < btn.length; i++) {
-        btn[i].onclick = function(e) {
-            e.preventDefault();
-            modal = document.querySelector(e.target.getAttribute("href"));
-            modal.style.display = "block";
-        }
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        for (var i = 0; i < spans.length; i++) {
-        spans[i].onclick = function() {
-            for (var index in modals) {
-              if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
-            }
-        }
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-            for (var index in modals) {
-              if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
-            }
-            }
-        }
-        //keep page from refreshing
-        function m_display(){
-            event.preventDefault();
-            modal.style.display ="block";
-        }
-        </script>
 
         <br><br>
     <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #9C74F5">Save Plan</button>
