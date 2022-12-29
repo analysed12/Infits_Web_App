@@ -21,6 +21,11 @@
         $experience = $row['experience'];
         $gender = $row['gender'];
         $age = $row['age'];
+        $facebook = $row['facebook'];
+        $whatsapp = $row['whatsapp'];
+        $twitter = $row['twitter'];
+        $linkedin = $row['linkedin'];
+        $instagram = $row['instagram'];
 
         if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
           $path = "./upload/pp.jpg";
@@ -229,7 +234,7 @@
         <?php if (is_null($experience) or $experience=='') { ?>
           <input type="text" name="experience" value="<?php echo 'XX Years'; ?>" disabled >
           <?php } else { ?>
-            <input type="text" name="experience" value="<?php echo $experience; ?>" >
+            <input type="text" name="experience" value="<?php echo $experience; ?>" disabled>
           <?php } ?>
         <br>
 
@@ -250,11 +255,11 @@
 
   <img src=<?php echo $path;?> style="height: 100px; width: 100px; border-radius: 30%;" alt="" />  <br>
 
-  <button class='socials'><img src="images/WhatsApp.svg" style="height: 33px;"> &nbsp; WhatsApp</button><br>
-  <button class='socials'><img src="images/Twitter.svg" style="height: 33px;"> &nbsp; Twitter</button><br>
-  <button class='socials'><img src="images/LinkedIn.svg" style="height: 33px;"> &nbsp; LinkedIn</button><br>
-  <button class='socials'><img src="images/Instagram.svg" style="height: 33px;"> &nbsp; Instagram</button><br>
-  <button class='socials'><img src="images/Facebook.svg" style="height: 33px;"> &nbsp; Facebook</button><br>
+  <button class='socials'><img src="images/WhatsApp.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $whatsapp; ?>" style="text-decoration:none; color:black;">WhatsApp</button><br>
+  <button class='socials'><img src="images/Twitter.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $twitter; ?>" style="text-decoration:none; color:black;">Twitter</button><br>
+  <button class='socials'><img src="images/LinkedIn.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $linkedin; ?>" style="text-decoration:none; color:black;">LinkedIn</button><br>
+  <button class='socials'><img src="images/Instagram.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $instagram; ?>" style="text-decoration:none; color:black;">Instagram</button><br>
+  <button class='socials'><img src="images/Facebook.svg" style="height: 33px;"> &nbsp; <a href="<?php echo $facebook; ?>" style="text-decoration:none; color:black;">Facebook </button><br>
 
 </div>
 
@@ -264,7 +269,9 @@
       <br><br>
       </div>
 
-      <div class="center-flex align-middle"><button class="addBtn" a href="profile_settings_edit.php">Edit Profile Details</button></div>
+      <div class="center-flex align-middle">
+        <button class="addBtn" a href="profile_settings_edit.php">Edit Profile Details</button>  <!--link not working to move to next page-->
+      </div>
       <br>
   </form>
   </div>

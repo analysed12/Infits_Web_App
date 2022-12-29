@@ -453,6 +453,8 @@ $("#imageUpload").change(function() {
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
+
+    <form method="post" action=" " enctype="multipart/form-data">
     <select name="socials" id="socials" placeholder="Platform">
           <option value="whatsapp">WhatsApp</option>
           <option value="twitter">Twitter</option>
@@ -461,12 +463,45 @@ $("#imageUpload").change(function() {
           <option value="instagram">Instagram</option>
       </select>
       <br>
-     <input type="text" placeholder="Copy Link Here">
+     <input type="text" placeholder="Copy Link Here" name="link">
      <br>
      <div class="center-flex align-middle"><button type="submit" class="addBtn" name="save_socials">Save</button></div>
   </div>
 
 </div>
+<?php
+//profile updation save button 
+if(isset($_POST['save_socials']) ) {
+  // receive all input values from the form
+  $socials = mysqli_real_escape_string($db, $_POST['socials']);
+  $link = mysqli_real_escape_string($db, $_POST['link']);
+
+  if ($socials == 'whatsapp'){
+  $query = "UPDATE dietitian SET whatsapp = '$link' where `dietitianuserID` = '$currentUser'";
+    mysqli_query($db, $query);
+  }
+
+  if ($socials == 'twitter'){
+    $query = "UPDATE dietitian SET twitter = '$link' where `dietitianuserID` = '$currentUser'";
+      mysqli_query($db, $query);
+  }
+
+  if ($socials == 'linkedin'){
+    $query = "UPDATE dietitian SET linkedin = '$link' where `dietitianuserID` = '$currentUser'";
+      mysqli_query($db, $query);
+    }
+
+  if ($socials == 'facebook'){
+    $query = "UPDATE dietitian SET facebook = '$link' where `dietitianuserID` = '$currentUser'";
+      mysqli_query($db, $query);
+    }
+
+  if ($socials == 'instagram'){
+    $query = "UPDATE dietitian SET instagram = '$link' where `dietitianuserID` = '$currentUser'";
+      mysqli_query($db, $query);
+    }
+}
+?>
 
 <script>
 // Get the modal
