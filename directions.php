@@ -2,16 +2,6 @@
 <title>Directions</title>
 <head>
   <style>
-	#content {
-        overflow: auto;
-        display: flex;
-        flex-direction: column;
-        height: 90%;
-        font-family: 'Poppins';
-        font-style: normal;
-        padding: 10px;
-        margin: 0px;
-    }
 	 	.upload-photo{
 
     position: absolute;
@@ -121,7 +111,7 @@ float:right;
 }
 
 
-
+}
 .div-header{
                 display: flex;
                 justify-content: space-between;
@@ -169,11 +159,12 @@ margin-top: 25;
 
 }
 .up-btn{
-	background: #FFFFFF;
-	border: 2px solid #A45DF2;
-	border-radius: 10px;
-	color: #A45DF2;
-	width: 250px;
+	position: absolute;
+	height:48px;
+	width:100px;
+	backrground:white;
+	color:#9A5EF5;
+	border-radius:15px;
 }
 
 	 </style>
@@ -198,36 +189,37 @@ margin-top: 25;
 	<body>
 	
 	  	 <!------Side Nav----->
-		   <div id="page">
-    		<?php include 'event_calendar.php'; ?>
-
-    		<div id="content">
+	  	 <?php include("event_calendar.php");?>
+	  	 
+	  	 <form id="form1" action="" method="post" enctype ="multipart/form/data">
+	  	 <div class="container" id ="cnt">
 	  	
         
-  
+     </div>
 
-<!--
+
          <div class="buttons" style="text-align: center;">
             <ul class="button-class" style="display:flex; list-style:none";>
-			<li> <div class="p-2" style="width: 135px;height:32px; margin-top: 5%;"><a href ="receipe_details_view.php" style="text-decoration: none; color: black; font-size:15;font-weight:400% ">Recipies details</a></div></li>
-			<li><div class="p-2" style="width:100px; height:32px; margin-left: 50px;">
-				<a href="Ingredients.php" style="text-decoration: none; color: black; font-size:15;font-weight:400%  ">Ingredients</a></div></li>
-			<li> <div class="p-2" style="width:78px; height:32px; margin-left: 50px; background-color: white;
-			margin-top: 5%; border-radius: 22px; text-align:center;margin-top: 5%;" >
-				<a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;">Directions</a></div></li>
-			</ul>
-			</div>-->
-
+<li> <div class="p-2" style="width: 135px;height:32px; margin-top: 5%;"><a href ="receipe_details_view.php" style="text-decoration: none; color: black; font-size:15;font-weight:400% ">Recipies details</a></div></li>
+  <li><div class="p-2" style="width:100px; height:32px; margin-left: 50px;">
+  	<a href="Ingredients.php" style="text-decoration: none; color: black; font-size:15;font-weight:400%  ">Ingredients</a></div></li>
+ <li> <div class="p-2" style="width:78px; height:32px; margin-left: 50px; background-color: white;
+  margin-top: 5%; border-radius: 22px; text-align:center;margin-top: 5%;" >
+ 	<a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;">Directions</a></div></li>
+</ul>
+</div>
 <form action=" " method="post" enctype="multipart/form-data">
-
-
+           <div class="link-add">    
+          <div class="link-container">
           	<label id="lbl" name="lbl_symbol">+</label>
-          	<p > Add Directions</p>
+          		<div>
+          			<div class="para">
+          	<p id ="p-add" > Add Directions</p>
 
 
     
                 <!------image upload----->
-             <!--<div class="up-link" style="display:flex; flex-direction:row; position:absolute;  height: 58px; width:160px;"> -->
+             <div class="up-link" style="display:flex; flex-direction:row; position:absolute;  height: 58px; width:160px;> 
 		
 			 <img src=".\images\upload.svg" id="up-symbol"  style="height:15px; width:15px;">  
 				<input type="file" name="video-upload" style="display:none;">
@@ -236,7 +228,7 @@ margin-top: 25;
 
 
                <!----------upload url-------->
-           <!--<div class="up-url" style="display:flex; flex-direction:row;position:absolute;  height: 58px; width:160px;>-->
+           <div class="up-url" style="display:flex; flex-direction:row;position:absolute;  height: 58px; width:160px;>
 		  
 
 		   <img src=".\images\url.svg" id="url-symbol" style="height:15px; width:15px;">
@@ -244,7 +236,7 @@ margin-top: 25;
 			<button id="url" name="url" class="up-btn" style="margin-left:190px;"> upload url </button>
            </div>
 
- 
+
 
 
             <!-------popup for add directions--->

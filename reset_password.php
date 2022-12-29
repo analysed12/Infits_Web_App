@@ -435,7 +435,7 @@ color: #FFFFFF;
             </div>
 </form>
             <div class="col-sm-6">
-                <div class="mobile">
+                <div class="mobile" class="d-none d-lg-block">
                 <img src="images/mobile.svg" alt="">
                 </div>
                 

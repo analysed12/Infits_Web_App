@@ -1,5 +1,5 @@
 <?php 
-      include('config.php');?>
+      include('connection.php');?>
       <?php
          if( isset($_POST['submit']) && isset($_FILES['my_image']))
          {     
