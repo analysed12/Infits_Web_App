@@ -5,7 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+     $(document).ready(function(){
+        $(".options").click(function(){
+        $(".dlt_popup").animate({
+                    height: 'toggle'
+                });
+        });
+    });
+    </script>
 </head>
+
 <style>
 .search_box{
     background: #FFFFFF;
