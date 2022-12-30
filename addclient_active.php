@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<?php // include('config.php');
+=======
 <?php  //include('config.php');
+>>>>>>> 52ebceb6e015ddf89b397eeb8a7f12a52c4efbce
 //session_start();?>
 
 <html>
