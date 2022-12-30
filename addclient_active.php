@@ -1,5 +1,5 @@
-<?php  include('config.php');
-session_start();?>
+<?php // include('config.php');
+//session_start();?>
 
 <html>
 
