@@ -1,6 +1,13 @@
+<!DOCTYPE html>
 <html>
 <title>Directions</title>
 <head>
+<link rel="stylesheet" href="./css/directions.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
 	 	.upload-photo{
 
@@ -9,27 +16,12 @@ width: 265px;
 height: 200px;
 left: 610px;
 top: 100px;
-
+border:solid 1px black;
 background: #D9D9D9;
 opacity: 0.74;
 border-radius: 12px;
 }
- .link-container{
-
- 	box-sizing: border-box;
-
-position: absolute;
-width: 60px;
-height: 52px;
-left: 620px;
-top: 460px;
-background: whitesmoke;
-border-radius: 19px;
-border-color:rgba(121, 99, 251, 1);
-box-shadow:rgba(121, 99, 251, 1) ;
-
-text-align: center;
- }
+ 
  #lbl{
  	position: absolute;
 width: 25px;
@@ -63,6 +55,7 @@ width: 459px;
 height: 50px;
 left: 556px;
 top: 380px;
+display:flex;
 
 background: #E7E7E7;
 border: 1px solid #E7E7E7;
@@ -70,31 +63,7 @@ border-radius: 44px;
 text-align: center;
 
 }
-.link-add{
-	height: 89px;
-	width:  181px;
-	top:  460px;
-	left:  584px;
-}
-#p-add
-{
 
-}
-.para{
-	position: absolute;
-
-
-left: 40px;
-top: 24px;
-/* identical to box height, or 33px */
-display: flex;
-flex-direction: row;
-justify-content:space-between;
-color: #929292;
-margin:10px;
-float:right;
-
-}
 .add-direction{
 	          display: none;
 	          box-sizing: border-box;
@@ -150,21 +119,6 @@ background: #FFFFF;
 border: 1px solid #D5D5D5;
 border-radius: 9px;
 
-
-}
-.link-add{
-margin-top: 25;
-	 padding-left: 25px;
-
-
-}
-.up-btn{
-	position: absolute;
-	height:48px;
-	width:100px;
-	backrground:white;
-	color:#9A5EF5;
-	border-radius:15px;
 }
 
 	 </style>
@@ -190,8 +144,9 @@ margin-top: 25;
 	
 	  	 <!------Side Nav----->
 	  	 <?php include("event_calendar.php");?>
+		 <?php include('connection.php');?>
 	  	 
-	  	 <form id="form1" action="" method="post" enctype ="multipart/form/data">
+	  	 <form id="form1" action="" method="post" enctype ="multipart/form-data">
 	  	 <div class="container" id ="cnt">
 	  	
         
@@ -208,38 +163,172 @@ margin-top: 25;
  	<a href="#" style="text-decoration: none; color: black; font-size:15; font-weight:400% ;">Directions</a></div></li>
 </ul>
 </div>
+
+<!------php for add directions------>
+<?php
+   if(isset($_POST['done']) || isset($_POST['dir']))
+   {
+	   $id = $_SESSION['dir_id'];
+	   $direction = $_POST['text1'];
+	   $sql ="insert into `add_direction` (`dir_id`, `direction`) values ('$id', '$direction')";
+	   if($conn -> query($sql))
+	   {
+		echo "direction added";
+
+	   }
+	   else
+	   {
+		 echo "not added";
+	   }
+   }
+
+?>
+
+ <!--------body part------->
+
 <form action=" " method="post" enctype="multipart/form-data">
-           <div class="link-add">    
+           <div class="link-add">   
+			
           <div class="link-container">
           	<label id="lbl" name="lbl_symbol">+</label>
           		<div>
           			<div class="para">
           	<p id ="p-add" > Add Directions</p>
+          </div>
 
 
-    
                 <!------image upload----->
-             <div class="up-link" style="display:flex; flex-direction:row; position:absolute;  height: 58px; width:160px;> 
-		
-			 <img src=".\images\upload.svg" id="up-symbol"  style="height:15px; width:15px;">  
+            
+		     <div class="img-set" style="position: absolute; text-align:center;margin-right:50px;">
+			 <img src=".\images\upload.svg" id="up-symbol">  
 				<input type="file" name="video-upload" style="display:none;">
-			<button id="upload" name="upload" class="up-btn" style="left:450px;"> upload video</button> 
-</div> 
+             </div>
+			<button id="upload" name="upload" class="up-btn" > upload video</button> 
+
 
 
                <!----------upload url-------->
-           <div class="up-url" style="display:flex; flex-direction:row;position:absolute;  height: 58px; width:160px;>
+         -  <div class="up-url" style="display:flex; flex-direction:row;position:absolute;  height: 58px; width:160px; ">
 		  
 
 		   <img src=".\images\url.svg" id="url-symbol" style="height:15px; width:15px;">
 		   <input type="file" name="url-upload" style="display:none;">
-			<button id="url" name="url" class="up-btn" style="margin-left:190px;"> upload url </button>
+		
+
+          <button type="button" class="btn-upld-sty"  id="btn-url">
+         upload url
+         </button>
+
            </div>
+</div>
+
+
+		   <!-------php for upload url----->
+		   <?php   
+		     //$name = $_SESSION['receipe_name'];
+			 
+			 if(isset($_POST['upld-url']))
+			 {
+				$url =$_POST['add-url'];
+				$sql = "update `dietian_recipies` set `link` = '$url' where `name` = '$name'";
+				if($conn -> query($sql) == TRUE)
+				{
+					echo "url link added";
+				}
+				else
+				{
+					echo "link not added, Try again";
+				}
+			 }
+			 
+		   ?>
+
+
+		   <!--------popup for upload url------>
+		   <form action =" " method="post">
+		   
+<div class="popup-url" id="upload-url">
+  <div class="dialog">
+    <div class="content">
+
+      <!-- url-popupHeader -->
+      <div class="url-header">
+        <h4 class="modal-url">ADD URL</h4>
+        <button class="close-button" id="cls-btn" style="background: none; border:none; cursor:pointer;outline: none; font-weight:bold; padding-left:355px;">
+            		 &times;</button>
+
+      </div>
+
+      <!-- url-popup body -->
+      <div class="url-body">
+        <input type ="text" id="url" palceholder="Enter Url" name="add-url">
+      </div>
+
+      <!-- url-popup footer -->
+      <div class="footer">
+        <button type="button" class="btn-upld-sty" name="upld-url" id="upld">upload</button>
+      </div>
+
+    </div>
+</div>
+</div>
+</form>
+
+
+
+<!----------code for upload video------->
+    <?php
+	   if(isset($_POST['upld-url']) && isset($_FILES['video-upload']))
+	   {
+		$img_name= $_FILES['video-upload']['name'];
+		$img_size = $_FILES['video-upload']['size'];
+		$tmp_name = $_FILES['video-upload']['tmp_name'];
+		  $error =$_FILES['video-upload']['error'];
+		   $file_type= $_FILES['video-upload']['type'];
+		 if($error === 0)
+		 {
+			if($img_size > 209712)
+			{
+				  echo("file too large");
+
+			 }
+			 else
+			{
+					 $img_ex=pathinfo($img_name, PATHINFO_EXTENSION);
+					$img_ex_lc=strtolower($img_ex);
+				   $allowed_ex = array("jpg","png");
+
+					 if(in_array($img_ex_lc, $allowed_ex))
+					{
+					   $new_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+					  $video_upload_path = "./images/" .$new_name;
+		 
+					  move_uploaded_file($tmp_name,$img_upload_path );  
+					  $videoandpath="$new_name|$video_upload_path";
+
+					  $sql ="update `dietian_recipies` set `file` = '$videoandpath' where `name` = '$name'";
+					  if($conn -> query($sql) == true)
+					  {
+						echo "video uploaded";
+					  }
+					  else
+					  {
+						echo "video not uploaded";
+					  }
+					}
+				}
+			}
+	  
+	   }
+	?>
+   
+
 
 
 
 
             <!-------popup for add directions--->
+
 
             <div class="add-direction" id="add-dir" name="add-dir">
             	<div class="div-header">
@@ -251,10 +340,11 @@ margin-top: 25;
             		
     
         <div class="box">
-        <input type= "text" id="text1" class="input-text" name = "text1" value="Directions"><br>
+        <input type= "text" id="text1" class="input-text" name = "text1" placeholder="Directions"><br>
         
        
-       <div  class="link-add"> <a href ="#" id="aid" name="aid">Add more Directions</a></div>
+       <div  class="link-add"> <button id="dir" name="dir" style="height:47px;width: 238px;color:#7B62FB;background:white;border:none;>
+	   Add more Directions</button></div>
 
        
         
@@ -292,9 +382,32 @@ margin-top: 25;
                         modal.style.display ="block";
 
                         }
-
+</script
 
             </script>
+
+             <!-----open upload url--->
+			
+			
+           var cou_btn = document.getElementById("btn-url");
+            var modal1= document.getElementById("upload-url");
+			var close = document.getElementById("cls-btn");
+            
+             
+            cou_btn.onclick = function(){
+              modal1.style.display = "block";
+			  event.preventDefault();
+            } 
+             cls.btn.onclick = function(){
+				modal1.style.display ="none";
+				event.preventDefault();
+			 }
+
+          
+         </script>
+    
+
+				
 
 
        

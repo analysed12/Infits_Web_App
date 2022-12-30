@@ -41,9 +41,9 @@ text-align: center;
              .popup-ingredients{
                 box-sizing: border-box;
                  position: relative;
-                width: 409px;
-                height: 212px;
-                top: 450px;
+                width: 356px;
+                height: 464px;
+                top: 400px;
                 left: 50%;
                 background: #FFFFFF;
                 border: 1px solid #E4E4E4;
@@ -52,9 +52,12 @@ text-align: center;
              }
              .box{
                 position: absolute;
+                  justify-content: space-between;
+                  display: flex;
+                  flex-direction: column;
                   margin-top:40px;
-                  height: 330px;
-                  width: 310px;
+                  height: 360px;
+                  width: 300px;
                   padding-left:61px;
                   padding-right:17px;
              }
@@ -72,7 +75,7 @@ text-align: center;
              .input-text{
                 box-sizing: border-box;
                 
-                width: 310px;
+                width: 200px;
                 height: 33px;
                 
                 border: 1px solid #D5D5D5;
@@ -94,11 +97,13 @@ text-align: center;
 .btn-symbol-head{
     
     justify-content: space-evenly;
+    display: flex;
+    flex-direction: row;
     position: absolute;
-    left: 580px;
+    left: 680px;
     top: 457px;
     height:55px;
-    width: 200px;
+   
 }
                 
 img{
@@ -111,8 +116,8 @@ img{
     font-size: 19px;
     font-weight: 400;
     height: 33px;
-    width: 125px;
-    margin-left: 60px;
+    width: 500px;
+    margin-left: 90px;
     margin-top:  15px;
     line-height: 150%;
  }

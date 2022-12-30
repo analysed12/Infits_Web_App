@@ -1,0 +1,141 @@
+#upload-url{
+    position: fixed;
+    height:280px;
+    width:476px;
+    display:none;
+    top: 25%;
+    left:25%;
+    border-radius: 12px;
+    border: 1.74869px solid #E4E4E4;
+      box-sizing:border-box;
+    background:white;
+    
+
+}
+#url{
+    height:57px;
+    width:421px;
+    position: absolute;
+}
+.modal-url{
+
+   position: absolute;
+   font-weight: 400;
+   font-size: 30px;
+   font-family: NATS;
+   color: black;
+   margin-left: 40px;
+}
+.url-header{
+    
+    
+
+    display: flex;
+    flex-direction: row;
+    align-items:space-between;
+    justify-content: space-between;
+   padding: 12px 46px;
+    
+}
+.url-body{
+    position: absolute;
+    padding: 45px 23px;
+}
+.footer{
+    position: absolute;
+    padding: 140px 160px;
+}
+#upld{
+    position:absolute;
+    background: #A85CF1;
+    color:white;
+    border-radius: 18px;
+    height:55px;
+    width:198px;
+    font-weight: 400px;
+    font-size: 26px;
+
+}
+
+.link-add{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+   top: 400px;
+   left: 520px;
+    width: 650px;
+    height: 150px;
+   
+    
+}
+
+.link-add .link-container{
+
+    box-sizing: border-box;
+
+position: absolute;
+width: 60px;
+height: 52px;
+
+background: whitesmoke;
+border-radius: 19px;
+border-color:rgba(121, 99, 251, 1);
+box-shadow:rgba(121, 99, 251, 1) ;
+
+text-align: center;
+}
+.para{
+	position: absolute;
+/* identical to box height, or 33px */
+
+color: #929292;
+margin-left: 40px;
+
+float:right;
+
+}
+.up-link{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align:justify;
+    margin-left: 420px;
+    height:48px;
+    width:160px;
+}
+
+.up-btn{
+	position: absolute;
+	height:48px;
+	width:120px;
+	background:rgb(16, 15, 15);
+	color:#9A5EF5;
+	border-radius:15px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    margin-left:450px;
+}
+#up-symbol{
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    z-index: 1;
+    margin-left:430px;
+}
+.btn-upld-sty{
+    height:48px;
+	width:120px;
+	background:rgb(16, 15, 15);
+	color:#9A5EF5;
+	border-radius:15px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+   margin-left:20px;
+
+}
+

@@ -228,9 +228,7 @@ border-radius: 31px;
 
          <!------code for upload image---->
          <script>
-          $(function(){
-
-          
+          (function(){  
           $('#camera').on('click',function(){
             $('#my_image').trigger('click');
           });

@@ -1,3 +1,10 @@
+<?php include('connection.php'); ?>
+<?php
+   
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -138,7 +145,9 @@ font-size:15px !important;
         <!-- Calendar -->
         <h4 class="header">Create Plan</h4>
 
+
         <!-- Other content -->
+        <form action =" " method="post" > 
         <div class="plan_form">
             <div class="event-image">
                 <div class="ev-img">
