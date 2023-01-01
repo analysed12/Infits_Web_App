@@ -256,8 +256,10 @@ header .current-date {
                 while($row = mysqli_fetch_assoc($result)){ ?>
                     <div class="schedule-card">
                         <div class="schedule-card-title"><?php echo $row['meeting_type'] ?></div>
+                        <div></div>
                         <div class="schedule-card-name"><?php echo $row['name'] ?></div>
                         <div class="schedule-card-place"><?php echo $row['place_of_meeting'] ?></div>
+
                     </div>
                     <?php
                 }?>
