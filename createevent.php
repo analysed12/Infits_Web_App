@@ -47,13 +47,10 @@
         echo '<script>
         console.log("Hello");
     var modalObject = document.getElementById("myModal");
-    // var spanObject = document.getElementsByClassName("close")[0];
     
     modalObject.style.display = "block";
     
-    // spanObject.onclick = function(){
-    //     modalObject.style.display = "none";
-    // }
+   
     
     window.onclick = function(event) {
         if (event.target == modalObject) {
