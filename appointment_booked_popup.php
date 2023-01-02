@@ -12,6 +12,7 @@
 </div>
 
 <script>
+    console.log("Hello");
 var modalObject = document.getElementById("myModal");
 // var spanObject = document.getElementsByClassName("close")[0];
 
