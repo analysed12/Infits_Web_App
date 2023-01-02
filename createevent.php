@@ -16,6 +16,7 @@
     $end_date = date('Y-m-d H:i:s', strtotime($_POST['enddate']));
     $start_date_time = substr($start_date,-8);
     $start_date_date = substr($start_date,0,10);
+   
 
     $count = 0;
     $sql = "Select * from create_event" ;
@@ -30,10 +31,14 @@
         if ( $date_date_start == $start_date_date){
             if (($start_date_time > $date_time_start) && ($start_date_time < $date_time_end))
             {
+                $date_time_start_onlytime = substr($date_time_start,0,5) ; 
+        //    echo $date_time_start_onlytime ;
             $count ++;
             }
-        }    
+        }   
     }
+    
+
 
     if ($count== 0)
     {
@@ -41,14 +46,11 @@
         $result1=mysqli_query($conn,$sql1);
     }
     else{
-        ?>
-        <!-- Appointment Booked Popup -->
+        include "appointment_booked_popup.php";
+        // echo '
         
-    
-        <!-- Appointment Booked Popup -->
-        <?
-        echo "Appointment Booked" ;
-       
+        
+        // ';
     }
     // if(empty($personid) || empty($eventname) || empty($client_id) || empty($meeting_type) || empty($start_date)|| empty($end_date) ||empty($place_of_meeting) || empty($description) || empty($attachment)){
         
@@ -86,7 +88,7 @@
                 <img class="event-image" src="images/eventlist.png" alt="">
             </div>
             <br>
-            
+
 
             <form action="createevent.php" method="post">
                 <div class="eve_form">
@@ -193,20 +195,78 @@
                     </div>
 
                     <div style="width:100%; margin-left:10%; margin-right:10%">
-                            <a href="createevent.php"><input
-                                    style="display:inline-block; color:black; background:white;" class="form_btn"
-                                    placeholder="Cancel"></input></a>
-                            <button style="display:inline-block; background: #4B9AFB;" class="form_btn" name="submit"
-                                type="submit">Book Appointment</button>
-                        </div>
+                        <a href="createevent.php"><input style="display:inline-block; color:black; background:white;"
+                                class="form_btn" placeholder="Cancel"></input></a>
+                        <button style="display:inline-block; background: #4B9AFB;" class="form_btn" name="submit"
+                            type="submit">Book Appointment</button>
+                    </div>
                 </div>
         </div>
         </form>
-        </div>
+    </div>
     </div>
     <!-- Contents End -->
 
+
+    <!-- Appointment booked popup -->
+
+
+
+    <?php
+if ( isset ($_POST['submit'])){
+    $personid = 1;
+    $eventname = $_POST['subject'];
+    // Using session and getting it from add client page
+    $clientuserid = "Azarudeen";
+    // $client_id = 2;
+    $meeting_type = $_POST['meetingtype'];
+    $place_of_meeting = $_POST['placeofmeeting'];
+    $description = $_POST['description'];
+    $attachment = "hello";
+    $start_date = date('Y-m-d H:i:s', strtotime($_POST['startdate']));
+    $end_date = date('Y-m-d H:i:s', strtotime($_POST['enddate']));
+    $start_date_time = substr($start_date,-8);
+    $start_date_date = substr($start_date,0,10);
    
+
+    $count = 0;
+    $sql = "Select * from create_event" ;
+    $result = mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_assoc($result)){ 
+        $date_start = $row['start_date'] ;
+        $date_time_start = substr($date_start,-8);
+        $date_date_start = substr($date_start,0,10);
+        $date_end = $row['end_date'] ;
+        $date_time_end = substr($date_end,-8);
+        $date_date_end = substr($date_end,0,10);
+        if ( $date_date_start == $start_date_date){
+            if (($start_date_time > $date_time_start) && ($start_date_time < $date_time_end))
+            {
+                $date_time_start_onlytime = substr($date_time_start,0,5) ; 
+        //    echo $date_time_start_onlytime ;
+            $count ++;
+            }
+        }   
+    }
+    
+
+
+    if ($count== 0)
+    {
+        $sql1 = "INSERT INTO create_event (eventname, clientuserid, meeting_type, start_date, end_date, place_of_meeting, description, attachment) VALUES ('$eventname','$clientuserid','$meeting_type','$start_date','$end_date','$place_of_meeting','$description','$attachment')";
+        $result1=mysqli_query($conn,$sql1);
+    }
+    else{
+        include "appointment_booked_popup.php";
+        // echo '
+        
+        
+        // ';
+    }
+}
+    ?>
+
+
 
 </body>
 <script>
