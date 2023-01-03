@@ -148,28 +148,90 @@
     <!------------------days of the week----------------->
     <center>
 
-    
+    <!--
 <div class="day-band">
-  <button class="day" id="daybtn">Mon</button>
-  <button class="day" id="daybtn">Tue</button>
-  <button class="day" id="daybtn">Wed</button>
-  <button class="day" id="daybtn">Thu</button>
-  <button class="day" id="daybtn">Fri</button>
-  <button class="day" id="daybtn">Sat</button>
-  <button class="day" id="daybtn">Sun</button>
-</div>
+  <button class="day" name="monday" id="daybtn">Mon</button>
+  <button class="day" name="tuesday" id="daybtn">Tue</button>
+  <button class="day" name="wednesday" id="daybtn">Wed</button>
+  <button class="day" name="thursday" id="daybtn">Thu</button>
+  <button class="day" name="friday" id="daybtn">Fri</button>
+  <button class="day" name="saturday" id="daybtn">Sat</button>
+  <button class="day" name="sunday" id="daybtn">Sun</button>
+</div>-->
 
-<script>
+ 
+<!--
+<div class="day-band">
+<form method="post" action=" " enctype="multipart/form-data">
+  <button class="day" name="day_selected1" id="daybtn">Mon</button>
+  <button class="day" name="day_selected" id="daybtn">Tue</button>
+  <button class="day" name="day_selected" id="daybtn">Wed</button>
+  <button class="day" name="day_selected" id="daybtn">Thu</button>
+  <button class="day" name="day_selected" id="daybtn">Fri</button>
+  <button class="day" name="day_selected" id="daybtn">Sat</button>
+  <button class="day" name="day_selected" id="daybtn">Sun</button>
+</div>
+  -->
+<script>/*
 const btn = document.getElementById('daybtn');
 
 btn.addEventListener('click', function onClick() {
-  btn.style.backgroundColor = 'salmon';
+  btn.style.backgroundColor = '#9C74F5';
   btn.style.color = 'white';
-});
+});*/
 </script>
+
+<?php/*
+ session_status() === PHP_SESSION_ACTIVE ?: session_start();
+
+$db = mysqli_connect('localhost', 'root', '', 'infits');
+
+if (isset($_POST['day_selected1'])) {
+$day_selected = mysqli_real_escape_string($db, $_POST['day_selected1']);
+echo $day_selected;
+
+switch ($day_selected) {
+  case "Mon":
+    echo "Monday";
+    break;
+  case "tuesday":
+    echo "Your favorite color is blue!";
+    break;
+  case "wednesday":
+    echo "Your favorite color is green!";
+    break;
+  case "thursday":
+    echo "Your favorite color is green!";
+    break;
+  case "friday":
+    echo "Your favorite color is green!";
+    break;
+  case "saturday":
+    echo "Your favorite color is green!";
+    break;
+  case "sunday":
+    echo "Your favorite color is green!";
+    break;
+  default:
+    echo "Error";
+}}*/
+?>
   </center>
     <br>
 
+    <?php $day='sunday';?>
+
+    <?php
+ session_status() === PHP_SESSION_ACTIVE ?: session_start();
+
+$db = mysqli_connect('localhost', 'root', '', 'infits');
+$query = "select $day from `diet_chart` where `clientID` = '$clientID' ";
+$result = mysqli_query($db, $query);
+if($result->num_rows > 0){ 
+  while($row = $result->fetch_assoc()){
+$data = json_decode($result);
+echo $data;}}
+?>
         <!------------------food of the day----------------->
 
     <div id="content">

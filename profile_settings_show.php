@@ -26,16 +26,17 @@
         $twitter = $row['twitter'];
         $linkedin = $row['linkedin'];
         $instagram = $row['instagram'];
+        $profilePhoto = $row['profilePhoto'];
 
-        if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
-          $path = "./upload/pp.jpg";
+        //if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
+         //$path = "./upload/pp.jpg";
           
       
-      } else { 
+      //} else { 
 
           $ext= explode('|',$row['profilePhoto']);
           $path = $ext[1] . "/" .$ext[0];
-      }
+      //}
       }
     }
 
@@ -100,7 +101,7 @@
       border-radius: 10px;
       text-decoration: none;
       margin: 5px;
-      width: 60%;
+      width: 600px;
   }
   .center-flex{
       display: flex;
@@ -171,7 +172,7 @@
   <div id="content">	 
 
   <!--<div class="add-client-area">-->
-  <form method="post" action="profile_settings.php" enctype="multipart/form-data">
+  <form method="post" action="" enctype="multipart/form-data">
   	
     <br>
 
@@ -214,9 +215,7 @@
 
         <div class="flex-middle">
 
-        Profile Picture: 
-		    <input type="file" name="my_image" style="width: 250px;" value="" required/>
-        <br>
+        
 
         Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled />
         <a href="reset-pw.php" class='reset'><p style="align: right; color: blue; font-size: 12px;">Reset Password?</p></a>
@@ -269,8 +268,8 @@
       <br><br>
       </div>
 
-      <div class="center-flex align-middle">
-        <button class="addBtn" a href="profile_settings_edit.php">Edit Profile Details</button>  <!--link not working to move to next page-->
+      <div class="center-flex">
+       <a href="profile_settings_edit.php"> <div class="addBtn" ><center>Edit Profile Details</center></div></a>  <!--link not working to move to next page-->
       </div>
       <br>
   </form>

@@ -6,7 +6,7 @@
  $db = mysqli_connect('localhost', 'root', '', 'infits');
 
 
-    $currentUser = $_SESSION['name'];
+  $currentUser = $_SESSION['name'];
    $query = "select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
     $result = mysqli_query($db, $query); // Use curly braces to access array members inside strings
     if($result->num_rows > 0){ 
@@ -83,6 +83,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     mysqli_query($db, $query);
 
   	$_SESSION['success'] = "Information Updated";
+    header('location: profile_settings_show.php');
               }
             }
           }
@@ -203,68 +204,6 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     background: white;
   }
 
-  /*avatar
-  
-.avatar-upload {
-    position: relative;
-    max-width: 205px;
-    margin: 50px auto;
-    .avatar-edit {
-        position: absolute;
-        right: 12px;
-        z-index: 1;
-        top: 10px;
-        input {
-            display: none;
-            + label {
-                display: inline-block;
-                width: 34px;
-                height: 34px;
-                margin-bottom: 0;
-                border-radius: 100%;
-                background: #FFFFFF;
-                border: 1px solid transparent;
-                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-                cursor: pointer;
-                font-weight: normal;
-                transition: all .2s ease-in-out;
-                &:hover {
-                    background: #f1f1f1;
-                    border-color: #d6d6d6;
-                }
-                &:after {
-                    content: "\f040";
-                    font-family: 'FontAwesome';
-                    color: #757575;
-                    position: absolute;
-                    top: 10px;
-                    left: 0;
-                    right: 0;
-                    text-align: center;
-                    margin: auto;
-                }
-            }
-        }
-    }
-    .avatar-preview {
-        width: 192px;
-        height: 192px;
-        position: relative;
-        border-radius: 100%;
-        border: 6px solid #F8F8F8;
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-        > div {
-            width: 100%;
-            height: 100%;
-            border-radius: 100%;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-    }
-}*/
-
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -313,8 +252,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
   <div id="content">	 
 
-  <!--<div class="add-client-area">-->
-  <form method="post" action="profile_settings_edit.php" enctype="multipart/form-data">
+  <form method="post" action="" enctype="multipart/form-data">
   	
     <br>
 
@@ -359,10 +297,6 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 <br><br>
 
         <div class="flex-middle">
-<!--
-        Profile Picture: 
-
-		    <input type="file" name="my_image" style="width: 250px;" value="" required/>-->
         <br>
 
         Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled required />
@@ -405,37 +339,9 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
 <div class="flex-right">
 <img src=<?php echo $path;?> style="height: 100px; width: 100px; border-radius: 30%;" alt="" />  <br>
-
-<!--  avatar  
-
-<div class="avatar-upload">
-        <div class="avatar-edit">
-            <input type='file' id="imageUpload" display="none;" accept=".png, .jpg, .jpeg" />
-            <label for="imageUpload"></label>
-        </div>
-        <div class="avatar-preview">
-            <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
-            </div>
-        </div>
-    </div>
-
-    <script>
-      function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-            $('#imagePreview').hide();
-            $('#imagePreview').fadeIn(650);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-$("#imageUpload").change(function() {
-    readURL(this);
-});
-
-</script>-->
+Profile Picture: 
+		    <input type="file" name="my_image" style="width: 250px;" value="" required/>
+        <br>
 
 <!--   socials  -->
 <button class='socials'><img src="images/WhatsApp.svg" style="height: 33px;"> &nbsp; WhatsApp</button><br>

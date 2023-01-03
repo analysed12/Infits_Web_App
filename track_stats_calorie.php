@@ -1,7 +1,6 @@
 
-<?php  include('config.php');
+<?php  //include('config.php');
 session_start();?>
-<?php  include('connection.php');?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +44,7 @@ session_start();?>
             var cl=document.getElementById('defaultOpen');
                         cl.click();
         </script>
-</head>
+
 <style>
 html {
     overflow-x: hidden;
@@ -703,8 +702,9 @@ height: 45px;
     border-radius: 2px;
     font-family: 'NATS';
 }
-</style>
 
+</style>
+</head>
 <body>
     <?php include 'event_calendar.php' ?>
 
@@ -917,7 +917,6 @@ height: 45px;
                     $today = date('Y-m-d');
 
                     // $clientID = $_POST['userID'];
-
                     $clientID = 'Azarudeen';
 
                     $sql = "SELECT * 
