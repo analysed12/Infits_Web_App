@@ -42,13 +42,19 @@
     {
         $sql1 = "INSERT INTO create_event (eventname, clientuserid, meeting_type, start_date, end_date, place_of_meeting, description, attachment) VALUES ('$eventname','$clientuserid','$meeting_type','$start_date','$end_date','$place_of_meeting','$description','$attachment')";
         $result1=mysqli_query($conn,$sql1);
+        header("Location: calendar_of_events.php");
     }
     else{
+        echo "Appointment Booked" ;
         echo '<script>
         console.log("Hello");
     var modalObject = document.getElementById("myModal");
-    
-    modalObject.style.display = "block";
+    function m_display(event){
+        event.preventDefault();
+        modalObject.style.display ="block";
+    }
+    m_display();    
+    // modalObject.style.display = "block";
     
    
     
@@ -58,6 +64,7 @@
         }
     }
     </script>';
+    header("Location: createevent.php");
     }
     // if(empty($personid) || empty($eventname) || empty($client_id) || empty($meeting_type) || empty($start_date)|| empty($end_date) ||empty($place_of_meeting) || empty($description) || empty($attachment)){
         
@@ -152,7 +159,7 @@
             <br>
             
 
-            <form action="createevent.php" method="post">
+            <form action="#" method="post">
                 <div class="eve_form">
                     <!-- Event name field -->
                     <label for="subject" class="event_title">EVENT NAME</label>

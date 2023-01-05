@@ -20,7 +20,7 @@
 font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
-font-size: 35px;
+font-size: 25px;
 line-height: 24px;
 /* identical to box height, or 50% */
 

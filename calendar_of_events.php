@@ -247,10 +247,13 @@ header .current-date {
                 <div class="schedule">
                     <p style="font-weight:bold;">Todays Schedule</p>
                     <?php
+
+                    $now = date("Y-m-d") ;
+                    // echo $now ;
                 // Rahul is taken as static dietitian name
                 $sql="SELECT dietitianuserID,newtable.clientuserID,name,eventname,meeting_type,place_of_meeting,start_date,end_date FROM
                 (SELECT create_client.dietitianuserID,clientuserID,name FROM client LEFT JOIN create_client ON create_client.clientName = client.clientuserID WHERE create_client.dietitianuserID = 'Rahul')newtable LEFT JOIN create_event ON create_event.clientuserid=newtable.clientuserID 
-                WHERE (start_date > CURRENT_TIMESTAMP);";
+                WHERE (start_date = $now);";
 
                 $result=mysqli_query($conn,$sql); 
                 while($row = mysqli_fetch_assoc($result)){ ?>
