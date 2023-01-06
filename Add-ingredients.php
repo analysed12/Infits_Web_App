@@ -5,7 +5,7 @@
 //$id = $_SESSION['ingrd_id'];
 if(isset($_POST['Done']) || isset($_POST['add-more'])  && isset($_FILES['my_image']))   
 {        
-        $name= "banana";
+        
        $ingrd1 =$_POST['text1'];
 
        $quantity1 =$_POST['text2'];
@@ -39,8 +39,9 @@ if(isset($_POST['Done']) || isset($_POST['add-more'])  && isset($_FILES['my_imag
                            //$final = $imageandpath | $ingrd1 | $quantity1;
            
               
-       $sql = "insert into `add_ingredient`(`ingrd_id`,`image`,`ingrd_name`,`quantity`) values
-        ('$id','$imageandpath', '$ingrd1',`quantity')";
+       $sql = "update `add_ingredient` set `image` = '$imageandpath', `ingrd_name` = '$ingrd1',`quantity` =  '$quantity1' 
+       where `ingrd_id` = 620";
+;
     if($conn-> query($sql)  == TRUE)
     {
       echo "instruction added";

@@ -1,4 +1,6 @@
-<!DOCTYPE HTML>
+
+
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -275,7 +277,7 @@
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-        
+            <
                 </strong></p>
            
                 </span></p>
@@ -287,7 +289,14 @@
             <img src="images/vec_search.png" style="height: 20px; width: 20px;">
             <img src="images/vec_notification.png" style="height: 20px; width: 20px;">
 
-         
+            
+
+                
+                
+            
+    
+        
+
         </div>
 
     </div>

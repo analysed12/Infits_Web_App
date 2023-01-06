@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <style>
@@ -293,19 +296,94 @@ margin-left: 10px;
     background: #F9F9FF;
 border: 1px solid #F9F9FF;
 border-radius: 15px;
-padding: 10px;
+padding-left: 40px;
 width: 300px;
 height : 50px;
 margin: 10px;
+}
+.input_bar{
+    background: #F9F9FF;
+border: 1px solid #F9F9FF;
+border-radius: 15px;
+padding-left: 40px;
+width: 300px;
+height : 50px;
+margin: 10px;
+}
+.left_column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+.refferal_code{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+}
+.blue_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    background: #4B99FB;
+    width: 60px;
+    height: 60px;
+border: 1px solid #EAEAEA;
+border-radius: 15px;
+}
+.ip_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    
+}
+.ip_box img{
+    z-index: 2;
+    margin-right: -45px;
+}
+.referral_text{
+    
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 121.34%;
+/* or 36px */
+
+text-align: right;
+
+color: #4F1963;
 }
 #password{
     background: #F9F9FF;
 border: 1px solid #EAEAEA;
 border-radius: 15px;
-padding: 10px;
+
 width: 300px;
 height : 50px;
 margin: 10px;
+}
+.check{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+    
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 121.34%;
+/* or 24px */
+
+
+color: #4B99FB;
 }
 .input_container { 
     position:relative;
@@ -323,6 +401,37 @@ margin: 10px;
     left:10px;
     width:10px;
     height:10px;
+}
+.sign_up{
+    background: #4B99FB;
+border-radius: 15px;
+width: 130px;
+height: 50px;
+border : none;
+color: #FFFFFF;
+}
+.sign_btn_section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    
+}
+.sign_in_sec{
+    margin-left: 30px;
+}
+.sign_in_sec span{
+    
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 121.34%;
+/* or 30px */
+
+text-align: right;
+
+color: #4B99FB;
 }
 </style>
 <body>
@@ -346,7 +455,7 @@ margin: 10px;
                 <div class="sform">
                     <div class="header_sigin">
                         <img src="images/bg_patch_small.svg" alt="">
-                        <span>Sign In</span>
+                        <span>Sign Up</span>
 
                     </div>
                     <div class="gf_btns">
@@ -368,17 +477,58 @@ margin: 10px;
                             <input type="text" class="input" placeholder="Email" value>
                             <img src="images/sletter.svg" class="input_img">
                         </div> -->
-                        <input id="email" type="text" placeholder="Email">
-                        <input id="password" type="text" placeholder="Password">
-
+                        <div class="ip_box">
+                            <img src="images/account_name.svg" alt="">
+                            <input class="input_bar" id="name" type="text" placeholder="       Name">
+                        </div>
+                        <div class="ip_box">
+                        <img src="images/mobile_form.svg" alt="">
+                            <input class="input_bar" id="mobile" type="text" placeholder="       Mobile">
+                        </div>
+                        <div class="ip_box">
+                        <img src="images/letter.svg" alt="">
+                            <input class="input_bar" id="email" type="text" placeholder="       Email">
+                        </div>
+                        <div class="ip_box">
+                        <img src="images/shield.svg" alt="">
+                            <input class="input_bar" id="password" type="text" placeholder="       Password">
+                        </div>
+                         <div class="ip_box">
+                         <img src="images/shield.svg" alt="">
+                            <input class="input_bar" id="retype_password" type="text" placeholder="       Re-type Password">
+                        </div>
+                        <div class="check">
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                            <label for="vehicle1"> I've read and agree with Terms and Services <br>and the  Privacy Policy of INFITS </label>
+                        </div>
+                        <div class="sign_btn_section">
+                            <div class="sign_btn">
+                                <button class="sign_up">Sign Up</button>
+                            </div>
+                            <div class="sign_in_sec">
+                                <span>Already have an account?</span>
+                                <div>Sign In</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="mobile">
-                <img src="images/mobile.svg" alt="">
+            <div class="col-sm-6 ">
+                <div class="left_column">
+                    
+                    <div class="mobile d-none d-sm-block" >
+                    <img src="images/mobile.svg" alt="">   
+                    </div>
+                    
+                    <span class="referral_text">Have a referral code? Verify here</span>
+                    <div class="refferal_code">
+
+                    <input class="input_bar" id="retype_password" type="text" placeholder="XXXXX-XXXXX">
+                    <div class="blue_button">
+                            <img src="images/arrow.svg" alt="">
+                    </div>
+                    </div>
                 </div>
-                
             </div>
         </div>
         <div class="row">

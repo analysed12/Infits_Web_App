@@ -77,7 +77,7 @@
         </tr>
     </thead>
     <?php
-    $sql="select `name`,`mobile` from `dietitian` where `name` != '{$dtname}' limit 5";
+    $sql="select `name`,`mobile` from `dietitian` where `name` != '{$dtname}'";
  $result_frd = $GLOBALS['conn']  -> query($sql);
  $cnt=1;
  

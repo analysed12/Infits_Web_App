@@ -1,3 +1,6 @@
+
+<?php  include('config.php');
+session_start();?>
 <?php  include('connection.php');?>
 <!DOCTYPE html>
 <html lang="en">
@@ -703,7 +706,7 @@ height: 45px;
 </style>
 
 <body>
-    <?php include 'navbar.php' ?>
+    <?php include 'event_calendar.php' ?>
 
     <div id="content">
 
