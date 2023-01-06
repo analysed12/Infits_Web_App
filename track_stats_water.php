@@ -796,7 +796,7 @@ height: 45px;
                                 $sql = "select drinkConsumed,date from watertracker where clientID = '$clientID' and type='water' and date between '$from' and '$to';";
 
                                 $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
-
+                                    
                                     $emparray = array();
                                     while($row =mysqli_fetch_assoc($result))
                                     {
