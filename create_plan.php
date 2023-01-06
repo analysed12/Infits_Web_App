@@ -22,13 +22,15 @@
     </script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
 /* Add Tags Popup */
 .popup {
     display: none;
-   
+
 }
 
 .popup.open {
@@ -46,7 +48,7 @@
 }
 
 .popup .contents {
-    
+
     border: 1px solid #ccc;
     border-radius: 5px;
     width: auto;
@@ -62,34 +64,135 @@
     padding: 20px;
 }
 
-.popup .contents p{
-    text-align :center ;
-    margin-top : 5px;
+.popup .contents p {
+    text-align: center;
+    margin-top: 5px;
 }
 
-.popup .contents input{
-    text-align :center ;
-    margin-top : 5px;
+.popup .contents input {
+    text-align: center;
+    margin-top: 5px;
     /* margin-left:5px;
     margin-right:5px; */
 }
 
-.popup .contents button{
-    text-align :center ;
-    margin-top : 15px;
-    margin-left : 30%;
-    text-decoration :none;
-    border:none;
-    background-color :#6883FB;
-    color:white;
-    padding : 5px;
-    width:40%;
-    border-radius : 5px;
-    
-}
-/* End of Add Tags Popup */
+.popup .contents button {
+    text-align: center;
+    margin-top: 15px;
+    margin-left: 30%;
+    text-decoration: none;
+    border: none;
+    background-color: #6883FB;
+    color: white;
+    padding: 5px;
+    width: 40%;
+    border-radius: 5px;
 
+
+}
+
+/* End of Add Tags Popup */
+.input-group {
+    /* margin-top: 10px;
+    margin-bottom: 10px; */
+}
+
+
+.features_main {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center;
+    justify-content: center; */
+    margin-top: 20px;
+    width: 100%;
+}
+
+.features_left {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    width: 100%;
+}
+
+.features_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.features_box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px;
+    height: 50px;
+    width: 70%;
+    background: #FFFFFF;
+    box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.ip_box {
+    background: #FFFFFF;
+    box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    border: none;
+    width: 400px;
+    padding: 10px;
+}
+
+
+.plan_btn_add {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.plan_btn {
+    color: #FFFFFF;
+    background: #7282FB;
+    border-radius: 10px;
+    height: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 10px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 24px;
+    border: none;
+    /* identical to box height, or 104% */
+
+    display: flex;
+    align-items: center;
+    text-align: right;
+    letter-spacing: 0.44px;
+}
+
+.input-group input {
+    border: none;
+}
+
+.input-group input:focus {
+    outline: none !important;
+}
+
+.remove-textbox {
+    color: black;
+    background: white;
+    border: none;
+}
 </style>
+
 <body>
     <!-- Navbar Start -->
     <?php
@@ -127,33 +230,57 @@ include "navbar.php"
                             <div class="tag">
                                 <div
                                     style="display: inline-block; border:none; padding: 10px; font-size: 15px; width: auto;">
-                                    <select id="languages" name="languages[]" multiple>
-                                        <?php    
-                                $sql = "SELECT * FROM plans";
-                                    $result=mysqli_query($conn,$sql);
-                                    $num = mysqli_num_rows($result);
-                                    if ($num >0){
-                                    while ($row =mysqli_fetch_assoc($result)){
-                                    ?>
-                                        <option value="<?php echo $row['planname']?>"><?php echo $row['planname'] ?>
-                                        </option>
+                                    <!-- <input type="text" id="txt" placeholder="Enter text to add option">
 
-                                        <?php
-                                }
-                                    }?>
+                                    <select id="languages" name="languages[]" multiple>
+                                        <option value="Keto Diet">Keto Diet</option>
+                                        <option value="Vegan Diet">Vegan Diet</option>
+                                        <option value="Diet Chart">Diet Chart</option>
                                     </select>
+                                    <button onclick="addOption();">Add Option</button> -->
+                                    <!-- <input type="text" id="txt" placeholder="Enter text to add option" > -->
+                                    <select id="fields_u" name="languages[]" multiple>
+                                        <option value="Keto Diet">Keto Diet</option>
+                                        <option value="Vegan Diet">Vegan Diet</option>
+                                        <option value="Diet Chart">Diet Chart</option>
+                                    </select>
+                                   
                                 </div>
 
-                               
+                                <script type="text/javascript">
+                                $(document).ready(function() {
+                                     
+                                    // $('#fields_u').append(
+                                    //     '<option value="2">Option 2</option><option value="3">Option 3</option>'
+                                    //     );
+                                    $('#fields_u').multiselect();
+                                    // $('#fields_u').multiselect('select', ['3']);
+                                    
+                                    $('#fields_u_add').on('click', function() {
+                                        $textValue = document.getElementById("txt").value ;
+                                        $('#fields_u').append('<option value="'+$textValue+'">'+$textValue+'</option>');
+                                        console.log('added');
+                                        event.preventDefault();
+                                        $('#fields_u').multiselect('rebuild');
+                                        popup.classList.remove('open');
+                                        // $('#fields_u').multiselect('select', ['4']);
+                                    });
+                                    
+
+                                });
+                                </script>
+
+
                                 <button onclick="showPopup()" style="display: inline-block; border:none;"
                                     class="tag-item openButton openBtn">+</button>
                                 <div class="popup">
                                     <div class="blocker" onclick="hidePopup()"></div>
                                     <div class="contents">
                                         <p>Add Tags</p>
-                                        <input type="text" name="tag_name" placeholder="Type Tag Name here....">
+                                        <input type="text" id="txt" name="tag_name" placeholder="Type Tag Name here....">
                                         <br>
-                                        <button name="add_to_tags_btn">Add</button>
+                                        <button id="fields_u_add">Add</button>
+                                        <!-- <button name="add_to_tags_btn" onclick="add_tags()">Add</button> -->
                                     </div>
                                 </div>
 
@@ -161,14 +288,34 @@ include "navbar.php"
                         </div>
                         <!-- Tags end here -->
 
+
                         <br>
                         <label for="" class="subject tag_title">Plan Duration</label>
                         <p style="font-size:15px;">Start Time</p>
                         <input class="subject subject-text" type="date" name="start_date" style="height: 45px;" />
                         <p style="font-size:15px; margin-top:10px;">End Time</p>
                         <input class="subject subject-text" type="date" name="end_date" style="height: 45px;" />
+                        <br>
 
-                        <br />
+                        <label for="" class="subject tag_title">Features</label>
+
+
+
+                        <div class="features_main">
+                            <div class="features_left textbox-wrapper">
+                                <div class="input-group">
+
+                                </div>
+
+                            </div>
+                            <div class="features_right">
+                                <button type="button" class="plan_btn_add plan_btn add-textbox">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+
+                        <br>
                         <label for="" class="subject tag_title">Description</label>
                         <input class="subject " type="text" name="description" style="height: 79px;" />
                         <br />
@@ -190,10 +337,10 @@ include "navbar.php"
             </form>
 
         </div>
-        
+
     </div>
 
-   
+
     <!-- Contents End -->
     <!-- Add everything in database -->
     <?php
@@ -201,6 +348,7 @@ if (isset($_POST['final_save_btn'])){
     // For tags
     $name_arr = $_POST['languages'];
     $tags = implode(" , ",$name_arr);
+    // $tags = "hello" ;
         $planname = $_POST['plan_name'];
         $profile = "hello";
         $duration="hello";
@@ -208,22 +356,15 @@ if (isset($_POST['final_save_btn'])){
         $end_date = $_POST['end_date'];
         $description = $_POST['description'];
         $price = $_POST['price'];
+        $myarray = $_POST['text_arr'];
+        $features = implode(" , ",$myarray);
   
-            $sql1 = "INSERT INTO `create_plan` (`name`,`tags`, `start_date`, `end_date`, `description`, `price`) VALUES ('$planname','$tags','$start_date','$end_date','$description','$price')";
+            $sql1 = "INSERT INTO `create_plan` (`name`,`tags`, `start_date`, `end_date`,`features`, `description`, `price`) VALUES ('$planname','$tags','$start_date','$end_date','$features','$description','$price')";
             $result1=mysqli_query($conn,$sql1);
    
 }
             ?>
-   <?php
-                             if (isset($_POST['add_to_tags_btn'])) {
-                             $planname = $_POST['tag_name']; 
-                             if ($planname != ""){
-                             $sql1 = "INSERT INTO plans  VALUES ('$planname')";
-                             $result1=mysqli_query($conn,$sql1);
-                             echo "<meta http-equiv='refresh' content='0'>";
-                             }
-                             }
-            ?> -->
+
     <!-- Pop up ends -->
 
 </body>
@@ -233,6 +374,8 @@ $(document).ready(function() {
         nonSelectedText: 'Select Tags'
     });
 });
+
+// const languages= [] ;
 
 const popup = document.querySelector('.popup');
 
@@ -246,8 +389,33 @@ function hidePopup() {
     popup.classList.remove('open');
 }
 
+// function add_tags (){
+//     event.preventDefault();
+// }
+</script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+
+
+<script>
+$(document).ready(function() {
+    var max = 10;
+    var cnt = 1;
+    $(".add-textbox").on("click", function(e) {
+        e.preventDefault();
+        if (cnt < max) {
+            cnt++;
+            $(".textbox-wrapper").append(
+                '<div class="input-group"><div class="features_box"><input type="text" name="text_arr[]" placeholder="Type feature here.." /><button type="button" class="remove-textbox"><i class="fa-solid fa-xmark"></i></button></div></div>'
+            );
+        }
+    });
+
+    $(".textbox-wrapper").on("click", ".remove-textbox", function(e) {
+        e.preventDefault();
+        $(this).parents(".input-group").remove();
+        cnt--;
+    });
+});
 </script>
 
 </html>
-
-
