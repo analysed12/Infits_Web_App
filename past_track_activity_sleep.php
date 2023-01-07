@@ -284,7 +284,11 @@ color: #000000;
                                                                 <img src="images/sleep_moon_icon.svg" alt="">
                                                                 <div class="sleep-info">
                                                                     <p>Deep Sleep</p>
+<<<<<<< HEAD
                                                                     <span>11.10 a.m.</span>
+=======
+                                                                    <span>11:10 a.m.</span>
+>>>>>>> ff77b97930244befaeb29add1edf2c0ca5c0df18
                                                                 </div>
                                                             </div>
                                                             <div class="right">
