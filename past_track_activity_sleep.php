@@ -252,9 +252,18 @@ color: #000000;
                                         <div class="col">
                                         <?php for ($i=0; $i < 5; $i++) { ?>
                                             <div class="week-container">
-                                                
-                                                <p class="date">19 Jun 2021</p>
-                                            
+                                                <?php if ($i == 0) { ?>
+                    
+                                                    <p class="date">19 Jun 2021</p>
+                                                <?php }else if($i==1){ ?>
+                                                    <p class="date">18 Jun 2021</p>
+                                                <?php }else if ($i==2){?>
+                                                    <p class="date">17 Jun 2021</p>
+                                                <?php }else if ($i==3){?>
+                                                    <p class="date">16 Jun 2021</p>
+                                                <?php }else{?>
+                                                    <p class="date">15 Jun 2021</p>
+                                                <?php } ?>
                                                 <div class="flex-box">
                                                 <?php for ($j=0; $j < 3; $j++) { ?>
                                                 
@@ -262,6 +271,7 @@ color: #000000;
                                                         <div class="left">
                                                             <img src="images/sleep_moon_icon.svg" alt="">
                                                             <div class="sleep-info">
+                                                                
                                                                 <p>Light Sleep</p>
                                                                 <span>11:10 a.m.</span>
                                                             </div>
