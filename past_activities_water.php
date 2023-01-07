@@ -11,6 +11,16 @@
 </head>
 
 <style>
+       .heading {
+    margin-left: 3%;
+}
+    .heading p {
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 70px;
+}
     .tab {
   overflow: hidden;
   border: 1px solid #ccc;
@@ -65,15 +75,15 @@ border-bottom-left-radius: 1em!important;
 }
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #63AEFF;
+  background-color: #7DACF5;
 }
 .tab button.active {
-  background-color: #63AEFF;
+  background-color: #7DACF5;
   color: white !important;
 }
 
 /* Style the tab content */
-.tabcontent {
+.tab-content {
   display: none;
   padding: 6px 12px;
   /* border: 1px solid #ccc; */
@@ -90,6 +100,15 @@ border-bottom-left-radius: 1em!important;
  
  
 }
+.client-card {
+        width: 70px;
+        height: auto;
+        margin: 10px;
+        text-align: center;
+        font-size: 20px;
+        border-radius: 14px;
+        padding: 5px;
+}
 
 .client-card p {
     font-size: 15px;
@@ -102,14 +121,6 @@ border-bottom-left-radius: 1em!important;
     background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
     border: 1px solid #52A4FF;
     border-radius: 10px;
-    width: 97px;
-    height: 114px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-
 }
 .client-card-water p{
     font-family: 'NATS';
@@ -124,14 +135,59 @@ border-bottom-left-radius: 1em!important;
     color: #FFFFFF;
 
 }
-.client-card {
-        width: 70px;
-        height: auto;
-        margin: 10px;
-        text-align: center;
-        font-size: 20px;
-        border-radius: 14px;
-        padding: 5px;
+/* -------------------Calorie Tab Content------------------- */
+.week-container{
+    margin: 3%;
+}
+.week-container p{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 30px;
+/* identical to box height */
+color: #000000;
+}
+.flex-box {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    padding: 5px 30px;
+}
+.meal-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 311px;
+    height: 67px;
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(235, 203, 196, 0.14) 0%, rgba(104, 68, 226, 0.2) 100%, rgba(227, 137, 160, 0.2) 100%);
+    border-radius: 10px;
+}
+.meal-box p{
+    margin-bottom: 0;
+}
+.left,
+.right{
+    display: flex;
+    gap: 20px;
+    /* flex-direction: row; */
+}
+.left span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 17px;
+/* line-height: 36px; */
+/* identical to box height */
+
+
+color: #000000;
+
+}
+.right p{
+    font-size: 20px;
+    line-height: 42px;
 }
 </style>
 <body>
@@ -141,11 +197,14 @@ border-bottom-left-radius: 1em!important;
         
         <div class="row">
             <div class="col-sm-10">
+                <div class="heading">
+                    <p>Past Activities</p>
+                </div>
                 <div class="tab">
                     <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
                     <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
                     <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
-                    <button class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                    <button id="temp" class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
                 </div>
             </div>
             <div class="col-sm-2">
@@ -163,33 +222,57 @@ border-bottom-left-radius: 1em!important;
         <div class="graph">
 
          <!-- Tab content -->
-                                <div id="London" id="defaultOpen"class="tabcontent">
+                                <div id="London" id="defaultOpen" class="tab-content">
                                 
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartwater"></canvas>
+                               
                                 </div>
 
-                                <div id="Year" class="tabcontent">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartYearly"></canvas>
+                                <div id="Year" class="tab-content">
+                                  
                                 </div>
 
-                                <div id="Month" class="tabcontent">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartMonthly"></canvas>
+                                <div id="Month" class="tab-content">
+                                    
                                 </div>
                                 
-                                <div id="Week" class="tabcontent">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartWeekly"></canvas>
+                                <div id="Week" class="tab-content">
+                                    
+                                    <!-- <canvas id="myChartWeekly"></canvas> -->
+                                    <div class="row">
+                                        <div class="col">
+                                        <?php for ($i=0; $i < 3; $i++) { ?>
+                                            <div class="week-container">
+                                                <p class="date">19 Jun 2021</p>
+                                                <div class="flex-box">
+                                                <?php for ($j=0; $j < 4; $j++) { ?>
+                                                
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/mug.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p>Water</p>
+                                                                <span>11:00 am</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/water_drop_outline.svg" alt="">
+                                                            <p class="kcal">350 ML</p>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
                                        <script>
                                             function openCity(evt, cityName) {
                                                 /* Declare all variables */
                                                 var i, tabcontent, tablinks;
                     
-                                                /* // Get all elements with class="tabcontent" and hide them */
-                                                tabcontent = document.getElementsByClassName("tabcontent");
+                                                /* // Get all elements with class="tab-content" and hide them */
+                                                tabcontent = document.getElementsByClassName("tab-content");
                                                 for (i = 0; i < tabcontent.length; i++) {
                                                     tabcontent[i].style.display = "none";
                                                 }
@@ -207,6 +290,7 @@ border-bottom-left-radius: 1em!important;
                     
                                             /* // Get the element with id="defaultOpen" and click on it */
                                             document.getElementById("defaultOpen").click();
+                                            // document.getElementById("temp").click();
                                        </script> 
             </div>
         </div>
