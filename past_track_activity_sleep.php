@@ -252,26 +252,60 @@ color: #000000;
                                         <div class="col">
                                         <?php for ($i=0; $i < 5; $i++) { ?>
                                             <div class="week-container">
-                                                
-                                                <p class="date">19 Jun 2021</p>
-                                            
+                                                <?php if ($i == 0) { ?>
+                    
+                                                    <p class="date">19 Jun 2021</p>
+                                                <?php }else if($i==1){ ?>
+                                                    <p class="date">18 Jun 2021</p>
+                                                <?php }else if ($i==2){?>
+                                                    <p class="date">17 Jun 2021</p>
+                                                <?php }else if ($i==3){?>
+                                                    <p class="date">16 Jun 2021</p>
+                                                <?php }else{?>
+                                                    <p class="date">15 Jun 2021</p>
+                                                <?php } ?>
                                                 <div class="flex-box">
                                                 <?php for ($j=0; $j < 3; $j++) { ?>
-                                                
                                                     <div class="sleep-holder-box">
+                                                        <?php if($j==0){ ?>
                                                         <div class="left">
                                                             <img src="images/sleep_moon_icon.svg" alt="">
                                                             <div class="sleep-info">
                                                                 <p>Light Sleep</p>
-                                                                <span>11:10 a.m.</span>
+                                                                <span>11.10 a.m.</span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
                                                             <img src="images/sleep_moon_colored.svg" alt="">
                                                             <p class="sleep-hours">7h 30m</p>
                                                         </div>
+                                                        <?php }else if($j==1){ ?>
+                                                            <div class="left">
+                                                                <img src="images/sleep_moon_icon.svg" alt="">
+                                                                <div class="sleep-info">
+                                                                    <p>Deep Sleep</p>
+                                                                    <span>11.10 a.m.</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="right">
+                                                                <img src="images/sleep_moon_colored.svg" alt="">
+                                                                <p class="sleep-hours">2h 2m</p>
+                                                        </div>
+                                                        <?php }else{ ?>
+                                                            <div class="left">
+                                                                <img src="images/sleep_moon_icon.svg" alt="">
+                                                                <div class="sleep-info">
+                                                                    <p>Awake</p>
+                                                                    <span>6.55 p.m.</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="right">
+                                                                <img src="images/sleep_moon_colored.svg" alt="">
+                                                                <p class="sleep-hours">15m</p>
+                                                            </div>
+                                                        <?php } ?>    
                                                     </div>
-                                                <?php } ?>
+                                                <?php } ?> <!-- end of for loop -->
                                                 </div>
                                             </div>
                                         <?php } ?>
