@@ -102,14 +102,6 @@ border-bottom-left-radius: 1em!important;
     background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
     border: 1px solid #52A4FF;
     border-radius: 10px;
-    width: 97px;
-    height: 114px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-
 }
 .client-card-water p{
     font-family: 'NATS';
