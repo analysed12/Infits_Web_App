@@ -9,11 +9,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-
+<?php include 'navbar.php' ?>
 <style>
-       .heading {
-    margin-left: 3%;
-}
     .heading p {
     font-family: 'NATS';
     font-style: normal;
@@ -37,7 +34,6 @@
   border: 1px solid #F8F5F5;
   width: 365px;
 height: 27px;
-margin-left: 3%;
 border-top-left-radius: 1em!important;
 border-bottom-left-radius: 1em!important;
 border-top-right-radius: 1em!important;
@@ -197,14 +193,59 @@ color: #000000;
     font-size: 20px;
     line-height: 42px;
 }
+/* -----------------------Resposnive New----------------------- */
+.ph-left{
+    padding-left: 3%;
+}
+.ph-right {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5%;
+}
+@media (max-width:576px){
+    .tab{
+        display:flex;
+        width: 100%;
+        flex-wrap:wrap;
+    }
+    .tab button {
+    width: 25%;
+}
+    .graph_button_left{
+        width:25% !important;
+    }
+    /* anothr */
+    .past-header{
+        position:relative;
+    }
+    .ph-right{
+        position:absolute;
+        top: -45px;
+        right: 5px;
+        scale: 0.9;
+        padding: 0;
+    }
+}
+@media (max-width:330px){
+    .past-header{
+        position:relative;
+    }
+    .ph-right{
+        position:absolute;
+        top: -59px;
+        right: -40px;
+        scale: 0.65;
+        padding: 0;
+    }
+}
 </style>
 <body>
-<?php include 'navbar.php' ?>
+
     <div class="content">
         <!-- tab_links -->
         
-        <div class="row">
-            <div class="col-sm-10">
+        <div class="row past-header">
+            <div class="col-sm-8 ph-left">
                 <div class="heading">
                     <p>Past Activities</p>
                 </div>
@@ -215,7 +256,7 @@ color: #000000;
                     <button id="temp" class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-4 ph-right">
                     <!-- metric_button -->
                 <div class="client-card client-card-calorie " style="color:#E3738D; border: 1px solid #E3738D;">
                     <img src="images/calorie_selected.svg" alt="">
