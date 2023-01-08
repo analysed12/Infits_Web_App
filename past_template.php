@@ -73,7 +73,7 @@ border-bottom-left-radius: 1em!important;
 }
 
 /* Style the tab content */
-.tabcontent {
+.tab-content {
   display: none;
   padding: 6px 12px;
   /* border: 1px solid #ccc; */
@@ -127,9 +127,7 @@ border-bottom-left-radius: 1em!important;
 }
 
 .day-content{
-   
     margin: 30px;
-    left: 30px;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -140,13 +138,15 @@ border-bottom-left-radius: 1em!important;
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-
 }
+
 .card{
-    flex: 0 0 25.333333%;
     margin : 15px;
 }
+
 .card-inside{
+    height: 67px;
+    width: 311px;
     display: flex;
     flex-direction: row;
     padding : 10px;
@@ -192,8 +192,8 @@ border-bottom-left-radius: 1em!important;
             <div class="col-sm-2">
                     <!-- metric_button -->
                 <div class="client-card client-card-water " style="color:#52A4FF; border: 1px solid #52A4FF;">
-                    <img src="images/water_selected.svg" alt="">
-                    <p>Water</p>
+                    <img src="images/sleep.svg" alt="">
+                    <p>Sleep</p>
                 </div>
             </div>
         </div>
@@ -202,25 +202,52 @@ border-bottom-left-radius: 1em!important;
         <div class="graph">
 
          <!-- Tab content -->
-                                <div id="London" id="defaultOpen"class="tabcontent">
+                                <div id="London" id="defaultOpen"class="tab-content">
                                 
                                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                                     <canvas id="myChartwater"></canvas>
                                     </div>
 
-                                    <div id="Year" class="tabcontent">
+                                    <div id="Year" class="tab-content">
                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                                         <canvas id="myChartYearly"></canvas>
                                     </div>
 
-                                    <div id="Month" class="tabcontent">
+                                    <div id="Month" class="tab-content">
                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                                         <canvas id="myChartMonthly"></canvas>
                                     </div>
                                     
-                                    <div id="Week" class="tabcontent">
+                                    <div id="Week" class="tab-content">
                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                        <canvas id="myChartWeekly"></canvas>
+                                        <!-- <canvas id="myChartWeekly"></canvas> -->
+
+                                        <?php for ($j = 1; $j<=3; $j++){?>
+                                            <div class="day-content">
+                                                    <div class="date-content"><span style = "font-weight: 600">19 Jan 2021</span></div>
+                                                    <div class="card-content">
+                                                        <?php for ($i = 1; $i<=3; $i++){ ?>
+                                                            <div class="card">
+                                                                <div class="card-inside">
+                                                                    <div class="card-image" >
+                                                                        <img src="images/sleep-light.png" alt="">
+                                                                    </div>
+                                                                    <div class="card-food-item" ><span style = "font-weight: bold">Light Sleep</span><br><span      style= "font-weight: lighter;font-size: 15px" >11:10 a.m.</span> 
+                                                                    </div>
+                                                                    <div class="card-food-quantity" >
+                                                                        <img src="images/sleep.svg" style = "height: 20px; width: 16px;"><span style= "margin-left: 10px;font-weight: 500;">2 hr 2m</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                        <?php } ?> 
+                                                </div>
+                                            </div>
+                                         <?php
+                                        }   
+                                        ?>
+
+
+
                                     </div>
                                     
                                     <script>
@@ -249,37 +276,9 @@ border-bottom-left-radius: 1em!important;
                                         document.getElementById("defaultOpen").click();
                                     </script>
                                     
-                                    <?php
-                                        for ($j = 1; $j<=3; $j++){
-                                            ?>
-                                            <div class="day-content">
-                                                
-                                                    <div class="date-content"><span style = "font-weight: 600">19 Jan 2021</span></div>
-                                                    <div class="card-content">
-                                                        <?php
-                                                        for ($i = 1; $i<=5; $i++){
-                                                            ?>
-                                                            <div class="card">
-                                                                <div class="card-inside">
-                                                                    <div class="card-image" >
-                                                                        <img src="images/coffecup.png" alt="">
-                                                                    </div>
-                                                                    <div class="card-food-item" ><span style = "font-weight: bold">Coffee</span><br><span style= "font-weight: lighter;font-size: 15px" >11:10 a.m.</span> </div>
-                                                                    <div class="card-food-quantity" >
-                                                                        <img src="images/waterdrop.png" style = "height: 20px; width: 16px;"><span style= "margin-left: 10px;font-weight: 500;"> 200 ML</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>                                                  
-                                                        <?php
-                                                    }   
-                                                    ?>
-                                            </div>
-                                         <?php
-                                        }   
-                                        ?>
-                                        </div>
-
-                                 </div>
+                                    
+                           </div>
+                    </div>
             </div>                   
         </div>
     </div>
