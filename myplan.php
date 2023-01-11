@@ -3,12 +3,23 @@
 require_once "config.php";
 ?>
 
+<?php
+if(isset($_POST['search-btn']))
+{
+  if(!empty($_POST['search']))
+	{
+    $search = $_POST['search'];
+
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Infits | My Plans</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -94,27 +105,50 @@ require_once "config.php";
         /* background-color: red; */
     }
 
-    .search-box{
-        border:none;
+    .search-box {
+        border: none !important;
 
     }
 
-    .search-box:focus{
-        outline:none;
+    .search-form input:focus {
+        outline: none !important;
     }
 
-    .search-icon{
-        border:none;
-        background:white;
+    .search-icon {
+        border: none;
+        background: white;
 
     }
 
-    .search-form{
+    .search-form {
         border: 1px solid #E1E1E1;
-        width:fit-content;
-        float:right;
-        padding:2px;
-        border-radius : 5px;
+        width: fit-content;
+        float: right;
+        /* padding: 2px; */
+        border-radius: 5px;
+    }
+
+    a:hover {
+        cursor: pointer;
+        background-color: yellow;
+    }
+
+    .box input {
+        width: 100%;
+        background-color: blue;
+    }
+
+    .search-list {
+        width: 200px;
+    }
+
+    .search-list li {
+        border: 1px solid black;
+        background-color: red;
+    }
+
+    #display {
+        z-index: 10 !important;
     }
     </style>
     <script>
@@ -130,16 +164,28 @@ include "navbar.php";
 ?>
 
 
+
+
     <div class="row" style="padding:1rem;">
         <div class="col-6" style="font-weight:bold;font-size:20px;">My Plans</div>
         <div class="col-6" style="text-align:right">
-            <form class="search-form">
-                <input type="search" placeholder="Search plan" class="search-box">
-                <button type="submit" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
+            <div class="card-body">
+                <form method="POST" class="search-form form-inline" style="width:200px;">
+                    <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
+                        name="search">
+                    <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
+                    <div id="display">
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-item-action" id="content">
+                </div>
+            </div>
+
         </div>
     </div>
-
 
     <div class="row">
         <div class="col-md-12">
@@ -147,7 +193,93 @@ include "navbar.php";
                 <div class="cards">
                     <?php
 
-                        
+if(isset($_POST['search-btn']))
+{
+  if(!empty($_POST['search']))
+	{
+    $search = $_POST['search'];
+    $sql1 = "SELECT * FROM create_plan WHERE name='$search'";
+ if($result1 = mysqli_query($conn, $sql1)){
+     if(mysqli_num_rows($result1) > 0){
+             while($row1 = mysqli_fetch_array($result1)){
+              ?>
+
+                    <div class="card" container>
+                        <div class="card-upper row">
+                            <div class="card-upper-image col-3">
+                                <img src="images/fruit_salad.svg" alt="">
+                            </div>
+                            <div class="card-upper-details col-8">
+                                <div class="row">
+                                    <div class="col"
+                                        style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:bold;">
+                                        <?php echo $row1['name']?></div>
+                                    <div class="w-100"></div>
+                                    <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
+                                            style="font-weight:bold">Rs.<?php echo $row1['price'] ?></span>/month
+                                    </div>
+                                    <div class="col-7"
+                                        style="margin-top:5px;margin-bottom:15px;font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;">
+                                        <?php $orgDate = $row1['start_date']; $newDate = date("d/m/Y", strtotime($orgDate)); echo $newDate ?>
+                                        to
+                                        <?php $orgDate = $row1['end_date']; $newDate = date("d/m/Y", strtotime($orgDate)); echo $newDate ?>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <?php
+                                            $mark=explode(',', $row1['tags']);//what will do here
+                                            foreach($mark as $out) {
+                                               echo '<div class="tag-element" style="width:auto;">'.$out.'</div>';
+                                            }
+                                            ?>
+
+                                </div>
+                            </div>
+                            <div class="card-upper-options col-1">
+                                <div class="row">
+                                    <div style="display:inline-block">
+                                        <a href="update_plan.php?id=<?php echo $row1['plan_id'] ?>" title="Update Record"
+                                            style="color#7282FB" data-toggle="tooltip"><span
+                                                class="fa fa-pencil"></span></a>
+                                    </div>
+                                    <div style="display:inline-block">
+                                        <a onclick="return confirm('Are you sure?')"
+                                            href="delete_plan.php?id=<?php echo $row1['plan_id'] ?>"
+                                            title="Delete Record" style="color:#7282FB" data-toggle="tooltip"><span
+                                                class="fa fa-trash "></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-middle row"><?php echo $row1['description']?></div>
+                        <div class="card-below row">
+                            <div class="col">
+                                <div class="row">FEATURES</div>
+                                <div class="row">
+                                    <?php
+                                            $mark=explode(',', $row1['features']);//what will do here
+                                            foreach($mark as $out) {
+                                                echo '<div class="col-3">';
+                                                echo '<div class="row" style="display:inline-block; margin-right:5px;"><i style="color:black;" class="fa-regular fa-circle-check"></i></div>';
+                                                echo '<div class="row" style="display:inline-block;">'.$out.'</div>';
+                                                echo '</div>';
+                                            }
+                                            ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php
+             }
+            }
+          }
+             
+        
+    // <!-- echo "Hello"; -->
+    
+  }
+}
+else{                       
  $sql = "SELECT * FROM create_plan";
  if($result = mysqli_query($conn, $sql)){
      if(mysqli_num_rows($result) > 0){
@@ -192,8 +324,9 @@ include "navbar.php";
                                                 class="fa fa-pencil"></span></a>
                                     </div>
                                     <div style="display:inline-block">
-                                        <a onclick="return confirm('Are you sure?')" href="delete_plan.php?id=<?php echo $row['plan_id'] ?>" title="Delete Record"
-                                            style="color:#7282FB" data-toggle="tooltip"><span
+                                        <a onclick="return confirm('Are you sure?')"
+                                            href="delete_plan.php?id=<?php echo $row['plan_id'] ?>"
+                                            title="Delete Record" style="color:#7282FB" data-toggle="tooltip"><span
                                                 class="fa fa-trash "></span></a>
                                     </div>
                                 </div>
@@ -232,6 +365,7 @@ include "navbar.php";
 
  // Close connection
  mysqli_close($conn);
+}
                         ?>
 
                     <div>
@@ -239,5 +373,31 @@ include "navbar.php";
                 </div>
             </div>
 </body>
+
+<script>
+function fill(Value) {
+    $('#search').val(Value);
+    $('#display').hide();
+}
+$(document).ready(function() {
+    $("#search").keyup(function() {
+        var name = $('#search').val();
+        if (name == "") {
+            $("#display").html("");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "ajax.php",
+                data: {
+                    search: name
+                },
+                success: function(html) {
+                    $("#display").html(html).show();
+                }
+            });
+        }
+    });
+});
+</script>
 
 </html>

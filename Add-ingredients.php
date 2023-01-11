@@ -1,4 +1,4 @@
-<?php include ('connection.php');
+<?php include ('config.php');
     
        if(!isset($_POST['Done']))      
        {
