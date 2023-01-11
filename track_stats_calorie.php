@@ -287,14 +287,18 @@ text-align: center;
 .stats-btn-container{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-wrap:wrap;
+    justify-content: center;
     align-items: center;
+    padding :0 10px;
 }
 .stat-btn{
-    max-width: 134px;
-    max-height: 57.45px;
-    width: 25%;
-    height: 100%;
+    /* max-width: 134px;
+    max-height: 57.45px; */
+    height: 57.45px;
+    /* width: 25%; */
+    width: 134px;
+    /* height: 100%; */
     background: #FFFFFF;
     border: 1px solid #F1F1F1;
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
@@ -302,6 +306,8 @@ text-align: center;
     padding: 5px;
     display: flex;
     align-items: center;
+    margin: 10px;
+    
 }
 .stat-data{
     width: 100%;
@@ -508,7 +514,7 @@ margin-left: 5px;
     .tsd-left-b {
     padding-left: 0;
     }
-    .stat-data {
+    /* .stat-data {
     scale: 0.7;
     }
     .stat-data .title {
@@ -522,7 +528,7 @@ margin-left: 5px;
     .stat-data .unit{
     margin-left: 0;
     font-size: 14px;
-    }
+    } */
     .tsd-right {
     scale: 0.8;
     }
