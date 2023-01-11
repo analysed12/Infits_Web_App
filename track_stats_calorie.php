@@ -22,7 +22,7 @@ if(isset($_POST['savegoal'])){
     if($result){
         unset($_POST["savegoal"]);
         unset($_POST["setgoal"]);
-        header(("Location: http://localhost/TeamHuddle/infits/_track_stats_calorie.php"));
+        header(("Location: http://localhost/TeamHuddle/infits/track_stats_calorie.php"));
         // exit();
     }
 }
