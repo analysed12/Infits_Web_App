@@ -718,31 +718,31 @@ height: 45px;
                 <div id="inner11">
                     <div class="flex-container">
                         <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_steps.php">
                             <i class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA; rotate: -90deg;"></i>
                             <p>Step</p>
                         </a>
                         </div>
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_heart.php">
                             <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
                             <p style="color:#E266A9;">Heart Rate</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_water.php">
                             <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
                             <p style="color:#52A4FF;">Water</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_weight.php">
                             <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
                             <p style="color:#7D5DE6;">Weight Track</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_sleep.php">
                             <i style="color:#54AFAC;" class="fa-solid fa-moon"></i>
                             <p style="color:#54AFAC;">Sleep</p>
                             </a>
