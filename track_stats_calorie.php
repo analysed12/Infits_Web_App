@@ -1,6 +1,5 @@
 <?php
 // Client Id
-// echo ('hel');
 $clientId = 'Eden';
 // Configure Dates
 date_default_timezone_set("Asia/Calcutta");
