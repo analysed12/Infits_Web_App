@@ -687,6 +687,9 @@ height: 45px;
     border-radius: 2px;
     font-family: 'NATS';
 }
+.client-card{
+    height: 120px !important;
+}
 </style>
 
 <body>
@@ -699,28 +702,40 @@ height: 45px;
                 <div id="inner11">
                     <div class="flex-container">
                         <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                            <i class="fa-solid fa-shoe-prints" style="rotate: -90deg;"></i>
-                            <p>Step</p>
+                        <a href="track_stats_steps.php">
+                            <i style="color:#FF6C6CCA ;rotate: -90deg;" class="fa-solid fa-shoe-prints" ></i>
+                            <p style="color:#FF6C6CCA ;"">Step</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                            <i class="fa-solid fa-heart-pulse"></i>
-                            <p>Heart Rate</p>
+                         <a href="track_stats_heart.php">
+                            <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
+                            <p style="color:#E266A9;">Heart Rate</p>
+                         </a>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                            <i class="fa-solid fa-droplet"></i>
-                            <p>Water</p>
+                        <a href="track_stats_water.php">
+                            <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
+                            <p style="color:#52A4FF;">Water</p>
+                        </a>
                         </div>
                         <div class="client-card client-card-weight" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                        <a href="track_stats_weight.php">
                         <img src="images/weight_selected.svg" alt="">
-                            <p>Weight Track</p>
+                            <p style="color:#FFFFFF;">Weight Track</p>
+                        </a>
                         </div>
-                        <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                            <i class="fa-solid fa-moon"></i>
-                            <p>Sleep</p>
+                        <div class="client-card" style="color:#6844E2; border: 1px solid #6844E2;">
+                        <a href="track_stats_sleep.php">
+                            <i style="color:#6844E2;" class="fa-solid fa-moon"></i>
+                            <p style="color:#6844E2;">Sleep</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                            <i class="fa-solid fa-stopwatch-20"></i>
-                            <p>Calorie Track</p>
+                        <a href="track_stats_calorie.php">
+                            <i style="color:#E3738D;" class="fa-solid fa-stopwatch-20"></i>
+                            <p style="color:#E3738D;">Calorie Track</p>
+                        </a>
                         </div>
                     </div>
 

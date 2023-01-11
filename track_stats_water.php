@@ -130,6 +130,9 @@ height: 57.45px;
     border-radius: 14px;
     padding: 5px;
 }
+.client-card{
+    height: 120px !important;
+}
 .client-card p {
     font-size: 15px;
 }
@@ -142,6 +145,7 @@ height: 57.45px;
     border: 1px solid #52A4FF;
     border-radius: 10px;
 }
+
 .client-card-water p{
     font-family: 'NATS';
     font-style: normal;
@@ -677,6 +681,12 @@ height: 45px;
     border-radius: 2px;
     font-family: 'NATS';
 }
+
+a:hover {
+    color:#00A0C6; 
+    text-decoration:none; 
+    cursor:pointer;  
+}
 </style>
 
 <body>
@@ -688,29 +698,42 @@ height: 45px;
             <div id="inner1">
                 <div id="inner11">
                     <div class="flex-container">
-                        <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                            <i class="fa-solid fa-shoe-prints" style="rotate: -90deg;"></i>
-                            <p>Step</p>
+                        <div class="client-card a" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                        <a href="track_stats_steps.php">
+                            <i  class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA;rotate: -90deg;"></i>
+                            <p style="color:#FF6C6CCA;">Step</p>
+                        </a>
                         </div>
-                        <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                            <i class="fa-solid fa-heart-pulse"></i>
-                            <p>Heart Rate</p>
+                        
+                            <div class="client-card a" style="color:#E266A9 !important; border: 1px solid #E266A9 ;">
+                            <a href="track_stats_heart.php">
+                                <i class="fa-solid fa-heart-pulse" style="color:#E266A9;"></i>
+                                <p style="color:#E266A9;">Heart Rate</p>
+                                </a>
                         </div>
-                        <div class="client-card client-card-water " style="color:#52A4FF; border: 1px solid #52A4FF;">
+                        
+                        <div class="client-card a client-card-water" style="color:#52A4FF !important; border: 1px solid #52A4FF ;">
                             <img src="images/water_selected.svg" alt="">
                             <p>Water</p>
                         </div>
-                        <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                            <i class="fa-solid fa-weight-hanging"></i>
-                            <p>Weight Track</p>
+                        
+                        <div class="client-card a" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                        <a href="track_stats_weight.php">
+                            <i class="fa-solid fa-weight-hanging" style="color:#7D5DE6"></i>
+                            <p style="color:#7D5DE6">Weight Track</p>
+                        </a>
                         </div>
-                        <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                            <i class="fa-solid fa-moon"></i>
-                            <p>Sleep</p>
+                        <div class="client-card a" style="color:#54AFAC; border: 1px solid #54AFAC;">
+                        <a href="track_stats_sleep.php">
+                            <i class="fa-solid fa-moon" style="color:#54AFAC"></i>
+                            <p style="color:#54AFAC">Sleep</p>
+                        </a>
                         </div>
-                        <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                            <i class="fa-solid fa-stopwatch-20"></i>
-                            <p>Calorie Track</p>
+                        <div class="client-card a" style="color:#E3738D; border: 1px solid #E3738D;">
+                        <a href="track_stats_calorie.php">
+                            <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i>
+                            <p style="color:#E3738D">Calorie Track</p>
+                        </a>
                         </div>
                     </div>
 
@@ -747,7 +770,7 @@ height: 45px;
                              );";
                             
                         
-                            $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+                            $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
                             
                                 $emparray = array();
                                 $mon = array();
@@ -869,7 +892,7 @@ height: 45px;
 
                             $dateArray = array();
 
-                            $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+                            $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
 
 
                                 $emparray = array();
