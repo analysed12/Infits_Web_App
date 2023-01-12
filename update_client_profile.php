@@ -90,8 +90,9 @@ input {
                 <form method="post" action="update_client_profile.php">
                     <br>
                     <?php
+
 $id = $_GET['id'];
-// echo $id ;
+echo $id ;
 $sql = "SELECT * from `addclient` where client_id='$id'";
 $result = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($result)){
@@ -164,7 +165,7 @@ $result = mysqli_query($conn,$sql);
                                     <div class="input-tag"
                                         style="display:inline-block;width:50% !important; margin-right:10%;">
                                         <?php echo $row1['name'] ?></div>
-                                    <a href="" class="" style="display:inline-block;width:40% !important;background: #FFFFFF;text-align:center;padding-top:5px;
+                                    <a href="select_client_plan.php?id=<?php echo $id?>" class="" style="display:inline-block;width:40% !important;background: #FFFFFF;text-align:center;padding-top:5px;
 border: 1px solid #6883FB;
 border-radius: 8px;">Select</a>
                                 </div>
@@ -177,7 +178,7 @@ border-radius: 8px;">Select</a>
                         <div class="row d-flex justify-content-center align-items-center">
 
                             <button type=" submit" class="editBtn" name="edit_client" style="width:20%;
-    margin-top:30px"><a href="update_client_profile.php?id=<?php echo $id?>">Edit Profile</a></button>
+    margin-top:30px"><a href="client_profile.php">Edit Profile</a></button>
 
 
                         </div>

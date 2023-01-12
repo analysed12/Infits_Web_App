@@ -219,7 +219,7 @@ include "navbar.php"
                 </div>
             </div>
             <br>
-            <form action="#" method="post">
+            <form action="select_client_plan.php" method="post">
                 <!-- Plan name -->
                 <div style="text-align:center; !important" class="plan_name_box">
                     <input required type="text" placeholder="Plan Name" class="plan_name" name="plan_name"
@@ -369,7 +369,7 @@ if (isset($_POST['final_update_btn'])){
         $sql1 = "UPDATE `create_plan` SET plan_id=$id,name='$planname',tags='$tags',start_date='$start_date',end_date='$end_date',features='$features',description='$description',price='$price' WHERE plan_id=$id";
         $result1=mysqli_query($conn,$sql1);
 
-        if($result1){
+        if($result){
 
         }
         else{

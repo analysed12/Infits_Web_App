@@ -245,7 +245,7 @@ body {
                     // echo "<div class='clientname'>".$row["plan_id"]."</div>";
                     echo "<div class='clientname'>".$row["name"]."</div>";
                     echo "<div class='buttons'><button>".$row1["name"]."</button><button>".$months." Month</button></div>";
-                    echo '<div class="profile"><a href="client_profile.php?id='.$row1['plan_id'].'">Profile</a></div>';
+                    echo '<div class="profile"><a href="client_profile.php?id='.$row['client_id'].'">Profile</a></div>';
                     echo "</div>";
                 
                  }}}
