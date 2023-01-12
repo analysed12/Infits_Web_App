@@ -222,7 +222,8 @@ include "navbar.php"
             <form action="#" method="post">
                 <!-- Plan name -->
                 <div style="text-align:center; !important" class="plan_name_box">
-                    <input required type="text" placeholder="Plan Name" class="plan_name" name="plan_name" value="<?php echo $row['name']?>" >
+                    <input required type="text" placeholder="Plan Name" class="plan_name" name="plan_name"
+                        value="<?php echo $row['name']?>">
                 </div>
 
                 <!-- Main form starts -->
@@ -284,9 +285,13 @@ include "navbar.php"
                         <br>
                         <label for="" class="subject tag_title">Plan Duration</label>
                         <p style="font-size:15px;">Start Time</p>
-                        <input required class="subject subject-text" type="date" name="start_date" value="<?php echo $row['start_date']?>" style="height: 45px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;" />
+                        <input required class="subject subject-text" type="date" name="start_date"
+                            value="<?php echo $row['start_date']?>"
+                            style="height: 45px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;" />
                         <p style="font-size:15px; margin-top:10px;">End Time</p>
-                        <input required class="subject subject-text" type="date" name="end_date" value="<?php echo $row['end_date']?>" style="height: 45px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;" />
+                        <input required class="subject subject-text" type="date" name="end_date"
+                            value="<?php echo $row['end_date']?>"
+                            style="height: 45px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;" />
                         <br>
 
                         <label for="" class="subject tag_title">Features</label>
@@ -306,21 +311,28 @@ include "navbar.php"
 
                         <br>
                         <label for="" class="subject tag_title">Description</label>
-                        <input required class="subject " type="text" name="description" value="<?php echo $row['description']?>" style="height: 79px; background: #FFFFFF;
+                        <input required class="subject " type="text" name="description"
+                            value="<?php echo $row['description']?>" style="height: 79px; background: #FFFFFF;
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     border:none;" />
                         <br />
 
                         <label for="" class="subject tag_title">Price</label>
-                        <input required class="subject subject-text" type="number" value="<?php echo $row['price']?>" name="price" placeholder="Rs. /month" style="height: 45px; background: #FFFFFF;
+                        <input required class="subject subject-text" type="number" value="<?php echo $row['price']?>"
+                            name="price" placeholder="Rs. /month" style="height: 45px; background: #FFFFFF;
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     border:none;" />
                         <br>
                         <div class="btns">
-                            <button>Cancel</button>
-                            <button style="float: right;" name="final_save_btn" type="submit">Update</button>
+                            <button style="display:inline-block;width:30%; font-size:90%;" name="final_cancel_btn">Cancel</button>
+                            <button
+                                style="display:inline-block;width:30%; font-size:90%; background-color:#6883FB;color:white"
+                                name="final_update_btn" type="submit">Save</button>
+                            <button
+                                style="display:inline-block;width:35%; font-size:90%; background-color:#6883FB;color:white"
+                                name="final_save_btn" type="submit">Save as new</button>
                         </div>
                         <br><br><br>
                     </div>
@@ -336,7 +348,7 @@ include "navbar.php"
 
     <!-- Add everything in database -->
     <?php
-if (isset($_POST['final_save_btn'])){
+if (isset($_POST['final_update_btn'])){
         
         $id = $_GET['id'];
     // For tags
@@ -365,10 +377,37 @@ if (isset($_POST['final_save_btn'])){
         }
    
 }
+else if (isset($_POST['final_save_btn'])){
+        
+    $id = $_GET['id'];
+// For tags
+    $name_arr = $_POST['languages'];
+    $tags = implode(" , ",$name_arr);
+    $planname = $_POST['plan_name'];
+    // dieticianid....This is a session variable
+    $profile = "Azarudeen";
+    $duration="hello";
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $myarray = $_POST['text_arr'];
+    $features = implode(" , ",$myarray);
+
+    $sql2 = "INSERT INTO `create_plan` (`profile`,`name`,`tags`, `start_date`, `end_date`,`features`, `description`, `price`) VALUES ('$profile','$planname','$tags','$start_date','$end_date','$features','$description','$price')";
+    $result2=mysqli_query($conn,$sql2);
+
+    if($result2){
+
+    }
+    else{
+        die(mysqli_error($conn));
+    }
+}
             ?>
 
     <!-- Pop up ends -->
-'
+
 </body>
 <script>
 $(document).ready(function() {

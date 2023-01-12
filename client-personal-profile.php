@@ -1,4 +1,4 @@
-<?php  include('connection.php');?>
+<?php  include('config.php');?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -26,7 +26,7 @@
 		<?php 
            // $clientuserID =$_SESSION['clientuserID'];
                    //Session variable for client Id
-             $clientuserID = "c002";
+             $clientuserID = "Azarudeen";
               $sql = "select * from `client` where `clientuserID` = '{$clientuserID}'";
               $result = $conn -> query($sql);
               if($result ->num_rows > 0)
@@ -34,7 +34,7 @@
                 while($row = $result -> fetch_assoc())
                 {?>
 
-		<?php include 'event_calendar.php';?>
+		<?php include 'navbar.php';?>
         <div class="form-body">
             <img src="images/profile_pic.svg" style="width: 300; height: 300;">
             <span> <?php echo $row['name']; ?> </span>

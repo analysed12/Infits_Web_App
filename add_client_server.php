@@ -5,18 +5,19 @@ $dietitianID = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', 'password@123', 'infits');
+// $conn = mysqli_connect('localhost', 'root', 'password@123', 'infits');
+include("config.php");
 
 // ADD CLIENT
 if (isset($_POST['add_client'])) {
   // receive all input values from the form
-  $dietitianuserID = mysqli_real_escape_string($db, $_POST['dietitianuserID']);
-  $clientName = mysqli_real_escape_string($db, $_POST['clientName']);
-  $gender = mysqli_real_escape_string($db, $_POST['gender']);
-  $height = mysqli_real_escape_string($db, $_POST['height']);
-  $weight = mysqli_real_escape_string($db, $_POST['weight']);
-  $about = mysqli_real_escape_string($db, $_POST['about']);
-  $plantitle = mysqli_real_escape_string($db, $_POST['plantitle']);
+  $dietitianuserID = mysqli_real_escape_string($conn, $_POST['dietitianuserID']);
+  $clientName = mysqli_real_escape_string($conn, $_POST['clientName']);
+  $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+  $height = mysqli_real_escape_string($conn, $_POST['height']);
+  $weight = mysqli_real_escape_string($conn, $_POST['weight']);
+  $about = mysqli_real_escape_string($conn, $_POST['about']);
+  $plantitle = mysqli_real_escape_string($conn, $_POST['plantitle']);
 
   // form validation: ensure that the form is correctly filled ...
   // by adding (array_push()) corresponding error unto $errors array
@@ -29,7 +30,7 @@ if (isset($_POST['add_client'])) {
   // first check the database to make sure 
   // a user does not already exist with the same username and/or email
   /*$user_check_query = "SELECT * FROM client WHERE clientuserID='$clientuserID' OR email='$email' LIMIT 1";
-  $result = mysqli_query($db, $user_check_query);
+  $result = mysqli_query($conn, $user_check_query);
   $user = mysqli_fetch_assoc($result);
   
   if ($user) { // if user exists
@@ -49,7 +50,7 @@ if (isset($_POST['add_client'])) {
 
   	$query = "INSERT INTO create_client (dietitianuserID, clientName, gender, height, weight, about, plantitle) 
   			  VALUES('$dietitianuserID','$clientName', '$gender' ,'$height','$weight', '$about', '$plantitle')";
-  	mysqli_query($db, $query);
+  	mysqli_query($conn, $query);
   	$_SESSION['success'] = "Client Added";
   	header('location: add_client.php');
   }

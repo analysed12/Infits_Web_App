@@ -3,17 +3,6 @@
 require_once "config.php";
 ?>
 
-<?php
-if(isset($_POST['search-btn']))
-{
-  if(!empty($_POST['search']))
-	{
-    $search = $_POST['search'];
-
-  }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,7 +99,7 @@ if(isset($_POST['search-btn']))
 
     }
 
-    .search-form input:focus {
+    input:focus {
         outline: none !important;
     }
 
@@ -258,10 +247,9 @@ if(isset($_POST['search-btn']))
                                     <?php
                                             $mark=explode(',', $row1['features']);//what will do here
                                             foreach($mark as $out) {
-                                                echo '<div class="col-3">';
-                                                echo '<div class="row" style="display:inline-block; margin-right:5px;"><i style="color:black;" class="fa-regular fa-circle-check"></i></div>';
-                                                echo '<div class="row" style="display:inline-block;">'.$out.'</div>';
-                                                echo '</div>';
+                                              
+                                                echo '<div style="display:inline-block;width:auto; margin-right:0.2px;"><i style="color:black;" class="fa-regular fa-circle-check"></i></div>';
+                                                echo '<div style="display:inline-block;width:auto;">'.$out.'</div>';
                                             }
                                             ?>
                                 </div>
@@ -273,9 +261,7 @@ if(isset($_POST['search-btn']))
              }
             }
           }
-             
-        
-    // <!-- echo "Hello"; -->
+
     
   }
 }
@@ -336,17 +322,19 @@ else{
                         <div class="card-below row">
                             <div class="col">
                                 <div class="row">FEATURES</div>
-                                <div class="row">
+                                <!-- <div class="row"> -->
                                     <?php
                                             $mark=explode(',', $row['features']);//what will do here
                                             foreach($mark as $out) {
-                                                echo '<div class="col-3">';
-                                                echo '<div class="row" style="display:inline-block; margin-right:5px;"><i style="color:black;" class="fa-regular fa-circle-check"></i></div>';
-                                                echo '<div class="row" style="display:inline-block;">'.$out.'</div>';
-                                                echo '</div>';
+
+                                                // echo '<div>';
+                                                echo '<div style="display:inline-block;width:auto;margin-right:5px; "><i style="color:black;" class="fa-regular fa-circle-check"></i></div>';
+                                                echo '<div style="display:inline-block;width:auto; margin-right:20px;">'.$out.'</div>';
+                                                // echo '</div>';
+                                            
                                             }
                                             ?>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </div>
                     </div>
@@ -372,6 +360,9 @@ else{
                     </div>
                 </div>
             </div>
+        <div style="margin>
+            <a href="">Hello</a>
+        </div>
 </body>
 
 <script>
@@ -387,7 +378,7 @@ $(document).ready(function() {
         } else {
             $.ajax({
                 type: "POST",
-                url: "ajax.php",
+                url: "search.php",
                 data: {
                     search: name
                 },
