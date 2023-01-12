@@ -13,7 +13,7 @@ if(isset($_GET['id']) && isset($_GET['planid'])  ){
 
     if($result){
         echo "Done" ;
-        header("Location: update_client_profile.php");
+        header("Location: update_client_profile.php?id=".$id);
     }
     else{
         die(mysqli_error($conn));
