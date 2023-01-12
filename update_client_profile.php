@@ -96,9 +96,9 @@ echo $id ;
 $sql = "SELECT * from `addclient` where client_id='$id'";
 $result = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($result)){
-            $id = $row["plan_id"] ;
+            $id1 = $row["plan_id"] ;
 
-                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $id";
+                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $id1";
                         $result1 = mysqli_query($conn, $sql1);
                         $row1 = mysqli_fetch_assoc($result1);
                         $date1 = strtotime($row1["start_date"]);
@@ -178,7 +178,7 @@ border-radius: 8px;">Select</a>
                         <div class="row d-flex justify-content-center align-items-center">
 
                             <button type=" submit" class="editBtn" name="edit_client" style="width:20%;
-    margin-top:30px"><a href="client_profile.php">Edit Profile</a></button>
+    margin-top:30px"><a href="client_profile.php?id=<?php echo $id?>">Edit Profile</a></button>
 
 
                         </div>
