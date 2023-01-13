@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -121,83 +122,9 @@ src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
     }
 
 
-    <!---------CSS for ingredients table--------->
-    .link{
-      width:200px;
-      display:flex;
-      flex-direction:row;
-      
-      
-      align-self:center;
-      
-    }
-    .symbol{
-      margin-left:300px;
-      text-align:center;
-      height: 55px;
-      width:55px;
-      border-radius:9px;
-      border-style:solid;
-      border-color:purple;
-      color:purple;
-     
-      
-    }
-
-    #add-dir{
-      display:flex;
-      margin:5px 15px;
-      color:black;
-      font-size:20px;
-    }
-
-    .popup-ingredients{
-                box-sizing: border-box;
-                 position: relative;
-                 display:none;
-                 
-                width: 356px;
-                height: 320px;
-                top: 25%;
-                left: 25%;
-                background: #FFFFFF;
-                border: 1px solid #E4E4E4;
-                box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.09);
-                border-radius:18px;
-             }
-.header{
-  height: 15px;
-    position: absolute;
-    margin-top: 5px;
-    justify-content: space-evenly;
-     margin-left:5px;
-
-}
-#header{
-  position: absolute;
-width: 141px;
-height: 18px;
- margin-left:30px;
-font-family: 'NATS';
-font-style: normal;
-font-weight:400;
-font-size: 25px;
-line-height: 75%;
-/* identical to box height, or 18px */
-
-display: flex;
+  
 
 
-color: #000000;
-}
-
-             .box{
-              margin-top:30px;
-              display:flex;
-              flex-direction:column;
-              
-
-             }
 
       <!----CSS for direction table----->
       flex-rightdir{
@@ -343,26 +270,74 @@ color: #000000;
       color:#A85CF;
       font-size:15px;
      }
-    </style>
-<!--------ingredient image----->
-<script>
 
-$(function(){
-  $('#sign').on('click',function(){
-    $('#my_image1').trigger('click');
-  });
-});     
-</script>
+     <!------direction poopup----->
+     .direction-add{
+      height:344px;
+      width:420px;
+      border-radius:15px;
+      left:40%;
+      top:50%;
+      border-style:15px solid #BF59EA;
+      color:black;
+      display:none;
+    
+     }
+     .flex-dir{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      
+
+     }
+     .btn-done{
+      height:54px;
+      width:150px;
+      background-color:#A85CF1;
+      color:white;
+      border-radius:15px;
+
+     }
+     .header{
+      display:flex;
+      flex-direction:row;
+      margin-top:30px;
+    margin-left:25px;
+      height:70px;
+     }
+
+    </style>
 
 <!-------uploadvideo----->
 <script>
-
+  $(document).ready(function(){
   $("#video-symbol").click(function(){
-    $("#video-upload").click();
+    $("#video-upload").trigger('click');
 
-
+  });
 });
 </script>
+
+
+ <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#btnShow").click(function () {
+
+                $('#SampleModal').modal('show');
+
+            });
+
+        });
+
+    </script>
+
+
 
   </head>
 
@@ -372,11 +347,14 @@ $(function(){
 
     <?php
 include ('connection.php');
-if( isset($_POST['save']) && isset($_FILES['my_image']))
+
+if( isset($_POST['save']) || isset($_FILES['my_image']))
 {     
    //$id= $_SESSION['dit_id']; 
       $id ='Sam';
+    
       $name =$_POST['R-name'];
+      $GLOBALS['rname']=$name;
       $course =$_POST['c-name'];
         
       $cate = $_POST['catgry'];
@@ -394,10 +372,10 @@ if( isset($_POST['save']) && isset($_FILES['my_image']))
       $link ="HELLO HOW R U?";
       $file1= "file";
       $ingrd= rand(100,1000);
-      $GLOBALS['id'] = $ingrd;                  //ingredient id as a global variable
+      $_SESSION['id'] = $ingrd;                  //ingredient id as a global variable
 
-      $inst = rand(100,1000);
-    
+      $inst = rand(100,1000);                 //instruction id
+     $_SESSION['dirtid'] = $inst;
   
 
       $total_time ="$p_time|$c_time";
@@ -434,9 +412,10 @@ if( isset($_POST['save']) && isset($_FILES['my_image']))
        VALUES('$name','$total_time','$serv','$link','$calo',
       '$prot','$fat','$fibr','$carbo','$ingrd','$inst','$cate','$id','$imageandpath','$file1','$course')";
 
-  //insert values into ingredient table
+  //insert default values into ingredient table
     $sql1= "INSERT INTO `add_ingredient`(`ingrd_id`,`ingrd_name`,`quantity`) VALUES         
            ('$ingrd','hhh', '4')";
+
 
            //insert values into instruction table
            $sql2 ="INSERT INTO `add_direction`(`dir_id`,`direction`) VALUES ('$inst','hjhj')";
@@ -466,8 +445,10 @@ if( isset($_POST['save']) && isset($_FILES['my_image']))
 
 
 
-  <form action=" " method="post" enctype="multipart/form-data">
+
+
     <div id="content">
+    <form action =" " method="POST" enctype="multipart/form-data">
       <!------------------------------------------------DASHBOARD--------------------------------------------------------->
         <h3 style="font-size: 30px; color: #202224; font-weight: 400; margin: 5px;">New Recipe</h3>
         <button id="save" name="save" style="height:46px; width:151px; background:#D257E6; color:white;
@@ -567,115 +548,28 @@ if( isset($_POST['save']) && isset($_FILES['my_image']))
 
 
 <div id="ingredients" class="tabcontent">
+  <!------redirect  to add_ingredients page---->
+  <?php header('location: Add-ingredients.php'); ?>
 
-
-<!------------------php for insert ingredients ------------->
-<?php
-if(isset($_POST['done'])  && isset($_FILES['my_image1'])) 
-{        
-        
-       $ingrd1 =$_POST['text1'];
-
-       $quantity1 =$_POST['text2'];
-       $ingrd = $GLOBALS['id'];
-       echo $ingrd;
-
-       //image upload 
-           $img_name= $_FILES['my_image1']['name'];
-             $img_size = $_FILES['my_image1']['size'];
-             $tmp_name = $_FILES['my_image1']['tmp_name'];
-               $error =$_FILES['my_image1']['error'];
-                $file_type= $_FILES['my_image1']['type'];
-              if($error === 0)
-              {
-                 if($img_size > 209712)
-                 {
-                       echo("file too large");
-
-                  }
-                  else
-                 {
-                          $img_ex=pathinfo($img_name, PATHINFO_EXTENSION);
-                         $img_ex_lc=strtolower($img_ex);
-                        $allowed_ex = array("jpg","png");
-
-                          if(in_array($img_ex_lc, $allowed_ex))
-                         {
-                            $new_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                           $img_upload_path = "./images/" .$new_name;
-              
-                           move_uploaded_file($tmp_name,$img_upload_path );  
-                           $imageandpath="$new_name|$img_upload_path";
-                          
-           
-              
-       $sql = "update `add_ingredient` set `image` = '$imageandpath', `ingrd_name` = '$ingrd1',`quantity` =  '$quantity1' 
-       where `ingrd_id` = '$ingrd'";
-    if($conn-> query($sql)  == TRUE)
-    {
-      echo "instruction added";
-            
-    }
-        else
-        {
-          echo "instruction not added";
-    }
-  }
-} } } ?>
-
-
-
-
-  <!-------content for ingredients------->
-  <form action=" " method="post" enctype="multipart/form-data">
-  <div class ="link">
-    <div class="symbol" style="text-align:center;"><h2 style="margin-top:10px 50px;"> + </h2></div>
-    <p id ="add-dir" style="color="black"> Add Ingredients </p>
-  </div>
-    <!----popup window----->
-    <div class ="popup-ingredients">
-        <div class ="header">
-        <h2 id = "header"> Add Ingredients </h2>
-         </div>
-        <div class="box">
-
-        <!--------image upload-------->
-          <div class="ing-img" style="height:60px;width:60px;border-radius:16px;border-color:purple; border:solid; text-align:center;margin-left:5px;margin-top:50px;display:flex;flex-direction:column;">
-         <img src="./images/plus.svg" id="sign" style="height:35px; width:35px; cursor:pointer;">
-      
-         <input type="file" name="my_image1" id="my_image1" style="display:none;">
-                </div>
-
-       <div class="flex-right-ing" style="display:flex; flex-direction:column; justify-content:space-between;margin-left:60px;margin-top:5px;">
-        <input type= "text" id="text1" class="input-text" name = "text1" placeholder="Name of ingredient" style=" width:200px;border-radius:15px;">
-        <input type="text" id ="text2"  class="input-text" name ="text2" placeholder="Quantity" style="border-radius:15px;width:200px;">
-        <p id="add-more" name="add-more" style="margin-left:80px;margin-top:20px; color: #7963FB; cursor:pointer;">
-        Add more Ingredients</p>
-        
-    <button type="submit"   name="done" id="done" style="font-size: 24px;width:162px;border-radius: 10px; background: linear-gradient(267.44deg, rgba(204, 87, 231, 0.66) 0.01%, rgba(116, 99, 252, 0.66) 85.22%);color: white;margin-left:80px;height: 31px; margin-top: 5px;text-align: center;">Done</button>
         </div>
-            </div>
-    
 
-</div>
-</div>
-</div>
-</form>
 
 
 
 
 <div id="directions" class="tabcontent">
   <!--    CONTENT FOR DIRECTIONS-->
+  <form action =" " method="POST" enctype="multipart/form-data">
 
     <div class="form-flex" style="margin-left:10px;">
     <div class="flex-rightdir">
-       <div class="symbol" style="text-align:center; margin-left:20px;" ><h2 style="margin:7px 10px;"> + </h2>
-        <p id="add-dir-data" style="width:140px;margin-left:50px;color:black;font-size:17px;margin-top:0px;" >Add direction</p> </div>
+      
+       <div class="btn-open" id="btn-show" style="text-align:center; margin-left:20px;" ><h2 style="margin:7px 10px;"> + </h2>
+        <p id="add-dir-data" style="width:140px;margin-left:90px;color:black;font-size:17px;margin-top:0px;" >Add direction</p> </div>
         </div>
 
        <div class="upload-vdo"> 
-             <img src= ".\images\upload.svg" id="video-symbol" onclick="openvideo style="height:17px;width:17px;margin-left:5px;margin-top:8px;cursor:pointer;">
+             <img src= ".\images\upload.svg" id="video-symbol" style="height:17px;width:17px;margin-left:5px;margin-top:8px;cursor:pointer;">
             <input type="file" name="video-upload"  id="video-upload" style="display:none;">
             <button id="btn-video" name="btn-video" class="btn-flex;" style="background:white; border:none; color: #A45DF2; margin-right:15px;margin-left:10px;"> Add Video </button>
        </div>
@@ -688,60 +582,49 @@ if(isset($_POST['done'])  && isset($_FILES['my_image1']))
     </div>
 
   </div>
+        </form>
+
+
+      <!--------php for add in drections table---->
+      <?php  
+      if(isset($_POST['done']))
+      {
+         $var_dir = $_POST['dirct'];
+        $var = $_SESSION['dirtid'];
+        // echo $var;
+         $sql ="insert into `add_direction` (`dir_id`,`direction`) values('$var', '$var_dir')";
+         if($conn -> query($sql) == true)
+         {
+           echo 'directions added';
+
+         }
+         else{
+          echo 'directions not added try again';
+         }
+      }
+
+       ?>
+
+
+
+  
+
 
   <!----------------DIRECTIONS POPUP-------------->
-  <div class="form-flex" style="margin-left:10px;">
-    <div class="add-dirc" id="add-dirc">
-      <div class="dirc-header">
-</div>
-<div class="dirc-content">
-  <input type="text" name="input-dirc" id="input-dirc">
-  <h4 id="dirc-p"> Add more Directions </h4>
-  <button id="dirc-add" name="dirc-add">Done</button>
-</div>
-</div>
+          <div id="dirModal"  class="direction-add" style="height:320px; width:476px; border-radius:15px; border:1px solid black;">
+        <div class="flex-dir">
+        <div class ="header">
+        <form action=" " method="POST">
 
-</div>
+          <h4> Add Direction </h4>  <button type="button" style="font-size:12px; border:none; margin-left:20px; background:white;">&times; </button>
+        </div>
+        <input type="text" name="dirct" placeholder="Type directions here....." style="border-radius:5px; height:51px; width:420px; margin-left:15px;"> <br><br>
+        <p id="para" style="font-size:17px; color:#7B62FB; display:flex;margin-left:40px;"> Add more direction</p> 
+        <button class="btn-done" name="done" style="margin-left:80px;">Done </button>
 
-
-
-
-<!-------php code for add url----->
-<?php
-    if(isset($_POST['url-save'])){
-      $url=$_POST['url1'];
-     // $namer= $_SESSION['rname'];
-     $namer = 'poha';
-      $sql="UPDATE dietian_recipies SET `link` = '$url' WHERE `name`= '$namer'";
-      if($conn ->query($sql) == true)
-      {
-        echo "Url Added";
-        }
-        else{
-          echo "URL not added";
-        }
-    }
-
-?>
-
-
-
-  <!------------JS for add url----->
-  <form action=" " method="post" enctype="multipart/file-type">
-    <div class="form-flex">
-  <div class="add-url" id="add-url">
-    <div class="url-header">
-      <h2> Add URL</h2>
-      
-</div>
-<div class="url-content">
-  <input type="text" name="url1">
-  <button type="submit" id="url-save" name="url-save" style="width:197px; height:56px; background:#A45DF2; color:white; margin-bottom:5px;">Save</button>
-</div>
-</div>
-  </div>
-</form>
-<!-------------close div of add url--------->
+        </div>
+        </div>
+        </form>
 
   </div>
 
