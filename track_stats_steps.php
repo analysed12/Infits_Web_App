@@ -885,8 +885,8 @@ new Chart(defaultChart, {
     datasets: [{
         fill: false,
         lineTension: 0,
-        backgroundColor: "#E27998",
-        borderColor: "#E27998",
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
         data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
         borderWidth: 1
     }]
@@ -906,8 +906,8 @@ new Chart(defaultChart, {
         }],
         yAxes:[{
             ticks:{
-                min:2500,
-                max:3000,
+                min:500,
+                max:5000,
                 stepSize:100,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
@@ -944,8 +944,8 @@ new Chart(yearlyChart, {
     datasets: [{
         fill: false,
         lineTension: 0,
-        backgroundColor: "#E27998",
-        borderColor: "#E27998",
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
         data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
         borderWidth: 1
     }]
@@ -965,9 +965,9 @@ new Chart(yearlyChart, {
         }],
         yAxes:[{
             ticks:{
-                min:2500,
-                max:3000,
-                stepSize:100,
+                min:500,
+                max:5000,
+                stepSize:500,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:13,
@@ -1003,8 +1003,8 @@ new Chart(monthlyChart, {
     datasets: [{
         fill: false,
         lineTension: 0,
-        backgroundColor: "#E27998",
-        borderColor: "#E27998",
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
         data: [ <?php echo(implode(', ', $wholeMonthData['value'])) ?>],
         borderWidth: 1
     }]
@@ -1024,9 +1024,9 @@ new Chart(monthlyChart, {
         }],
         yAxes:[{
             ticks:{
-                min:2500,
-                max:3000,
-                stepSize:100,
+                min:500,
+                max:5000,
+                stepSize:500,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:12,
@@ -1062,8 +1062,8 @@ new Chart(weeklyChart, {
     datasets: [{
         fill: false,
         lineTension: 0,
-        backgroundColor: "#E27998",
-        borderColor: "#E27998",
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
         data: [ <?php echo(implode(', ', $wholeWeekData['value'])) ?>],
         borderWidth: 1
     }]
@@ -1083,9 +1083,9 @@ new Chart(weeklyChart, {
         }],
         yAxes:[{
             ticks:{
-                min:2500,
-                max:3000,
-                stepSize:100,
+                min:500,
+                max:5000,
+                stepSize:500,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:12,
