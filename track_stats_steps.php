@@ -583,7 +583,7 @@ margin-left: 5px;
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
                         <a href="track_stats_step.php">
                             <img src="images/calorie_selected.svg" alt="">
-                            <p style="color:#00000;">Calorie Track</p>
+                            <p style="color:#E3738D;">Calorie Track</p>
                             </a>
                         </div>
                 </div>
