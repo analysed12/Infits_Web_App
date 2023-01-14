@@ -1,4 +1,3 @@
-
 <?php
 // Client Id
 $clientId = 'Eden';
@@ -7,17 +6,15 @@ date_default_timezone_set("Asia/Calcutta");
 $today = new DateTime();
 // Goal Insertion
 if(isset($_POST['savegoal'])){
+    $client = $_POST['clientid'];
     $goal =$_POST['setgoal'];
-    $current_date = date("Y-m-d");
     $conn = new mysqli("localhost", "root", "", "infits");
 
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
     
-    $query="UPDATE calorietracker SET goal = $goal WHERE clientID= '$clientId' AND 
-            `time` >= '$current_date 00:00:00'
-            AND `time` <= '$current_date 23:59:59'";
+    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('calorie' , $goal, '$client' )";
     $result = $conn->query($query) or die("Query Failed");
     
     if($result){
@@ -552,31 +549,31 @@ margin-left: 5px;
                 </div>
                 <div class="card-container">
                 <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_steps.php">
                             <i class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA; rotate: -90deg;"></i>
                             <p style="color: #FF6C6CCA;">Step</p>
                         </a>
                         </div>
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_heart.php">
                             <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
                             <p style="color:#E266A9;">Heart Rate</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_water.php">
                             <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
                             <p style="color:#52A4FF;">Water</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_weight.php">
                             <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
                             <p style="color:#7D5DE6;">Weight Track</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                        <a href="track_stats_calorie.php">
+                        <a href="track_stats_sleep.php">
                             <i style="color:#54AFAC;" class="fa-solid fa-moon"></i>
                             <p style="color:#54AFAC;">Sleep</p>
                             </a>
@@ -658,6 +655,7 @@ margin-left: 5px;
                 <img src="images/fruits.svg" alt="">
                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                     <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 BPM">
+                    <input name="clientid"  type="hidden" value="<?php echo($clientId) ?>">
                     <button type="submit" name="savegoal" id="save-goal">Set</button>
                 </form>
             </div>
@@ -666,7 +664,7 @@ margin-left: 5px;
 <?php 
 // funtion to fetch
 // This can be more Simple by String Concatination
-function fetchDataSql($clientId,$from_date, $from_month, $from_year, $to_date,$to_month, $to_year, $isCustom=0){
+function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
     // Connect to Database
     $conn = new mysqli("localhost", "root", "", "infits");
     if($conn->connect_error){
@@ -675,28 +673,31 @@ function fetchDataSql($clientId,$from_date, $from_month, $from_year, $to_date,$t
     // For Sum of All Data Till Today
     if($isCustom==1){
         $query="SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-                `time` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
+                `time` <= '{$to_date} 23:59:59';";
     // for sum of Data between two dates
     }else if($isCustom==2){
         $query = "SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-                `time` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
-                AND `time` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";;
+                `time` >= '{$from_date} 00:00:00'
+                AND `time` <= '{$to_date} 23:59:59';";;
     // for average of data end to end (monthly)
     }else if($isCustom==3){
         $query="SELECT avg(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-            `time` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
-            AND `time` < '{$to_year}-{$to_month}-{$to_date} 00:00:00';";
-    // for all data of a day
+            `time` >= '{$from_date} 00:00:00'
+            AND `time` < '{$to_date} 00:00:00';";
+    // for get latest goal from goals table
     }else if($isCustom==4){
-        $query="SELECT * FROM calorietracker WHERE clientID= '$clientId' AND 
-            `time` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
-            AND `time` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
+        $query="SELECT goal FROM goals WHERE forWhat = 'calorie' ORDER BY time DESC LIMIT 1";
+    // for getting past actvities 
+    }else if($isCustom==5){
+        $query = "SELECT * FROM `calorietracker` WHERE clientID = '$clientId' AND `time` >= '{$from_date} 00:00:00'
+        AND `time` < '{$to_date} 23:59:59' ORDER BY time DESC;" ;
     // for average of data of one full day
     }else{
     $query="SELECT avg(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-            `time` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
-            AND `time` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
+            `time` >= '{$from_date} 00:00:00'
+            AND `time` <= '{$to_date} 23:59:59';";
     }
+    // echo($query);
     $result = $conn->query($query) or die("Query Failed");
     $data = array();
     while($row = $result->fetch_assoc()){
@@ -707,17 +708,17 @@ function fetchDataSql($clientId,$from_date, $from_month, $from_year, $to_date,$t
 }
 
 // All Data Total Sum
-$allDataSum = fetchDataSql($clientId, '', '', '', $today->format('d'), $today->format('m'), $today->format('y'), 1)[0]['SUM(caloriesconsumed)'];
+$allDataSum = fetchDataSql($clientId, '', $today->format('Y-3-d'), 1)[0]['SUM(caloriesconsumed)'];
 // Today Data Sum
-$todayData = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('y'), $today->format('d'), $today->format('m'), $today->format('y'),2)[0]['SUM(caloriesconsumed)'];
+$todayData = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),2)[0]['SUM(caloriesconsumed)'];
 // Week Average
 $pastWeek =new DateTime();
 $pastWeek->modify('-1 week');
-$weekAvg = fetchDataSql($clientId,$pastWeek->format('d'), $pastWeek->format('m'), $pastWeek->format('y'), $today->format('d'), $today->format('m'), $today->format('y'))[0]['avg(caloriesconsumed)'];
+$weekAvg = fetchDataSql($clientId,$pastWeek->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(caloriesconsumed)'];
 // Month Average
 $pastMonth = new DateTime();
 $pastMonth->modify('-1 month');
-$monthAvg = fetchDataSql($clientId,$pastMonth->format('d'), $pastMonth->format('m'), $pastMonth->format('y'), $today->format('d'), $today->format('m'), $today->format('y'))[0]['avg(caloriesconsumed)'];
+$monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(caloriesconsumed)'];
 ?>
     <div class="row ts-down">
         <div class="col-lg-7 tsd-left">
@@ -751,16 +752,9 @@ $monthAvg = fetchDataSql($clientId,$pastMonth->format('d'), $pastMonth->format('
                 </div>
             </div>
 <?php
-$pastActiivity = new DateTime();
-$pastActiivity->modify('-3 day');
-$pastActivityData = fetchDataSql($clientId, $pastActiivity->format('d'), $pastActiivity->format('m'), $pastActiivity->format('y'), $today->format('d'), $today->format('m'), $today->format('y'),4);
-
-// i = number of activities wanted
-$i = 5;
+$pastActivityData = fetchDataSql($clientId,$today->format('Y-m-d'),$today->format('Y-m-d'),5);
+$k = 0;
 $j = count($pastActivityData);
-if($i>$j){
-    $i = $j;
-}
 ?>
             <div class="tsd-left-b table-activity">
                 <div class="heading">
@@ -769,8 +763,8 @@ if($i>$j){
                 </div>
                 <div class="heading-border"></div>
                 <div class="activity-container">
-<?php while($i>0){
-    $date = new DateTime($pastActivityData[$j-1]['time']);
+<?php while($k<$j){
+    $date = new DateTime($pastActivityData[$k]['time']);
 ?>
                     <div class="activity-box">
                         <div class="activity-date">
@@ -779,25 +773,34 @@ if($i>$j){
                         </div>
                         <div class="activity-border"></div>
                         <div class="activity-data">
-                            <span class="up">Shake</span>
-                            <span class="down"><?php echo ($pastActivityData[$j-1]['caloriesconsumed']) ?> Kcal</span>
+                            <span class="up"><?php echo (ucwords($pastActivityData[$k]['meal'])) ?></span>
+                            <span class="down"><?php echo ($pastActivityData[$k]['caloriesconsumed']) ?> Kcal</span>
                         </div>
                         <div class="activity-time">
                             <span><?php echo ($date->format('h:i A')) ?></span>
                         </div>
                     </div>
-<?php $i--;
-$j--; } ?>
+<?php $k++; } ?>
 
                 </div>
             </div>
         </div>
 <?php
-$progressBarData = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('y'), $today->format('d'), $today->format('m'), $today->format('y'), 4);
-$calorieConsumed = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('y'), $today->format('d'), $today->format('m'), $today->format('y'), 2)[0]['SUM(caloriesconsumed)'];
-$currentGoal =  $progressBarData[0]['goal'];
-$calorieRemaining = $currentGoal - $calorieConsumed;
-$progressPercent = round(($calorieConsumed / $currentGoal) * 100,2);
+$progressBarData = fetchDataSql($clientId, '', '',4);
+$calorieConsumed = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'), 2);
+if(empty($calorieConsumed)){
+    $calorieConsumed = 0;
+}else{
+    $calorieConsumed = $calorieConsumed[0]['SUM(caloriesconsumed)'];
+}
+if(empty($progressBarData)){
+    $currentGoal =  0;
+    $progressPercent = 0;
+}else{
+    $currentGoal =  $progressBarData[0]['goal'];
+    $progressPercent = round(($calorieConsumed / $currentGoal) * 100,2);
+}
+$calorieRemaining = (int) $currentGoal - (int) $calorieConsumed;
 ?>     
         <div class="col-lg-5 tsd-right">
             <div class="heading">
@@ -806,7 +809,7 @@ $progressPercent = round(($calorieConsumed / $currentGoal) * 100,2);
             </div>
             <div class="progress-bar-container">
                 <div class="total-consumed">
-                    <span><?php echo ($calorieConsumed) ?> Kcal</span>
+                    <span><?php echo ( (int) $calorieConsumed) ?> Kcal</span>
                     <p>Consumed</p>
                 </div>
                 <div id="progress-percent" class="progress-circle">
@@ -827,52 +830,70 @@ $progressPercent = round(($calorieConsumed / $currentGoal) * 100,2);
     </div>
 </div>
 <?php
-// To Get Past Year - Yearly data
+// To Get - Yearly data
 $wholeYearData = array(
     'value' => array(),
     'month' => array()
 );
-for ($i = 12; $i > 0;$i--){
-    $j = $i - 1;
-    $yearly_Month_1 = new DateTime();
-    $yearly_Month_2 = new DateTime();
-    $yearly_Month_1->modify("-$i month");
-    $yearly_Month_2->modify("-$j month");
-    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1->format('d'), $yearly_Month_1->format('m'), $yearly_Month_1->format('y'), $yearly_Month_2->format('d'), $yearly_Month_2->format('m'), $yearly_Month_2->format('y'),3)[0]['avg(caloriesconsumed)'];
+$yearly_month = new DateTime();
+$yearly_last_month = new DateTime();
+$yearly_month->setDate($yearly_month->format('Y'),01,01);
+if($today->format('m') == '01'){
+    echo('hel');
+    $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+    $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+}
+while($yearly_last_month >= $yearly_month){
+    
+    $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
+    $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
+    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1, $yearly_Month_2,3)[0]['avg(caloriesconsumed)'];
 
     array_push($wholeYearData['value'], $yearly_Data);
-    array_push($wholeYearData['month'], $yearly_Month_1->format('M'));
+    array_push($wholeYearData['month'], $yearly_month->format('M'));
+    $yearly_month->modify('+1 month');
 }
-// To Get Past Month - Monthly Data
 $wholeMonthData = array(
     'value' => array(),
     'date' => array(),
-    'sum' =>0,
 );
 $monthly_Month = new DateTime();
-$monthly_Month->modify("-1 month");
-while ($today >= $monthly_Month) {
-    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('y'), $monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('y'))[0]['avg(caloriesconsumed)'];
+$monthly_LastDay = new DateTime();
+$monthly_Month->modify("first day of this month");
+
+if($today->format('d') == '01'){
+    $monthly_Month->modify("first day of previous month");
+    $monthly_LastDay->modify("last day of previous month");
+}
+while ($monthly_LastDay >= $monthly_Month) {
+    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('Y-m-d'), $monthly_Month->format('Y-m-d'),2)[0]['SUM(caloriesconsumed)'];
 
     array_push($wholeMonthData['value'],$monthly_Data);
     array_push($wholeMonthData['date'], $monthly_Month->format('d'));
-    $wholeMonthData['sum'] = $wholeMonthData['sum'] + $monthly_Data;
     $monthly_Month->modify("+1 day");
+    
 }
-// To Get Past Week - Weekly Data
+
+
+// To Get - Weekly Data
 $wholeWeekData = array(
     'value' => array(),
     'day' => array(),
-    'sum' => 0,
 );
-for($i=7;$i>=0;$i--){
-    $weekly_Day = new DateTime();
-    $weekly_Day->modify("-$i day");
-    $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('d'), $weekly_Day->format('m'), $weekly_Day->format('y'), $weekly_Day->format('d'), $weekly_Day->format('m'), $weekly_Day->format('y'))[0]['avg(caloriesconsumed)'];
+$weekly_Day = new DateTime();
+$weekly_Day->modify('previous monday');
+$weekly_lastDay =new DateTime();
 
-    array_push($wholeWeekData['value'], $weekly_Data);
+if($today->format('l')== "Monday"){
+    $weekly_lastDay->modify('previous sunday');
+}
+
+while($weekly_Day <= $weekly_lastDay){
+    $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('Y-m-d'), $weekly_Day->format('Y-m-d'),2);
+
+    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(caloriesconsumed)']);
     array_push($wholeWeekData['day'], $weekly_Day->format('D'));
-    $wholeWeekData['sum'] = $wholeWeekData['sum'] + $weekly_Data;
+    $weekly_Day->modify("+1 day");
 }
 ?>
 <script>
@@ -907,9 +928,9 @@ new Chart(defaultChart, {
         }],
         yAxes:[{
             ticks:{
-                min:2500,
-                max:3000,
-                stepSize:100,
+                // min:2500,
+                // max:3000,
+                // stepSize:100,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:13,
@@ -966,9 +987,9 @@ new Chart(yearlyChart, {
         }],
         yAxes:[{
             ticks:{
-                min:2500,
-                max:3000,
-                stepSize:100,
+                // min:2500,
+                // max:3000,
+                // stepSize:100,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:13,
@@ -1025,9 +1046,9 @@ new Chart(monthlyChart, {
         }],
         yAxes:[{
             ticks:{
-                min:2500,
-                max:3000,
-                stepSize:100,
+                // min:2500,
+                // max:3000,
+                stepSize:500,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:12,
@@ -1059,13 +1080,18 @@ const weeklyChart = document.getElementById('myChartWeekly');
 new Chart(weeklyChart, {
     type: 'line',
     data: {
-    labels: [<?php echo("'" . implode("','", $wholeWeekData['day']) . "'") ?>],
+    // labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    labels: [
+        <?php
+         echo("'" . implode("','", $wholeWeekData['day']) . "'") 
+    ?>
+    ],
     datasets: [{
         fill: false,
         lineTension: 0,
         backgroundColor: "#E27998",
         borderColor: "#E27998",
-        data: [ <?php echo(implode(', ', $wholeWeekData['value'])) ?>],
+        data: [ <?php echo( implode(', ',$wholeWeekData['value'])) ?>],
         borderWidth: 1
     }]
     },
@@ -1084,9 +1110,9 @@ new Chart(weeklyChart, {
         }],
         yAxes:[{
             ticks:{
-                min:2500,
-                max:3000,
-                stepSize:100,
+                // min:2500,
+                // max:3000,
+                stepSize:500,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:12,
