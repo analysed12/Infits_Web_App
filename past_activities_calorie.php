@@ -1,3 +1,10 @@
+<?php
+// Client Id
+$clientId = 'Eden';
+// Configure Dates
+date_default_timezone_set("Asia/Calcutta");
+$today = new DateTime();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,10 +147,11 @@ border-bottom-left-radius: 1em!important;
     color: #FFFFFF;
 }
 /* -------------------Calorie Tab Content------------------- */
-.week-container{
-    margin: 3%;
+.activity-container{
+    /* margin: 3%; */
+    padding: 3%;
 }
-.week-container p{
+.activity-container p{
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
@@ -265,53 +273,259 @@ color: #000000;
             </div>
         </div>
             
-            
+<?php
+function fetchPastActivity($clientId,$query){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    
+    // echo($query);
+    $result = $conn->query($query) or die("Query Failed");
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+?>
     
         <!-- past_activities -->
         <div class="graph">
 
          <!-- Tab content -->
+                                <!-- Custom Data -->
                                 <div id="London" id="defaultOpen" class="tab-content">
-                                
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartwater"></canvas>
-                                </div>
-
-                                <div id="Year" class="tab-content">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartYearly"></canvas>
-                                </div>
-
-                                <div id="Month" class="tab-content">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartMonthly"></canvas>
-                                </div>
-                                
-                                <div id="Week" class="tab-content">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <!-- <canvas id="myChartWeekly"></canvas> -->
                                     <div class="row">
                                         <div class="col">
-                                        <?php for ($i=0; $i < 3; $i++) { ?>
-                                            <div class="week-container">
-                                                <p class="date">19 Jun 2021</p>
+                                        <?php
+                                        $yearly_month = new DateTime();
+                                        $yearly_last_month = new DateTime();
+                                        $yearly_month->setDate($yearly_month->format('Y'),01,01);
+                                        if($today->format('m') == '01'){
+                                            $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+                                            $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+                                        }
+                                        
+                                        while($yearly_last_month >= $yearly_month){
+                                            $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
+                                            $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
+                                            $query="SELECT * FROM calorietracker WHERE clientID= '$clientId' AND 
+                                                    `time` >= '".$yearly_Month_1." 00:00:00'
+                                                    AND `time` <= '".$yearly_Month_2." 23:59:59';";
+                                            $yearly_Data = fetchPastActivity($clientId,$query);
+                                            
+                                            $count = count($yearly_Data);
+                                            $i = 0;
+                                        ?>
+                                            <div class="activity-container">
+                                                <p class="date"><?php echo ($yearly_month->format('M Y')); ?></p>
+                                                <?php 
+                                                $yearly_month->modify("+1 Month");
+                                                if(empty($yearly_Data)){
+                                                    echo ("<p> NO DATA FOUND </p>");
+                                                    echo ('</div>');
+                                                    // echo('<br>');
+                                                    continue;
+                                                }
+                                                ?>
                                                 <div class="flex-box">
-                                                <?php for ($j=0; $j < 4; $j++) { ?>
-                                                
+                                                <?php  
+                                                while($i<$count){ 
+                                                    $I_date = new DateTime($yearly_Data[$i]['time']);
+                                                ?>
                                                     <div class="meal-box">
                                                         <div class="left">
                                                             <img src="images/calorie_meal_icon.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Breakfast</p>
-                                                                <span>11:00 am</span>
+                                                                <p><?php echo($yearly_Data[$i]['meal']) ?></p>
+                                                                <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
                                                             <img src="images/calorie_fire_icon.svg" alt="">
-                                                            <p class="kcal">226 kcal</p>
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['caloriesconsumed']) ?> kcal</p>
                                                         </div>
                                                     </div>
-                                                <?php } ?>
+                                                <?php $i++; } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Yearly Data -->
+                                <div id="Year" class="tab-content">
+                                    <div class="row">
+                                        <div class="col">
+                                        <?php
+                                        $yearly_month = new DateTime();
+                                        $yearly_last_month = new DateTime();
+                                        $yearly_month->setDate($yearly_month->format('Y'),01,01);
+                                        if($today->format('m') == '01'){
+                                            $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+                                            $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+                                        }
+                                        
+                                        while($yearly_last_month >= $yearly_month){
+                                            $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
+                                            $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
+                                            $query="SELECT * FROM calorietracker WHERE clientID= '$clientId' AND 
+                                                    `time` >= '".$yearly_Month_1." 00:00:00'
+                                                    AND `time` <= '".$yearly_Month_2." 23:59:59';";
+                                            $yearly_Data = fetchPastActivity($clientId,$query);
+                                            
+                                            $count = count($yearly_Data);
+                                            $i = 0;
+                                        ?>
+                                            <div class="activity-container">
+                                                <p class="date"><?php echo ($yearly_month->format('M Y')); ?></p>
+                                                <?php 
+                                                $yearly_month->modify("+1 Month");
+                                                if(empty($yearly_Data)){
+                                                    echo ("<p> NO DATA FOUND </p>");
+                                                    echo ('</div>');
+                                                    // echo('<br>');
+                                                    continue;
+                                                }
+                                                ?>
+                                                <div class="flex-box">
+                                                <?php  
+                                                while($i<$count){ 
+                                                    $I_date = new DateTime($yearly_Data[$i]['time']);
+                                                ?>
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/calorie_meal_icon.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p><?php echo($yearly_Data[$i]['meal']) ?></p>
+                                                                <span><?php echo($I_date->format('h:i A d M')) ?></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/calorie_fire_icon.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['caloriesconsumed']) ?> kcal</p>
+                                                        </div>
+                                                    </div>
+                                                <?php $i++; } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Monthly Data -->
+                                <div id="Month" class="tab-content">
+                                    <div class="row">
+                                        <div class="col">
+                                        <?php
+                                        $monthly_Month = new DateTime();
+                                        $monthly_LastDay = new DateTime();
+                                        $monthly_Month->modify("first day of this month");
+                                        if($today->format('d') == '01'){
+                                            $monthly_Month->modify("first day of previous month");
+                                            $monthly_LastDay->modify("last day of previous month");
+                                        }
+                                        
+                                        while($monthly_LastDay >= $monthly_Month){
+                                            $query="SELECT * FROM calorietracker WHERE clientID= '$clientId' AND 
+                                                    `time` >= '".$monthly_Month->format('Y-m-d')." 00:00:00'
+                                                    AND `time` <= '".$monthly_Month->format('Y-m-d')." 23:59:59';";
+                                            $monthly_Data = fetchPastActivity($clientId,$query);
+                                            
+                                            $count = count($monthly_Data);
+                                            $i = 0;
+                                        ?>
+                                            <div class="activity-container">
+                                                <p class="date"><?php echo ($monthly_Month->format('d M Y')); ?></p>
+                                                <?php 
+                                                $monthly_Month->modify("+1 day");
+                                                if(empty($monthly_Data)){
+                                                    echo ("<p> NO DATA FOUND </p>");
+                                                    echo ('</div>');
+                                                    // echo('<br>');
+                                                    continue;
+                                                }
+                                                ?>
+                                                <div class="flex-box">
+                                                <?php  
+                                                while($i<$count){ 
+                                                    $I_date = new DateTime($monthly_Data[$i]['time']);
+                                                ?>
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/calorie_meal_icon.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p><?php echo($monthly_Data[$i]['meal']) ?></p>
+                                                                <span><?php echo($I_date->format('h:i A')) ?></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/calorie_fire_icon.svg" alt="">
+                                                            <p class="kcal"><?php echo($monthly_Data[$i]['caloriesconsumed']) ?> kcal</p>
+                                                        </div>
+                                                    </div>
+                                                <?php $i++; } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Weekly Data -->
+                                <div id="Week" class="tab-content">
+                                    <div class="row">
+                                        <div class="col">
+                                        <?php
+                                        $weekly_Day = new DateTime();
+                                        $weekly_Day->modify('previous monday');
+                                        $weekly_lastDay =new DateTime();
+                                        
+                                        if($today->format('l')== "Monday"){
+                                            $weekly_lastDay->modify('previous sunday');
+                                        }
+                                        
+                                        while($weekly_Day <= $weekly_lastDay){
+                                            $query="SELECT * FROM calorietracker WHERE clientID= '$clientId' AND 
+                                                    `time` >= '".$weekly_Day->format('Y-m-d')." 00:00:00'
+                                                    AND `time` <= '".$weekly_Day->format('Y-m-d')." 23:59:59';";
+                                            $weekly_Data = fetchPastActivity($clientId,$query);
+                                            
+                                            $count = count($weekly_Data);
+                                            $i = 0;
+                                        ?>
+                                            <div class="activity-container">
+                                                <p class="date"><?php echo ($weekly_Day->format('d M Y')); ?></p>
+                                                <?php 
+                                                $weekly_Day->modify("+1 day");
+                                                if(empty($weekly_Data)){
+                                                    echo ("<p> NO DATA FOUND </p>");
+                                                    echo ('</div>');
+                                                    // echo('<br>');
+                                                    continue;
+                                                }
+                                                ?>
+                                                <div class="flex-box">
+                                                <?php  
+                                                while($i<$count){ 
+                                                    $I_date = new DateTime($weekly_Data[$i]['time']);
+                                                ?>
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/calorie_meal_icon.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p><?php echo($weekly_Data[$i]['meal']) ?></p>
+                                                                <span><?php echo($I_date->format('h:i A')) ?></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/calorie_fire_icon.svg" alt="">
+                                                            <p class="kcal"><?php echo($weekly_Data[$i]['caloriesconsumed']) ?> kcal</p>
+                                                        </div>
+                                                    </div>
+                                                <?php $i++; } ?>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -341,8 +555,8 @@ color: #000000;
                                             }
                     
                                             /* // Get the element with id="defaultOpen" and click on it */
-                                            document.getElementById("defaultOpen").click();
-                                            // document.getElementById("temp").click();
+                                            // document.getElementById("defaultOpen").click();
+                                            document.getElementById("temp").click();
                                        </script> 
             </div>
         </div>
