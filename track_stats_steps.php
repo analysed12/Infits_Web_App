@@ -16,20 +16,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
-            $(".pheader p").click(function(){
-                $(".activity_pop").toggle();
+            $(".graph_button_left").click();
+            });
+            $(document).ready(function(){
+            $("#defaultOpen").click(function(){
+                
             });
             });
         </script>
         <script>
+
             $(document).ready(function(){
-            $(".calendat_but").click(function(){
-                $(".calendar_pop").animate({
+            $(".pheader p").click(function(){
+                $(".activity_pop").animate({
                     height: 'toggle'
                 });
             }); 
             });
-            var cl=document.getElementById("defaultOpen");
+            $(document).ready(function(){
+            $(".activity_pop img").click(function(){
+                $(".activity_pop").animate({
+                    height: 'toggle'
+                });
+            }); 
+            });
+            
+            var cl=document.getElementById('defaultOpen');
                         cl.click();
         </script>
         <!-- <script>
@@ -543,8 +555,54 @@ opacity: 0.77;
     box-shadow: 0px 3px 4px rgba(0.16, 0.16, 0.16, 0.16);
     margin-top: -220px;
     padding: 2px;
+
+}
+.activity_pop img{
+    align-self: flex-end;
+    margin-right: 20px;
+}
+.pop_header span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 53px;
+/* identical to box height */
+
+
+color: #FF7B44;
 }
 .pop_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    margin: 10 px;
+    padding: 10px;
+}
+.pop_box_info{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    height: 49px;
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 20px;
+padding : 0 px !important;
+color: #000000;
+}
+/* a:hover, .active {
+    align-items: center;
+    border: 1px solid #E5F1FF;
+    background-color:  #FF8B8B !important;
+    color: #FFFFFF !important;
+    border-radius: 10px;
+} */
+.pop_box{
+
     width: 344px;
     height: 49px;
     background: linear-gradient(180deg, rgba(255, 224, 209, 0.48) 0%, rgba(255, 139, 139, 0.48) 100%);
@@ -591,12 +649,28 @@ color: #9C74F5;
    border-radius: 12px;
 }
 /* Style the buttons that are used to open the tab content */
+.tab {
+  overflow: hidden;
+  /* border: 1px solid #ccc;
+  background-color: #f1f1f1; */
+  border: 1px solid #F8F5F5;
+  width: 365px;
+height: 27px;
+margin-left: 3%;
+border-top-left-radius: 1em!important;
+border-bottom-left-radius: 1em!important;
+border-top-right-radius: 1em!important;
+  border-bottom-right-radius: 1em!important;
+}
+
+
+/* Style the buttons that are used to open the tab content */
 .tab button {
     background: #FFFFFF;
     border: 1px solid #FCFBFB;
     border-radius: 0px;
-    height: 27px;
-    width: 76px;
+    width: 85.35px;
+height: 24px;
   float: left;
   border: none;
   outline: none;
@@ -611,16 +685,25 @@ line-height: 27px;
 
 color: #4D4D4D;
 }
-
+.graph_button_side{
+    border: 1px solid #F8F5F5;
+  border-top-right-radius: 1em!important;
+  border-bottom-right-radius: 1em!important;
+}
+.graph_button_left{
+  width: 106.69px !important;
+border-top-left-radius: 1em!important;
+border-bottom-left-radius: 1em!important;
+}
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #C986CF;
+  background-color: #FF8B8B;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #C986CF;
-  color: white;
+  background-color: #FF8B8B;
+  color: white !important;
 }
 
 /* Style the tab content */
@@ -629,6 +712,48 @@ color: #4D4D4D;
   padding: 6px 12px;
   /* border: 1px solid #ccc; */
   border-top: none;
+}
+#setgoalweight{
+    background: #FFFFFF;
+border: 0px solid #DFDFDF;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+border-radius: 10px;
+width: 163px;
+height: 45px;
+}
+.graph_button{
+    width: 365px !important;
+    height: 27px !important;
+        
+    font-family: 'NATS' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    line-height: 27px !important;
+
+    color: #4D4D4D;
+}
+.graph_button_side{
+  
+    border-top-right-radius: 1em!important;
+    border-bottom-right-radius: 1em!important;
+}
+.graph_button_left{
+    width: 106.69px !important;
+  border-top-left-radius: 1em!important;
+  border-bottom-left-radius: 1em!important;
+}
+.graph_button>button{
+    width: 76px;
+    height: 27px;
+    background: #FFFFFF;
+    border: 1px solid #FCFBFB;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: 'NATS';
+}
+.client-card{
+    height: 120px !important;
 }
 </style>
 
@@ -712,28 +837,40 @@ color: #4D4D4D;
                 <div id="inner11">
                     <div class="flex-container">
                         <div class="client-card-steps client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                        <a href="track_stats_steps.php">
                             <img src="images/steps_selected.svg" alt="">
-                            <p>Steps</p>
+                            <p style="color:#FFFFFF ;">Steps</p>
+                        </a>
                         </div>
                         <div class=" client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                        <i class="fa-solid fa-heart-pulse"></i>
-                            <p>Heart Rate</p>
+                         <a href="track_stats_heart.php">
+                            <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
+                            <p style="color:#E266A9;">Heart Rate</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                            <i class="fa-solid fa-droplet"></i>
-                            <p>Water</p>
+                        <a href="track_stats_water.php">
+                            <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
+                            <p style="color:#52A4FF;">Water</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                            <i class="fa-solid fa-weight-hanging"></i>
-                            <p>Weight Track</p>
+                        <a href="track_stats_weight.php">
+                            <i style="color:#7D5DE6" class="fa-solid fa-weight-hanging"></i>
+                            <p style="color:#7D5DE6">Weight Track</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                            <i class="fa-solid fa-moon"></i>
-                            <p>Sleep</p>
+                        <a href="track_stats_sleep.php">
+                            <i style="color:#54AFAC" class="fa-solid fa-moon"></i>
+                            <p style="color:#54AFAC">Sleep</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                            <i class="fa-solid fa-stopwatch-20"></i>
-                            <p>Calorie Track</p>
+                        <a href="track_stats_calorie.php">
+                            <i  style="color:#E3738D;" class="fa-solid fa-stopwatch-20"></i>
+                            <p  style="color:#E3738D;" >Calorie Track</p>
+                        </a>
                         </div>
                     </div>
 
@@ -904,15 +1041,15 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
     // echo json_encode(['steps' => $full]);
 ?>
 
-
+                                        <div class="tab">
+                                           <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
+                                           <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
+                                           <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
+                                           <button class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                                        </div>
                 <div class="graph">
-                                           
-                            <div class="tab">
-                            <button class="tablinks" onclick="openCity(event, 'London')">Custom Dates</button>
-                            <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
-                            <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
-                            <button class="tablinks" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
-                            </div>
+                              
+                         
 
                             <!-- Tab content -->
                             <div id="London" id="defaultOpen"class="tabcontent">
@@ -935,7 +1072,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                             <canvas id="myChartWeekly"></canvas>
                             </div>
-                        <script>
+                        <script> 
                         function openCity(evt, cityName) {
                             /* Declare all variables */
                             var i, tabcontent, tablinks;
@@ -960,9 +1097,9 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
 
                         /* // Get the element with id="defaultOpen" and click on it */
                         
-                         document.getElementById(defaultOpen).click();
+                         document.getElementById("defaultOpen").click();
                          
-                        </script> 
+                        </script>  
                 </div>
                    
                 </div>
@@ -976,7 +1113,9 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                         <img src="images/set_goals.png" alt="">
                     </div>
                     <div class="box-title">Daily Steps</div>
-                    <div class="box-counter">00000</div>
+                    <div class="box-counter">
+                    Goal:<input type="number" id="setgoalweight" name="weightgoal">
+                    </div>
                     <buttpn class="box-btn">Set</buttpn>
                 </div>
             </div>
@@ -1035,8 +1174,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                                 <span>Monthly Avg</span>
                                 <span><span><?php echo json_encode((int) (($stepsSumM[0]-'0')/30));?>  </span> Steps</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                                
                             </div>
 
                             <div class="bottom-stats-btn">
@@ -1044,8 +1182,7 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                                 <span>Total</span>
                                 <span><span><?php echo json_encode($stepsSumT[0]-'0');?></span> Steps</span>
                                 </div>
-                                <div class="heart_info">
-                                </div>
+                                
                             </div>
                     </div>
                            
@@ -1141,22 +1278,109 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
                         </div>
                     </div>
                 </div>
-                <div class="activity_pop">
+            <div class="activity_pop">
+
+                <?php
+                    $today = date('Y-m-d');
+
+                    // $clientID = $_POST['userID'];
+
+                    $clientID = 'Azarudeen';
+
+                    $sql = "SELECT * 
+                    FROM stepTracker
+                    WHERE clientID='$clientID' AND `dateandtime` = '$today'
+                    ORDER BY dateandtime;";
+
+                    $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
+
+                        $emparray = array();
+                        while($row =mysqli_fetch_assoc($result))
+                        {
+                            $emparray['steps'] = $row['steps'];
+                            $emparray['date'] = date("d-m-Y",strtotime($row['dateandtime']));
+                            $emparray['avgspeed'] = $row['avgspeed'];
+                            $emparray['distance'] = $row['distance'];
+                            $emparray['calories'] = $row['calories'];
+                            $full[] = $emparray;
+                        }
+                        // echo json_encode(['water' => $full]);
+                        $logsteps=array_column($full, 'steps');
+                        $logdate=array_column($full, 'date');
+                        $logavgspeed=array_column($full, 'avgspeed');
+                        $logdistance=array_column($full, 'distance');
+                        $logcalories=array_column($full, 'calories');
+                        // echo json_encode($logsteps);
+                ?>
+                <img src="images/exit.svg" alt="">
                     <div class="pop_header">
                         <span>Activity</span>
-                        
                     </div>
                     <div class="pop_box">
+                       <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p><?php echo (int)$logdistance[0]?> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p><?php echo $logdistance[0]?>m</p>
+                        </div>
                     </div>
                     <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p><?php echo $logdistance[0]?> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p> m</p>
+                        </div>
                     </div>
                     <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p><?php echo $logdistance[0]?> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p> m</p>
+                        </div>
                     </div>
                     <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p><?php echo $logdistance[0]?> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
                     </div>
                     <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p<?php echo $logdistance[0]?>m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
                     </div>
                     <div class="pop_box">
+                    <img src="images/man_running.svg" alt="">
+                        <div class="pop_box_info">
+                            <span>Running</span>
+                            <p><?php echo $logdistance[0]?> m</p>
+                        </div>
+                        <div class="pop_box_info">
+                        <span>Running</span>
+                            <p>9075 m</p>
+                        </div>
                     </div>
 
                 </div>

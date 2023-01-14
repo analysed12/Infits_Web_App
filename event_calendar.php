@@ -290,9 +290,9 @@ include('config.php');
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-            <?php  if (isset($_SESSION['name'])) : ?>
-                <?php echo $_SESSION['name']; ?></strong></p>
-            <?php endif ?>
+            <?php echo ($_SESSION['name'])?>
+                </strong></p>
+           
                 </span></p>
             <p id="topnav-content-2">Your performance summary this week</p>
         </div>
@@ -309,16 +309,22 @@ include('config.php');
            	  	if(mysqli_num_rows($res) > 0)
            	  	{
            	  		while ($row = $res -> fetch_assoc()){
-           	  		
-                  //$path = $row["file"];
-                  $ext= explode('|',$row['profilePhoto']);
-                  $path = $ext[1] . "/" .$ext[0];
-                  ?>
-                  
+                        if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
+                            $path = "./upload/pp.jpg";
+                            ?>
+                        
+                            <!--<img src="./upload/pp.jpg" style="height: 33px; width: 33px; border-radius: 100%;" alt="" />-->
+                        <?php } else { 
+                    //$path = $row["file"];
+                            $ext= explode('|',$row['profilePhoto']);
+                            $path = $ext[1] . "/" .$ext[0];
+                        }}?>
+                
+                
                 <img src=<?php echo $path;?> style="height: 33px; width: 33px; border-radius: 100%;" alt="" />  
-
+                <?php  ?>
     
-            <?php }} ?>
+            <?php } ?>
 
         </div>
 

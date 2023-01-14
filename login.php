@@ -11,7 +11,9 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="GOOGLE_SIGNIN_CLIENT_ID" >
 
   <style>
         body{
@@ -126,6 +128,33 @@ justify-content: center;
       <p style="text-align: center; font-size: 20px;">Don’t have an account? </p><a href="register.php" style="text-align: center;">Sign up</a>
   	</p>
   </form>
+
+  
+<center>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+</center>  
+
+<script type="text/javascript">
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+
+
+      if(profile){
+          $.ajax({
+                type: 'POST',
+                url: 'social_login.php',
+                data: {id:profile.getId(), name:profile.getName(), email:profile.getEmail()}
+            }).done(function(data){
+                window.location.href = 'index.php';
+            }).fail(function() { 
+                alert( "Something went wrong !!" );
+            });
+      }
+
+
+    }
+</script>
+
   </div>
 </body>
 </html>

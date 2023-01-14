@@ -5,7 +5,7 @@ $dietitianID = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'infits');
+$db = mysqli_connect('localhost', 'root', 'password@123', 'infits');
 
 // ADD CLIENT
 if (isset($_POST['add_client'])) {
