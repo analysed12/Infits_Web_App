@@ -9,8 +9,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<?php include 'navbar.php' ?>
+
 <style>
+       .heading {
+    margin-left: 3%;
+}
     .heading p {
     font-family: 'NATS';
     font-style: normal;
@@ -34,6 +37,7 @@
   border: 1px solid #F8F5F5;
   width: 365px;
 height: 27px;
+margin-left: 3%;
 border-top-left-radius: 1em!important;
 border-bottom-left-radius: 1em!important;
 border-top-right-radius: 1em!important;
@@ -71,10 +75,10 @@ border-bottom-left-radius: 1em!important;
 }
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #E48DA2;
+  background-color: #6844E2;
 }
 .tab button.active {
-  background-color: #E48DA2;
+  background-color: #6844E2;
   color: white !important;
 }
 
@@ -113,9 +117,9 @@ border-bottom-left-radius: 1em!important;
 .client-card i {
     font-size: 15px;
 }
-.client-card-calorie{
-    background: linear-gradient(216.13deg, #E2809B 9.2%, #EBD3C8 91.57%);
-    border: 1px solid #E3738D;
+.client-sleep{
+    background: linear-gradient(216.13deg, #7D5DE6 9.2%, #633FDD 91.57%);
+    border: 1px solid #7D5DE6;
     border-radius: 10px;
     margin: 10px 0 0 0;
     width: 97px;
@@ -126,7 +130,7 @@ border-bottom-left-radius: 1em!important;
     justify-content: center;
     gap: 15px;
 }
-.client-card-calorie p{
+.client-sleep p{
     margin-bottom: 0;
     font-family: 'NATS';
     font-style: normal;
@@ -139,7 +143,7 @@ border-bottom-left-radius: 1em!important;
 
     color: #FFFFFF;
 }
-/* -------------------Calorie Tab Content------------------- */
+/* sleep */
 .week-container{
     margin: 3%;
 }
@@ -158,7 +162,7 @@ color: #000000;
     flex-wrap: wrap;
     padding: 5px 30px;
 }
-.meal-box {
+.sleep-holder-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -168,7 +172,7 @@ color: #000000;
     background: linear-gradient(180deg, rgba(235, 203, 196, 0.14) 0%, rgba(104, 68, 226, 0.2) 100%, rgba(227, 137, 160, 0.2) 100%);
     border-radius: 10px;
 }
-.meal-box p{
+.sleep-holder-box p{
     margin-bottom: 0;
 }
 .left,
@@ -176,13 +180,13 @@ color: #000000;
     display: flex;
     gap: 20px;
     /* flex-direction: row; */
+    /* flex-direction: column; */
 }
 .left span{
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
 font-size: 17px;
-/* line-height: 36px; */
 /* identical to box height */
 
 
@@ -193,59 +197,14 @@ color: #000000;
     font-size: 20px;
     line-height: 42px;
 }
-/* -----------------------Resposnive New----------------------- */
-.ph-left{
-    padding-left: 3%;
-}
-.ph-right {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 5%;
-}
-@media (max-width:576px){
-    .tab{
-        display:flex;
-        width: 100%;
-        flex-wrap:wrap;
-    }
-    .tab button {
-    width: 25%;
-}
-    .graph_button_left{
-        width:25% !important;
-    }
-    /* anothr */
-    .past-header{
-        position:relative;
-    }
-    .ph-right{
-        position:absolute;
-        top: -45px;
-        right: 5px;
-        scale: 0.9;
-        padding: 0;
-    }
-}
-@media (max-width:330px){
-    .past-header{
-        position:relative;
-    }
-    .ph-right{
-        position:absolute;
-        top: -59px;
-        right: -40px;
-        scale: 0.65;
-        padding: 0;
-    }
-}
 </style>
 <body>
-
+<?php include 'navbar.php' ?>
     <div class="content">
         <!-- tab_links -->
         
-        <div class="row past-header">
-            <div class="col-sm-8 ph-left">
+        <div class="row">
+            <div class="col-sm-10">
                 <div class="heading">
                     <p>Past Activities</p>
                 </div>
@@ -256,11 +215,11 @@ color: #000000;
                     <button id="temp" class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
                 </div>
             </div>
-            <div class="col-sm-4 ph-right">
+            <div class="col-sm-2">
                     <!-- metric_button -->
-                <div class="client-card client-card-calorie " style="color:#E3738D; border: 1px solid #E3738D;">
-                    <img src="images/calorie_selected.svg" alt="">
-                    <p>Track Calorie</p>
+                <div class="client-card client-sleep " style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                    <img src="images/sleep_card_icon.svg" alt="sleep icon">
+                    <p>Sleep</p>
                 </div>
             </div>
         </div>
@@ -289,29 +248,68 @@ color: #000000;
                                 
                                 <div id="Week" class="tab-content">
                                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <!-- <canvas id="myChartWeekly"></canvas> -->
                                     <div class="row">
                                         <div class="col">
-                                        <?php for ($i=0; $i < 3; $i++) { ?>
+                                        <?php for ($i=0; $i < 5; $i++) { ?>
                                             <div class="week-container">
-                                                <p class="date">19 Jun 2021</p>
+                                                <?php if ($i == 0) { ?>
+                    
+                                                    <p class="date">19 Jun 2021</p>
+                                                <?php }else if($i==1){ ?>
+                                                    <p class="date">18 Jun 2021</p>
+                                                <?php }else if ($i==2){?>
+                                                    <p class="date">17 Jun 2021</p>
+                                                <?php }else if ($i==3){?>
+                                                    <p class="date">16 Jun 2021</p>
+                                                <?php }else{?>
+                                                    <p class="date">15 Jun 2021</p>
+                                                <?php } ?>
                                                 <div class="flex-box">
-                                                <?php for ($j=0; $j < 4; $j++) { ?>
-                                                
-                                                    <div class="meal-box">
+                                                <?php for ($j=0; $j < 3; $j++) { ?>
+                                                    <div class="sleep-holder-box">
+                                                        <?php if($j==0){ ?>
                                                         <div class="left">
-                                                            <img src="images/calorie_meal_icon.svg" alt="">
-                                                            <div class="meal-title">
-                                                                <p>Breakfast</p>
-                                                                <span>11:00 am</span>
+                                                            <img src="images/sleep_moon_icon.svg" alt="">
+                                                            <div class="sleep-info">
+                                                                <p>Light Sleep</p>
+                                                                <span>11.10 a.m.</span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/calorie_fire_icon.svg" alt="">
-                                                            <p class="kcal">226 kcal</p>
+                                                            <img src="images/sleep_moon_colored.svg" alt="">
+                                                            <p class="sleep-hours">7h 30m</p>
                                                         </div>
+                                                        <?php }else if($j==1){ ?>
+                                                            <div class="left">
+                                                                <img src="images/sleep_moon_icon.svg" alt="">
+                                                                <div class="sleep-info">
+                                                                    <p>Deep Sleep</p>
+<<<<<<< HEAD
+                                                                    <span>11.10 a.m.</span>
+=======
+                                                                    <span>11:10 a.m.</span>
+>>>>>>> ff77b97930244befaeb29add1edf2c0ca5c0df18
+                                                                </div>
+                                                            </div>
+                                                            <div class="right">
+                                                                <img src="images/sleep_moon_colored.svg" alt="">
+                                                                <p class="sleep-hours">2h 2m</p>
+                                                        </div>
+                                                        <?php }else{ ?>
+                                                            <div class="left">
+                                                                <img src="images/sleep_moon_icon.svg" alt="">
+                                                                <div class="sleep-info">
+                                                                    <p>Awake</p>
+                                                                    <span>6.55 p.m.</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="right">
+                                                                <img src="images/sleep_moon_colored.svg" alt="">
+                                                                <p class="sleep-hours">15m</p>
+                                                            </div>
+                                                        <?php } ?>    
                                                     </div>
-                                                <?php } ?>
+                                                <?php } ?> <!-- end of for loop -->
                                                 </div>
                                             </div>
                                         <?php } ?>

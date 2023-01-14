@@ -71,10 +71,10 @@ border-bottom-left-radius: 1em!important;
 }
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #E48DA2;
+  background-color: #C986CF;
 }
 .tab button.active {
-  background-color: #E48DA2;
+  background-color: #C986CF;
   color: white !important;
 }
 
@@ -114,8 +114,8 @@ border-bottom-left-radius: 1em!important;
     font-size: 15px;
 }
 .client-card-calorie{
-    background: linear-gradient(216.13deg, #E2809B 9.2%, #EBD3C8 91.57%);
-    border: 1px solid #E3738D;
+    background: linear-gradient(217.35deg, #F97EAA 0%, #C389D5 100%);
+    border: 1px solid #E266A9;
     border-radius: 10px;
     margin: 10px 0 0 0;
     width: 97px;
@@ -147,7 +147,7 @@ border-bottom-left-radius: 1em!important;
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
-font-size: 25px;
+font-size: 24px;
 line-height: 30px;
 /* identical to box height */
 color: #000000;
@@ -225,6 +225,9 @@ color: #000000;
         scale: 0.9;
         padding: 0;
     }
+    .week-container p {
+    font-size: 20px;
+}
 }
 @media (max-width:330px){
     .past-header{
@@ -258,9 +261,9 @@ color: #000000;
             </div>
             <div class="col-sm-4 ph-right">
                     <!-- metric_button -->
-                <div class="client-card client-card-calorie " style="color:#E3738D; border: 1px solid #E3738D;">
-                    <img src="images/calorie_selected.svg" alt="">
-                    <p>Track Calorie</p>
+                <div class="client-card client-card-calorie " style="color:#E266A9; border: 1px solid #E266A9;">
+                    <img src="images/heartrate_selected.svg" alt="">
+                    <p>Heart Rate</p>
                 </div>
             </div>
         </div>
@@ -296,22 +299,73 @@ color: #000000;
                                             <div class="week-container">
                                                 <p class="date">19 Jun 2021</p>
                                                 <div class="flex-box">
-                                                <?php for ($j=0; $j < 4; $j++) { ?>
                                                 
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/calorie_meal_icon.svg" alt="">
+                                                            <img src="images/resting_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Breakfast</p>
+                                                                <p>Resting</p>
                                                                 <span>11:00 am</span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/calorie_fire_icon.svg" alt="">
-                                                            <p class="kcal">226 kcal</p>
+                                                            <img src="images/heartrate_selected_small.svg" alt="">
+                                                            <p class="kcal">150 BPM</p>
                                                         </div>
                                                     </div>
-                                                <?php } ?>
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/running_heart_rate.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p>Running</p>
+                                                                <span>11:00 am</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/heartrate_selected_small.svg" alt="">
+                                                            <p class="kcal">169 BPM</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p>Cycling</p>
+                                                                <span>11:00 am</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/heartrate_selected_small.svg" alt="">
+                                                            <p class="kcal">153 BPM</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/sport_heart_rate.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p>After Sport</p>
+                                                                <span>11:00 am</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/heartrate_selected_small.svg" alt="">
+                                                            <p class="kcal">180 BPM</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/gym_heart_rate.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p>Gym</p>
+                                                                <span>06:55 pm</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/heartrate_selected_small.svg" alt="">
+                                                            <p class="kcal">122 BPM</p>
+                                                        </div>
+                                                    </div>
+                                                
                                                 </div>
                                             </div>
                                         <?php } ?>
