@@ -839,7 +839,6 @@ $yearly_month = new DateTime();
 $yearly_last_month = new DateTime();
 $yearly_month->setDate($yearly_month->format('Y'),01,01);
 if($today->format('m') == '01'){
-    echo('hel');
     $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
     $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
 }
