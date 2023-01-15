@@ -8,27 +8,21 @@ date_default_timezone_set("Asia/Calcutta");
 $today = new DateTime('2022-01-25');
 // Goal Insertion
 if(isset($_POST['savegoal'])){
+    $client = $_POST['clientid'];
     $goal =$_POST['setgoal'];
-    // $current_date = date("Y-m-d");
-    $current_date =  new DateTime('2022-01-25');
-    $dday =  $current_date->format('d');
-    $dmonth =  $current_date->format('m');
-    $dyear =  $current_date->format('y');
     $conn = new mysqli("localhost", "root", "", "infits");
 
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
-
     
-    $query="UPDATE sleeptracker SET goal = $goal WHERE clientID= '$clientId' AND `sleeptime` >= '{$dday}-{$dmonth}-{$dyear} 00:00:00' AND `sleeptime` <= ''{$dday}-{$dmonth}-{$dyear} 23:59:59'";
-   
+    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('sleep' , $goal, '$client' )";
     $result = $conn->query($query) or die("Query Failed");
     
     if($result){
         unset($_POST["savegoal"]);
         unset($_POST["setgoal"]);
-        header(('Location: http://localhost/analysed/infits/track_stats_sleep.php'));
+        header(("Location: http://localhost/analysed/infits/track_stats_sleep.php"));
         // exit();
     }
 }
@@ -819,7 +813,7 @@ height: 45px;
                 <div id="inner12">
                                         <div class="tab">
                                            <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
-                                           <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
+                                           <button class="tablinks" onclick="openCity(event, 'Y'ear')">Year</button>
                                            <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
                                            <button class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
                                         </div>
@@ -888,8 +882,7 @@ font-weight: 400;
 line-height: 42px;
 letter-spacing: 0em;
 text-align: left;
-color: #ABA3A3;
-
+color: #ABA3A3 ;
 ">daily sleep hours</span>
                     </div>
                     <div class="inner21-image">
@@ -923,7 +916,7 @@ function fetchDataSql($clientId,$from_date, $from_month, $from_year, $to_date,$t
     }
     // For Sum of All Data Till Today
     if($isCustom==1){
-        $query="SELECT avg(hrsSlept) FROM sleeptracker WHERE clientID= '$clientId' AND 
+        $query="SELECT SUM(hrsSlept) FROM sleeptracker WHERE clientID= '$clientId' AND 
                 `sleeptime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
     // for sum of Data between two dates
     }else if($isCustom==2){
@@ -937,9 +930,12 @@ function fetchDataSql($clientId,$from_date, $from_month, $from_year, $to_date,$t
             AND `sleeptime` < '{$to_year}-{$to_month}-{$to_date} 00:00:00';";
     // for all data of a day
     }else if($isCustom==4){
+        $query="SELECT goal FROM goals WHERE forWhat = 'sleep' ORDER BY 'time' DESC LIMIT 1";}
+    // for getting past actvities 
+    else if($isCustom==5){
         $query="SELECT * FROM sleeptracker WHERE clientID= '$clientId' AND 
             `sleeptime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
-            AND `sleeptime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
+            AND `sleeptime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59'";
     // for average of data of one full day
     }else{
     $query="SELECT avg(hrsSlept) FROM sleeptracker WHERE clientID= '$clientId' AND 
@@ -959,17 +955,17 @@ function fetchDataSql($clientId,$from_date, $from_month, $from_year, $to_date,$t
 
 
 // All Data Total Sum
-$allDataSum = fetchDataSql($clientId, '', '', '', $today->format('d'), $today->format('m'), $today->format('y'), 1)[0]['avg(hrsSlept)'];
+$allDataSum = fetchDataSql($clientId, '', '', '', $today->format('d'), $today->format('m'), $today->format('Y'), 1)[0]['SUM(hrsSlept)'];
 // Today Data Sum
-$todayData = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('y'), $today->format('d'), $today->format('m'), $today->format('y'),2)[0]['SUM(hrsSlept)'];
+$todayData = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'),2)[0]['SUM(hrsSlept)'];
 // Week Average
 $pastWeek =new DateTime('2022-01-25');
 $pastWeek->modify('-1 week');
-$weekAvg = fetchDataSql($clientId,$pastWeek->format('d'), $pastWeek->format('m'), $pastWeek->format('y'), $today->format('d'), $today->format('m'), $today->format('y'))[0]['avg(hrsSlept)'];
+$weekAvg = fetchDataSql($clientId,$pastWeek->format('d'), $pastWeek->format('m'), $pastWeek->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'))[0]['avg(hrsSlept)'];
 // Month Average
 $pastMonth = new DateTime('2022-01-25');
 $pastMonth->modify('-1 month');
-$monthAvg = fetchDataSql($clientId,$pastMonth->format('d'), $pastMonth->format('m'), $pastMonth->format('y'), $today->format('d'), $today->format('m'), $today->format('y'))[0]['avg(hrsSlept)'];
+$monthAvg = fetchDataSql($clientId,$pastMonth->format('d'), $pastMonth->format('m'), $pastMonth->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'))[0]['avg(hrsSlept)'];
 $months = array (1=>'Jan',2=>'Feb',3=>'Mar',4=>'Apr',5=>'May',6=>'Jun',7=>'Jul',8=>'Aug',9=>'Sep',10=>'Oct',11=>'Nov',12=>'Dec');
 ?>
                     
@@ -1023,32 +1019,27 @@ $months = array (1=>'Jan',2=>'Feb',3=>'Mar',4=>'Apr',5=>'May',6=>'Jun',7=>'Jul',
                      <span>Past Activity</span>
                       </div>
                      <?php
-                     $a=1;
-                    $tod = $today;
-                     
-                    while ($a <= 4) {
-                    $to = fetchDataSql($clientId, $tod->format('d'), $tod->format('m'), $tod->format('y'), $tod->format('d'), $tod->format('m'), $tod->format('y'),2)[0]['SUM(hrsSlept)'];
+                     $pastActivityData = fetchDataSql($clientId, '', '', '', $today->format('d'), $today->format('m'), $today->format('Y'),5);
+                     $j = count($pastActivityData)-1;
+                     $k = 0;
 
-
+                    while ($k <= $j) {
+                    $date = new DateTime($pastActivityData[$k]['sleeptime']);
                      echo '<div class="table_element">';
                      echo '<div class="date">';
-                     echo '<span style = "color:#6844E2; font-weigth: 600;">'.$months[(int)$tod->format('m')].'</span>';
-                     echo '<span style = "font-weight: bold; color: black;">'.($tod->format('d')).'</span>';
+                     echo '<span style = "color:#6844E2; font-weigth: 600;">'.$date->format('D').'</span>';
+                     echo '<span style = "font-weight: bold; color: black;">'.($date->format('d')).'</span>';
                      echo '</div>';
                      echo '<div class="table_activity">';
                      echo '<span style = "color:#6844E2;">Sleep</span>';
-                     echo '<p>'.$to.'</p>';
+                     echo '<p>'.(ucwords($pastActivityData[$k]['hrsSlept'])).'</p>';
                      echo ' </div>';
                      echo '<div class="table_time">';
-                     echo '<span>'.$tod->format('h:i A').'</span>';
+                     echo '<span>'.$date->format('h:i A').'</span>';
                      echo ' </div>';
                      echo '</div>';
-                     $a++;
-                     $tod->modify('-1 day');
-
-                    }
-                     
-                    
+                     $k++;
+                    }  
                      ?>
                       </div> 
 
@@ -1068,20 +1059,31 @@ $months = array (1=>'Jan',2=>'Feb',3=>'Mar',4=>'Apr',5=>'May',6=>'Jun',7=>'Jul',
 
 
                         <?php
-$progressBarData = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('y'), $today->format('d'), $today->format('m'), $today->format('y'), 4);
-$sleepConsumed = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('y'), $today->format('d'), $today->format('m'), $today->format('y'), 2)[0]['SUM(hrsSlept)'];
-$currentGoal =  $progressBarData[0]['goal'];
-$sleepRemaining = $currentGoal - $sleepConsumed;
-$progressPercent = round(($sleepConsumed / $currentGoal) * 100,2);
+$progressBarData = fetchDataSql($clientId, '', '','','','','', 4);
+$sleepConsumed = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'), 2);
+if(empty($sleepConsumed)){
+    $sleepConsumed = 0;
+}else{
+    $sleepConsumed = $sleepConsumed[0]['SUM(hrsSlept)'];
+}
+
+if(empty($progressBarData)){
+    $currentGoal =  0;
+    $progressPercent = 0;
+}else{
+    $currentGoal =  $progressBarData[0]['goal'];
+    $progressPercent = round(($sleepConsumed / $currentGoal) * 100,2);
+}
+$sleepRemaining =  (int) $currentGoal - (int) $sleepConsumed;
 ?>  
 
                         <div role="progressbar" style="--value:<?php $value = $progressPercent; echo $value; ?>"></div>
-                        <div class="light_sleep" role="progressbar1" style="--value:<?php $value = $progressPercent; echo $value; ?>"></div>
-                        <div class="deep_sleep" role="progressbar2" style="--value:<?php $value = $progressPercent; echo $value;  ?>"></div>
+                        <div class="light_sleep" role="progressbar1" style="--value:<?php $value = $currentGoal; echo $value; ?>"></div>
+                        <div class="deep_sleep" role="progressbar2" style="--value:<?php $value = $sleepConsumed; echo $value;  ?>"></div>
                     <div class="pbottom">
                         <div class="pbottom-element">
                             <p> Light Sleep </p>
-                            <span><?php echo ($progressPercent).'%'?></span> 
+                            <span><?php echo ($sleepConsumed).'%'?></span> 
                         </div>
                         <div class="pbottom-element" style = "border-right:3px solid #C986CF ; border-left:3px solid #C986CF ;">
                             <p>Awake Period</p>
@@ -1089,11 +1091,11 @@ $progressPercent = round(($sleepConsumed / $currentGoal) * 100,2);
                         </div>
                         <div class="pbottom-element">
                             <p>Deep Sleep</p>
-                            <span><?php echo ($progressPercent).'%'?></span> 
+                            <span><?php echo ($currentGoal).'%'?></span> 
                         </div>
                     </div>
 
-                    <div class="activity_pop">
+                 <div class="activity_pop">
             
                 <img src="images/exit.svg" alt="">
                     <div class="pop_header">
@@ -1180,52 +1182,69 @@ $progressPercent = round(($sleepConsumed / $currentGoal) * 100,2);
 
 
 <?php
+
 // To Get Past Year - Yearly data
 $wholeYearData = array(
     'value' => array(),
     'month' => array()
 );
-for ($i = 12; $i > 0;$i--){
-    $j = $i - 1;
-    $yearly_Month_1 = new DateTime('2022-01-25');
-    $yearly_Month_2 = new DateTime('2022-01-15');
-    $yearly_Month_1->modify("-$i month");
-    $yearly_Month_2->modify("-$j month");
-    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1->format('d'), $yearly_Month_1->format('m'), $yearly_Month_1->format('y'), $yearly_Month_2->format('d'), $yearly_Month_2->format('m'), $yearly_Month_2->format('y'),3)[0]['avg(hrsSlept)'];
+$yearly_month = new DateTime("2022-01-25");
+$yearly_last_month = new DateTime("2022-01-25");
+$yearly_month->setDate($yearly_month->format('Y'),01,01);
+if($today->format('m') == '01'){
+    $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+    $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+}
+while($yearly_last_month >= $yearly_month){
+    
+    $yearly_Month_1 = $yearly_month->format('Y'-'m')."-"."01";
+    $yearly_Month_2 =  $yearly_month->format('Y'-'m')."-". $yearly_month->format('t');
+    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1->format('d'),$yearly_Month_1->format('m'),$yearly_Month_1->format('Y'), $yearly_Month_2-format('d'),$yearly_Month_2-format('m'),$yearly_Month_2-format('Y'),3)[0]['avg(hrsSlept)'];
 
     array_push($wholeYearData['value'], $yearly_Data);
-    array_push($wholeYearData['month'], $yearly_Month_1->format('M'));
+    array_push($wholeYearData['month'], $yearly_month->format('M'));
+    $yearly_month->modify('+1 month');
 }
 // To Get Past Month - Monthly Data
 $wholeMonthData = array(
     'value' => array(),
     'date' => array(),
-    'sum' =>0,
 );
-$monthly_Month = new DateTime('2022-01-25');
-$monthly_Month->modify("-1 month");
-while ($today >= $monthly_Month) {
-    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('y'), $monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('y'))[0]['avg(hrsSlept)'];
+$monthly_Month = new DateTime("2022-01-25");
+$monthly_LastDay = new DateTime("2022-01-25");
+$monthly_Month->modify("first day of this month");
+
+if($today->format('d') == '01'){
+    $monthly_Month->modify("first day of previous month");
+    $monthly_LastDay->modify("last day of previous month");
+}
+while ($monthly_LastDay >= $monthly_Month) {
+    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('Y'), $monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('Y'),2)[0]['SUM(hrsSlept)'];
 
     array_push($wholeMonthData['value'],$monthly_Data);
     array_push($wholeMonthData['date'], $monthly_Month->format('d'));
-    $wholeMonthData['sum'] = $wholeMonthData['sum'] + $monthly_Data;
     $monthly_Month->modify("+1 day");
+    
 }
 // To Get Past Week - Weekly Data
 $wholeWeekData = array(
     'value' => array(),
     'day' => array(),
-    'sum' => 0,
 );
-for($i=7;$i>=0;$i--){
-    $weekly_Day = new DateTime('2022-01-25');
-    $weekly_Day->modify("-$i day");
-    $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('d'), $weekly_Day->format('m'), $weekly_Day->format('y'), $weekly_Day->format('d'), $weekly_Day->format('m'), $weekly_Day->format('y'))[0]['avg(hrsSlept)'];
+$weekly_Day = new DateTime("2022-01-25");
+$weekly_Day->modify('previous monday');
+$weekly_lastDay =new DateTime("2022-01-25");
 
-    array_push($wholeWeekData['value'], $weekly_Data);
+if($today->format('l')== "Monday"){
+    $weekly_lastDay->modify('previous sunday');
+}
+
+while($weekly_Day <= $weekly_lastDay){
+    $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('d'), $weekly_Day->format('m'), $weekly_Day->format('Y'), $weekly_Day->format('d'),$weekly_Day->format('m'),$weekly_Day->format('Y'),2);
+
+    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(hrsSlept)']);
     array_push($wholeWeekData['day'], $weekly_Day->format('D'));
-    $wholeWeekData['sum'] = $wholeWeekData['sum'] + $weekly_Data;
+    $weekly_Day->modify("+1 day");
 }
 ?>
 
@@ -1254,6 +1273,9 @@ new Chart(defaultChart, {
                 display:false,
             },
             ticks:{
+                 min:0,
+                max:16,
+                stepSize:2,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:11,
@@ -1262,9 +1284,7 @@ new Chart(defaultChart, {
         }],
         yAxes:[{
             ticks:{
-                min:0,
-                max:16,
-                stepSize:2,
+               
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:13,
@@ -1275,7 +1295,7 @@ new Chart(defaultChart, {
     legend:{
         display:false,
     },
-    //   responsive:true,
+    /* //   responsive:true, */
     tooltips:{
         enabled:true,
         // innerHeight:500,
