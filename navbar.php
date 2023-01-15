@@ -1,10 +1,12 @@
 <?php 
+session_start(); 
 include('config.php');
 
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+// $name = $_SESSION['name'] ;
+// if(!isset($_SESSION)) 
+// { 
+//     session_start(); 
+// } 
 
   if (!isset($_SESSION['name'])) {
   	$_SESSION['msg'] = "You must log in first";
@@ -24,7 +26,7 @@ if(!isset($_SESSION))
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
+    <title>Infits</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2">
@@ -274,7 +276,7 @@ a {
                 class="nav-icon">Dashboard</a>
         <a class="sidenavlink" href="#"><img src="images/vec_messages.png" class="nav-icon">Messages</a>
         <a class="sidenavlink" href="#"><img src="images/vec_live.png" class="nav-icon">Live</a>
-        <a class="sidenavlink" href="#"><img src="images/vec_appointments.png" class="nav-icon">Appoinments</a>
+        <a class="sidenavlink" href="calendar_of_events.php"><img src="images/vec_appointments.png" class="nav-icon">Appoinments</a>
         <a class="sidenavlink" href="#"><img src="images/vec_client_list.png" class="nav-icon">Clients</a>
         <a class="sidenavlink" href="#"><img src="images/vec_recipies.png" class="nav-icon">Diet Plans</a>
         <a class="sidenavlink" href="#"><img src="images/vec_mail.png" class="nav-icon">Payments</a>
@@ -290,9 +292,15 @@ a {
 
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
-            <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
-                    <?php echo ($_SESSION['name'])?>
-                    </strong></p>
+            <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name"><strong>
+                    <?php
+                    $id11 = $_SESSION['name'] ;
+                    $sql1 = "SELECT name FROM dietitian WHERE dietitianuserID ='$id11'";
+                    $res = mysqli_query($conn,$sql1);
+                    $row = mysqli_fetch_assoc($res) ; 
+                    echo $row['name'];
+                     ?>
+                    </strong>
 
             </span></p>
             <p id="topnav-content-2">Your performance summary this week</p>
