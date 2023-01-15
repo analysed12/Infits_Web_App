@@ -90,9 +90,8 @@
     <link rel="stylesheet" href="createevent.css" />
 </head>
 <style>
-    
 /* Appointment popup */
-.modal{
+.modal {
     display: none !important;
     position: fixed !important;
     z-index: 1 !important;
@@ -102,14 +101,14 @@
     width: 100% !important;
     height: 100% !important;
     overflow: auto !important;
-    background-color: rgb(0,0,0) !important;
-    background-color: rgba(0,0,0,0.4) !important;
+    background-color: rgb(0, 0, 0) !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
     /* opacity: 0.1 !important; */
 }
 
-.modal-content{
+.modal-content {
     background-color: #fefefe !important;
-    
+
     margin: auto !important;
     padding: 20px !important;
     border: 1px solid #888 !important;
@@ -118,7 +117,7 @@
 }
 
 /* close btn */
-.close{
+.close {
     color: #aaaaaa !important;
     float: right !important;
     font-size: 28px !important;
@@ -134,7 +133,7 @@
     cursor: pointer !important;
 }
 
-.alert-header{
+.alert-header {
     text-align: center;
     color: red;
     font-weight: bold;
@@ -145,6 +144,7 @@
     padding-top: 5px;
 }
 </style>
+
 <body>
     <!-- Navbar Start -->
     <?php include "navbar.php" ?>
@@ -157,7 +157,7 @@
                 <img class="event-image" src="images/eventlist.png" alt="">
             </div>
             <br>
-            
+
 
             <form action="#" method="post">
                 <div class="eve_form">
@@ -193,12 +193,19 @@
 
                     <div style="max-width:100%;margin:auto">
                         <!-- Add client field -->
-                        <div class="input-icons">
+                        <!-- <div class="input-icons">
                             <i class="fa-solid fa-user icon">
                             </i>
                             <input style="border-top:none;border-left:none;border-right:none" class="input-field"
-                                name="client_name" placeholder="Add Client">
-                        </div>
+                                name="client_name" placeholder="<a>Add Client</a>">
+                        </div> -->
+                        <a href="add_client_event.php" style="margin-top:0 !important;padding:0 !important;">
+                            <div class="txt button" style="border-bottom:1.8px solid black; width:100% !important;">
+                                <i class="fa-solid fa-user icon">
+                                </i>
+                                <p style="display:inline-block">Add Client</p>
+                            </div>
+                        </a>
 
                         <!-- Meeting type fields -->
                         <div class="input-icons">
@@ -264,38 +271,37 @@
                     </div>
 
                     <div style="width:100%; margin-left:10%; margin-right:10%">
-                            <a href="createevent.php"><input
-                                    style="display:inline-block; color:black; background:white;" class="form_btn"
-                                    placeholder="Cancel"></input></a>
-                            <button style="display:inline-block; background: #4B9AFB;" class="form_btn" name="submit"
-                                type="submit">Book Appointment</button>
-                        </div>
+                        <a href="createevent.php"><input style="display:inline-block; color:black; background:white;"
+                                class="form_btn" placeholder="Cancel"></input></a>
+                        <button style="display:inline-block; background: #4B9AFB;" class="form_btn" name="submit"
+                            type="submit">Book Appointment</button>
+                    </div>
                 </div>
         </div>
         </form>
-        </div>
+    </div>
     </div>
     <!-- Contents End -->
 
 
     <!-- Appointment booked popup -->
-   
+
     <div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="alert-header">ALERT</div>
-        <!-- <span class="close">&times;</span> -->
-        <?php
+        <div class="modal-content">
+            <div class="alert-header">ALERT</div>
+            <!-- <span class="close">&times;</span> -->
+            <?php
             // $date_time_start_onlytime = substr($date_time_start,-6) ;
 
             ?>
-        <p>You already have <> with <> at <>
-        </p>
+            <p>You already have <> with <> at <>
+            </p>
+        </div>
     </div>
-</div>
 
-  
 
-   
+
+
 
 </body>
 <script>

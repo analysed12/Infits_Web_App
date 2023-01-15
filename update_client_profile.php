@@ -91,14 +91,14 @@ input {
                     <br>
                     <?php
 
-$id = $_GET['id'];
-echo $id ;
-$sql = "SELECT * from `addclient` where client_id='$id'";
+$client_id = $_GET['client_id'];
+// echo $id ;
+$sql = "SELECT * from `addclient` where client_id='$client_id'";
 $result = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($result)){
-            $id1 = $row["plan_id"] ;
+            $plan_id = $row["plan_id"] ;
 
-                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $id1";
+                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $plan_id";
                         $result1 = mysqli_query($conn, $sql1);
                         $row1 = mysqli_fetch_assoc($result1);
                         $date1 = strtotime($row1["start_date"]);
@@ -165,7 +165,7 @@ $result = mysqli_query($conn,$sql);
                                     <div class="input-tag"
                                         style="display:inline-block;width:50% !important; margin-right:10%;">
                                         <?php echo $row1['name'] ?></div>
-                                    <a href="select_client_plan.php?id=<?php echo $id?>" class="" style="display:inline-block;width:40% !important;background: #FFFFFF;text-align:center;padding-top:5px;
+                                    <a href="select_client_plan.php?client_id=<?php echo $client_id?>" class="" style="display:inline-block;width:40% !important;background: #FFFFFF;text-align:center;padding-top:5px;
 border: 1px solid #6883FB;
 border-radius: 8px;">Select</a>
                                 </div>
@@ -178,7 +178,7 @@ border-radius: 8px;">Select</a>
                         <div class="row d-flex justify-content-center align-items-center">
 
                             <button type=" submit" class="editBtn" name="edit_client" style="width:20%;
-    margin-top:30px"><a href="client_profile.php?id=<?php echo $id?>">Edit Profile</a></button>
+    margin-top:30px"><a href="client_profile.php?client_id=<?php echo $client_id?>">Confirm Edit</a></button>
 
 
                         </div>

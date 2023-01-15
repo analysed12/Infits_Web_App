@@ -124,12 +124,22 @@ body {
     font-size: 18px;
     color: #4B9AFB;
     padding-top: 15px;
-    height: 40px;
-    width: 40px;
+    height: auto;
+    width: 100px;;
     text-align: center;
-    border-bottom: 3px solid #4B9AFB;
+    /* border: 3px solid #4B9AFB; */
 }
 
+.profile a{
+    background: #FFFFFF;
+border: 1px solid #F1F1F1;
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+border-radius: 8px;
+border:none;
+padding-left:10px;
+padding-right:10px;
+    width:100px !important;
+}
 #addclient-topnav p a {
     text-decoration: none;
     outline: none;
@@ -149,17 +159,16 @@ body {
     }
 }
 
-#addclient-topnav button {
+#addclient-topnav button{
     /* border-left:none;
     border-right:none;
     border-top:none; */
-    border: none;
-    background-color: white;
-    margin-right: 10px;
-    border-bottom: 2px solid #4B9AFB;
-
+    border:none;
+    background-color:white;
+    margin-right:10px;
+    border-bottom:2px solid #4B9AFB;
+    
 }
-
 /* 
 #addclient-topnav button:focus{
     border-bottom:2px solid #4B9AFB;
@@ -187,11 +196,9 @@ body {
                     {
                       while($row = mysqli_fetch_assoc($result))
                     {
-                        $client_id = $row["client_id"];
-                        $plan_id = $row["plan_id"] ;
+                        $id = $row["plan_id"] ;
 
-
-                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $plan_id";
+                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $id";
                         $result1 = mysqli_query($conn, $sql1);
                         $row1 = mysqli_fetch_assoc($result1);
                         $date1 = strtotime($row1["start_date"]);
@@ -211,7 +218,7 @@ body {
                     echo "<div><img src='./icons/profile6.png'></div>";
                     // echo "<div class='clientname'>".$row["plan_id"]."</div>";
                     echo "<div class='clientname'>".$row["name"]."</div>";
-                    echo "<div class='buttons'><button>".$row1["name"]."</button><button>".$months."</button></div>";
+                    echo "<div class='buttons'><button>".$row1["name"]."</button><button>".$months." Month</button></div>";
                     echo '<div class="profile"><a href="client_profile.php?id='.$row1['plan_id'].'">Profile</a></div>';
                     echo "</div>";
                 
@@ -225,17 +232,9 @@ body {
                     {
                       while($row = mysqli_fetch_assoc($result))
                     {
-                        $client_id = $row["client_id"] ;
-                        $plan_id = $row["plan_id"] ;
+                        $id = $row["plan_id"] ;
 
-
-                        if($plan_id == 0){
-                            $plan_name ="No plan";
-                            $plan_duration = "No Plan";
-
-                        }
-                        else{
-                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $plan_id";
+                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $id";
                         $result1 = mysqli_query($conn, $sql1);
                         $row1 = mysqli_fetch_assoc($result1);
                         $date1 = strtotime($row1["start_date"]);
@@ -244,27 +243,28 @@ body {
                         
                         while (($date1 = strtotime('+1 MONTH', $date1)) <= $date2)
                             $months++;
+                        
+                        // echo $months;
 
-                        $plan_name = $row1['name'] ;
-                        $plan_duration = $months." Month" ;
-                    }
-                 
+                        if(mysqli_num_rows($result1) > 0)
+                    {
+                        // $name_of_plan = $row1["name"];
                 
                     echo "<div class='client'>";
                     echo "<div><img src='./icons/profile6.png'></div>";
                     // echo "<div class='clientname'>".$row["plan_id"]."</div>";
                     echo "<div class='clientname'>".$row["name"]."</div>";
-                    echo "<div class='buttons'><button>".$plan_name."</button><button>".$plan_duration."</button></div>";
-                    echo '<div class="profile"><a href="client_profile.php?client_id='.$row['client_id'].'">Profile</a></div>';
+                    echo "<div class='buttons'><button>".$row1["name"]."</button><button>".$months." Month</button></div>";
+                    echo '<div class="profile"><a href="client_profile.php?id='.$row['client_id'].'">SELECT</a></div>';
                     echo "</div>";
                 
-                 }}
+                 }}}
                 }
 ?>
 
 
 
-
+                    
             </div>
         </div>
     </div>

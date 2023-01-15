@@ -281,7 +281,7 @@ if(isset($_POST['search-btn']))
 }
 else{                       
  $sql = "SELECT * FROM create_plan";
- $clientid = $_GET['id'];
+ $client_id = $_GET['client_id'];
  if($result = mysqli_query($conn, $sql)){
      if(mysqli_num_rows($result) > 0){
              while($row = mysqli_fetch_array($result)){
@@ -344,9 +344,9 @@ else{
                                 </div>
                             </div>
                             <div class="" style="display:flex; align-items:center;justify-content:center; ">
-                                <a class="planBtn1" href="update_client_plan.php?id=<?php echo $row['plan_id'] ?>">Edit
+                                <a class="planBtn1" href="update_client_plan.php?plan_id=<?php echo $row['plan_id'] ?>">Edit
                                     Plan</a>
-                                <a class="planBtn2" href="choose_plan.php?id=<?php echo $clientid?>&planid=<?php echo $row['plan_id'] ?>">Choose Plan</a>
+                                <a class="planBtn2" href="choose_plan.php?client_id=<?php echo $client_id?>&plan_id=<?php echo $row['plan_id'] ?>">Choose Plan</a>
                             </div>
                         </form>
                     </div>

@@ -1,0 +1,179 @@
+.content{
+    overflow: auto;
+        display: flex;
+        flex-direction: column;
+        height: 90%;
+        font-family: 'Poppins';
+        font-style: normal;
+        padding: 10px;
+        margin: 0px;
+    }
+  .flex-top{
+    display:flex;
+    flex-direction:row;
+    justify-items: auto;
+
+  }
+  #search{
+    height:45px;
+    width:350px;
+margin-left: 350px;
+  }
+  #searchbtn{
+    background-color: #7282FB;
+    color:white;
+    height:46px;
+    width:121px;
+    border-radius:15px;
+    cursor:pointer;
+    margin-left: 15px;
+  }
+  .flex-second{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: space-evenly;
+    margin-left: 15px;
+    margin-top: 30px;
+
+  }
+  .recipe-flex{
+    width:233px;
+    height:124px;
+    border-radius:15px;
+    
+    text-align: center;
+    border:none;
+    cursor: pointer;
+    font-weight:500;
+    font-size:25px;
+
+
+  }
+  #breakfast{
+
+    background-color: #B5F7B9;
+align-items: center;
+
+  }
+  #lunch{
+    background-color: #F3D1D2;
+  }
+  #snacks{
+    background-color: #B8DDF1;
+  }
+
+  #dinner{
+    background-color: #edb2b274;
+  }
+
+  .flex-third{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-left:80px;
+    margin-right: 60px;
+
+  }
+  #viewall{
+     cursor:pointer;
+     color:#6A6A6A;
+     font-size:15px;
+
+  }
+  .flex-last{
+    height:fit-content;
+    width:266px;
+    border-radius:15px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    margin-left:20px;
+    border: 1px solid black;
+    margin-bottom:15px;
+  }
+.box-title{
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  margin-left:15px;
+}
+#recipename{
+  font-size:15px;
+  color:black;
+  font-weight:400px;
+
+}
+.box2{
+  display:flex;
+  flex-direction: row;
+  margin-left:15px;
+  margin-right:15px;
+  justify-content: space-between;
+
+
+}
+.steps{
+  background-color: #7282FB;
+  color:white;
+  border-radius: 50px;
+  height:22px;
+  width:22px;
+  text-align: center;
+  margin-left:15px;
+}
+.box3{
+  display:flex;
+  flex-direction: row;
+  
+  margin-left:15px;
+  margin-right:15px;
+  
+
+}
+.btn-mdn{
+  width:71px;
+  height:26px;
+  border-radius:10px;
+  background-color: #9C74F5;
+  color:white;
+  font-size: 12px;
+  font-weight:300px;
+  margin-left: 70px;
+  
+}
+.tabcontent{
+
+  padding: 6px 30px;
+  border: none;
+  border-top: none;
+  color: black;
+
+
+
+}
+  .title1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left:15px;
+  }
+  #breakfast1{
+    display:none;
+  }
+  #snacks1{
+    display:none;
+  }
+  #lunch1{
+    display:none;
+  }
+  #dinner1{
+    display:none;
+  }
+  .flex-fast{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    
+  }

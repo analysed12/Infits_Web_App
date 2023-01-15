@@ -203,7 +203,7 @@ include "navbar.php"
 
         <!-- Other content -->
         <?php
-        $id = $_GET['id'];
+        $plan_id = $_GET['plan_id'];
         // echo $id ;
         $sql = "SELECT * from `create_plan` where plan_id='$id'";
         $result = mysqli_query($conn,$sql);

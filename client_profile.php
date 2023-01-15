@@ -86,14 +86,14 @@ body {
                 <form method="post" action="update_client_profile.php">
                     <br>
                     <?php
-$id = $_GET['id'];
+$client_id = $_GET['client_id'];
 // echo $id ;
-$sql = "SELECT * from `addclient` where client_id='$id'";
+$sql = "SELECT * from `addclient` where client_id='$client_id'";
 $result = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($result)){
-            $id1 = $row["plan_id"] ;
+            $plan_id = $row["plan_id"] ;
 
-                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $id1";
+                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $plan_id";
                         $result1 = mysqli_query($conn, $sql1);
                         $row1 = mysqli_fetch_assoc($result1);
                         $date1 = strtotime($row1["start_date"]);
@@ -166,7 +166,7 @@ $result = mysqli_query($conn,$sql);
                         <div class="row d-flex justify-content-center align-items-center">
 
                             <a class="editBtn" name="edit_client" style="width:20%;
-    margin-top:10px" href="update_client_profile.php?id=<?php echo $id?>">Edit Profile</a>
+    margin-top:10px" href="update_client_profile.php?client_id=<?php echo $client_id?>">Edit Profile</a>
 
 
                         </div>

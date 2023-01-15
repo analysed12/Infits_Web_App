@@ -99,6 +99,9 @@ height: 190px; */
 .txt p {
     padding-left: 15px;
 }
+.txt a {
+    padding-left: 15px;
+}
 
 .txticon {
     padding: 10px;
