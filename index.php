@@ -1,3 +1,5 @@
+<!-- Dashboard -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infits</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <!-- temp commit by Sabari -->
     
     <style>
       #page{
@@ -144,7 +145,7 @@ justify-content: center;
   </head>
 
   <body>
-    <?php include 'event_calendar.php';?>
+    <?php include 'navbar.php';?>
 
     <div id="content">
 

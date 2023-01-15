@@ -495,7 +495,7 @@ body {
                 </div>
 
                 <div class="form_inputs login-area">
-                    <form action="sign_in_new.php" method="post">
+                    <form action="" method="post">
                         <?php include('errors.php'); 
                    ?>
 
