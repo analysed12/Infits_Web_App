@@ -510,6 +510,9 @@ body {
                             <input name="password" class="input_bar" id="password" type="password"
                                 placeholder="Password">
                         </div>
+                        <!-- <br> -->
+                        <a href="forgot_password.php" style="float:right;">Forgot password?</a>
+                        <br><br>
                         <div class="sign_btn_section">
                             <div class="sign_btn">
                                 <button type="submit" class="btn sign_up" name="login_user">Login</button>

@@ -55,32 +55,17 @@ include("navbar.php");
         printf("<script>location.href='calendar_of_events.php'</script>");
     }
     else{
-        echo "Appointment Booked" ;
-        echo '<script>
-        console.log("Hello");
-    var modalObject = document.getElementById("myModal");
-    function m_display(event){
-        event.preventDefault();
-        modalObject.style.display ="block";
-    }
-    m_display();    
-    // modalObject.style.display = "block";
-    
-   
-    
-    window.onclick = function(event) {
-        if (event.target == modalObject) {
-            modalObject.style.display = "none";
-        }
-    }
-    </script>';
-    header("Location: createevent.php");
-    }
-    // if(empty($personid) || empty($eventname) || empty($client_id) || empty($meeting_type) || empty($start_date)|| empty($end_date) ||empty($place_of_meeting) || empty($description) || empty($attachment)){
-        
-    // } else {
+        echo '<div style="text-align:center;background: #FFFFFF;
+        border: 1px solid #F1F1F1;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+        border-radius: 8px;margin-top:20px;width:30%;margin-left:45%">
+        <p style="text-align:center; color:red;font-weight:bold;">Alert !!</p>
+        <p>Appointment already booked !!</p>
+        </div>' ;
 
-        
+    // printf("<script>location.href='createevent.php'</script>");
+    }
+  
     }
 
 ?>
@@ -232,6 +217,7 @@ include("navbar.php");
                                 <option value="In person">In person</option>
                             </select>
                         </div>
+
 
                         <!-- Date and Time fields -->
                         <div class="txt button" style="border-bottom:1.8px solid black;" id="button">
