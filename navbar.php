@@ -243,6 +243,8 @@ a {
     font-size: 36px;
     margin-left: 50px;
 }
+
+
 </style>
 
 
@@ -276,8 +278,9 @@ a {
                 class="nav-icon">Dashboard</a>
         <a class="sidenavlink" href="#"><img src="images/vec_messages.png" class="nav-icon">Messages</a>
         <a class="sidenavlink" href="#"><img src="images/vec_live.png" class="nav-icon">Live</a>
-        <a class="sidenavlink" href="calendar_of_events.php"><img src="images/vec_appointments.png" class="nav-icon">Appoinments</a>
-        <a class="sidenavlink" href="#"><img src="images/vec_client_list.png" class="nav-icon">Clients</a>
+        <a class="sidenavlink" href="calendar_of_events.php"><img src="images/vec_appointments.png"
+                class="nav-icon">Appoinments</a>
+        <a class="sidenavlink" href="client_list.php"><img src="images/vec_client_list.png" class="nav-icon">Clients</a>
         <a class="sidenavlink" href="myplan.php"><img src="images/vec_recipies.png" class="nav-icon">Diet Plans</a>
         <a class="sidenavlink" href="#"><img src="images/vec_mail.png" class="nav-icon">Payments</a>
         <a class="sidenavlink" href="#"><img src="images/vec_recipies.png" class="nav-icon">Recipies</a>
@@ -293,7 +296,7 @@ a {
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name"><strong>
-                    <?php
+                        <?php
                     $id11 = $_SESSION['name'] ;
                     $sql1 = "SELECT name FROM dietitian WHERE dietitianuserID ='$id11'";
                     $res = mysqli_query($conn,$sql1);
@@ -302,7 +305,7 @@ a {
                      ?>
                     </strong>
 
-            </span></p>
+                </span></p>
             <p id="topnav-content-2">Your performance summary this week</p>
         </div>
         <div class="topnav-icons">
@@ -345,16 +348,15 @@ a {
         <div id="mySidenav" class="sidenavv">
             <img src="images/logo.png" id="logo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a  href="index.php" id="defaultOpen"><img src="images/vec_dashboard.png"
-                    >&nbsp&nbsp Dashboard</a>
-            <a  href="#"><img src="images/vec_messages.png" >&nbsp&nbsp Messages</a>
-            <a  href="#"><img src="images/vec_live.png" >&nbsp&nbsp Live</a>
-            <a  href="#"><img src="images/vec_appointments.png">&nbsp&nbsp Appoinments</a>
-            <a  href="#"><img src="images/vec_client_list.png" >&nbsp&nbsp Clients</a>
-            <a  href="myplan.php"><img src="images/vec_recipies.png" >&nbsp&nbsp Diet Plans</a>
-            <a  href="#"><img src="images/vec_mail.png" >&nbsp&nbsp Payments</a>
-            <a  href="#"><img src="images/vec_recipies.png" >&nbsp&nbsp Recipies</a>
-            <a  href="#"><img src="images/vec_recipies.png" >&nbsp&nbsp Health Form</a>
+            <a href="index.php" id="defaultOpen"><img src="images/vec_dashboard.png">&nbsp&nbsp Dashboard</a>
+            <a href="#"><img src="images/vec_messages.png">&nbsp&nbsp Messages</a>
+            <a href="#"><img src="images/vec_live.png">&nbsp&nbsp Live</a>
+            <a href="#"><img src="images/vec_appointments.png">&nbsp&nbsp Appoinments</a>
+            <a href="#"><img src="images/vec_client_list.png">&nbsp&nbsp Clients</a>
+            <a href="myplan.php"><img src="images/vec_recipies.png">&nbsp&nbsp Diet Plans</a>
+            <a href="#"><img src="images/vec_mail.png">&nbsp&nbsp Payments</a>
+            <a href="#"><img src="images/vec_recipies.png">&nbsp&nbsp Recipies</a>
+            <a href="#"><img src="images/vec_recipies.png">&nbsp&nbsp Health Form</a>
 
             <a href="#"><img src="images/vec_gethelp.png">&nbsp&nbsp Get Help</a>
             <a href="#"><img src="images/vec_settings.png">&nbsp&nbsp Settings</a>
