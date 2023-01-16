@@ -278,7 +278,7 @@ a {
         <a class="sidenavlink" href="#"><img src="images/vec_live.png" class="nav-icon">Live</a>
         <a class="sidenavlink" href="calendar_of_events.php"><img src="images/vec_appointments.png" class="nav-icon">Appoinments</a>
         <a class="sidenavlink" href="#"><img src="images/vec_client_list.png" class="nav-icon">Clients</a>
-        <a class="sidenavlink" href="#"><img src="images/vec_recipies.png" class="nav-icon">Diet Plans</a>
+        <a class="sidenavlink" href="myplan.php"><img src="images/vec_recipies.png" class="nav-icon">Diet Plans</a>
         <a class="sidenavlink" href="#"><img src="images/vec_mail.png" class="nav-icon">Payments</a>
         <a class="sidenavlink" href="#"><img src="images/vec_recipies.png" class="nav-icon">Recipies</a>
         <a class="sidenavlink" href="#"><img src="images/vec_recipies.png" class="nav-icon">Health Form</a>
@@ -351,7 +351,7 @@ a {
             <a  href="#"><img src="images/vec_live.png" >&nbsp&nbsp Live</a>
             <a  href="#"><img src="images/vec_appointments.png">&nbsp&nbsp Appoinments</a>
             <a  href="#"><img src="images/vec_client_list.png" >&nbsp&nbsp Clients</a>
-            <a  href="#"><img src="images/vec_recipies.png" >&nbsp&nbsp Diet Plans</a>
+            <a  href="myplan.php"><img src="images/vec_recipies.png" >&nbsp&nbsp Diet Plans</a>
             <a  href="#"><img src="images/vec_mail.png" >&nbsp&nbsp Payments</a>
             <a  href="#"><img src="images/vec_recipies.png" >&nbsp&nbsp Recipies</a>
             <a  href="#"><img src="images/vec_recipies.png" >&nbsp&nbsp Health Form</a>
