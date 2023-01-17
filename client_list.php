@@ -1,5 +1,6 @@
-<?php include 'navbar.php'; ?>
-
+<?php
+include('navbar.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,177 +8,268 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infits | Client List</title>
-
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <style>
-body {
-    height: 100vh;
-    overflow: auto;
+.clients {
+    margin-left: 18rem;
+    font-weight: 400;
+    margin-top: 1.5rem;
+    font-family: poppins;
 }
 
-#contents {
+.clients_container {
     display: flex;
-    flex-direction: column;
-    height: 90%;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 35px;
-    padding: 20px;
+    /* gap: 18rem; */
 }
 
-.topnav-content #topnav-content-3 {
-    font-family: 'Poppins';
-    /* NATS */
-    font-style: normal;
-    font-weight: 400;
-    /* font-size: 25px !important; */
-    color: #000000;
-}
-
-#addclient-topnav {
+.clients_operations {
     display: flex;
-    width: 100%;
-    align-items: center;
-    font-family: 'NATS', 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 27px;
-    color: #000000;
+    gap: 2rem;
 }
 
-#addclient-topnav p {
-    margin: 0;
-    font-family: 'NATS', 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 27px;
-    line-height: 57px;
-    width: 90px;
-    height: 50px;
-    margin-right: 30px;
-    color: #000000;
-    text-align: center;
+#btn1 {
+    background-color: white;
+    border: none;
+    color: #9C74F5;
+    width: auto;
+
 }
 
-#addclient-topnav-active {
-    border-bottom: 5px solid #4B9AFB;
-}
-
-#clients {
-    height: 60vh;
-    padding: 30px;
-    display: grid;
-    grid-template-columns: 19% 19% 19% 19% 19%;
-    column-gap: 1%;
-    row-gap: 50px;
-    overflow: scroll;
-}
-
-::-webkit-scrollbar {
-    width: 0;
-    /* Remove scrollbar space */
-    background: transparent;
-    /* Optional: just make scrollbar invisible */
-}
-
-.client {
+.add_set_client {
+    width: auto;
+    margin-top: 1rem;
+    color: #9C74F5;
+    background-color: white;
+    box-shadow: 0.7px 0.7px 2.5px 1.5px rgb(231, 208, 253);
+    border-radius: 0.6rem;
+    font-size: medium;
+    border: none;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
 }
 
-.clientname {
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 21px;
-    color: #000000;
-    margin-top: 5px;
+#btn2 {
+    width: auto;
+    background-color: #FD2B2B;
+    border: none;
+    color: white;
+    margin-top: 1rem;
+    border-radius: 0.6rem;
+    box-shadow: 0.6px 0.6px 2px 1px #ccc;
+    padding: 0.5rem;
+    padding-bottom: 0.3rem;
 }
 
-.buttons {
-    width: 70%;
+.search_client {
+    width: auto;
+    margin-top: 1rem;
+    color: #ACACAC;
+    background-color: white;
+    box-shadow: 0.6px 0.6px 2px 1px #ccc;
+    border-radius: 0.6rem;
+    font-size: medium;
+    border: none;
     display: flex;
-    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
 }
 
-.client button {
-    background: #FFFFFF;
-    border: 1px solid #4B9AFB;
-    border-radius: 9px;
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    color: #000000;
-    margin-top: 10px;
+#btn3 {
+    width: auto;
+    background-color: white;
+    border: none;
+    color: #ACACAC;
 }
 
-.profile {
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    color: #4B9AFB;
-    padding-top: 15px;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    border-bottom: 3px solid #4B9AFB;
+.seach_clients_text {
+    border: none;
 }
 
-#addclient-topnav p a {
-    text-decoration: none;
-    outline: none;
-    color: #000000;
+.clients_container2 {
+    margin-top: 2rem;
 }
 
-@media (max-width:1023px) {
-    #contents {
-        position: fixed;
-        /* top: 10%; */
-        width: 100vw;
-    }
+/* .clients_container3 {
+    display: none;
+} */
 
-    #clients {
-        grid-template-columns: 49% 49%;
-        column-gap: 1%;
-    }
-}
-
-#addclient-topnav button {
-    /* border-left:none;
-    border-right:none;
-    border-top:none; */
+#active {
     border: none;
     background-color: white;
-    margin-right: 10px;
-    border-bottom: 2px solid #4B9AFB;
+    font-weight: 500;
+    font-size: 1.2rem;
+    border: 1px solid transparent;
+    width: auto;
+}
+
+#active:hover {
+    border-bottom: 0.25rem solid #4B9AFB;
+}
+
+.client_wrapper1 {
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.client_wrapper2 {
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.client_profile {
+    height: 9rem;
+    width: auto;
+    background-color: #FAFAFA;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+img {
+    width: 4rem;
+    height: 5rem;
+    border-radius: 100%;
+}
+
+#btn4 {
+    background-color: white;
+    border-color: #4B9AFB;
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+    margin-top: 0.8rem;
+    width: auto;
+}
+
+
+@media screen and (max-width: 720px) {
+    .clients {
+        margin-left: 2rem;
+    }
+
+    .clients_container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .add_set_client {
+        font-size: 0.8rem;
+    }
+
+    .add_set {
+        margin-top: 0.3rem;
+    }
+
+    .client_wrapper1 {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.1rem;
+    }
+
+    .client_wrapper2 {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.1rem;
+    }
+
+    .clients_container3 {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .clients_operations {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .clients_container3 {
+        display: none;
+    }
+
 
 }
 
-/* 
-#addclient-topnav button:focus{
-    border-bottom:2px solid #4B9AFB;
-} */
+.client-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+
+.client-item {
+    padding: 30px 10px;
+    border: 1px solid grey;
+    /* text-align: center; */
+    margin: 5px;
+    width: 150px;
+    flex-basis: 300px;
+    background: #FAFAFA;
+    border: 1px solid #D9D9D9;
+    /* box-shadow: 0px 10px 15px rgba(136, 136, 136, 0.05); */
+    border-radius: 15px;
+
+}
+
+.button-top{
+    border:none;
+    background:white;
+    border-bottom : 1px solid blue;
+}
 </style>
 
 <body>
+    <div class="clients">
+        <p style="font-size:1.7rem; font-weight:500">Clients</p>
+        <div class="clients_container">
+            <div class="search_client" style="margin-right:40px">
+                <div><button id="btn3"><span class="material-symbols-outlined">search</span></button> </div>
+                <div>&nbsp&nbsp&nbsp&nbsp <input type="text" name="search_client" placeholder="Seach Clients"
+                        class="seach_clients_text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+            </div>
 
 
-    <div id="contents">
-        <h4>Client List</h4>
-        <div id="addclient">
-            <form id="addclient-topnav" method="post">
-                <button id="addclient-topnav-active" name="active-btn">Active</button>
-                <button id="addclient-topnav-pending" name="pending-btn">Pending</button>
+            <div class="clients_operations">
+                <div class="add_set_client">
+                    <div><button id="btn1"><span class="material-symbols-outlined">add</span></button> </div>
+                    <div class="add_set"> <span>Add Clients</span></div>
+                </div>
+                <div class="add_set_client">
+                    <div><button id="btn1"><span class="material-symbols-outlined">settings</span></button> </div>
+                    <div class="add_set"> <span>Set Goals</span></div>
+                </div>
+
+                <div class="add_set_client">
+                    <div><button id="btn1"><span class="material-symbols-outlined">notification_add</span></button>
+                    </div>
+                    <div class="add_set"> <span>Set Reminders</span></div>
+                </div>
+                <div class="delete_client">
+                    <button id="btn2"><span class="material-symbols-outlined">delete</span></button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="clients_container2">
+            <form action="" method="post">
+                <button class="button-top" name="active-btn">Active</button>
+                <button class="button-top" name="pending-btn">Pending</button>
             </form>
-            <div id="clients">
+        </div>
+        <br><br>
 
-                <?php 
+        <div class="client-container">
+            <?php
                 if(isset($_POST['pending-btn']))
                 {
                     $id = $_SESSION['name'] ;
@@ -201,19 +293,31 @@ body {
                         while (($date1 = strtotime('+1 MONTH', $date1)) <= $date2)
                             $months++;
                         
+                            $plan_name = $row1['name'] ;
+                            $plan_duration = $months." Month" ;
                         // echo $months;
 
                         if(mysqli_num_rows($result1) > 0)
                     {
                         // $name_of_plan = $row1["name"];
                 
-                    echo "<div class='client'>";
-                    echo "<div><img src='./icons/profile6.png'></div>";
-                    // echo "<div class='clientname'>".$row["plan_id"]."</div>";
-                    echo "<div class='clientname'>".$row["name"]."</div>";
-                    echo "<div class='buttons'><button>".$row1["name"]."</button><button>".$months." Month</button></div>";
-                    echo '<div class="profile"><a href="client_profile.php?id='.$row1['plan_id'].'">Profile</a></div>';
+                        echo "<div class='client-item'>";
+                    echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
+                    echo "<div class='profile2'>";
+                    echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
+                    echo "<a href='client_profile.php?client_id=".$row['client_id']."'>Profile</a>";
+                    echo "<div>";
+                    echo "<div class='box1' style='display:inline-block;background: #FFFFFF;
+                    border: 1px solid #4B9AFB;
+                    border-radius: 6px;padding:5px;margin-top:5px';margin-right:5px;>".$plan_name."</div>";
+                    echo "<div class='box2' style='display:inline-block;background: #FFFFFF;
+                    border: 1px solid #4B9AFB;
+                    border-radius: 6px;padding:5px;margin-top:5px;margin-left:5px;'>".$plan_duration." </div>";
                     echo "</div>";
+    
+                    echo "</div>";
+                    echo "</div>";
+    
                 
                  }}}
                 }
@@ -250,25 +354,37 @@ body {
                         $plan_duration = $months." Month" ;
                     }
                  
-                
-                    echo "<div class='client'>";
-                    echo "<div><img src='./icons/profile6.png'></div>";
-                    // echo "<div class='clientname'>".$row["plan_id"]."</div>";
-                    echo "<div class='clientname'>".$row["name"]."</div>";
-                    echo "<div class='buttons'><button>".$plan_name."</button><button>".$plan_duration."</button></div>";
-                    echo '<div class="profile"><a href="client_dashboard.php?client_id='.$row['client_id'].'">Profile</a></div>';
+                    echo "<div class='client-item'>";
+                    echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
+                    echo "<div class='profile2'>";
+                    echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
+                    echo "<a href='client_dashboard.php?client_id=".$row['client_id']."'>Profile</a>";
+                    echo "<div>";
+                    echo "<div class='box1' style='display:inline-block;background: #FFFFFF;
+                    border: 1px solid #4B9AFB;
+                    border-radius: 6px;padding:5px;margin-top:5px';margin-right:5px;>".$plan_name."</div>";
+                    echo "<div class='box2' style='display:inline-block;background: #FFFFFF;
+                    border: 1px solid #4B9AFB;
+                    border-radius: 6px;padding:5px;margin-top:5px;margin-left:5px;'>".$plan_duration." </div>";
+                    echo "</div>";
+    
+                    echo "</div>";
                     echo "</div>";
                 
                  }}
                 }
-?>
+                ?>
 
 
-
-
-            </div>
         </div>
+
     </div>
+
+
+
+
+    </div>
+
 </body>
 
 </html>
