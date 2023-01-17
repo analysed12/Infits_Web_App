@@ -1016,7 +1016,7 @@ function CustomChart_Data(from_date,to_date){
     window.customChart.destroy();
     $.ajax({
         type: "POST",
-        url: "_customdate_track_stats_calorie.php",
+        url: "track_stats_calorie.php",
         data: {from_date: from_date, to_date: to_date},
         success: function(result) {
         london_pop.innerHTML = "We are showing you the data in range <br>"+ result['range'] +" !";
