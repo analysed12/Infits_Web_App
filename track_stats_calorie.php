@@ -470,6 +470,11 @@ margin-left: 5px;
     font-size: 25px;
     line-height: 53px;
 }
+.tsd-left-b .heading span{
+    font-size: 13px;
+    font-weight: bold;
+    color: #A4A4A4;    
+}
 .heading-border{
     margin-top: -10px;
     width: 100%;
@@ -832,7 +837,7 @@ $j = count($pastActivityData);
             <div class="tsd-left-b table-activity">
                 <div class="heading">
                     <p>Past Activity</p>
-                    <i class="fa-solid fa-sliders"></i>
+                    <a href="past_activities_calorie.php"><span>View All</span></a>
                 </div>
                 <div class="heading-border"></div>
                 <div class="activity-container">
@@ -878,7 +883,7 @@ $calorieRemaining = (int) $currentGoal - (int) $calorieConsumed;
         <div class="col-lg-5 tsd-right">
             <div class="heading">
                 <p>Daily Progress</p>
-                <span>View Activity</span>
+                <a href="past_activities_calorie.php"><span>View Activity</span></a>
             </div>
             <div class="progress-bar-container">
                 <div class="total-consumed">
