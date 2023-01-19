@@ -25,6 +25,74 @@ if(isset($_POST['savegoal'])){
         // exit();
     }
 }
+// funtion to fetch
+// This can be more Simple by String Concatination
+function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    // For Sum of All Data Till Today
+    if($isCustom==1){
+        $query="SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
+                `time` <= '{$to_date} 23:59:59';";
+    // for sum of Data between two dates
+    }else if($isCustom==2){
+        $query = "SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
+                `time` >= '{$from_date} 00:00:00'
+                AND `time` <= '{$to_date} 23:59:59';";;
+    // for average of data end to end (monthly)
+    }else if($isCustom==3){
+        $query="SELECT avg(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
+            `time` >= '{$from_date} 00:00:00'
+            AND `time` < '{$to_date} 00:00:00';";
+    // for get latest goal from goals table
+    }else if($isCustom==4){
+        $query="SELECT goal FROM goals WHERE forWhat = 'calorie' ORDER BY time DESC LIMIT 1";
+    // for getting past actvities 
+    }else if($isCustom==5){
+        $query = "SELECT * FROM `calorietracker` WHERE clientID = '$clientId' AND `time` >= '{$from_date} 00:00:00'
+        AND `time` < '{$to_date} 23:59:59' ORDER BY time DESC;" ;
+    // for average of data of one full day
+    }else{
+    $query="SELECT avg(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
+            `time` >= '{$from_date} 00:00:00'
+            AND `time` <= '{$to_date} 23:59:59';";
+    }
+    // echo($query);
+    // echo ('<br>');
+    $result = $conn->query($query) or die("Query Failed");
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
+    $CustomData = array(
+        'value' => array(),
+        'date' => array(),
+        'range' => "",
+    );
+    $CustomDay_1 = new DateTime($_POST['from_date']);
+    $CustomDay_2 = new DateTime($_POST['to_date']);
+    $CustomData['range'] =  $CustomDay_1->format('d M Y') ." - ". $CustomDay_2->format('d M Y') ;
+    
+    while ($CustomDay_2 >= $CustomDay_1) {
+        $CustomDataValue = (int) fetchDataSql($clientId,$CustomDay_1->format('Y-m-d'), $CustomDay_1->format('Y-m-d'),2)[0]['SUM(caloriesconsumed)'];
+    
+        array_push($CustomData['value'], $CustomDataValue);
+        array_push($CustomData['date'], $CustomDay_1->format('d'));
+        $CustomDay_1->modify("+1 day");
+    } 
+    $CustomData = json_encode($CustomData);
+    // return $CustomData;
+    header('Content-Type: application/json');
+    echo ($CustomData);
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +102,9 @@ if(isset($_POST['savegoal'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -129,12 +200,13 @@ border-top-left-radius: 1em;
 border-bottom-left-radius: 1em;
 border-top-right-radius: 1em;
 border-bottom-right-radius: 1em;
+position: relative;
 }
 .tablinks {
 background: #FFFFFF;
 border: 1px solid #FCFBFB;
 border-radius: 0px;
-width: 25%;
+width: 24%;
 height: 24px;
 float: left;
 border: none;
@@ -153,6 +225,26 @@ color: #4D4D4D;
 .graph_button_left{
     border-top-left-radius: 1em;
 border-bottom-left-radius: 1em;
+width: 28%;
+}
+.drop{
+    position: absolute;
+    color: #4D4D4D;
+    top: 5px;
+    left: 80px;
+    margin-left: 8px;
+    cursor: pointer;
+    
+}
+#daterange{
+    border: none;
+    background: transparent;
+    height: 0px;
+    width: 0px;
+    z-index: -1;
+    position: absolute;
+    left: 71px;
+    top: 20px;
 }
 .graph_button_right{
     border-top-right-radius: 1em;
@@ -178,6 +270,7 @@ border-bottom-right-radius: 1em;
     padding: 10px;
 }
 .tab_content{
+    position: relative;
     display: none;
     width: 100%;
     height: 100%;
@@ -185,6 +278,33 @@ border-bottom-right-radius: 1em;
 .tab_content canvas{
     width: 100%;
     height: 100%;
+}
+.i-button {
+    position: absolute;
+    top: -4%;
+    right: -12%;
+    cursor: pointer;
+}
+.i-pop {
+    background: #ffffff;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 27px;
+    position: absolute;
+    /* right: -62%; */
+    /* top: 10%; */
+    right: -12%;
+    top: 12%;
+    box-shadow: 0px 1.74334px 13.0751px rgb(0 0 0 / 25%);
+    border: 1px solid #EFEFEF;
+    padding: 10px 15px;
+    width: 500px;
+    text-align: center;
+    border-radius: 15px;
+    display: none;
+    transition: 2s ease-in-out;
 }
 
 /* Goal Dialog */
@@ -350,6 +470,11 @@ margin-left: 5px;
     font-size: 25px;
     line-height: 53px;
 }
+.tsd-left-b .heading span{
+    font-size: 13px;
+    font-weight: bold;
+    color: #A4A4A4;    
+}
 .heading-border{
     margin-top: -10px;
     width: 100%;
@@ -513,21 +638,6 @@ margin-left: 5px;
     .tsd-left-b {
     padding-left: 0;
     }
-    /* .stat-data {
-    scale: 0.7;
-    }
-    .stat-data .title {
-    margin-left: 0;
-    font-size: 13px;
-    }
-    .stat-data .value {
-    margin-left: 0;
-    font-size: 20px;
-    }
-    .stat-data .unit{
-    margin-left: 0;
-    font-size: 14px;
-    } */
     .tsd-right {
     scale: 0.8;
     }
@@ -536,8 +646,6 @@ margin-left: 5px;
     }
 }
 </style>
-
-
 <body>
 <div class="content">
     <div class="row ts-top">
@@ -590,7 +698,11 @@ margin-left: 5px;
 
             <div class="tst-left-b">
                 <div class="tab">
+                
                     <button class="tablinks graph_button_left" onclick="openCity(event, 'London')">Custom Dates</button>
+                    <input id="daterange"  type="date-range">
+                    <i id="daterange-btn" class="drop fa-solid fa-caret-down"></i>
+                   
                     <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
                     <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
                     <button class="tablinks graph_button_right" onclick="openCity(event, 'Week')">Week</button>
@@ -600,21 +712,29 @@ margin-left: 5px;
                     <div id="London" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChart"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="london_pop" class="i-pop"></div>
                     </div>
                     
                     <div id="Year" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartYearly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="year_pop" class="i-pop"></div>
                     </div>
 
                     <div id="Month" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartMonthly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="month_pop" class="i-pop"></div>
                     </div>
                     
                     <div id="Week" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartWeekly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="week_pop" class="i-pop"></div>
                     </div>
                 
                     <script>
@@ -640,8 +760,8 @@ margin-left: 5px;
                     }
 
                     /* // Get the element with id="defaultOpen" and click on it */
-                    // document.getElementById("defaultOpen").click();
-                    document.getElementById("London").style.display = "block";
+                    document.getElementsByClassName('graph_button_right')[0].click();
+                    // document.getElementById("London").style.display = "block";
                     </script> 
                 </div>
             </div>           
@@ -663,50 +783,7 @@ margin-left: 5px;
         </div>
     </div>
 <?php 
-// funtion to fetch
-// This can be more Simple by String Concatination
-function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
-    // Connect to Database
-    $conn = new mysqli("localhost", "root", "", "infits");
-    if($conn->connect_error){
-        die("Connection failed :" . $conn->connect_error);
-    }
-    // For Sum of All Data Till Today
-    if($isCustom==1){
-        $query="SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-                `time` <= '{$to_date} 23:59:59';";
-    // for sum of Data between two dates
-    }else if($isCustom==2){
-        $query = "SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-                `time` >= '{$from_date} 00:00:00'
-                AND `time` <= '{$to_date} 23:59:59';";;
-    // for average of data end to end (monthly)
-    }else if($isCustom==3){
-        $query="SELECT avg(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-            `time` >= '{$from_date} 00:00:00'
-            AND `time` < '{$to_date} 00:00:00';";
-    // for get latest goal from goals table
-    }else if($isCustom==4){
-        $query="SELECT goal FROM goals WHERE forWhat = 'calorie' ORDER BY time DESC LIMIT 1";
-    // for getting past actvities 
-    }else if($isCustom==5){
-        $query = "SELECT * FROM `calorietracker` WHERE clientID = '$clientId' AND `time` >= '{$from_date} 00:00:00'
-        AND `time` < '{$to_date} 23:59:59' ORDER BY time DESC;" ;
-    // for average of data of one full day
-    }else{
-    $query="SELECT avg(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-            `time` >= '{$from_date} 00:00:00'
-            AND `time` <= '{$to_date} 23:59:59';";
-    }
-    // echo($query);
-    $result = $conn->query($query) or die("Query Failed");
-    $data = array();
-    while($row = $result->fetch_assoc()){
-        $data[] =  $row;
-    }
-    $conn->close();
-    return ($data);
-}
+
 
 // All Data Total Sum
 $allDataSum = fetchDataSql($clientId, '', $today->format('Y-3-d'), 1)[0]['SUM(caloriesconsumed)'];
@@ -760,7 +837,7 @@ $j = count($pastActivityData);
             <div class="tsd-left-b table-activity">
                 <div class="heading">
                     <p>Past Activity</p>
-                    <i class="fa-solid fa-sliders"></i>
+                    <a href="past_activities_calorie.php"><span>View All</span></a>
                 </div>
                 <div class="heading-border"></div>
                 <div class="activity-container">
@@ -806,7 +883,7 @@ $calorieRemaining = (int) $currentGoal - (int) $calorieConsumed;
         <div class="col-lg-5 tsd-right">
             <div class="heading">
                 <p>Daily Progress</p>
-                <span>View Activity</span>
+                <a href="past_activities_calorie.php"><span>View Activity</span></a>
             </div>
             <div class="progress-bar-container">
                 <div class="total-consumed">
@@ -832,6 +909,7 @@ $calorieRemaining = (int) $currentGoal - (int) $calorieConsumed;
 </div>
 <?php
 // To Get - Yearly data
+$year_pop = 0;
 $wholeYearData = array(
     'value' => array(),
     'month' => array()
@@ -842,6 +920,7 @@ $yearly_month->setDate($yearly_month->format('Y'),01,01);
 if($today->format('m') == '01'){
     $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
     $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+    $year_pop = 1;
 }
 while($yearly_last_month >= $yearly_month){
     
@@ -853,6 +932,7 @@ while($yearly_last_month >= $yearly_month){
     array_push($wholeYearData['month'], $yearly_month->format('M'));
     $yearly_month->modify('+1 month');
 }
+$month_pop = 0;
 $wholeMonthData = array(
     'value' => array(),
     'date' => array(),
@@ -864,6 +944,7 @@ $monthly_Month->modify("first day of this month");
 if($today->format('d') == '01'){
     $monthly_Month->modify("first day of previous month");
     $monthly_LastDay->modify("last day of previous month");
+    $month_pop = 1;
 }
 while ($monthly_LastDay >= $monthly_Month) {
     $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('Y-m-d'), $monthly_Month->format('Y-m-d'),2)[0]['SUM(caloriesconsumed)'];
@@ -873,9 +954,8 @@ while ($monthly_LastDay >= $monthly_Month) {
     $monthly_Month->modify("+1 day");
     
 }
-
-
 // To Get - Weekly Data
+$week_pop = 0;
 $wholeWeekData = array(
     'value' => array(),
     'day' => array(),
@@ -886,6 +966,7 @@ $weekly_lastDay =new DateTime();
 
 if($today->format('l')== "Monday"){
     $weekly_lastDay->modify('previous sunday');
+    $week_pop = 1;
 }
 
 while($weekly_Day <= $weekly_lastDay){
@@ -897,10 +978,141 @@ while($weekly_Day <= $weekly_lastDay){
 }
 ?>
 <script>
+const london_pop = document.getElementById('london_pop');
+const year_pop = document.getElementById('year_pop');
+const month_pop = document.getElementById('month_pop');
+const week_pop = document.getElementById('week_pop');
+const i_buttons = document.getElementsByClassName('i-button');
+const i_pop = document.getElementsByClassName('i-pop');
+
+if(<?php echo($year_pop) ?>){
+    year_pop.innerText = "As it is fresh year, we are showing you the previous year's data until the latest data is synced for this month!";
+    london_pop.innerText = "As it is fresh year, we are showing you the previous year's data until the latest data is synced for this month!";
+}else{
+    year_pop.innerText = "We are showing you the ongoing year's data and it keeps updating realtime!";
+    london_pop.innerText = "We are showing you the ongoing year's data and it keeps updating realtime!";
+}
+
+if(<?php echo($month_pop) ?>){
+    month_pop.innerText = "As it is fresh month, we are showing you the previous month's data until the latest data is synced for this month!";
+}else{
+    month_pop.innerText = "We are showing you the ongoing month's data and it keeps updating realtime!";
+}
+
+if(<?php echo($week_pop) ?>){
+    week_pop.innerText = "As it is fresh year, we are showing you the previous week's data until the latest data is synced for the week!";
+}else{
+    week_pop.innerText = "We are showing you the ongoing week's data and it keeps updating realtime!";
+}
+
+
+for(let i =0; i<i_buttons.length; i++){
+    i_buttons[i].addEventListener('mouseover',()=>{
+        i_pop[i].style.display = "Block";
+    });
+    i_buttons[i].addEventListener('mouseout',()=>{
+        i_pop[i].style.display = "none";
+    });
+}
 // --------------Charts--------------
-// Default Chart
+// Default Chart (Function)
 const defaultChart = document.getElementById('myChart');
-new Chart(defaultChart, {
+function CustomChart_Data(from_date,to_date){
+    window.customChart.destroy();
+    $.ajax({
+        type: "POST",
+        url: "track_stats_calorie.php",
+        data: {from_date: from_date, to_date: to_date},
+        success: function(result) {
+        london_pop.innerHTML = "We are showing you the data in range <br>"+ result['range'] +" !";
+        window.customChart = new Chart(defaultChart, {
+                                type: 'line',
+                                data: {
+                                labels: result['date'],
+                                datasets: [{
+                                    fill: false,
+                                    lineTension: 0,
+                                    backgroundColor: "#E27998",
+                                    borderColor: "#E27998",
+                                    data: result['value'],
+                                    borderWidth: 1
+                                }]
+                                },
+                                options: {
+                                    // title: {
+                                    //     display: true,
+                                    //     text: result['range'],
+                                    //     fontFamily: 'NATS',
+                                    //     fontStyle: 'bold',
+                                    //     fontSize: 15,
+                                    //     // fontColor: 'black',
+                                    //     fontColor: '#9D9D9D',
+                                    // },
+                                    scales: {
+                                        xAxes:[{
+                                            gridLines:{
+                                                display:false,
+                                            },
+                                            ticks:{
+                                                fontFamily: 'NATS',
+                                                fontStyle: 'bold',
+                                                fontSize:11,
+                                                fontColor: '#9D9D9D',
+                                            }
+                                        }],
+                                        yAxes:[{
+                                            ticks:{
+                                                // min:2500,
+                                                // max:3000,
+                                                // stepSize:100,
+                                                fontFamily: 'NATS',
+                                                fontStyle: 'bold',
+                                                fontSize:13,
+                                                fontColor: '#9D9D9D',
+                                            },
+                                        }],
+                                    },
+                                    legend:{
+                                        display:false,
+                                    },
+                                    //   responsive:true,
+                                    tooltips:{
+                                        enabled:true,
+                                        // innerHeight:500,
+                                        // innerWidth:500,
+                                    },
+                                    layout:{
+                                        padding:{
+                                            left:5,
+                                            right:5,
+                                            top:0,
+                                            bottom:5,
+                                        },
+                                    },
+                                }
+                            });
+                        }
+                    });
+        document.getElementsByClassName('graph_button_left')[0].click();
+}
+const date_btn = document.getElementById('daterange-btn');
+date_btn.addEventListener('click' , ()=>{
+    fp.toggle();
+});
+const fp = flatpickr("input[type = date-range]", {
+    maxDate: "today",
+    dateFormat: "Y-m-d",
+    mode: "range",
+    onClose:[
+        function(selectedDates){
+            const Date_1 = new Date(selectedDates[0]);
+            const Date_2 = new Date(selectedDates[1]);
+            CustomChart_Data(Date_1.toISOString().slice(0,10),Date_2.toISOString().slice(0,10));
+        }
+    ]
+});
+
+window.customChart = new Chart(defaultChart, {
     type: 'line',
     data: {
     labels: [<?php echo("'". implode("','", $wholeYearData['month']). "'") ?>],
@@ -909,7 +1121,7 @@ new Chart(defaultChart, {
         lineTension: 0,
         backgroundColor: "#E27998",
         borderColor: "#E27998",
-        data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
+        data: [<?php echo(implode(', ', $wholeYearData['value'])) ?>],
         borderWidth: 1
     }]
     },
