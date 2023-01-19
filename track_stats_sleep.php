@@ -1,3 +1,34 @@
+<?php
+// Client Id
+$clientId = 'Azarudeen';
+$ttime;
+// Configure Dates
+date_default_timezone_set("Asia/Calcutta");
+// $today = new DateTime();
+$today = new DateTime('2022-01-25');
+// Goal Insertion
+if(isset($_POST['savegoal'])){
+    $client = $_POST['clientid'];
+    $goal =$_POST['setgoal'];
+    $conn = new mysqli("localhost", "root", "", "infits");
+
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    
+    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('sleep' , $goal, '$client' )";
+    $result = $conn->query($query) or die("Query Failed");
+    
+    if($result){
+        unset($_POST["savegoal"]);
+        unset($_POST["setgoal"]);
+        header(("Location: http://localhost/analysed/infits/track_stats_sleep.php"));
+        // exit();
+    }
+}
+?>
+
+
 <?php  include('config.php');?>
 
 <!DOCTYPE html>
@@ -237,7 +268,7 @@ border-radius: 10px;
 height: 38.95px;
     background: #FFFFFF;
 border: 1px solid #F1F1F1;
-padding:8px;
+padding:10px;
 box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
 border-radius: 16px;
 width: 134px;
@@ -501,7 +532,10 @@ line-height: 49px;
 }
 .pbottom-element{
     margin:2px;
+    padding: 5px;
+   
 }
+
 .pbottom-element p{
     font-family: 'NATS';
 font-style: normal;
@@ -525,7 +559,6 @@ letter-spacing: 0.03em;
 color: #6844E2;
 }
 .date{
-    
     border-right: 1px solid #C986CF;
 
 }
@@ -556,6 +589,7 @@ opacity: 0.77;
     margin-top: -220px;
     padding: 2px;
   z-index: 5;
+  display: none;
 }
 .activity_pop img{
     align-self: flex-end;
@@ -723,10 +757,13 @@ height: 45px;
     border-radius: 2px;
     font-family: 'NATS';
 }
+.client-card{
+    height: 120px !important;
+}
 </style>
 
 <body>
-    <?php include 'navbar.php' ?>
+<?php include 'navbar.php' ?>
 
     <div id="content">
 
@@ -735,28 +772,40 @@ height: 45px;
                 <div id="inner11">
                     <div class="flex-container">
                         <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                            <i class="fa-solid fa-shoe-prints" style="rotate: -90deg;"></i>
-                            <p>Step</p>
+                        <a href="track_stats_steps.php">
+                            <i style="color:#FF6C6CCA ;rotate: -90deg;" class="fa-solid fa-shoe-prints" style="rotate: -90deg;"></i>
+                            <p style="color:#FF6C6CCA ;">Step</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                            <i class="fa-solid fa-heart-pulse"></i>
-                            <p>Heart Rate</p>
+                        <a href="track_stats_heart.php">
+                            <i style="color:#E266A9 ;" class="fa-solid fa-heart-pulse"></i>
+                            <p style="color:#E266A9 ;">Heart Rate</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                            <i class="fa-solid fa-droplet"></i>
-                            <p>Water</p>
+                        <a href="track_stats_water.php">
+                            <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
+                            <p style="color:#52A4FF;">Water</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                            <i class="fa-solid fa-weight-hanging"></i>
-                            <p>Weight Track</p>
+                        <a href="track_stats_weight.php">
+                            <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
+                            <p style="color:#7D5DE6;">Weight Track</p>
+                        </a>
                         </div>
                         <div class="client-card client-card-sleep" style="color:#54AFAC; border: 1px solid #54AFAC;">
+                        <a href="track_stats_sleep.php">
                             <img src="images/moon.svg" alt="">
-                            <p>Sleep</p>
+                            <p style="color:#FFFFFF;" >Sleep</p>
+                        </a>
                         </div>
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                            <i class="fa-solid fa-stopwatch-20"></i>
-                            <p>Calorie Track</p>
+                        <a href="track_stats_calorie.php">
+                            <i style="color:#E3738D;" class="fa-solid fa-stopwatch-20"></i>
+                            <p style="color:#E3738D;">Calorie Track</p>
+                        </a>
                         </div>
                     </div>
 
@@ -764,7 +813,7 @@ height: 45px;
                 <div id="inner12">
                                         <div class="tab">
                                            <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
-                                           <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
+                                           <button class="tablinks" onclick="openCity(event, 'Y'ear')">Year</button>
                                            <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
                                            <button class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
                                         </div>
@@ -777,7 +826,7 @@ height: 45px;
                                 <div id="London" id="defaultOpen" class="tabcontent">
                                 
                                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartwater"></canvas>
+                                <canvas id="myChart"></canvas>
                                 </div>
 
                                 <div id="Year" class="tabcontent">
@@ -825,17 +874,28 @@ height: 45px;
             <div id="inner2">
                 <div class="inner21">
                     <div class="inner21-title">
-                        Set Goals
+                        Sleep Goal
+                        <br>
+                        <span style = "font-family: NATS;
+font-size: 20px;
+font-weight: 400;
+line-height: 42px;
+letter-spacing: 0em;
+text-align: left;
+color: #ABA3A3 ;
+">daily sleep hours</span>
                     </div>
                     <div class="inner21-image">
                         <img src="images/sleep_table.svg" alt="">
                     </div>
-                    <div class="box-title">Daily Steps</div>
+                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                     <div class="box-counter">
-                    Goal:<input type="number" id="setgoalweight" name="weightgoal">
+                        <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Hours" style = "font-size:20px;">
                     </div>
-                    <buttpn class="box-btn">Set</buttpn>
-                </div>
+                    <button class="box-btn" type="submit" name="savegoal" id="save-goal">Set</button>
+                    </form>    
+                    </div>
+               
             </div>
         </div>
 
@@ -844,20 +904,86 @@ height: 45px;
             <div class="col-sm-8">
 
                 <div class="bottom-btns">
+
+                <?php 
+// funtion to fetch
+// This can be more Simple by String Concatination
+function fetchDataSql($clientId,$from_date, $from_month, $from_year, $to_date,$to_month, $to_year, $isCustom=0){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    // For Sum of All Data Till Today
+    if($isCustom==1){
+        $query="SELECT SUM(hrsSlept) FROM sleeptracker WHERE clientID= '$clientId' AND 
+                `sleeptime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
+    // for sum of Data between two dates
+    }else if($isCustom==2){
+        $query = "SELECT SUM(hrsSlept) FROM sleeptracker WHERE clientID= '$clientId' AND 
+                `sleeptime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
+                AND `sleeptime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";;
+    // for average of data end to end (monthly)
+    }else if($isCustom==3){
+        $query="SELECT avg(hrsSlept) FROM sleeptracker WHERE clientID= '$clientId' AND 
+            `sleeptime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
+            AND `sleeptime` < '{$to_year}-{$to_month}-{$to_date} 00:00:00';";
+    // for all data of a day
+    }else if($isCustom==4){
+        $query="SELECT goal FROM goals WHERE forWhat = 'sleep' ORDER BY 'time' DESC LIMIT 1";}
+    // for getting past actvities 
+    else if($isCustom==5){
+        $query="SELECT * FROM sleeptracker WHERE clientID= '$clientId' AND 
+            `sleeptime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
+            AND `sleeptime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59'";
+    // for average of data of one full day
+    }else{
+    $query="SELECT avg(hrsSlept) FROM sleeptracker WHERE clientID= '$clientId' AND 
+            `sleeptime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
+            AND `sleeptime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
+    }
+    $result = $conn->query($query) or die("Query Failed");
+
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+
+
+
+// All Data Total Sum
+$allDataSum = fetchDataSql($clientId, '', '', '', $today->format('d'), $today->format('m'), $today->format('Y'), 1)[0]['SUM(hrsSlept)'];
+// Today Data Sum
+$todayData = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'),2)[0]['SUM(hrsSlept)'];
+// Week Average
+$pastWeek =new DateTime('2022-01-25');
+$pastWeek->modify('-1 week');
+$weekAvg = fetchDataSql($clientId,$pastWeek->format('d'), $pastWeek->format('m'), $pastWeek->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'))[0]['avg(hrsSlept)'];
+// Month Average
+$pastMonth = new DateTime('2022-01-25');
+$pastMonth->modify('-1 month');
+$monthAvg = fetchDataSql($clientId,$pastMonth->format('d'), $pastMonth->format('m'), $pastMonth->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'))[0]['avg(hrsSlept)'];
+$months = array (1=>'Jan',2=>'Feb',3=>'Mar',4=>'Apr',5=>'May',6=>'Jun',7=>'Jul',8=>'Aug',9=>'Sep',10=>'Oct',11=>'Nov',12=>'Dec');
+?>
                     
                 <div class="flex-container-bottom">
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Daily Count</span>
-                                    <span>72 BPM</span>
-                                </div>
+                                    <span>
+                                    <span style = "font-weight: bold; font-size: 30px;"><?php echo(ceil($todayData))?></span> hours</span>
+                                </div> 
                                 
                             </div>
 
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Weekly Avg</span>
-                                    <span>72 BPM</span>
+                                    <span><span>
+                                    <span style = "font-weight: bold; font-size: 30px;"><?php echo(ceil($weekAvg))?></span> hours</span>
                                 </div>
                                 
                             </div>
@@ -867,7 +993,8 @@ height: 45px;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Monthly Avg</span>
-                                <span>72 BPM</span>
+                                <span><span>
+                                    <span style = "font-weight: bold; font-size: 30px;"><?php echo(ceil($monthAvg))?></span> hours</span>
                                 </div>
                                 <div class="heart_info">
                                 </div>
@@ -876,7 +1003,8 @@ height: 45px;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Total</span>
-                                <span>72 BPM</span>
+                                <span><span>
+                                    <span style = "font-weight: bold; font-size: 30px;"><?php echo(ceil($allDataSum))?></span> hours</span>
                                 </div>
                                 <div class="heart_info">
                                 </div>
@@ -891,28 +1019,27 @@ height: 45px;
                      <span>Past Activity</span>
                       </div>
                      <?php
-                     $a=1;
-                     
-                    while ($a <= 4) {
-                        
+                     $pastActivityData = fetchDataSql($clientId, '', '', '', $today->format('d'), $today->format('m'), $today->format('Y'),5);
+                     $j = count($pastActivityData)-1;
+                     $k = 0;
+
+                    while ($k <= $j) {
+                    $date = new DateTime($pastActivityData[$k]['sleeptime']);
                      echo '<div class="table_element">';
                      echo '<div class="date">';
-                     echo '<span>Sep</span>';
-                     echo ' <p>18</p>';
+                     echo '<span style = "color:#6844E2; font-weigth: 600;">'.$date->format('D').'</span>';
+                     echo '<span style = "font-weight: bold; color: black;">'.($date->format('d')).'</span>';
                      echo '</div>';
                      echo '<div class="table_activity">';
-                     echo '<span>Sep</span>';
-                     echo '<p>18</p>';
+                     echo '<span style = "color:#6844E2;">Sleep</span>';
+                     echo '<p>'.(ucwords($pastActivityData[$k]['hrsSlept'])).'</p>';
                      echo ' </div>';
                      echo '<div class="table_time">';
-                     echo '   <span>9:10 AM</span>';
+                     echo '<span>'.$date->format('h:i A').'</span>';
                      echo ' </div>';
                      echo '</div>';
-                     
-                     $a++;
-                    }
-                     
-                    
+                     $k++;
+                    }  
                      ?>
                       </div> 
 
@@ -928,28 +1055,48 @@ height: 45px;
                         <div class="concentric">
                             
                         </div>
-                        <div role="progressbar" style="--value:<?php $value = 50; echo $value; ?>"></div>
-                        <div class="light_sleep" role="progressbar1" style="--value:<?php $value = 50; echo $value; ?>"></div>
-                        <div class="deep_sleep" role="progressbar2" style="--value:<?php $value = 50; echo $value; ?>"></div>
+
+
+
+                        <?php
+$progressBarData = fetchDataSql($clientId, '', '','','','','', 4);
+$sleepConsumed = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'), 2);
+if(empty($sleepConsumed)){
+    $sleepConsumed = 0;
+}else{
+    $sleepConsumed = $sleepConsumed[0]['SUM(hrsSlept)'];
+}
+
+if(empty($progressBarData)){
+    $currentGoal =  0;
+    $progressPercent = 0;
+}else{
+    $currentGoal =  $progressBarData[0]['goal'];
+    $progressPercent = round(($sleepConsumed / $currentGoal) * 100,2);
+}
+$sleepRemaining =  (int) $currentGoal - (int) $sleepConsumed;
+?>  
+
+                        <div role="progressbar" style="--value:<?php $value = $progressPercent; echo $value; ?>"></div>
+                        <div class="light_sleep" role="progressbar1" style="--value:<?php $value = $currentGoal; echo $value; ?>"></div>
+                        <div class="deep_sleep" role="progressbar2" style="--value:<?php $value = $sleepConsumed; echo $value;  ?>"></div>
                     <div class="pbottom">
                         <div class="pbottom-element">
-                            <p>Light Sleep</p>
-                            <span>16%</span> 
+                            <p> Light Sleep </p>
+                            <span><?php echo ($sleepConsumed).'%'?></span> 
                         </div>
-                        <div class="pbottom-element">
+                        <div class="pbottom-element" style = "border-right:3px solid #C986CF ; border-left:3px solid #C986CF ;">
                             <p>Awake Period</p>
-                            <span>64%</span> 
+                            <span><?php echo ($sleepRemaining).'%'?></span> 
                         </div>
                         <div class="pbottom-element">
                             <p>Deep Sleep</p>
-                            <span>28%</span> 
+                            <span><?php echo ($currentGoal).'%'?></span> 
                         </div>
                     </div>
-                    <div class="activity_pop">
-                
-                <?php
-                   
-                ?>
+
+                 <div class="activity_pop">
+            
                 <img src="images/exit.svg" alt="">
                     <div class="pop_header">
                         <span>Activity</span>
@@ -1028,228 +1175,318 @@ height: 45px;
         </div>
     </div>
 </body>
-<script>
-var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  
- var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
- 
-                    new Chart("myChartwater", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: true
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                        new Chart("myChartYearly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                            
-                            new Chart("myChartMonthly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                            new Chart("myChartWeekly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
 
-</script>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script src="radial-progress-bar.js"></script>
-<script>
-var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  
- var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
- 
-                    new Chart("myChartwater", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: true
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                        new Chart("myChartYearly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                            
-                            new Chart("myChartMonthly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                            new Chart("myChartWeekly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#FF8B8B",
-                                        borderColor: "#FF8B8B",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
 
+
+
+
+
+<?php
+
+// To Get Past Year - Yearly data
+$wholeYearData = array(
+    'value' => array(),
+    'month' => array()
+);
+$yearly_month = new DateTime("2022-01-25");
+$yearly_last_month = new DateTime("2022-01-25");
+$yearly_month->setDate($yearly_month->format('Y'),01,01);
+if($today->format('m') == '01'){
+    $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+    $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+}
+while($yearly_last_month >= $yearly_month){
+    
+    $yearly_Month_1 = $yearly_month->format('Y'-'m')."-"."01";
+    $yearly_Month_2 =  $yearly_month->format('Y'-'m')."-". $yearly_month->format('t');
+    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1->format('d'),$yearly_Month_1->format('m'),$yearly_Month_1->format('Y'), $yearly_Month_2-format('d'),$yearly_Month_2-format('m'),$yearly_Month_2-format('Y'),3)[0]['avg(hrsSlept)'];
+
+    array_push($wholeYearData['value'], $yearly_Data);
+    array_push($wholeYearData['month'], $yearly_month->format('M'));
+    $yearly_month->modify('+1 month');
+}
+// To Get Past Month - Monthly Data
+$wholeMonthData = array(
+    'value' => array(),
+    'date' => array(),
+);
+$monthly_Month = new DateTime("2022-01-25");
+$monthly_LastDay = new DateTime("2022-01-25");
+$monthly_Month->modify("first day of this month");
+
+if($today->format('d') == '01'){
+    $monthly_Month->modify("first day of previous month");
+    $monthly_LastDay->modify("last day of previous month");
+}
+while ($monthly_LastDay >= $monthly_Month) {
+    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('Y'), $monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('Y'),2)[0]['SUM(hrsSlept)'];
+
+    array_push($wholeMonthData['value'],$monthly_Data);
+    array_push($wholeMonthData['date'], $monthly_Month->format('d'));
+    $monthly_Month->modify("+1 day");
+    
+}
+// To Get Past Week - Weekly Data
+$wholeWeekData = array(
+    'value' => array(),
+    'day' => array(),
+);
+$weekly_Day = new DateTime("2022-01-25");
+$weekly_Day->modify('previous monday');
+$weekly_lastDay =new DateTime("2022-01-25");
+
+if($today->format('l')== "Monday"){
+    $weekly_lastDay->modify('previous sunday');
+}
+
+while($weekly_Day <= $weekly_lastDay){
+    $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('d'), $weekly_Day->format('m'), $weekly_Day->format('Y'), $weekly_Day->format('d'),$weekly_Day->format('m'),$weekly_Day->format('Y'),2);
+
+    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(hrsSlept)']);
+    array_push($wholeWeekData['day'], $weekly_Day->format('D'));
+    $weekly_Day->modify("+1 day");
+}
+?>
+
+
+/* <script>
+// --------------Charts--------------
+// Default Chart */
+const defaultChart = document.getElementById('myChart');
+new Chart(defaultChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'". implode("','", $wholeYearData['month']). "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
+        data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                 min:0,
+                max:16,
+                stepSize:2,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+               
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+    /* //   responsive:true, */
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+/* // Yearly Chart */
+const yearlyChart = document.getElementById('myChartYearly');
+new Chart(yearlyChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'". implode("','", $wholeYearData['month']). "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
+        data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+                min:0,
+                max:16,
+                stepSize:2,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+    //   responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+/* // Monthly Chart */
+const monthlyChart = document.getElementById('myChartMonthly');
+new Chart(monthlyChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'" . implode("','", $wholeMonthData['date']) . "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
+        data: [ <?php echo(implode(', ', $wholeMonthData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize: 11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+                min:0,
+                max:16,
+                stepSize:2,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:12,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+      responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+/* // Weekly Chart */
+const weeklyChart = document.getElementById('myChartWeekly');
+new Chart(weeklyChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'" . implode("','", $wholeWeekData['day']) . "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
+        data: [ <?php echo(implode(', ', $wholeWeekData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize: 13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+        yAxes:[{
+            ticks:{
+                min:0,
+                max:16,
+                stepSize:2,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:12,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+      responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
 </script>
 </html>

@@ -73,7 +73,7 @@ border-bottom-left-radius: 1em!important;
 }
 
 /* Style the tab content */
-.tabcontent {
+.tab-content {
   display: none;
   padding: 6px 12px;
   /* border: 1px solid #ccc; */
@@ -102,6 +102,14 @@ border-bottom-left-radius: 1em!important;
     background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
     border: 1px solid #52A4FF;
     border-radius: 10px;
+    width: 97px;
+    height: 114px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
 }
 .client-card-water p{
     font-family: 'NATS';
@@ -125,14 +133,63 @@ border-bottom-left-radius: 1em!important;
         border-radius: 14px;
         padding: 5px;
 }
+
+.day-content{
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-left: 30px;
+}
+
+.card-content{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.card{
+    margin : 15px;
+}
+
+.card-inside{
+    height: 67px;
+    width: 311px;
+    display: flex;
+    flex-direction: row;
+    padding : 10px;
+    background: linear-gradient(180deg, rgba(255, 232, 242, 0.2) 0%, rgba(201, 134, 207, 0.2) 100%);
+    border-radius: 10px;
+    align-items: center;
+}
+
+.card-image{
+    width: 20%;
+    display: flex; 
+    justify-content: center; 
+}
+
+.card-food-item{
+    width: 40%;
+   
+}
+
+.card-food-quantity{
+    width : 40%;
+    display: flex; 
+    justify-content: center; 
+}
+
 </style>
 <body>
 <?php include 'navbar.php' ?>
     <div class="content">
+
         <!-- tab_links -->
         
         <div class="row">
             <div class="col-sm-10">
+               <h2  style=" height: 76px; padding : 15px;width: 400px; border-radius: nullpx;">Past Activites</h2>
                 <div class="tab">
                     <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
                     <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
@@ -143,64 +200,95 @@ border-bottom-left-radius: 1em!important;
             <div class="col-sm-2">
                     <!-- metric_button -->
                 <div class="client-card client-card-water " style="color:#52A4FF; border: 1px solid #52A4FF;">
-                    <img src="images/water_selected.svg" alt="">
-                    <p>Water</p>
+                    <img src="images/sleep.svg" alt="">
+                    <p>Sleep</p>
                 </div>
             </div>
         </div>
-            
-            
-    
+ 
         <!-- past_activities -->
         <div class="graph">
 
          <!-- Tab content -->
-                                <div id="London" id="defaultOpen"class="tabcontent">
+                                <div id="London" id="defaultOpen"class="tab-content">
                                 
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartwater"></canvas>
-                                </div>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                    <canvas id="myChartwater"></canvas>
+                                    </div>
 
-                                <div id="Year" class="tabcontent">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartYearly"></canvas>
-                                </div>
+                                    <div id="Year" class="tab-content">
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                        <canvas id="myChartYearly"></canvas>
+                                    </div>
 
-                                <div id="Month" class="tabcontent">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartMonthly"></canvas>
-                                </div>
-                                
-                                <div id="Week" class="tabcontent">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartWeekly"></canvas>
-                                </div>
-                                       <script>
-                                            function openCity(evt, cityName) {
-                                                /* Declare all variables */
-                                                var i, tabcontent, tablinks;
-                    
-                                                /* // Get all elements with class="tabcontent" and hide them */
-                                                tabcontent = document.getElementsByClassName("tabcontent");
-                                                for (i = 0; i < tabcontent.length; i++) {
-                                                    tabcontent[i].style.display = "none";
-                                                }
-                    
-                                                /* // Get all elements with class="tablinks" and remove the class "active" */
-                                                tablinks = document.getElementsByClassName("tablinks");
-                                                for (i = 0; i < tablinks.length; i++) {
-                                                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                                                }
-                    
-                                                /* // Show the current tab, and add an "active" class to the button that opened the tab */
-                                                document.getElementById(cityName).style.display = "block";
-                                                evt.currentTarget.className += " active";
+                                    <div id="Month" class="tab-content">
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                        <canvas id="myChartMonthly"></canvas>
+                                    </div>
+                                    
+                                    <div id="Week" class="tab-content">
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                                        <!-- <canvas id="myChartWeekly"></canvas> -->
+
+                                        <?php for ($j = 1; $j<=3; $j++){?>
+                                            <div class="day-content">
+                                                    <div class="date-content"><span style = "font-weight: 600">19 Jan 2021</span></div>
+                                                    <div class="card-content">
+                                                        <?php for ($i = 1; $i<=3; $i++){ ?>
+                                                            <div class="card">
+                                                                <div class="card-inside">
+                                                                    <div class="card-image" >
+                                                                        <img src="images/sleep-light.png" alt="">
+                                                                    </div>
+                                                                    <div class="card-food-item" ><span style = "font-weight: bold">Light Sleep</span><br><span      style= "font-weight: lighter;font-size: 15px" >11:10 a.m.</span> 
+                                                                    </div>
+                                                                    <div class="card-food-quantity" >
+                                                                        <img src="images/sleep.svg" style = "height: 20px; width: 16px;"><span style= "margin-left: 10px;font-weight: 500;">2 hr 2m</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                        <?php } ?> 
+                                                </div>
+                                            </div>
+                                         <?php
+                                        }   
+                                        ?>
+
+
+
+                                    </div>
+                                    
+                                    <script>
+                                        function openCity(evt, cityName) {
+                                            /* Declare all variables */
+                                            var i, tabcontent, tablinks;
+                
+                                            /* // Get all elements with class="tabcontent" and hide them */
+                                            tabcontent = document.getElementsByClassName("tabcontent");
+                                            for (i = 0; i < tabcontent.length; i++) {
+                                                tabcontent[i].style.display = "none";
                                             }
-                    
-                                            /* // Get the element with id="defaultOpen" and click on it */
-                                            document.getElementById("defaultOpen").click();
-                                       </script> 
-            </div>
+                
+                                            /* // Get all elements with class="tablinks" and remove the class "active" */
+                                            tablinks = document.getElementsByClassName("tablinks");
+                                            for (i = 0; i < tablinks.length; i++) {
+                                                tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                            }
+                
+                                            /* // Show the current tab, and add an "active" class to the button that opened the tab */
+                                            document.getElementById(cityName).style.display = "block";
+                                            evt.currentTarget.className += " active";
+                                        }
+                
+                                        /* // Get the element with id="defaultOpen" and click on it */
+                                        document.getElementById("defaultOpen").click();
+                                    </script>
+                                    
+                                    
+                           </div>
+                    </div>
+            </div>                   
         </div>
+    </div>
 </body>
 </html>

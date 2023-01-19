@@ -6,18 +6,17 @@ $name = "";
 $email = "";
 $errors = array(); 
 
-// connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'infits1');
+include "config.php";
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
-  $dietitianuserID = mysqli_real_escape_string($db, $_POST['dietitianuserID']);
-  $name = mysqli_real_escape_string($db, $_POST['name']);
-  $email = mysqli_real_escape_string($db, $_POST['email']);
-  $mobile = mysqli_real_escape_string($db, $_POST['mobile']);
-  $password = mysqli_real_escape_string($db, $_POST['password']);
-  $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+  $dietitianuserID = mysqli_real_escape_string($conn, $_POST['dietitianuserID']);
+  $name = mysqli_real_escape_string($conn, $_POST['name']);
+  $email = mysqli_real_escape_string($conn, $_POST['email']);
+  $mobile = mysqli_real_escape_string($conn, $_POST['mobile']);
+  $password = mysqli_real_escape_string($conn, $_POST['password']);
+  $password_2 = mysqli_real_escape_string($conn, $_POST['password_2']);
 
   // form validation: ensure that the form is correctly filled ...
   // by adding (array_push()) corresponding error unto $errors array
@@ -33,7 +32,7 @@ if (isset($_POST['reg_user'])) {
   // first check the database to make sure 
   // a user does not already exist with the same username and/or email
   $user_check_query = "SELECT * FROM dietitian WHERE dietitianuserID='$dietitianuserID' OR email='$email' LIMIT 1";
-  $result = mysqli_query($db, $user_check_query);
+  $result = mysqli_query($conn, $user_check_query);
   $user = mysqli_fetch_assoc($result);
   
   if ($user) { // if user exists
@@ -52,7 +51,7 @@ if (isset($_POST['reg_user'])) {
 
   	$query = "INSERT INTO dietitian (dietitianuserID, name, email, mobile, password) 
   			  VALUES('$dietitianuserID','$name', '$email', '$mobile', '$password')";
-  	mysqli_query($db, $query);
+  	mysqli_query($conn, $query);
   	$_SESSION['name'] = $name;
   	$_SESSION['success'] = "You are now logged in";
   	header('location: index.php');
@@ -63,8 +62,8 @@ if (isset($_POST['reg_user'])) {
 
 // LOGIN USER
 if (isset($_POST['login_user'])) {
-    $dietitianuserID = mysqli_real_escape_string($db, $_POST['dietitianuserID']);
-    $password = mysqli_real_escape_string($db, $_POST['password']);
+    $dietitianuserID = mysqli_real_escape_string($conn, $_POST['dietitianuserID']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
   
     if (empty($dietitianuserID)) {
         array_push($errors, "dietitianuserID is required");
@@ -73,17 +72,42 @@ if (isset($_POST['login_user'])) {
         array_push($errors, "Password is required");
     }
   
+    $word = ".com" ;
     if (count($errors) == 0) {
         // $password = md5($password);
-        $query = "SELECT * FROM dietitian WHERE `dietitianuserID`='$dietitianuserID' AND `password`='$password'";
-        $results = mysqli_query($db, $query);
-        if (mysqli_num_rows($results) == 1) {
-          $_SESSION['name'] = $dietitianuserID;
-          $_SESSION['success'] = "You are now logged in";
-          header('location: index.php');
-        }else {
-            array_push($errors, "Wrong username/password combination");
-        }
+        if(strpos($dietitianuserID, $word) !== false){
+          // emailid entered
+          $query = "SELECT * FROM dietitian WHERE `email`='$dietitianuserID' AND `password`='$password'";
+          $results = mysqli_query($conn, $query);
+          if (mysqli_num_rows($results) == 1) {
+            // changing dietitianuseriid now from email to username
+            $sql = "SELECT * FROM dietitian WHERE `email`='$dietitianuserID'" ;
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result) ;
+
+            $_SESSION['name'] = $row['dietitianuserID'];
+            // echo $row['dietitianuserID'] ;
+            $_SESSION['success'] = "You are now logged in";
+            header('location: index.php');
+          }else {
+              array_push($errors, "Wrong Email/password combination");
+              // header('location: sign_in_new.php');
+          }
+      } 
+      else{
+          // Username entered
+          $query = "SELECT * FROM dietitian WHERE `dietitianuserID`='$dietitianuserID' AND `password`='$password'";
+          $results = mysqli_query($conn, $query);
+          if (mysqli_num_rows($results) == 1) {
+            $_SESSION['name'] = $dietitianuserID;
+            $_SESSION['success'] = "You are now logged in";
+            header('location: index.php');
+          }else {
+              array_push($errors, "Wrong Username/password combination");
+              // header('location: sign_in_new.php');
+          }
+      }
+       
     }
   }
   
