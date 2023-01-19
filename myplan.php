@@ -128,7 +128,7 @@
 
     .search-list li {
         border: 1px solid black;
-        background-color: red;
+        background-color: lightblue;
     }
 
     #display {
