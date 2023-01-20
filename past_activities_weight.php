@@ -26,14 +26,12 @@ function fetchPastActivity($clientId,$query){
     return ($data);
 }
 
-if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
+if(isset($_POST['dates'])){
      $list = '
      <div class="row">
         <div class="col">';
-    $date1 = substr($_POST['from_date'], 0, 2) ."-". substr($_POST['from_date'], 3, 2) ."-". substr($_POST['from_date'], 6, 4);
-    $date2 = substr($_POST['to_date'], 0, 2) ."-". substr($_POST['to_date'], 3, 2) ."-". substr($_POST['to_date'], 6, 4);
-    $Custom_Day1 = new DateTime($date1);
-    $Custom_Day2 = new DateTime($date2);
+    $Custom_Day1 = new DateTime(substr($_POST['dates'][0],4,11));
+    $Custom_Day2 = new DateTime(substr($_POST['dates'][1],4,11));
         while($Custom_Day2 >= $Custom_Day1){
             $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
                     `date` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
@@ -647,14 +645,13 @@ color: #000000;
         </div>
 <script>
 const customTab = document.getElementById('London');
-function Custom_Data(from_date,to_date){
+function Custom_Data(dates){
     $.ajax({
         type: "POST",
         url: "past_activities_weight.php?id=<?php echo ($clientId) ?>",
-        data: {from_date: from_date, to_date: to_date},
+        data: {dates: dates},
         success: function(result) {
             customTab.innerHTML = "";
-            // console.log(result);
             customTab.innerHTML = result;
             document.getElementById("custombtn").click();
         }
@@ -670,10 +667,7 @@ function Custom_Data(from_date,to_date){
                 mode: "range",
                 onClose:[
                     function(selectedDates){
-                        // console.log(selectedDates);
-                        const Date_1 = new Date(selectedDates[0]);
-                        const Date_2 = new Date(selectedDates[1]);
-                        Custom_Data(Date_1.toLocaleDateString().substring(0,10),Date_2.toLocaleDateString().substring(0,10));
+                        Custom_Data(selectedDates);
                     }
                 ]
             });
