@@ -21,7 +21,7 @@ if(isset($_POST['savegoal'])){
     if($result){
         unset($_POST["savegoal"]);
         unset($_POST["setgoal"]);
-        header(("Location: http://localhost/TeamHuddle/infits/track_stats_calorie.php"));
+        header(("Location: track_stats_calorie.php"));
         // exit();
     }
 }
@@ -837,7 +837,7 @@ $j = count($pastActivityData);
             <div class="tsd-left-b table-activity">
                 <div class="heading">
                     <p>Past Activity</p>
-                    <a href="past_activities_calorie.php"><span>View All</span></a>
+                    <a href="past_activities_calorie.php?id=<?php echo ($clientId) ?>"><span>View All</span></a>
                 </div>
                 <div class="heading-border"></div>
                 <div class="activity-container">
@@ -883,7 +883,7 @@ $calorieRemaining = (int) $currentGoal - (int) $calorieConsumed;
         <div class="col-lg-5 tsd-right">
             <div class="heading">
                 <p>Daily Progress</p>
-                <a href="past_activities_calorie.php"><span>View Activity</span></a>
+                <a href="past_activities_calorie.php?id=<?php echo ($clientId) ?>"><span>View Activity</span></a>
             </div>
             <div class="progress-bar-container">
                 <div class="total-consumed">

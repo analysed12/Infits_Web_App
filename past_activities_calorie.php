@@ -1,9 +1,88 @@
 <?php
 // Client Id
-$clientId = 'Eden';
+if(isset($_GET['id']) AND $_GET['id'] != ""){
+    $clientId = $_GET['id'];
+}else{
+    header("Location: track_stats_calorie.php");
+}
 // Configure Dates
 date_default_timezone_set("Asia/Calcutta");
 $today = new DateTime();
+
+function fetchPastActivity($clientId,$query){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    
+    // echo($query);
+    $result = $conn->query($query) or die("Query Failed");
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+
+if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
+     $list = '
+     <div class="row">
+        <div class="col">';
+    $date1 = substr($_POST['from_date'], 0, 2) ."-". substr($_POST['from_date'], 3, 2) ."-". substr($_POST['from_date'], 6, 4);
+    $date2 = substr($_POST['to_date'], 0, 2) ."-". substr($_POST['to_date'], 3, 2) ."-". substr($_POST['to_date'], 6, 4);
+    $Custom_Day1 = new DateTime($date1);
+    $Custom_Day2 = new DateTime($date2);
+        while($Custom_Day2 >= $Custom_Day1){
+            $query="SELECT * FROM calorietracker WHERE clientID= '$clientId' AND 
+                    `time` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
+                    AND `time` <= '".$Custom_Day1->format('Y-m-d')." 23:59:59';";
+            $CustomData = fetchPastActivity($clientId,$query);
+            
+            $count = count($CustomData);
+            $i = 0;
+    
+            $list .= '<div class="activity-container">
+                <p class="date">'. $Custom_Day1->format('d M Y') .'</p>';
+                
+                $Custom_Day1->modify("+1 day");
+                if(empty($CustomData)){
+                    $list.='<p> NO DATA FOUND </p></div>';
+                    continue;
+                }
+                
+                $list .= 
+                '<div class="flex-box">';
+                
+                while($i<$count){ 
+                    $I_date = new DateTime($CustomData[$i]['time']);
+                
+                $list .='<div class="meal-box">
+                        <div class="left">
+                            <img src="images/calorie_meal_icon.svg" alt="">
+                            <div class="meal-title">
+                                <p> ' .$CustomData[$i]['meal'] . '</p>
+                                <span>'.$I_date->format('h:i A').'</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <img src="images/calorie_fire_icon.svg" alt="">
+                            <p class="kcal">'.$CustomData[$i]['caloriesconsumed'].' kcal</p>
+                        </div>
+                    </div>';
+                $i++; }
+            $list.='</div>
+            </div>';
+         }
+    
+    $list .=
+        '</div>
+    </div>';
+    echo ($list);
+    exit();
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +94,11 @@ $today = new DateTime();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <?php include 'navbar.php' ?>
 <style>
@@ -25,10 +109,26 @@ $today = new DateTime();
     font-size: 44px;
     line-height: 70px;
 }
-    .tab {
+.tab {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
+  position: relative;
+}
+#daterange {
+    border: none;
+    background: transparent;
+    height: 0px;
+    width: 0px;
+    z-index: -1;
+    position: absolute;
+    left: 90px;
+    top: 20px;
+}
+#daterange-btn{
+    position: absolute;
+    top: 5px;
+    left: 92px;
 }
 .tab_button_side{
    border-radius: 12px;
@@ -100,8 +200,6 @@ border-bottom-left-radius: 1em!important;
 .top_bar{
     display: flex;
    flex-wrap:wrap;
- 
- 
 }
 .client-card {
         width: 70px;
@@ -258,40 +356,27 @@ color: #000000;
                     <p>Past Activities</p>
                 </div>
                 <div class="tab">
-                    <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
+                    <button id="custombtn" class="tablinks graph_button_left" onclick="openCity(event, 'London')">Custom Dates</button>
+                    <input id="daterange"  type="date-range">
+                    <i id="daterange-btn" class="drop fa-solid fa-caret-down"></i>
+                    
+                    
                     <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
                     <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
-                    <button id="temp" class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                    <button id="defauttab" class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
                 </div>
             </div>
             <div class="col-sm-4 ph-right">
-                    <!-- metric_button -->
+                <!-- metric_button -->
+                <a href="track_stats_calorie.php?id=<?php echo($clientId) ?>">
                 <div class="client-card client-card-calorie " style="color:#E3738D; border: 1px solid #E3738D;">
                     <img src="images/calorie_selected.svg" alt="">
                     <p>Track Calorie</p>
                 </div>
+                </a>
             </div>
         </div>
-            
-<?php
-function fetchPastActivity($clientId,$query){
-    // Connect to Database
-    $conn = new mysqli("localhost", "root", "", "infits");
-    if($conn->connect_error){
-        die("Connection failed :" . $conn->connect_error);
-    }
-    
-    // echo($query);
-    $result = $conn->query($query) or die("Query Failed");
-    $data = array();
-    while($row = $result->fetch_assoc()){
-        $data[] =  $row;
-    }
-    $conn->close();
-    return ($data);
-}
-?>
-    
+                
         <!-- past_activities -->
         <div class="graph">
 
@@ -556,9 +641,42 @@ function fetchPastActivity($clientId,$query){
                     
                                             /* // Get the element with id="defaultOpen" and click on it */
                                             // document.getElementById("defaultOpen").click();
-                                            document.getElementById("temp").click();
-                                       </script> 
+                                            document.getElementById("defauttab").click();
+                                            </script> 
             </div>
         </div>
+<script>
+const customTab = document.getElementById('London');
+function Custom_Data(from_date,to_date){
+    $.ajax({
+        type: "POST",
+        url: "past_activities_calorie.php?id=<?php echo ($clientId) ?>",
+        data: {from_date: from_date, to_date: to_date},
+        success: function(result) {
+            customTab.innerHTML = "";
+            // console.log(result);
+            customTab.innerHTML = result;
+            document.getElementById("custombtn").click();
+        }
+    }
+)}
+            const date_btn = document.getElementById('daterange-btn');
+            date_btn.addEventListener('click' , ()=>{
+                fp.toggle();
+            });
+            const fp = flatpickr("input[type = date-range]", {
+                maxDate: "today",
+                dateFormat: "Y-m-d",
+                mode: "range",
+                onClose:[
+                    function(selectedDates){
+                        // console.log(selectedDates);
+                        const Date_1 = new Date(selectedDates[0]);
+                        const Date_2 = new Date(selectedDates[1]);
+                        Custom_Data(Date_1.toLocaleDateString().substring(0,10),Date_2.toLocaleDateString().substring(0,10));
+                    }
+                ]
+            });
+</script>
 </body>
 </html>
