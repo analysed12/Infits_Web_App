@@ -4,30 +4,24 @@ $clientId = 'Azarudeen';
 // Configure Dates
 date_default_timezone_set("Asia/Calcutta");
 // $today = new DateTime();
-$today = new DateTime('2022-01-25');
+$today = new DateTime('2022-09-05');
 // Goal Insertion
 if(isset($_POST['savegoal'])){
+    $client = $_POST['clientid'];
     $goal =$_POST['setgoal'];
-    // $current_date = date("Y-m-d");
-    $current_date =  new DateTime('2022-01-25');
-    $dday =  $current_date->format('d');
-    $dmonth =  $current_date->format('m');
-    $dyear =  $current_date->format('y');
     $conn = new mysqli("localhost", "root", "", "infits");
 
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
-
     
-    $query="UPDATE sleeptracker SET goal = $goal WHERE clientID= '$clientId' AND `sleeptime` >= '{$dday}-{$dmonth}-{$dyear} 00:00:00' AND `sleeptime` <= ''{$dday}-{$dmonth}-{$dyear} 23:59:59'";
-   
+    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('sleep' , $goal, '$client' )";
     $result = $conn->query($query) or die("Query Failed");
     
     if($result){
         unset($_POST["savegoal"]);
         unset($_POST["setgoal"]);
-        header(('Location: http://localhost/analysed/infits/track_stats_heart.php'));
+        header(("Location: http://localhost/analysed/infits/track_stats_heart.php"));
         // exit();
     }
 }
@@ -802,7 +796,7 @@ height: 45px;
                                 <div id="London" id='defaultOpen' class="tabcontent">
                                 
                                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartwater"></canvas>
+                                <canvas id="myChart"></canvas>
                                 </div>
 
                                 <div id="Year" class="tabcontent">
@@ -861,10 +855,12 @@ height: 45px;
                         <img src="images/equipment.svg" alt="">
                     </div>
                     <div class="box-title">Daily Heart Rate</div>
+                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                     <div class="box-counter">
-                    Goal:<input type="number" id="setgoalweight" name="weightgoal">
+                    Goal: <input type="number" required min="1" id="set-goal" name="setgoal">
                     </div>
-                    <buttpn class="box-btn">Set</buttpn>
+                    <button class="box-btn"  type="submit" name="savegoal" id="save-goal">Set</button>
+                    </form>  
                 </div>
             </div>
         </div>
@@ -876,48 +872,78 @@ height: 45px;
                 <div class="bottom-btns">
                     
                 <div class="flex-container-bottom">
-                   <?php
-                                                        
-                            $today = date('Y-m-d');
+                
+                
+                
+                
+                
+                <?php
 
-                            $from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
+                function fetchDataSql($clientId,$from_date, $from_month, $from_year, $to_date,$to_month, $to_year, $isCustom=0){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    // For Sum of All Data Till Today
+    if($isCustom==1){
+        $query="SELECT SUM(average) FROM heartrate WHERE clientID= '$clientId' AND 
+                `dateandtime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
+    // for sum of Data between two dates
+    }else if($isCustom==2){
+        $query = "SELECT SUM(average) FROM heartrate WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";;
+    // for average of data end to end (monthly)
+    }else if($isCustom==3){
+        $query="SELECT avg(average) FROM heartrate WHERE clientID= '$clientId' AND 
+            `dateandtime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
+            AND `dateandtime` < '{$to_year}-{$to_month}-{$to_date} 00:00:00';";
+    // for all data of a day
+    }else if($isCustom==4){
+        $query="SELECT goal FROM goals WHERE forWhat = 'sleep' ORDER BY 'time' DESC LIMIT 1";}
+    // for getting past actvities 
+    else if($isCustom==5){
+        $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+            `dateandtime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
+            AND `dateandtime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59'";
+    // for average of data of one full day
+    }else{
+    $query="SELECT avg(average) FROM heartrate WHERE clientID= '$clientId' AND 
+            `dateandtime` >= '{$from_year}-{$from_month}-{$from_date} 00:00:00'
+            AND `dateandtime` <= '{$to_year}-{$to_month}-{$to_date} 23:59:59';";
+    }
+    $result = $conn->query($query) or die("Query Failed");
 
-                            $to = date('Y-m-d', strtotime('1 days', strtotime($today)));
-
-                            // $clientID = $_POST['clientID'];
-
-                            $clientID = "Azarudeen";
-
-                            $sql = "SELECT * 
-                                FROM heartrate
-                                WHERE clientID='$clientID' AND `dateandtime` = '$today';";
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
 
 
-                            $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
 
-                                $emparray = array();
-                                $full=array();
-                                while($row =mysqli_fetch_assoc($result))
-                                {
-                                    $emparray['date'] = $row['dateandtime'];
-                                    $a = json_decode($row['maximum']);
-                                    $average = array_sum($a)/count($a);
-                                    $emparray['avg'] = $average;
-                                    $emparray['min'] = min($a);
-                                    $emparray['max'] = max($a);
+// All Data Total Sum
+$allDataSum = fetchDataSql($clientId, '', '', '', $today->format('d'), $today->format('m'), $today->format('Y'), 1)[0]['SUM(average)'];
+// Today Data Sum
+$todayData = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'),6)[0]['avg(average)'];
+// Week Average
+$pastWeek =new DateTime('2022-09-05');
+$pastWeek->modify('-1 week');
+$weekAvg = fetchDataSql($clientId,$pastWeek->format('d'), $pastWeek->format('m'), $pastWeek->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'))[0]['avg(average)'];
+// Month Average
+$pastMonth = new DateTime('2022-09-05');
+$pastMonth->modify('-1 month');
+$monthAvg = fetchDataSql($clientId,$pastMonth->format('d'), $pastMonth->format('m'), $pastMonth->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'))[0]['avg(average)'];
+$months = array (1=>'Jan',2=>'Feb',3=>'Mar',4=>'Apr',5=>'May',6=>'Jun',7=>'Jul',8=>'Aug',9=>'Sep',10=>'Oct',11=>'Nov',12=>'Dec');
+?>
 
-                                    $full[] = $emparray;
-                                }
-                                // echo json_encode(['heart' => $full]);
-                                $avg=array_column($full,'avg');
-                                $minh=array_column($full,'min');
-                                $maxh=array_column($full,'max');
-                                 
-                   ?>          
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Daily Count</span>
-                                    <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
+                                    <span><span><?php echo(ceil($todayData))?></span> BPM</span>
                                 </div>
                                 
                             </div>
@@ -925,7 +951,7 @@ height: 45px;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                     <span>Weekly Avg</span>
-                                    <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
+                                    <span><span><?php echo(ceil($weekAvg))?></span> BPM</span>
                                 </div>
                                 
                             </div>
@@ -935,7 +961,7 @@ height: 45px;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Monthly Avg</span>
-                                <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
+                                <span><span><?php echo(ceil($monthAvg))?></span> BPM</span>
                                 </div>
                                
                             </div>
@@ -943,83 +969,75 @@ height: 45px;
                             <div class="bottom-stats-btn">
                                 <div class="heart_info">
                                 <span>Total</span>
-                                <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
+                                <span><span><?php echo(ceil($allDataSum))?></span> BPM</span>
                                 </div>
                                
                             </div>
                     </div>
                            
                 </div>
+
+
+
                 <div class="row">
                     <div class="col-sm-12">
-                    <?php   
-                        // pastActivity query
-                        $today = date('Y-m-d');
-
-                        $from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
-
-                        $to = date('Y-m-d', strtotime('1 days', strtotime($today)));
-
-
-                        // $clientID = $_POST['clientID'];
-
-                        $clientID = 'Azarudeen';
-
-                        $sql = "select steps,dateandtime from steptracker where clientID = '$clientID' and dateandtime between '$from' and '$to';";
-
-                        $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
-
-                            $emparray = array();
-                            while($row =mysqli_fetch_assoc($result))
-                            {
-                            $emparray['date'] = date("d-m-Y",strtotime($row['dateandtime']));
-                            $emparray['steps'] = $row['steps'];
-                            $full[] = $emparray;
-                            }
-                            $pastDate= array_column($full, 'date');
-                            $pastSteps= array_column($full, 'steps');
-                    ?>
                     <div class="table">
                         <div class="table_top">
-                            <span>Past Activity</span>
-                            <div class="calendat_but"><img src="images/calender_toggle.svg"></div>
-                     
-                        </div>
-                      
+                     <span>Past Activity</span>
+                      </div>
                      <?php
-                     $a=1;
-                     for ($i=0; $i <4 ; $i++) { ?>
-                         <div class="table_element">
-                        <div class="date">
-                        <span>Sep</span>
-                        <p><?php echo $pastDate[$i]?></p>
-                        </div>
-                        <div class="table_activity">
-                        <span>Steps</span>
-                        <p><?php echo $pastSteps[$i]?></p>
-                        <?php
-                        echo ' </div>';
-                        echo '<div class="table_time">';
-                        echo '   <span>9:10 AM</span>';
-                        echo ' </div>';
-                        echo '</div>';
-                     }
+                     $pastActivityData = fetchDataSql($clientId, '', '', '', $today->format('d'), $today->format('m'), $today->format('Y'),5);
+                     $j = count($pastActivityData)-1;
+                     $k = 0;
 
-                     
-                    
+                    while ($k <= $j) {
+                    $date = new DateTime($pastActivityData[$k]['dateandtime']);
+                     echo '<div class="table_element">';
+                     echo '<div class="date">';
+                     echo '<span style = "color:#6844E2; font-weigth: 600;">'.$date->format('D').'</span>';
+                     echo '<span style = "font-weight: bold; color: black;">'.($date->format('d')).'</span>';
+                     echo '</div>';
+                     echo '<div class="table_activity">';
+                     echo '<span style = "color:#6844E2;">Heart Rate</span>';
+                     echo '<p>'.(ucwords($pastActivityData[$k]['average'])).'</p>';
+                     echo ' </div>';
+                     echo '<div class="table_time">';
+                     echo '<span>'.$date->format('h:i A').'</span>';
+                     echo ' </div>';
+                     echo '</div>';
+                     $k++;
+                    }  
                      ?>
-                      </div>   
-                         
+                      </div> 
+
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
-                <?php
-                 $userid='Azarudeen';
-                 $sql = "SELECT average, maximum, minimum FROM heartrate WHERE clientID = '$userid' ORDER BY clientID DESC LIMIT 1";
-                 $result = $conn->query($sql);
-                 $row = $result->fetch_assoc();
-                ?>
+            
+            
+            
+            <?php
+$progressBarData = fetchDataSql($clientId, '', '','','','','', 4);
+$heartrate = fetchDataSql($clientId, $today->format('d'), $today->format('m'), $today->format('Y'), $today->format('d'), $today->format('m'), $today->format('Y'), 6);
+if(empty($heartrate)){
+    $heartrate = 0;
+}else{
+    $heartrate = $heartrate[0]['avg(average)'];
+}
+
+if(empty($progressBarData)){
+    $currentGoal =  0;
+    $progressPercent = 0;
+}else{
+    $currentGoal =  $progressBarData[0]['goal'];
+    $progressPercent = round(($heartrate / $currentGoal) * 100,2);
+}
+$sleepRemaining =  (int) $currentGoal - (int) $heartrate;
+?>  
+
+
+
                 <div class="pheader">
 						<h4>Daily Progress</h4>
 						<p>View Activity</p>
@@ -1030,18 +1048,18 @@ height: 45px;
                 <div class="heart_beat_box">
                     <div class="avg">
                         <span>Avg</span>
-                        <p><?php echo $row["average"];?> BPM</p>
+                        <p><?php echo $heartrate?> BPM</p>
                     </div>
                     <div class="max">
                         <span>Max</span>
-                        <p><?php echo $row["maximum"];?> BPM</p>
+                        <p><?php echo $heartrate?> BPM</p>
                     </div>
                     <div class="low">
                         <span>Low</span>
-                        <p><?php echo $row["minimum"];?> BPM</p>
+                        <p><?php echo $heartrate?> BPM</p>
                     </div>
                 </div>
-                <div class="activity_pop">
+                <div class="activity_pop" style= "display:none;">
                 
                 <?php
                    
@@ -1122,116 +1140,314 @@ height: 45px;
         </div>
     </div>
 </body>
-<script>
-var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  
- var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
- 
-                    new Chart("myChartwater", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#C986CF",
-                                        borderColor: "#C986CF",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: true
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                        new Chart("myChartYearly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#C986CF",
-                                        borderColor: "#C986CF",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                            
-                            new Chart("myChartMonthly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#C986CF",
-                                        borderColor: "#C986CF",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                            new Chart("myChartWeekly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#C986CF",
-                                        borderColor: "#C986CF",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                           
-</script>
 
+
+<?php
+
+// To Get Past Year - Yearly data
+$wholeYearData = array(
+    'value' => array(),
+    'month' => array()
+);
+$yearly_month = new DateTime("2022-09-05");
+$yearly_last_month = new DateTime("2022-09-05");
+$yearly_month->setDate($yearly_month->format('Y'),01,01);
+if($today->format('m') == '01'){
+    $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+    $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+}
+while($yearly_last_month >= $yearly_month){
+    
+    $yearly_Month_1 = $yearly_month->format('Y'-'m')."-"."01";
+    $yearly_Month_2 =  $yearly_month->format('Y'-'m')."-". $yearly_month->format('t');
+    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1->format('d'),$yearly_Month_1->format('m'),$yearly_Month_1->format('Y'), $yearly_Month_2-format('d'),$yearly_Month_2-format('m'),$yearly_Month_2-format('Y'),3)[0]['avg(average)'];
+
+    array_push($wholeYearData['value'], $yearly_Data);
+    array_push($wholeYearData['month'], $yearly_month->format('M'));
+    $yearly_month->modify('+1 month');
+}
+// To Get Past Month - Monthly Data
+$wholeMonthData = array(
+    'value' => array(),
+    'date' => array(),
+);
+$monthly_Month = new DateTime("2022-09-05");
+$monthly_LastDay = new DateTime("2022-09-05");
+$monthly_Month->modify("first day of this month");
+
+if($today->format('d') == '01'){
+    $monthly_Month->modify("first day of previous month");
+    $monthly_LastDay->modify("last day of previous month");
+}
+while ($monthly_LastDay >= $monthly_Month) {
+    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('Y'), $monthly_Month->format('d'),$monthly_Month->format('m'),$monthly_Month->format('Y'),2)[0]['SUM(average)'];
+
+    array_push($wholeMonthData['value'],$monthly_Data);
+    array_push($wholeMonthData['date'], $monthly_Month->format('d'));
+    $monthly_Month->modify("+1 day");
+    
+}
+// To Get Past Week - Weekly Data
+$wholeWeekData = array(
+    'value' => array(),
+    'day' => array(),
+);
+$weekly_Day = new DateTime("2022-09-05");
+$weekly_Day->modify('previous monday');
+$weekly_lastDay =new DateTime("2022-09-05");
+
+if($today->format('l')== "Monday"){
+    $weekly_lastDay->modify('previous sunday');
+}
+
+while($weekly_Day <= $weekly_lastDay){
+    $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('d'), $weekly_Day->format('m'), $weekly_Day->format('Y'), $weekly_Day->format('d'),$weekly_Day->format('m'),$weekly_Day->format('Y'),2);
+
+    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(hrsSlept)']);
+    array_push($wholeWeekData['day'], $weekly_Day->format('D'));
+    $weekly_Day->modify("+1 day");
+}
+?>
+
+
+/* <script>
+// --------------Charts--------------
+// Default Chart */
+const defaultChart = document.getElementById('myChart');
+new Chart(defaultChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'". implode("','", $wholeYearData['month']). "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
+        data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                 min:0,
+                max:200,
+                stepSize:20,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+               
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+    /* //   responsive:true, */
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+/* // Yearly Chart */
+const yearlyChart = document.getElementById('myChartYearly');
+new Chart(yearlyChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'". implode("','", $wholeYearData['month']). "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
+        data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+                min:0,
+                max:200,
+                stepSize:20,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+    //   responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+/* // Monthly Chart */
+const monthlyChart = document.getElementById('myChartMonthly');
+new Chart(monthlyChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'" . implode("','", $wholeMonthData['date']) . "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
+        data: [ <?php echo(implode(', ', $wholeMonthData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize: 11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+                min:0,
+                max:200,
+                stepSize:20,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:12,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+      responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+/* // Weekly Chart */
+const weeklyChart = document.getElementById('myChartWeekly');
+new Chart(weeklyChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'" . implode("','", $wholeWeekData['day']) . "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
+        data: [ <?php echo(implode(', ', $wholeWeekData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize: 13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+        yAxes:[{
+            ticks:{
+                min:0,
+                max:200,
+                stepSize:20,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:12,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+      responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+</script>
 </html>

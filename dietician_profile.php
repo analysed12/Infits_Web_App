@@ -1,3 +1,20 @@
+<?php
+session_start();
+// $conn = new mysqli("localhost", "root", "", "infits");
+
+// if($conn->connect_error){
+//     die("Connection failed :" . $conn->connect_error);
+// }
+//$query="SELECT name FROM dietitian WHERE deititianuserId = 'John_wayne'";
+//$result = $conn->query($query) or die("Query Failed");
+//$_SESSION["clientName"] = "$query";
+//$conn->close();
+// $_SESSION["clientName"] = "John Wayne";
+$name =  explode(" ", $_SESSION["clientName"] );
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -106,7 +123,7 @@ justify-content: center;
         <img src="images/pp2.png" height="80px" style="margin-right: 20px;">
           <div class="task-text">
             <h1 style="font-size: 16px; color: grey; font-weight: 400; margin-bottom: 0;">Welcome Back</h1>
-             <h3 style="font-size: 24px; color: #202224; font-weight: 500; margin:0px ;"><var>name</var></h3>
+             <h3 style="font-size: 24px; color: #202224; font-weight: 500; margin:0px ;"><var><?php echo($name[0].'<br>'.$name[1]) ?></var></h3>
           </div>
         </div>
 

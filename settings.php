@@ -507,7 +507,7 @@ $name =  explode(" ", $_SESSION["clientName"] );
         <ul class="grid">
             <li>
                 <div class="box img-1">
-                    <a href="#">
+                    <a href="dietician_profile.php">
                         <div class="info">
                             <p>My Profile</p>
                         </div>
