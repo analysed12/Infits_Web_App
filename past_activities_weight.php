@@ -35,9 +35,9 @@ if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
     $Custom_Day1 = new DateTime($date1);
     $Custom_Day2 = new DateTime($date2);
         while($Custom_Day2 >= $Custom_Day1){
-            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
-                    `dateandtime` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
-                    AND `dateandtime` <= '".$Custom_Day1->format('Y-m-d')." 23:59:59';";
+            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                    `date` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
+                    AND `date` <= '".$Custom_Day1->format('Y-m-d')." 23:59:59';";
             $CustomData = fetchPastActivity($clientId,$query);
             
             $count = count($CustomData);
@@ -56,19 +56,19 @@ if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
                 '<div class="flex-box">';
                 
                 while($i<$count){ 
-                    $I_date = new DateTime($CustomData[$i]['dateandtime']);
+                    $I_date = new DateTime($CustomData[$i]['date']);
                 
                 $list .='<div class="meal-box">
                         <div class="left">
-                            <img src="images/cycling_heart_rate.svg" alt="">
+                            <img src="images/weight_meter.svg" alt="">
                             <div class="meal-title">
-                                <p>Max ' .$CustomData[$i]['maximum'] . '</p>
+                                <p>BMI ' .$CustomData[$i]['bmi'] . '</p>
                                 <span>'.$I_date->format('h:i A').'</span>
                             </div>
                         </div>
                         <div class="right">
-                            <img src="images/heartrate_selected_small.svg" alt="">
-                            <p class="kcal">'.$CustomData[$i]['average'].' BPM</p>
+                            <img src="images/weight_small.svg" alt="">
+                            <p class="kcal">'.$CustomData[$i]['weight'].' Kg</p>
                         </div>
                     </div>';
                 $i++; }
@@ -178,10 +178,10 @@ border-bottom-left-radius: 1em!important;
 }
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #C986CF;
+  background-color: #9CD1D0;
 }
 .tab button.active {
-  background-color: #C986CF;
+  background-color: #9CD1D0;
   color: white !important;
 }
 
@@ -219,7 +219,7 @@ border-bottom-left-radius: 1em!important;
     font-size: 15px;
 }
 .client-card-heart{
-    background: linear-gradient(217.35deg, #F97EAA 0%, #C389D5 100%);
+    background: linear-gradient(38.98deg, #768B93 7.65%, #8FC4C3 87.93%);
     border: 1px solid #E266A9;
     border-radius: 10px;
     margin: 10px 0 0 0;
@@ -271,7 +271,7 @@ color: #000000;
     width: 311px;
     height: 67px;
     padding: 20px;
-    background: linear-gradient(180deg, rgba(255, 232, 242, 0.2) 0%, rgba(201, 134, 207, 0.2) 100%);
+    background: linear-gradient(181.98deg, rgba(218, 240, 240, 0.2) 1.67%, rgba(86, 107, 115, 0.2) 98.33%);
     border-radius: 10px;
 }
 .meal-box p{
@@ -368,10 +368,10 @@ color: #000000;
             </div>
             <div class="col-sm-4 ph-right">
                 <!-- metric_button -->
-                <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
-                <div class="client-card client-card-heart " style="color:#E3738D; border: 1px solid #E3738D;">
-                    <img src="images/heartrate_selected.svg" alt="">
-                    <p>Heart Rate</p>
+                <a href="track_stats_weight.php?id=<?php echo($clientId) ?>">
+                <div class="client-card client-card-heart " style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                    <img src="images/weight_selected.svg" alt="">
+                    <p>Weight</p>
                 </div>
                 </a>
             </div>
@@ -397,9 +397,9 @@ color: #000000;
                                         while($yearly_last_month >= $yearly_month){
                                             $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
                                             $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
-                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
-                                                    `dateandtime` >= '".$yearly_Month_1." 00:00:00'
-                                                    AND `dateandtime` <= '".$yearly_Month_2." 23:59:59';";
+                                            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                                                    `date` >= '".$yearly_Month_1." 00:00:00'
+                                                    AND `date` <= '".$yearly_Month_2." 23:59:59';";
                                             $yearly_Data = fetchPastActivity($clientId,$query);
                                             
                                             $count = count($yearly_Data);
@@ -419,19 +419,19 @@ color: #000000;
                                                 <div class="flex-box">
                                                 <?php  
                                                 while($i<$count){ 
-                                                    $I_date = new DateTime($yearly_Data[$i]['dateandtime']);
+                                                    $I_date = new DateTime($yearly_Data[$i]['date']);
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/weight_meter.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Max <?php echo($yearly_Data[$i]['maximum']) ?></p>
+                                                                <p>BMI <?php echo($yearly_Data[$i]['bmi']) ?></p>
                                                                 <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal"><?php echo($yearly_Data[$i]['average']) ?> BPM</p>
+                                                            <img src="images/weight_small.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['weight']) ?> Kg</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -457,9 +457,9 @@ color: #000000;
                                         while($yearly_last_month >= $yearly_month){
                                             $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
                                             $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
-                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
-                                                    `dateandtime` >= '".$yearly_Month_1." 00:00:00'
-                                                    AND `dateandtime` <= '".$yearly_Month_2." 23:59:59';";
+                                            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                                                    `date` >= '".$yearly_Month_1." 00:00:00'
+                                                    AND `date` <= '".$yearly_Month_2." 23:59:59';";
                                             $yearly_Data = fetchPastActivity($clientId,$query);
                                             
                                             $count = count($yearly_Data);
@@ -479,19 +479,19 @@ color: #000000;
                                                 <div class="flex-box">
                                                 <?php  
                                                 while($i<$count){ 
-                                                    $I_date = new DateTime($yearly_Data[$i]['dateandtime']);
+                                                    $I_date = new DateTime($yearly_Data[$i]['date']);
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/weight_meter.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Max <?php echo($yearly_Data[$i]['maximum']) ?></p>
+                                                                <p>BMI <?php echo($yearly_Data[$i]['bmi']) ?></p>
                                                                 <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal"><?php echo($yearly_Data[$i]['average']) ?> BPM</p>
+                                                            <img src="images/weight_small.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['weight']) ?> Kg</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -515,9 +515,9 @@ color: #000000;
                                         }
                                         
                                         while($monthly_LastDay >= $monthly_Month){
-                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
-                                                    `dateandtime` >= '".$monthly_Month->format('Y-m-d')." 00:00:00'
-                                                    AND `dateandtime` <= '".$monthly_Month->format('Y-m-d')." 23:59:59';";
+                                            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                                                    `date` >= '".$monthly_Month->format('Y-m-d')." 00:00:00'
+                                                    AND `date` <= '".$monthly_Month->format('Y-m-d')." 23:59:59';";
                                             $monthly_Data = fetchPastActivity($clientId,$query);
                                             
                                             $count = count($monthly_Data);
@@ -537,19 +537,19 @@ color: #000000;
                                                 <div class="flex-box">
                                                 <?php  
                                                 while($i<$count){ 
-                                                    $I_date = new DateTime($monthly_Data[$i]['dateandtime']);
+                                                    $I_date = new DateTime($monthly_Data[$i]['date']);
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/weight_meter.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Max <?php echo($monthly_Data[$i]['maximum']) ?></p>
+                                                                <p>BMI <?php echo($monthly_Data[$i]['bmi']) ?></p>
                                                                 <span><?php echo($I_date->format('h:i A')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal"><?php echo($monthly_Data[$i]['average']) ?> BPM</p>
+                                                            <img src="images/weight_small.svg" alt="">
+                                                            <p class="kcal"><?php echo($monthly_Data[$i]['weight']) ?> Kg</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -573,9 +573,9 @@ color: #000000;
                                         }
                                         
                                         while($weekly_Day <= $weekly_lastDay){
-                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
-                                                    `dateandtime` >= '".$weekly_Day->format('Y-m-d')." 00:00:00'
-                                                    AND `dateandtime` <= '".$weekly_Day->format('Y-m-d')." 23:59:59';";
+                                            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                                                    `date` >= '".$weekly_Day->format('Y-m-d')." 00:00:00'
+                                                    AND `date` <= '".$weekly_Day->format('Y-m-d')." 23:59:59';";
                                             $weekly_Data = fetchPastActivity($clientId,$query);
                                             
                                             $count = count($weekly_Data);
@@ -595,19 +595,19 @@ color: #000000;
                                                 <div class="flex-box">
                                                 <?php  
                                                 while($i<$count){ 
-                                                    $I_date = new DateTime($weekly_Data[$i]['dateandtime']);
+                                                    $I_date = new DateTime($weekly_Data[$i]['date']);
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/weight_meter.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Max <?php echo($weekly_Data[$i]['maximum']) ?></p>
+                                                                <p>BMI <?php echo($weekly_Data[$i]['bmi']) ?></p>
                                                                 <span><?php echo($I_date->format('h:i A')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal"><?php echo($weekly_Data[$i]['average']) ?> BPM</p>
+                                                            <img src="images/weight_small.svg" alt="">
+                                                            <p class="kcal"><?php echo($weekly_Data[$i]['weight']) ?> Kg</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -650,7 +650,7 @@ const customTab = document.getElementById('London');
 function Custom_Data(from_date,to_date){
     $.ajax({
         type: "POST",
-        url: "past_activities_heart.php?id=<?php echo ($clientId) ?>",
+        url: "past_activities_weight.php?id=<?php echo ($clientId) ?>",
         data: {from_date: from_date, to_date: to_date},
         success: function(result) {
             customTab.innerHTML = "";

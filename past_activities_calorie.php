@@ -673,6 +673,8 @@ function Custom_Data(from_date,to_date){
                         // console.log(selectedDates);
                         const Date_1 = new Date(selectedDates[0]);
                         const Date_2 = new Date(selectedDates[1]);
+                        console.log(Date_1.toLocaleDateString().substring(0,10));
+                        console.log(Date_2.toLocaleDateString().substring(0,10));
                         Custom_Data(Date_1.toLocaleDateString().substring(0,10),Date_2.toLocaleDateString().substring(0,10));
                     }
                 ]

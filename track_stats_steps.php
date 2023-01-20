@@ -552,37 +552,37 @@ margin-left: 5px;
                 </div>
                 <div class="card-container">
                 <div class="client-card client-card-steps" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                        <a href="track_stats_step.php">
+                        <a href="track_stats_steps.php">
                             <i class="fa-solid fa-shoe-prints" style="color:#FFFFFF; rotate: -90deg;"></i>
                             <p style="color: #FFFFFF;">Step</p>
                         </a>
                         </div>
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                        <a href="track_stats_step.php">
+                        <a href="track_stats_heart.php">
                             <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
                             <p style="color:#E266A9;">Heart Rate</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                        <a href="track_stats_step.php">
+                        <a href="track_stats_water.php">
                             <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
                             <p style="color:#52A4FF;">Water</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                        <a href="track_stats_step.php">
+                        <a href="track_stats_weight.php">
                             <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
                             <p style="color:#7D5DE6;">Weight Track</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                        <a href="track_stats_step.php">
+                        <a href="track_stats_sleep.php">
                             <i style="color:#54AFAC;" class="fa-solid fa-moon"></i>
                             <p style="color:#54AFAC;">Sleep</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                        <a href="track_stats_step.php">
+                        <a href="track_stats_calorie.php">
                             <img src="images/calorie_selected.svg" alt="">
                             <p style="color:#E3738D;">Calorie Track</p>
                             </a>
