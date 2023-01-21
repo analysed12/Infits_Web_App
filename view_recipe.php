@@ -184,12 +184,12 @@ include "navbar.php";
     <div class="content">
         <br>
         <div style="float:right;margin-right:30px;">
-            <button style="height:auto;background: #D257E6;
+            <a href="index.php" style="height:auto;background: #D257E6;
 box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-border-radius: 10px;border:none;padding:10px;width:150px;color:white;">Done</button>
-            <button style="height:auto;background: #D257E6;
+border-radius: 10px;border:none;padding-left:50px;padding-top:10px;padding-bottom:10px;padding-right:50px;width:350px;color:white;">Done</a>
+            <a style="height:auto;background: #D257E6;
 box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-border-radius: 10px;border:none;padding:10px;width:150px;color:white;"><a>Edit</a></button>
+border-radius: 10px;border:none;padding-left:50px;padding-top:10px;padding-bottom:10px;padding-right:50px;width:150px;color:white;">Edit</a>
         </div>
         <br><br><br>
         <div class="flex-box-top">

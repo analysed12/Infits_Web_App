@@ -316,9 +316,9 @@ Ingredients not Added;
             </center>
 
             <div class="tab">
-                <a href="" style="text-decoration:none;">Recipe</a>
+                <a href="create_recipe.php" style="text-decoration:none;">Recipe</a>
                 <a href="Add-ingredients.php" style="text-decoration:none;">Ingredients</a>
-                <a href=" " style="text-decoration:none;">Directions</a>
+                <a href="directions.php" style="text-decoration:none;background-color:#D257E6;color:white">Directions</a>
             </div>
 
 
