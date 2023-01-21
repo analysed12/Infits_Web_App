@@ -243,8 +243,6 @@ a {
     font-size: 36px;
     margin-left: 50px;
 }
-
-
 </style>
 
 
@@ -283,7 +281,7 @@ a {
         <a class="sidenavlink" href="client_list.php"><img src="images/vec_client_list.png" class="nav-icon">Clients</a>
         <a class="sidenavlink" href="myplan.php"><img src="images/vec_recipies.png" class="nav-icon">Diet Plans</a>
         <a class="sidenavlink" href="#"><img src="images/vec_mail.png" class="nav-icon">Payments</a>
-        <a class="sidenavlink" href="#"><img src="images/vec_recipies.png" class="nav-icon">Recipies</a>
+        <a class="sidenavlink" href="create_recipe.php"><img src="images/vec_recipies.png" class="nav-icon">Recipies</a>
         <a class="sidenavlink" href="#"><img src="images/vec_recipies.png" class="nav-icon">Health Form</a>
 
         <div class="menu-bottom">

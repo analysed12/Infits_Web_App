@@ -27,66 +27,66 @@ include "navbar.php"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
-    /* Add Tags Popup */
+/* Add Tags Popup */
 .popup {
-  display: none;
+    display: none;
 
 }
 
 .popup.open {
-  display: block;
+    display: block;
 }
 
 .blocker {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  content: ' ';
-  background: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: ' ';
+    background: rgba(0, 0, 0, .5);
 }
 
 .popup .contents {
 
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: auto;
-  height: auto;
-  display: flex-box;
-  align-items: center;
-  justify-content: center;
-  background: #FFF;
-  position: fixed;
-  top: 50vh;
-  left: 50vw;
-  transform: translate(-50%, -50%);
-  padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+    display: flex-box;
+    align-items: center;
+    justify-content: center;
+    background: #FFF;
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    padding: 20px;
 }
 
 .popup .contents p {
-  text-align: center;
-  margin-top: 5px;
+    text-align: center;
+    margin-top: 5px;
 }
 
 .popup .contents input {
-  text-align: center;
-  margin-top: 5px;
-  /* margin-left:5px;
+    text-align: center;
+    margin-top: 5px;
+    /* margin-left:5px;
   margin-right:5px; */
 }
 
 .popup .contents button {
-  text-align: center;
-  margin-top: 15px;
-  margin-left: 30%;
-  text-decoration: none;
-  border: none;
-  background-color: #6883FB;
-  color: white;
-  padding: 5px;
-  width: 40%;
-  border-radius: 5px;
+    text-align: center;
+    margin-top: 15px;
+    margin-left: 30%;
+    text-decoration: none;
+    border: none;
+    background-color: #6883FB;
+    color: white;
+    padding: 5px;
+    width: 40%;
+    border-radius: 5px;
 
 
 }
@@ -95,100 +95,100 @@ include "navbar.php"
 
 
 .features_main {
-  display: flex;
-  flex-direction: row;
-  /* align-items: center;
+    display: flex;
+    flex-direction: row;
+    /* align-items: center;
   justify-content: center; */
-  margin-top: 20px;
-  width: 100%;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .features_left {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 
-  width: 100%;
+    width: 100%;
 }
 
 .features_right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
 
 .features_box {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px;
-  height: 50px;
-  width: 70%;
-  background: #FFFFFF;
-  box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  margin: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px;
+    height: 50px;
+    width: 70%;
+    background: #FFFFFF;
+    box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin: 5px;
 }
 
 .ip_box {
-  background: #FFFFFF;
-  box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  border: none;
-  width: 400px;
-  padding: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    border: none;
+    width: 400px;
+    padding: 10px;
 }
 
 
 .plan_btn_add {
-  width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5%;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
 }
 
 .plan_btn {
-  color: #FFFFFF;
-  background: #7282FB;
-  border-radius: 10px;
-  height: 40px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-right: 10px;
-  font-family: 'NATS';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 21px;
-  line-height: 24px;
-  border: none;
-  /* identical to box height, or 104% */
+    color: #FFFFFF;
+    background: #7282FB;
+    border-radius: 10px;
+    height: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 10px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 24px;
+    border: none;
+    /* identical to box height, or 104% */
 
-  display: flex;
-  align-items: center;
-  text-align: right;
-  letter-spacing: 0.44px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    letter-spacing: 0.44px;
 }
 
 .input-group input {
-  border: none;
+    border: none;
 }
 
 .input-group input:focus {
-  outline: none !important;
+    outline: none !important;
 }
 
 .remove-textbox {
-  color: black;
-  background: white;
-  border: none;
+    color: black;
+    background: white;
+    border: none;
 }
-
 </style>
+
 <body>
     <!-- Navbar Start -->
 
@@ -243,6 +243,8 @@ include "navbar.php"
                                         $textValue = document.getElementById("txt").value;
                                         $('#fields_u').append('<option value="' + $textValue + '">' +
                                             $textValue + '</option>');
+                                        $('#fields_u').multiselect('select', ['$textValue']);
+
                                         console.log('added');
                                         event.preventDefault();
                                         $('#fields_u').multiselect('rebuild');
@@ -379,7 +381,6 @@ function showPopup() {
 function hidePopup() {
     popup.classList.remove('open');
 }
-
 </script>
 
 
