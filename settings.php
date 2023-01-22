@@ -516,7 +516,7 @@ $name =  explode(" ", $_SESSION["name"] );
             </li>
             <li>
                 <div class="box img-2">
-                    <a href="referral_code.php">
+                    <a href="referral_code_new.php">
                         <div class="info">
                             <p>Referral Code</p>
                         </div>
