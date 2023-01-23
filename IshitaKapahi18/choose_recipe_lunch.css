@@ -1,0 +1,218 @@
+.content{
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    font-family: 'Poppins';
+    font-style: normal;
+    padding: 10px;
+    margin: 0px;
+}
+.flex-top{
+    display:flex;
+    flex-direction:row;
+    justify-items: auto;
+  
+  }
+  #search{
+    height:45px;
+    width:350px;
+    margin-left: 350px;
+    margin-top: 2rem;
+    box-shadow: 0.6px 0.6px 2px 1px #ccc;
+    border-radius:0.6rem;
+    border: None;
+    padding-left: 2rem;
+  }
+  #searchbtn1{
+    background-color: #7282FB;
+    color:white;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius:40%;
+    margin-left: 15px;
+    margin-top: 2rem;
+    
+    border: none;
+  }
+  #searchbtn{
+    background-color: #7282FB;
+    color:white;
+    height:46px;
+    width:121px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-left: 15px;
+    margin-top: 2rem;
+    border: none;
+    
+  }
+  .flex-second{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: space-evenly;
+    margin-left: 15px;
+    margin-top: 5px;
+  
+  }
+  .recipe-flex{
+    width:233px;
+    height:124px;
+    border-radius:15px;
+    
+    text-align: center;
+    border:none;
+    cursor: pointer;
+    font-weight:500;
+    font-size:25px;
+  
+  
+  }
+
+  #breakfast{
+  
+  background-image:url('images/food2.jpg');
+  background-size: cover;
+  
+  }
+  #breakfast:hover {
+   
+    background-image:url('images/food1.jpg');
+    background-size: cover;
+    -webkit-transition: background-image 1s ease-out;
+    -moz-transition: background-image 1s ease-out;
+    -o-transition: background-image 1s ease-out;
+    transition: background-image 1s ease-out;
+  }
+  #lunch{
+  
+    background-image:url('images/food1.jpg');
+    background-size: cover;
+    
+    }
+    #lunch:hover {
+     
+      background-image:url('images/food2.jpg');
+      background-size: cover;
+      -webkit-transition: background-image 1s ease-out;
+      -moz-transition: background-image 1s ease-out;
+      -o-transition: background-image 1s ease-out;
+      transition: background-image 1s ease-out;
+    }
+     #snacks{
+  
+  background-image:url('images/food2.jpg');
+  background-size: cover;
+  
+  }
+  #snacks:hover {
+   
+    background-image:url('images/food1.jpg');
+    background-size: cover;
+    -webkit-transition: background-image 1s ease-out;
+    -moz-transition: background-image 1s ease-out;
+    -o-transition: background-image 1s ease-out;
+    transition: background-image 1s ease-out;
+  }
+  #dinner{
+  
+    background-image:url('images/food1.jpg');
+    background-size: cover;
+    
+    }
+    #dinner:hover {
+     
+      background-image:url('images/food2.jpg');
+      background-size: cover;
+      -webkit-transition: background-image 1s ease-out;
+      -moz-transition: background-image 1s ease-out;
+      -o-transition: background-image 1s ease-out;
+      transition: background-image 1s ease-out;
+    }
+  
+  .title1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left:15px;
+  }
+  #viewall{
+    cursor:pointer;
+    color:#6A6A6A;
+    font-size:15px;
+    margin-right: 10rem;
+ 
+ }
+ .flex-last{
+  height:fit-content;
+  width:266px;
+  height: 240px;
+  border-radius:15px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+  margin-left:70px;
+  border: 1px solid black;
+  margin-bottom:15px;
+}
+.box-title{
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  margin-left:15px;
+  }
+  #recipename{
+    font-size:15px;
+    color:black;
+    font-weight:400px;
+    
+    }
+    .box2{
+      display:flex;
+      flex-direction: row;
+      margin-left:15px;
+      margin-right:15px;
+      justify-content: space-between;
+      
+      
+      }
+      .steps{
+      background-color: #9C74F5;
+      color:white;
+      border-radius: 50px;
+      height:25px;
+      width:25px;
+      text-align: center;
+      margin-left:15px;
+      padding-top: 0.28rem;
+      }
+      .box3{
+        display:flex;
+        flex-direction: row;
+        
+        margin-left:15px;
+        margin-right:15px;
+        
+        
+        }
+        .btn-mdn{
+        width:71px;
+        height:26px;
+        border-radius:10px;
+        background-color: #9C74F5;
+        color:white;
+        font-size: 12px;
+        font-weight:300px;
+        margin-left: 70px;
+        border: none;
+        
+        }
+        @media screen and (max-width: 720px) {
+          .flex-top{
+            display: flex;
+            flex-direction: column;
+          }
+        }
