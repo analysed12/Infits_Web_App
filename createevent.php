@@ -198,7 +198,7 @@ include("navbar.php");
                                 $query = "SELECT client_id,name FROM addclient WHERE dietitianuserID = '$id' ";
                                 $result1=mysqli_query($conn,$query); 
                                 while($row = mysqli_fetch_assoc($result1) ){ ?>
-                                <option value=<?php echo $row['name']?>><?php echo $row['name']?></option>
+                                <option value="<?php echo $row['name']?>"><?php echo $row['name']?></option>
                                 <?php
                                 } 
                                 ?>
