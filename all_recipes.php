@@ -382,7 +382,7 @@ to <br>suit your needs </h5>
 
          <!--------------breakfast recipes---------->
 <?php 
-    $sql = "SELECT * FROM dietian_recipies where `category` = 'Breakfast'";
+    $sql = "SELECT * FROM `dietian_recipies` WHERE category = \"Breakfast\";";
      $result = $conn -> query($sql); 
      if($result -> num_rows> 0){
              while($row = $result->fetch_assoc()){
@@ -392,7 +392,7 @@ to <br>suit your needs </h5>
                 }
                 else
                {
-              $ext= explode('|',$row['image']);
+               $ext= explode('|',$row['image']);
                $path = $ext[1];
                $t1= explode('|', $row['time']);
                $GLOBALS['dirid'] = $row['instruction'];
@@ -429,7 +429,8 @@ to <br>suit your needs </h5>
             
             </div>     
              
-            <?php }} ?>
+            <?php 
+        }} ?>
 
             </div> 
           
@@ -448,7 +449,7 @@ to <br>suit your needs </h5>
          <div class="cards">
 
         <?php 
-    $sql = "SELECT * FROM dietian_recipies where `category` = 'Lunch'";
+    $sql = "SELECT * FROM `dietian_recipies` where `category` = 'Lunch'";
      $result = $conn -> query($sql); 
      if($result -> num_rows> 0){
              while($row = $result->fetch_assoc()){

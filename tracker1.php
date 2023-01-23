@@ -96,7 +96,8 @@ html {
       height: auto;
       width: 100%;
     }
-  
+
+
     .food_image{
       display: flex;
       align-items: center;
@@ -171,9 +172,13 @@ font-size: 15px;
 </style>
 
 <body>
+
+
     <!-- Navbar Start -->
     <?php
-    include("navbar.php")
+    include("navbar.php");
+    include('connection.php');
+    $meal = 'breakfast';
     ?>
     <!-- Navbar End -->
 
@@ -191,85 +196,101 @@ font-size: 15px;
     <?php include("calendar.php");
     ?>
 
-
+<div id = "refresh">
     <!-- Other content -->
         <div class="time_events">
             <div class="time_container">
                 <div class="time_card">
-                    <div class="time_text">Breakfast</div>
+                    <div class="time_text" onClick = "breakFastopen()">Breakfast</div>
                 </div>
                 <div class="time_card">
-                    <div class="time_text">Lunch</div>
+                    <div class="time_text"  onClick = "lunchopen()">Lunch</div>
                 </div>
                 <div class="time_card">
-                    <div class="time_text">Snack</div>
+                    <div class="time_text"  onClick = "snacksopen()">Snack</div>
                 </div>
                 <div class="time_card">
-                    <div class="time_text">Dinner</div>
+                    <div class="time_text"  onClick = "dinneropen()">Dinner</div>
                 </div>
             </div>
         </div>
-
+          <?php
+        $date = "12 AUG 2022";
+        $clientId = "Azarudeen";
+        $conn = new mysqli("localhost", "root", "", "infits");
+        if($conn->connect_error){
+                die("Connection failed :" . $conn->connect_error);
+        }
+        $sql = "SELECT * FROM `mealtracker` WHERE date = '$date' AND clientID = '$clientId' AND meal = '$meal'";
+        $result =$conn-> query($sql);
+       ?>
         <div class="food_events">
-            <div class="food_container">
-              <div class="food_card">
-                <div class="food_image"><img src="images/alooparatha.svg"></div>
-                <div style="padding:18px">
-                <div class="food_text">Aloo Paratha</div>
-                <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
-                </div>
-              </div>
-              <div class="food_card">
-                <div class="food_image"><img src="images/pancake.svg"></div>
-                <div style="padding:18px">
-                    <div class="food_text">Pancake</div>
-                    <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
+               <div class="food_container">
+                  <?php    
+        if ($result->num_rows > 0) 
+        {
+                while($row = $result->fetch_assoc())
+                {
+                  echo '        <div class="food_card">';
+                    echo '          <div class="food_image"><img src="'.$row['image'].'"></div>';
+                    echo '          <div style="padding:18px">';
+                        echo '          <div class="food_text">'.$row['name'].'</div>';
+                        echo '          <p class="food_des">'.$row['description'].'</p>';
+                    echo '          </div>';
+                  echo '        </div>';
+                }
+        } 
+        else {
+                echo "No recipies found";
+        }
+        ?>
 
-                </div>
-              </div>
-              <div class="food_card">
-                <div class="food_image"><img src="images/salad.svg"></div>
-                <div style="padding:18px">
-                    <div class="food_text">Healthy salad</div>
-                    <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
-
-                </div>
-              </div>
-              
             </div>
-            <div class="food_container">
-                <div class="food_card">
-                  <div class="food_image"><img src="images/alooparatha.svg"></div>
-                  <div style="padding:18px">
-                  <div class="food_text">Aloo Paratha</div>
-                  <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
-                  </div>
-                </div>
-                <div class="food_card">
-                  <div class="food_image"><img src="images/pancake.svg"></div>
-                  <div style="padding:18px">
-                      <div class="food_text">Pancake</div>
-                      <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
-  
-                  </div>
-                </div>
-                <div class="food_card">
-                  <div class="food_image"><img src="images/salad.svg"></div>
-                  <div style="padding:18px">
-                      <div class="food_text">Healthy salad</div>
-                      <p class="food_des">Calories 299,Protien 4g,Carbs 36g,Fat 12g </p>
-  
-                  </div>
-                </div>
-                
-              </div>
-          </div>
-
-
-
-
-
+         </div>
+     </div>
     </div>
+
+
+    <script>
+
+
+
+function reload()
+{
+$('#refresh').load('tracker1.php').fadeIn("slow");
+}
+
+
+
+function breakFastopen(){
+  <?php 
+  $meal = "breakfast";
+  ?>
+  console.log("breakfast");
+ reload();
+
+}
+function lunchopen(){
+  <?php 
+  $meal = "lunch";
+  ?>
+  console.log("lunch");
+  reload();
+}
+function snacksopen(){
+  <?php 
+  $meal = "snack";
+  ?>
+  $('#refresh').load('#refresh > *');
+}
+function dinneropen(){
+  <?php 
+  $meal = "dinner";
+  ?>
+  $('#refresh').load('#refresh > *');
+}
+</script>
+    
     <!-- Contents End -->
 
 </body>
