@@ -605,7 +605,7 @@ body {
                         </div>
                         <div class="ip_box">
                             <img src="images/account_name.svg" alt="">
-                            <input class="input_bar" name="name" id="name" type="text" placeholder="       Name">
+                            <input class="input_bar" name="name" id="name" type="text" placeholder="       Full Name">
                         </div>
                         <div class="ip_box">
                             <img src="images/mobile_form.svg" alt="">
