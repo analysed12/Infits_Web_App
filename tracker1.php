@@ -11,7 +11,9 @@
     integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
+    
   />
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <title>Tracker1</title>
 </head>
 <style>
@@ -171,6 +173,61 @@ font-size: 15px;
 
 </style>
 
+<script>
+      $(document).ready(function () {
+          $("#breakfast").show();
+          $("#snack").hide();
+          $("#lunch").hide();
+          $("#dinner").hide();
+      });
+    </script>
+
+<script>
+      $(document).ready(function () {
+        $("#btn1").click(function () {
+          $("#breakfast").show();
+          $("#snack").hide();
+          $("#lunch").hide();
+          $("#dinner").hide();
+        });
+      });
+    </script>
+
+<script>
+      $(document).ready(function () {
+        $("#btn2").click(function () {
+          $("#breakfast").hide();
+          $("#snack").show();
+          $("#lunch").hide();
+          $("#dinner").hide();
+        });
+      });
+    </script>
+
+<script>
+     $(document).ready(function () {
+        $("#btn3").click(function () {
+          $("#breakfast").hide();
+          $("#snack").hide();
+          $("#lunch").show();
+          $("#dinner").hide();
+        });
+      });
+    </script>
+
+<script>
+      $(document).ready(function () {
+        $("#btn4").click(function () {
+          $("#breakfast").hide();
+          $("#snack").hide();
+          $("#lunch").hide();
+          $("#dinner").show();
+        });
+      });
+    </script>
+
+
+
 <body>
 
 
@@ -178,7 +235,6 @@ font-size: 15px;
     <?php
     include("navbar.php");
     include('connection.php');
-    $meal = 'breakfast';
     ?>
     <!-- Navbar End -->
 
@@ -196,100 +252,176 @@ font-size: 15px;
     <?php include("calendar.php");
     ?>
 
-<div id = "refresh">
     <!-- Other content -->
+    <h3>today's meal
+    </h3>
         <div class="time_events">
             <div class="time_container">
                 <div class="time_card">
-                    <div class="time_text" onClick = "breakFastopen()">Breakfast</div>
+                    <div class="time_text" id = "btn1">Breakfast</div>
                 </div>
                 <div class="time_card">
-                    <div class="time_text"  onClick = "lunchopen()">Lunch</div>
+                    <div class="time_text" id = "btn2">Lunch</div>
                 </div>
                 <div class="time_card">
-                    <div class="time_text"  onClick = "snacksopen()">Snack</div>
+                    <div class="time_text" id = "btn3">Snack</div>
                 </div>
                 <div class="time_card">
-                    <div class="time_text"  onClick = "dinneropen()">Dinner</div>
+                    <div class="time_text" id = "btn4">Dinner</div>
                 </div>
             </div>
         </div>
+
+
+
+
+        <div id="breakfast">
           <?php
-        $date = "12 AUG 2022";
-        $clientId = "Azarudeen";
-        $conn = new mysqli("localhost", "root", "", "infits");
-        if($conn->connect_error){
-                die("Connection failed :" . $conn->connect_error);
-        }
-        $sql = "SELECT * FROM `mealtracker` WHERE date = '$date' AND clientID = '$clientId' AND meal = '$meal'";
-        $result =$conn-> query($sql);
-       ?>
-        <div class="food_events">
-               <div class="food_container">
-                  <?php    
-        if ($result->num_rows > 0) 
-        {
-                while($row = $result->fetch_assoc())
-                {
-                  echo '        <div class="food_card">';
-                    echo '          <div class="food_image"><img src="'.$row['image'].'"></div>';
-                    echo '          <div style="padding:18px">';
-                        echo '          <div class="food_text">'.$row['name'].'</div>';
-                        echo '          <p class="food_des">'.$row['description'].'</p>';
-                    echo '          </div>';
-                  echo '        </div>';
+                $date = "12 AUG 2022";
+                $clientId = "Azarudeen";
+                $conn = new mysqli("localhost", "root", "", "infits");
+                if($conn->connect_error){
+                        die("Connection failed :" . $conn->connect_error);
                 }
-        } 
-        else {
-                echo "No recipies found";
-        }
-        ?>
+                $sql = "SELECT * FROM `mealtracker` WHERE date = '$date' AND clientID = '$clientId' AND meal = 'breakfast'";
+                $result =$conn-> query($sql);
+              ?>
+                <div class="food_events">
+                      <div class="food_container">
+                          <?php    
+                if ($result->num_rows > 0) 
+                {
+                        while($row = $result->fetch_assoc())
+                        {
+                          echo '        <div class="food_card">';
+                            echo '          <div class="food_image"><img src="'.$row['image'].'"></div>';
+                            echo '          <div style="padding:18px">';
+                                echo '          <div class="food_text">'.$row['name'].'</div>';
+                                echo '          <p class="food_des">'.$row['description'].'</p>';
+                            echo '          </div>';
+                          echo '        </div>';
+                        }
+                } 
+                else {
+                        echo "No recipies found";
+                }
+          ?>
+          </div>
+          </div>
 
-            </div>
-         </div>
-     </div>
+          </div>
+
+
+          <div id="lunch">
+          <?php
+                $date = "12 AUG 2022";
+                $clientId = "Azarudeen";
+                $conn = new mysqli("localhost", "root", "", "infits");
+                if($conn->connect_error){
+                        die("Connection failed :" . $conn->connect_error);
+                }
+                $sql = "SELECT * FROM `mealtracker` WHERE date = '$date' AND clientID = '$clientId' AND meal = 'lunch'";
+                $result =$conn-> query($sql);
+              ?>
+                <div class="food_events">
+                      <div class="food_container">
+                          <?php    
+                if ($result->num_rows > 0) 
+                {
+                        while($row = $result->fetch_assoc())
+                        {
+                          echo '        <div class="food_card">';
+                            echo '          <div class="food_image"><img src="'.$row['image'].'"></div>';
+                            echo '          <div style="padding:18px">';
+                                echo '          <div class="food_text">'.$row['name'].'</div>';
+                                echo '          <p class="food_des">'.$row['description'].'</p>';
+                            echo '          </div>';
+                          echo '        </div>';
+                        }
+                } 
+                else {
+                        echo "No recipies found";
+                }
+          ?>
+          </div>
+          </div>
+
+          </div>
+
+
+          <div id="snack">
+          <?php
+                $date = "12 AUG 2022";
+                $clientId = "Azarudeen";
+                $conn = new mysqli("localhost", "root", "", "infits");
+                if($conn->connect_error){
+                        die("Connection failed :" . $conn->connect_error);
+                }
+                $sql = "SELECT * FROM `mealtracker` WHERE date = '$date' AND clientID = '$clientId' AND meal = 'snack'";
+                $result =$conn-> query($sql);
+              ?>
+                <div class="food_events">
+                      <div class="food_container">
+                          <?php    
+                if ($result->num_rows > 0) 
+                {
+                        while($row = $result->fetch_assoc())
+                        {
+                          echo '        <div class="food_card">';
+                            echo '          <div class="food_image"><img src="'.$row['image'].'"></div>';
+                            echo '          <div style="padding:18px">';
+                                echo '          <div class="food_text">'.$row['name'].'</div>';
+                                echo '          <p class="food_des">'.$row['description'].'</p>';
+                            echo '          </div>';
+                          echo '        </div>';
+                        }
+                } 
+                else {
+                        echo "No recipies found";
+                }
+          ?>
+          </div>
+          </div>
+
+          </div>
+
+          <div id="dinner">
+          <?php
+                $date = "12 AUG 2022";
+                $clientId = "Azarudeen";
+                $conn = new mysqli("localhost", "root", "", "infits");
+                if($conn->connect_error){
+                        die("Connection failed :" . $conn->connect_error);
+                }
+                $sql = "SELECT * FROM `mealtracker` WHERE date = '$date' AND clientID = '$clientId' AND meal = 'dinner'";
+                $result =$conn-> query($sql);
+              ?>
+                <div class="food_events">
+                      <div class="food_container">
+                          <?php    
+                if ($result->num_rows > 0) 
+                {
+                        while($row = $result->fetch_assoc())
+                        {
+                          echo '        <div class="food_card">';
+                            echo '          <div class="food_image"><img src="'.$row['image'].'"></div>';
+                            echo '          <div style="padding:18px">';
+                                echo '          <div class="food_text">'.$row['name'].'</div>';
+                                echo '          <p class="food_des">'.$row['description'].'</p>';
+                            echo '          </div>';
+                          echo '        </div>';
+                        }
+                } 
+                else {
+                        echo "No recipies found";
+                }
+          ?>
+          </div>
+          </div>
+
+          </div>
+
     </div>
-
-
-    <script>
-
-
-
-function reload()
-{
-$('#refresh').load('tracker1.php').fadeIn("slow");
-}
-
-
-
-function breakFastopen(){
-  <?php 
-  $meal = "breakfast";
-  ?>
-  console.log("breakfast");
- reload();
-
-}
-function lunchopen(){
-  <?php 
-  $meal = "lunch";
-  ?>
-  console.log("lunch");
-  reload();
-}
-function snacksopen(){
-  <?php 
-  $meal = "snack";
-  ?>
-  $('#refresh').load('#refresh > *');
-}
-function dinneropen(){
-  <?php 
-  $meal = "dinner";
-  ?>
-  $('#refresh').load('#refresh > *');
-}
-</script>
     
     <!-- Contents End -->
 
