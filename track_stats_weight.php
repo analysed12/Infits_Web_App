@@ -20,7 +20,7 @@ if(isset($_POST['savegoal'])){
     if($result){
         unset($_POST["savegoal"]);
         unset($_POST["setgoal"]);
-        header(("Location:". $_SERVER['PHP_SELF'] .""));
+        header(("Location: track_stats_weight.php"));
         // exit();
     }
 }
@@ -838,7 +838,7 @@ $j = count($pastActivityData);
             <div class="tsd-left-b table-activity">
                 <div class="heading">
                     <p>Past Activity</p>
-                    <a href="past_activities_weight.php"><span>View All</span></a>
+                    <a href="past_activities_weight.php?id=<?php echo ($clientId) ?>"><span>View All</span></a>
                 </div>
                 <div class="heading-border"></div>
                 <div class="activity-container">
@@ -871,7 +871,7 @@ $progressBarData = fetchDataSql($clientId, "", $today->format('Y-m-d'), 2);
         <div class="col-lg-4 tsd-right">
             <div class="heading">
                 <p>Daily Progress</p>
-                <a href="past_activities_weight.php"><span>View Activity</span></a>
+                <a href="past_activities_weight.php?id=<?php echo ($clientId) ?>"><span>View Activity</span></a>
             </div>
             <div class="progress-bar-container">
                 <div id="progress-percent" class="progress-circle">
