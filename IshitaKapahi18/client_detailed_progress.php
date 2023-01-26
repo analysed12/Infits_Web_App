@@ -60,17 +60,23 @@ include('event_calender.php');
 #btn2:hover{
     border-bottom:0.25rem solid #4B9AFB; 
 }
+#btn2:focus{
+  border-bottom:0.25rem solid #4B9AFB; 
+
+}
 .container1_rightside{
     margin-left: 14rem;
 }
 .container2_wrapper1{
-  width: 42rem;
+  width: 70rem;
   display: flex;
-  gap: 2rem;
-  padding: 0.3rem;
+  gap: 3rem;
+  padding: 0.4rem;
   border-radius: 0.7rem;
   background-color: #FDFDFD;
   margin-left: 20rem;
+  border: 2px solid #F4F4F4;
+  margin-top:0.3rem;
 }
 .info{
   display: flex;
@@ -91,7 +97,7 @@ include('event_calender.php');
   width: 450px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.12);
+  border: 2px solid #CCCCCC; 
   margin-top: 0.5rem;
 }
 .wrapper header{
@@ -134,6 +140,7 @@ header .current-date{
   flex-wrap: wrap;
   list-style: none;
   text-align: center;
+  
 }
 .weeks{
     margin-bottom:0%;
@@ -188,7 +195,7 @@ header .current-date{
   margin-top: 1rem;
 }
 .mob_container1_wrapper1{
-  margin-left: 5rem;
+  margin-left: 2rem;
   border: 1px solid  #e4e1e1;
   box-shadow: 0 4px 7px rgba(0,0,0,0.12);
   border-radius: 0.7rem;
@@ -209,6 +216,7 @@ header .current-date{
   }
   .container1_rightside{
     margin-left: 2rem;
+    display:none;
 }
 .track_buttons{
   margin-left: 1rem;
@@ -260,13 +268,13 @@ header .current-date{
                     </header>
                     <div class="calendar">
                         <ul class="weeks">
-                        <li>Sun</li>
-                        <li>Mon</li>
-                        <li>Tue</li>
-                        <li>Wed</li>
-                        <li>Thu</li>
-                        <li>Fri</li>
-                        <li>Sat</li>
+                        <li>S</li>
+                        <li>M</li>
+                        <li>T</li>
+                        <li>W</li>
+                        <li>T</li>
+                        <li>F</li>
+                        <li>S</li>
                         </ul>
                         <ul class="days"></ul>
                     </div>
@@ -374,10 +382,10 @@ header .current-date{
             <div class="detailed_progress_container2" id="container2">
                 <div class="container2_wrapper1">
                 <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span></div>
-                <div class="info"><span>Steps</span> <div class="symbols"><div style="color:#FDA184"><span class="material-symbols-outlined" style="font-size:2rem;font-weight:600">line_end</span></div><div style="margin-top:0.3rem"><span >4855 steps</span></div></div></div>
-                <div class="info"><span>Heart Rate</span> <div class="symbols"><div style="color:#F080B2"><span class="material-symbols-outlined" style="font-size:2rem;font-weight:600">line_end</span></div><div style="margin-top:0.3rem"><span >150 bpm</span></div></div></div>
-                <div class="info"><span>Weight</span> <div class="symbols"><div style="color:#7B979D"><span class="material-symbols-outlined" style="font-size:2rem;font-weight:600">line_end</span></div><div style="margin-top:0.3rem"><span >1.6kg</span></div></div></div>
-                <div class="info"><span>Sleep</span> <div class="symbols"><div style="color:#7853E3"><span class="material-symbols-outlined" style="font-size:2rem;font-weight:600">line_end</span></div><div style="margin-top:0.3rem"><span >7 hrs</span></div></div></div>
+                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span >4855 steps</span></div></div></div>
+                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span >150 bpm</span></div></div></div>
+                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span >1.6kg</span></div></div></div>
+                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span >7 hrs</span></div></div></div>
                 
 
                 </div>
@@ -389,10 +397,11 @@ header .current-date{
             <div class="detailed_progress_container2" id="container3">
                 <div class="container2_wrapper1">
                 <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span></div>
-                <div class="info"><span>Steps</span> <div class="symbols"><div style="color:#FDA184"><span class="material-symbols-outlined" style="font-size:2rem;font-weight:600">line_end</span></div><div style="margin-top:0.3rem"><span >2356 steps</span></div></div></div>
-                <div class="info"><span>Heart Rate</span> <div class="symbols"><div style="color:#F080B2"><span class="material-symbols-outlined" style="font-size:2rem;font-weight:600">line_end</span></div><div style="margin-top:0.3rem"><span >150 bpm</span></div></div></div>
-                <div class="info"><span>Weight</span> <div class="symbols"><div style="color:#7B979D"><span class="material-symbols-outlined" style="font-size:2rem;font-weight:600">line_end</span></div><div style="margin-top:0.3rem"><span >1.6kg</span></div></div></div>
-                <div class="info"><span>Sleep</span> <div class="symbols"><div style="color:#7853E3"><span class="material-symbols-outlined" style="font-size:2rem;font-weight:600">line_end</span></div><div style="margin-top:0.3rem"><span >7 hrs</span></div></div></div>
+                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span >2356 steps</span></div></div></div>
+                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span >150 bpm</span></div></div></div>
+                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span >1.6kg</span></div></div></div>
+                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span >7 hrs</span></div></div></div>
+                
                 
 
                 </div>
