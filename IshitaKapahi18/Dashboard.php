@@ -14,7 +14,7 @@ include('event_calender.php');
     <style>
     .dashboard{
     margin-top: 2rem;
-    margin-left: 18rem;
+    margin-left: 17rem;
     font-family: poppins;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,17 @@ include('event_calender.php');
 }
 .dashboard_comtainer1{
     display: flex;
-    gap: 60rem;
+    gap: 40rem;
+}
+.container2_rightside{
+    display:flex;
+    gap:1rem;
+}
+.addbutton{
+    margin-top:0.5rem;
+}
+#addbutton{
+    display:none;
 }
 #btn1{
     border: none;
@@ -34,6 +44,19 @@ include('event_calender.php');
     font-size: 1.8rem;
     padding-left: 1.1rem;
     padding-right: 1.1rem;
+    position:relative;
+}
+#addbtn{
+    border-radius:0.7rem;
+    background-color:white;
+    box-shadow: 1px 1px 2px 1px  rgba(0, 0, 0, 0.25);
+    border:none;
+    padding:0.5rem;
+    padding-left:2.5rem;
+    padding-right:2.5rem;
+    position:absoute:
+
+
 }
 .dashboard_container2{
     display: flex;
@@ -114,15 +137,16 @@ include('event_calender.php');
 }
 .dashboard_container3{
     display: flex;
+    margin-top:0.5rem;
 }
 .dashboard_container4{
-    margin-left: 3rem;
+    margin-left: 0.4rem;
 }
 .container4_wrapper1{
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
     font-weight: 500;
-    margin-left: 20rem;
+    margin-left: 16rem;
     margin-top: 1rem;
 }
 .material-symbols-outlined{
@@ -131,14 +155,17 @@ include('event_calender.php');
 }
 .symbols{
     display: flex;
+    gap:0.2rem;
 }
 
 .container4_wrapper2{
     display: flex;
-    background-color: #f8f6f6;
+    background-color: #FDFDFD;
     border: 1px solid #e4e1e1;
     width:fit-content;
-    padding: 0.5rem;
+    padding: 0.7rem;
+    padding-left:1rem;
+    padding-right:1.5rem;
     border-radius: 0.5rem;
     margin-top: 1rem;
 
@@ -146,7 +173,7 @@ include('event_calender.php');
 }
 #values{
     margin-top: 2rem;
-    background-color:#f8f6f6;
+    background-color:#FDFDFD;
     color:#454545;
     font-weight:300;
     border:none;
@@ -194,7 +221,7 @@ include('event_calender.php');
 
 .list_tasklist{
     width: auto;
-    background-color: #f8f6f6;
+    background-color:#FDFDFD;
     border: 1px solid  #e4e1e1;
     border-radius: 0.6rem;
 }
@@ -207,13 +234,15 @@ include('event_calender.php');
 .tasklist_wrapper3{
     margin-left: 6rem;
 }
-.meassages{
+.messages{
     display: flex;
-    gap: 1rem;
+    flex-direction:column;
+    gap: 2rem;
     padding: 0.5rem;
     border-radius: 0.6rem;
-    background-color: #f8f6f6;
+    background-color:#FDFDFD;
     border: 1px solid  #e4e1e1;
+    padding:1rem;
 
 }
 
@@ -224,11 +253,34 @@ include('event_calender.php');
 .steps{
   margin-top: 1rem;
 }
+#two{
+    background-color:#0177FD;
+    border-radius: 100%;
+    padding:0.09rem;
+    color:white;
+    padding-left:0.3rem;
+    padding-right:0.3rem;
+    font-size:0.6rem;
+
+}
+.list1{
+    display:flex;
+    gap:13rem;
+}
+.list2{
+    display:flex;
+    gap:14rem;
+}
+
+#btn6:focus {
+    background-color: #7282FB;
+    color:white;
+}
 
 @media screen and (max-width: 720px) {
     .dashboard_comtainer1{
         display: flex;
-        gap:8rem;
+        gap:4rem;
     }
     .dashboard{
         margin-left: 2rem;
@@ -277,6 +329,32 @@ include('event_calender.php');
         height: 283px;
         margin-left: 2rem;
     }
+    .list1{
+    display:flex;
+    gap:8rem;
+}
+.list2{
+    display:flex;
+    gap:9rem;
+}
+#addbtn{
+    border-radius:0.7rem;
+    background-color:white;
+    box-shadow: 1px 1px 2px 1px  rgba(0, 0, 0, 0.25);
+    border:none;
+    padding:0.3rem;
+    padding-left:1rem;
+    padding-right:1rem;
+    position:absoute;
+    margin-left:0.3rem;
+
+
+}
+.add{
+    margin-top:0.2rem;
+    margin-left:0% !important;
+}
+    
    
 }
     </style>
@@ -287,12 +365,31 @@ include('event_calender.php');
 
         <div class="dashboard_comtainer1">
             <div class="container1_leftside">
-                <p style="font-size:1.3rem; font-weight:600">Dashboard</p>
+                <p style="font-size:1.5rem; font-weight:600">Dashboard</p>
                 <p style="font-weight:600;font-size:1.1rem">Upcoming Events</p>
                 
             </div>
             <div class="container2_rightside" >
-                <button id="btn1" >+</button> 
+                <div class="addbutton" id="addbutton">
+                    <button id="addbtn">Add Task</button>
+                    <button id="addbtn" class="add">Add Client</button>
+                </div>
+                <div><button id="btn1" >+</button></div>
+                <script>
+                     var x = document.getElementById("addbutton");
+                        var selectbtn1 = document.getElementById("btn1");
+                        selectbtn1.onclick = function() {
+                            
+                        if (x.style.display === "block") {
+                        x.style.display = "none";
+                        document.getElementById("btn1").innerHTML = "+";
+                    } else {
+                        x.style.display = "block";
+                        document.getElementById("btn1").innerHTML = "x";
+                    }
+                    }
+                        
+                </script> 
                  
             </div>
             
@@ -350,7 +447,7 @@ include('event_calender.php');
         </div>
 
         <div class="dashboard_container3">
-            <div style="font-size:1.4rem; font-weight:600"> Client Progress</div>
+            <div style="font-size:1.2rem; font-weight:600"> Client Progress</div>
             <div class="details">
                 <a href=""><button id="details">View All</button></a>
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
@@ -361,50 +458,50 @@ include('event_calender.php');
         <div class="dashboard_container4">
 
             <div class="container4_wrapper1">
-                <div class="symbols"><div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div><span>Steps</span></div></div>
-                <div class="symbols"><div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div><span>Heart Rate</span></div></div>
-                <div class="symbols"><div style="color:#8FAFF3"><span class="material-symbols-outlined">local_drink</span></div><div><span>Water</span></div></div>
-                <div class="symbols"><div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div><span>Sleep</span></div></div>
-                <div class="symbols"><div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div><span>Weight</span></div></div>
-                <div class="symbols"><div style="color:#E388A0"><span class="material-symbols-outlined">timer_10_alt_1</span></div><div><span>Calories</span></div></div>
+                <div class="symbols"><div><img src="images/Frame.png" style="width:1.8rem"></div><div><span>Steps</span></div></div>
+                <div class="symbols"><div><img src="images/Frame-1.png" style="width:1.8rem"></div><div><span>Heart Rate</span></div></div>
+                <div class="symbols"><div><img src="images/Frame-2.png" style="width:1.8rem"></div><div><span>Water</span></div></div>
+                <div class="symbols"><div><img src="images/Frame-3.png" style="width:1.8rem"></div><div><span>Sleep</span></div></div>
+                <div class="symbols"><div><img src="images/Frame-4.png" style="width:1.8rem"></div><div><span>Weight</span></div></div>
+                <div class="symbols"><div><img src="images/Frame-5.png" style="width:1.8rem"></div><div><span>Calories</span></div></div>
                 
             </div>
 
             <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#f8f6f6; color:black;font-weight:500; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:9rem">5256/6000</a></span>
+                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> Ronald Richards</span></a></span>
+                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
                 <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
                 <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">7/8 hrs.</a></span>
+                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
                 <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:2rem">122/300 kcal</a></span>
+                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
             </div>
             <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#f8f6f6; color:black;font-weight:500; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:9rem">5256/6000</a></span>
+                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> Ronald Richards</span></a></span>
+                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
                 <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
                 <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">7/8 hrs.</a></span>
+                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
                 <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:2rem">122/300 kcal</a></span>
+                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
             </div>
             <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#f8f6f6; color:black;font-weight:500; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:9rem">5256/6000</a></span>
+                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span>
+                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
                 <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
                 <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">7/8 hrs.</a></span>
+                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
                 <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:2rem">122/300 kcal</a></span>
+                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
             </div>
             <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#f8f6f6; color:black;font-weight:500; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:9rem">5256/6000</a></span>
+                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> Ronald Richards</span></a></span>
+                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
                 <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
                 <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">7/8 hrs.</a></span>
+                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
                 <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:2rem">122/300 kcal</a></span>
+                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
             </div>
 
     </div>  
@@ -490,12 +587,12 @@ include('event_calender.php');
                     <span><a href="" style="background-color:white; color:#717171; border:none" >View All</a></span> 
                 </div>
                 <div class="list_tasklist">
-                    <button id="btn6" onclick="openPage('tasklist', this)">Today</button>
+                    <button id="btn6" onclick="openPage('tasklist', this,'blue')">Today</button>
                     <button id="btn6" class="btn6">Upcoming</button>
                     <div id="tasklist">
                     <div class="list_tasklist_container" >
                         <div class="tasklist_wrapper1">
-                            <div><img src="images/foodrecipe.jpeg" style="width:2rem; background-color:#f8f6f6;border-radius:0.5rem"></div>
+                            <div><img src="images/foodrecipe.jpeg" style="width:2rem; background-color:#FDFDFD;border-radius:0.5rem"></div>
                         </div>
                         <div class="tasklist_wrapper2">
                             <span style="font-weight:600">Client Recipe Design</span>
@@ -517,15 +614,44 @@ include('event_calender.php');
                 
                     <span><a href="" style="background-color:white; color:#717171 ; border:none" >View All</a></span>
                 </div>
-                    <div class="meassages">
+                    <div class="messages">
+                       <div style="display:flex">
                        <div class="tasklist_wrapper1">
-                            <div><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:0.5rem"></div>
+                            <div><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:0.5rem"></div>
                         </div>
                         <div class="tasklist_wrapper2">
-                            <span style="font-weight:600">Rick Owens</span>
+                            <div class="list1">
+                            <span style="font-weight:600">Robert Parker</span> <span style="color:#717171">16:45</span>
+                            </div>
+                            <div class="list2">
                             <span style="margin-botton:4rem; color:#717171">Its Awesome</span>
+                            <span id="two">2</span>
+                            </div>
+                            
                             
                         </div>
+                       </div>
+
+                       <div style="display:flex">
+                       <div class="tasklist_wrapper1">
+                            <div><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:0.5rem"></div>
+                        </div>
+                        <div class="tasklist_wrapper2">
+                            <div class="list1">
+                            <span style="font-weight:600">Robert Parker</span> <span id="time"style=";color:#717171">16:45</span>
+                            </div>
+                            <div class="list2">
+                            <span style="margin-botton:4rem; color:#717171">Its Awesome</span>
+                            <span id="two" id="msg">2</span>
+                            </div>
+                            
+                            
+                        </div>
+                       </div>
+
+                        
+
+                        
                         
                     </div> 
 
