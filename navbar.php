@@ -160,7 +160,7 @@
         align-items: center;
         border: 1px solid #E5F1FF;
         background-color: #E5F1FF;
-        color: #0177FB !important;
+        color: #0177FB;
         border-radius: 10px;
     }
 
@@ -247,6 +247,8 @@
         <a onclick="openPage('Contact','nav-res','CONTACT US')">Recipes</a>
         <a onclick="openPage('Careers','nav-res','CAREERS')">Appoinments</a>
         <a onclick="openPage('Contact','nav-res','CONTACT US')">Client List</a>
+        <a href ="#"><img src ="icons/healthicon.svg">Health Form</a>
+
         <a>Settings</a>
         <a>Get Help</a>
         <a>Log Out</a>
@@ -268,6 +270,7 @@
                 src="images/vec_appointments.png" class="nav-icon">Appoinments</a>
         <a class="sidenavlink" onclick="openPage('Contact','sidenav','CONTACT US')"><img
                 src="images/vec_client_list.png" class="nav-icon">Client List</a>
+        <a class="sidenavlink" href="#"><img src="icons/healthicon.svg" class="nav-icon">Health Form</a>
         <div class="menu-bottom">
             <a class="sidenavlink"><img src="images/vec_gethelp.png" class="nav-icon">Get Help</a>
             <a class="sidenavlink"><img src="images/vec_settings.png" class="nav-icon">Settings</a>
