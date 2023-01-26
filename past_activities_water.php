@@ -1,3 +1,10 @@
+<?php
+// Client Id
+$clientId = 'Eden';
+// Configure Dates
+date_default_timezone_set("Asia/Calcutta");
+$today = new DateTime();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-
+<?php include 'navbar.php' ?>
 <style>
        .heading {
     margin-left: 3%;
@@ -189,15 +196,58 @@ color: #000000;
     font-size: 20px;
     line-height: 42px;
 }
+.ph-left{
+    padding-left: 3%;
+}
+.ph-right {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5%;
+}
+@media (max-width:576px){
+    .tab{
+        display:flex;
+        width: 100%;
+        flex-wrap:wrap;
+    }
+    .tab button {
+    width: 25%;
+}
+    .graph_button_left{
+        width:25% !important;
+    }
+    /* anothr */
+    .past-header{
+        position:relative;
+    }
+    .ph-right{
+        position:absolute;
+        top: -45px;
+        right: 5px;
+        scale: 0.9;
+        padding: 0;
+    }
+}
+@media (max-width:330px){
+    .past-header{
+        position:relative;
+    }
+    .ph-right{
+        position:absolute;
+        top: -59px;
+        right: -40px;
+        scale: 0.65;
+        padding: 0;
+    }
+}
 </style>
 <body>
-<?php include 'navbar.php' ?>
     <div class="content">
         <!-- tab_links -->
         
-        <div class="row">
+        <div class="row past-header">
             <div class="col-sm-10">
-                <div class="heading">
+                <div class="heading ph-left">
                     <p>Past Activities</p>
                 </div>
                 <div class="tab">
@@ -216,23 +266,119 @@ color: #000000;
             </div>
         </div>
             
-            
+        <?php
+function fetchPastActivity($clientId,$query){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    
+    // echo($query);
+    $result = $conn->query($query) or die("Query Failed");
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+?>    
     
         <!-- past_activities -->
         <div class="graph">
 
          <!-- Tab content -->
                                 <div id="London" id="defaultOpen" class="tab-content">
-                                
+                                <div class="row">
+                                    
+                                        <div class="col">
+                                        <?php for ($i=0; $i < 3; $i++) { ?>
+                                            <div class="week-container">
+                                                <p class="date">19 Jun 2021</p>
+                                                <div class="flex-box">
+                                                <?php for ($j=0; $j < 4; $j++) { ?>
+                                                
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/mug.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p>Water</p>
+                                                                <span>11:00 am</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/water_drop_outline.svg" alt="">
+                                                            <p class="kcal">350 ML</p>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
                                
                                 </div>
 
                                 <div id="Year" class="tab-content">
-                                  
+                                <div class="row">
+                                        <div class="col">
+                                        <?php for ($i=0; $i < 3; $i++) { ?>
+                                            <div class="week-container">
+                                                <p class="date">19 Jun 2021</p>
+                                                <div class="flex-box">
+                                                <?php for ($j=0; $j < 4; $j++) { ?>
+                                                
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/mug.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p>Water</p>
+                                                                <span>11:00 am</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/water_drop_outline.svg" alt="">
+                                                            <p class="kcal">350 ML</p>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div id="Month" class="tab-content">
-                                    
+                                <div class="row">
+                                        <div class="col">
+                                        <?php for ($i=0; $i < 3; $i++) { ?>
+                                            <div class="week-container">
+                                                <p class="date">19 Jun 2021</p>
+                                                <div class="flex-box">
+                                                <?php for ($j=0; $j < 4; $j++) { ?>
+                                                
+                                                    <div class="meal-box">
+                                                        <div class="left">
+                                                            <img src="images/mug.svg" alt="">
+                                                            <div class="meal-title">
+                                                                <p>Water</p>
+                                                                <span>11:00 am</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <img src="images/water_drop_outline.svg" alt="">
+                                                            <p class="kcal">350 ML</p>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 <div id="Week" class="tab-content">
