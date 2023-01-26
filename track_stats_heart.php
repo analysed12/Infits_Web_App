@@ -1,3 +1,42 @@
+<?php
+// Client Id
+$clientId = 'Azarudeen';
+// Configure Dates
+date_default_timezone_set("Asia/Calcutta");
+// $today = new DateTime();
+$today = new DateTime('2022-01-25');
+// Goal Insertion
+if(isset($_POST['savegoal'])){
+    $goal =$_POST['setgoal'];
+    // $current_date = date("Y-m-d");
+    $current_date =  new DateTime('2022-01-25');
+    $dday =  $current_date->format('d');
+    $dmonth =  $current_date->format('m');
+    $dyear =  $current_date->format('y');
+    $conn = new mysqli("localhost", "root", "", "infits");
+
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+
+    
+    $query="UPDATE sleeptracker SET goal = $goal WHERE clientID= '$clientId' AND `sleeptime` >= '{$dday}-{$dmonth}-{$dyear} 00:00:00' AND `sleeptime` <= ''{$dday}-{$dmonth}-{$dyear} 23:59:59'";
+   
+    $result = $conn->query($query) or die("Query Failed");
+    
+    if($result){
+        unset($_POST["savegoal"]);
+        unset($_POST["setgoal"]);
+        header(('Location: http://localhost/analysed/infits/track_stats_heart.php'));
+        // exit();
+    }
+}
+?>
+
+
+
+
+
 <?php  include('config.php');?>
 
 <!DOCTYPE html>

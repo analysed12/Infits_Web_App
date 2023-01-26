@@ -1,3 +1,17 @@
+<?php
+session_start();
+// $conn = new mysqli("localhost", "root", "", "infits");
+
+// if($conn->connect_error){
+//     die("Connection failed :" . $conn->connect_error);
+// }
+//$query="SELECT name FROM dietitian WHERE deititianuserId = 'John_wayne'";
+//$result = $conn->query($query) or die("Query Failed");
+//$_SESSION["clientName"] = "$query";
+//$conn->close();
+$_SESSION["clientName"] = "John Wayne";
+$name =  explode(" ", $_SESSION["clientName"] );
+?>
 <!DOCTYPE HTML>
 <html lang="en" dir="ltr">
 
@@ -485,7 +499,7 @@
     <div class="container">
         <div class="text-center">
             <img src="./images/settingDp.svg" class="rounded" alt="...">
-            <h3 class="display-6 right-float"><br /> John <br /> Wayne</h3>
+            <h3 class="display-6 right-float"><br /> <?php echo ($name[0]) ?><br /> <?php echo($name[1])?></h3>
         </div>
     </div>
 
@@ -502,7 +516,7 @@
             </li>
             <li>
                 <div class="box img-2">
-                    <a href="#">
+                    <a href="referral_code.php">
                         <div class="info">
                             <p>Referral Code</p>
                         </div>
@@ -511,7 +525,7 @@
             </li>
             <li>
                 <div class="box img-3">
-                    <a href="#">
+                    <a href="about_us.php">
                         <div class="info">
                             <p>About Us</p>
                         </div>
@@ -520,7 +534,7 @@
             </li>
             <li>
                 <div class="box img-4">
-                    <a href="#">
+                    <a href="achivement.php">
                         <div class="info">
                             <p>My Achievements</p>
                         </div>
@@ -529,7 +543,7 @@
             </li>
             <li>
                 <div class="box img-5">
-                    <a href="#">
+                    <a href="refer.php">
                         <div class="info">
                             <p>Refer To Friends</p>
                         </div>

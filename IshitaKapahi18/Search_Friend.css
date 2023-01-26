@@ -1,0 +1,77 @@
+.searchfriend{
+    font-family: poppins;  
+    margin-left: 20rem;
+    margin-top: 3rem;
+}
+.searchfriend_wrapper{
+    display: flex;
+    gap: 15rem;
+}
+.searchfriend_container1{
+    margin-left: 2rem;
+}
+.image1{
+    margin-top: 4rem;
+}
+.referal_code_section{
+    width: 18rem;
+    border: 1px solid #4B9AFB;
+    padding: 0.1rem;
+    border-radius: 8px;
+    
+}
+
+input{
+    border-style: none;
+    border-color: Transparent;
+    overflow: hidden;
+    outline: none;
+    padding: 0.5rem;
+    color: #4B9AFB;
+  }
+#copy{
+    border: none;
+    background-color: white;
+    color: #4B9AFB;
+    float: right;
+    margin-top: 0.5rem;
+
+}
+#copy:hover{
+    background-color: hsl(215, 85%, 95%);
+    border-radius: 7px;
+}
+#share{
+    color: white;
+    background-color: #4B9AFB;
+    border-radius: 8px;
+    padding: 0.4rem;
+    border: none;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 1.5rem;
+    margin-left: 11rem;
+}
+#friends_table{
+    margin-top: 2rem;
+}
+.material-symbols-outlined{
+    margin-left: 13rem;
+    cursor: pointer;
+}
+#friend_name{
+    font-size: 1rem;
+    font-weight: 500;
+}
+@media screen and (max-width: 720px) {
+   .searchfriend{
+    margin-left: 3rem;
+   }
+   .searchfriend_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+   }
+
+ 
+ }
