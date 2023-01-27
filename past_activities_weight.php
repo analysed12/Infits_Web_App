@@ -3,8 +3,7 @@
 if(isset($_GET['id']) AND $_GET['id'] != ""){
     $clientId = $_GET['id'];
 }else{
-     header("Location: track_stats_water.php");
-    // $clientId= 'Azarudeen';
+    header("Location: track_stats_heart.php");
 }
 // Configure Dates
 date_default_timezone_set("Asia/Calcutta");
@@ -34,9 +33,9 @@ if(isset($_POST['dates'])){
     $Custom_Day1 = new DateTime(substr($_POST['dates'][0],4,11));
     $Custom_Day2 = new DateTime(substr($_POST['dates'][1],4,11));
         while($Custom_Day2 >= $Custom_Day1){
-            $query="SELECT * FROM watertrackerdt WHERE clientID= '$clientId' AND 
-                    `dateandtime` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
-                    AND `dateandtime` <= '".$Custom_Day1->format('Y-m-d')." 23:59:59';";
+            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                    `date` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
+                    AND `date` <= '".$Custom_Day1->format('Y-m-d')." 23:59:59';";
             $CustomData = fetchPastActivity($clientId,$query);
             
             $count = count($CustomData);
@@ -55,19 +54,19 @@ if(isset($_POST['dates'])){
                 '<div class="flex-box">';
                 
                 while($i<$count){ 
-                    $I_date = new DateTime($CustomData[$i]['dateandtime']);
+                    $I_date = new DateTime($CustomData[$i]['date']);
                 
                 $list .='<div class="meal-box">
                         <div class="left">
-                            <img src="images/mug.svg" alt="">
+                            <img src="images/weight_meter.svg" alt="">
                             <div class="meal-title">
-                                <p> ' .$CustomData[$i]['type'] . '</p>
+                                <p>BMI ' .$CustomData[$i]['bmi'] . '</p>
                                 <span>'.$I_date->format('h:i A').'</span>
                             </div>
                         </div>
                         <div class="right">
-                            <img src="images/water_drop_outline.svg" alt="">
-                            <p class="kcal">'.$CustomData[$i]['drinkConsumed'].' Liters</p>
+                            <img src="images/weight_small.svg" alt="">
+                            <p class="kcal">'.$CustomData[$i]['weight'].' Kg</p>
                         </div>
                     </div>';
                 $i++; }
@@ -177,10 +176,10 @@ border-bottom-left-radius: 1em!important;
 }
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color:#7DACF5;
+  background-color: #9CD1D0;
 }
 .tab button.active {
-  background-color:#7DACF5;
+  background-color: #9CD1D0;
   color: white !important;
 }
 
@@ -217,9 +216,9 @@ border-bottom-left-radius: 1em!important;
 .client-card i {
     font-size: 15px;
 }
-.client-card-calorie{
-    background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
-    border: 1px solid #E3738D;
+.client-card-heart{
+    background: linear-gradient(38.98deg, #768B93 7.65%, #8FC4C3 87.93%);
+    border: 1px solid #E266A9;
     border-radius: 10px;
     margin: 10px 0 0 0;
     width: 97px;
@@ -230,7 +229,7 @@ border-bottom-left-radius: 1em!important;
     justify-content: center;
     gap: 15px;
 }
-.client-card-calorie p{
+.client-card-heart p{
     margin-bottom: 0;
     font-family: 'NATS';
     font-style: normal;
@@ -270,9 +269,8 @@ color: #000000;
     width: 311px;
     height: 67px;
     padding: 20px;
-
-    background: linear-gradient(180deg, rgba(255, 232, 242, 0.2) 0%, rgba(201, 134, 207, 0.2) 100%);
-        border-radius: 10px;
+    background: linear-gradient(181.98deg, rgba(218, 240, 240, 0.2) 1.67%, rgba(86, 107, 115, 0.2) 98.33%);
+    border-radius: 10px;
 }
 .meal-box p{
     margin-bottom: 0;
@@ -368,10 +366,10 @@ color: #000000;
             </div>
             <div class="col-sm-4 ph-right">
                 <!-- metric_button -->
-                <a href="__track_stats_water.php?id=<?php echo($clientId) ?>">
-                <div class="client-card client-card-calorie " style="color:#7DACF5; border: 1px solid #7DACF5;">
-                    <img src="images/water_selected.svg" alt="">
-                    <p>Water</p>
+                <a href="track_stats_weight.php?id=<?php echo($clientId) ?>">
+                <div class="client-card client-card-heart " style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                    <img src="images/weight_selected.svg" alt="">
+                    <p>Weight</p>
                 </div>
                 </a>
             </div>
@@ -397,9 +395,9 @@ color: #000000;
                                         while($yearly_last_month >= $yearly_month){
                                             $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
                                             $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
-                                            $query="SELECT * FROM watertrackerdt WHERE clientID= '$clientId' AND 
-                                                    `dateandtime` >= '".$yearly_Month_1." 00:00:00'
-                                                    AND `dateandtime` <= '".$yearly_Month_2." 23:59:59';";
+                                            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                                                    `date` >= '".$yearly_Month_1." 00:00:00'
+                                                    AND `date` <= '".$yearly_Month_2." 23:59:59';";
                                             $yearly_Data = fetchPastActivity($clientId,$query);
                                             
                                             $count = count($yearly_Data);
@@ -419,19 +417,19 @@ color: #000000;
                                                 <div class="flex-box">
                                                 <?php  
                                                 while($i<$count){ 
-                                                    $I_date = new DateTime($yearly_Data[$i]['dateandtime']);
+                                                    $I_date = new DateTime($yearly_Data[$i]['date']);
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/mug.svg" alt="">
+                                                            <img src="images/weight_meter.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p><?php echo($yearly_Data[$i]['type']) ?></p>
+                                                                <p>BMI <?php echo($yearly_Data[$i]['bmi']) ?></p>
                                                                 <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/water_drop_outline.svg" alt="">
-                                                            <p class="kcal"><?php echo($yearly_Data[$i]['drinkConsumed']) ?> liters</p>
+                                                            <img src="images/weight_small.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['weight']) ?> Kg</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -457,9 +455,9 @@ color: #000000;
                                         while($yearly_last_month >= $yearly_month){
                                             $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
                                             $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
-                                            $query="SELECT * FROM watertrackerdt WHERE clientID= '$clientId' AND 
-                                                    `dateandtime` >= '".$yearly_Month_1." 00:00:00'
-                                                    AND `dateandtime` <= '".$yearly_Month_2." 23:59:59';";
+                                            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                                                    `date` >= '".$yearly_Month_1." 00:00:00'
+                                                    AND `date` <= '".$yearly_Month_2." 23:59:59';";
                                             $yearly_Data = fetchPastActivity($clientId,$query);
                                             
                                             $count = count($yearly_Data);
@@ -479,19 +477,19 @@ color: #000000;
                                                 <div class="flex-box">
                                                 <?php  
                                                 while($i<$count){ 
-                                                    $I_date = new DateTime($yearly_Data[$i]['dateandtime']);
+                                                    $I_date = new DateTime($yearly_Data[$i]['date']);
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/mug.svg" alt="">
+                                                            <img src="images/weight_meter.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p><?php echo($yearly_Data[$i]['type']) ?></p>
+                                                                <p>BMI <?php echo($yearly_Data[$i]['bmi']) ?></p>
                                                                 <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/water_drop_outline.svg" alt="">
-                                                            <p class="kcal"><?php echo($yearly_Data[$i]['drinkConsumed']) ?> liters</p>
+                                                            <img src="images/weight_small.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['weight']) ?> Kg</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -515,9 +513,9 @@ color: #000000;
                                         }
                                         
                                         while($monthly_LastDay >= $monthly_Month){
-                                            $query="SELECT * FROM watertrackerdt WHERE clientID= '$clientId' AND 
-                                                    `dateandtime` >= '".$monthly_Month->format('Y-m-d')." 00:00:00'
-                                                    AND `dateandtime` <= '".$monthly_Month->format('Y-m-d')." 23:59:59';";
+                                            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                                                    `date` >= '".$monthly_Month->format('Y-m-d')." 00:00:00'
+                                                    AND `date` <= '".$monthly_Month->format('Y-m-d')." 23:59:59';";
                                             $monthly_Data = fetchPastActivity($clientId,$query);
                                             
                                             $count = count($monthly_Data);
@@ -537,19 +535,19 @@ color: #000000;
                                                 <div class="flex-box">
                                                 <?php  
                                                 while($i<$count){ 
-                                                    $I_date = new DateTime($monthly_Data[$i]['dateandtime']);
+                                                    $I_date = new DateTime($monthly_Data[$i]['date']);
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/mug.svg" alt="">
+                                                            <img src="images/weight_meter.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p><?php echo($monthly_Data[$i]['type']) ?></p>
+                                                                <p>BMI <?php echo($monthly_Data[$i]['bmi']) ?></p>
                                                                 <span><?php echo($I_date->format('h:i A')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/water_drop_outline.svg" alt="">
-                                                            <p class="kcal"><?php echo($monthly_Data[$i]['drinkConsumed']) ?> liters</p>
+                                                            <img src="images/weight_small.svg" alt="">
+                                                            <p class="kcal"><?php echo($monthly_Data[$i]['weight']) ?> Kg</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -573,9 +571,9 @@ color: #000000;
                                         }
                                         
                                         while($weekly_Day <= $weekly_lastDay){
-                                            $query="SELECT * FROM watertrackerdt WHERE clientID= '$clientId' AND 
-                                                    `dateandtime` >= '".$weekly_Day->format('Y-m-d')." 00:00:00'
-                                                    AND `dateandtime` <= '".$weekly_Day->format('Y-m-d')." 23:59:59';";
+                                            $query="SELECT * FROM weighttracker WHERE clientID= '$clientId' AND 
+                                                    `date` >= '".$weekly_Day->format('Y-m-d')." 00:00:00'
+                                                    AND `date` <= '".$weekly_Day->format('Y-m-d')." 23:59:59';";
                                             $weekly_Data = fetchPastActivity($clientId,$query);
                                             
                                             $count = count($weekly_Data);
@@ -595,19 +593,19 @@ color: #000000;
                                                 <div class="flex-box">
                                                 <?php  
                                                 while($i<$count){ 
-                                                    $I_date = new DateTime($weekly_Data[$i]['dateandtime']);
+                                                    $I_date = new DateTime($weekly_Data[$i]['date']);
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/mug.svg" alt="">
+                                                            <img src="images/weight_meter.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p><?php echo($weekly_Data[$i]['type']) ?></p>
+                                                                <p>BMI <?php echo($weekly_Data[$i]['bmi']) ?></p>
                                                                 <span><?php echo($I_date->format('h:i A')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/water_drop_outline.svg" alt="">
-                                                            <p class="kcal"><?php echo($weekly_Data[$i]['drinkConsumed']) ?> liters</p>
+                                                            <img src="images/weight_small.svg" alt="">
+                                                            <p class="kcal"><?php echo($weekly_Data[$i]['weight']) ?> Kg</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -650,7 +648,7 @@ const customTab = document.getElementById('London');
 function Custom_Data(dates){
     $.ajax({
         type: "POST",
-        url: "past_activities_water.php?id=<?php echo ($clientId) ?>",
+        url: "past_activities_weight.php?id=<?php echo ($clientId) ?>",
         data: {dates: dates},
         success: function(result) {
             customTab.innerHTML = "";

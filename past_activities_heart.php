@@ -1,3 +1,88 @@
+<?php
+// Client Id
+if(isset($_GET['id']) AND $_GET['id'] != ""){
+    $clientId = $_GET['id'];
+}else{
+    // header("Location: __track_stats_water.php");
+    $clientId= 'Azarudeen';
+}
+// Configure Dates
+date_default_timezone_set("Asia/Calcutta");
+$today = new DateTime();
+
+function fetchPastActivity($clientId,$query){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    
+    // echo($query);
+    $result = $conn->query($query) or die("Query Failed");
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+
+if(isset($_POST['dates'])){
+     $list = '
+     <div class="row">
+        <div class="col">';
+    $Custom_Day1 = new DateTime(substr($_POST['dates'][0],4,11));
+    $Custom_Day2 = new DateTime(substr($_POST['dates'][1],4,11));
+        while($Custom_Day2 >= $Custom_Day1){
+            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                    `dateandtime` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
+                    AND `dateandtime` <= '".$Custom_Day1->format('Y-m-d')." 23:59:59';";
+            $CustomData = fetchPastActivity($clientId,$query);
+            
+            $count = count($CustomData);
+            $i = 0;
+    
+            $list .= '<div class="activity-container">
+                <p class="date">'. $Custom_Day1->format('d M Y') .'</p>';
+                
+                $Custom_Day1->modify("+1 day");
+                if(empty($CustomData)){
+                    $list.='<p> NO DATA FOUND </p></div>';
+                    continue;
+                }
+                
+                $list .= 
+                '<div class="flex-box">';
+                
+                while($i<$count){ 
+                    $I_date = new DateTime($CustomData[$i]['dateandtime']);
+                
+                $list .='<div class="meal-box">
+                        <div class="left">
+                            <img src="images/calorie_meal_icon.svg" alt="">
+                            <div class="meal-title">
+                                <p> ' .$CustomData[$i]['type'] . '</p>
+                                <span>'.$I_date->format('h:i A').'</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <img src="images/water_drop_outline.svg" alt="">
+                            <p class="kcal">'.$CustomData[$i]['average'].' bpm</p>
+                        </div>
+                    </div>';
+                $i++; }
+            $list.='</div>
+            </div>';
+         }
+    
+    $list .=
+        '</div>
+    </div>';
+    echo ($list);
+    exit();
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +93,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <?php include 'navbar.php' ?>
 <style>
@@ -18,10 +108,26 @@
     font-size: 44px;
     line-height: 70px;
 }
-    .tab {
+.tab {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
+  position: relative;
+}
+#daterange {
+    border: none;
+    background: transparent;
+    height: 0px;
+    width: 0px;
+    z-index: -1;
+    position: absolute;
+    left: 90px;
+    top: 20px;
+}
+#daterange-btn{
+    position: absolute;
+    top: 5px;
+    left: 92px;
 }
 .tab_button_side{
    border-radius: 12px;
@@ -71,10 +177,10 @@ border-bottom-left-radius: 1em!important;
 }
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #C986CF;
+  background-color:#C986CF;
 }
 .tab button.active {
-  background-color: #C986CF;
+  background-color:#C986CF;
   color: white !important;
 }
 
@@ -93,8 +199,6 @@ border-bottom-left-radius: 1em!important;
 .top_bar{
     display: flex;
    flex-wrap:wrap;
- 
- 
 }
 .client-card {
         width: 70px;
@@ -113,9 +217,9 @@ border-bottom-left-radius: 1em!important;
 .client-card i {
     font-size: 15px;
 }
-.client-card-calorie{
+.client-card-heart{
     background: linear-gradient(217.35deg, #F97EAA 0%, #C389D5 100%);
-    border: 1px solid #E266A9;
+    border: 1px solid #E3738D;
     border-radius: 10px;
     margin: 10px 0 0 0;
     width: 97px;
@@ -126,7 +230,7 @@ border-bottom-left-radius: 1em!important;
     justify-content: center;
     gap: 15px;
 }
-.client-card-calorie p{
+.client-card-heart p{
     margin-bottom: 0;
     font-family: 'NATS';
     font-style: normal;
@@ -140,14 +244,15 @@ border-bottom-left-radius: 1em!important;
     color: #FFFFFF;
 }
 /* -------------------Calorie Tab Content------------------- */
-.week-container{
-    margin: 3%;
+.activity-container{
+    /* margin: 3%; */
+    padding: 3%;
 }
-.week-container p{
+.activity-container p{
     font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
-font-size: 24px;
+font-size: 25px;
 line-height: 30px;
 /* identical to box height */
 color: #000000;
@@ -165,8 +270,9 @@ color: #000000;
     width: 311px;
     height: 67px;
     padding: 20px;
-    background: linear-gradient(180deg, rgba(235, 203, 196, 0.14) 0%, rgba(104, 68, 226, 0.2) 100%, rgba(227, 137, 160, 0.2) 100%);
-    border-radius: 10px;
+
+    background: linear-gradient(180deg, rgba(255, 232, 242, 0.2) 0%, rgba(201, 134, 207, 0.2) 100%);
+        border-radius: 10px;
 }
 .meal-box p{
     margin-bottom: 0;
@@ -225,9 +331,6 @@ color: #000000;
         scale: 0.9;
         padding: 0;
     }
-    .week-container p {
-    font-size: 20px;
-}
 }
 @media (max-width:330px){
     .past-header{
@@ -253,119 +356,261 @@ color: #000000;
                     <p>Past Activities</p>
                 </div>
                 <div class="tab">
-                    <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
+                    <button id="custombtn" class="tablinks graph_button_left" onclick="openCity(event, 'London')">Custom Dates</button>
+                    <input id="daterange"  type="date-range">
+                    <i id="daterange-btn" class="drop fa-solid fa-caret-down"></i>
+                    
+                    
                     <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
                     <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
-                    <button id="temp" class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
+                    <button id="defauttab" class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
                 </div>
             </div>
             <div class="col-sm-4 ph-right">
-                    <!-- metric_button -->
-                <div class="client-card client-card-calorie " style="color:#E266A9; border: 1px solid #E266A9;">
-                    <img src="images/heartrate_selected.svg" alt="">
+                <!-- metric_button -->
+                <a href="__track_stats_water.php?id=<?php echo($clientId) ?>">
+                <div class="client-card client-card-heart " style="color:#E266A9; border: 1px solid #E266A9;">
+                    <img src="images/heart.svg" alt="">
                     <p>Heart Rate</p>
                 </div>
+                </a>
             </div>
         </div>
-            
-            
-    
+                
         <!-- past_activities -->
         <div class="graph">
 
          <!-- Tab content -->
+                                <!-- Custom Data -->
                                 <div id="London" id="defaultOpen" class="tab-content">
-                                
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartwater"></canvas>
-                                </div>
-
-                                <div id="Year" class="tab-content">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartYearly"></canvas>
-                                </div>
-
-                                <div id="Month" class="tab-content">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <canvas id="myChartMonthly"></canvas>
-                                </div>
-                                
-                                <div id="Week" class="tab-content">
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                    <!-- <canvas id="myChartWeekly"></canvas> -->
                                     <div class="row">
                                         <div class="col">
-                                        <?php for ($i=0; $i < 3; $i++) { ?>
-                                            <div class="week-container">
-                                                <p class="date">19 Jun 2021</p>
+                                        <?php
+                                        $yearly_month = new DateTime();
+                                        $yearly_last_month = new DateTime();
+                                        $yearly_month->setDate($yearly_month->format('Y'),01,01);
+                                        if($today->format('m') == '01'){
+                                            $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+                                            $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+                                        }
+                                        
+                                        while($yearly_last_month >= $yearly_month){
+                                            $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
+                                            $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
+                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                                                    `dateandtime` >= '".$yearly_Month_1." 00:00:00'
+                                                    AND `dateandtime` <= '".$yearly_Month_2." 23:59:59';";
+                                            $yearly_Data = fetchPastActivity($clientId,$query);
+                                            
+                                            $count = count($yearly_Data);
+                                            $i = 0;
+                                        ?>
+                                            <div class="activity-container">
+                                                <p class="date"><?php echo ($yearly_month->format('M Y')); ?></p>
+                                                <?php 
+                                                $yearly_month->modify("+1 Month");
+                                                if(empty($yearly_Data)){
+                                                    echo ("<p> NO DATA FOUND </p>");
+                                                    echo ('</div>');
+                                                    // echo('<br>');
+                                                    continue;
+                                                }
+                                                ?>
                                                 <div class="flex-box">
-                                                
-                                                    <div class="meal-box">
-                                                        <div class="left">
-                                                            <img src="images/resting_heart_rate.svg" alt="">
-                                                            <div class="meal-title">
-                                                                <p>Resting</p>
-                                                                <span>11:00 am</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal">150 BPM</p>
-                                                        </div>
-                                                    </div>
+                                                <?php  
+                                                while($i<$count){ 
+                                                    $I_date = new DateTime($yearly_Data[$i]['dateandtime']);
+                                                ?>
                                                     <div class="meal-box">
                                                         <div class="left">
                                                             <img src="images/running_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Running</p>
-                                                                <span>11:00 am</span>
+                                                                <p>heartrate</p>
+                                                                <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal">169 BPM</p>
+                                                            <img src="images/heart_past.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['average']) ?> bpm</p>
                                                         </div>
                                                     </div>
+                                                <?php $i++; } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Yearly Data -->
+                                <div id="Year" class="tab-content">
+                                    <div class="row">
+                                        <div class="col">
+                                        <?php
+                                        $yearly_month = new DateTime();
+                                        $yearly_last_month = new DateTime();
+                                        $yearly_month->setDate($yearly_month->format('Y'),01,01);
+                                        if($today->format('m') == '01'){
+                                            $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+                                            $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+                                        }
+                                        
+                                        while($yearly_last_month >= $yearly_month){
+                                            $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
+                                            $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
+                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                                                    `dateandtime` >= '".$yearly_Month_1." 00:00:00'
+                                                    AND `dateandtime` <= '".$yearly_Month_2." 23:59:59';";
+                                            $yearly_Data = fetchPastActivity($clientId,$query);
+                                            
+                                            $count = count($yearly_Data);
+                                            $i = 0;
+                                        ?>
+                                            <div class="activity-container">
+                                                <p class="date"><?php echo ($yearly_month->format('M Y')); ?></p>
+                                                <?php 
+                                                $yearly_month->modify("+1 Month");
+                                                if(empty($yearly_Data)){
+                                                    echo ("<p> NO DATA FOUND </p>");
+                                                    echo ('</div>');
+                                                    // echo('<br>');
+                                                    continue;
+                                                }
+                                                ?>
+                                                <div class="flex-box">
+                                                <?php  
+                                                while($i<$count){ 
+                                                    $I_date = new DateTime($yearly_Data[$i]['dateandtime']);
+                                                ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/running_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Cycling</p>
-                                                                <span>11:00 am</span>
+                                                                <p>heart rate</p>
+                                                                <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal">153 BPM</p>
+                                                            <img src="images/heart_past.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['average']) ?> bpm</p>
                                                         </div>
                                                     </div>
+                                                <?php $i++; } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Monthly Data -->
+                                <div id="Month" class="tab-content">
+                                    <div class="row">
+                                        <div class="col">
+                                        <?php
+                                        $monthly_Month = new DateTime();
+                                        $monthly_LastDay = new DateTime();
+                                        $monthly_Month->modify("first day of this month");
+                                        if($today->format('d') == '01'){
+                                            $monthly_Month->modify("first day of previous month");
+                                            $monthly_LastDay->modify("last day of previous month");
+                                        }
+                                        
+                                        while($monthly_LastDay >= $monthly_Month){
+                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                                                    `dateandtime` >= '".$monthly_Month->format('Y-m-d')." 00:00:00'
+                                                    AND `dateandtime` <= '".$monthly_Month->format('Y-m-d')." 23:59:59';";
+                                            $monthly_Data = fetchPastActivity($clientId,$query);
+                                            
+                                            $count = count($monthly_Data);
+                                            $i = 0;
+                                        ?>
+                                            <div class="activity-container">
+                                                <p class="date"><?php echo ($monthly_Month->format('d M Y')); ?></p>
+                                                <?php 
+                                                $monthly_Month->modify("+1 day");
+                                                if(empty($monthly_Data)){
+                                                    echo ("<p> NO DATA FOUND </p>");
+                                                    echo ('</div>');
+                                                    // echo('<br>');
+                                                    continue;
+                                                }
+                                                ?>
+                                                <div class="flex-box">
+                                                <?php  
+                                                while($i<$count){ 
+                                                    $I_date = new DateTime($monthly_Data[$i]['dateandtime']);
+                                                ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/sport_heart_rate.svg" alt="">
+                                                            <img src="images/running_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>After Sport</p>
-                                                                <span>11:00 am</span>
+                                                                <p>heart rate</p>
+                                                                <span><?php echo($I_date->format('h:i A')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal">180 BPM</p>
+                                                            <img src="images/heart_past.svg" alt="">
+                                                            <p class="kcal"><?php echo($monthly_Data[$i]['average']) ?> bpm</p>
                                                         </div>
                                                     </div>
+                                                <?php $i++; } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Weekly Data -->
+                                <div id="Week" class="tab-content">
+                                    <div class="row">
+                                        <div class="col">
+                                        <?php
+                                        $weekly_Day = new DateTime();
+                                        $weekly_Day->modify('previous monday');
+                                        $weekly_lastDay =new DateTime();
+                                        
+                                        if($today->format('l')== "Monday"){
+                                            $weekly_lastDay->modify('previous sunday');
+                                        }
+                                        
+                                        while($weekly_Day <= $weekly_lastDay){
+                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                                                    `dateandtime` >= '".$weekly_Day->format('Y-m-d')." 00:00:00'
+                                                    AND `dateandtime` <= '".$weekly_Day->format('Y-m-d')." 23:59:59';";
+                                            $weekly_Data = fetchPastActivity($clientId,$query);
+                                            
+                                            $count = count($weekly_Data);
+                                            $i = 0;
+                                        ?>
+                                            <div class="activity-container">
+                                                <p class="date"><?php echo ($weekly_Day->format('d M Y')); ?></p>
+                                                <?php 
+                                                $weekly_Day->modify("+1 day");
+                                                if(empty($weekly_Data)){
+                                                    echo ("<p> NO DATA FOUND </p>");
+                                                    echo ('</div>');
+                                                    // echo('<br>');
+                                                    continue;
+                                                }
+                                                ?>
+                                                <div class="flex-box">
+                                                <?php  
+                                                while($i<$count){ 
+                                                    $I_date = new DateTime($weekly_Data[$i]['dateandtime']);
+                                                ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/gym_heart_rate.svg" alt="">
+                                                            <img src="images/running_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Gym</p>
-                                                                <span>06:55 pm</span>
+                                                                <p>heart rate</p>
+                                                                <span><?php echo($I_date->format('h:i A')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal">122 BPM</p>
+                                                            <img src="images/heart_past.svg" alt="">
+                                                            <p class="kcal"><?php echo($weekly_Data[$i]['average']) ?> bpm</p>
                                                         </div>
                                                     </div>
-                                                
+                                                <?php $i++; } ?>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -395,10 +640,39 @@ color: #000000;
                                             }
                     
                                             /* // Get the element with id="defaultOpen" and click on it */
-                                            document.getElementById("defaultOpen").click();
-                                            // document.getElementById("temp").click();
-                                       </script> 
+                                            // document.getElementById("defaultOpen").click();
+                                            document.getElementById("defauttab").click();
+                                            </script> 
             </div>
         </div>
+<script>
+const customTab = document.getElementById('London');
+function Custom_Data(dates){
+    $.ajax({
+        type: "POST",
+        url: "_past_activities_water.php?id=<?php echo ($clientId) ?>",
+        data: {dates: dates},
+        success: function(result) {
+            customTab.innerHTML = "";
+            customTab.innerHTML = result;
+            document.getElementById("custombtn").click();
+        }
+    }
+)}
+            const date_btn = document.getElementById('daterange-btn');
+            date_btn.addEventListener('click' , ()=>{
+                fp.toggle();
+            });
+            const fp = flatpickr("input[type = date-range]", {
+                maxDate: "today",
+                dateFormat: "Y-m-d",
+                mode: "range",
+                onClose:[
+                    function(selectedDates){
+                        Custom_Data(selectedDates);
+                    }
+                ]
+            });
+</script>
 </body>
 </html>

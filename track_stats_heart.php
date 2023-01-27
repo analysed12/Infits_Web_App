@@ -1,432 +1,669 @@
+
 <?php
 // Client Id
 $clientId = 'Azarudeen';
 // Configure Dates
 date_default_timezone_set("Asia/Calcutta");
-// $today = new DateTime();
-$today = new DateTime('2022-01-25');
+$today = new DateTime();
 // Goal Insertion
 if(isset($_POST['savegoal'])){
+    $client = $_POST['clientid'];
     $goal =$_POST['setgoal'];
-    // $current_date = date("Y-m-d");
-    $current_date =  new DateTime('2022-01-25');
-    $dday =  $current_date->format('d');
-    $dmonth =  $current_date->format('m');
-    $dyear =  $current_date->format('y');
     $conn = new mysqli("localhost", "root", "", "infits");
 
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
-
     
-    $query="UPDATE sleeptracker SET goal = $goal WHERE clientID= '$clientId' AND `sleeptime` >= '{$dday}-{$dmonth}-{$dyear} 00:00:00' AND `sleeptime` <= ''{$dday}-{$dmonth}-{$dyear} 23:59:59'";
-   
+    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('heart' , $goal, '$client' )";
     $result = $conn->query($query) or die("Query Failed");
     
     if($result){
         unset($_POST["savegoal"]);
         unset($_POST["setgoal"]);
-        header(('Location: http://localhost/analysed/infits/track_stats_heart.php'));
+        header(("Location: track_stats_heart.php"));
         // exit();
     }
 }
+// funtion to fetch
+// This can be more Simple by String Concatination
+function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    // For Sum of All Data Till Today
+    if($isCustom==1){
+        $query="SELECT SUM(average) FROM heartrate WHERE clientID= '$clientId' AND 
+                `dateandtime` <= '{$to_date} 23:59:59';";
+    // for sum of Data between two dates
+    }else if($isCustom==2){
+        $query = "SELECT SUM(average) FROM heartrate WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";
+    // for average of data end to end (monthly)
+    }else if($isCustom==3){
+        $query="SELECT avg(average) FROM heartrate WHERE clientID= '$clientId' AND 
+            `dateandtime` >= '{$from_date} 00:00:00'
+            AND `dateandtime` < '{$to_date} 00:00:00';";
+    // for get latest goal from goals table
+    }else if($isCustom==4){
+        $query="SELECT goal FROM goals WHERE forWhat = 'calorie' ORDER BY time DESC LIMIT 1";
+    // for getting past actvities 
+    }else if($isCustom==5){
+        $query = "SELECT * FROM `heartrate` WHERE clientID = '$clientId' AND `dateandtime` >= '{$from_date} 00:00:00'
+        AND `dateandtime` < '{$to_date} 23:59:59' ORDER BY dateandtime DESC;" ;
+    // for average of data of one full day
+    }else if($isCustom==6){
+        $query = "SELECT SUM(maximum) FROM heartrate WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";
+    // for average of data end to end (monthly)
+    }else if($isCustom==7){
+        $query = "SELECT SUM(minimum) FROM heartrate WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";
+    // for average of data end to end (monthly)
+    }else{
+    $query="SELECT avg(average) FROM heartrate WHERE clientID= '$clientId' AND 
+            `dateandtime` >= '{$from_date} 00:00:00'
+            AND `dateandtime` <= '{$to_date} 23:59:59';";
+    }
+    // echo($query);
+    // echo ('<br>');
+    $result = $conn->query($query) or die("Query Failed");
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
+    $CustomData = array(
+        'value' => array(),
+        'date' => array(),
+        'range' => "",
+    );
+    $CustomDay_1 = new DateTime($_POST['from_date']);
+    $CustomDay_2 = new DateTime($_POST['to_date']);
+    $CustomData['range'] =  $CustomDay_1->format('d M Y') ." - ". $CustomDay_2->format('d M Y') ;
+    
+    while ($CustomDay_2 >= $CustomDay_1) {
+        $CustomDataValue = (int) fetchDataSql($clientId,$CustomDay_1->format('Y-m-d'), $CustomDay_1->format('Y-m-d'),2)[0]['SUM(average)'];
+    
+        array_push($CustomData['value'], $CustomDataValue);
+        array_push($CustomData['date'], $CustomDay_1->format('d'));
+        $CustomDay_1->modify("+1 day");
+    } 
+    $CustomData = json_encode($CustomData);
+    // return $CustomData;
+    header('Content-Type: application/json');
+    echo ($CustomData);
+    exit();
+}
 ?>
-
-
-
-
-
-<?php  include('config.php');?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-            $(document).ready(function(){
-            $(".graph_button_left").click();
-            });
-            $(document).ready(function(){
-            $("#defaultOpen").click(function(){
-                
-            });
-            });
-        </script>
-        <script>
-
-            $(document).ready(function(){
-            $(".pheader p").click(function(){
-                $(".activity_pop").animate({
-                    height: 'toggle'
-                });
-            }); 
-            });
-            $(document).ready(function(){
-            $(".activity_pop img").click(function(){
-                $(".activity_pop").animate({
-                    height: 'toggle'
-                });
-            }); 
-            });
-            
-            var cl=document.getElementById('defaultOpen');
-                        cl.click();
-        </script>
+    
 </head>
+<?php include('navbar.php') ?>
 <style>
-html {
-    overflow-x: hidden;
-}
 
-#content {
+.content{
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
-    height: 90%;
-    font-family: "Poppins";
+}
+tst-left-t{
+    padding-left: 3%;
+}
+.heading{
+    width: 145px;
+    height: 68px;
+
+}
+.heading p{
+    font-family: 'NATS';
     font-style: normal;
-    font-weight: 500;
-    font-size: 35px;
-    padding: 20px;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 68px;
+    /* letter-spacing: -0.114286px; */
+    color: #000000;
+    margin: 0;
 }
-
-#wrapper {
-    height: auto;
-    width: 100%;
-    padding: 20px;
-}
-
-#inner1 {
-    float: left;
-    width: 70%;
-    height: auto;
-}
-
-#inner2 {
-    float: left;
-    width: 30%;
-    height: auto;
-    background: #FFFFFF;
-    border: 1px solid #EFEFEF;
-    border-radius: 31px;
-    padding: 20px;
-}
-
-#inner11 {
-    float: left;
-    /* background: green; */
-    width: 100%;
-}
-
-#inner12 {
-    float: left;
-    clear: left;
-}
-
-.flex-container {
+.card-container{
     display: flex;
     flex-wrap: wrap;
+    /* justify-content: space-between; */
+    gap: 5%;
+    padding-left: 1%;
 }
-
-.flex-container>div {
-    width: 90px;
-    height: auto;
-    /* background: pink; */
-    margin: 10px;
-    text-align: center;
-    /* line-height: 75px; */
-    font-size: 30px;
-    border-radius: 14px;
-    padding: 5px;
+.client-card {
+width: 100px;
+height: 120px;
+background: rgba(255, 255, 255, 0.8);
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+gap: 15px;
+margin-bottom: 15px;
 }
-.flex-container-bottom {
+.client-card a{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
 }
-.flex-container-bottom>div {
-    width: 134px;
-height: 57.45px;
-    /* background: pink; */
-    margin: 10px;
-    text-align: center;
-    /* line-height: 75px; */
-    font-size: 30px;
-    border-radius: 14px;
-    padding: 5px;
-}
-.client-card p {
-    font-size: 15px;
-    
-}
-
-.client-card i {
-    font-size: 15px;
-}
-.client-card-heart {
+.client-card-calorie{
     background: linear-gradient(217.35deg, #F97EAA 0%, #C389D5 100%);
 }
-.client-card-heart p{
-    color: #FFFFFF;
-} 
+.client-card i{
+    scale: 1.5;
+}
+.client-card a img {
+    height: 30px;
+    width: auto;
+}
+.client-card p{
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+line-height: 1;
+font-size: 19px;
+    margin: 0;
+}
+
+/* tst-left b */
+.tst-left-b {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+/* Style the buttons that are used to open the tab content */
+.tab {
+background-color: #f1f1f1;
+border: 1px solid #F8F5F5;
+max-width: 365px;
+width: 100%;
+height: 27px;
+border-top-left-radius: 1em;
+border-bottom-left-radius: 1em;
+border-top-right-radius: 1em;
+border-bottom-right-radius: 1em;
+position: relative;
+}
+.tablinks {
+background: #FFFFFF;
+border: 1px solid #FCFBFB;
+border-radius: 0px;
+width: 24%;
+height: 24px;
+float: left;
+border: none;
+outline: none;
+cursor: pointer;
+transition: 0.3s;
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 27px;
+
+color: #4D4D4D;
+}
+/* border for side buttons */
+.graph_button_left{
+    border-top-left-radius: 1em;
+border-bottom-left-radius: 1em;
+width: 28%;
+}
+.drop{
+    position: absolute;
+    color: #4D4D4D;
+    top: 5px;
+    left: 80px;
+    margin-left: 8px;
+    cursor: pointer;
+    
+}
+#daterange{
+    border: none;
+    background: transparent;
+    height: 0px;
+    width: 0px;
+    z-index: -1;
+    position: absolute;
+    left: 71px;
+    top: 20px;
+}
+.graph_button_right{
+    border-top-right-radius: 1em;
+border-bottom-right-radius: 1em;
+}
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #C986CF;
+}
+.tab button.active {
+  background-color: #C986CF;
+  color: white !important;
+}
 .graph {
-    width: 450px;
-    margin-left: 20px;
-    margin-top: 20px;
+    max-width: 487px;
+    max-height: 240px;
+    width: 100%;
     height: 100%;
     background: #FFFFFF;
     border: 1px solid #F1F1F1;
     box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.16);
     border-radius: 11px;
-    /* border: 1px solid black; */
     padding: 10px;
-
 }
-
-.inner21 {
-    text-align: center;
-}
-
-.inner21-title {
-    font-size: 20px;
-}
-
-.box-btn {
-    width: auto;
-    height: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    font-size: 20px;
-    background: linear-gradient(264.28deg, #D483C6 1.62%, #F37FAF 93.12%);
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);
-    border-radius: 10px;
-}
-
-.box-title {
-    font-size: 15px;
-    color: #FF8B8B;
-}
-
-.box-counter {
-    background: #FFFFFF;
-    border: 1px solid #DFDFDF;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-    border-radius: 10px;
-    color: grey;
-}
-
-
-#wrapper-lower {
-    height: auto;
+.tab_content{
+    position: relative;
+    display: none;
     width: 100%;
-    padding: 20px;
+    height: 100%;
 }
-
-#inner1-lower {
-    float: left;
-    width: 70%;
-    height: auto;
-    /* background: blue; */
+.tab_content canvas{
+    width: 100%;
+    height: 100%;
 }
-
-#inner2-lower {
-    float: left;
-    width: 30%;
-    height: auto;
-    /* background: pink; */
-    /* background: #FFFFFF;
+.i-button {
+    position: absolute;
+    top: -4%;
+    right: -12%;
+    cursor: pointer;
+}
+.i-pop {
+    background: #ffffff;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 27px;
+    position: absolute;
+    /* right: -62%; */
+    /* top: 10%; */
+    right: -12%;
+    top: 12%;
+    box-shadow: 0px 1.74334px 13.0751px rgb(0 0 0 / 25%);
     border: 1px solid #EFEFEF;
-    border-radius: 31px;
-    padding:20px; */
+    padding: 10px 15px;
+    width: 500px;
+    text-align: center;
+    border-radius: 15px;
+    display: none;
+    transition: 2s ease-in-out;
 }
 
-#inner11-lower {
-    float: left;
-    /* background: green; */
+/* Goal Dialog */
+.tst-right {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 25px 0;
+}
+.set-goal {
     width: 100%;
-}
-
-#inner12-lower {
-    float: left;
-    clear: left;
-}
-
-.bottom-btns{
+    height: 100%;
+    max-width: 380px;
+    max-height: 450px;
+    /* background: #FFFFFF; */
+    border: 1px solid #EFEFEF;
+    background: url('./images/goal-bg.svg');
+    background-repeat: no-repeat;
+    background-position: inherit;
+    box-shadow: 0px 1.74334px 13.0751px rgba(0, 0, 0, 0.25);
+    border-radius: 13.0751px;
+    position: relative;
+    padding: 10px;
     display: flex;
-    flex-direction: row;
-    justify-content:space-evenly;
-}
-.bottom-stats-btn{
-    display: flex;
+    gap: 20px;
     flex-direction: column;
-    justify-content:center;
-    width: 88px;
-height: 38.95px;
-    background: #FFFFFF;
-border: 1px solid #F1F1F1;
-padding:8px;
-box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
-border-radius: 16px;
-width: 134px;
-height: 57.45px;
+    /* justify-content: center; */
+    align-items: center;
 }
-.table{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    margin: 2%;
-
+.set-goal .heading{
+    position: relative;
+    padding-left: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }
-@keyframes growProgressBar {
-
-    0%,
-    33% {
-        --pgPercentage: 0;
-    }
-
-    100% {
-        --pgPercentage: var(--value);
-    }
+#g-set-success {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+    font-size: 20px;
+    letter-spacing: 2px;
 }
-
-@property --pgPercentage {
-    syntax: '<number>';
-    inherits: false;
-    initial-value: 0;
+.set-goal img{
+width: 211px;
+height: 166px;
 }
-
-div[role="progressbar"] {
-    --size: 10rem;
-    --fg: #E68AA1;
-    --bg: #F9E0E7;
-    --pgPercentage: var(--value);
-    animation: growProgressBar 3s 1 forwards;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    
-    box-shadow: -9px 9px 18px rgba(217, 217, 217, 0.2), 9px -9px 18px rgba(217, 217, 217, 0.2), -9px -9px 18px rgba(255, 255, 255, 0.9), 9px 9px 23px rgba(217, 217, 217, 0.9), inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(217, 217, 217, 0.5);
-    background:
-        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
-        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: calc(var(--size) / 7);
-    color: var(--fg);
+.set-goal span {
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 40px;
+    color: #DF7296;
+    margin-top: -10px;
 }
-
-div[role="progressbar"]::before {
-    counter-reset: percentage var(--value);
-    content: '❤️' counter(percentage)' ' 'bpm';
-}
-
-
-@media (min-width: 0px) and (max-width: 720px) {
-    #inner1 {
-        width: 100% !important;
-    }
-
-    #inner2 {
-        clear: left;
-        margin-top: 30px !important;
-        width: 100% !important;
-    }
-
-    #inner11 {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-
-    }
-
-    #inner12 {
-        width: 100% !important;
-    }
-
-    .graph {
-        /* display: flex;
-        align-items: center;
-        justify-content: center; */
-        width: 100% !important;
-        margin-left: 0 !important;
-    }
-
-    .flex-container>div {
-        width: 70px;
-        height: auto;
-        margin: 10px;
-        text-align: center;
-        font-size: 20px;
-        border-radius: 14px;
-        padding: 5px;
-    }
-}
-.heart_info{
-    padding:2px;
- display: flex;
+.set-goal form{
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 19px;
-line-height: 40px;
-
-color: #5D5D5D;
 }
-.heart_info span span{
-    font-family: 'NATS';
+.set-goal input{
+width: 163px;
+height: 45px;
+border: 1px solid #DFDFDF;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+border-radius: 10px;
+padding: 8px 25px;
+}
+.set-goal input::placeholder{
+font-family: 'Nunito';
 font-style: normal;
-font-weight: 400;
-/* font-size: 15px; */
-
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+color: #ABA3A3;
 text-align: center;
-
-color: #000000;
 }
-.cpb{
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: top;
-    justify-content: center;
+#save-goal {
     margin-top: 20px;
-    margin-bottom: 50px;
+    border: none;
+    width: 124px;
+    height: 45px;
+    background: linear-gradient(264.28deg, #D483C6 1.62%, #F37FAF 93.12%);
+    box-shadow: 0px 3.48718px 3.48718px rgba(0, 0, 0, 0.28);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 19px;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
 }
-.max{
+/* page down */
+.tsd-left-t {
+    padding: 25px 0 25px 10px;
+}
+.stats-btn-container{
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-wrap:wrap;
     justify-content: center;
     align-items: center;
-    border-left: 2px solid #C986CF;
-    border-right: 2px solid #C986CF;
-    width:120px;
-
+    padding :0 10px;
 }
-/* .max span{
+.stat-btn{
+    /* max-width: 134px;
+    max-height: 57.45px; */
+    height: 57.45px;
+    /* width: 25%; */
+    width: 134px;
+    /* height: 100%; */
+    background: #FFFFFF;
+    border: 1px solid #F1F1F1;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    
+}
+.stat-data{
+    width: 100%;
+    height: 100%;
     font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 42px;
-letter-spacing: 0.03em;
-
+    font-style: normal;
+    font-weight: 400;
+}
+.stat-data .title{
+font-size: 18px;
+line-height: 0;
+color: #5D5D5D;
+margin-left: 5px;
+}
+.stat-data .value{
+font-size: 25px;
+line-height: 0;
+text-align: center;
 color: #000000;
-} */
+margin-left: 5px;
+}
+.stat-data .unit{
+font-size: 17px;
+line-height: 0;
+color: #6B6B6B;
+margin-left: 5px;
+}
+/* Table Activity */
+.tsd-left-b{
+    padding-left: 30px;
+}
+.tsd-left-b .heading {
+    width: 100%;
+    max-width: 549px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.tsd-left-b .heading p{
+    font-size: 25px;
+    line-height: 53px;
+}
+.tsd-left-b .heading span{
+    font-size: 13px;
+    font-weight: bold;
+    color: #A4A4A4;    
+}
+.heading-border{
+    margin-top: -10px;
+    width: 100%;
+    max-width: 549px;
+    height: 2px;
+    background-color: #F5F5F5;
+}
+.activity-container{
+    width: 100%;
+    max-width: 549px;
+    margin-top: 15px;
+}
+.activity-box{
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0;
+}
+.activity-date {
+    display: flex;
+    flex-direction: column;
+    width: 17%;
+    justify-content: flex-end;
+    align-items: center;
+}
+.activity-box .up{
+    font-size: 20px;
+    line-height: 10px;
+    letter-spacing: 0.03em;
+    color: #E47E9B;
+}
+.activity-box .down{
+    font-size: 23px;
+    line-height: 49px;
+    /* identical to box height */
+    letter-spacing: 0.03em;
+    color: #000000;
+}
+.activity-border{
+    height: 50px;
+    width: 5px;
+    background-color: #E47E9B;
+    margin: 0 20px;
+}
+.activity-data{
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    align-items: center;
+}
+.activity-time{
+    font-size: 19px;
+    line-height: 40px;
+    letter-spacing: 0.03em;
+    color: #000000;
+    opacity: 0.44;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 70px;
+}
+/* progress bar */
+.tsd-right{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .tsd-right .heading {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 30%;
+        padding-right: 5%;
+    }
+    .tsd-right .heading p{
+        font-size: 22px;
+        line-height: 46px;
+        color: #000000;
+    }
+    .tsd-right .heading span{
+        font-size: 16px;
+        line-height: 46px;
+        color: #E27998;
+    }
+.progress-bar-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 10px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    color: #000000;
+    position: relative;
+}
+.total-consumed {
+    position: absolute;
+    top: 20px;
+    right: -110px;
+}
+.total-consumed span,
+.total-remaining span{
+    font-size: 25px;
+    line-height: 0;
+    letter-spacing: 0.03em;
+    color: #000000;
+}
+.total-consumed p,
+.total-remaining p {
+    font-size: 22px;
+    line-height: 50px;
+    letter-spacing: 0.03em;
+}
+.total-remaining{
+    position: absolute;
+    bottom: -20px;
+    left: -110px;
+}
+.progress-circle{
+    width: 214px;
+    height: 214px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    /* background: conic-gradient(#F9E0E7 50% , #E68AA1 0); */
+}
+.progress-circle-fill {
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    background: #fff;
+}
+.progress-circle-value{
+    width: 175px;
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.progress-circle-value span{
+    font-size: 20px;
+    line-height: 35px;
+}
+#progress-percent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    line-height: 50px;
+}
+/* -------------------- */
 
+/* media */
+@media (max-width:420px) {
+    .tst-left-b {
+    padding: 20px;
+    }
+    .tsd-left-t {
+    padding-left: 0;
+    }
+    .tsd-left-b {
+    padding-left: 0;
+    }
+    .tsd-right {
+    scale: 0.8;
+    }
+    .progress-bar-container {
+    scale: 0.8;
+    }
+}
 .heart_beat_box{
     display: flex;
     flex-direction: row;
@@ -466,772 +703,743 @@ color: #000000;
     justify-content: center;
     align-items: center;
 }
-.table_top{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 20px;
-}
-.table_top>span{
-    font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 21px;
-line-height: 44px;
-
-color: #000000;
-}
-.table_element{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin: 20px;
-    height:60px
-}
-.table_element>div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width:200px
-}
-
-.table_element>div>span{
-    font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 42px;
-letter-spacing: 0.03em;
-
-color: #C986CF;
-}
-.table_element>div>p{
-
-    font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 23px;
-line-height: 49px;
-
-
-}
-.date{
-    
-    border-right: 1px solid #C986CF;
-
-}
-.table_time>span{
-    width: 103.19px;
-height: 40px;
-    font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 19px;
-line-height: 40px;
-letter-spacing: 0.03em;
-color: #000000;
-
-opacity: 0.77;
-}
-.pheader{
-	display :flex;
-	flex-direction:row;
-	justify-content:space-between;
-}
-.pheader p{
-	font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 34px;
-/* identical to box height */
-width: 77px;
-height: 34px;
-margin-left: 20px;
-color: #9C74F5;
-}
-.activity_pop{
-    position: relative;
+.max{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 369px;
-    height: 545px;
-    background: #FFFEFE;
-    border-radius: 32px;
-    box-shadow: 0px 3px 4px rgba(0.16, 0.16, 0.16, 0.16);
-    margin-top: -250px;
-    padding: 2px;
+    border-left: 2px solid #C986CF;
+    border-right: 2px solid #C986CF;
+    width:120px;
 
-}
-.activity_pop img{
-    align-self: flex-end;
-    margin-right: 20px;
-}
-.pop_header span{
-    font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 25px;
-line-height: 53px;
-/* identical to box height */
-
-
-color: #FF7B44;
-}
-.pop_box{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: space-between;
-    margin: 10 px;
-    padding: 10px;
-}
-.pop_box_info{
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    align-items: flex-end !important;
-    height: 49px;
-font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 22px;
-line-height: 20px;
-padding : 0 px !important;
-color: #000000;
-}
-/* a:hover, .active {
-    align-items: center;
-    border: 1px solid #E5F1FF;
-    background-color:  #FF8B8B !important;
-    color: #FFFFFF !important;
-    border-radius: 10px;
-} */
-.pop_box{
-
-    width: 344px;
-    height: 49px;
-    background: linear-gradient(135deg, rgba(255, 232, 242, 0.48) 0%, rgba(201, 134, 207, 0.48) 100%);
-    border-radius: 10px;
-    margin:5px;
-}
-/* css for graph tabs */
-/* Style the tab */
-.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-}
-.tab_button_side{
-   border-radius: 12px;
-}
-/* Style the buttons that are used to open the tab content */
-.tab {
-  overflow: hidden;
-  /* border: 1px solid #ccc;
-  background-color: #f1f1f1; */
-  border: 1px solid #F8F5F5;
-  width: 365px;
-height: 27px;
-margin-left: 3%;
-border-top-left-radius: 1em!important;
-border-bottom-left-radius: 1em!important;
-border-top-right-radius: 1em!important;
-  border-bottom-right-radius: 1em!important;
-}
-
-
-/* Style the buttons that are used to open the tab content */
-.tab button {
-    background: #FFFFFF;
-    border: 1px solid #FCFBFB;
-    border-radius: 0px;
-    width: 85.35px;
-height: 24px;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  /* padding: 14px 16px; */
-  transition: 0.3s;
-  font-family: 'NATS';
-font-style: normal;
-font-weight: 400;
-font-size: 13px;
-line-height: 27px;
-
-color: #4D4D4D;
-}
-.graph_button_side{
-    border: 1px solid #F8F5F5;
-  border-top-right-radius: 1em!important;
-  border-bottom-right-radius: 1em!important;
-}
-.graph_button_left{
-  width: 106.69px !important;
-border-top-left-radius: 1em!important;
-border-bottom-left-radius: 1em!important;
-}
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #C986CF;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #C986CF;
-  color: white !important;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  /* border: 1px solid #ccc; */
-  border-top: none;
-}
-#setgoalweight{
-    background: #FFFFFF;
-border: 0px solid #DFDFDF;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-border-radius: 10px;
-width: 163px;
-height: 45px;
-}
-.graph_button{
-    width: 365px !important;
-    height: 27px !important;
-        
-    font-family: 'NATS' !important;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    font-size: 13px !important;
-    line-height: 27px !important;
-
-    color: #4D4D4D;
-}
-.graph_button_side{
-  
-    border-top-right-radius: 1em!important;
-    border-bottom-right-radius: 1em!important;
-}
-.graph_button_left{
-    width: 106.69px !important;
-  border-top-left-radius: 1em!important;
-  border-bottom-left-radius: 1em!important;
-}
-.graph_button>button{
-    width: 76px;
-    height: 27px;
-    background: #FFFFFF;
-    border: 1px solid #FCFBFB;
-    box-sizing: border-box;
-    border-radius: 2px;
-    font-family: 'NATS';
-}
-.client-card{
-    height: 120px !important;
 }
 </style>
-
 <body>
-    <?php include 'navbar.php' ?>
-    <?php 
-       
-    ?>
-    <div id="content">
+<div class="content">
+    <div class="row ts-top">
 
-        <div id="wrapper">
-            <div id="inner1">
-                <div id="inner11">
-                    <div class="flex-container">
-                        <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                            <a href="track_stats_steps.php">
-                            <i class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA;rotate: -90deg;"></i>
-                            <p style="color:#FF6C6CCA;">Step</p>
+        <div class="col-lg-8 tst-left">
+
+            <div class="tst-left-t">
+                <div class="heading">
+                    <p>Clients Stats</p>
+                </div>
+                <div class="card-container">
+                <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                        <a href="track_stats_steps.php">
+                            <i class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA; rotate: -90deg;"></i>
+                            <p style="color: #FF6C6CCA;">Step</p>
+                        </a>
+                        </div>
+                        <div class="client-card client-card-calorie" style="color:#E266A9; border: 1px solid #E266A9;">
+                        <a href="track_stats_heart.php">
+                                <img src="images/heart.svg" alt=""/>
+                            <p style="color:#FFFFFF;">Heart Rate</p>
                             </a>
                         </div>
-                        <div class="client-card client-card-heart " style="color:#E266A9; border: 1px solid #E266A9;">
-                        <a href="track_stats_heart.php">
-                            <img src="images/heart.svg" alt=""/>
-                            <p style="color:#FFFFFF;">Heart Rate</p>
-                        </a>
-                        </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                        <a href="track_stats_water.php" >
-                            <i class="fa-solid fa-droplet" style="color:#52A4FF;"></i>
+                        <a href="track_stats_water.php">
+                            <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
                             <p style="color:#52A4FF;">Water</p>
-                        </a>
+                            </a>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                        <a href="track_stats_weight.php" >
+                        <a href="track_stats_weight.php">
                             <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
                             <p style="color:#7D5DE6;">Weight Track</p>
-                        </a>
+                            </a>
                         </div>
                         <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                        <a href="track_stats_sleep.php" >          
+                        <a href="track_stats_sleep.php">
                             <i style="color:#54AFAC;" class="fa-solid fa-moon"></i>
                             <p style="color:#54AFAC;">Sleep</p>
-                        </a>
+                            </a>
                         </div>
-                        <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                        <a href="track_stats_calorie.php" >
-                            <i style="color:#E3738D;" class="fa-solid fa-stopwatch-20"></i>
-                            <p style="color:#E3738D;">Calorie Track</p>
-                        </a>
+                        <div class="client-card " style="color:#E3738D; border: 1px solid #E3738D;">
+                        <a href="track_stats_calorie.php">
+                        <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i>
+                        <p style="color:#E3738D;">Calorie Track</p>
+                            </a>
                         </div>
-                    </div>
-
-                </div>
-                <div id="inner12">
-
-                                        <div class="tab">
-                                           <button class="tablinks graph_button_left " onclick="openCity(event, 'London')">Custom Dates</button>
-                                           <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
-                                           <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
-                                           <button class="tablinks graph_button_side" class="tab_button_side" onclick="openCity(event, 'Week')">Week</button>
-                                        </div>
-                <div class="graph">
-                                           
-                                           
-               
-                                           <!-- Tab content -->
-                                <div id="London" id='defaultOpen' class="tabcontent">
-                                
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartwater"></canvas>
-                                </div>
-
-                                <div id="Year" class="tabcontent">
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartYearly"></canvas>
-                                </div>
-
-                                <div id="Month" class="tabcontent">
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartMonthly"></canvas>
-                                </div>
-                                
-                                <div id="Week" class="tabcontent">
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                                <canvas id="myChartWeekly"></canvas>
-                                </div>
-                                
-                                </script>
-                               
-                                       <script>
-                                            function openCity(evt, cityName) {
-                                                /* Declare all variables */
-                                                var i, tabcontent, tablinks;
-                    
-                                                /* // Get all elements with class="tabcontent" and hide them */
-                                                tabcontent = document.getElementsByClassName("tabcontent");
-                                                for (i = 0; i < tabcontent.length; i++) {
-                                                    tabcontent[i].style.display = "none";
-                                                }
-                                                
-                                                /* // Get all elements with class="tablinks" and remove the class "active" */
-                                                tablinks = document.getElementsByClassName("tablinks");
-                                                for (i = 0; i < tablinks.length; i++) {
-                                                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                                                }
-                    
-                                                /* // Show the current tab, and add an "active" class to the button that opened the tab */
-                                                document.getElementById(cityName).style.display = "block";
-                                                
-                                                evt.currentTarget.className += " active";
-                                            }
-                    
-                                            /* // Get the element with id="defaultOpen" and click on it */
-                                            document.getElementById("defaultOpen").click();
-                                            /* document.getElementById("defaultOpen").onclick(); */
-                                       </script> 
-                               </div>
                 </div>
             </div>
-            <div id="inner2">
-                <div class="inner21">
-                    <div class="inner21-title">
-                        Set Goals
+
+            <div class="tst-left-b">
+                <div class="tab">
+                
+                    <button class="tablinks graph_button_left" onclick="openCity(event, 'London')">Custom Dates</button>
+                    <input id="daterange"  type="date-range">
+                    <i id="daterange-btn" class="drop fa-solid fa-caret-down"></i>
+                   
+                    <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
+                    <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
+                    <button class="tablinks graph_button_right" onclick="openCity(event, 'Week')">Week</button>
+                </div>
+                <div class="graph">
+                    <!-- Tab content -->
+                    <div id="London" class="tab_content">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                    <canvas id="myChart"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="london_pop" class="i-pop"></div>
                     </div>
-                    <div class="inner21-image">
-                        <img src="images/equipment.svg" alt="">
+                    
+                    <div id="Year" class="tab_content">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                    <canvas id="myChartYearly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="year_pop" class="i-pop"></div>
                     </div>
-                    <div class="box-title">Daily Heart Rate</div>
-                    <div class="box-counter">
-                    Goal:<input type="number" id="setgoalweight" name="weightgoal">
+
+                    <div id="Month" class="tab_content">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                    <canvas id="myChartMonthly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="month_pop" class="i-pop"></div>
                     </div>
-                    <buttpn class="box-btn">Set</buttpn>
+                    
+                    <div id="Week" class="tab_content">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                    <canvas id="myChartWeekly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="week_pop" class="i-pop"></div>
+                    </div>
+                
+                    <script>
+                    function openCity(evt, cityName) {
+                    /* Declare all variables */
+                    var i, tab_content, tablinks;
+
+                    /* // Get all elements with class="tab_content" and hide them */
+                    tab_content = document.getElementsByClassName("tab_content");
+                    for (i = 0; i < tab_content.length; i++) {
+                        tab_content[i].style.display = "none";
+                    }
+
+                    /* // Get all elements with class="tablinks" and remove the class "active" */
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+
+                    /* // Show the current tab, and add an "active" class to the button that opened the tab */
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                    }
+
+                    /* // Get the element with id="defaultOpen" and click on it */
+                    document.getElementsByClassName('graph_button_right')[0].click();
+                    // document.getElementById("London").style.display = "block";
+                    </script> 
+                </div>
+            </div>           
+        </div>
+        <div class="col-lg-4 tst-right">
+            <div class="set-goal">
+                <div class="heading">
+                    <p>Heart Rate Goal</p>
+                    <span>Daily Heart Rate</span>
+                    <span id="g-set-success"></span>
+                </div>
+                <img src="images/equipment.svg" alt="">
+                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 BPM">
+                    <input name="clientid"  type="hidden" value="<?php echo($clientId) ?>">
+                    <button type="submit" name="savegoal" id="save-goal">Set</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php 
+
+
+// All Data Total Sum
+$allDataSum = fetchDataSql($clientId, '', $today->format('Y-3-d'), 1)[0]['SUM(average)'];
+// Today Data Sum
+$todayData = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),2)[0]['SUM(average)'];
+// Week Average
+$pastWeek =new DateTime();
+$pastWeek->modify('-1 week');
+$weekAvg = fetchDataSql($clientId,$pastWeek->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(average)'];
+// Month Average
+$pastMonth = new DateTime();
+$pastMonth->modify('-1 month');
+$monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(average)'];
+?>
+    <div class="row ts-down">
+        <div class="col-lg-7 tsd-left">
+            <div class="tsd-left-t">
+                <div class="stats-btn-container">
+                    
+                    <div class="stat-btn">
+                        <div class="stat-data">
+                            <span class="title">Daily Count</span>
+                            <span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">bpm</span>
+                        </div>
+                    </div>
+                    <div class="stat-btn">
+                        <div class="stat-data">
+                            <span class="title">Weekly Avg</span>
+                            <span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">bpm</span>
+                        </div>
+                    </div>
+                    <div class="stat-btn">
+                        <div class="stat-data">
+                            <span class="title">Monthly Avg</span>
+                            <span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">bpm</span>
+                        </div>
+                    </div>
+                    <div class="stat-btn">
+                        <div class="stat-data">
+                            <span class="title">Total</span>
+                            <span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">bpm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<?php
+$pastActivityData = fetchDataSql($clientId,$today->format('Y-m-d'),$today->format('Y-m-d'),5);
+$k = 0;
+$j = count($pastActivityData);
+?>
+            <div class="tsd-left-b table-activity">
+                <div class="heading">
+                    <p>Past Activity</p>
+                    <a href="past_activities_heart.php?id=<?php echo ($clientId) ?>"><span>View All</span></a>
+                </div>
+                <div class="heading-border"></div>
+                <div class="activity-container">
+<?php while($k<$j){
+    $date = new DateTime($pastActivityData[$k]['dateandtime']);
+?>
+                    <div class="activity-box">
+                        <div class="activity-date">
+                            <span class="up"><?php echo ($date->format('D')) ?></span>
+                            <span class="down"><?php echo ($date->format('d')) ?></span>
+                        </div>
+                        <div class="activity-border"></div>
+                        <div class="activity-data">
+                            <span class="up"><?php echo 'heartrate' ?></span>
+                            <span class="down"><?php echo ($pastActivityData[$k]['average']) ?> bpm</span>
+                        </div>
+                        <div class="activity-time">
+                            <span><?php echo ($date->format('h:i A')) ?></span>
+                        </div>
+                    </div>
+<?php $k++; } ?>
+
                 </div>
             </div>
         </div>
-
-        <div id="wrapper-lower">
-        <div class="row">
-            <div class="col-sm-8">
-
-                <div class="bottom-btns">
-                    
-                <div class="flex-container-bottom">
-                   <?php
-                                                        
-                            $today = date('Y-m-d');
-
-                            $from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
-
-                            $to = date('Y-m-d', strtotime('1 days', strtotime($today)));
-
-                            // $clientID = $_POST['clientID'];
-
-                            $clientID = "Azarudeen";
-
-                            $sql = "SELECT * 
-                                FROM heartrate
-                                WHERE clientID='$clientID' AND `dateandtime` = '$today';";
-
-
-                            $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
-
-                                $emparray = array();
-                                $full=array();
-                                while($row =mysqli_fetch_assoc($result))
-                                {
-                                    $emparray['date'] = $row['dateandtime'];
-                                    $a = json_decode($row['maximum']);
-                                    $average = array_sum($a)/count($a);
-                                    $emparray['avg'] = $average;
-                                    $emparray['min'] = min($a);
-                                    $emparray['max'] = max($a);
-
-                                    $full[] = $emparray;
-                                }
-                                // echo json_encode(['heart' => $full]);
-                                $avg=array_column($full,'avg');
-                                $minh=array_column($full,'min');
-                                $maxh=array_column($full,'max');
-                                 
-                   ?>          
-                            <div class="bottom-stats-btn">
-                                <div class="heart_info">
-                                    <span>Daily Count</span>
-                                    <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
-                                </div>
-                                
-                            </div>
-
-                            <div class="bottom-stats-btn">
-                                <div class="heart_info">
-                                    <span>Weekly Avg</span>
-                                    <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
-                                </div>
-                                
-                            </div>
-                    
-                      
-                      
-                            <div class="bottom-stats-btn">
-                                <div class="heart_info">
-                                <span>Monthly Avg</span>
-                                <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
-                                </div>
-                               
-                            </div>
-
-                            <div class="bottom-stats-btn">
-                                <div class="heart_info">
-                                <span>Total</span>
-                                <span><span><?php echo json_encode((int) $avg);?></span> BPM</span>
-                                </div>
-                               
-                            </div>
-                    </div>
-                           
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                    <?php   
-                        // pastActivity query
-                        $today = date('Y-m-d');
-
-                        $from = date('Y-m-d', strtotime('-8 days', strtotime($today)));
-
-                        $to = date('Y-m-d', strtotime('1 days', strtotime($today)));
-
-
-                        // $clientID = $_POST['clientID'];
-
-                        $clientID = 'Azarudeen';
-
-                        $sql = "select steps,dateandtime from steptracker where clientID = '$clientID' and dateandtime between '$from' and '$to';";
-
-                        $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
-
-                            $emparray = array();
-                            while($row =mysqli_fetch_assoc($result))
-                            {
-                            $emparray['date'] = date("d-m-Y",strtotime($row['dateandtime']));
-                            $emparray['steps'] = $row['steps'];
-                            $full[] = $emparray;
-                            }
-                            $pastDate= array_column($full, 'date');
-                            $pastSteps= array_column($full, 'steps');
-                    ?>
-                    <div class="table">
-                        <div class="table_top">
-                            <span>Past Activity</span>
-                            <div class="calendat_but"><img src="images/calender_toggle.svg"></div>
-                     
-                        </div>
-                      
-                     <?php
-                     $a=1;
-                     for ($i=0; $i <4 ; $i++) { ?>
-                         <div class="table_element">
-                        <div class="date">
-                        <span>Sep</span>
-                        <p><?php echo $pastDate[$i]?></p>
-                        </div>
-                        <div class="table_activity">
-                        <span>Steps</span>
-                        <p><?php echo $pastSteps[$i]?></p>
-                        <?php
-                        echo ' </div>';
-                        echo '<div class="table_time">';
-                        echo '   <span>9:10 AM</span>';
-                        echo ' </div>';
-                        echo '</div>';
-                     }
-
-                     
-                    
-                     ?>
-                      </div>   
-                         
-                    </div>
-                </div>
+<?php
+$progressBarData = fetchDataSql($clientId, '', '',4);
+$calorieConsumed = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'), 2);
+$heartRateM = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'), 6);
+$heartRatem = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'), 7);
+if(empty($heartRateM)){
+    $heartRateM = 0;
+}else{
+    $heartRateM = $heartRateM[0]['SUM(maximum)'];
+}
+if(empty($heartRatem)){
+    $heartRatem = 0;
+}else{
+    $heartRatem = $heartRatem[0]['SUM(minimum)'];
+}
+if(empty($calorieConsumed)){
+    $calorieConsumed = 0;
+}else{
+    $calorieConsumed = $calorieConsumed[0]['SUM(average)'];
+}
+if(empty($progressBarData)){
+    $currentGoal =  0;
+    $progressPercent = 0;
+}else{
+    $currentGoal =  $progressBarData[0]['goal'];
+    $progressPercent = round(($calorieConsumed / $currentGoal) * 100,2);
+}
+$calorieRemaining = (int) $currentGoal - (int) $calorieConsumed;
+?>     
+        <div class="col-lg-5 tsd-right">
+            <div class="heading">
+                <p>Daily Progress</p>
+                <a href="past_activities_heart.php?id=<?php echo ($clientId) ?>"><span>View Activity</span></a>
             </div>
-            <div class="col-sm-4">
-                <?php
-                 $userid='Azarudeen';
-                 $sql = "SELECT average, maximum, minimum FROM heartrate WHERE clientID = '$userid' ORDER BY clientID DESC LIMIT 1";
-                 $result = $conn->query($sql);
-                 $row = $result->fetch_assoc();
-                ?>
-                <div class="pheader">
-						<h4>Daily Progress</h4>
-						<p>View Activity</p>
-					</div>
-                <div class="cpb">
-                    <div role="progressbar" style="--value:<?php $value = 73; echo $value; ?>"></div>
+            <div class="progress-bar-container">
+                
+                <div id="progress-percent" class="progress-circle">
+                    <div class="progress-circle-fill">
+                        <div class="progress-circle-value"><span id="progress-percent">❤️<?php echo((int)($calorieConsumed)) ?></span><span>bpm</span></div>
+                    </div>
                 </div>
                 <div class="heart_beat_box">
                     <div class="avg">
                         <span>Avg</span>
-                        <p><?php echo $row["average"];?> BPM</p>
+                        <p><?php echo ( (int) $calorieConsumed)?> BPM</p>
                     </div>
                     <div class="max">
                         <span>Max</span>
-                        <p><?php echo $row["maximum"];?> BPM</p>
+                        <p><?php echo($heartRateM)?> BPM</p>
                     </div>
                     <div class="low">
                         <span>Low</span>
-                        <p><?php echo $row["minimum"];?> BPM</p>
+                        <p><?php echo($heartRatem)?> BPM</p>
                     </div>
                 </div>
-                <div class="activity_pop">
-                
-                <?php
-                   
-                ?>
-                <img src="images/exit.svg" alt="">
-                    <div class="pop_header">
-                        <span>Activity</span>
-                    </div>
-                    <div class="pop_box">
-                       <img src="images/man_running.svg" alt="">
-                        <div class="pop_box_info">
-                            <span>Running</span>
-                            <p> m</p>
-                        </div>
-                        <div class="pop_box_info">
-                        <span>Running</span>
-                            <p>m</p>
-                        </div>
-                    </div>
-                    <div class="pop_box">
-                    <img src="images/man_running.svg" alt="">
-                        <div class="pop_box_info">
-                            <span>Running</span>
-                            <p> m</p>
-                        </div>
-                        <div class="pop_box_info">
-                        <span>Running</span>
-                            <p> m</p>
-                        </div>
-                    </div>
-                    <div class="pop_box">
-                    <img src="images/man_running.svg" alt="">
-                        <div class="pop_box_info">
-                            <span>Running</span>
-                            <p> m</p>
-                        </div>
-                        <div class="pop_box_info">
-                        <span>Running</span>
-                            <p> m</p>
-                        </div>
-                    </div>
-                    <div class="pop_box">
-                    <img src="images/man_running.svg" alt="">
-                        <div class="pop_box_info">
-                            <span>Running</span>
-                            <p>m</p>
-                        </div>
-                        <div class="pop_box_info">
-                        <span>Running</span>
-                            <p>9075 m</p>
-                        </div>
-                    </div>
-                    <div class="pop_box">
-                    <img src="images/man_running.svg" alt="">
-                        <div class="pop_box_info">
-                            <span>Running</span>
-                            <pm</p>
-                        </div>
-                        <div class="pop_box_info">
-                        <span>Running</span>
-                            <p>9075 m</p>
-                        </div>
-                    </div>
-                    <div class="pop_box">
-                    <img src="images/man_running.svg" alt="">
-                        <div class="pop_box_info">
-                            <span>Running</span>
-                            <p> m</p>
-                        </div>
-                        <div class="pop_box_info">
-                        <span>Running</span>
-                            <p>9075 m</p>
-                        </div>
-                    </div>
             </div>
         </div>
-           
-        </div>
-    </div>
-</body>
 <script>
-var xValues = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  
- var yValues = [1000, 2000, 3000, 5000, 2000, 5000, 6000];
- 
-                    new Chart("myChartwater", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#C986CF",
-                                        borderColor: "#C986CF",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: true
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                        new Chart("myChartYearly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#C986CF",
-                                        borderColor: "#C986CF",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                            
-                            new Chart("myChartMonthly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#C986CF",
-                                        borderColor: "#C986CF",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                            new Chart("myChartWeekly", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        fill: false,
-                                        lineTension: 0,
-                                        backgroundColor: "#C986CF",
-                                        borderColor: "#C986CF",
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 1000,
-                                                max: 12000
-                                            }
-                                        }],
-                                    }
-                                }
-                            });
-                           
+    const progressPercent = document.getElementById('progress-percent');
+    progressPercent.style.setProperty("background", "conic-gradient(#F9E0E7 <?php echo(100 - $progressPercent) ?>% , #E68AA1 0)");
 </script>
+    </div>
+</div>
+<?php
+// To Get - Yearly data
+$year_pop = 0;
+$wholeYearData = array(
+    'value' => array(),
+    'month' => array()
+);
+$yearly_month = new DateTime();
+$yearly_last_month = new DateTime();
+$yearly_month->setDate($yearly_month->format('Y'),01,01);
+if($today->format('m') == '01'){
+    $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
+    $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+    $year_pop = 1;
+}
+while($yearly_last_month >= $yearly_month){
+    
+    $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
+    $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
+    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1, $yearly_Month_2,3)[0]['avg(average)'];
 
+    array_push($wholeYearData['value'], $yearly_Data);
+    array_push($wholeYearData['month'], $yearly_month->format('M'));
+    $yearly_month->modify('+1 month');
+}
+$month_pop = 0;
+$wholeMonthData = array(
+    'value' => array(),
+    'date' => array(),
+);
+$monthly_Month = new DateTime();
+$monthly_LastDay = new DateTime();
+$monthly_Month->modify("first day of this month");
+
+if($today->format('d') == '01'){
+    $monthly_Month->modify("first day of previous month");
+    $monthly_LastDay->modify("last day of previous month");
+    $month_pop = 1;
+}
+while ($monthly_LastDay >= $monthly_Month) {
+    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('Y-m-d'), $monthly_Month->format('Y-m-d'),2)[0]['SUM(average)'];
+
+    array_push($wholeMonthData['value'],$monthly_Data);
+    array_push($wholeMonthData['date'], $monthly_Month->format('d'));
+    $monthly_Month->modify("+1 day");
+    
+}
+// To Get - Weekly Data
+$week_pop = 0;
+$wholeWeekData = array(
+    'value' => array(),
+    'day' => array(),
+);
+$weekly_Day = new DateTime();
+$weekly_Day->modify('previous monday');
+$weekly_lastDay =new DateTime();
+
+if($today->format('l')== "Monday"){
+    $weekly_lastDay->modify('previous sunday');
+    $week_pop = 1;
+}
+
+while($weekly_Day <= $weekly_lastDay){
+    $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('Y-m-d'), $weekly_Day->format('Y-m-d'),2);
+
+    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(average)']);
+    array_push($wholeWeekData['day'], $weekly_Day->format('D'));
+    $weekly_Day->modify("+1 day");
+}
+?>
+<script>
+const london_pop = document.getElementById('london_pop');
+const year_pop = document.getElementById('year_pop');
+const month_pop = document.getElementById('month_pop');
+const week_pop = document.getElementById('week_pop');
+const i_buttons = document.getElementsByClassName('i-button');
+const i_pop = document.getElementsByClassName('i-pop');
+
+if(<?php echo($year_pop) ?>){
+    year_pop.innerText = "As it is fresh year, we are showing you the previous year's data until the latest data is synced for this month!";
+    london_pop.innerText = "As it is fresh year, we are showing you the previous year's data until the latest data is synced for this month!";
+}else{
+    year_pop.innerText = "We are showing you the ongoing year's data and it keeps updating realtime!";
+    london_pop.innerText = "We are showing you the ongoing year's data and it keeps updating realtime!";
+}
+
+if(<?php echo($month_pop) ?>){
+    month_pop.innerText = "As it is fresh month, we are showing you the previous month's data until the latest data is synced for this month!";
+}else{
+    month_pop.innerText = "We are showing you the ongoing month's data and it keeps updating realtime!";
+}
+
+if(<?php echo($week_pop) ?>){
+    week_pop.innerText = "As it is fresh year, we are showing you the previous week's data until the latest data is synced for the week!";
+}else{
+    week_pop.innerText = "We are showing you the ongoing week's data and it keeps updating realtime!";
+}
+
+
+for(let i =0; i<i_buttons.length; i++){
+    i_buttons[i].addEventListener('mouseover',()=>{
+        i_pop[i].style.display = "Block";
+    });
+    i_buttons[i].addEventListener('mouseout',()=>{
+        i_pop[i].style.display = "none";
+    });
+}
+// --------------Charts--------------
+// Default Chart (Function)
+const defaultChart = document.getElementById('myChart');
+function CustomChart_Data(from_date,to_date){
+    window.customChart.destroy();
+    $.ajax({
+        type: "POST",
+        url: "track_stats_calorie.php",
+        data: {from_date: from_date, to_date: to_date},
+        success: function(result) {
+        london_pop.innerHTML = "We are showing you the data in range <br>"+ result['range'] +" !";
+        window.customChart = new Chart(defaultChart, {
+                                type: 'line',
+                                data: {
+                                labels: result['date'],
+                                datasets: [{
+                                    fill: false,
+                                    lineTension: 0,
+                                    backgroundColor: "#C986CF",
+                                    borderColor: "#C986CF",
+                                    data: result['value'],
+                                    borderWidth: 1
+                                }]
+                                },
+                                options: {
+                                    // title: {
+                                    //     display: true,
+                                    //     text: result['range'],
+                                    //     fontFamily: 'NATS',
+                                    //     fontStyle: 'bold',
+                                    //     fontSize: 15,
+                                    //     // fontColor: 'black',
+                                    //     fontColor: '#9D9D9D',
+                                    // },
+                                    scales: {
+                                        xAxes:[{
+                                            gridLines:{
+                                                display:false,
+                                            },
+                                            ticks:{
+                                                fontFamily: 'NATS',
+                                                fontStyle: 'bold',
+                                                fontSize:11,
+                                                fontColor: '#9D9D9D',
+                                            }
+                                        }],
+                                        yAxes:[{
+                                            ticks:{
+                                                // min:2500,
+                                                // max:3000,
+                                                // stepSize:100,
+                                                fontFamily: 'NATS',
+                                                fontStyle: 'bold',
+                                                fontSize:13,
+                                                fontColor: '#9D9D9D',
+                                            },
+                                        }],
+                                    },
+                                    legend:{
+                                        display:false,
+                                    },
+                                    //   responsive:true,
+                                    tooltips:{
+                                        enabled:true,
+                                        // innerHeight:500,
+                                        // innerWidth:500,
+                                    },
+                                    layout:{
+                                        padding:{
+                                            left:5,
+                                            right:5,
+                                            top:0,
+                                            bottom:5,
+                                        },
+                                    },
+                                }
+                            });
+                        }
+                    });
+        document.getElementsByClassName('graph_button_left')[0].click();
+}
+const date_btn = document.getElementById('daterange-btn');
+date_btn.addEventListener('click' , ()=>{
+    fp.toggle();
+});
+const fp = flatpickr("input[type = date-range]", {
+    maxDate: "today",
+    dateFormat: "Y-m-d",
+    mode: "range",
+    onClose:[
+        function(selectedDates){
+            const Date_1 = new Date(selectedDates[0]);
+            const Date_2 = new Date(selectedDates[1]);
+            CustomChart_Data(Date_1.toISOString().slice(0,10),Date_2.toISOString().slice(0,10));
+        }
+    ]
+});
+
+window.customChart = new Chart(defaultChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'". implode("','", $wholeYearData['month']). "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#C986CF",
+        borderColor: "#C986CF",
+        data: [<?php echo(implode(', ', $wholeYearData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+                // min:2500,
+                // max:3000,
+                // stepSize:100,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+    //   responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+// Yearly Chart
+const yearlyChart = document.getElementById('myChartYearly');
+new Chart(yearlyChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'". implode("','", $wholeYearData['month']). "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#C986CF",
+        borderColor: "#C986CF",
+        data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+                // min:2500,
+                // max:3000,
+                // stepSize:100,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+    //   responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+// Monthly Chart
+const monthlyChart = document.getElementById('myChartMonthly');
+new Chart(monthlyChart, {
+    type: 'line',
+    data: {
+    labels: [<?php echo("'" . implode("','", $wholeMonthData['date']) . "'") ?>],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#C986CF",
+        borderColor: "#C986CF",
+        data: [ <?php echo(implode(', ', $wholeMonthData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize: 11,
+                fontColor: '#9D9D9D',
+            }
+        }],
+        yAxes:[{
+            ticks:{
+                // min:2500,
+                // max:3000,
+                stepSize:500,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:12,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+      responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+// Weekly Chart
+const weeklyChart = document.getElementById('myChartWeekly');
+new Chart(weeklyChart, {
+    type: 'line',
+    data: {
+    // labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    labels: [
+        <?php
+         echo("'" . implode("','", $wholeWeekData['day']) . "'") 
+    ?>
+    ],
+    datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "#C986CF",
+        borderColor: "#C986CF",
+        data: [ <?php echo( implode(', ',$wholeWeekData['value'])) ?>],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        xAxes:[{
+            gridLines:{
+                display:false,
+            },
+            ticks:{
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize: 13,
+                fontColor: '#9D9D9D',
+            },
+        }],
+        yAxes:[{
+            ticks:{
+                // min:2500,
+                // max:3000,
+                stepSize:500,
+                fontFamily: 'NATS',
+                fontStyle: 'bold',
+                fontSize:12,
+                fontColor: '#9D9D9D',
+            },
+        }],
+    },
+    legend:{
+        display:false,
+    },
+      responsive:true,
+    tooltips:{
+        enabled:true,
+        // innerHeight:500,
+        // innerWidth:500,
+    },
+    layout:{
+        padding:{
+            left:5,
+            right:5,
+            top:5,
+            bottom:5,
+        },
+    },
+    }
+});
+</script>
+</body>
 </html>
+
+

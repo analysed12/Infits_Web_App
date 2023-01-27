@@ -36,28 +36,38 @@ function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
     }
     // For Sum of All Data Till Today
     if($isCustom==1){
-        $query="SELECT SUM(drinkConsumed) FROM watertrackerdt WHERE clientID= '$clientId' AND 
+        $query="SELECT SUM(steps) FROM steptracker WHERE clientID= '$clientId' AND 
                 `dateandtime` <= '{$to_date} 23:59:59';";
     // for sum of Data between two dates
     }else if($isCustom==2){
-        $query = "SELECT SUM(drinkConsumed) FROM watertrackerdt WHERE clientID= '$clientId' AND 
+        $query = "SELECT SUM(steps) FROM steptracker WHERE clientID= '$clientId' AND 
                 `dateandtime` >= '{$from_date} 00:00:00'
                 AND `dateandtime` <= '{$to_date} 23:59:59';";;
     // for average of data end to end (monthly)
     }else if($isCustom==3){
-        $query="SELECT avg(drinkConsumed) FROM watertrackerdt WHERE clientID= '$clientId' AND 
+        $query="SELECT avg(steps) FROM steptracker WHERE clientID= '$clientId' AND 
             `dateandtime` >= '{$from_date} 00:00:00'
             AND `dateandtime` < '{$to_date} 00:00:00';";
     // for get latest goal from goals table
     }else if($isCustom==4){
-        $query="SELECT goal FROM goals WHERE forWhat = 'water' ORDER BY time DESC LIMIT 1";
+        $query="SELECT goal FROM goals WHERE forWhat = 'steps' ORDER BY time DESC LIMIT 1";
     // for getting past actvities 
     }else if($isCustom==5){
-        $query = "SELECT * FROM `watertrackerdt` WHERE clientID = '$clientId' AND `dateandtime` >= '{$from_date} 00:00:00'
+        $query = "SELECT * FROM `steptracker` WHERE clientID = '$clientId' AND `dateandtime` >= '{$from_date} 00:00:00'
         AND `dateandtime` < '{$to_date} 23:59:59' ORDER BY dateandtime DESC;" ;
     // for average of data of one full day
+    }else if($isCustom==6){
+        $query = "SELECT SUM(distance) FROM steptracker WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";;
+    // for average of data end to end (monthly)
+    }else if($isCustom==7){
+        $query = "SELECT SUM(calories) FROM steptracker WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";;
+    // for average of data end to end (monthly)
     }else{
-    $query="SELECT avg(drinkConsumed) FROM watertrackerdt WHERE clientID= '$clientId' AND 
+    $query="SELECT avg(steps) FROM steptracker WHERE clientID= '$clientId' AND 
             `dateandtime` >= '{$from_date} 00:00:00'
             AND `dateandtime` <= '{$to_date} 23:59:59';";
     }
@@ -82,7 +92,7 @@ if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
     $CustomData['range'] =  $CustomDay_1->format('d M Y') ." - ". $CustomDay_2->format('d M Y') ;
     
     while ($CustomDay_2 >= $CustomDay_1) {
-        $CustomDataValue = (int) fetchDataSql($clientId,$CustomDay_1->format('Y-m-d'), $CustomDay_1->format('Y-m-d'),2)[0]['SUM(drinkConsumed)'];
+        $CustomDataValue = (int) fetchDataSql($clientId,$CustomDay_1->format('Y-m-d'), $CustomDay_1->format('Y-m-d'),2)[0]['SUM(steps)'];
     
         array_push($CustomData['value'], $CustomDataValue);
         array_push($CustomData['date'], $CustomDay_1->format('d'));
@@ -197,7 +207,7 @@ border: 1px solid #F8F5F5;
 max-width: 365px;
 width: 100%;
 height: 27px;
-border-top-left-radius: 1em;
+border-top-left-radius: 1em;left
 border-bottom-left-radius: 1em;
 border-top-right-radius: 1em;
 border-bottom-right-radius: 1em;
@@ -253,10 +263,10 @@ border-bottom-right-radius: 1em;
 }
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #63AEFF;
+  background-color: #FF8B8B;
 }
 .tab button.active {
-  background-color: #63AEFF;
+  background-color: #FF8B8B;
   color: white !important;
 }
 .graph {
@@ -360,7 +370,7 @@ height: 166px;
     font-weight: 400;
     font-size: 23px;
     line-height: 40px;
-    color: #5CA7F8;
+    color: #FF8B8B;
     margin-top: -10px;
 }
 .set-goal form{
@@ -391,7 +401,7 @@ text-align: center;
     border: none;
     width: 124px;
     height: 45px;
-    background: linear-gradient(263.28deg, #FA8686 0%, #9FB0F2 0.01%, #5CA7F8 93.31%);
+    background: linear-gradient(262.45deg, #FA8686 9.26%, #F1A680 93.19%);
     box-shadow: 0px 3.48718px 3.48718px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
     color: #ffffff;
@@ -509,7 +519,7 @@ margin-left: 5px;
     font-size: 20px;
     line-height: 10px;
     letter-spacing: 0.03em;
-    color: #63AEFF;
+    color: #FF8B8B;
 }
 .activity-box .down{
     font-size: 23px;
@@ -521,7 +531,7 @@ margin-left: 5px;
 .activity-border{
     height: 50px;
     width: 5px;
-    background-color: #63AEFF;
+    background-color:#FF8B8B;
     margin: 0 20px;
 }
 .activity-data{
@@ -563,36 +573,119 @@ margin-left: 5px;
     .tsd-right .heading span{
         font-size: 16px;
         line-height: 46px;
-        color: #5FA8F8;
+        color: #FF8B8B;
     }
 .progress-bar-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    align-items: center;
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
     color: #000000;
     position: relative;
 }
+.pbc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+}
+.left{
+    margin-right: 20px;
+}
+.right{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.right_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #FF8B8B;
+border-radius: 10px;
+width: 120px;
+height: 56px;
+margin-top: 20px;
+color: #000000;
+padding: 5px;
+}
+.right_div span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+margin-top: 5px;
+/* identical to box height */
+
+
+
+color: #FFFFFF;
+}
+.right_div p{
+
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 19px;
+
+
+
+color: #FFFFFF;
+}
 .total-consumed {
+    background: #FF8B8B;
+border-radius: 10px;
     position: absolute;
+    
     top: 20px;
     right: -110px;
 }
 .total-consumed span,
 .total-remaining span{
-    font-size: 25px;
+    font-size: 20px;
     line-height: 0;
     letter-spacing: 0.03em;
     color: #000000;
 }
 .total-consumed p,
 .total-remaining p {
+    font-size: 20px;
+    line-height: 50px;
+    letter-spacing: 0.03em;
+}
+
+.total-consumed1 {
+    background: #FF8B8B;
+border-radius: 10px;
+margin-top: 20px;
+    position: absolute;
+    top: 100px;
+    right: -110px;
+}
+.total-consumed1 span,
+.total-remaining span{
+    font-size: 20px;
+    line-height: 0;
+    letter-spacing: 0.03em;
+    color: #000000;
+}
+.total-consumed1 p,
+.total-remaining p {
     font-size: 22px;
     line-height: 50px;
     letter-spacing: 0.03em;
 }
 .total-remaining{
+    background: #FF8B8B;
+border-radius: 10px;
     position: absolute;
-    bottom: -20px;
+    bottom: -40px;
     right: -110px;
 }
 .progress-circle{
@@ -608,7 +701,7 @@ margin-left: 5px;
     width: 175px;
     height: 175px;
     border-radius: 50%;
-    background: #fff;
+    background: #FF8B8B;
 }
 .progress-circle-value{
     width: 175px;
@@ -617,14 +710,55 @@ margin-left: 5px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+   
 }
 .progress-circle-value span{
+    
     font-size: 20px;
     line-height: 35px;
 }
 #progress-percent{
+   
     font-size: 48px;
     line-height: 50px;
+}
+.progress-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+.progress-bottom-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.progress-bottom-div span{
+    
+color: #0A0A0A;
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+}
+.progress-bottom-div p{
+    color: #FF8B8B;
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+}
+.colorid{
+    color: #FFFFFF;
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 55px;
 }
 /* -------------------- */
 
@@ -646,23 +780,9 @@ margin-left: 5px;
     scale: 0.8;
     }
 }
-.client-card-water{
-    background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
-    border: 1px solid #52A4FF;
-    border-radius: 10px;
-}
-.client-card-water p{
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 120%;
-    /* or 23px */
 
-    text-align: center;
-
-    color: #FFFFFF;
-
+.client-card-steps{
+    background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
 }
 </style>
 <body>
@@ -676,10 +796,10 @@ margin-left: 5px;
                     <p>Clients Stats</p>
                 </div>
                 <div class="card-container">
-                <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                <div class="client-card client-card-steps" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
                         <a href="track_stats_steps.php">
-                            <i class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA; rotate: -90deg;"></i>
-                            <p style="color: #FF6C6CCA;">Step</p>
+                            <i class="fa-solid fa-shoe-prints" style="color:#FFFFFF; rotate: -90deg;"></i>
+                            <p style="color: #FFFFFF;">Step</p>
                         </a>
                         </div>
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
@@ -688,10 +808,10 @@ margin-left: 5px;
                             <p style="color:#E266A9;">Heart Rate</p>
                             </a>
                         </div>
-                        <div class="client-card client-card-water" style="color:#52A4FF; border: 1px solid #52A4FF;">
+                        <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
                         <a href="track_stats_water.php">
-                        <img src="images/water_selected.svg" alt="">
-                            <p style="color:#FFFFFF;">Water</p>
+                        <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
+                        <p style="color:#52A4FF;">Water</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
@@ -788,13 +908,13 @@ margin-left: 5px;
         <div class="col-lg-4 tst-right">
             <div class="set-goal">
                 <div class="Water Intake Goal">
-                    <p>Water Intake Goal</p>
-                    <span>Daily water Consumption</span>
+                    <p>Steps Goal </p>
+                    <span>Daily Steps</span>
                     <span id="g-set-success"></span>
                 </div>
-                <img src="images/man_drinking_water.svg" alt="">
+                <img src="images/steps_goal_run.svg" alt="">
                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                    <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 Liters">
+                    <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 Steps">
                     <input name="clientid"  type="hidden" value="<?php echo($clientId) ?>">
                     <button type="submit" name="savegoal" id="save-goal">Set</button>
                 </form>
@@ -805,17 +925,19 @@ margin-left: 5px;
 
 
 // All Data Total Sum
-$allDataSum = fetchDataSql($clientId, '', $today->format('Y-3-d'), 1)[0]['SUM(drinkConsumed)'];
+$allDataSum = fetchDataSql($clientId, '', $today->format('Y-3-d'), 1)[0]['SUM(steps)'];
 // Today Data Sum
-$todayData = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),2)[0]['SUM(drinkConsumed)'];
+$todayData = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),2)[0]['SUM(steps)'];
+$todayDatad = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),6)[0]['SUM(distance)'];
+$todayDatac = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),7)[0]['SUM(calories)'];
 // Week Average
 $pastWeek =new DateTime();
 $pastWeek->modify('-1 week');
-$weekAvg = fetchDataSql($clientId,$pastWeek->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(drinkConsumed)'];
+$weekAvg = fetchDataSql($clientId,$pastWeek->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(steps)'];
 // Month Average
 $pastMonth = new DateTime();
 $pastMonth->modify('-1 month');
-$monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(drinkConsumed)'];
+$monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(steps)'];
 ?>
     <div class="row ts-down">
         <div class="col-lg-7 tsd-left">
@@ -825,25 +947,25 @@ $monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('
                     <div class="stat-btn">
                         <div class="stat-data">
                             <span class="title">Daily Count</span>
-                            <span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">Glasses</span>
+                            <span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">Steps</span>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
                             <span class="title">Weekly Avg</span>
-                            <span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">Glasses</span>
+                            <span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">Steps</span>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
                             <span class="title">Monthly Avg</span>
-                            <span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">Glasses</span>
+                            <span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">Steps</span>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
                             <span class="title">Total</span>
-                            <span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">Glasses</span>
+                            <span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">Steps</span>
                         </div>
                     </div>
                 </div>
@@ -856,7 +978,7 @@ $j = count($pastActivityData);
             <div class="tsd-left-b table-activity">
                 <div class="heading">
                     <p>Past Activity</p>
-                    <a href="past_activities_water.php?id=<?php echo ($clientId) ?>"><span>View All</span></a>
+                    <a href="_past_activities_steps.php?id=<?php echo ($clientId) ?>"><span>View All</span></a>
                 </div>
                 <div class="heading-border"></div>
                 <div class="activity-container">
@@ -870,8 +992,8 @@ $j = count($pastActivityData);
                         </div>
                         <div class="activity-border"></div>
                         <div class="activity-data">
-                            <span class="up"><?php echo (ucwords($pastActivityData[$k]['type'])) ?></span>
-                            <span class="down"><?php echo ($pastActivityData[$k]['drinkConsumed']) ?> Liters</span>
+                            <span class="up">Walking</span>
+                            <span class="down"><?php echo ($pastActivityData[$k]['steps']) ?> Steps</span>
                         </div>
                         <div class="activity-time">
                             <span><?php echo ($date->format('h:i A')) ?></span>
@@ -888,7 +1010,7 @@ $calorieConsumed = fetchDataSql($clientId, $today->format('Y-m-d'), $today->form
 if(empty($calorieConsumed)){
     $calorieConsumed = 0;
 }else{
-    $calorieConsumed = $calorieConsumed[0]['SUM(drinkConsumed)'];
+    $calorieConsumed = $calorieConsumed[0]['SUM(steps)'];
 }
 if(empty($progressBarData)){
     $currentGoal =  0;
@@ -902,27 +1024,54 @@ $calorieRemaining = (int) $currentGoal - (int) $calorieConsumed;
         <div class="col-lg-5 tsd-right">
             <div class="heading">
                 <p>Daily Progress</p>
-                <a href="past_activities_calorie.php"><span>View Activity</span></a>
+                <a href="_past_activities_steps.php"><span>View Activity</span></a>
             </div>
-            <div class="progress-bar-container">
-                <div class="total-consumed">
-                    <span><?php echo ($calorieRemaining) ?> Liters</span>
-                    <p>Remaining</p>
-                </div>
-                <div id="progress-percent" class="progress-circle">
-                    <div class="progress-circle-fill">
-                        <div class="progress-circle-value"><span id="progress-percent"><img src="images/water_drop.svg" alt=""></span><span><?php echo($progressPercent) ?>%</span></div>
+            <div class="pbc">
+                <div class="progress-bar-container">
+                    <div class="left">
+                        <div id="progress-percent" class="progress-circle">
+                            <div class="progress-circle-fill">
+                                <div class="progress-circle-value"><span class="colorid " id="progress-percent "><?php echo($progressPercent) ?>%</span><span>Of daily step goal</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="right_div">
+                            <span>Daily goal</span>
+                            <p><?php echo $currentGoal?></p>
+                        </div>
+                        <div class="right_div">
+                            <span>Weekly goal</span>
+                            <p><?php echo 7*$currentGoal?></p>
+                        </div>
+                        <div class="right_div">
+                            <span>Monthly goal</span>
+                            <p><?php echo 30*$currentGoal?></p>
+                        </div>
                     </div>
                 </div>
-                <div class="total-remaining">
-                    <span><?php echo((int) $calorieConsumed) ?> Liters</span>
-                    <p>Consumed</p>
+                <div class="progress-bottom">
+                        <div class="progress-bottom-div">
+                            <span>
+                                <img src="images/footsteps.svg" alt=""> Steps</span>
+                            <p><?php echo(ceil($todayData)) ?></p>
+                        </div>
+                        <div class="progress-bottom-div">
+                            <span>
+                            <img src="images/distance.svg" alt=""> Distance</span>
+                            <p><?php echo(ceil($todayDatad)) ?></p>
+                        </div>
+                        <div class="progress-bottom-div">
+                            <span>
+                            <img src="images/fire.svg" alt=""> Burned</span>
+                            <p><?php echo(ceil($todayDatac)) ?></p>
+                        </div>
                 </div>
             </div>
         </div>
 <script>
     const progressPercent = document.getElementById('progress-percent');
-    progressPercent.style.setProperty("background", "conic-gradient(#63AEFF <?php echo(100 - $progressPercent) ?>% , #B1D4Fa 0)");
+    progressPercent.style.setProperty("background", "conic-gradient(#FFE0D1 <?php echo(100 - $progressPercent) ?>% , #FF8B8B 0)");
 </script>
     </div>
 </div>
@@ -945,7 +1094,7 @@ while($yearly_last_month >= $yearly_month){
     
     $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
     $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
-    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1, $yearly_Month_2,3)[0]['avg(drinkConsumed)'];
+    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1, $yearly_Month_2,3)[0]['avg(steps)'];
 
     array_push($wholeYearData['value'], $yearly_Data);
     array_push($wholeYearData['month'], $yearly_month->format('M'));
@@ -966,7 +1115,7 @@ if($today->format('d') == '01'){
     $month_pop = 1;
 }
 while ($monthly_LastDay >= $monthly_Month) {
-    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('Y-m-d'), $monthly_Month->format('Y-m-d'),2)[0]['SUM(drinkConsumed)'];
+    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('Y-m-d'), $monthly_Month->format('Y-m-d'),2)[0]['SUM(steps)'];
 
     array_push($wholeMonthData['value'],$monthly_Data);
     array_push($wholeMonthData['date'], $monthly_Month->format('d'));
@@ -991,7 +1140,7 @@ if($today->format('l')== "Monday"){
 while($weekly_Day <= $weekly_lastDay){
     $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('Y-m-d'), $weekly_Day->format('Y-m-d'),2);
 
-    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(drinkConsumed)']);
+    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(steps)']);
     array_push($wholeWeekData['day'], $weekly_Day->format('D'));
     $weekly_Day->modify("+1 day");
 }
@@ -1051,8 +1200,8 @@ function CustomChart_Data(from_date,to_date){
                                 datasets: [{
                                     fill: false,
                                     lineTension: 0,
-                                    backgroundColor: "#63AEFF",
-                                    borderColor: "#63AEFF",
+                                    backgroundColor: "#FF8B8B",
+                                    borderColor: "#FF8B8B",
                                     data: result['value'],
                                     borderWidth: 1
                                 }]
@@ -1138,8 +1287,8 @@ window.customChart = new Chart(defaultChart, {
     datasets: [{
         fill: false,
         lineTension: 0,
-        backgroundColor: "#63AEFF",
-        borderColor: "#63AEFF",
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
         data: [<?php echo(implode(', ', $wholeYearData['value'])) ?>],
         borderWidth: 1
     }]
@@ -1197,8 +1346,8 @@ new Chart(yearlyChart, {
     datasets: [{
         fill: false,
         lineTension: 0,
-        backgroundColor: "#63AEFF",
-        borderColor: "#63AEFF",
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
         data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
         borderWidth: 1
     }]
@@ -1256,8 +1405,8 @@ new Chart(monthlyChart, {
     datasets: [{
         fill: false,
         lineTension: 0,
-        backgroundColor: "#63AEFF",
-        borderColor: "#63AEFF",
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
         data: [ <?php echo(implode(', ', $wholeMonthData['value'])) ?>],
         borderWidth: 1
     }]
@@ -1320,8 +1469,8 @@ new Chart(weeklyChart, {
     datasets: [{
         fill: false,
         lineTension: 0,
-        backgroundColor: "#63AEFF",
-        borderColor: "#63AEFF",
+        backgroundColor: "#FF8B8B",
+        borderColor: "#FF8B8B",
         data: [ <?php echo( implode(', ',$wholeWeekData['value'])) ?>],
         borderWidth: 1
     }]
