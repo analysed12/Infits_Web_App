@@ -59,14 +59,14 @@ if(isset($_POST['dates'])){
                 
                 $list .='<div class="meal-box">
                         <div class="left">
-                            <img src="images/calorie_meal_icon.svg" alt="">
+                            <img src="images/running_heart_rate.svg" alt="">
                             <div class="meal-title">
-                                <p> ' .$CustomData[$i]['type'] . '</p>
+                                <p> heart rate</p>
                                 <span>'.$I_date->format('h:i A').'</span>
                             </div>
                         </div>
                         <div class="right">
-                            <img src="images/water_drop_outline.svg" alt="">
+                            <img src="images/heart_past.svg" alt="">
                             <p class="kcal">'.$CustomData[$i]['average'].' bpm</p>
                         </div>
                     </div>';
@@ -650,7 +650,7 @@ const customTab = document.getElementById('London');
 function Custom_Data(dates){
     $.ajax({
         type: "POST",
-        url: "_past_activities_water.php?id=<?php echo ($clientId) ?>",
+        url: "past_activities_heart.php?id=<?php echo ($clientId) ?>",
         data: {dates: dates},
         success: function(result) {
             customTab.innerHTML = "";
