@@ -594,7 +594,7 @@ if(!empty($up_event)){
                     <span><?php echo($time->format('M d')) ?></span>
                     <span><?php echo($time->format('h:i a')) ?></span>
                 </div>
-                <p class="container2_middle"><?php echo($up_event[$i]['eventname']) ?></p>
+                <p class="container2_middle"><?php echo(ucwords($up_event[$i]['eventname'])) ?></p>
                 <button class="btn2">Join the call</button>
             </div>
 <?php
@@ -766,7 +766,7 @@ if(!empty($data)){
                 <div class="tasklist">
                     <p style="font-size:1.3rem ; font-weight:600">Messages</p>
                 
-                    <span><a href="" style="background-color:white; color:#717171 ; border:none" >View All</a></span>
+                    <span><a href="" style=" color:#717171 ; border:none" >View All</a></span>
                 </div>
                     <div class="messages">
                        <div style="display:flex">
