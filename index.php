@@ -1,4 +1,5 @@
 <?php
+// session_start();
 include('navbar.php');
 // Get Id
 if(isset($_SESSION['name'])){
@@ -14,9 +15,6 @@ function fetchData($query){
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
-    
-    // echo($query);
-    // echo('<br>');
     $result = $conn->query($query) or die("Query Failed");
     $data = array();
     while($row = $result->fetch_assoc()){
@@ -55,10 +53,6 @@ function fetchInformation($client_id){
         ),
     );
     $query = "SELECT goal FROM goals WHERE clientID = '$client_id' AND forWhat = 'steps' ORDER BY time DESC LIMIT 1";
-    // echo('<pre>');
-    // print_r(fetchData($query));
-    // echo('</pre>');
-    // die();
     $value = fetchData($query);
     if(!empty($value)){
         $data['steps']['goal'] =$value[0]['goal'];
@@ -110,7 +104,7 @@ function fetchInformation($client_id){
         $data['heart']['progress'] = 0;
     }
 
-    $query = "SELECT SUM(drinkConsumed) FROM watertracker WHERE clientID= '$client_id' AND  `date` = '{$date->format('y-m-d')}'";
+    $query = "SELECT SUM(drinkConsumed) FROM watertracker WHERE clientID= '$client_id' AND  `dateandtime` = '{$date->format('y-m-d')}'";
     $value = fetchData($query);
     if($value[0]['SUM(drinkConsumed)'] != ''){
         $data['water']['progress'] =$value[0]['SUM(drinkConsumed)'];
@@ -151,13 +145,13 @@ function fetchInformation($client_id){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>
 .dashboard{
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-left: 17rem;
-    font-family: 'poppins';
+    font-family: 'NATS';
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -237,6 +231,7 @@ function fetchInformation($client_id){
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    font-size: 19px;
 }
 .box1{
     background-color: #def9df !important;
@@ -252,7 +247,7 @@ function fetchInformation($client_id){
 }
 .container2_upper {
     padding: 1rem;
-    font-size: 0.9rem;
+    font-size: 18px;
     display: flex;
     gap: 4.3rem;
     /* justify-content: space-between; */
@@ -306,6 +301,7 @@ function fetchInformation($client_id){
     /* margin-left: 45rem; */
     border: none;
     margin-right: 4rem;
+    font-size: 20px;
 }
 .dashboard_container3 {
     display: flex;
@@ -329,6 +325,7 @@ function fetchInformation($client_id){
     justify-content: flex-end;
     width: 75%;
     align-items: center;
+    font-size: 20px;
 }
 .material-symbols-outlined{
     margin-top: 0.1rem;
@@ -551,8 +548,8 @@ function fetchInformation($client_id){
 
         <div class="dashboard_comtainer1">
             <div class="container1_leftside">
-                <p style="font-size:1.5rem; font-weight:600">Dashboard</p>
-                <p style="font-weight:600;font-size:1.1rem">Upcoming Events</p>
+                <p style="font-size: 40px;font-weight:600;margin-bottom: 0;">Dashboard</p>
+                <p style="font-weight:600;font-size:25px">Upcoming Events</p>
                 
             </div>
             <div class="container2_rightside" >
@@ -584,10 +581,6 @@ function fetchInformation($client_id){
 $today = new DateTime();
 $query = "SELECT * FROM `create_event` WHERE dietitianuserID = '{$dietitian_id}' AND start_date > {$today->format('Y-m-d')} ORDER BY start_date;";
 $up_event = fetchData($query);
-// echo ('<pre>');
-// print_r($up_event);
-// echo ('</pre>');
-// die();
 ?>
 <div class="dashboard_container2">
 <?php
@@ -602,7 +595,7 @@ if(!empty($up_event)){
                     <span><?php echo($time->format('M d')) ?></span>
                     <span><?php echo($time->format('h:i a')) ?></span>
                 </div>
-                <p class="container2_middle"><?php echo($up_event[$i]['eventname']) ?></p>
+                <p class="container2_middle"><?php echo(ucwords($up_event[$i]['eventname'])) ?></p>
                 <button class="btn2">Join the call</button>
             </div>
 <?php
@@ -616,23 +609,17 @@ if(!empty($up_event)){
 </div>
 
         <div class="dashboard_container3">
-            <div style="font-size:1.2rem; font-weight:600"> Client Progress</div>
+            <div style="font-size:35px; font-weight:600"> Client Progress</div>
             <div class="details">
                 <a href=""><button id="details">View All</button></a>
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
             </div>
             
         </div>
-<!-- Backend -->
 <?php
 $query = "SELECT `client_id`,`name` FROM `addclient` WHERE dietitianuserID = '$dietitian_id' AND status = 1;";
 $data = fetchData($query);
-// echo ('<pre>');
-// print_r($data);
-// echo ('</pre>');
 ?>
-
-<!-- Backend -->
         <div class="dashboard_container4">
 
             <div class="container4_wrapper1">
@@ -654,22 +641,19 @@ if(!empty($data)){
     }
     for($i = 0; $i<$lim; $i++){
         $infom = fetchInformation($data[$i]['client_id']);
-    //     echo ('<pre>');
-    // print_r($infom);
-    // echo ('</pre>');
 ?>
             <div class="container4_wrapper2">
                 <span style="width: 25%;">
-                <a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem">
+                <a href="" style="background-color:#FDFDFD; color:black;font-weight:600; font-size:20px; border:none; margin-top:1rem">
                 <img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> <?php echo($data[$i]['name']) ?></a>
                 </span>
                 <div class="values-container col-12">
-                    <span class="col-2"><a href="" class="values"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
-                    <span class="col-2"><a href="" class="values" ><?php echo($infom['heart']['progress']) ?> bpm</a></span>
-                    <span class="col-2"><a href="" class="values" ><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
-                    <span class="col-2"><a href="" class="values" ><?php echo($infom['sleep']['progress'] . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
-                    <span class="col-2"><a href="" class="values"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</a></span>
-                    <span class="col-2"><a href="" class="values" ><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</a></span>
+                    <span class="col-2"><a href="track_stats_steps.php?id=<?php echo($data[$i]['client_id']) ?>" class="values"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
+                    <span class="col-2"><a href="track_stats_heart.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['heart']['progress']) ?> Bpm</a></span>
+                    <span class="col-2"><a href="track_stats_water.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
+                    <span class="col-2"><a href="track_stats_sleep.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
+                    <span class="col-2"><a href="track_stats_weight.php?id=<?php echo($data[$i]['client_id']) ?>" class="values"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</a></span>
+                    <span class="col-2"><a href="track_stats_calorie.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</a></span>
                 </div>
             </div>
 <?php
@@ -693,9 +677,6 @@ if(!empty($data)){
     }
     for($i = 0; $i<$lim; $i++){
         $infom = fetchInformation($data[$i]['client_id']);
-    //     echo ('<pre>');
-    // print_r($infom);
-    // echo ('</pre>');
 ?>
     <div class="mobileview_clientprogress">
 
@@ -786,7 +767,7 @@ if(!empty($data)){
                 <div class="tasklist">
                     <p style="font-size:1.3rem ; font-weight:600">Messages</p>
                 
-                    <span><a href="" style="background-color:white; color:#717171 ; border:none" >View All</a></span>
+                    <span><a href="" style=" color:#717171 ; border:none" >View All</a></span>
                 </div>
                     <div class="messages">
                        <div style="display:flex">
@@ -822,15 +803,8 @@ if(!empty($data)){
                             
                         </div>
                        </div>
-
-                        
-
-                        
                         
                     </div> 
-
-
-            
                 
             </div>
          
