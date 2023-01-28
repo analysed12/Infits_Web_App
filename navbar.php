@@ -81,13 +81,13 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
-    font-family: 'Poppins', serif;
+    font-family: 'NATS';
     text-decoration: none;
-    margin-bottom: 2vh;
+    margin-bottom: 5px;
     margin-left: 43px;
     font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
+    font-weight: 400;
+    font-size: 27px;
     margin-right: 30px;
 }
 
