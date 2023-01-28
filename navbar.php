@@ -48,6 +48,10 @@ include('config.php');
 
 body {
     margin: 0;
+    background: url('images/bottomrightvector.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom -51px right -40px;
     /* width: 100vw;
         height: 100vh; */
 }
@@ -73,6 +77,10 @@ body {
     display: flex;
     flex-direction: column;
     border-right: #E8ECF5 2px solid;
+    background: url('images/topleftvector.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: 0 -60px
 }
 
 .sidenav .sidenavlink {
