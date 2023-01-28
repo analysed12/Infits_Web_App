@@ -1,4 +1,5 @@
 <?php
+// session_start();
 include('navbar.php');
 // Get Id
 if(isset($_SESSION['name'])){
@@ -103,7 +104,7 @@ function fetchInformation($client_id){
         $data['heart']['progress'] = 0;
     }
 
-    $query = "SELECT SUM(drinkConsumed) FROM watertracker WHERE clientID= '$client_id' AND  `date` = '{$date->format('y-m-d')}'";
+    $query = "SELECT SUM(drinkConsumed) FROM watertracker WHERE clientID= '$client_id' AND  `dateandtime` = '{$date->format('y-m-d')}'";
     $value = fetchData($query);
     if($value[0]['SUM(drinkConsumed)'] != ''){
         $data['water']['progress'] =$value[0]['SUM(drinkConsumed)'];
@@ -148,7 +149,7 @@ function fetchInformation($client_id){
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>
 .dashboard{
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-left: 17rem;
     font-family: 'NATS';
     display: flex;
@@ -647,11 +648,11 @@ if(!empty($data)){
                 <img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> <?php echo($data[$i]['name']) ?></a>
                 </span>
                 <div class="values-container col-12">
-                    <span class="col-2"><a href="" class="values"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
-                    <span class="col-2"><a href="" class="values" ><?php echo($infom['heart']['progress']) ?> bpm</a></span>
-                    <span class="col-2"><a href="" class="values" ><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
-                    <span class="col-2"><a href="" class="values" ><?php echo($infom['sleep']['progress'] . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
-                    <span class="col-2"><a href="" class="values"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</a></span>
+                    <span class="col-2"><a href="track_stats_steps.php?id=<?php echo($data[$i]['client_id']) ?>" class="values"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
+                    <span class="col-2"><a href="track_stats_heart.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['heart']['progress']) ?> Bpm</a></span>
+                    <span class="col-2"><a href="track_stats_water.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
+                    <span class="col-2"><a href="track_stats_sleep.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
+                    <span class="col-2"><a href="track_stats_weight.php?id=<?php echo($data[$i]['client_id']) ?>" class="values"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</a></span>
                     <span class="col-2"><a href="track_stats_calorie.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</a></span>
                 </div>
             </div>
@@ -802,15 +803,8 @@ if(!empty($data)){
                             
                         </div>
                        </div>
-
-                        
-
-                        
                         
                     </div> 
-
-
-            
                 
             </div>
          
