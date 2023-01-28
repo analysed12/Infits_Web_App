@@ -2,30 +2,107 @@
 <?php
 // Client Id
 $clientId = 'Azarudeen';
+
 // Configure Dates
 date_default_timezone_set("Asia/Calcutta");
-$today = new DateTime('2022-01-14');
+$today = new DateTime();
 // Goal Insertion
 if(isset($_POST['savegoal'])){
+    $client = $_POST['clientid'];
     $goal =$_POST['setgoal'];
-    $current_date = date("Y-m-d");
-    $conn = new mysqli("localhost", "root", "", "infits (2)");
+    $conn = new mysqli("localhost", "root", "", "infits");
 
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
     
-    $query="UPDATE steptracker SET goal = $goal WHERE clientID= '$clientId' AND 
-            `dateandtime` >= '$current_date 00:00:00'
-            AND `dateandtime` <= '$current_date 23:59:59'";
+    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('steps' , $goal, '$client' )";
     $result = $conn->query($query) or die("Query Failed");
     
     if($result){
         unset($_POST["savegoal"]);
         unset($_POST["setgoal"]);
-        header(("Location: http://localhost/TeamHuddle/infits/track_stats_step.php"));
+        header(("Location:track_stats_steps.php"));
         // exit();
     }
+}
+// funtion to fetch
+// This can be more Simple by String Concatination
+function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
+    // Connect to Database
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    // For Sum of All Data Till Today
+    if($isCustom==1){
+        $query="SELECT SUM(steps) FROM steptracker WHERE clientID= '$clientId' AND 
+                `dateandtime` <= '{$to_date} 23:59:59';";
+    // for sum of Data between two dates
+    }else if($isCustom==2){
+        $query = "SELECT SUM(steps) FROM steptracker WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";;
+    // for average of data end to end (monthly)
+    }else if($isCustom==3){
+        $query="SELECT avg(steps) FROM steptracker WHERE clientID= '$clientId' AND 
+            `dateandtime` >= '{$from_date} 00:00:00'
+            AND `dateandtime` < '{$to_date} 00:00:00';";
+    // for get latest goal from goals table
+    }else if($isCustom==4){
+        $query="SELECT goal FROM goals WHERE forWhat = 'steps' ORDER BY time DESC LIMIT 1";
+    // for getting past actvities 
+    }else if($isCustom==5){
+        $query = "SELECT * FROM `steptracker` WHERE clientID = '$clientId' AND `dateandtime` >= '{$from_date} 00:00:00'
+        AND `dateandtime` < '{$to_date} 23:59:59' ORDER BY dateandtime DESC;" ;
+    // for average of data of one full day
+    }else if($isCustom==6){
+        $query = "SELECT SUM(distance) FROM steptracker WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";;
+    // for average of data end to end (monthly)
+    }else if($isCustom==7){
+        $query = "SELECT SUM(calories) FROM steptracker WHERE clientID= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";;
+    // for average of data end to end (monthly)
+    }else{
+    $query="SELECT avg(steps) FROM steptracker WHERE clientID= '$clientId' AND 
+            `dateandtime` >= '{$from_date} 00:00:00'
+            AND `dateandtime` <= '{$to_date} 23:59:59';";
+    }
+    // echo($query);
+    // echo ('<br>');
+    $result = $conn->query($query) or die("Query Failed");
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
+    $CustomData = array(
+        'value' => array(),
+        'date' => array(),
+        'range' => "",
+    );
+    $CustomDay_1 = new DateTime($_POST['from_date']);
+    $CustomDay_2 = new DateTime($_POST['to_date']);
+    $CustomData['range'] =  $CustomDay_1->format('d M Y') ." - ". $CustomDay_2->format('d M Y') ;
+    
+    while ($CustomDay_2 >= $CustomDay_1) {
+        $CustomDataValue = (int) fetchDataSql($clientId,$CustomDay_1->format('Y-m-d'), $CustomDay_1->format('Y-m-d'),2)[0]['SUM(steps)'];
+    
+        array_push($CustomData['value'], $CustomDataValue);
+        array_push($CustomData['date'], $CustomDay_1->format('d'));
+        $CustomDay_1->modify("+1 day");
+    } 
+    $CustomData = json_encode($CustomData);
+    // return $CustomData;
+    header('Content-Type: application/json');
+    echo ($CustomData);
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -36,6 +113,9 @@ if(isset($_POST['savegoal'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -76,26 +156,26 @@ tst-left-t{
     padding-left: 1%;
 }
 .client-card {
-    width: 100px;
-    height: 120px;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0px 1px 2px rgb(0 0 0 / 15%);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 15px;
-    margin-bottom: 15px;
+width: 100px;
+height: 120px;
+background: rgba(255, 255, 255, 0.8);
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+gap: 15px;
+margin-bottom: 15px;
 }
 .client-card a{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.client-card-steps{
-    background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
+.client-card-calorie{
+background: linear-gradient(37.35deg, #E2809B 0%, #EBD3C8 100%);
 }
 .client-card i{
     scale: 1.5;
@@ -127,16 +207,17 @@ border: 1px solid #F8F5F5;
 max-width: 365px;
 width: 100%;
 height: 27px;
-border-top-left-radius: 1em;
+border-top-left-radius: 1em;left
 border-bottom-left-radius: 1em;
 border-top-right-radius: 1em;
 border-bottom-right-radius: 1em;
+position: relative;
 }
 .tablinks {
 background: #FFFFFF;
 border: 1px solid #FCFBFB;
 border-radius: 0px;
-width: 25%;
+width: 24%;
 height: 24px;
 float: left;
 border: none;
@@ -155,6 +236,26 @@ color: #4D4D4D;
 .graph_button_left{
     border-top-left-radius: 1em;
 border-bottom-left-radius: 1em;
+width: 28%;
+}
+.drop{
+    position: absolute;
+    color: #4D4D4D;
+    top: 5px;
+    left: 80px;
+    margin-left: 8px;
+    cursor: pointer;
+    
+}
+#daterange{
+    border: none;
+    background: transparent;
+    height: 0px;
+    width: 0px;
+    z-index: -1;
+    position: absolute;
+    left: 71px;
+    top: 20px;
 }
 .graph_button_right{
     border-top-right-radius: 1em;
@@ -180,6 +281,7 @@ border-bottom-right-radius: 1em;
     padding: 10px;
 }
 .tab_content{
+    position: relative;
     display: none;
     width: 100%;
     height: 100%;
@@ -187,6 +289,33 @@ border-bottom-right-radius: 1em;
 .tab_content canvas{
     width: 100%;
     height: 100%;
+}
+.i-button {
+    position: absolute;
+    top: -4%;
+    right: -12%;
+    cursor: pointer;
+}
+.i-pop {
+    background: #ffffff;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 27px;
+    position: absolute;
+    /* right: -62%; */
+    /* top: 10%; */
+    right: -12%;
+    top: 12%;
+    box-shadow: 0px 1.74334px 13.0751px rgb(0 0 0 / 25%);
+    border: 1px solid #EFEFEF;
+    padding: 10px 15px;
+    width: 500px;
+    text-align: center;
+    border-radius: 15px;
+    display: none;
+    transition: 2s ease-in-out;
 }
 
 /* Goal Dialog */
@@ -272,7 +401,7 @@ text-align: center;
     border: none;
     width: 124px;
     height: 45px;
-    background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
+    background: linear-gradient(262.45deg, #FA8686 9.26%, #F1A680 93.19%);
     box-shadow: 0px 3.48718px 3.48718px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
     color: #ffffff;
@@ -352,6 +481,11 @@ margin-left: 5px;
     font-size: 25px;
     line-height: 53px;
 }
+.tsd-left-b .heading span{
+    font-size: 13px;
+    font-weight: bold;
+    color: #A4A4A4;    
+}
 .heading-border{
     margin-top: -10px;
     width: 100%;
@@ -385,7 +519,7 @@ margin-left: 5px;
     font-size: 20px;
     line-height: 10px;
     letter-spacing: 0.03em;
-    color: #E47E9B;
+    color: #FF8B8B;
 }
 .activity-box .down{
     font-size: 23px;
@@ -397,7 +531,7 @@ margin-left: 5px;
 .activity-border{
     height: 50px;
     width: 5px;
-    background-color: #E47E9B;
+    background-color:#FF8B8B;
     margin: 0 20px;
 }
 .activity-data{
@@ -442,34 +576,117 @@ margin-left: 5px;
         color: #FF8B8B;
     }
 .progress-bar-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    align-items: center;
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
     color: #000000;
     position: relative;
 }
+.pbc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+}
+.left{
+    margin-right: 20px;
+}
+.right{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.right_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #FF8B8B;
+border-radius: 10px;
+width: 120px;
+height: 56px;
+margin-top: 20px;
+color: #000000;
+padding: 5px;
+}
+.right_div span{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+margin-top: 5px;
+/* identical to box height */
+
+
+
+color: #FFFFFF;
+}
+.right_div p{
+
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 19px;
+
+
+
+color: #FFFFFF;
+}
 .total-consumed {
+    background: #FF8B8B;
+border-radius: 10px;
     position: absolute;
+    
     top: 20px;
     right: -110px;
 }
 .total-consumed span,
 .total-remaining span{
-    font-size: 25px;
+    font-size: 20px;
     line-height: 0;
     letter-spacing: 0.03em;
     color: #000000;
 }
 .total-consumed p,
 .total-remaining p {
+    font-size: 20px;
+    line-height: 50px;
+    letter-spacing: 0.03em;
+}
+
+.total-consumed1 {
+    background: #FF8B8B;
+border-radius: 10px;
+margin-top: 20px;
+    position: absolute;
+    top: 100px;
+    right: -110px;
+}
+.total-consumed1 span,
+.total-remaining span{
+    font-size: 20px;
+    line-height: 0;
+    letter-spacing: 0.03em;
+    color: #000000;
+}
+.total-consumed1 p,
+.total-remaining p {
     font-size: 22px;
     line-height: 50px;
     letter-spacing: 0.03em;
 }
 .total-remaining{
+    background: #FF8B8B;
+border-radius: 10px;
     position: absolute;
-    bottom: -20px;
-    left: -110px;
+    bottom: -40px;
+    right: -110px;
 }
 .progress-circle{
     width: 214px;
@@ -478,13 +695,13 @@ margin-left: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background: conic-gradient(#FF8B8B 50% , #E68AA1 0); */
+    /* background: conic-gradient(#F9E0E7 50% , #E68AA1 0); */
 }
 .progress-circle-fill {
     width: 175px;
     height: 175px;
     border-radius: 50%;
-    background: #FFFFFF;
+    background: #FF8B8B;
 }
 .progress-circle-value{
     width: 175px;
@@ -493,14 +710,55 @@ margin-left: 5px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+   
 }
 .progress-circle-value span{
+    
     font-size: 20px;
     line-height: 35px;
 }
 #progress-percent{
+   
     font-size: 48px;
     line-height: 50px;
+}
+.progress-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+.progress-bottom-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.progress-bottom-div span{
+    
+color: #0A0A0A;
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+}
+.progress-bottom-div p{
+    color: #FF8B8B;
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+}
+.colorid{
+    color: #FFFFFF;
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 55px;
 }
 /* -------------------- */
 
@@ -515,21 +773,6 @@ margin-left: 5px;
     .tsd-left-b {
     padding-left: 0;
     }
-    /* .stat-data {
-    scale: 0.7;
-    }
-    .stat-data .title {
-    margin-left: 0;
-    font-size: 13px;
-    }
-    .stat-data .value {
-    margin-left: 0;
-    font-size: 20px;
-    }
-    .stat-data .unit{
-    margin-left: 0;
-    font-size: 14px;
-    } */
     .tsd-right {
     scale: 0.8;
     }
@@ -537,9 +780,11 @@ margin-left: 5px;
     scale: 0.8;
     }
 }
+
+.client-card-steps{
+    background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
+}
 </style>
-
-
 <body>
 <div class="content">
     <div class="row ts-top">
@@ -565,8 +810,8 @@ margin-left: 5px;
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
                         <a href="track_stats_water.php">
-                            <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
-                            <p style="color:#52A4FF;">Water</p>
+                        <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
+                        <p style="color:#52A4FF;">Water</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
@@ -583,7 +828,7 @@ margin-left: 5px;
                         </div>
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
                         <a href="track_stats_calorie.php">
-                            <img src="images/calorie_selected.svg" alt="">
+                        <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i>
                             <p style="color:#E3738D;">Calorie Track</p>
                             </a>
                         </div>
@@ -592,7 +837,11 @@ margin-left: 5px;
 
             <div class="tst-left-b">
                 <div class="tab">
+                
                     <button class="tablinks graph_button_left" onclick="openCity(event, 'London')">Custom Dates</button>
+                    <input id="daterange"  type="date-range">
+                    <i id="daterange-btn" class="drop fa-solid fa-caret-down"></i>
+                   
                     <button class="tablinks" onclick="openCity(event, 'Year')">Year</button>
                     <button class="tablinks" onclick="openCity(event, 'Month')">Month</button>
                     <button class="tablinks graph_button_right" onclick="openCity(event, 'Week')">Week</button>
@@ -602,21 +851,29 @@ margin-left: 5px;
                     <div id="London" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChart"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="london_pop" class="i-pop"></div>
                     </div>
                     
                     <div id="Year" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartYearly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="year_pop" class="i-pop"></div>
                     </div>
 
                     <div id="Month" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartMonthly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="month_pop" class="i-pop"></div>
                     </div>
                     
                     <div id="Week" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartWeekly"></canvas>
+                    <img class="i-button" src="./images/i-button.svg" alt="">
+                    <div id="week_pop" class="i-pop"></div>
                     </div>
                 
                     <script>
@@ -642,77 +899,37 @@ margin-left: 5px;
                     }
 
                     /* // Get the element with id="defaultOpen" and click on it */
-                    // document.getElementById("defaultOpen").click();
-                    document.getElementById("London").style.display = "block";
+                    document.getElementsByClassName('graph_button_right')[0].click();
+                    // document.getElementById("London").style.display = "block";
                     </script> 
                 </div>
             </div>           
         </div>
         <div class="col-lg-4 tst-right">
             <div class="set-goal">
-                <div class="heading">
-                    <p>Set Goals</p>
-                    <span>Daily Step Count</span>
+                <div class="Water Intake Goal">
+                    <p>Steps Goal </p>
+                    <span>Daily Steps</span>
                     <span id="g-set-success"></span>
                 </div>
-                <img src="images/fruits.svg" alt="">
+                <img src="images/steps_goal_run.svg" alt="">
                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                    <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 STEPS">
+                    <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 Steps">
+                    <input name="clientid"  type="hidden" value="<?php echo($clientId) ?>">
                     <button type="submit" name="savegoal" id="save-goal">Set</button>
                 </form>
             </div>
         </div>
     </div>
 <?php 
-// funtion to fetch
-// This can be more Simple by String Concatination
-function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
-    // Connect to Database
-    $conn = new mysqli("localhost", "root", "", "infits");
-    if($conn->connect_error){
-        die("Connection failed :" . $conn->connect_error);
-    }
-    // For Sum of All Data Till Today
-    if($isCustom==1){
-        $query="SELECT SUM(steps) FROM steptracker WHERE clientID= '$clientId' AND 
-                `dateandtime` <= '{$to_date} 23:59:59';";
-    // for sum of Data between two dates
-    }else if($isCustom==2){
-        $query = "SELECT SUM(steps) FROM steptracker WHERE clientID= '$clientId' AND 
-                `dateandtime` >= '{$from_date} 00:00:00'
-                AND `dateandtime` <= '{$to_date} 23:59:59';";;
-    // for average of data end to end (monthly)
-    }else if($isCustom==3){
-        $query="SELECT avg(steps) FROM steptracker WHERE clientID= '$clientId' AND 
-            `dateandtime` >= '{$from_date} 00:00:00'
-            AND `dateandtime` < '{$to_date} 00:00:00';";
-    // for get latest goal from goals table
-    }else if($isCustom==4){
-        $query="SELECT goal FROM goals WHERE forWhat = 'steps' ORDER BY time DESC LIMIT 1";
-    // for getting past actvities 
-    }else if($isCustom==5){
-        $query = "SELECT * FROM `steptracker` WHERE clientID = '$clientId' AND `dateandtime` >= '{$from_date} 00:00:00'
-        AND `dateandtime` < '{$to_date} 23:59:59' ORDER BY dateandtime DESC;" ;
-    // for average of data of one full day
-    }else{
-    $query="SELECT avg(steps) FROM steptracker WHERE clientID= '$clientId' AND 
-            `dateandtime` >= '{$from_date} 00:00:00'
-            AND `dateandtime` <= '{$to_date} 23:59:59';";
-    }
-    // echo($query);
-    $result = $conn->query($query) or die("Query Failed");
-    $data = array();
-    while($row = $result->fetch_assoc()){
-        $data[] =  $row;
-    }
-    $conn->close();
-    return ($data);
-}
+
 
 // All Data Total Sum
 $allDataSum = fetchDataSql($clientId, '', $today->format('Y-3-d'), 1)[0]['SUM(steps)'];
 // Today Data Sum
 $todayData = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),2)[0]['SUM(steps)'];
+$todayDatad = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),6)[0]['SUM(distance)'];
+$todayDatac = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),7)[0]['SUM(calories)'];
 // Week Average
 $pastWeek =new DateTime();
 $pastWeek->modify('-1 week');
@@ -730,32 +947,30 @@ $monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('
                     <div class="stat-btn">
                         <div class="stat-data">
                             <span class="title">Daily Count</span>
-                            <span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">steps</span>
+                            <span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">Steps</span>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
                             <span class="title">Weekly Avg</span>
-                            <span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">steps</span>
+                            <span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">Steps</span>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
                             <span class="title">Monthly Avg</span>
-                            <span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">steps</span>
+                            <span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">Steps</span>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
                             <span class="title">Total</span>
-                            <span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">steps</span>
+                            <span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">Steps</span>
                         </div>
                     </div>
                 </div>
             </div>
 <?php
-$pastActivityData = new DateTime('');
-$pastActivityData -> modify('-5 day');
 $pastActivityData = fetchDataSql($clientId,$today->format('Y-m-d'),$today->format('Y-m-d'),5);
 $k = 0;
 $j = count($pastActivityData);
@@ -763,7 +978,7 @@ $j = count($pastActivityData);
             <div class="tsd-left-b table-activity">
                 <div class="heading">
                     <p>Past Activity</p>
-                    <i class="fa-solid fa-sliders"></i>
+                    <a href="past_activities_steps.php?id=<?php echo ($clientId) ?>"><span>View All</span></a>
                 </div>
                 <div class="heading-border"></div>
                 <div class="activity-container">
@@ -777,8 +992,8 @@ $j = count($pastActivityData);
                         </div>
                         <div class="activity-border"></div>
                         <div class="activity-data">
-                            <span class="up"><?php echo (ucwords($pastActivityData[$k]['steps'])) ?></span>
-                            <span class="down"><?php echo ($pastActivityData[$k]['steps']) ?> meters</span>
+                            <span class="up">Walking</span>
+                            <span class="down"><?php echo ($pastActivityData[$k]['steps']) ?> Steps</span>
                         </div>
                         <div class="activity-time">
                             <span><?php echo ($date->format('h:i A')) ?></span>
@@ -791,50 +1006,78 @@ $j = count($pastActivityData);
         </div>
 <?php
 $progressBarData = fetchDataSql($clientId, '', '',4);
-$steps = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'), 2);
-if(empty($steps)){
-    $steps = 0;
+$calorieConsumed = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'), 2);
+if(empty($calorieConsumed)){
+    $calorieConsumed = 0;
 }else{
-    $steps = $steps[0]['SUM(steps)'];
+    $calorieConsumed = $calorieConsumed[0]['SUM(steps)'];
 }
 if(empty($progressBarData)){
     $currentGoal =  0;
     $progressPercent = 0;
 }else{
     $currentGoal =  $progressBarData[0]['goal'];
-    $progressPercent = round(($steps / $currentGoal) * 100,2);
+    $progressPercent = round(($calorieConsumed / $currentGoal) * 100,2);
 }
-$stepsRemaining = (int) $currentGoal - (int) $steps;
+$calorieRemaining = (int) $currentGoal - (int) $calorieConsumed;
 ?>     
         <div class="col-lg-5 tsd-right">
             <div class="heading">
                 <p>Daily Progress</p>
-                <span>View Activity</span>
+                <a href="past_activities_steps.php"><span>View Activity</span></a>
             </div>
-            <div class="progress-bar-container">
-                <div class="total-consumed">
-                    <span><?php echo ( (int) $steps) ?> Steps</span>
-                    <p>Walked</p>
-                </div>
-                <div id="progress-percent" class="progress-circle">
-                    <div class="progress-circle-fill">
-                        <div class="progress-circle-value"><span id="progress-percent"><?php echo($progressPercent) ?>%</span><span>Walked</span></div>
+            <div class="pbc">
+                <div class="progress-bar-container">
+                    <div class="left">
+                        <div id="progress-percent" class="progress-circle">
+                            <div class="progress-circle-fill">
+                                <div class="progress-circle-value"><span class="colorid " id="progress-percent "><?php echo($progressPercent) ?>%</span><span>Of daily step goal</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="right_div">
+                            <span>Daily goal</span>
+                            <p><?php echo $currentGoal?></p>
+                        </div>
+                        <div class="right_div">
+                            <span>Weekly goal</span>
+                            <p><?php echo 7*$currentGoal?></p>
+                        </div>
+                        <div class="right_div">
+                            <span>Monthly goal</span>
+                            <p><?php echo 30*$currentGoal?></p>
+                        </div>
                     </div>
                 </div>
-                <div class="total-remaining">
-                    <span><?php echo($stepsRemaining) ?> steps</span>
-                    <p>Remaining</p>
+                <div class="progress-bottom">
+                        <div class="progress-bottom-div">
+                            <span>
+                                <img src="images/footsteps.svg" alt=""> Steps</span>
+                            <p><?php echo(ceil($todayData)) ?></p>
+                        </div>
+                        <div class="progress-bottom-div">
+                            <span>
+                            <img src="images/distance.svg" alt=""> Distance</span>
+                            <p><?php echo(ceil($todayDatad)) ?></p>
+                        </div>
+                        <div class="progress-bottom-div">
+                            <span>
+                            <img src="images/fire.svg" alt=""> Burned</span>
+                            <p><?php echo(ceil($todayDatac)) ?></p>
+                        </div>
                 </div>
             </div>
         </div>
 <script>
     const progressPercent = document.getElementById('progress-percent');
-    progressPercent.style.setProperty("background", "conic-gradient(#FF8B8B <?php echo(100 - $progressPercent) ?>% , #E68AA1 0)");
+    progressPercent.style.setProperty("background", "conic-gradient(#FFE0D1 <?php echo(100 - $progressPercent) ?>% , #FF8B8B 0)");
 </script>
     </div>
 </div>
 <?php
 // To Get - Yearly data
+$year_pop = 0;
 $wholeYearData = array(
     'value' => array(),
     'month' => array()
@@ -845,6 +1088,7 @@ $yearly_month->setDate($yearly_month->format('Y'),01,01);
 if($today->format('m') == '01'){
     $yearly_month->setDate($yearly_month->format('Y')-1,01,01);
     $yearly_last_month->setDate($yearly_last_month->format('Y')-1,12,31);
+    $year_pop = 1;
 }
 while($yearly_last_month >= $yearly_month){
     
@@ -856,6 +1100,7 @@ while($yearly_last_month >= $yearly_month){
     array_push($wholeYearData['month'], $yearly_month->format('M'));
     $yearly_month->modify('+1 month');
 }
+$month_pop = 0;
 $wholeMonthData = array(
     'value' => array(),
     'date' => array(),
@@ -867,6 +1112,7 @@ $monthly_Month->modify("first day of this month");
 if($today->format('d') == '01'){
     $monthly_Month->modify("first day of previous month");
     $monthly_LastDay->modify("last day of previous month");
+    $month_pop = 1;
 }
 while ($monthly_LastDay >= $monthly_Month) {
     $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('Y-m-d'), $monthly_Month->format('Y-m-d'),2)[0]['SUM(steps)'];
@@ -876,9 +1122,8 @@ while ($monthly_LastDay >= $monthly_Month) {
     $monthly_Month->modify("+1 day");
     
 }
-
-
 // To Get - Weekly Data
+$week_pop = 0;
 $wholeWeekData = array(
     'value' => array(),
     'day' => array(),
@@ -889,6 +1134,7 @@ $weekly_lastDay =new DateTime();
 
 if($today->format('l')== "Monday"){
     $weekly_lastDay->modify('previous sunday');
+    $week_pop = 1;
 }
 
 while($weekly_Day <= $weekly_lastDay){
@@ -900,10 +1146,141 @@ while($weekly_Day <= $weekly_lastDay){
 }
 ?>
 <script>
+const london_pop = document.getElementById('london_pop');
+const year_pop = document.getElementById('year_pop');
+const month_pop = document.getElementById('month_pop');
+const week_pop = document.getElementById('week_pop');
+const i_buttons = document.getElementsByClassName('i-button');
+const i_pop = document.getElementsByClassName('i-pop');
+
+if(<?php echo($year_pop) ?>){
+    year_pop.innerText = "As it is fresh year, we are showing you the previous year's data until the latest data is synced for this month!";
+    london_pop.innerText = "As it is fresh year, we are showing you the previous year's data until the latest data is synced for this month!";
+}else{
+    year_pop.innerText = "We are showing you the ongoing year's data and it keeps updating realtime!";
+    london_pop.innerText = "We are showing you the ongoing year's data and it keeps updating realtime!";
+}
+
+if(<?php echo($month_pop) ?>){
+    month_pop.innerText = "As it is fresh month, we are showing you the previous month's data until the latest data is synced for this month!";
+}else{
+    month_pop.innerText = "We are showing you the ongoing month's data and it keeps updating realtime!";
+}
+
+if(<?php echo($week_pop) ?>){
+    week_pop.innerText = "As it is fresh year, we are showing you the previous week's data until the latest data is synced for the week!";
+}else{
+    week_pop.innerText = "We are showing you the ongoing week's data and it keeps updating realtime!";
+}
+
+
+for(let i =0; i<i_buttons.length; i++){
+    i_buttons[i].addEventListener('mouseover',()=>{
+        i_pop[i].style.display = "Block";
+    });
+    i_buttons[i].addEventListener('mouseout',()=>{
+        i_pop[i].style.display = "none";
+    });
+}
 // --------------Charts--------------
-// Default Chart
+// Default Chart (Function)
 const defaultChart = document.getElementById('myChart');
-new Chart(defaultChart, {
+function CustomChart_Data(from_date,to_date){
+    window.customChart.destroy();
+    $.ajax({
+        type: "POST",
+        url: "track_stats_steps.php",
+        data: {from_date: from_date, to_date: to_date},
+        success: function(result) {
+        london_pop.innerHTML = "We are showing you the data in range <br>"+ result['range'] +" !";
+        window.customChart = new Chart(defaultChart, {
+                                type: 'line',
+                                data: {
+                                labels: result['date'],
+                                datasets: [{
+                                    fill: false,
+                                    lineTension: 0,
+                                    backgroundColor: "#FF8B8B",
+                                    borderColor: "#FF8B8B",
+                                    data: result['value'],
+                                    borderWidth: 1
+                                }]
+                                },
+                                options: {
+                                    // title: {
+                                    //     display: true,
+                                    //     text: result['range'],
+                                    //     fontFamily: 'NATS',
+                                    //     fontStyle: 'bold',
+                                    //     fontSize: 15,
+                                    //     // fontColor: 'black',
+                                    //     fontColor: '#9D9D9D',
+                                    // },
+                                    scales: {
+                                        xAxes:[{
+                                            gridLines:{
+                                                display:false,
+                                            },
+                                            ticks:{
+                                                fontFamily: 'NATS',
+                                                fontStyle: 'bold',
+                                                fontSize:11,
+                                                fontColor: '#9D9D9D',
+                                            }
+                                        }],
+                                        yAxes:[{
+                                            ticks:{
+                                                // min:2500,
+                                                // max:3000,
+                                                // stepSize:100,
+                                                fontFamily: 'NATS',
+                                                fontStyle: 'bold',
+                                                fontSize:13,
+                                                fontColor: '#9D9D9D',
+                                            },
+                                        }],
+                                    },
+                                    legend:{
+                                        display:false,
+                                    },
+                                    //   responsive:true,
+                                    tooltips:{
+                                        enabled:true,
+                                        // innerHeight:500,
+                                        // innerWidth:500,
+                                    },
+                                    layout:{
+                                        padding:{
+                                            left:5,
+                                            right:5,
+                                            top:0,
+                                            bottom:5,
+                                        },
+                                    },
+                                }
+                            });
+                        }
+                    });
+        document.getElementsByClassName('graph_button_left')[0].click();
+}
+const date_btn = document.getElementById('daterange-btn');
+date_btn.addEventListener('click' , ()=>{
+    fp.toggle();
+});
+const fp = flatpickr("input[type = date-range]", {
+    maxDate: "today",
+    dateFormat: "Y-m-d",
+    mode: "range",
+    onClose:[
+        function(selectedDates){
+            const Date_1 = new Date(selectedDates[0]);
+            const Date_2 = new Date(selectedDates[1]);
+            CustomChart_Data(Date_1.toISOString().slice(0,10),Date_2.toISOString().slice(0,10));
+        }
+    ]
+});
+
+window.customChart = new Chart(defaultChart, {
     type: 'line',
     data: {
     labels: [<?php echo("'". implode("','", $wholeYearData['month']). "'") ?>],
@@ -912,7 +1289,7 @@ new Chart(defaultChart, {
         lineTension: 0,
         backgroundColor: "#FF8B8B",
         borderColor: "#FF8B8B",
-        data: [ <?php echo(implode(', ', $wholeYearData['value'])) ?>],
+        data: [<?php echo(implode(', ', $wholeYearData['value'])) ?>],
         borderWidth: 1
     }]
     },
@@ -1145,3 +1522,5 @@ new Chart(weeklyChart, {
 </script>
 </body>
 </html>
+
+

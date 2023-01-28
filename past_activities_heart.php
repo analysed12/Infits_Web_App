@@ -3,7 +3,8 @@
 if(isset($_GET['id']) AND $_GET['id'] != ""){
     $clientId = $_GET['id'];
 }else{
-    header("Location: track_stats_heart.php");
+    // header("Location: __track_stats_water.php");
+    $clientId= 'Azarudeen';
 }
 // Configure Dates
 date_default_timezone_set("Asia/Calcutta");
@@ -30,8 +31,8 @@ if(isset($_POST['dates'])){
      $list = '
      <div class="row">
         <div class="col">';
-        $Custom_Day1 = new DateTime(substr($_POST['dates'][0],4,11));
-        $Custom_Day2 = new DateTime(substr($_POST['dates'][1],4,11));
+    $Custom_Day1 = new DateTime(substr($_POST['dates'][0],4,11));
+    $Custom_Day2 = new DateTime(substr($_POST['dates'][1],4,11));
         while($Custom_Day2 >= $Custom_Day1){
             $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
                     `dateandtime` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
@@ -58,15 +59,15 @@ if(isset($_POST['dates'])){
                 
                 $list .='<div class="meal-box">
                         <div class="left">
-                            <img src="images/cycling_heart_rate.svg" alt="">
+                            <img src="images/running_heart_rate.svg" alt="">
                             <div class="meal-title">
-                                <p>Max ' .$CustomData[$i]['maximum'] . '</p>
+                                <p> heart rate</p>
                                 <span>'.$I_date->format('h:i A').'</span>
                             </div>
                         </div>
                         <div class="right">
-                            <img src="images/heartrate_selected_small.svg" alt="">
-                            <p class="kcal">'.$CustomData[$i]['average'].' BPM</p>
+                            <img src="images/heart_past.svg" alt="">
+                            <p class="kcal">'.$CustomData[$i]['average'].' bpm</p>
                         </div>
                     </div>';
                 $i++; }
@@ -176,10 +177,10 @@ border-bottom-left-radius: 1em!important;
 }
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #C986CF;
+  background-color:#C986CF;
 }
 .tab button.active {
-  background-color: #C986CF;
+  background-color:#C986CF;
   color: white !important;
 }
 
@@ -218,7 +219,7 @@ border-bottom-left-radius: 1em!important;
 }
 .client-card-heart{
     background: linear-gradient(217.35deg, #F97EAA 0%, #C389D5 100%);
-    border: 1px solid #E266A9;
+    border: 1px solid #E3738D;
     border-radius: 10px;
     margin: 10px 0 0 0;
     width: 97px;
@@ -269,8 +270,9 @@ color: #000000;
     width: 311px;
     height: 67px;
     padding: 20px;
+
     background: linear-gradient(180deg, rgba(255, 232, 242, 0.2) 0%, rgba(201, 134, 207, 0.2) 100%);
-    border-radius: 10px;
+        border-radius: 10px;
 }
 .meal-box p{
     margin-bottom: 0;
@@ -366,9 +368,9 @@ color: #000000;
             </div>
             <div class="col-sm-4 ph-right">
                 <!-- metric_button -->
-                <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
-                <div class="client-card client-card-heart " style="color:#E3738D; border: 1px solid #E3738D;">
-                    <img src="images/heartrate_selected.svg" alt="">
+                <a href="__track_stats_water.php?id=<?php echo($clientId) ?>">
+                <div class="client-card client-card-heart " style="color:#E266A9; border: 1px solid #E266A9;">
+                    <img src="images/heart.svg" alt="">
                     <p>Heart Rate</p>
                 </div>
                 </a>
@@ -421,15 +423,15 @@ color: #000000;
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/running_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Max <?php echo($yearly_Data[$i]['maximum']) ?></p>
+                                                                <p>heartrate</p>
                                                                 <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal"><?php echo($yearly_Data[$i]['average']) ?> BPM</p>
+                                                            <img src="images/heart_past.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['average']) ?> bpm</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -481,15 +483,15 @@ color: #000000;
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/running_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Max <?php echo($yearly_Data[$i]['maximum']) ?></p>
+                                                                <p>heart rate</p>
                                                                 <span><?php echo($I_date->format('h:i A d M')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal"><?php echo($yearly_Data[$i]['average']) ?> BPM</p>
+                                                            <img src="images/heart_past.svg" alt="">
+                                                            <p class="kcal"><?php echo($yearly_Data[$i]['average']) ?> bpm</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -539,15 +541,15 @@ color: #000000;
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/running_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Max <?php echo($monthly_Data[$i]['maximum']) ?></p>
+                                                                <p>heart rate</p>
                                                                 <span><?php echo($I_date->format('h:i A')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal"><?php echo($monthly_Data[$i]['average']) ?> BPM</p>
+                                                            <img src="images/heart_past.svg" alt="">
+                                                            <p class="kcal"><?php echo($monthly_Data[$i]['average']) ?> bpm</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
@@ -597,15 +599,15 @@ color: #000000;
                                                 ?>
                                                     <div class="meal-box">
                                                         <div class="left">
-                                                            <img src="images/cycling_heart_rate.svg" alt="">
+                                                            <img src="images/running_heart_rate.svg" alt="">
                                                             <div class="meal-title">
-                                                                <p>Max <?php echo($weekly_Data[$i]['maximum']) ?></p>
+                                                                <p>heart rate</p>
                                                                 <span><?php echo($I_date->format('h:i A')) ?></span>
                                                             </div>
                                                         </div>
                                                         <div class="right">
-                                                            <img src="images/heartrate_selected_small.svg" alt="">
-                                                            <p class="kcal"><?php echo($weekly_Data[$i]['average']) ?> BPM</p>
+                                                            <img src="images/heart_past.svg" alt="">
+                                                            <p class="kcal"><?php echo($weekly_Data[$i]['average']) ?> bpm</p>
                                                         </div>
                                                     </div>
                                                 <?php $i++; } ?>
