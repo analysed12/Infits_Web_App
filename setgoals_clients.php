@@ -1,5 +1,5 @@
 <?php
-include('navbar.php');
+include('event_calender.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,6 @@ include('navbar.php');
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-
-
 <style>
 @font-face {
     font-family: 'NATS';
@@ -72,6 +70,9 @@ body{
     margin-right: 4rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid #EFEFEF;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
   }
   .setgoals_button{
     color: white;
@@ -118,6 +119,7 @@ border: 1.31578px solid #E3738D !important;
     background-repeat: no-repeat;
     background-attachment:scroll;
     background-position: bottom right ;
+    
     
   
     
@@ -300,8 +302,22 @@ margin-top: 2.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
+    animation-duration: 2s;
+    animation-name: slidein;
     
     
+    
+}
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
 }
 
 #rightside_wrapper1{
