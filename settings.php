@@ -47,16 +47,22 @@ body {
     max-width: 1100px;
     margin: 0 0;
     padding: 6% 1%;
-}
+    display: flex;
+    justify-content: center;
 
+
+}
 
 .grid {
     margin: 0 0 0 0;
     padding: 0;
     list-style: none;
-    display: block;
+    display: flex;
     text-align: center;
     width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+
 }
 
 .grid:after {
@@ -70,10 +76,19 @@ body {
 }
 
 .grid li {
-    width: 180px;
-    height: 180px;
+    
+    height: 221px;
     display: inline-block;
-    margin: 20px;
+    margin: 35px;
+    padding: 26px;
+    flex: 0 0 200px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 8px 0px #00000040;
+    /* border: none; */
+    border-radius: 20px;
+
+   
+
 }
 
 .box {
@@ -88,6 +103,13 @@ body {
         -moz-transform 0.3s ease-in-out;
     transition: all 0.3s ease-in-out,
         transform 0.3s ease-in-out, ;
+        
+      
+        
+}
+
+.box a{
+    text-decoration: none;
 }
 
 .box:hover {
@@ -122,12 +144,14 @@ body {
 
         /* bottom, image */
         url(./icons/settings/icon1.svg);
-    background-position: center;
+    background-position: center top;
 
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
+    border-radius: 20px;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
+    align-text:center;
 
 }
 
@@ -136,9 +160,9 @@ body {
 
         /* bottom, image */
         url(./icons/settings/icon1.svg);
-    background-position: center;
+    background-position: center top;
 
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
@@ -150,9 +174,9 @@ body {
 
         /* bottom, image */
         url(./icons/settings/icon2.svg);
-    background-position: center;
+    background-position: center top;
 
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
@@ -163,9 +187,9 @@ body {
 
         /* bottom, image */
         url(./icons/settings/icon3.svg);
-    background-position: center;
+    background-position: center top;
 
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
@@ -176,9 +200,9 @@ body {
 
         /* bottom, image */
         url(./icons/settings/icon1.svg);
-    background-position: center;
+    background-position: center top;
 
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
@@ -190,39 +214,53 @@ body {
         /* bottom, image */
         url(./icons/settings/icon4.svg);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center top;
 
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
 }
 
 .info {
-    position: absolute;
-    width: inherit;
-    height: inherit;
+     position: absolute;
+     bottom: 0px;
+    /* display: flex;
+    justify-content: center; */ 
+    /* width: inherit;
+    height: inherit; */
+    text-align: center;
+
+
 }
 
 .info h3 {
-    /* font-family: 'Pacifico', cursive;
+    /* font-family: 'Pacifico', cursive; 
     font-weight: 400;
 	color: black;
 	font-size: 42px;
 	margin: 0 30px;
 	padding: 100px 0 0 0;
-	line-height:1.5; */
+	line-height:1.5;  */
 }
 
 .info p {
     color: rgb(9, 9, 9);
-    padding: 4px 5px;
-    margin: 120px 20px;
-    /* justify-content: space-between; */
+    font-family: 'Pacifico', cursive; 
+    font-weight: 500;
+	color: black;
+	margin: 0px;
+    padding: 20px;
     font-size: 20px;
     text-align:center;
-    /* line-height:2; */
-    /* align-items: center; */
+   
+}
+
+.rounded{
+border: 2px solid #FFFFFF;
+box-shadow: 0px 10px 10px 0px #FFB6C1;
+border-radius: 100px;
+
 }
 </style>
 
@@ -235,7 +273,9 @@ body {
     <div class="container">
         <div class="text-center">
             <img src="./images/settingDp.svg" class="rounded" alt="...">
-            <h3 class="display-6 right-float"><br /> <?php echo ($name[0]) ?><br /> <?php echo($name[1])?></h3>
+            <!-- <h3 class="display-6 right-float"><br /> <?php echo ($name[0]) ?><br /> <?php echo($name[1])?></h3> -->
+            <h3 class="display-6 right-float" style = "margin: 20px;"><br />John <br/> Wayne</h3>
+
         </div>
     </div>
 
