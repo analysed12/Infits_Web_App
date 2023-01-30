@@ -1,5 +1,5 @@
 <?php
-include('event_calender.php');
+include('navbar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
