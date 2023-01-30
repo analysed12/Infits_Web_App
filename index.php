@@ -223,7 +223,7 @@ function fetchInformation($client_id){
 
 .container2_wrapper {
     width: 226px;
-    height: 167px;
+    height: 188px;
     background-color: #7282FB;
     border-radius: 0.8rem;
     color: white;
@@ -259,6 +259,7 @@ function fetchInformation($client_id){
     margin-bottom: 25px;
     font-weight: 600;
     width: 226px;
+    font-size: 25px;
 }
 .btn2{
     border: none;
@@ -315,6 +316,7 @@ function fetchInformation($client_id){
     display: flex;
     justify-content: flex-end;
     width: 95%;
+    padding-right: 1.5rem;
 
 }
 .symbols-container,
@@ -596,7 +598,7 @@ if(!empty($up_event)){
                     <span><?php echo($time->format('h:i a')) ?></span>
                 </div>
                 <p class="container2_middle"><?php echo(ucwords($up_event[$i]['eventname'])) ?></p>
-                <button class="btn2">Join the call</button>
+                <button class="btn2 btn-bg-<?php echo($color) ?>">Join the call</button>
             </div>
 <?php
     $color++;

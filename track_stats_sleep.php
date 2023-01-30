@@ -172,24 +172,27 @@ margin-bottom: 15px;
 .client-card a{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 23px;
+    height: 65%;
+    margin-top: 15px;
 }
 .client-card-calorie{
 background: linear-gradient(37.35deg, #E2809B 0%, #EBD3C8 100%);
 }
 .client-card i{
-    scale: 1.5;
+    scale: 2;
 }
 .client-card a img {
     height: 30px;
     width: auto;
+    margin-bottom: -15px;
 }
 .client-card p{
 font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
 line-height: 1;
-font-size: 19px;
+font-size: 22px;
     margin: 0;
 }
 
@@ -1013,7 +1016,7 @@ content: counter(percentage) '';
 
             <div class="tst-left-t">
                 <div class="heading">
-                    <p>Clients Stats</p>
+                    <p style="margin-top: -15px;">Clients Stats</p>
                 </div>
                 <div class="card-container">
                 <div class="client-card " style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
@@ -1025,7 +1028,7 @@ content: counter(percentage) '';
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
                         <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
                             <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
-                            <p style="color:#E266A9;">Heart Rate</p>
+                            <p style="color:#E266A9;">Heart<br>Rate</p>
                             </a>
                         </div>
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
@@ -1037,7 +1040,7 @@ content: counter(percentage) '';
                         <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
                         <a href="track_stats_weight.php?id=<?php echo($clientId) ?>">
                             <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
-                            <p style="color:#7D5DE6;">Weight Track</p>
+                            <p style="color:#7D5DE6;">Weight<br>Track</p>
                             </a>
                         </div>
                         <div class="client-card client-card-sleep" style="color:#54AFAC; border: 1px solid #54AFAC;">
@@ -1049,7 +1052,7 @@ content: counter(percentage) '';
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
                         <a href="track_stats_calorie.php?id=<?php echo($clientId) ?>">
                         <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i>
-                            <p style="color:#E3738D;">Calorie Track</p>
+                            <p style="color:#E3738D;">Calorie<br>Track</p>
                             </a>
                         </div>
                 </div>
@@ -1642,7 +1645,7 @@ new Chart(monthlyChart, {
             ticks:{
                 // min:2500,
                 // max:3000,
-                stepSize:500,
+                // stepSize:500,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:12,
@@ -1706,7 +1709,7 @@ new Chart(weeklyChart, {
             ticks:{
                 // min:2500,
                 // max:3000,
-                stepSize:500,
+                // stepSize:500,
                 fontFamily: 'NATS',
                 fontStyle: 'bold',
                 fontSize:12,
