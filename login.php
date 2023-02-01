@@ -505,7 +505,7 @@ border-radius: 15px;
         </div>
         <div class="right">
             <button id="home">Home</button>
-            <button class="sign">SignUp</button>
+            <button class="sign" onclick="window.location.href = 'register.php';">SignUp</button>
         </div>
     </div>
 
