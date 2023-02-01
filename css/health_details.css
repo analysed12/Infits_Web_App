@@ -1,0 +1,375 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 16px;
+    font-family: "NATS";
+}
+
+.content .heading-box {
+    width: 94%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.content .heading-box h1 {
+    font-size: 2.5rem;
+}
+
+.content .heading-box button {
+    background-color: #6883FB;
+    color: #ffffff;
+    width: 173px;
+    height: 50px;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 10px;
+    letter-spacing: 2px;
+}
+
+.content .heading-box button a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* .content #addDocumentPopup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background-color: #f2f2f294;
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+.content #addDocumentPopup.active{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content #addDocumentPopup .popup{
+    position: fixed;
+    top: 50%;
+    background-color: #FFFFFF;
+    height: 200px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+.content #addDocumentPopup .popup h2{
+    font-size: 1.5rem;
+}
+.content #addDocumentPopup .popup button#fileUpload{
+    border: 1px solid #6883FB;
+    background-color: #FFFFFF;
+    height: 42px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.content #addDocumentPopup .popup button#fileUpload span{
+     margin-right: 15px;
+}
+.content #addDocumentPopup .popup .option-box{
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+}
+.content #addDocumentPopup .popup .option-box button{
+     height: 42px;
+     width: 115px;
+     border-radius: 10px;
+     -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+     -ms-border-radius: 10px;
+     -o-border-radius: 10px;
+}
+.content #addDocumentPopup .popup .option-box #cancel{
+     background-color: #FFFFFF;
+     border: 1px solid #6883FB;
+}
+.content #addDocumentPopup .popup .option-box #save{
+     background-color: #6883FB;
+     border: 1px solid #FFFFFF;
+     color: #FFFFFF;
+} */
+
+
+/* .content #addDocumentPopup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background-color: #f2f2f294;
+    backdrop-filter: blur(2px);
+    z-index: 1;
+} */
+.content #addDocumentPopup.active {
+    display: flex;
+}
+
+.content #addDocumentPopup {
+    position: fixed;
+    top: 50%;
+    background-color: #FFFFFF;
+    height: 200px;
+    width: 350px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.content #addDocumentPopup h2 {
+    font-size: 2rem;
+}
+
+.content #addDocumentPopup button#fileUpload {
+    border: 1px solid #6883FB;
+    background-color: #FFFFFF;
+    height: 42px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.content #addDocumentPopup button#fileUpload span {
+    margin-right: 15px;
+}
+
+.content #addDocumentPopup .option-box {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+.content #addDocumentPopup .option-box button {
+    height: 42px;
+    width: 115px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.content #addDocumentPopup .option-box #cancel {
+    background-color: #FFFFFF;
+    border: 1px solid #6883FB;
+}
+
+.content #addDocumentPopup .option-box #save {
+    background-color: #6883FB;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+.content .health-form-container {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content .health-form-container .title-options-container {
+    position: relative;
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+    margin-bottom: 50px;
+}
+
+.content .health-form-container .title-options-container .border-bottom {
+    position: absolute;
+    background-color: #1FB688;
+    height: 4px;
+    width: 200px;
+    transition: all 0.3s ease;
+}
+
+.content .health-form-container .title-options-container .border-bottom.left {
+    transform: translateY(20px);
+    -webkit-transform: translateY(20px);
+    -moz-transform: translateY(20px);
+    -ms-transform: translateY(20px);
+    -o-transform: translateY(20px);
+}
+
+.content .health-form-container .title-options-container .border-bottom.right {
+    transform: translate(300px, 20px);
+    width: 250px;
+    -webkit-transform: translate(300px, 20px);
+    -moz-transform: translate(300px, 20px);
+    -ms-transform: translate(300px, 20px);
+    -o-transform: translate(300px, 20px);
+}
+
+.content .health-form-container .title-options-container h3 {
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+
+.content .health-form-container #form-details,
+.content .health-form-container #form-documents {
+    overflow-y: auto;
+    height: 400px;
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* width */
+.content .health-form-container #form-details::-webkit-scrollbar,
+.content .health-form-container #form-documents::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.content .health-form-container #form-details::-webkit-scrollbar-track,
+.content .health-form-container #form-documents::-webkit-scrollbar-track {
+    background-color: #EFEFEF;
+    border-radius: 10px;
+}
+
+/* Handle */
+.content .health-form-container #form-details::-webkit-scrollbar-thumb,
+.content .health-form-container #form-documents::-webkit-scrollbar-thumb {
+    background: #C8C8C8;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.content .health-form-container #form-details::-webkit-scrollbar-thumb:hover,
+.content .health-form-container #form-documents::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.content .health-form-container #form-details .details {
+    height: 150px;
+    width: 90%;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    margin-bottom: 50px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+
+.content .health-form-container #form-details .details p {
+    position: relative;
+}
+
+.content .health-form-container #form-details .details p#question {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding-top: 5px;
+}
+
+.content .health-form-container #form-details .details p#question::after {
+    content: "";
+    position: absolute;
+    background-color: #808080;
+    height: 1.5px;
+    width: 100%;
+    bottom: -12px;
+    left: 0px;
+}
+
+.content .health-form-container #form-details .details p#answer {
+    font-size: 1.3rem;
+    margin-top: 5px;
+    font-weight: 500;
+    padding-top: 5px;
+}
+
+.content .health-form-container #form-documents .details {
+    border: 1px solid #f2f2f2;
+    height: 80px;
+    width: 90%;
+    padding: 15px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.content .health-form-container #form-documents .details .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 260px;
+}
+
+.content .health-form-container #form-documents .details .title .info-box {
+    width: 200px;
+    margin-top: 12px;
+}
+
+.content .health-form-container #form-documents .details .title .info-box p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 0px;
+}
+
+.content .health-form-container #form-documents .details .title .info-box .minor-details {
+    color: #8D8D8D;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.content .health-form-container #form-documents .details .options {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+}
