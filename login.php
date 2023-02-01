@@ -476,18 +476,20 @@ border-radius: 15px;
 }
 @media screen and (max-width: 720px) {
     #home{
-        margin-left:1rem;
+        margin-left:13rem;
     }
     .mobile img {
     width: 400px;
     height: 400px;
 }
 .sign{
-    margin-left:4rem;
+    margin-left:11rem;
 }
 #hr{
-    width: auto !important;
-    margin-left:1rem !important;
+    display:none;
+}
+#btml{
+    margin-left:4rem;
 }
 
 }
@@ -513,7 +515,7 @@ border-radius: 15px;
 
             <div class="sform">
                 <div class="header_sigin">
-                    <img src="images/bg_patch_small.svg" style="width:70rem;height:8rem;margin-left:13rem">
+                    <img src="images/bg_patch_small.svg" >
                     <span style="font-size: 100px;font-weight:400">Sign In</span>
                     
 
@@ -580,8 +582,8 @@ border-radius: 15px;
         </div>
         <hr  id="hr" style="border: 2px solid #F3F3FF;width: 1204px;margin-left:6rem">
     </div>
-    <div class="row" style="margin-top:2rem">
-        <div class="col-sm-4">
+    <div class="row" style="margin-top:2rem" ">
+        <div class="col-sm-4" id="btml">
             <div class="bottom_logo">
                 <img src="images/infits_logo.svg" alt="">
                 <span style="font-size:30px !important,font-weight:500;text-align:center !important">Fitter.Healthier.Happier</span>
