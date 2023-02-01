@@ -1,4 +1,43 @@
 <?php
+// Client Id
+// $clientId = 'Azarudeen';
+// $ttime;
+// Configure Dates
+date_default_timezone_set("Asia/Calcutta");
+// $today = new DateTime();
+// $today = new DateTime('2022-01-25');
+// Goal Insertion
+if(isset($_POST['savegoal'])){
+    $client = $_POST['clientid'];
+    $goal =$_POST['setgoal'];
+    $forwhat = $_POST['forwhat'];
+    $conn = new mysqli("localhost", "root", "", "infits");
+
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    
+    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('$forwhat' , $goal, '$client' )";
+    $result = $conn->query($query) or die("Query Failed");
+    
+    if($result){
+        unset($_POST["savegoal"]);
+        unset($_POST["setgoal"]);
+        header(("Location: http://localhost/newgoals/Infits_Web_App/setgoals_clients.php"));
+        // exit();
+    }
+}
+?>
+
+
+
+
+
+
+
+
+
+<?php
 include('navbar.php');
 ?>
 <!DOCTYPE html>
@@ -499,8 +538,21 @@ margin-top: 2.5rem;
                             </div>
                             <span style="color:#FF8B8B">Daily Steps</span> <br>
                             <img src="images/setgoals.jpg" style="margin-left:4rem"><br>
-                            <label id="label1">0000 Steps</label>
-                            <button id="button2" class="setbutton">Set</button>  
+                            
+                            
+                            <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                                <!-- <label id="label1">0000 BPM</label> -->
+                                <?php $name = "all";
+                                      $forwhat = "steps";
+                                ?>
+                                <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
+                                <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
+                                <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Steps" style = "font-size:20px;">
+                                <button id="button4" class="setbutton" type="submit" name="savegoal">Set</button>  
+                              </form>
+
+
+
                         </div>
                         
 
@@ -520,8 +572,22 @@ margin-top: 2.5rem;
                             </div>
                             <span style="color:#FF8B8B">Daily Heart Rate</span> <br>
                             <img src="images/heartrate.jpg" style="margin-left:3.8rem"><br>
-                            <label id="label1">0000 BPM</label>
-                            <button id="button4" class="setbutton">Set</button>  
+                            
+                            
+
+                            <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                                <!-- <label id="label1">0000 BPM</label> -->
+                                <?php $name = "all";
+                                      $forwhat = "heart";
+                                ?>
+                                <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
+                                <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
+                                <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 BPM" style = "font-size:20px;">
+                                <button id="button4" class="setbutton" type="submit" name="savegoal">Set</button>  
+                              </form>
+
+
+
                         </div>
                         
 
@@ -546,8 +612,22 @@ margin-top: 2.5rem;
                             </div>
                             <span style="color: #633FDD;">Daily Sleep Hours</span> <br>
                             <img src="images/sleep.jpg" style="margin-left:3.5rem"><br>
-                            <label id="label1">0000 Hours</label>
-                            <button id="button6" class="setbutton">Set</button>  
+                            
+                            
+                            <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                                <!-- <label id="label1">0000 BPM</label> -->
+                                <?php $name = "all";
+                                      $forwhat = "sleep";
+                                ?>
+                                <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
+                                <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
+                                <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Hours" style = "font-size:20px;">
+                                <button id="button4" class="setbutton" type="submit" name="savegoal">Set</button>  
+                              </form>
+
+
+
+
                         </div>
                         
 
@@ -567,8 +647,16 @@ margin-top: 2.5rem;
                             </div>
                             <span style="color: #788F97">Daily Weight Count</span> <br>
                             <img src="images/weight.jpg" style="margin-left:3.5rem"><br>
-                            <label id="label1">0000 BPM</label>
-                            <button id="button8" class="setbutton">Set</button>  
+                            <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                                <!-- <label id="label1">0000 BPM</label> -->
+                                <?php $name = "all";
+                                      $forwhat = "weight";
+                                ?>
+                                <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
+                                <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
+                                <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 KG" style = "font-size:20px;">
+                                <button id="button4" class="setbutton" type="submit" name="savegoal">Set</button>  
+                              </form>
                         </div>
                         
 
@@ -593,8 +681,16 @@ margin-top: 2.5rem;
                             </div>
                             <span style="color: #5CA7F8">Daily Water Consumption</span> <br>
                             <img src="images/water.jpg" style="margin-left:4rem"><br>
-                            <label id="label1">0000 litres</label>
-                            <button id="button10" class="setbutton">Set</button>  
+                            <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                                <!-- <label id="label1">0000 BPM</label> -->
+                                <?php $name = "all";
+                                      $forwhat = "water";
+                                ?>
+                                <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
+                                <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
+                                <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 LITRES" style = "font-size:20px;">
+                                <button id="button4" class="setbutton" type="submit" name="savegoal">Set</button>  
+                              </form>
                         </div>
                         
 
@@ -614,8 +710,16 @@ margin-top: 2.5rem;
                             </div>
                             <span style="color:  #E48FA7">Daily Calorie Count</span> <br>
                             <img src="images/calorie.jpg" style="margin-left:3rem"><br>
-                            <label id="label1">0000 BPM</label>
-                            <button id="button12" class="setbutton">Set</button>  
+                            <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                                <!-- <label id="label1">0000 BPM</label> -->
+                                <?php $name = "all";
+                                      $forwhat = "calorie";
+                                ?>
+                                <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
+                                <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
+                                <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Calorie" style = "font-size:20px;">
+                                <button id="button4" class="setbutton" type="submit" name="savegoal">Set</button>  
+                              </form> 
                         </div>
                         
 
@@ -644,12 +748,21 @@ margin-top: 2.5rem;
                         <span style="color:#FFA578">Step Goals</span>
                         <span style="color:#FF8B8B">Daily Steps</span>
                     </div>
+                  
+                  
+                    <form id="form1" action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+
+                    <?php $forwhat = "steps"; ?>
                     <div style="display:flex;flex-direction:column; margin-top:1.2rem;margin-left:3.6rem ;font-size:1.2rem; font-weight:400">
                         <span >No. of steps</span>
-                        <label id="label2">00000 Steps</label>
+                        <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Steps" style = "font-size:20px;">
                     </div>
+                    <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
+
                     <button class="userimage" style="background-color: #F3A181 ; position:static;margin-left:0.5rem" id="userimage1"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button class="userimage" style="background-color: #F3A181;position:static"><img src="images/right.png" ></button>
+                    <button class="userimage" style="background-color: #F3A181;position:static" type = "submit" name = "savegoal"><img src="images/right.png" ></button>
+
+                    </form>
                     
                     
                     
@@ -663,12 +776,22 @@ margin-top: 2.5rem;
                         <span style="color:#E882B8">Heart Rate Goal</span>
                         <span style="color:#FF8B8B">Daily Heart Rate</span>
                     </div>
+
+
+                    <form id="form1" action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+
+                    <?php $forwhat = "heart"; ?>
+
+
                     <div style="display:flex;flex-direction:column; margin-top:1.2rem;font-size:1.2rem; font-weight:400;margin-left:1.5rem">
                         <span >Beats per minute</span>
-                        <label id="label2">00000 BPM</label>
+                        <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 BPM" style = "font-size:20px;">
                     </div>
+                    <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #DA83C3;margin-left:0.7rem" id="userimage2"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button class="userimage" style="background-color: #DA83C3;"><img src="images/right.png" ></button>
+                    <button type="submit" name="savegoal" class="userimage" style="background-color: #DA83C3;"><img src="images/right.png" ></button>
+
+                    </form>
                     
                 </div>
 
@@ -681,12 +804,19 @@ margin-top: 2.5rem;
                         <span style="color:#68A9F7">Water Goal</span>
                         <span style="color:#FF8B8B">Daily Water Intake</span>
                     </div>
+                    <form id="form1" action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                    <?php
+                        $forwhat = "water";
+                        ?>
                     <div style="display:flex;flex-direction:column; margin-top:1.2rem ;font-size:1.2rem; font-weight:400;margin-left:0.7rem">
                         <span >Quantity</span>
-                        <label id="label2">00000 litres</label>
+                        <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 litres" style = "font-size:20px;">
                     </div>
+                    <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #68A9F7;margin-left:0.5rem" id="userimage3"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button class="userimage" style="background-color: #68A9F7;"><img src="images/right.png" ></button>
+                    <button type="submit" name="savegoal" class="userimage" style="background-color: #68A9F7;"><img src="images/right.png" ></button>
+
+                    </form>
                     
                 </div>
 
@@ -699,12 +829,19 @@ margin-top: 2.5rem;
                         <span style="color:#805AE5">Sleep Goal</span>
                         <span style="color:#FF8B8B">Daily Sleep Duration</span>
                     </div>
+                    <form id="form1" action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                    <?php
+                        $forwhat = "sleep";
+                        ?>
                     <div style="display:flex;flex-direction:column; margin-top:1.2rem;font-size:1.2rem; font-weight:400">
                         <span >Sleep time</span>
-                        <label id="label2">00000 hours</label>
+                        <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Hours" style = "font-size:20px;">
                     </div>
+                    <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #805AE5;" id="userimage4"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button class="userimage" style="background-color: #805AE5;"><img src="images/right.png" ></button>
+                    <button type="submit" name="savegoal" class="userimage" style="background-color: #805AE5;"><img src="images/right.png" ></button>
+
+                    </form>
                     
                 </div>
 
@@ -717,12 +854,18 @@ margin-top: 2.5rem;
                         <span style="color:#7F9FA4">Weight Goal</span>
                         <span style="color:#FF8B8B">Daily Weight Count</span>
                     </div>
+                    <form id="form1" action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+                    <?php
+                        $forwhat = "weigth";
+                        ?>
                     <div style="display:flex;flex-direction:column; margin-top:1.2rem;font-size:1.2rem; font-weight:400;margin-left:0.5rem">
                         <span >Weight Count</span>
-                        <label id="label2">00000 kg</label>
+                        <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Kgs" style = "font-size:20px;">
                     </div>
+                    <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #7F9FA4;position:static;margin-left:1.3rem" id="userimage5"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button class="userimage" style="background-color: #7F9FA4;position:static"><img src="images/right.png" ></button>
+                    <button type="submit" name="savegoal" class="userimage" style="background-color: #7F9FA4;position:static"><img src="images/right.png" ></button>
+                    </form>
                     
                 </div>
 
@@ -735,12 +878,19 @@ margin-top: 2.5rem;
                         <span style="color:#E39F9A">Calorie Goal</span>
                         <span style="color:#FF8B8B">Daily Calorie Count</span>
                     </div>
+                    <form id="form1" action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
+
+                    <?php
+                        $forwhat = "calorie";
+                        ?>
+
                     <div style="display:flex;flex-direction:column; margin-top:1.2rem ;font-size:1.2rem; font-weight:400;margin-left:0.7rem">
                         <span >Calorie Count</span>
-                        <label id="label2">00000 kcal</label>
+                        <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Calories" style = "font-size:20px;">
                     </div>
+                    <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #E39F9A;margin-left:0.5rem" id="userimage6"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button class="userimage" style="background-color: #E39F9A;"><img src="images/right.png" ></button>
+                    <button type="submit" name="savegoal" class="userimage" style="background-color: #E39F9A;"><img src="images/right.png" ></button>
                     
                 </div>
 
