@@ -34,13 +34,6 @@ include "server.php";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
-body {
-    /* position: relative; */
-    max-height: 100vh;
-    margin: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
 
 .top_bar {
     display: flex;
@@ -65,33 +58,33 @@ body {
 #home {
     font-family: 'NATS';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 25px;
-    line-height: 8px;
-    align-items: center;
-    color: #8081F9;
+   
+    color:  #8081F9;
     background-color: #FFFFFF;
     border: none;
     margin-bottom: 10px;
 }
 
+
 .sign {
     background: #F8F8FF;
-    box-shadow: 0px 0px 1px #C0C0FF;
+    box-shadow: 0px 0px 10px #C0C0FF;
     border-radius: 12px;
-    width: 100px;
+    width: 117px;
     height: 50px;
-    margin-right: 20px;
     border: none;
-    margin-bottom: 20px;
+    margin-top:0.7rem;
+    margin-right:0.7rem;
     font-family: 'NATS';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 25px;
-    line-height: 60px;
-    align-item: centre;
-
     color: #8081F9;
+    align-item;
+    centre;
+    margin-left:0.7rem;
 }
 
 .mobile img {
@@ -557,9 +550,9 @@ body {
     <div class="top_bar">
         <div class="left">
             <div class="bg">
-                <img src="images/bg_patch.svg" alt="">
+            <img src="images/Vector3.png" style="width:25rem">
             </div>
-            <img src="images/infits_logo.svg" alt="">
+            <img src="images/infits_logo.svg" style="margin-top:0.8rem;margin-left:0.8rem">
         </div>
         <div class="right">
             <button id="home">Home</button>

@@ -1,5 +1,4 @@
-<?php 
-session_start(); 
+<?php session_start(); 
 include('config.php');
 
 // $name = $_SESSION['name'] ;

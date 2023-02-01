@@ -15,6 +15,15 @@
 
     <style>
     @import url('https://fonts.googleapis.com/earlyaccess/nats.css');
+    @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
 
     body {
         font-family: 'NATS', serif !important;
@@ -26,7 +35,7 @@
         color: black;
         padding: 1rem;
         height: auto;
-        width: 100%;
+        width: auto;
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
@@ -134,6 +143,26 @@
     #display {
         z-index: 10 !important;
     }
+    
+    #btn1{
+    border: none;
+    background-color: #0177FD;
+    color: white;
+    
+    border-radius: 100%;
+    font-size:2.7rem;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    position:relative;
+    margin-left:93%;
+}
+
+
+@media screen and (max-width: 720px) {
+    #heading{
+        font-size:35px !important;
+    }
+}
     </style>
     <script>
     $(document).ready(function() {
@@ -151,12 +180,9 @@ include "navbar.php";
 
 
     <div class="row" style="padding:1rem;">
-        <div class="col-6" style="font-weight:bold;font-size:20px;"><a href="myplan.php">My Plans</a></div>
+        <div class="col-6" id="heading"style="font-weight:400;font-size:48px;color:black !important">Diet Plans</div>
         <div class="col-6" style="text-align:right">
             <div class="card-body">
-                <div style="display:inline-block;padding:8px;background-color:#7282FB;margin-right:10px">
-                    <a style="color:white" href="create_plan.php">CREATE PLAN</a>
-                </div>
                 <form method="POST" class="search-form form-inline" style="width:200px;display:inline-block;">
                     <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
                         name="search">
@@ -199,7 +225,7 @@ if(isset($_POST['search-btn']))
                             <div class="card-upper-details col-8">
                                 <div class="row">
                                     <div class="col"
-                                        style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:bold;">
+                                        style="margin-top:5px;margin-bottom:5px; font-size:30px;font-weight:400 !important;">
                                         <?php echo $row1['name']?></div>
                                     <div class="w-100"></div>
                                     <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
@@ -237,7 +263,7 @@ if(isset($_POST['search-btn']))
                                 </div>
                             </div>
                         </div>
-                        <div class="card-middle row"><?php echo $row1['description']?></div>
+                        <div class="card-middle row" style="color:#919191 !important"><?php echo $row1['description']?></div>
                         <div class="card-below row">
                             <div class="col">
                                 <div class="row">FEATURES</div>
@@ -278,7 +304,7 @@ else{
                             <div class="card-upper-details col-8">
                                 <div class="row">
                                     <div class="col"
-                                        style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:bold;">
+                                        style="margin-top:5px;margin-bottom:5px; font-size:30px;font-weight:400;">
                                         <?php echo $row['name']?></div>
                                     <div class="w-100"></div>
                                     <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
@@ -297,9 +323,28 @@ else{
                                                echo '<div class="tag-element" style="width:auto;">'.$out.'</div>';
                                             }
                                             ?>
+                                            
 
                                 </div>
+                               
                             </div>
+                            
+                            
+                            
+                            <!----<div class="card-upper-options col-1" style="position:relative;display:flex">
+                                
+                            
+                                <div class="row" style="position:absolute;display:flex">
+                                <div class="setting" id="setting">
+                                    <a id="edit" class="settingbtn">Edit</a>
+                                    <a id="delete" class="settingbtn">Delete</a>
+                                </div>
+                               <div> <button type="submit" class="dots" ><i class="fa-solid fa-ellipsis-vertical"></i></button></div>
+                                    
+                                </div>
+                                
+                            </div> -->
+                            
                             <div class="card-upper-options col-1">
                                 <div class="row">
                                     <div style="display:inline-block">
@@ -315,8 +360,9 @@ else{
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
-                        <div class="card-middle row"><?php echo $row['description']?></div>
+                        <div class="card-middle row" style="color:#919191 !important"><?php echo $row['description']?></div>
                         <div class="card-below row">
                             <div class="col">
                                 <div class="row">FEATURES</div>
@@ -358,6 +404,11 @@ else{
                     </div>
                 </div>
             </div>
+
+    <div>
+        <button id="btn1" onclick="window.location.href = 'create_plan.php';">+</button>
+    </div>
+    
 
 </body>
 
