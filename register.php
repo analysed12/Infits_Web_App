@@ -33,13 +33,17 @@ include "server.php";
 @import url('https://fonts.googleapis.com/earlyaccess/nats.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
-
-body {
-    /* position: relative; */
-    max-height: 100vh;
-    margin: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
+@font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family: 'NATS', sans-serif;
 }
 
 .top_bar {
@@ -65,33 +69,33 @@ body {
 #home {
     font-family: 'NATS';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 25px;
-    line-height: 8px;
-    align-items: center;
-    color: #8081F9;
+   
+    color:  #8081F9;
     background-color: #FFFFFF;
     border: none;
     margin-bottom: 10px;
 }
 
+
 .sign {
     background: #F8F8FF;
-    box-shadow: 0px 0px 1px #C0C0FF;
+    box-shadow: 0px 0px 10px #C0C0FF;
     border-radius: 12px;
-    width: 100px;
+    width: 117px;
     height: 50px;
-    margin-right: 20px;
     border: none;
-    margin-bottom: 20px;
+    margin-top:0.7rem;
+    margin-right:0.7rem;
     font-family: 'NATS';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 25px;
-    line-height: 60px;
-    align-item: centre;
-
     color: #8081F9;
+    align-item;
+    centre;
+    margin-left:0.7rem;
 }
 
 .mobile img {
@@ -341,14 +345,14 @@ body {
     border: 1px solid #EAEAEA;
     border-radius: 15px;
     background: #FFFFFF;
-    margin-right: 10px;
+    
 }
 
 .facebook {
     border: 1px solid #EAEAEA;
     border-radius: 15px;
     background: #FFFFFF;
-    margin-left: 10px;
+
 
 }
 
@@ -373,12 +377,13 @@ body {
 
 .input_bar {
     background: #F9F9FF;
-    border: 1px solid #F9F9FF;
-    border-radius: 15px;
+border: 1px solid #EAEAEA;
+border-radius: 15px;
     padding-left: 40px;
     width: 300px;
     height: 50px;
     margin: 10px;
+    color: #CDCDCD;
 }
 
 .left_column {
@@ -504,11 +509,12 @@ body {
 
 .sign_up {
     background: #4B99FB;
-    border-radius: 15px;
+border-radius: 15px;
     width: 130px;
     height: 50px;
     border: none;
     color: #FFFFFF;
+    font-size: 22px;
 }
 
 .sign_btn_section {
@@ -542,7 +548,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    margin-top: 40px;
+    margin-top: 5px;
 }
 
 .blue_line {
@@ -551,19 +557,29 @@ body {
     background: #4B99FB;
     border-radius: 1em;
 }
+@media screen and (max-width: 720px) {
+    #home{
+        background: #F8F8FF;
+
+    }
+    #hr{
+        display:none;
+    }
+}
+
 </style>
 
 <body>
     <div class="top_bar">
         <div class="left">
             <div class="bg">
-                <img src="images/bg_patch.svg" alt="">
+            <img src="images/Vector3.png" style="width:25rem">
             </div>
-            <img src="images/infits_logo.svg" alt="">
+            <img src="images/infits_logo.svg" style="margin-top:0.8rem;margin-left:0.8rem">
         </div>
         <div class="right">
             <button id="home">Home</button>
-            <button class="sign">SignUp</button>
+            <button class="sign" onclick="window.location.href = 'login.php';">SignIn</button>
         </div>
     </div>
 
@@ -573,34 +589,34 @@ body {
 
             <div class="sform">
                 <div class="header_sigin">
-                    <img src="images/bg_patch_small.svg" alt="">
-                    <span>Sign Up</span>
+                    <img src="images/Vectorsignup.png" alt="">
+                    <span style="font-size: 100px;">Sign Up</span>
 
                 </div>
 
                 <div class="signwith">
                     <div class="blue_line"> </div>
-                    <span> Sign Up With</span>
+                    <span style="font-size: 25px;color: #4F1963;margin-left:1rem"> Sign Up With</span>
                 </div>
                 <div class="gf_btns">
                     <button class="google">
                         <img src="images/google.svg" alt="">
-                        <span>Google</span>
+                        <span style="color: #4B99FB;font-size:27px;margin-left:0.4rem">Google</span>
                     </button>
-                    <button class="facebook">
+                    <button class="facebook" style="margin-left:1rem">
                         <img src="images/facebook.svg" alt="">
-                        <span>Facebook</span>
+                        <span style="color: #4B99FB;font-size:27px">Facebook</span>
                     </button>
                 </div>
                 <div class="or">
-                    <span>OR</span>
+                    <span style="font-size: 25px;color: #4F1963;font-weight:400">OR</span>
                 </div>
                 <div class="form_inputs">
                     <form method="post" action="register.php">
                       <?php include "errors.php";  ?>
                         
                         <div class="ip_box">
-                            <img src="images/account_name.svg" alt="">
+                            <img src="images/account_name.svg" >
                             <input class="input_bar" name="dietitianuserID" id="name" type="text" placeholder="       Username">
                         </div>
                         <div class="ip_box">
@@ -620,24 +636,19 @@ body {
                             <input class="input_bar" name="password" id="password" type="text"
                                 placeholder="       Password">
                         </div>
-                        <div class="ip_box">
-                            <img src="images/shield.svg" alt="">
-                            <input class="input_bar" name="password_2" id="retype_password" type="text"
-                                placeholder="       Confirm Password">
-                        </div>
+                        
                         <div class="check">
                             <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                            <label for="vehicle1"> I've read and agree with Terms and Services <br>and the Privacy
-                                Policy of
-                                INFITS </label>
+                            <label for="vehicle1" style="margin-left:1rem"> I've read and agree with Terms and Services <br>and the Privacy
+                                Policy of INFITS </label>
                         </div>
                         <div class="sign_btn_section">
                             <div class="sign_btn">
                                 <button type="submit" class="sign_up btn" name="reg_user">Sign Up</button>
                             </div>
-                            <div class="sign_in_sec">
+                            <div class="sign_in_sec" style="font-size: 25px;">
                                 <span>Already have an account?</span>
-                                <a href="login.php" style="text-decoration:none;"><div>Sign In</div></a>
+                                <a href="login.php" style="text-decoration:none;" ><div style="color: #4F1963;margin-left:4rem;font-size: 20px;font-weight:500">Sign In</div></a>
                               
                             </div>
                         </div>
@@ -650,7 +661,13 @@ body {
             <div class="left_column">
 
                 <div class="mobile d-none d-sm-block">
-                    <img src="images/mobile.svg" alt="">
+                    <img src="images/mobile.svg" style="width:500px;height:500px">
+                </div>
+
+                <div class="ip_box" style="margin-top:4rem">
+                            <img src="images/shield.svg" alt="">
+                            <input class="input_bar" name="password_2" id="retype_password" type="text"
+                                placeholder="       Confirm Password">
                 </div>
 
                 <span class="referral_text">Have a referral code? Verify here</span>
@@ -669,6 +686,69 @@ body {
     </div>
     </div>
 
+    </div>
+
+
+    <hr  id="hr" style="border: 2px solid #F3F3FF;width: 1204px;margin-left:9rem">
+    </div>
+    <div class="row" style="margin-top:2rem" ">
+        <div class="col-sm-4" id="btml">
+            <div class="bottom_logo">
+                <img src="images/infits_logo.svg" alt="">
+                <span style="font-size:30px !important,font-weight:500;text-align:center !important">Fitter.Healthier.Happier</span>
+                <div class="social_links">
+                    <img src="images/facebook.svg" alt="">
+                    <img src="images/twitter.svg" alt="">
+                    <img src="images/linkedin.svg" alt="">
+
+                </div>
+                <span class="copy">Copyright 2022 Infits. All rights reserved.</span>
+            </div>
+
+            <div class="bottom_patch">
+                <img src="images/bottomvector.png" style="margin-left:3rem">
+            </div>
+
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="left_links">
+                        <span style="font-size:35px;margin-top:3rem;">Company</span>
+                        <div class="link" style="color: #8E8E8E;">About</div>
+                        <div class="link" style="color: #8E8E8E;">Features</div>
+                        <div class="link" style="color: #8E8E8E;">Testimonials</div>
+                        <div class="link" style="color: #8E8E8E;">Get in touch</div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="right_links">
+                    <img src="images/bg_patch_small.svg" style="width:30rem;height:8rem">
+                        <span style="color: #4F1963;font-size:30px">Get the app</span>
+                        <!-- <img src="images/bg_patch_small.svg" alt=""> -->
+                        <div class="play_store">
+                            <div class="apple" style="padding:0.5rem">
+                                <img src="images/apple.svg" alt="">
+                                <div class="content">
+                                    <p>Download on the</p>
+                                    <span>App Store</span>
+                                </div>
+
+                            </div>
+                            
+                            <div class="play" style="padding:0.5rem">
+                                <img src="images/gplay.svg" alt="">
+                                <div class="content">
+                                    <p style="font-size:16px">Get it on</p>
+                                    <span style="font-size:14px; font-weight:600 !important">Google Play</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
     <script type="text/javascript">
     function onSignIn(googleUser) {

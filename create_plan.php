@@ -197,7 +197,7 @@ include "navbar.php"
     <!-- Contents Start -->
     <div id="content">
 
-        <h4 class="header">Create Plan</h4>
+        <h4 class="header" style="">Create Plan</h4>
 
         <!-- Other content -->
         <div class="plan_form">

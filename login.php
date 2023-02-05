@@ -17,13 +17,22 @@ include "server.php";
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="GOOGLE_SIGNIN_CLIENT_ID">
+<meta name="google-signin-client_id" content="GOOGLE_SIGNIN_CLIENT_ID">
 
 </head>
 <style>
 @import url('https://fonts.googleapis.com/earlyaccess/nats.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
 
 body {
     /* position: relative; */
@@ -31,6 +40,7 @@ body {
     margin: 0;
     overflow-x: hidden;
     overflow-y: scroll;
+    font-family: 'NATS', sans-serif;
 }
 
 .top_bar {
@@ -57,42 +67,38 @@ body {
 #home {
     font-family: 'NATS';
     font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 8px;
-    align-items: center;
-    color: #8081F9;
+    font-weight: 500;
+    font-size: 25px;
+   
+    color:  #8081F9;
     background-color: #FFFFFF;
     border: none;
     margin-bottom: 10px;
 }
 
+
 .sign {
     background: #F8F8FF;
-    box-shadow: 0px 0px 1px #C0C0FF;
+    box-shadow: 0px 0px 10px #C0C0FF;
     border-radius: 12px;
-    width: 100px;
-    height: 60px;
-    margin-right: 20px;
+    width: 117px;
+    height: 50px;
     border: none;
-    margin-bottom: 10px;
+    margin-top:0.7rem;
+    margin-right:0.7rem;
     font-family: 'NATS';
     font-style: normal;
     font-weight: 500;
     font-size: 25px;
-    line-height: 0px;
-    justify;
-    centre;
-    padding;
-    200px;
     color: #8081F9;
     align-item;
     centre;
+    margin-left:0.7rem;
 }
 
 .mobile img {
-    width: 400px;
-    height: 400px;
+    width: 550px;
+    height: 550px;
 }
 
 .col-sm-6 {
@@ -278,8 +284,8 @@ body {
     font-size: 20px;
     /* line-height: 124.84%; */
     /* identical to box height, or 25px */
-    color: #A6A6A6;
-    margin-top: 60px;
+    color:#A6A6A6;
+    margin-top: 6rem;
 
 }
 
@@ -328,6 +334,7 @@ body {
 
 .gf_btns {
     display: flex;
+    gap:1rem;
     justify-content: space-between;
     /* align-items: center; */
     flex-direction: row;
@@ -335,19 +342,23 @@ body {
 }
 
 .google {
-
     border: 1px solid #EAEAEA;
     border-radius: 15px;
     background: #FFFFFF;
     margin-right: 10px;
+   
 }
 
 .facebook {
     border: 1px solid #EAEAEA;
+    padding-left:0.5rem;
+    padding-right:0.5rem;
     border-radius: 15px;
     background: #FFFFFF;
     margin-left: 10px;
-
+    display:flex;
+    gap:0.5rem;
+    color: #4B99FB;
 }
 
 .form_inputs {
@@ -370,8 +381,8 @@ body {
 
 #password {
     background: #F9F9FF;
-    border: 1px solid #EAEAEA;
-    border-radius: 15px;
+border: 1px solid #EAEAEA;
+border-radius: 15px;
     padding: 10px;
     width: 300px;
     height: 50px;
@@ -400,9 +411,11 @@ body {
 
 .ip_box {
     display: flex;
-    justify-content: center;
+    
     align-items: center;
     flex-direction: row;
+    color: #B4B4B4;
+    
 
 }
 
@@ -425,6 +438,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    
+    border-radius: 15px;
 
 }
 
@@ -437,10 +452,11 @@ body {
     border: 1px solid #F9F9FF;
     border-radius: 15px;
     padding-left: 40px !important;
-    width: 300px;
+    width: 30px;
     height: 50px;
     margin: 10px;
 }
+
 
 .sign_in_sec span {
 
@@ -455,19 +471,41 @@ body {
 
     color: #4B99FB;
 }
+.row{
+    margin-left:2rem;
+}
+@media screen and (max-width: 720px) {
+    #home{
+        margin-left:13rem;
+    }
+    .mobile img {
+    width: 400px;
+    height: 400px;
+}
+.sign{
+    margin-left:11rem;
+}
+#hr{
+    display:none;
+}
+#btml{
+    margin-left:4rem;
+}
+
+}
 </style>
 
 <body>
     <div class="top_bar">
         <div class="left">
             <div class="bg">
-                <img src="images/bg_patch.svg" alt="">
+                <img src="images/Vector3.png" style="width:25rem">
             </div>
-            <img src="images/infits_logo.svg" alt="">
+            <img src="images/infits_logo.svg" style="margin-top:0.8rem;margin-left:0.8rem">
         </div>
         <div class="right">
             <button id="home">Home</button>
-            <button class="sign">SignUp</button>
+            <button class="sign" onclick="window.location.href = 'register.php';">SignUp</button>
         </div>
     </div>
 
@@ -477,50 +515,53 @@ body {
 
             <div class="sform">
                 <div class="header_sigin">
-                    <img src="images/bg_patch_small.svg" alt="">
-                    <span>Sign In</span>
+                    <img src="images/bg_patch_small.svg" >
+                    <span style="font-size: 100px;font-weight:400">Sign In</span>
+                    
 
                 </div>
+                <span><img src="images/Line70.png"><span style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.5rem"> Sign In With</span></span>
                 <div class="gf_btns">
 
                     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
                     <button class="facebook">
-                        <img src="images/facebook.svg" alt="">
-                        <span>Facebook</span>
+                        <img src="images/facebook.svg" style="width:2rem;margin-top:0.2rem">
+                        <span style="font-size:25px">Facebook</span>
                     </button>
                 </div>
-                <div class="or">
-                    <span>OR</span>
+                <div class="or" style="margin-top:1rem">
+                    <span style="color: #4F1963;font-size:25px ;font-weight:400">OR</span>
                 </div>
 
                 <div class="form_inputs login-area">
                     <form action="" method="post">
-                        <?php include('errors.php'); 
+                    <?php include('errors.php'); 
                    ?>
 
                         <!-- Main Form -->
                         <div class="ip_box">
-                            <img src="images/letter.svg" alt="">
+                            <img src="images/letter.svg" >
                             <input class="input_bar" id="email" type="text" name="dietitianuserID"
-                                placeholder="Email or Username">
+                                placeholder="Email">
                         </div>
                         <div class="ip_box">
                             <img src="images/shield.svg" alt="">
                             <input name="password" class="input_bar" id="password" type="password"
                                 placeholder="Password">
+                                <img src="images/eye.png" alt="">
                         </div>
                         <!-- <br> -->
-                        <a href="forgot_password.php" style="float:right;">Forgot password?</a>
+                        <a href="forgot_password.php" style="float:right; underline:none">Forgot password?</a>
                         <br><br>
                         <div class="sign_btn_section">
-                            <div class="sign_btn">
-                                <button type="submit" class="btn sign_up" name="login_user">Login</button>
+                            <div class="sign_btn" style="background: #4B99FB;border-radius:15px">
+                                <button type="submit" class="btn sign_up" name="login_user" style="font-size: 25px;">Login</button>
                             </div>
                             <p></p>
                             <div class="sign_in_sec">
-                                <span>Don't have an Account?</span>
-                                <div><a href="register.php" style="text-align: center;text-decoration:none;">Sign up</a>
+                                <span style="font-size:17px">Don't have an Account?</span>
+                                <div><a href="register.php" style="text-align: center;text-decoration:none;color:#4F1963;font-weight:500;font-size:17px;margin-left:6rem">Sign up</a>
                                 </div>
                             </div>
                         </div>
@@ -539,23 +580,24 @@ body {
 </center>  -->
             <!--  -->
         </div>
+        <hr  id="hr" style="border: 2px solid #F3F3FF;width: 1204px;margin-left:6rem">
     </div>
-    <div class="row">
-        <div class="col-sm-4">
+    <div class="row" style="margin-top:2rem" ">
+        <div class="col-sm-4" id="btml">
             <div class="bottom_logo">
                 <img src="images/infits_logo.svg" alt="">
-                <span>Fitter.Healthier.Happier</span>
+                <span style="font-size:30px !important,font-weight:500;text-align:center !important">Fitter.Healthier.Happier</span>
                 <div class="social_links">
                     <img src="images/facebook.svg" alt="">
                     <img src="images/twitter.svg" alt="">
                     <img src="images/linkedin.svg" alt="">
 
                 </div>
-                <span class="copy">Copyright 2022 Infits. All rights reserved</span>
+                <span class="copy">Copyright 2022 Infits. All rights reserved.</span>
             </div>
 
             <div class="bottom_patch">
-                <img src="images/bg_patch_bottom.svg" alt="">
+                <img src="images/bottomvector.png" style="margin-left:3rem">
             </div>
 
         </div>
@@ -563,19 +605,20 @@ body {
             <div class="row">
                 <div class="col-sm-6">
                     <div class="left_links">
-                        <span>Company</span>
-                        <div class="link">About</div>
-                        <div class="link">Features</div>
-                        <div class="link">Testimonials</div>
-                        <div class="link">Get in touch</div>
+                        <span style="font-size:35px;margin-top:3rem;">Company</span>
+                        <div class="link" style="color: #8E8E8E;">About</div>
+                        <div class="link" style="color: #8E8E8E;">Features</div>
+                        <div class="link" style="color: #8E8E8E;">Testimonials</div>
+                        <div class="link" style="color: #8E8E8E;">Get in touch</div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="right_links">
-                        <span>Get the app</span>
+                    <img src="images/bg_patch_small.svg" style="width:30rem;height:8rem">
+                        <span style="color: #4F1963;font-size:30px">Get the app</span>
                         <!-- <img src="images/bg_patch_small.svg" alt=""> -->
                         <div class="play_store">
-                            <div class="apple">
+                            <div class="apple" style="padding:0.5rem">
                                 <img src="images/apple.svg" alt="">
                                 <div class="content">
                                     <p>Download on the</p>
@@ -583,11 +626,12 @@ body {
                                 </div>
 
                             </div>
-                            <div class="play">
+                            
+                            <div class="play" style="padding:0.5rem">
                                 <img src="images/gplay.svg" alt="">
                                 <div class="content">
-                                    <p>Get it on</p>
-                                    <span>Google Play</span>
+                                    <p style="font-size:16px">Get it on</p>
+                                    <span style="font-size:14px; font-weight:600 !important">Google Play</span>
                                 </div>
                             </div>
                         </div>

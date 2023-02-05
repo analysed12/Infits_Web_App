@@ -13,6 +13,10 @@ include "navbar.php"
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -28,6 +32,23 @@ include "navbar.php"
 </head>
 <style>
 /* Add Tags Popup */
+@font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
+
+    body {
+        font-family: 'NATS', serif !important;
+    }
 .popup {
     display: none;
 
@@ -93,14 +114,13 @@ include "navbar.php"
 
 /* End of Add Tags Popup */
 
-
 .features_main {
     display: flex;
     flex-direction: row;
     /* align-items: center;
   justify-content: center; */
     margin-top: 20px;
-    width: 100%;
+    
 }
 
 .features_left {
@@ -108,7 +128,7 @@ include "navbar.php"
     flex-wrap: wrap;
     flex-direction: row;
 
-    width: 100%;
+    width: 64%;
 }
 
 .features_right {
@@ -123,9 +143,9 @@ include "navbar.php"
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 6px;
-    height: 50px;
-    width: 70%;
+    padding: 15px;
+    width: 350px;
+height: 50px;
     background: #FFFFFF;
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -159,12 +179,12 @@ include "navbar.php"
     padding-bottom: 15px;
     padding-left: 5px;
     padding-right: 5px;
-    margin-right: 10px;
+    
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
     font-size: 21px;
-    line-height: 24px;
+    
     border: none;
     /* identical to box height, or 104% */
 
@@ -176,7 +196,12 @@ include "navbar.php"
 
 .input-group input {
     border: none;
+    
 }
+select {
+        width: 250px;
+        margin: 10px;
+    }
 
 .input-group input:focus {
     outline: none !important;
@@ -186,6 +211,43 @@ include "navbar.php"
     color: black;
     background: white;
     border: none;
+}
+.cancelbutton{
+    width: 183px;
+height: 52px;
+
+margin-left:2.5rem;
+background: #FFFFFF;
+border: 2px solid #7282FB;
+border-radius: 10px;
+}
+.savebutton{
+    width: 183px;
+height: 52px;
+border:none;
+color:white;
+margin-left:2.5rem;
+background: #6883FB;
+border-radius: 10px;
+}
+
+
+@media screen and (max-width: 720px) {
+  .header{
+    margin-left:0% !important; 
+    font-size:25px !important;
+  }
+  .features_left {
+    
+    width: 100%;
+}
+  .ev-img{
+    margin-top:3rem;
+  }
+  #width{
+    width:auto !important;
+  }
+  
 }
 </style>
 
@@ -197,7 +259,7 @@ include "navbar.php"
     <!-- Contents Start -->
     <div id="content">
 
-        <h4 class="header">Create Plan</h4>
+        <p class="header" style="font-size:30px;margin-left:3rem;margin-top:1rem">Create Plan</p>
 
         <!-- Other content -->
         <?php
@@ -212,29 +274,30 @@ include "navbar.php"
         <div class="plan_form">
             <!-- Person image -->
             <div class="event-image">
-                <div class="ev-img">
-                    <img src="images/create_edit_plan.svg" alt="">
+                <div class="ev-img" style="position:relative">
+                    <div style="background: #7282FB;border-radius:100px;padding:0.5rem; z-index:2;margin-top:1rem;cursor:pointer;"> <img src="images/pencil.png" alt=""></div>
+                    <img src="images/create_edit_plan.svg"  style="position:absolute;width:15rem" >
                 </div>
             </div>
             <br>
             <form action="#" method="post">
                 <!-- Plan name -->
-                <div style="text-align:center; !important" class="plan_name_box">
-                    <input required type="text" placeholder="Plan Name" class="plan_name" name="plan_name"
-                        value="<?php echo $row['name']?>">
+                <div style="text-align:center; !important;;margin-top:2rem;" class="plan_name_box">
+                    <input required type="text" placeholder="Plan Name" class="plan_name" name="plan_name" style="border:none;"
+                        value="<?php echo $row['name']?>"><i class="fa-solid fa-pen" style="color:#7282FB;cursor:pointer;"></i>
                 </div>
 
                 <!-- Main form starts -->
-                <div class="event_form">
+                <div class="event_form" style="margin-left:23rem" >
                     <div class="evt-form">
 
                         <!-- Different Tags -->
                         <div class="tags">
-                            <div class="tag_title">Tags</div>
+                            <div class="tag_title" style="font-size:20px">Tags</div>
                             <div class="tag">
-                                <div
-                                    style="display: inline-block; border:none; padding: 10px; font-size: 15px; width: auto;">
-                                    <select id="fields_u" name="languages[]" multiple>
+                                <div class="tag_select"
+                                    style="display: inline-block; border:none; padding-top: 10px; font-size: 15px; width: auto;">
+                                    <select id="fields_u"  style="padding-right:5rem"name="languages[]" multiple>
                                         <option value="Keto Diet">Keto Diet</option>
                                         <option value="Vegan Diet">Vegan Diet</option>
                                         <option value="Diet Chart">Diet Chart</option>
@@ -262,8 +325,8 @@ include "navbar.php"
                                 </script>
 
 
-                                <button onclick="showPopup()" style="display: inline-block; border:none;"
-                                    class="tag-item openButton openBtn">+</button>
+                                <button onclick="showPopup()" style="display: inline-block; border:none;margin-left:15px;padding-left:1rem;padding-right:1rem;"
+                                    class="tag-item openButton openBtn" >+</button>
                                 <div class="popup">
                                     <div class="blocker" onclick="hidePopup()"></div>
                                     <div class="contents">
@@ -281,18 +344,31 @@ include "navbar.php"
 
 
                         <br>
-                        <label for="" class="subject tag_title">Plan Duration</label>
-                        <p style="font-size:15px;">Start Time</p>
-                        <input required class="subject subject-text" type="date" name="start_date"
+                        <label for="" class="subject tag_title" style="font-size:20px">Plan Duration</label>
+                        <div class="duration" style="display:flex; gap:2rem;margin-top:1rem">
+                        <div>
+                        <p style="font-size:15px;color: #6C6F71;">From</p>
+                        <input required class="subject subject-text" type="date" name="start_date" id="width"
                             value="<?php echo $row['start_date']?>"
-                            style="height: 45px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;" />
-                        <p style="font-size:15px; margin-top:10px;">End Time</p>
-                        <input required class="subject subject-text" type="date" name="end_date"
+                            style="height: 45px;width: 226px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;color: #BBBBBB;opacity: 0.5;padding:15px" />
+                        
+                        </div>
+                        <div>
+                        <p style="font-size:15px;color: #6C6F71;">To</p>
+                        <input required class="subject subject-text" type="date" name="end_date" id="width"
                             value="<?php echo $row['end_date']?>"
-                            style="height: 45px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;" />
+                            style="height: 45px;width: 226px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;color: #BBBBBB;opacity: 0.5;padding:15px" />
+                        </div>
+                        </div>
                         <br>
 
-                        <label for="" class="subject tag_title">Features</label>
+        
+                        <label for="" class="subject tag_title" style="font-size:20px">Description</label>
+                        <input required id="width"class="subject " type="text" name="description"  placeholder="Description"
+                            value="<?php echo $row['description']?>" style="height: auto; background: #FFFFFF;width: 482px;box-shadow:0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none; padding:15px" />
+                        <br />
+
+                        <label for="" class="subject tag_title " style="font-size:20px">Features</label>
 
                         <div class="features_main">
                             <div class="features_left textbox-wrapper">
@@ -307,30 +383,19 @@ include "navbar.php"
                             </div>
                         </div>
 
-                        <br>
-                        <label for="" class="subject tag_title">Description</label>
-                        <input required class="subject " type="text" name="description"
-                            value="<?php echo $row['description']?>" style="height: 79px; background: #FFFFFF;
-    box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border:none;" />
-                        <br />
+                       
 
-                        <label for="" class="subject tag_title">Price</label>
+                        <label for="" class="subject tag_title" style="font-size:20px;margin-top:1rem" id="width">Price</label>
                         <input required class="subject subject-text" type="number" value="<?php echo $row['price']?>"
-                            name="price" placeholder="Rs. /month" style="height: 45px; background: #FFFFFF;
-    box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border:none;" />
+                            name="price" placeholder="₹000 / month" style="height: 45px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);width: 482px;border-radius: 10px;border:none;padding:15px" />
                         <br>
-                        <div class="btns">
-                            <button style="display:inline-block;width:30%; font-size:90%;" name="final_cancel_btn">Cancel</button>
-                            <button
-                                style="display:inline-block;width:30%; font-size:90%; background-color:#6883FB;color:white"
-                                name="final_update_btn" type="submit">Save</button>
-                            <button
+                        <div style="display:flex">
+                            <button name="final_cancel_btn" class="cancelbutton">Cancel</button>
+                            <button name="final_update_btn" class="savebutton" type="submit">Save</button>
+                            <!----<button
                                 style="display:inline-block;width:35%; font-size:90%; background-color:#6883FB;color:white"
-                                name="final_save_btn" type="submit">Save as new</button>
+                                name="final_save_btn" type="submit">Save as new</button>-->
+                            
                         </div>
                         <br><br><br>
                     </div>
