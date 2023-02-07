@@ -204,49 +204,51 @@ border-bottom-left-radius: 1em!important;
    flex-wrap:wrap;
 }
 .client-card {
-        width: 70px;
-        height: auto;
-        margin: 10px;
-        text-align: center;
-        font-size: 20px;
-        border-radius: 14px;
-        padding: 5px;
+width: 100px;
+height: 120px;
+background: rgba(255, 255, 255, 0.8);
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+gap: 15px;
+margin-bottom: 15px;
 }
-
-.client-card p {
-    font-size: 15px;
-}
-
-.client-card i {
-    font-size: 15px;
-}
-.client-card-heart{
-    background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
-
-    border: 1px solid #E3738D;
-    border-radius: 10px;
-    margin: 10px 0 0 0;
-    width: 97px;
-    height: 114px;
+.client-card a{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+    gap: 23px;
+    height: 65%;
+    margin-top: 15px;
 }
-.client-card-heart p{
-    margin-bottom: 0;
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 120%;
-    /* or 23px */
-
-    text-align: center;
-
-    color: #FFFFFF;
+.client-card-steps{
+    background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.792) 43.71%, rgba(255, 92, 0, 0.416) 95.3%);
 }
+.client-card i{
+    scale: 2;
+}
+.client-card a:hover{
+    background: none;
+    border:none;
+    text-decoration: none;
+}
+.client-card a img {
+    height: 30px;
+    width: auto;
+    margin-bottom: -15px;
+}
+.client-card p{
+font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+line-height: 1;
+font-size: 22px;
+margin: 0;
+}
+
 /* -------------------Calorie Tab Content------------------- */
 .activity-container{
     /* margin: 3%; */
@@ -372,12 +374,18 @@ color: #000000;
             </div>
             <div class="col-sm-4 ph-right">
                 <!-- metric_button -->
-                <a href="track_stats_steps.php?id=<?php echo($clientId) ?>">
+                <!-- <a href="track_stats_steps.php?id=">
                 <div class="client-card client-card-heart " style="color:#E266A9; border: 1px solid #E266A9;">
                 <i class="fa-solid fa-shoe-prints" style="color:#FFFFFF; rotate: -90deg;"></i>
                             <p style="color: #FFFFFF;">Step</p>
                 </div>
-                </a>
+                </a> -->
+                <div class="client-card client-card-steps" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                    <a href="track_stats_steps.php?id=<?php echo($clientId) ?>">
+                        <i class="fa-solid fa-shoe-prints" style="color:#FFFFFF; rotate: -90deg;"></i>
+                        <p style="color: #FFFFFF;">Steps</p>
+                    </a>
+                </div>
             </div>
         </div>
                 
