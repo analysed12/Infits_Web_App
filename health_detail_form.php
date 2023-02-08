@@ -93,97 +93,41 @@
 
             <div id="form-documents">
 
-                <div class="details">
-                    <div class="title">
-                        <img src="icons/pdf.svg" alt="PDF">
-                        <div class="info-box">
-                            <p class="name">Diabetes Report</p>
-                            <div class="minor-details">
-                                <span>11 Aug,2022</span>
-                                <span>2.6MB</span>
+                <?php
+                for ($i = 0; $i < 6; $i++) {
+
+                    ?>
+                    <div class="details">
+                        <div class="title">
+                            <img src="icons/pdf.svg" alt="PDF">
+                            <div class="info-box">
+                                <p class="name">Diabetes Report</p>
+                                <div class="minor-details">
+                                    <span>11 Aug,2022</span>
+                                    <span>2.6MB</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="options">
-                        <img src="icons/download.svg" alt="Download" title="Download">
-                        <img src="icons/share.svg" alt="Share" title="Share">
-                        <img src="icons/delete.svg" alt="Delete" title="Delete">
-                    </div>
-                </div>
-
-                <div class="details">
-                    <div class="title">
-                        <img src="icons/pdf.svg" alt="PDF">
-                        <div class="info-box">
-                            <p class="name">Diabetes Report</p>
-                            <div class="minor-details">
-                                <span>11 Aug,2022</span>
-                                <span>2.6MB</span>
-                            </div>
+                        <div class="options">
+                            <img src="icons/download.svg" alt="Download" title="Download">
+                            <img src="icons/share.svg" alt="Share" title="Share" class="shareBtn">
+                            <img src="icons/delete.svg" alt="Delete" title="Delete">
                         </div>
                     </div>
-                    <div class="options">
-                        <img src="icons/download.svg" alt="Download" title="Download">
-                        <img src="icons/share.svg" alt="Share" title="Share">
-                        <img src="icons/delete.svg" alt="Delete" title="Delete">
+                <?php
+                }
+
+                ?>
+                <div class="share-popup" id="sharePopup">
+                    <p>Share via <img src="icons/share2.svg" alt="Share" title="Share"></p>
+                    <div class="share-icon-container">
+                        <div class="share-icon"><img src="icons/whatsapp.svg" alt="whatsapp"></div>
+                        <div class="share-icon"><img src="icons/twitter.svg" alt="twitter"></div>
+                        <div class="share-icon"><img src="icons/facebook.svg" alt="facebook"></div>
+                        <div class="share-icon"><img src="icons/linkedIn.svg" alt="linkedin"></div>
+                        <div class="share-icon"><img src="icons/instagram.svg" alt="instagram"></div>
                     </div>
                 </div>
-
-                <div class="details">
-                    <div class="title">
-                        <img src="icons/pdf.svg" alt="PDF">
-                        <div class="info-box">
-                            <p class="name">Diabetes Report</p>
-                            <div class="minor-details">
-                                <span>11 Aug,2022</span>
-                                <span>2.6MB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="options">
-                        <img src="icons/download.svg" alt="Download" title="Download">
-                        <img src="icons/share.svg" alt="Share" title="Share">
-                        <img src="icons/delete.svg" alt="Delete" title="Delete">
-                    </div>
-                </div>
-
-
-                <div class="details">
-                    <div class="title">
-                        <img src="icons/pdf.svg" alt="PDF">
-                        <div class="info-box">
-                            <p class="name">Diabetes Report</p>
-                            <div class="minor-details">
-                                <span>11 Aug,2022</span>
-                                <span>2.6MB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="options">
-                        <img src="icons/download.svg" alt="Download" title="Download">
-                        <img src="icons/share.svg" alt="Share" title="Share">
-                        <img src="icons/delete.svg" alt="Delete" title="Delete">
-                    </div>
-                </div>
-
-                <div class="details">
-                    <div class="title">
-                        <img src="icons/pdf.svg" alt="PDF">
-                        <div class="info-box">
-                            <p class="name">Diabetes Report</p>
-                            <div class="minor-details">
-                                <span>11 Aug,2022</span>
-                                <span>2.6MB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="options">
-                        <img src="icons/download.svg" alt="Download" title="Download">
-                        <img src="icons/share.svg" alt="Share" title="Share">
-                        <img src="icons/delete.svg" alt="Delete" title="Delete">
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -195,6 +139,8 @@
         const borderBottom = document.querySelector(".border-bottom");
         const btn = document.querySelector("[data-btn");
         let popup = document.querySelector("#addDocumentPopup");
+        let shareBtn = document.querySelectorAll(".shareBtn");
+        let sharePopup = document.querySelector("#sharePopup");
 
         formDocuments.style.display = "none";
 
@@ -241,6 +187,25 @@
 
             console.log(`================== ${content} ======================`);
             // console.log(formDetails.parentElement);
+        }
+
+        // shareBtn.addEventListener("click", () => {
+        //     sharePopup.classList.toggle("show");
+
+        //     if (popup.classList.contains("show")) {
+
+        //         popup.addEventListener("click", () => {
+        //             popup.classList.remove("show");
+        //         });
+        //     }
+        // });
+        console.log(sharePopup);
+        console.log(shareBtn);
+        for (const index of shareBtn) {
+            index.addEventListener("click", () => {
+                sharePopup.classList.add("show");
+                console.log("Clicked");
+            });
         }
     </script>
 

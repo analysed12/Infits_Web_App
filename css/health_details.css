@@ -250,6 +250,7 @@
 
 .content .health-form-container #form-details,
 .content .health-form-container #form-documents {
+    position: relative;
     overflow-y: auto;
     height: 400px;
     width: 100%;
@@ -372,4 +373,34 @@
     display: flex;
     justify-content: space-between;
     width: 100px;
+}
+.content .health-form-container #form-documents .share-popup.show {
+    display: flex;
+}
+.content .health-form-container #form-documents .share-popup {
+    position: fixed;
+    background-color: #FFFFFF;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 149px;
+    width: 330px;
+    box-shadow: 0px 2px 5px 0px rgb(0 0 0 / 25%);
+    border-radius: 15px;
+}
+.content .health-form-container #form-documents .share-popup p{
+    font-size: 1.4rem;
+}
+.content .health-form-container #form-documents .share-popup p img{
+    margin-left: 15px;
+}
+.content .health-form-container #form-documents .share-popup .share-icon-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.content .health-form-container #form-documents .share-popup .share-icon-container .share-icon{
+    cursor:pointer;
 }

@@ -231,6 +231,13 @@
         font-size: 36px;
         margin-left: 50px;
     }
+
+    body #sidenavbar {
+        position: relative;
+        background-image: url("icons/SIdebar_vector.svg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 </style>
 
 <script>
