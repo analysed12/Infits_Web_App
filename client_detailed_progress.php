@@ -12,6 +12,7 @@ include('navbar.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <style>
+      
     
 .detailed_progress_container1{
     display: flex;
@@ -44,10 +45,13 @@ include('navbar.php');
   border: none;  
 }
 .track_buttons{
-  margin-left: 20rem;
+  margin-left: 1rem;
+  margin-top:4rem;
+  display:flex;
+  gap:1rem;
 }
 #btn2{
-    background-color: white;
+    background: none;
     color: black;
     border: none;
     font-size: larger;
@@ -72,11 +76,13 @@ include('navbar.php');
   display: flex;
   gap: 3rem;
   padding: 0.4rem;
+  padding-left:1.5rem;
   border-radius: 0.7rem;
   background-color: #FDFDFD;
   margin-left: 20rem;
   border: 2px solid #F4F4F4;
-  margin-top:0.3rem;
+  margin-top:1.3rem;
+  font-weight:500;
 }
 .info{
   display: flex;
@@ -215,12 +221,14 @@ header .current-date{
     margin-left: 1rem;
   }
   .container1_rightside{
-    margin-left: 2rem;
-    display:none;
+    margin-left: 1rem;
+    
+    
 }
 .track_buttons{
   margin-left: 1rem;
   margin-top: 2rem;
+  justify-content:space-between !important;
 }
 .search_client{
   width: auto;
@@ -235,7 +243,12 @@ header .current-date{
 }
 .mobview_container1{
   display: none;
+  justify-content:center;
 }
+#track{
+  display:none;
+}
+
 }
     </style>
 </head>
@@ -250,6 +263,11 @@ header .current-date{
                     <div><button id="btn1"><span class="material-symbols-outlined">search</span></button> </div>
                     <div>&nbsp&nbsp&nbsp&nbsp <input type="text" name="search_client" placeholder="Search Clients" class="seach_clients_text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>   
                 </div>
+                <div class="track_buttons" id="track">
+                        <button id="btn2" onclick="myFunction()">On-Track</button>
+                        <button id="btn2" onclick="myFunction2()">Off-Track</button>
+                </div>
+
                 
                 
             </div>
@@ -347,11 +365,7 @@ header .current-date{
 <!--------------------------------------- webview of progress details--------------------------------------------------->
 
         <div class="webview_progressdetails">
-                    <div class="track_buttons">
-                        <button id="btn2" onclick="myFunction()">On-Track</button>
-                        <button id="btn2" onclick="myFunction2()">Off-Track</button>
-                    </div>
-
+                    
                     <script>
                     function myFunction() {
                     var x = document.getElementById("container2");
@@ -381,11 +395,11 @@ header .current-date{
 
             <div class="detailed_progress_container2" id="container2">
                 <div class="container2_wrapper1">
-                <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span></div>
-                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span >4855 steps</span></div></div></div>
-                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span >150 bpm</span></div></div></div>
-                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span >1.6kg</span></div></div></div>
-                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span >7 hrs</span></div></div></div>
+                <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Ronald Richards</span></a></span></div>
+                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">4855 steps</span></div></div></div>
+                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
+                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
+                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
                 
 
                 </div>
@@ -396,11 +410,11 @@ header .current-date{
             
             <div class="detailed_progress_container2" id="container3">
                 <div class="container2_wrapper1">
-                <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span></div>
-                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span >2356 steps</span></div></div></div>
-                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span >150 bpm</span></div></div></div>
-                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span >1.6kg</span></div></div></div>
-                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span >7 hrs</span></div></div></div>
+                <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Ronald Richards</span></a></span></div>
+                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">2356 steps</span></div></div></div>
+                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
+                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
+                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
                 
                 
 
