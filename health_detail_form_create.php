@@ -8,10 +8,9 @@
     <title>Infits | Health Details</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-            <link rel="stylesheet" href="css/health_detail_form_create.css">
+    <link rel="stylesheet" href="css/health_detail_form_create.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
@@ -20,7 +19,7 @@
 <body>
     <?php include 'navbar.php' ?>
 
-    <div class="content">
+    <form class="content" method="post">
         <div class="heading-box">
             <h1>Health Details Form</h1>
             <button id="save">Save</button>
@@ -30,8 +29,7 @@
             <div class="form-container">
 
                 <div class="form-title">
-                    <img src="icons/form-name.svg"><input type="text" name="formName" id="formName"
-                        placeholder="Enter form name">
+                    <img src="icons/form-name.svg"><input type="text" name="formName" id="formName" placeholder="Enter form name">
                 </div>
 
                 <div class="form-question-container">
@@ -43,17 +41,13 @@
                         </div>
                         <div class="options">
                             <div class="option editQuestion" title="Edit">
-                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M17.71 5.04055C18.1 4.65055 18.1 4.00055 17.71 3.63055L15.37 1.29055C15 0.900547 14.35 0.900547 13.96 1.29055L12.12 3.12055L15.87 6.87055M0 15.2505V19.0005H3.75L14.81 7.93055L11.06 4.18055L0 15.2505Z" />
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.71 5.04055C18.1 4.65055 18.1 4.00055 17.71 3.63055L15.37 1.29055C15 0.900547 14.35 0.900547 13.96 1.29055L12.12 3.12055L15.87 6.87055M0 15.2505V19.0005H3.75L14.81 7.93055L11.06 4.18055L0 15.2505Z" />
                                 </svg>
                             </div>
                             <div class="option deleteQuestion" title="Delete">
-                                <svg width="14" height="17" viewBox="0 0 14 17" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M1.56534 16.3636H12.4745V3.63636H1.56534V16.3636ZM13.3836 0.909091H10.2017L9.29265 0H4.74718L3.83808 0.909091H0.65625V2.72727H13.3836V0.909091Z" />
+                                <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.56534 16.3636H12.4745V3.63636H1.56534V16.3636ZM13.3836 0.909091H10.2017L9.29265 0H4.74718L3.83808 0.909091H0.65625V2.72727H13.3836V0.909091Z" />
                                 </svg>
                             </div>
                         </div>
@@ -66,23 +60,19 @@
                         </div>
                         <div class="options">
                             <div class="option editQuestion" title="Edit">
-                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M17.71 5.04055C18.1 4.65055 18.1 4.00055 17.71 3.63055L15.37 1.29055C15 0.900547 14.35 0.900547 13.96 1.29055L12.12 3.12055L15.87 6.87055M0 15.2505V19.0005H3.75L14.81 7.93055L11.06 4.18055L0 15.2505Z" />
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.71 5.04055C18.1 4.65055 18.1 4.00055 17.71 3.63055L15.37 1.29055C15 0.900547 14.35 0.900547 13.96 1.29055L12.12 3.12055L15.87 6.87055M0 15.2505V19.0005H3.75L14.81 7.93055L11.06 4.18055L0 15.2505Z" />
                                 </svg>
                             </div>
                             <div class="option deleteQuestion" title="Delete">
-                                <svg width="14" height="17" viewBox="0 0 14 17" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M1.56534 16.3636H12.4745V3.63636H1.56534V16.3636ZM13.3836 0.909091H10.2017L9.29265 0H4.74718L3.83808 0.909091H0.65625V2.72727H13.3836V0.909091Z" />
+                                <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.56534 16.3636H12.4745V3.63636H1.56534V16.3636ZM13.3836 0.909091H10.2017L9.29265 0H4.74718L3.83808 0.909091H0.65625V2.72727H13.3836V0.909091Z" />
                                 </svg>
                             </div>
                         </div>
                     </div>
 
-                    <button id="addQuestion">Add Question</button>
+                    <button id="addQuestion" type="button">Add Question</button>
                 </div>
             </div>
 
@@ -108,6 +98,10 @@
                     </div>
                 </div>
 
+                <div class="answer-text-container">
+                    <input type="text" name="answer" id="answer" placeholder="Answer">
+                </div>
+
                 <div class="custom-input-container">
                     <div class="btn-box">
                         <button id="addCheckbox"><img src="icons/add.svg"> <span>Add Checkbox</span></button>
@@ -118,13 +112,11 @@
                     <div class="custom-input-row">
                         <div class="rowOnly">
                             <input type="checkbox" name="singleRow" id="singleRow">
-                            <label for="singleRow"><span>Yes</span> <img src="icons/edit-pencile.svg"
-                                    title="Edit"></label>
+                            <label for="singleRow"><span>Yes</span> <img src="icons/edit-pencile.svg" title="Edit"></label>
                         </div>
                         <div class="rowOnly">
                             <input type="checkbox" name="singleRow" id="singleRow">
-                            <label for="singleRow"><span>No</span> <img src="icons/edit-pencile.svg"
-                                    title="Edit"></label>
+                            <label for="singleRow"><span>No</span> <img src="icons/edit-pencile.svg" title="Edit"></label>
                         </div>
                     </div>
                     <!-- <div class="custom-input-table">
@@ -196,10 +188,35 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </form>
 
     <script src="js/health_detail_form_create.js"></script>
 
+    <?php
+
+    $conn = new mysqli("localhost", "root", "", "infits");
+
+    if ($conn->connect_error) {
+        die("Connection Failed: " . $conn->connect_error);
+    }
+
+    $uniqueFormID = uniqid();
+
+    echo $uniqueFormID;
+
+
+    if(isset($_POST['formName'])){
+        $formName = $_POST['formName'];
+
+        $sql = "INSERT INTO `health_form_details`(`formID`, `formName`, `uniqueFormID`, `dietitianID`, `createdAt`, `updatedAt`) VALUES (null,'$formName','$uniqueFormID','13',null,null)";
+
+        $result = $conn->query($sql);
+
+        if($result){
+            echo "fORM nAME cREATED";
+        }
+    }
+    ?>
 </body>
 
 </html>

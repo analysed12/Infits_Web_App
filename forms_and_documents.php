@@ -1,3 +1,10 @@
+<?php
+$conn = new mysqli("localhost", "root", "", "infits");
+
+if ($conn->connect_error) {
+    die("Connection Failed: " . $conn->connect_error);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="css/forms_and_documents.css">
-    </head>
+    <link rel="stylesheet" href="css/forms_and_documents.css">
+</head>
 
 <body>
     <?php include 'navbar.php' ?>
@@ -86,90 +93,48 @@
                 <button><a href="#">View all</a></button>
             </div>
             <div class="client-card-container">
+                <?php
+                    $sql = "SELECT DISTINCT ClientName FROM `clientcon` LIMIT 8";
+                    $result = $conn->query($sql);
 
-                <div class="client-cards">
-                    <img class="vector" src="icons/client-card-vector.svg">
-                    <div class="card-content">
-                        <img src="images/client.png" alt="Profile" id="clientProfile">
-                        <p>Ronald Richard</p>
-                        <div class="btn-box">
-                            <button>Form</button>
-                            <button>Documents</button>
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                        ?>
+                            <div class="client-cards">
+                            <img class="vector" src="icons/client-card-vector.svg">
+                            <div class="card-content">
+                                <img src="images/client.png" alt="Profile" id="clientProfile">
+                                <p> <?php echo $row["ClientName"]; ?> </p>
+                                <div class="btn-box">
+                                    <button id="clientForm">Form</button>
+                                    <button id="clientDocument">Documents</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="client-cards">
-                    <img class="vector" src="icons/client-card-vector.svg">
-                    <div class="card-content">
-                        <img src="images/client.png" alt="Profile" id="clientProfile">
-                        <p>Ronald Richard</p>
-                        <div class="btn-box">
-                            <button>Form</button>
-                            <button>Documents</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="client-cards">
-                    <img class="vector" src="icons/client-card-vector.svg">
-                    <div class="card-content">
-                        <img src="images/client.png" alt="Profile" id="clientProfile">
-                        <p>Ronald Richard</p>
-                        <div class="btn-box">
-                            <button>Form</button>
-                            <button>Documents</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="client-cards">
-                    <img class="vector" src="icons/client-card-vector.svg">
-                    <div class="card-content">
-                        <img src="images/client.png" alt="Profile" id="clientProfile">
-                        <p>Ronald Richard</p>
-                        <div class="btn-box">
-                            <button>Form</button>
-                            <button>Documents</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="client-cards">
-                    <img class="vector" src="icons/client-card-vector.svg">
-                    <div class="card-content">
-                        <img src="images/client.png" alt="Profile" id="clientProfile">
-                        <p>Ronald Richard</p>
-                        <div class="btn-box">
-                            <button>Form</button>
-                            <button>Documents</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="client-cards">
-                    <img class="vector" src="icons/client-card-vector.svg">
-                    <div class="card-content">
-                        <img src="images/client.png" alt="Profile" id="clientProfile">
-                        <p>Ronald Richard</p>
-                        <div class="btn-box">
-                            <button>Form</button>
-                            <button>Documents</button>
-                        </div>
-                    </div>
-                </div>
-
+                        <?php
+                          }
+                    }
+                ?>
             </div>
         </div>
     </div>
 
     <script>
         const optionBtn = document.querySelector(".options");
+        const clientForm = document.querySelector("#clientForm");
+        const clientDocument = document.querySelector("#clientDocument");
         // const optionPopup = document.querySelector(".option-popup");
 
         function showPopup(e) {
             e.parentNode.children[3].classList.toggle("show");
         };
+
+        clientForm.addEventListener("click", () => {
+            document.location.href = 'health_detail_form.php?form=show';
+        });
+        clientDocument.addEventListener("click", () => {
+            document.location.href = 'health_detail_form.php?documents=show';
+        });
     </script>
 </body>
 

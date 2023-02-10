@@ -254,7 +254,7 @@
     overflow-y: auto;
     height: 400px;
     width: 100%;
-    padding: 10px 0px;
+    /* padding: 10px 0px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -287,16 +287,17 @@
 }
 
 .content .health-form-container #form-details .details {
-    height: 150px;
-    width: 90%;
-    padding: 10px 50px;
+    /* border: 1px solid red; */
+    height: 115px;
+    width: 85%;
+    padding: 3px 33px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
-    margin-bottom: 50px;
+    margin-bottom: 19px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
@@ -310,7 +311,7 @@
 .content .health-form-container #form-details .details p#question {
     font-size: 1.6rem;
     font-weight: 500;
-    padding-top: 5px;
+    /* padding-top: 5px; */
 }
 
 .content .health-form-container #form-details .details p#question::after {
@@ -319,15 +320,15 @@
     background-color: #808080;
     height: 1.5px;
     width: 100%;
-    bottom: -12px;
+    bottom: -9px;
     left: 0px;
 }
 
 .content .health-form-container #form-details .details p#answer {
     font-size: 1.3rem;
-    margin-top: 5px;
+    /* margin-top: 5px; */
     font-weight: 500;
-    padding-top: 5px;
+    /* padding-top: 5px; */
 }
 
 .content .health-form-container #form-documents .details {

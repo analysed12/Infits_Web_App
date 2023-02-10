@@ -1,3 +1,10 @@
+<?php
+$conn = new mysqli("localhost", "root", "", "infits");
+
+if ($conn->connect_error) {
+    die("Connection Failed: " . $conn->connect_error);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,25 +76,23 @@
 
             <div id="form-details">
 
+            <?php
+            $QueAns = "SELECT `question`, `answers` FROM `clientcon`";
+            $result = $conn->query($QueAns);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    if ($row["question"] == "Biochemical dataReport image") {
+                        continue ;
+                    }
+                ?>
                 <div class="details">
-                    <p id="question">What is your Name ?</p>
-                    <p id="answer">Ronald Richard</p>
+                    <p id="question"><?php echo $row["question"]; ?></p>
+                    <p id="answer"><?php echo $row["answers"]; ?></p>
                 </div>
-
-                <div class="details">
-                    <p id="question">What is your Name ?</p>
-                    <p id="answer">Ronald Richard</p>
-                </div>
-
-                <div class="details">
-                    <p id="question">What is your Name ?</p>
-                    <p id="answer">Ronald Richard</p>
-                </div>
-
-                <div class="details">
-                    <p id="question">What is your Name ?</p>
-                    <p id="answer">Ronald Richard</p>
-                </div>
+                <?php
+                  }
+            }
+            ?>
 
             </div>
 
@@ -142,7 +147,28 @@
         let shareBtn = document.querySelectorAll(".shareBtn");
         let sharePopup = document.querySelector("#sharePopup");
 
-        formDocuments.style.display = "none";
+        // formDocuments.style.display = "none";
+        <?php
+        $url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+
+        $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+
+        $url_components = parse_url($url);
+        parse_str($url_components['query'], $params);
+
+        if ($params['form'] === 'show') {
+            ?>
+            formDocuments.style.display = "none";
+        <?php
+        } elseif ($params['documents'] === 'show') {
+            ?>
+            formDetails.style.display = "none";
+            borderBottom.classList.add("right");
+            borderBottom.classList.remove("left");
+
+        <?php
+        }
+        ?>
 
         function formContent(content) {
             if (content === 1) {
