@@ -214,8 +214,8 @@ background-color: #f1f1f1;
 border: 1px solid #F8F5F5;
 max-width: 365px;
 width: 100%;
-height: 27px;
-border-top-left-radius: 1em;left
+height: 31px;
+border-top-left-radius: 1em;
 border-bottom-left-radius: 1em;
 border-top-right-radius: 1em;
 border-bottom-right-radius: 1em;
@@ -226,7 +226,7 @@ background: #FFFFFF;
 border: 1px solid #FCFBFB;
 border-radius: 0px;
 width: 24%;
-height: 24px;
+/* height: 24px; */
 float: left;
 border: none;
 outline: none;
@@ -435,7 +435,7 @@ text-align: center;
     max-height: 57.45px; */
     height: 57.45px;
     /* width: 25%; */
-    width: 134px;
+    width: 150px;
     /* height: 100%; */
     background: #FFFFFF;
     border: 1px solid #F1F1F1;
@@ -458,14 +458,14 @@ text-align: center;
 font-size: 18px;
 line-height: 0;
 color: #5D5D5D;
-margin-left: 5px;
+margin-left: 10px;
 }
 .stat-data .value{
 font-size: 25px;
 line-height: 0;
 text-align: center;
 color: #000000;
-margin-left: 5px;
+margin-left: 20px;
 }
 .stat-data .unit{
 font-size: 17px;
@@ -560,12 +560,13 @@ margin-left: 5px;
     height: 70px;
 }
 /* progress bar */
-.tsd-right{
-        display: flex;
-        flex-direction: column;
-        /* justify-content: center; */
-        align-items: center;
-    }
+.tsd-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 50px;
+}
     .tsd-right .heading {
         width: 100%;
         display: flex;
@@ -805,42 +806,42 @@ line-height: 55px;
                     <p style="margin-top: -15px;">Clients Stats</p>
                 </div>
                 <div class="card-container">
-                <div class="client-card client-card-steps" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                        <a href="track_stats_steps.php?id=<?php echo($clientId) ?>">
-                            <i class="fa-solid fa-shoe-prints" style="color:#FFFFFF; rotate: -90deg;"></i>
-                            <p style="color: #FFFFFF;">Step</p>
+                    <div class="client-card client-card-steps" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                    <a href="track_stats_steps.php?id=<?php echo($clientId) ?>">
+                        <i class="fa-solid fa-shoe-prints" style="color:#FFFFFF; rotate: -90deg;"></i>
+                        <p style="color: #FFFFFF;">Steps</p>
+                    </a>
+                    </div>
+                    <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
+                    <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
+                        <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
+                        <p style="color:#E266A9;">Heart<br>Rate</p>
                         </a>
-                        </div>
-                        <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                        <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
-                            <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
-                            <p style="color:#E266A9;">Heart<br>Rate</p>
-                            </a>
-                        </div>
-                        <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                        <a href="track_stats_water.php?id=<?php echo($clientId) ?>">
-                        <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
-                        <p style="color:#52A4FF;">Water</p>
-                            </a>
-                        </div>
-                        <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                        <a href="track_stats_weight.php?id=<?php echo($clientId) ?>">
-                            <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
-                            <p style="color:#7D5DE6;">Weight<br>Track</p>
-                            </a>
-                        </div>
-                        <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                        <a href="track_stats_sleep.php?id=<?php echo($clientId) ?>">
-                            <i style="color:#54AFAC;" class="fa-solid fa-moon"></i>
-                            <p style="color:#54AFAC;">Sleep</p>
-                            </a>
-                        </div>
-                        <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                        <a href="track_stats_calorie.php?id=<?php echo($clientId) ?>">
-                        <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i>
-                            <p style="color:#E3738D;">Calorie<br>Track</p>
-                            </a>
-                        </div>
+                    </div>
+                    <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
+                    <a href="track_stats_water.php?id=<?php echo($clientId) ?>">
+                    <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
+                    <p style="color:#52A4FF;">Water</p>
+                        </a>
+                    </div>
+                    <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                    <a href="track_stats_weight.php?id=<?php echo($clientId) ?>">
+                        <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
+                        <p style="color:#7D5DE6;">Weight<br>Track</p>
+                        </a>
+                    </div>
+                    <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
+                    <a href="track_stats_sleep.php?id=<?php echo($clientId) ?>">
+                        <i style="color:#54AFAC;" class="fa-solid fa-moon"></i>
+                        <p style="color:#54AFAC;">Sleep</p>
+                        </a>
+                    </div>
+                    <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
+                    <a href="track_stats_calorie.php?id=<?php echo($clientId) ?>">
+                    <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i>
+                        <p style="color:#E3738D;">Calorie<br>Track</p>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -1177,7 +1178,7 @@ if(<?php echo($month_pop) ?>){
 }
 
 if(<?php echo($week_pop) ?>){
-    week_pop.innerText = "As it is fresh year, we are showing you the previous week's data until the latest data is synced for the week!";
+    week_pop.innerText = "As it is fresh week, we are showing you the previous week's data until the latest data is synced for the week!";
 }else{
     week_pop.innerText = "We are showing you the ongoing week's data and it keeps updating realtime!";
 }

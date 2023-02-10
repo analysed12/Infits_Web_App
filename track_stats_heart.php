@@ -215,7 +215,7 @@ background-color: #f1f1f1;
 border: 1px solid #F8F5F5;
 max-width: 365px;
 width: 100%;
-height: 27px;
+height: 31px;
 border-top-left-radius: 1em;
 border-bottom-left-radius: 1em;
 border-top-right-radius: 1em;
@@ -227,7 +227,7 @@ background: #FFFFFF;
 border: 1px solid #FCFBFB;
 border-radius: 0px;
 width: 24%;
-height: 24px;
+/* height: 24px; */
 float: left;
 border: none;
 outline: none;
@@ -436,7 +436,7 @@ text-align: center;
     max-height: 57.45px; */
     height: 57.45px;
     /* width: 25%; */
-    width: 134px;
+    width: 150px;
     /* height: 100%; */
     background: #FFFFFF;
     border: 1px solid #F1F1F1;
@@ -459,14 +459,14 @@ text-align: center;
 font-size: 18px;
 line-height: 0;
 color: #5D5D5D;
-margin-left: 5px;
+margin-left: 10px;
 }
 .stat-data .value{
 font-size: 25px;
 line-height: 0;
 text-align: center;
 color: #000000;
-margin-left: 5px;
+margin-left: 20px;
 }
 .stat-data .unit{
 font-size: 17px;
@@ -565,11 +565,12 @@ margin-left: 5px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-end;
     }
     .tsd-right .heading {
         width: 100%;
         display: flex;
+        /* justify-content: center; */
         justify-content: flex-end;
         gap: 30%;
         padding-right: 5%;
@@ -674,15 +675,16 @@ margin-left: 5px;
     scale: 0.8;
     }
 }
-.heart_beat_box{
+.heart_beat_box {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background: #FFE8F2;
-border-radius: 10px;
-width: 355px;
-height: 108px;
-padding:7px;
+    background: #fff;
+    border-radius: 10px;
+    width: 355px;
+    height: 108px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    padding: 7px;
 }
 .heart_beat_box p{
     font-family: 'NATS';
@@ -738,7 +740,7 @@ color: #000000;
                 <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
                         <a href="track_stats_steps.php?id=<?php echo($clientId) ?>">
                             <i class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA; rotate: -90deg;"></i>
-                            <p style="color: #FF6C6CCA;">Step</p>
+                            <p style="color: #FF6C6CCA;">Steps</p>
                         </a>
                         </div>
                         <div class="client-card client-card-calorie" style="color:#E266A9; border: 1px solid #E266A9;">
@@ -1099,7 +1101,7 @@ if(<?php echo($month_pop) ?>){
 }
 
 if(<?php echo($week_pop) ?>){
-    week_pop.innerText = "As it is fresh year, we are showing you the previous week's data until the latest data is synced for the week!";
+    week_pop.innerText = "As it is fresh week, we are showing you the previous week's data until the latest data is synced for the week!";
 }else{
     week_pop.innerText = "We are showing you the ongoing week's data and it keeps updating realtime!";
 }

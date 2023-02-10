@@ -224,8 +224,8 @@ border-bottom-left-radius: 1em!important;
     border: 1px solid #E266A9;
     border-radius: 10px;
     margin: 10px 0 0 0;
-    width: 97px;
-    height: 114px;
+    width: 100px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -372,7 +372,7 @@ color: #000000;
                 <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
                 <div class="client-card client-card-heart " style="color:#E3738D; border: 1px solid #E3738D;">
                     <img src="images/heartrate_selected.svg" alt="">
-                    <p>Heart Rate</p>
+                    <p>Heart<br>Rate</p>
                 </div>
                 </a>
             </div>
