@@ -418,16 +418,17 @@ header .current-date{
                         $step = "SELECT steps FROM `steptracker` WHERE clientid = '3' AND dateandtime = '2023-02-11 12:40:50'";
                         $stepgoal =$conn-> query($step);
                         $stepgoal1 = mysqli_fetch_assoc($stepgoal);
-                      
+                        // echo($stepgoal1['steps'].'---'.$row['steps']);
                         if($stepgoal1['steps'] >= $row['steps']){
+                            
                             $on[$i]['steps'] = $stepgoal1['steps'];
-                            $off[$i]['steps'] = -1;
+                            $off[$i]['steps'] = '-1';
                         }
                         else{
-                            $on[$i]['steps'] =-1;
+                            $on[$i]['steps'] ='-1';
                             $off[$i]['steps'] = $stepgoal1['steps'];
                         }
-
+                       
 
                         //for heart rate
                         // //$heart = "SELECT average FROM `heartrate` WHERE clientID = $canme AND dateandtime = today's date";
@@ -436,10 +437,10 @@ header .current-date{
                         $heartgoal1 = mysqli_fetch_assoc($heartgoal);
                         if($heartgoal1['average'] >= $row['heart']){
                             $on[$i]['heart'] = $heartgoal1['average'];
-                            $off[$i]['heart'] = -1;
+                            $off[$i]['heart'] = '-1';
                         }
                         else{
-                          $on[$i]['heart'] =-1;
+                          $on[$i]['heart'] ='-1';
                           $off[$i]['heart'] = $heartgoal1['average'];
                         }
 
@@ -451,13 +452,14 @@ header .current-date{
                         $weightgoal1 = mysqli_fetch_assoc($weightgoal);
                         if($weightgoal1['goal'] >= $row['weight']){
                             $on[$i]['weight'] = $weightgoal1['goal'];
-                            $off[$i]['weight'] = -1;
+                            $off[$i]['weight'] = '-1';
                         }
                         else{
-                          $on[$i]['weight'] =-1;
+                          $on[$i]['weight'] ='-1';
                           $off[$i]['weight'] = $weightgoal1['goal'];
                         }
 
+                        
 
                         //for sleep 
                         //$sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = $cname AND sleeptime = today's date";
@@ -466,10 +468,10 @@ header .current-date{
                         $sleepgoal1 = mysqli_fetch_assoc($sleepgoal);
                         if($sleepgoal1['hrsSlept'] >= $row['sleep']){
                             $on[$i]['sleep'] = $sleepgoal1['hrsSlept'];
-                            $off[$i]['sleep'] = -1;
+                            $off[$i]['sleep'] = '-1';
                         }
                         else{
-                          $on[$i]['sleep'] =-1;
+                          $on[$i]['sleep'] ='-1';
                           $off[$i]['sleep'] = $sleepgoal1['hrsSlept'];
                         }
 
@@ -480,43 +482,34 @@ header .current-date{
               
               ?>
 
-
+            
 
 
             <div class="detailed_progress_container2" id="container2">
                 <div class="container2_wrapper1">
                 <?php
                       foreach($on as $r){
-                        if($r['steps']=='-1' and $r['heart']=='-1' and $r['weight']=='-1' and $r['sleep']=='-1' ){
-                          continue;
-                        }
-                        else{
-                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem">'.$r["name"].'</span></a></span></div>');
+                        if($r['steps']!= '-1' || $r['heart']!= '-1' || $r['weight']!= '-1' || $r['sleep']!= '-1' ){
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client '.$r["name"].'</span></a></span></div>');
                         }
                        
-                        if($r['steps']=='-1'){
-                          continue;
-                        }
-                        else{
+
+                        if($r['steps']!= '-1'){
+                         
                           echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
                         }
-                        if($r['heart']=='-1'){
-                          continue;
-                        }
-                        else{
+                        if($r['heart']!= '-1'){
+                         
                           echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
                         }
-                        if($r['weight']=='-1'){
-                          continue;
+                        if($r['weight']!='-1'){
+                         
+                          echo('<div class="info"><span>Weight </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' Kgs</span></div></div></div>');
                         }
-                        else{
-                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' bpm</span></div></div></div>');
-                        }
-                        if($r['sleep']=='-1'){
-                          continue;
-                        }
-                        else{
-                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' bpm</span></div></div></div>');
+                        if($r['sleep']!= '-1' ){
+                         
+                          
+                          echo('<div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
                         }
                       }
                 ?>
@@ -532,36 +525,28 @@ header .current-date{
                 <div class="container2_wrapper1">
                 <?php
                       foreach($off as $r){
-                        if($r['steps']=='-1' and $r['heart']=='-1' and $r['weight']=='-1' and $r['sleep']=='-1' ){
-                          continue;
+                        if($r['steps']!='-1' || $r['heart']!='-1' || $r['weight']!='-1' || $r['sleep']!='-1' ){
+                          // echo("hi");
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client  '.$r["name"].'</span></a></span></div>');
                         }
-                        else{
-                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem">'.$r["name"].'</span></a></span></div>');
-                        }
-                        if($r['steps']=='-1'){
-                          continue;
-                        }
-                        else{
+                        // echo("hiiii");
+                        if($r['steps']!='-1'){
+                          // echo("bue steps");
                           echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
                         }
-                        if($r['heart']=='-1'){
-                          continue;
-                        }
-                        else{
+                        if($r['heart']!='-1'){
+                          
                           echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
                         }
-                        if($r['weight']=='-1'){
-                          continue;
+                        if($r['weight']!='-1'){
+                         
+                          echo('<div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' kgs</span></div></div></div>');
                         }
-                        else{
-                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' bpm</span></div></div></div>');
+                        if($r['sleep']!='-1'){
+                         
+                          echo('<div class="info"><span>Sleep </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
                         }
-                        if($r['sleep']=='-1'){
-                          continue;
-                        }
-                        else{
-                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' bpm</span></div></div></div>');
-                        }
+                        
                       }
                 ?>
                 
