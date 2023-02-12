@@ -12,6 +12,7 @@ include('navbar.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <style>
+      
     
 .detailed_progress_container1{
     display: flex;
@@ -44,10 +45,13 @@ include('navbar.php');
   border: none;  
 }
 .track_buttons{
-  margin-left: 20rem;
+  margin-left: 1rem;
+  margin-top:4rem;
+  display:flex;
+  gap:1rem;
 }
 #btn2{
-    background-color: white;
+    background: none;
     color: black;
     border: none;
     font-size: larger;
@@ -72,11 +76,13 @@ include('navbar.php');
   display: flex;
   gap: 3rem;
   padding: 0.4rem;
+  padding-left:1.5rem;
   border-radius: 0.7rem;
   background-color: #FDFDFD;
   margin-left: 20rem;
   border: 2px solid #F4F4F4;
-  margin-top:0.3rem;
+  margin-top:1.3rem;
+  font-weight:500;
 }
 .info{
   display: flex;
@@ -215,12 +221,14 @@ header .current-date{
     margin-left: 1rem;
   }
   .container1_rightside{
-    margin-left: 2rem;
-    display:none;
+    margin-left: 1rem;
+    
+    
 }
 .track_buttons{
   margin-left: 1rem;
   margin-top: 2rem;
+  justify-content:space-between !important;
 }
 .search_client{
   width: auto;
@@ -235,7 +243,12 @@ header .current-date{
 }
 .mobview_container1{
   display: none;
+  justify-content:center;
 }
+#track{
+  display:none;
+}
+
 }
     </style>
 </head>
@@ -250,6 +263,11 @@ header .current-date{
                     <div><button id="btn1"><span class="material-symbols-outlined">search</span></button> </div>
                     <div>&nbsp&nbsp&nbsp&nbsp <input type="text" name="search_client" placeholder="Search Clients" class="seach_clients_text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>   
                 </div>
+                <div class="track_buttons" id="track">
+                        <button id="btn2" onclick="myFunction()">On-Track</button>
+                        <button id="btn2" onclick="myFunction2()">Off-Track</button>
+                </div>
+
                 
                 
             </div>
@@ -347,11 +365,7 @@ header .current-date{
 <!--------------------------------------- webview of progress details--------------------------------------------------->
 
         <div class="webview_progressdetails">
-                    <div class="track_buttons">
-                        <button id="btn2" onclick="myFunction()">On-Track</button>
-                        <button id="btn2" onclick="myFunction2()">Off-Track</button>
-                    </div>
-
+                    
                     <script>
                     function myFunction() {
                     var x = document.getElementById("container2");
@@ -376,19 +390,132 @@ header .current-date{
                     }
                 </script>
 
+            <?php
+              $conn = new mysqli("localhost", "root", "", "infits");
+              if($conn->connect_error){
+                die("Connection failed :" . $conn->connect_error);
+              }
+              $on = array();
+              $off = array();
+              $sql = $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne'";
+              $result =$conn-> query($sql);
+              $i=0;
+              if ($result->num_rows > 0) 
+              {
 
+                while($row = $result->fetch_assoc())
+                      {
+                        $cname = $row['client_id'];
+                        $on[$i]['name'] = $cname;
+                        $off[$i]['name'] = $cname;
+
+
+                        //some changes is needed while linking.
+
+                        //for steps 
+
+                        //$step = "SELECT steps FROM `steptracker` WHERE clientid = $canme AND dateandtime = today's date";
+                        $step = "SELECT steps FROM `steptracker` WHERE clientid = '3' AND dateandtime = '2023-02-11 12:40:50'";
+                        $stepgoal =$conn-> query($step);
+                        $stepgoal1 = mysqli_fetch_assoc($stepgoal);
+                        // echo($stepgoal1['steps'].'---'.$row['steps']);
+                        if($stepgoal1['steps'] >= $row['steps']){
+                            
+                            $on[$i]['steps'] = $stepgoal1['steps'];
+                            $off[$i]['steps'] = '-1';
+                        }
+                        else{
+                            $on[$i]['steps'] ='-1';
+                            $off[$i]['steps'] = $stepgoal1['steps'];
+                        }
+                       
+
+                        //for heart rate
+                        // //$heart = "SELECT average FROM `heartrate` WHERE clientID = $canme AND dateandtime = today's date";
+                        $heart = "SELECT average FROM `heartrate` WHERE clientID = '3' AND dateandtime = '2023-02-11 14:53:24'";
+                        $heartgoal =$conn-> query($heart);
+                        $heartgoal1 = mysqli_fetch_assoc($heartgoal);
+                        if($heartgoal1['average'] >= $row['heart']){
+                            $on[$i]['heart'] = $heartgoal1['average'];
+                            $off[$i]['heart'] = '-1';
+                        }
+                        else{
+                          $on[$i]['heart'] ='-1';
+                          $off[$i]['heart'] = $heartgoal1['average'];
+                        }
+
+
+                        //for weight 
+                        //$weight = "SELECT goal FROM `weighttracker` WHERE clientID = $came AND date = '2022-01-01 00:00:00'";
+                        $weight = "SELECT goal FROM `weighttracker` WHERE clientID = '3' AND date = '2022-01-01 00:00:00'";
+                        $weightgoal =$conn-> query($weight);
+                        $weightgoal1 = mysqli_fetch_assoc($weightgoal);
+                        if($weightgoal1['goal'] >= $row['weight']){
+                            $on[$i]['weight'] = $weightgoal1['goal'];
+                            $off[$i]['weight'] = '-1';
+                        }
+                        else{
+                          $on[$i]['weight'] ='-1';
+                          $off[$i]['weight'] = $weightgoal1['goal'];
+                        }
+
+                        
+
+                        //for sleep 
+                        //$sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = $cname AND sleeptime = today's date";
+                        $sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = '3' AND sleeptime = '2022-01-01 10:10:00'";
+                        $sleepgoal =$conn-> query($sleep);
+                        $sleepgoal1 = mysqli_fetch_assoc($sleepgoal);
+                        if($sleepgoal1['hrsSlept'] >= $row['sleep']){
+                            $on[$i]['sleep'] = $sleepgoal1['hrsSlept'];
+                            $off[$i]['sleep'] = '-1';
+                        }
+                        else{
+                          $on[$i]['sleep'] ='-1';
+                          $off[$i]['sleep'] = $sleepgoal1['hrsSlept'];
+                        }
+
+
+                  $i++;
+                  }
+              }
+              
+              ?>
+
+            
 
 
             <div class="detailed_progress_container2" id="container2">
                 <div class="container2_wrapper1">
-                <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span></div>
-                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span >4855 steps</span></div></div></div>
-                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span >150 bpm</span></div></div></div>
-                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span >1.6kg</span></div></div></div>
-                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span >7 hrs</span></div></div></div>
-                
+                <?php
+                      foreach($on as $r){
+                        if($r['steps']!= '-1' || $r['heart']!= '-1' || $r['weight']!= '-1' || $r['sleep']!= '-1' ){
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client '.$r["name"].'</span></a></span></div>');
+                        }
+                       
 
-                </div>
+                        if($r['steps']!= '-1'){
+                         
+                          echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
+                        }
+                        if($r['heart']!= '-1'){
+                         
+                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
+                        }
+                        if($r['weight']!='-1'){
+                         
+                          echo('<div class="info"><span>Weight </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' Kgs</span></div></div></div>');
+                        }
+                        if($r['sleep']!= '-1' ){
+                         
+                          
+                          echo('<div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
+                        }
+                      }
+                ?>
+               
+
+                 </div>
                 
             </div>
 
@@ -396,15 +523,32 @@ header .current-date{
             
             <div class="detailed_progress_container2" id="container3">
                 <div class="container2_wrapper1">
-                <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span></div>
-                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span >2356 steps</span></div></div></div>
-                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span >150 bpm</span></div></div></div>
-                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span >1.6kg</span></div></div></div>
-                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span >7 hrs</span></div></div></div>
-                
-                
-
-                </div>
+                <?php
+                      foreach($off as $r){
+                        if($r['steps']!='-1' || $r['heart']!='-1' || $r['weight']!='-1' || $r['sleep']!='-1' ){
+                          // echo("hi");
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client  '.$r["name"].'</span></a></span></div>');
+                        }
+                        // echo("hiiii");
+                        if($r['steps']!='-1'){
+                          // echo("bue steps");
+                          echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
+                        }
+                        if($r['heart']!='-1'){
+                          
+                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
+                        }
+                        if($r['weight']!='-1'){
+                         
+                          echo('<div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' kgs</span></div></div></div>');
+                        }
+                        if($r['sleep']!='-1'){
+                         
+                          echo('<div class="info"><span>Sleep </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
+                        }
+                        
+                      }
+                ?>
                 
             </div>
 

@@ -1,12 +1,11 @@
 <?php
-// Client Id
 // $clientId = 'Azarudeen';
-// $ttime;
+
 // Configure Dates
 date_default_timezone_set("Asia/Calcutta");
 // $today = new DateTime();
-// $today = new DateTime('2022-01-25');
-// Goal Insertion
+
+// General Goal Insertion
 if(isset($_POST['savegoal'])){
     $client = $_POST['clientid'];
     $goal =$_POST['setgoal'];
@@ -16,26 +15,46 @@ if(isset($_POST['savegoal'])){
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
+
     
-    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('$forwhat' , $goal, '$client' )";
+//  $query = "INSERT INTO goals_ ($forwhat, client_id, dietitain_id) VALUES($goal, $client, "John_wanyne") ON DUPLICATE KEY UPDATE $forwhat=$goal WHERE client_id = $client";
+
+    $query="UPDATE goals_ SET $forwhat=$goal WHERE client_id = $client";
     $result = $conn->query($query) or die("Query Failed");
     
     if($result){
         unset($_POST["savegoal"]);
         unset($_POST["setgoal"]);
-        header(("Location: http://localhost/newgoals/Infits_Web_App/setgoals_clients.php"));
+        header(("Location: http://localhost/newgoals/Infits_Web_App/setgoalnew.php"));
         // exit();
     }
 }
+
+
+if(isset($_POST['savepastgoal'])){
+
+    $conn = new mysqli("localhost", "root", "", "infits");
+
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+
+    if(!empty($_POST['client_list'])){
+        $goal =$_POST['setgoal'];
+        $forwhat = $_POST['forwhat'];
+        foreach($_POST['cleint_list'] as $selected){
+            echo( $selected."</br>");
+            $client = $selected;
+            $query="UPDATE goals_ SET $forwhat=$goal WHERE client_id = $client";
+            $result = $conn->query($query) or die("Query Failed");
+            }
+        }
+        unset($_POST["savegoal"]);
+        unset($_POST["setgoal"]);
+        header(("Location: http://localhost/newgoals/Infits_Web_App/setgoalnew.php"));
+}
+
 ?>
-
-
-
-
-
-
-
-
 
 <?php
 include('navbar.php');
@@ -542,7 +561,7 @@ margin-top: 2.5rem;
                             
                             <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
                                 <!-- <label id="label1">0000 BPM</label> -->
-                                <?php $name = "all";
+                                <?php $name = "3";
                                       $forwhat = "steps";
                                 ?>
                                 <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
@@ -577,7 +596,7 @@ margin-top: 2.5rem;
 
                             <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
                                 <!-- <label id="label1">0000 BPM</label> -->
-                                <?php $name = "all";
+                                <?php $name = "2";
                                       $forwhat = "heart";
                                 ?>
                                 <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
@@ -616,7 +635,7 @@ margin-top: 2.5rem;
                             
                             <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
                                 <!-- <label id="label1">0000 BPM</label> -->
-                                <?php $name = "all";
+                                <?php $name = "2";
                                       $forwhat = "sleep";
                                 ?>
                                 <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
@@ -649,7 +668,7 @@ margin-top: 2.5rem;
                             <img src="images/weight.jpg" style="margin-left:3.5rem"><br>
                             <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
                                 <!-- <label id="label1">0000 BPM</label> -->
-                                <?php $name = "all";
+                                <?php $name = "2";
                                       $forwhat = "weight";
                                 ?>
                                 <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
@@ -683,7 +702,7 @@ margin-top: 2.5rem;
                             <img src="images/water.jpg" style="margin-left:4rem"><br>
                             <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
                                 <!-- <label id="label1">0000 BPM</label> -->
-                                <?php $name = "all";
+                                <?php $name = "2";
                                       $forwhat = "water";
                                 ?>
                                 <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
@@ -712,7 +731,7 @@ margin-top: 2.5rem;
                             <img src="images/calorie.jpg" style="margin-left:3rem"><br>
                             <form action="<?php $_SERVER['PHP_SELF']  ?>" method="POST">
                                 <!-- <label id="label1">0000 BPM</label> -->
-                                <?php $name = "all";
+                                <?php $name = "2";
                                       $forwhat = "calorie";
                                 ?>
                                 <input type="hidden" name="clientid" value="<?php echo $name; ?>" />
@@ -758,9 +777,8 @@ margin-top: 2.5rem;
                         <input name="setgoal" required min="1" type="number" id="set-goal" placeholder = "0000 Steps" style = "font-size:20px;">
                     </div>
                     <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
-
-                    <button class="userimage" style="background-color: #F3A181 ; position:static;margin-left:0.5rem" id="userimage1"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button class="userimage" style="background-color: #F3A181;position:static" type = "submit" name = "savegoal"><img src="images/right.png" ></button>
+                    <button class="userimage" type = button style="background-color: #F3A181 ; position:static;margin-left:0.5rem" id="userimage1"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <button class="userimage" style="background-color: #F3A181;position:static" type = "submit" name = "savepastgoal"><img src="images/right.png" ></button>
 
                     </form>
                     
@@ -789,7 +807,7 @@ margin-top: 2.5rem;
                     </div>
                     <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #DA83C3;margin-left:0.7rem" id="userimage2"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button type="submit" name="savegoal" class="userimage" style="background-color: #DA83C3;"><img src="images/right.png" ></button>
+                    <button type="submit" name="savepastgoal" class="userimage" style="background-color: #DA83C3;"><img src="images/right.png" ></button>
 
                     </form>
                     
@@ -814,7 +832,7 @@ margin-top: 2.5rem;
                     </div>
                     <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #68A9F7;margin-left:0.5rem" id="userimage3"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button type="submit" name="savegoal" class="userimage" style="background-color: #68A9F7;"><img src="images/right.png" ></button>
+                    <button type="submit" name="savepastgoal" class="userimage" style="background-color: #68A9F7;"><img src="images/right.png" ></button>
 
                     </form>
                     
@@ -839,7 +857,7 @@ margin-top: 2.5rem;
                     </div>
                     <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #805AE5;" id="userimage4"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button type="submit" name="savegoal" class="userimage" style="background-color: #805AE5;"><img src="images/right.png" ></button>
+                    <button type="submit" name="savepastgoal" class="userimage" style="background-color: #805AE5;"><img src="images/right.png" ></button>
 
                     </form>
                     
@@ -864,7 +882,7 @@ margin-top: 2.5rem;
                     </div>
                     <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #7F9FA4;position:static;margin-left:1.3rem" id="userimage5"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button type="submit" name="savegoal" class="userimage" style="background-color: #7F9FA4;position:static"><img src="images/right.png" ></button>
+                    <button type="submit" name="savepastgoal" class="userimage" style="background-color: #7F9FA4;position:static"><img src="images/right.png" ></button>
                     </form>
                     
                 </div>
@@ -890,7 +908,7 @@ margin-top: 2.5rem;
                     </div>
                     <input type="hidden" name="forwhat" value="<?php echo $forwhat; ?>" />
                     <button class="userimage" style="background-color: #E39F9A;margin-left:0.5rem" id="userimage6"><img src="images/mdi_user-circle-outline.png" ></button>
-                    <button type="submit" name="savegoal" class="userimage" style="background-color: #E39F9A;"><img src="images/right.png" ></button>
+                    <button type="submit" name="savepastgoal" class="userimage" style="background-color: #E39F9A;"><img src="images/right.png" ></button>
                     
                 </div>
 
@@ -1088,7 +1106,7 @@ margin-top: 2.5rem;
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
                     </div>
-                    <button class="userimage2" style="background-color: #68A9F7"><img src="images/right.png" ></button>
+                    <button class="userimage3" style="background-color: #68A9F7"><img src="images/right.png" ></button>
                     
                 </div>
                 <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
@@ -1160,7 +1178,7 @@ margin-top: 2.5rem;
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
                     </div>
-                    <button class="userimage2" style="background-color: #805AE5"><img src="images/right.png" ></button>
+                    <button class="userimage4" style="background-color: #805AE5"><img src="images/right.png" ></button>
                     
                 </div>
                 <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
@@ -1233,7 +1251,7 @@ margin-top: 2.5rem;
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
                     </div>
-                    <button class="userimage2" style="background-color: #7F9FA4"><img src="images/right.png" ></button>
+                    <button class="userimage5" style="background-color: #7F9FA4"><img src="images/right.png" ></button>
                     
                 </div>
                 <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
@@ -1306,7 +1324,7 @@ margin-top: 2.5rem;
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
                     </div>
-                    <button class="userimage2" style="background-color: #E39F9A"><img src="images/right.png" ></button>
+                    <button class="userimage6" style="background-color: #E39F9A"><img src="images/right.png" ></button>
                     
                 </div>
                 <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
@@ -1346,34 +1364,21 @@ margin-top: 2.5rem;
                 <label id="checklabel" >Client 7</label><br>
                 <input type="checkbox" id="clientscheck" >
                 <label id="checklabel" >Client 7</label><br>
-                
-
-                    
                 </div>
             </div>
-
-
-
-                
-                
-
-
-
-
             </div>
+<!-------------------------------------------------------------------MOB VIEW CODE ENDS------------------------------------------------------------------->       
 
 
-
-
-     <!-------------------------------------------------------------------MOB VIEW CODE ENDS----------------------------------------------------------------------------------------------------------------->       
-
-
-<!----------------------------------------------------rightside past goals popup div code starts----------------------------------------------------------------------->
+<!-------------------------------------------------------------rightside past goals popup div code starts-------------------------------------------------->
 
             <div class="pastreminders_rightside">
-
             <!------------------------------------------1 wrapper-------------------------------------------------->
+            
+        
+            
             <div class="rightside_wrapper1" id="rightside_wrapper1">
+                    
                 <div style="text-align:center"><img src="images/Frame.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Step Goal</span></div>
                 <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign goal</span>
                 <div style="display:flex; gap:1rem">
@@ -1381,25 +1386,41 @@ margin-top: 2.5rem;
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
                     </div>
-                    <button class="userimage2" style="background-color: #FFB38E"><img src="images/right.png" ></button>
+                    <button class="userimage2" style="background-color: #E882B8"><img src="images/right.png" ></button>
                     
                 </div>
-                <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
-                    <div style="display:flex">
+
+
+                <div class = selected-steps style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
+                <div style="display:flex">
                     <span class="bluetext" style="margin-left:1rem">Ronald Richards <span class="close" id="close2">&times;</span></span>
-                    <span class="bluetext" style="margin-left:1rem">Client 4 <span class="close" id="close2">&times;</span></span>
-                    </div>
-                    <div style="display:flex">
                     <span class="bluetext" style="margin-left:1rem">Harry Roy <span class="close" id="close2">&times;</span></span>
-                    <span class="bluetext" style="margin-left:1rem">Client 4 <span class="close" id="close2">&times;</span></span>
-                    </div>
-                    <div style="display:flex">
-                    <span class="bluetext" style="margin-left:1rem">Client4 <span class="close" id="close2">&times;</span></span>
                     </div>
                 </div>
+                
+                <?php
+                   $sql = "SELECT `client_id` FROM `goals_` WHERE dietition_id = 'John_wayne'";
+                   $client_list_steps = mysqli_query($conn, $sql) or die('failed');
+                   if (mysqli_num_rows($client_list_steps) > 0) {
+                        $i = 0;
+                        while ($row = mysqli_fetch_assoc($client_list_steps)) {
+                            $list = explode(',', $row['client_id']);
+                ?>
 
-                <div class="checkbox" style="padding-left:2rem">
-                <input type="checkbox" id="clientscheck" >
+                <div class="checkbox-steps" style="padding-left:2rem">
+
+
+                <form action="<?php $_SERVER['PHP_SELF']  ?>" method="post">
+                
+<?php
+                    foreach ($list as $c) {
+                        echo('<input type="checkbox" id="clientscheck" name="cleint_list[]" value ='.$c.'>');
+                        echo('<label id="checklabel"  > Client'.$c.'</label><br>');
+                    }
+?>
+                </form>
+
+                <!-- <input type="checkbox" id="clientscheck" >
                 <label id="checklabel" >Ronald Richards</label><br>
                 <input type="checkbox" id="clientscheck">
                 <label id="checklabel" >Client 4</label><br>
@@ -1422,12 +1443,17 @@ margin-top: 2.5rem;
                 <input type="checkbox" id="clientscheck" >
                 <label id="checklabel" >Client 7</label><br>
                 <input type="checkbox" id="clientscheck" >
-                <label id="checklabel" >Client 7</label><br>
+                <label id="checklabel" >Client 7</label><br> -->
                 
-                
-
-                    
                 </div>
+
+
+            <?php
+                }
+            }
+            
+            ?>
+
             </div>
 
 
@@ -2178,9 +2204,12 @@ margin-top: 2.5rem;
                 
                 
                     }
-                    }
-                        
-                     </script>
+                }
+                 </script>
+
+
+
+
 
 
 
