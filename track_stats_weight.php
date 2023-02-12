@@ -1,7 +1,4 @@
 <?php
-if(isset($_SESSION['name'])){
-    header('location: login.php');
-}
 // Client Id
 if(isset($_GET['id'])){
     $clientId = $_GET['id'];
@@ -14,6 +11,7 @@ $today = new DateTime();
 // Goal Insertion
 if(isset($_POST['savegoal'])){
     $client = $_POST['clientid'];
+    $dietition = $_POST['dietition'];
     $goal =$_POST['setgoal'];
     $conn = new mysqli("localhost", "root", "", "infits");
 
@@ -21,8 +19,12 @@ if(isset($_POST['savegoal'])){
         die("Connection failed :" . $conn->connect_error);
     }
     
-    $query="INSERT INTO goals (forWhat, goal, clientID) VALUES ('weight' , $goal, '$client' )";
+    $query = "UPDATE `goals` SET `weight` = $goal WHERE `client_id` = $client";
     $result = $conn->query($query) or die("Query Failed");
+    if($conn->affected_rows == 0){
+        $query="INSERT INTO `goals`(`dietition_id`, `client_id`, `weight`) VALUES ('{$dietition}','{$client}','{$goal}')";
+        $result = $conn->query($query) or die("Query Failed");
+    }
     
     if($result){
         unset($_POST["savegoal"]);
@@ -84,6 +86,7 @@ if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
     exit();
 }
 include('navbar.php');
+$dietition = $_SESSION['name'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -791,6 +794,7 @@ margin-left: 5px;
                 </div>
                 <img src="images/obesity.svg" alt="">
                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <input hidden name="dietition" value="<?php echo($dietition) ?>">
                     <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 BPM">
                     <input name="clientid"  type="hidden" value="<?php echo($clientId) ?>">
                     <button type="submit" name="savegoal" id="save-goal">Set</button>

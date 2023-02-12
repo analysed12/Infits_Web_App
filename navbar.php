@@ -28,11 +28,9 @@ include('config.php');
     <title>Infits</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2"> -->
 </head>
 
 <style>
-/* @import url('https://fonts.googleapis.com/earlyaccess/nats.css'); */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 @font-face {
@@ -91,11 +89,16 @@ body {
     font-family: 'NATS';
     text-decoration: none;
     margin-bottom: 5px;
-    margin-left: 43px;
+    margin-left: 25px;
     font-style: normal;
     font-weight: 400;
-    font-size: 26px;
-    margin-right: 30px;
+    font-size: 23px;
+    margin-right: 15px;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
 }
 
 .sidenav .menu-bottom {
@@ -103,6 +106,7 @@ body {
     bottom: 10px;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .sidenav .sidenavlink:hover {
@@ -113,14 +117,15 @@ body {
     height: auto;
     width: 174px;
     margin-left: 10px;
-    margin-bottom: 3vh;
+    margin-bottom: 4.5vh;
     margin-top: 2vh;
 }
 
 .sidenav .nav-icon {
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     margin-right: 15px;
+    margin-left: 10px;
 }
 
 .tabcontent {
@@ -186,6 +191,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .topnav-icons img {
@@ -194,14 +200,24 @@ body {
 }
 
 a:hover,
-.active {
+.navactive {
     align-items: center;
     border: 1px solid #E5F1FF;
-    background-color: #E5F1FF;
+    /* background-color: #E5F1FF; */
+    background: rgba(114, 130, 251, 0.1);
     color: #0177FB !important;
     border-radius: 10px;
 }
-
+.navactive::after {
+	content: "";
+    width: 6px;
+    height: 50px;
+    background: #7282FB;
+    position: absolute;
+    left: -25px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 a {
     padding: 1px 2px 1px 3px;
     text-decoration: none;
@@ -259,75 +275,214 @@ a {
     font-size: 36px;
     margin-left: 50px;
 }
+.notification img {
+    height: 30px;
+    margin-left: 0;
+}
+
+.noti-box {
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    width: 400px;
+    height: 440px;
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 20px;
+    background: #FFFFFF;
+    padding: 15px 20px;
+
+    display: none;
+    /* transition: 0.3s ease-in-out; */
+    /* animation: slideDown 1s forwards; */
+    /* animation: slideUp 1s forwards; */
+}
+@keyframes slideDown {
+    from {
+      top: -450px;
+    }
+    to {
+      top: 60px;
+    }
+}
+@keyframes slideUp {
+    from {
+      top: 60px;
+    }
+    to {
+      top: -500px;
+    }
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28px;
+    color: #292A2E;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.notifications {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 25px 10px 5px;
+    gap: 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 340px;
+}
+.notifications::-webkit-scrollbar{
+    display: none;
+}
+
+.notification {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.notification .noti-description .title{
+    font-size: 18px;
+    line-height: 13px;
+    color: #000000;
+}
+
+.noti-description {
+    display: flex;
+    flex-direction: column;
+}
 </style>
 
 
 
 <body>
-
-    <div class="nav">
-        <div class="navcontent">
-        </div>
-    </div>
-    <div class="nav-res" id="navbar-res">
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <img src="./icons/menu.png">
-        </a>
-        <a onclick="openPage('Home','nav-res', 'HOME')" class="active" id="defaultOpen"
-            style="margin-top:10vh;">Dashboard</a>
-        <a onclick="openPage('Key_Projects','nav-res','KEY PROJECTS')">Messages</a>
-        <a onclick="openPage('Client','nav-res','CLIENT TESTIMONIAL')">Live</a>
-        <a onclick="openPage('Careers','nav-res','CAREERS')">Mail</a>
-        <a onclick="openPage('Contact','nav-res','CONTACT US')">Recipes</a>
-        <a onclick="openPage('Careers','nav-res','CAREERS')">Appoinments</a>
-        <a onclick="openPage('Contact','nav-res','CONTACT US')">Client List</a>
-        <a>Settings</a>
-        <a>Get Help</a>
-        <a>Log Out</a>
-    </div>
-
     <div class="sidenav" id="sidenavbar">
         <img src="images/logo.png" class="sidenavlink" id="logo">
-        <a class="sidenavlink" href="index.php" id="defaultOpen"><img src="images/vec_dashboard.png"
-                class="nav-icon">Dashboard</a>
-        <a class="sidenavlink" href="#"><img src="images/vec_messages.png" class="nav-icon">Messages</a>
-        <a class="sidenavlink" href="#"><img src="images/vec_live.png" class="nav-icon">Live</a>
-        <a class="sidenavlink" href="calendar_of_events.php"><img src="images/vec_appointments.png"
-                class="nav-icon">Appoinments</a>
-        <a class="sidenavlink" href="client_list.php"><img src="images/vec_client_list.png" class="nav-icon">Clients</a>
-        <a class="sidenavlink" href="myplan.php"><img src="images/vec_recipies.png" class="nav-icon">Diet Plans</a>
-        <a class="sidenavlink" href="#"><img src="images/vec_mail.png" class="nav-icon">Payments</a>
-        <a class="sidenavlink" href="create_recipe.php"><img src="images/vec_recipies.png" class="nav-icon">Recipies</a>
-        <a class="sidenavlink" href="#"><img src="images/vec_recipies.png" class="nav-icon">Health Form</a>
+        <a id="index" class="sidenavlink nav-_index nav-track_stats_steps nav-track_stats_water nav-track_stats_heart nav-track_stats_sleep nav-track_stats_weight nav-track_stats_calorie" href="index.php"><img src="images/vec_dashboard.png" class="nav-icon">Dashboard</a>
+        <a id="messages" class="sidenavlink nav-messages" href="#"><img src="images/vec_messages.svg" class="nav-icon">Messages</a>
+        <a id="live" class="sidenavlink" href="#"><img src="images/vec_live.svg" class="nav-icon">Live</a>
+        <a id="calendar_of_events" class="sidenavlink nav-calendar_of_events" href="calendar_of_events.php"><img src="images/vec_appointments.svg" class="nav-icon">Appoinments</a>
+        <a id="client_list" class="sidenavlink nav-client_list" href="client_list.php"><img src="images/vec_client_list.svg" class="nav-icon">Clients</a>
+        <a id="myplan" class="sidenavlink nav-myplan" href="myplan.php"><img src="images/vec_diet_plan.svg" class="nav-icon">Diet Plans</a>
+        <a id="payments" class="sidenavlink nav-payments" href="#"><img src="images/vec_payments.svg" class="nav-icon">Payments</a>
+        <a id="create_recipe" class="sidenavlink nav-create_recipe" href="create_recipe.php"><img src="images/vec_recipies.svg" class="nav-icon">Recipes</a>
+        <a id="healthform" class="sidenavlink nav-healthform" href="#"><img src="images/vec_health_form.svg" class="nav-icon">Health Form</a>
 
         <div class="menu-bottom">
-            <a class="sidenavlink"><img src="images/vec_gethelp.png" class="nav-icon">Get Help</a>
-            <a class="sidenavlink" href="settings.php"><img src="images/vec_settings.png" class="nav-icon">Settings</a>
-            <a href="logout.php" class="sidenavlink"><img src="images/vec_logout.png" class="nav-icon">Log Out</a>
+            <a class="sidenavlink nav-get_help"><img src="images/vec_gethelp.svg" class="nav-icon">Get Help</a>
+            <a class="sidenavlink nav-settings" href="settings.php"><img src="images/vec_settings.svg" class="nav-icon">Settings</a>
+            <a href="logout.php" class="sidenavlink"><img src="images/vec_logout.svg" class="nav-icon">Log Out</a>
         </div>
     </div>
 
     <div class="topnav">
         <div class="topnav-content" id="topnav-change">
-            <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name"><strong>
-                        <?php
+            <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
+                <strong>
+                    <?php
                     $id11 = $_SESSION['name'] ;
                     $sql1 = "SELECT name FROM dietitian WHERE dietitianuserID ='$id11'";
                     $res = mysqli_query($conn,$sql1);
                     $row = mysqli_fetch_assoc($res) ; 
                     echo $row['name'];
-                     ?>
-                    </strong>
-
-                </span></p>
+                    ?>
+                </strong></span></p>
             <p id="topnav-content-2">Your performance summary this week</p>
         </div>
         <div class="topnav-icons">
             <img src="images/pp.png" style="height: 24px; width: 24; display:none;" id="addusermale">
 
             <img src="images/vec_search.png" style="height: 20px; width: 20px;">
-            <img src="images/vec_notification.png" style="height: 20px; width: 20px;">
+            <img id="notifications-pop" src="images/vec_notification.png" style="height: 20px; width: 20px;">
 
+            <div class="noti-box">
+                <div class="top"><span>Notifications</span><span id="noti-close">x</span></div>
+                <div class="notifications">
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                    <!-- noti -->
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    <!-- noti -->
+                </div>
+            </div>
             <?php
                 $currentUser = $_SESSION['name'];
            	  	$sql ="select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
@@ -393,36 +548,6 @@ a {
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
     <script>
-    function openPage(pageName, elmnt, name) {
-        // Hide all elements with class="tabcontent" by default */
-        var i, tabcontent;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        if (tabcontent.display == "none") {
-            elmnt = "nav-res";
-        }
-        // Show the specific tab content
-        document.getElementById(pageName).style.display = "block";
-        if (pageName == "Errorpage") {
-            document.getElementById(pageName).style.display = "flex";
-        }
-        if (elmnt == "nav-res") {
-            var topnav = document.getElementById("navbar-res");
-            var i;
-            topnav.className = "nav-res";
-        }
-        show = document.getElementById("show");
-        show.innerHTML = name;
-        callaos();
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-
     /* Toggle between adding and removing the "responsive" class to sidenav when the user clicks on the icon */
     function myFunction() {
         var x = document.getElementById("navbar-res");
@@ -432,6 +557,21 @@ a {
             x.className = "nav-res";
         }
     }
+    document.getElementById('notifications-pop').addEventListener('click',()=>{
+        document.getElementsByClassName('noti-box')[0].style.animation = 'slideDown 0.5s forwards';
+        document.getElementsByClassName('noti-box')[0].style.display = 'block';
+
+    });
+    document.getElementById('noti-close').addEventListener('click',()=>{
+        document.getElementsByClassName('noti-box')[0].style.animation = 'slideUp 0.5s forwards';
+        // document.getElementsByClassName('noti-box')[0].style.display = 'none';
+    });
+    // get the url and add active to page 
+    const currentPath = window.location.pathname;
+    const lastPage = currentPath.split('/').pop().split('.').shift();
+    console.log(lastPage);
+    // document.getElementById(lastPage).classList.add('navactive');
+    document.getElementsByClassName('nav-' + lastPage)[0].classList.add('navactive');
     </script>
 </body>
 
