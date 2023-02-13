@@ -260,9 +260,23 @@ header .current-date{
             <div class="container1_leftside">
                 <p style="font-size:1.7rem;font-weight:700">Client Progress Details</p>
                 <div class="search_client">
+                    <div> <input type="text" name="search_client" oninput="load_data(this.value)"  placeholder="Search Clients" class="seach_clients_text""></div>  
                     <div><button id="btn1"><span class="material-symbols-outlined">search</span></button> </div>
-                    <div>&nbsp&nbsp&nbsp&nbsp <input type="text" name="search_client" placeholder="Search Clients" class="seach_clients_text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>   
+                    
                 </div>
+             
+                <!-- <table>
+                <tbody id = "table_data">
+                </tbody>
+                </table> -->
+
+                <select name="clientName" id="table_data">
+                  <!-- <option value="this">this</option>
+                  <option value="that">that</option> -->
+                </select>
+
+
+                
                 <div class="track_buttons" id="track">
                         <button id="btn2" onclick="myFunction()">On-Track</button>
                         <button id="btn2" onclick="myFunction2()">Off-Track</button>
@@ -343,7 +357,7 @@ header .current-date{
                             // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
                             currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
 
-                            if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+                            if(currMonth <script 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
                                 // creating a new date of current year & month and pass it as date value
                                 date = new Date(currYear, currMonth, new Date().getDate());
                                 currYear = date.getFullYear(); // updating current year with new date year
@@ -354,15 +368,16 @@ header .current-date{
                             renderCalendar(); // calling renderCalendar function
                         });
                     });
+
+                    </script>
                                     
-                </script>
     
                 
             </div>
             
         </div>
         
-<!--------------------------------------- webview of progress details--------------------------------------------------->
+ <!--------------------------------------- webview of progress details--------------------------------------------------->
 
         <div class="webview_progressdetails">
                     
@@ -492,8 +507,6 @@ header .current-date{
                         if($r['steps']!= '-1' || $r['heart']!= '-1' || $r['weight']!= '-1' || $r['sleep']!= '-1' ){
                            echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client '.$r["name"].'</span></a></span></div>');
                         }
-                       
-
                         if($r['steps']!= '-1'){
                          
                           echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
@@ -507,8 +520,6 @@ header .current-date{
                           echo('<div class="info"><span>Weight </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' Kgs</span></div></div></div>');
                         }
                         if($r['sleep']!= '-1' ){
-                         
-                          
                           echo('<div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
                         }
                       }
@@ -674,17 +685,28 @@ header .current-date{
             
         </div>
 
-
-
-
-
-        
-
-
-
-
         
     </div>
+
+
+
+
+<script>
+
+function load_data(search = ''){
+   let xhr = new XMLHttpRequest();
+  xhr.open("GET", "searching.php?search="+search,true);
+  xhr.onload = function(){
+      // console.log(xhr.responseText);
+      document.getElementById('table_data').innerHTML = xhr.responseText;
+  }
+   xhr.send();
+
+}
+
+load_data();
+ 
+  </script>
     
 </body>
 </html>
