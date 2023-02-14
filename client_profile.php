@@ -25,9 +25,26 @@
 
 </head>
 <style>
+    @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
+
+   
 body {
     height: 100vh;
     overflow: auto;
+    font-family: 'NATS', sans-serif;
+    font-weight:400;
 }
 
 #content {
@@ -55,9 +72,9 @@ body {
 }
 
 .row {
-    width: 100% !important;
-    margin-top: 10px !important;
-    ;
+    width: 87% ;
+    margin-top: 10px ;
+    margin-left:2rem;
 }
 
 .editBtn {
@@ -71,6 +88,26 @@ body {
 
 .editBtn a:hover {
     outline: none !important;
+}
+@media screen and (max-width: 720px){
+    .row{
+        margin-left:0% !important;
+        width:auto;
+    }
+    h4{
+        margin-left:0 !important;
+    }
+    .ronald{
+        width:90px !important;
+        height:90px !important;
+    }
+    .editBtn{
+        width: 197px !important;
+height: 52px !important;
+    }
+    .name{
+        margin-top:0 !important;
+    }
 }
 </style>
 
@@ -103,13 +140,13 @@ $result = mysqli_query($conn,$sql);
             // echo;
         ?>
 
-                    <h4>Client Profile</h4>
+                    <h4 style="font-size: 30px;margin-left:2rem">Client Profile</h4>
                     <div class="container">
-                        <div class="d-flex justify-content-center align-items-center" style="gap:50px">
-                            <div class="" style="display:inline-block;"><img
-                                    style="height:100px;weight:100px;border-radius:50%;" src="images/profile-image.png"
+                        <div class="d-flex justify-content-center align-items-center; margin-top:10px" style="gap:20px">
+                            <div class="" style="display:inline-block;"><img class="ronald"
+                                    style="height:150px;weight:150px;border-radius:50%;" src="images/ronalduser.png"
                                     alt=""></div>
-                            <div class="" style="display:inline-block"><?php echo $row['name'] ?></div>
+                            <div style="font-size: 30px;margin-top:50px"class="name" style="display:inline-block"><?php echo $row['name'] ?></div>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -163,8 +200,7 @@ $result = mysqli_query($conn,$sql);
                         </div>
                         <div class="row d-flex justify-content-center align-items-center">
 
-                            <a class="editBtn" name="edit_client" style="width:20%;
-    margin-top:10px" href="update_client_profile.php?client_id=<?php echo $client_id?>">Edit Profile</a>
+                            <a class="editBtn" name="edit_client" style="width:20%;margin-top:20px;text-align:center" href="update_client_profile.php?client_id=<?php echo $client_id?>">Edit Profile</a>
 
 
                         </div>

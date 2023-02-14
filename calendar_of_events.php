@@ -27,6 +27,19 @@
     <title>Event Calendar</title>
 </head>
 <style>
+          @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+        font-family: 'NATS', sans-serif;
+        
+    }
 html {
     overflow-x: hidden;
 }
@@ -83,7 +96,7 @@ html {
 }
 
 .fc-today {
-    background-color: rgb(218, 218, 218, 0.3) !important;
+    background-color: inherit !important;
 }
 
 .fc-today-button {
@@ -113,7 +126,7 @@ table {
 }
 
 .fc-left h2 {
-    font-size: 20px !important;
+    font-size: 15px !important;
 }
 
 .wrapper {
@@ -177,7 +190,7 @@ header .current-date {
 
 .calendar-side .days li {
     margin-top: 10px !important;
-    
+
 }
 
 .calendar-side .days {
@@ -247,6 +260,13 @@ a:hover {
     color: #CBC3E3 !important;
 }
 
+/* .fc-day-header span{
+    color:red !important;
+} */
+
+.fc-axis {
+    color: #AAAAAA !important;
+}
 
 /* Side Calendar */
 </style>
@@ -260,12 +280,11 @@ a:hover {
                     <div class="row">
                         <div class="col-lg-12">
                             <div>
-                                <br><br><br>
                                 <h5 style="display:inline-block;">Calendar</h5>
                                 <a href="createevent.php" class="event_btn" style="display:inline-block; float:right;background: #7A78FD;
-            border-radius: 7px;border: none; color: white; padding:10px">+ Create event</a>
+            border-radius: 7px;border: none; color: white; padding:10px">+ Create Schedule</a>
                             </div>
-                            <br><br>
+                            <br>
                             <div id="calendar"></div>
                         </div>
                     </div>
@@ -306,7 +325,7 @@ a:hover {
 ?>
                     <br><br>
                     <div>
-                    <?php
+                        <?php
 
                 $id = $_SESSION['name'] ;
                 // echo gettype($id) ;
@@ -331,46 +350,46 @@ a:hover {
 
                     if ($date == $now){
                     ?>
-                    <div class="schedule-card" >
+                        <div class="schedule-card">
 
-                        <div class="schedule-card-title"><?php echo $row['eventname'] ?></div>
-                        <div></div>
-                        <div class="schedule-card-name" style="margin-top:15px">
-                            <div
-                                style="display:inline-block;background-color:#528aae;margin-right:10px;border-radius:50%;width:20px;height:20px;color:white;text-align:center;">
-                                <i class="fa-solid fa-user-tie"></i>
-                            </div>
-                            <div style="display:inline-block"><?php 
+                            <div class="schedule-card-title"><?php echo $row['eventname'] ?></div>
+                            <div></div>
+                            <div class="schedule-card-name" style="margin-top:15px">
+                                <div
+                                    style="display:inline-block;background-color:#528aae;margin-right:10px;border-radius:50%;width:20px;height:20px;color:white;text-align:center;">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <div style="display:inline-block"><?php 
                             echo $name ; 
                             ?></div>
-                        </div>
-                        <div class="schedule-card-place" style="margin-top:15px">
-
-                            <div
-                                style="display:inline-block;background-color:#528aae;margin-right:10px;border-radius:50%;width:20px;height:20px;color:white;text-align:center;">
-                                <i class="fa-solid fa-location-dot"></i>
                             </div>
-                            <div style="display:inline-block"><?php echo $row['place_of_meeting'] ?></div>
-                        </div>
-                        <div style="margin-top:15px">
-                            <?php echo $newstartdate ?> -
-                            <?php echo $newenddate ?>
+                            <div class="schedule-card-place" style="margin-top:15px">
 
+                                <div
+                                    style="display:inline-block;background-color:#528aae;margin-right:10px;border-radius:50%;width:20px;height:20px;color:white;text-align:center;">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div style="display:inline-block"><?php echo $row['place_of_meeting'] ?></div>
+                            </div>
+                            <div style="margin-top:15px;color:#4B9AFB">
+                                <?php echo $newstartdate ?> -
+                                <?php echo $newenddate ?>
+
+                            </div>
                         </div>
-                    </div>
-                    <?php
+                        <?php
                 }}?>
 
 
 
-            </div>
+                    </div>
                 </div>
                 <style>
                 .schedule-card {
                     background: #EFF8FF;
                     border-radius: 21px;
                     width: 90%;
-                    padding: 20px;
+                    padding: 15px;
                     margin-bottom: 20px;
                 }
 
@@ -378,6 +397,31 @@ a:hover {
                     font-weight: 600;
                     font-size: 18px;
                     color: #3C82D7;
+                }
+
+                .fc-prev-button {
+                    color: #4B9AFB !important;
+                    background-color: #EFEFEF !important;
+                }
+
+                .fc-next-button {
+                    color: #4B9AFB !important;
+                    background-color: #EFEFEF !important;
+                }
+
+                .fc-today-button {
+                    padding-left: 20px !important;
+                    padding-right: 20px !important;
+                    text-transform: capitalize !important;
+                    color: black !important;
+                    font-weight: bold !important;
+                    background-color: #EFEFEF !important;
+
+                }
+
+                .fc-agendaWeek-button {
+                    background: #EFEFEF !important;
+                    border-radius: 5px !important;
                 }
                 </style>
             </div>
@@ -411,10 +455,13 @@ function display_events() {
                 allDaySlot: false,
                 //  plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
                 header: {
-                    left: 'title',
-                    center: 'prev, today, next',
-                    right: 'agendaWeek'
+                    left: 'prev , today next ',
+                    // center: 'title',
+                    right: 'agendaWeek, month ,agendaDay'
                 },
+
+                // { year: 'numeric', month: 'long' },
+
                 editable: false,
                 selectable: true,
                 selectHelper: true,
@@ -481,5 +528,3 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
     });
 });
 </script>
-
-</html>
