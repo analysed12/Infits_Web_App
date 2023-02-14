@@ -260,9 +260,23 @@ header .current-date{
             <div class="container1_leftside">
                 <p style="font-size:1.7rem;font-weight:700">Client Progress Details</p>
                 <div class="search_client">
+                    <div> <input type="text" name="search_client" oninput="load_data(this.value)"  placeholder="Search Clients" class="seach_clients_text""></div>  
                     <div><button id="btn1"><span class="material-symbols-outlined">search</span></button> </div>
-                    <div>&nbsp&nbsp&nbsp&nbsp <input type="text" name="search_client" placeholder="Search Clients" class="seach_clients_text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>   
+                    
                 </div>
+             
+                <!-- <table>
+                <tbody id = "table_data">
+                </tbody>
+                </table> -->
+
+                <select name="clientName" id="table_data">
+                  <!-- <option value="this">this</option>
+                  <option value="that">that</option> -->
+                </select>
+
+
+                
                 <div class="track_buttons" id="track">
                         <button id="btn2" onclick="myFunction()">On-Track</button>
                         <button id="btn2" onclick="myFunction2()">Off-Track</button>
@@ -343,7 +357,7 @@ header .current-date{
                             // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
                             currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
 
-                            if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+                            if(currMonth <script 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
                                 // creating a new date of current year & month and pass it as date value
                                 date = new Date(currYear, currMonth, new Date().getDate());
                                 currYear = date.getFullYear(); // updating current year with new date year
@@ -354,15 +368,16 @@ header .current-date{
                             renderCalendar(); // calling renderCalendar function
                         });
                     });
+
+                    </script>
                                     
-                </script>
     
                 
             </div>
             
         </div>
         
-<!--------------------------------------- webview of progress details--------------------------------------------------->
+ <!--------------------------------------- webview of progress details--------------------------------------------------->
 
         <div class="webview_progressdetails">
                     
@@ -390,19 +405,128 @@ header .current-date{
                     }
                 </script>
 
+            <?php
+              $conn = new mysqli("localhost", "root", "", "infits");
+              if($conn->connect_error){
+                die("Connection failed :" . $conn->connect_error);
+              }
+              $on = array();
+              $off = array();
+              $sql = $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne'";
+              $result =$conn-> query($sql);
+              $i=0;
+              if ($result->num_rows > 0) 
+              {
 
+                while($row = $result->fetch_assoc())
+                      {
+                        $cname = $row['client_id'];
+                        $on[$i]['name'] = $cname;
+                        $off[$i]['name'] = $cname;
+
+
+                        //some changes is needed while linking.
+
+                        //for steps 
+
+                        //$step = "SELECT steps FROM `steptracker` WHERE clientid = $canme AND dateandtime = today's date";
+                        $step = "SELECT steps FROM `steptracker` WHERE clientid = '3' AND dateandtime = '2023-02-11 12:40:50'";
+                        $stepgoal =$conn-> query($step);
+                        $stepgoal1 = mysqli_fetch_assoc($stepgoal);
+                        // echo($stepgoal1['steps'].'---'.$row['steps']);
+                        if($stepgoal1['steps'] >= $row['steps']){
+                            
+                            $on[$i]['steps'] = $stepgoal1['steps'];
+                            $off[$i]['steps'] = '-1';
+                        }
+                        else{
+                            $on[$i]['steps'] ='-1';
+                            $off[$i]['steps'] = $stepgoal1['steps'];
+                        }
+                       
+
+                        //for heart rate
+                        // //$heart = "SELECT average FROM `heartrate` WHERE clientID = $canme AND dateandtime = today's date";
+                        $heart = "SELECT average FROM `heartrate` WHERE clientID = '3' AND dateandtime = '2023-02-11 14:53:24'";
+                        $heartgoal =$conn-> query($heart);
+                        $heartgoal1 = mysqli_fetch_assoc($heartgoal);
+                        if($heartgoal1['average'] >= $row['heart']){
+                            $on[$i]['heart'] = $heartgoal1['average'];
+                            $off[$i]['heart'] = '-1';
+                        }
+                        else{
+                          $on[$i]['heart'] ='-1';
+                          $off[$i]['heart'] = $heartgoal1['average'];
+                        }
+
+
+                        //for weight 
+                        //$weight = "SELECT goal FROM `weighttracker` WHERE clientID = $came AND date = '2022-01-01 00:00:00'";
+                        $weight = "SELECT goal FROM `weighttracker` WHERE clientID = '3' AND date = '2022-01-01 00:00:00'";
+                        $weightgoal =$conn-> query($weight);
+                        $weightgoal1 = mysqli_fetch_assoc($weightgoal);
+                        if($weightgoal1['goal'] >= $row['weight']){
+                            $on[$i]['weight'] = $weightgoal1['goal'];
+                            $off[$i]['weight'] = '-1';
+                        }
+                        else{
+                          $on[$i]['weight'] ='-1';
+                          $off[$i]['weight'] = $weightgoal1['goal'];
+                        }
+
+                        
+
+                        //for sleep 
+                        //$sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = $cname AND sleeptime = today's date";
+                        $sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = '3' AND sleeptime = '2022-01-01 10:10:00'";
+                        $sleepgoal =$conn-> query($sleep);
+                        $sleepgoal1 = mysqli_fetch_assoc($sleepgoal);
+                        if($sleepgoal1['hrsSlept'] >= $row['sleep']){
+                            $on[$i]['sleep'] = $sleepgoal1['hrsSlept'];
+                            $off[$i]['sleep'] = '-1';
+                        }
+                        else{
+                          $on[$i]['sleep'] ='-1';
+                          $off[$i]['sleep'] = $sleepgoal1['hrsSlept'];
+                        }
+
+
+                  $i++;
+                  }
+              }
+              
+              ?>
+
+            
 
 
             <div class="detailed_progress_container2" id="container2">
                 <div class="container2_wrapper1">
-                <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Ronald Richards</span></a></span></div>
-                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">4855 steps</span></div></div></div>
-                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
-                
+                <?php
+                      foreach($on as $r){
+                        if($r['steps']!= '-1' || $r['heart']!= '-1' || $r['weight']!= '-1' || $r['sleep']!= '-1' ){
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client '.$r["name"].'</span></a></span></div>');
+                        }
+                        if($r['steps']!= '-1'){
+                         
+                          echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
+                        }
+                        if($r['heart']!= '-1'){
+                         
+                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
+                        }
+                        if($r['weight']!='-1'){
+                         
+                          echo('<div class="info"><span>Weight </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' Kgs</span></div></div></div>');
+                        }
+                        if($r['sleep']!= '-1' ){
+                          echo('<div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
+                        }
+                      }
+                ?>
+               
 
-                </div>
+                 </div>
                 
             </div>
 
@@ -410,15 +534,32 @@ header .current-date{
             
             <div class="detailed_progress_container2" id="container3">
                 <div class="container2_wrapper1">
-                <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Ronald Richards</span></a></span></div>
-                <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">2356 steps</span></div></div></div>
-                <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
-                
-                
-
-                </div>
+                <?php
+                      foreach($off as $r){
+                        if($r['steps']!='-1' || $r['heart']!='-1' || $r['weight']!='-1' || $r['sleep']!='-1' ){
+                          // echo("hi");
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client  '.$r["name"].'</span></a></span></div>');
+                        }
+                        // echo("hiiii");
+                        if($r['steps']!='-1'){
+                          // echo("bue steps");
+                          echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
+                        }
+                        if($r['heart']!='-1'){
+                          
+                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
+                        }
+                        if($r['weight']!='-1'){
+                         
+                          echo('<div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' kgs</span></div></div></div>');
+                        }
+                        if($r['sleep']!='-1'){
+                         
+                          echo('<div class="info"><span>Sleep </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
+                        }
+                        
+                      }
+                ?>
                 
             </div>
 
@@ -544,17 +685,28 @@ header .current-date{
             
         </div>
 
-
-
-
-
-        
-
-
-
-
         
     </div>
+
+
+
+
+<script>
+
+function load_data(search = ''){
+   let xhr = new XMLHttpRequest();
+  xhr.open("GET", "searching.php?search="+search,true);
+  xhr.onload = function(){
+      // console.log(xhr.responseText);
+      document.getElementById('table_data').innerHTML = xhr.responseText;
+  }
+   xhr.send();
+
+}
+
+load_data();
+ 
+  </script>
     
 </body>
 </html>

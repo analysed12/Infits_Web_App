@@ -52,38 +52,38 @@ function fetchInformation($client_id){
             'progress' => 0,
         ),
     );
-    $query = "SELECT goal FROM goals WHERE clientID = '$client_id' AND forWhat = 'steps' ORDER BY time DESC LIMIT 1";
+    $query = "SELECT steps FROM goals WHERE client_id = '$client_id'";
     $value = fetchData($query);
     if(!empty($value)){
-        $data['steps']['goal'] =$value[0]['goal'];
+        $data['steps']['goal'] =$value[0]['steps'];
     }else{
         $data['steps']['goal'] = 0;
     }
-    $query = "SELECT goal FROM goals WHERE clientID = '$client_id' AND forWhat = 'water' ORDER BY time DESC LIMIT 1";
+    $query = "SELECT water FROM goals WHERE client_id = '$client_id'";
     $value = fetchData($query);
     if(!empty($value)){
-        $data['water']['goal'] =$value[0]['goal'];
+        $data['water']['goal'] =$value[0]['water'];
     }else{
         $data['water']['goal'] = 0;
     }
-    $query = "SELECT goal FROM goals WHERE clientID = '$client_id' AND forWhat = 'sleep' ORDER BY time DESC LIMIT 1";
+    $query = "SELECT sleep FROM goals WHERE client_id = '$client_id'";
     $value = fetchData($query);
     if(!empty($value)){
-        $data['sleep']['goal'] =$value[0]['goal'];
+        $data['sleep']['goal'] =$value[0]['sleep'];
     }else{
         $data['sleep']['goal'] = 0;
     }
-    $query = "SELECT goal FROM goals WHERE clientID = '$client_id' AND forWhat = 'weight' ORDER BY time DESC LIMIT 1";
+    $query = "SELECT weight FROM goals WHERE client_id = '$client_id'";
     $value = fetchData($query);
     if(!empty($value)){
-        $data['weight']['goal'] =$value[0]['goal'];
+        $data['weight']['goal'] =$value[0]['weight'];
     }else{
         $data['weight']['goal'] = 0;
     }
-    $query = "SELECT goal FROM goals WHERE clientID = '$client_id' AND forWhat = 'calorie' ORDER BY time DESC LIMIT 1";
+    $query = "SELECT calorie FROM goals WHERE client_id = '$client_id'";
     $value = fetchData($query);
     if(!empty($value)){
-        $data['calorie']['goal'] =$value[0]['goal'];
+        $data['calorie']['goal'] =$value[0]['calorie'];
     }else{
         $data['calorie']['goal'] = 0;
     }
@@ -177,9 +177,10 @@ function fetchInformation($client_id){
     justify-content: space-between;
 }
 .container2_rightside {
-    display: flex;
-    gap: 1rem;
-    margin-right: 25px;
+	display: flex;
+	gap: 1rem;
+	margin-right: 25px;
+	margin-top: 10px;
 }
 .btn-add {
     width: 50px;
@@ -351,7 +352,9 @@ function fetchInformation($client_id){
     display: flex;
     gap:0.2rem;
 }
-
+.symbols.col-2 img {
+	scale: 0.8;
+}
 .container4_wrapper2 {
     display: flex;
     background-color: #FDFDFD;
@@ -374,12 +377,14 @@ function fetchInformation($client_id){
 }
 .dashboard_container5{
     display: flex;
-    gap: 14rem;
+    /* gap: 14rem; */
+    justify-content: space-between;
     margin-top: 1rem;
+    margin-bottom: 5rem;
 }
 .tasklist{
     display: flex;
-    gap: 13rem;
+    gap: 16rem;
 }
 .list_tasklist{
     padding: 1rem;
@@ -399,6 +404,25 @@ function fetchInformation($client_id){
     border-radius: 0.5rem;
 
 }
+#btn7{
+    border: none;
+    background-color: white;
+    padding: 0.5rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    font-weight: 600;
+    border-radius: 0.6rem;
+}
+#btn7:hover{
+    background-color: #7282FB;
+    color:white;
+    border-radius: 0.5rem;
+
+}
+.active-btn{
+    color: #fff;
+    background-color: #7282FB !important;
+}
 .list_tasklist_container{
     display: flex;
     gap: 1rem;
@@ -409,21 +433,23 @@ function fetchInformation($client_id){
     
     
 }
-#tasklist{
+#today_tasks,
+#upcoming_tasks{
     display: none;
 }
 
-.list_tasklist{
+.list_tasklist {
     width: auto;
-    background-color:#FDFDFD;
+    background-color: #FDFDFD;
     border: 1px solid  #e4e1e1;
     border-radius: 0.6rem;
+    margin-left: 2rem;
 }
 
 .tasklist_wrapper2{
     display: flex;
     flex-direction: column;
-    font-size: 0.7em;
+    font-size: 1em;
 }
 .tasklist_wrapper3{
     margin-left: 6rem;
@@ -473,6 +499,10 @@ function fetchInformation($client_id){
     background-color: #7282FB;
     color:white;
 }
+#btn7:focus {
+    background-color: #7282FB;
+    color:white;
+}
 
 @media screen and (max-width: 920px) {
     .dashboard_container4{
@@ -507,6 +537,10 @@ function fetchInformation($client_id){
     }
     
     #btn6{
+        padding-left: 2rem;
+        padding-right: 2rem
+    }
+    #btn7{
         padding-left: 2rem;
         padding-right: 2rem
     }
@@ -551,7 +585,7 @@ function fetchInformation($client_id){
     }
     .dashboard_container2{
         display: flex;
-        flex-direction: column;
+        /* flex-direction: column; */
         gap: 1rem;
         margin-left: 3rem;
     }
@@ -755,24 +789,79 @@ if(!empty($data)){
             <div class="container5_wrapper1">
                 <div class="tasklist">
                     <p style="font-size:1.3rem ; font-weight:600">My Task List</p>
-                    <span><a href="" style="background-color:white; color:#717171; border:none" >View All</a></span> 
+                    <span><a href="task_list.php" style="background-color:white; color:#717171; border:none" >View All</a></span> 
                 </div>
                 <div class="list_tasklist">
-                    <button id="btn6" onclick="openPage('tasklist', this,'blue')">Today</button>
-                    <button id="btn6" class="btn6">Upcoming</button>
-                    <div id="tasklist">
-                    <div class="list_tasklist_container" >
-                        <div class="tasklist_wrapper1">
-                            <div><img src="images/foodrecipe.jpeg" style="width:2rem; background-color:#FDFDFD;border-radius:0.5rem"></div>
+                    <button id="btn6" class="task-btn" onclick="openTask('btn6','today_tasks')">Today</button>
+                    <button id="btn7" class="btn6 task-btn" onclick="openTask('btn7','upcoming_tasks')">Upcoming</button>
+                    <div id="today_tasks">
+<?php 
+
+$query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = '{$dietitian_id}' AND date = '{$today->format('Y-m-d')}' ORDER BY date,start_time LIMIT 3";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)){
+        // $date = new DateTime($row['date']);
+        $start = "";
+        $end = "";
+        if($row['start_time'] !=''){
+            $start = date("g:i a", strtotime($row['start_time']));
+        }
+        if($row['end_time'] != ''){
+            $end = date("g:i a", strtotime($row['end_time']));
+        }
+
+?>
+                        <!-- task -->
+                        <div class="list_tasklist_container" >
+                            <div class="tasklist_wrapper1">
+                                <div><img src="images/foodrecipe.jpeg" style="width:2rem; background-color:#FDFDFD;border-radius:0.5rem"></div>
+                            </div>
+                            <div class="tasklist_wrapper2">
+                                <span style="font-weight:600"><?php echo($row['title']) ?></span>
+                                <span style="margin-botton:4rem; color:#717171"><?php echo($start . ' to ' . $end) ?></span>
+                            </div>
+                            <div class="tasklist_wrapper3"><span class="material-symbols-outlined" style="font-weight:800">more_vert</span></div>
                         </div>
-                        <div class="tasklist_wrapper2">
-                            <span style="font-weight:600">Client Recipe Design</span>
-                            <span style="margin-botton:4rem; color:#717171">10am to 11 am</span>
-                            
-                        </div>
-                        <div class="tasklist_wrapper3"><span class="material-symbols-outlined" style="font-weight:800">more_vert</span></div>
-                        
+                        <!-- task -->
+<?php
+    }
+}
+?>
                     </div>
+                    <div id="upcoming_tasks">
+<?php 
+$query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = '{$dietitian_id}' AND date > '{$today->format('Y-m-d')}' ORDER BY date,start_time LIMIT 3";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        // $date = new DateTime($row['date']);
+        $start = "";
+        $end = "";
+        if($row['start_time'] !=''){
+            $start = date("g:i a", strtotime($row['start_time']));
+        }
+        if($row['end_time'] != ''){
+            $end = date("g:i a", strtotime($row['end_time']));
+        }
+
+        ?>
+                        <!-- task -->
+                        <div class="list_tasklist_container" >
+                            <div class="tasklist_wrapper1">
+                                <div><img src="images/foodrecipe.jpeg" style="width:2rem; background-color:#FDFDFD;border-radius:0.5rem"></div>
+                            </div>
+                            <div class="tasklist_wrapper2">
+                                <span style="font-weight:600"><?php echo($row['title']) ?></span>
+                                <span style="margin-botton:4rem; color:#717171"><?php echo($start . ' to ' . $end) ?></span>
+                            </div>
+                            <div class="tasklist_wrapper3"><span class="material-symbols-outlined" style="font-weight:800">more_vert</span></div>
+                        </div>
+                        <!-- task -->
+<?php
+    }
+}
+?>
                     </div>
                 </div>
                 
@@ -827,6 +916,18 @@ if(!empty($data)){
         </div>
 
     </div>
-    
+    <script>
+        function openTask(b,id){
+            const taskbtn = document.getElementsByClassName('task-btn');
+            taskbtn[0].classList.remove = 'active-btn';
+            taskbtn[1].classList.remove = 'active-btn';
+            document.getElementById('today_tasks').style.display = 'none';
+            document.getElementById('upcoming_tasks').style.display = 'none';
+            document.getElementById(id).style.display = 'block';
+            const btn = document.getElementById(b);
+            btn.classList.add = 'active-btn';
+        }
+        document.getElementById('btn6').click();
+    </script>
 </body>
 </html>
