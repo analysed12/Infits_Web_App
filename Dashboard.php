@@ -12,10 +12,26 @@ include('navbar.php');
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <style>
+        @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+        font-family: 'NATS', sans-serif;
+        
+    }
+element.style{
+    font-weight:400 !important;
+}
+
     .dashboard{
     margin-top: 2rem;
     margin-left: 17rem;
-    font-family: poppins;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -54,7 +70,7 @@ include('navbar.php');
     padding:0.5rem;
     padding-left:2.5rem;
     padding-right:2.5rem;
-    position:absoute:
+    position:absoute;
 
 
 }
@@ -87,12 +103,12 @@ include('navbar.php');
     font-size: 0.9rem;
     display: flex;
     gap: 4.3rem;
-    font-weight: 600;
+    font-weight: 400;
 }
 .container2_middle{
     margin-top: 0.5rem;
     text-align: center;
-    font-weight: 600;
+    font-weight: 400;
 }
 #btn2{
     border: none;
@@ -145,7 +161,7 @@ include('navbar.php');
 .container4_wrapper1{
     display: flex;
     gap: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
     margin-left: 16rem;
     margin-top: 1rem;
 }
@@ -196,7 +212,7 @@ include('navbar.php');
     padding: 0.5rem;
     padding-left: 4rem;
     padding-right: 4rem;
-    font-weight: 600;
+    font-weight: 400;
     border-radius: 0.6rem;
 }
 #btn6:hover{
@@ -365,7 +381,7 @@ include('navbar.php');
 
         <div class="dashboard_comtainer1">
             <div class="container1_leftside">
-                <p style="font-size:1.5rem; font-weight:600">Dashboard</p>
+                <p style="font-size:1.5rem; font-weight:400 !important;">Dashboard</p>
                 <p style="font-weight:600;font-size:1.1rem">Upcoming Events</p>
                 
             </div>
@@ -520,12 +536,12 @@ include('navbar.php');
                     <div class="row1" style="display:flex ; gap:2rem ">
                             <div class="steps">
                                 <div class="symbols">
-                                <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
+                                <div style="color:#F6A682"><img src="images/Frame.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
                                 <span style="font-size:0.9rem;color:#454545">5256/6000</span>
                             </div>
                             <div class="steps">
                                 <div class="symbols">
-                                <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
+                                <div style="color:#EF80B2"><img src="images/Frame-1.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
                                 <span style="font-size:0.9rem;color:#454545">123 bpm</span>
                             </div>
                     </div>
@@ -533,12 +549,12 @@ include('navbar.php');
                     <div class="row2" style="display:flex ; gap:2rem">
                             <div class="steps">
                                 <div class="symbols">
-                                <div style="color:#8FAFF3"><span class="material-symbols-outlined">local_drink</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Water</span></div></div>
+                                <div style="color:#8FAFF3"><img src="images/Frame-2.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Water</span></div></div>
                                 <span style="font-size:0.9rem;color:#454545">2/3 ltrs</span>
                             </div>
                             <div class="steps">
                                 <div class="symbols">
-                                <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
+                                <div style="color:#7550E2"><img src="images/Frame-3.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
                                 <span style="font-size:0.9rem;color:#454545">7/8 hrs.</span>
                             </div>
                     </div>
@@ -546,12 +562,12 @@ include('navbar.php');
                     <div class="row3" style="display:flex ; gap:2rem">
                             <div class="steps">
                                 <div class="symbols">
-                                <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
+                                <div style="color:#788F96"><img src="images/Frame-4.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
                                 <span style="font-size:0.9rem;color:#454545">0.53/2 kg</span>
                             </div>
                             <div class="steps">
                                 <div class="symbols">
-                                <div style="color:#E388A0"><span class="material-symbols-outlined">timer_10_alt_1</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Calories</span></div></div>
+                                <div style="color:#E388A0"><img src="images/Frame-5.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Calories</span></div></div>
                                 <span style="font-size:0.9rem;color:#454545">122/300 kcal</span>
                             </div>
                     </div>

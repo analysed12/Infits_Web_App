@@ -86,6 +86,19 @@ include("navbar.php");
 </head>
 <style>
 /* Appointment popup */
+@font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+    body {
+        font-family: 'NATS', sans-serif;
+    }
 .modal {
     display: none !important;
     position: fixed !important;
@@ -142,17 +155,18 @@ include("navbar.php");
 
 <body>
 
+
     <!-- Contents Start -->
     <div id="content">
+        <h4 style="margin:20px;margin-bottom:0;font-weight:500;font-size:30px">Add Event</h4>
         <div class="event-form">
             <div class="ev-img">
                 <img class="event-image" src="images/event_image.svg" alt="">
             </div>
-            <br>
 
-
+            
             <form action="#" method="post">
-                <div class="eve_form">
+                <div class="eve_form" style="color:#4B9AFB">
                     <!-- Event name field -->
                     <label for="subject" class="event_title">EVENT NAME</label>
                     <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;"
@@ -221,13 +235,13 @@ include("navbar.php");
 
                         <!-- Date and Time fields -->
                         <div class="txt button" style="border-bottom:1.8px solid black;" id="button">
-                            <i class="fa-solid fa-calendar-days txticon" style="display:inline-block">
+                            <i class="fa-solid fa-calendar-days txticon" style="display:inline-block;color:black !important">
                             </i>
-                            <p style="display:inline-block">Date and Time</p>
+                            <p style="display:inline-block;color:black !important">Date and Time</p>
                         </div>
 
                         <!-- Date and Time Pop up -->
-                        <div id="bg_container" class="bg-popContainer">
+                        <div id="bg_container" class="bg-popContainer" style="color:black" >
                             <div class="pop-box">
                                 <div id="close" class="closer">+</div>
                                 <div>
@@ -280,6 +294,8 @@ include("navbar.php");
         </form>
     </div>
     </div>
+
+
     <!-- Contents End -->
 
 

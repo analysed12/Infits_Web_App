@@ -23,10 +23,21 @@ $name =  explode(" ", $row['name'] );
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
+@font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
-    margin: 0;
-    /* width: 100vw;
-        height: 100vh; */
+    height:100%;
+        font-family: 'NATS', sans-serif !important;
+        padding-bottom:2rem;
 }
 
 .nav {
@@ -45,8 +56,8 @@ body {
 
 .section {
     max-width: 1100px;
-    margin: 0 0;
-    padding: 6% 1%;
+    margin-top:30px;
+    
     display: flex;
     justify-content: center;
 
@@ -92,17 +103,11 @@ body {
 }
 
 .box {
-    width: 100%;
-    height: 100%;
+   
     position: relative;
     cursor: pointer;
     border-radius: 10px;
-    -webkit-transition: 0.3s ease-in-out,
-        -webkit-transform 0.3s ease-in-out;
-    -moz-transition: 0.3s ease-in-out,
-        -moz-transform 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out,
-        transform 0.3s ease-in-out, ;
+   
         
       
         
@@ -114,6 +119,7 @@ body {
 
 .box:hover {
     transform: scale(1.10);
+    background-color:none;
 }
 
 .logout-button-box {
@@ -152,6 +158,8 @@ body {
     border-radius: 20px;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
     align-text:center;
+    width: 160px;
+    height: 171px !important;
 
 }
 
@@ -166,6 +174,8 @@ body {
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
+    width: 171px;
+    height: 171px;
 
 }
 
@@ -180,19 +190,23 @@ body {
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
+    width: 171px;
+    height: 171px;
 }
 
 .img-4 {
     background:
 
         /* bottom, image */
-        url(./icons/settings/icon3.svg);
+        url(./icons/settings/icon4.svg);
     background-position: center top;
 
     /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
+    width: 171px;
+    height: 171px;
 }
 
 .img-5 {
@@ -206,6 +220,8 @@ body {
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
+    width: 171px;
+    height: 171px;
 }
 
 .img-6 {
@@ -220,6 +236,8 @@ body {
     color: #f3e7e3 !important;
     background-repeat: no-repeat;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
+    width: 171px;
+    height: 171px;
 }
 
 .info {
@@ -257,10 +275,45 @@ body {
 }
 
 .rounded{
-border: 2px solid #FFFFFF;
-box-shadow: 0px 10px 10px 0px #FFB6C1;
-border-radius: 100px;
+  
 
+border-radius: 1.2rem;
+
+}
+.logout{
+width: 178px;
+height: 52px;
+position:absolute;
+margin-right:3%;
+margin-top:1rem;
+margin-bottom:1rem !important;
+background: #FF0000;
+border-radius: 10px;
+}
+.mobview{
+    display:none;
+}
+.mob_wrapper1{
+    margin:10px;
+    margin-left:20px;
+    display: flex;
+
+     width: 370px;
+height: 52px;
+
+
+background: #F3F5F8;
+border-radius: 18px;
+}
+
+@media screen and (max-width: 720px) {
+    .webview{
+        display:none;
+    }
+    .mobview{
+        display:flex;
+        flex-direction:column;
+    }
 }
 </style>
 
@@ -270,68 +323,63 @@ border-radius: 100px;
 
     <br />
     <br />
+    <div class="webview">
     <div class="container">
         <div class="text-center">
             <img src="./images/settingDp.svg" class="rounded" alt="...">
             <!-- <h3 class="display-6 right-float"><br /> <?php echo ($name[0]) ?><br /> <?php echo($name[1])?></h3> -->
-            <h3 class="display-6 right-float" style = "margin: 20px;"><br />John <br/> Wayne</h3>
+            <h3 class="display-6 right-float" style = "margin-left: 25px;font-weight:400"><br />John <br/> Wayne</h3>
 
         </div>
     </div>
 
     <div class="section">
-        <ul class="grid">
+        <ul class="grid" style="margin-left:10rem">
             <li>
                 <div class="box img-1">
                     <a href="profile_settings_show.php">
-                        <div class="info">
-                            <p style="text-align:center !important;">My Profile</p>
-                        </div>
+                    <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">My Profile</p>
                     </a>
                 </div>
             </li>
             <li>
                 <div class="box img-2">
                     <a href="referral_code.php">
-                        <div class="info">
-                            <p>Referral Code</p>
-                        </div>
+                        
+                    <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Referral Code</p>
                     </a>
                 </div>
             </li>
             <li>
                 <div class="box img-3">
                     <a href="about_us.php">
-                        <div class="info">
-                            <p>About Us</p>
-                        </div>
+                        
+                     <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">About Us</p>
+                        
                     </a>
                 </div>
             </li>
             <li>
                 <div class="box img-4">
                     <a href="achivement.php">
-                        <div class="info">
-                            <p>My Achievements</p>
-                        </div>
+                        <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">My Achievements</p>
+            
                     </a>
                 </div>
             </li>
             <li>
                 <div class="box img-5">
                     <a href="refer.php">
-                        <div class="info">
-                            <p>Refer To Friends</p>
-                        </div>
+                            <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Refer To Friends</p>
                     </a>
                 </div>
             </li>
             <li>
                 <div class="box img-6">
                     <a href="#">
-                        <div class="info">
-                            <p>Notifications</p>
-                        </div>
+                        
+                            <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Notifications</p>
+                       
                     </a>
                 </div>
             </li>
@@ -341,7 +389,50 @@ border-radius: 100px;
             <button class="logout">Logout</button>
         </div> -->
     </div>
+    <div>
+        <button class="logout">Logout</button>
+        
+    </div>
+    </div>
+<!--------------------------------------------------MOBVIEW------------------------------>
+
+    <div class="mobview">
+        <div class="profileimg" >
+        <img src="./images/settingDp.svg" id="pfp" style="margin-left:9.5rem;width:30%">
+        <p  style = "margin-left: 25px;font-weight:400;font-size:30px;margin-top:0;text-align:center">John Wayne</p>
+        </div>
+
+        <div class="mob_wrapper1">
+            <img src="icons/settings/icon1.svg" alt="">
+            <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">Referral Code</p>     
+        </div>
+        <div class="mob_wrapper1">
+            <img src="icons/settings/icon3.svg" alt="">
+            <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">My Achievements</p>     
+        </div>
+        <div class="mob_wrapper1">
+            <img src="icons/settings/icon4.svg" alt="">
+            <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">Notifications</p>     
+        </div>
+        <div class="mob_wrapper1">
+            <img src="icons/settings/icon2.svg" alt="">
+            <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">About Us</p>     
+        </div>
+        <div class="mob_wrapper1">
+            <img src="images/helpus.png" style="width:12%;margin-left:10px">
+            <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">Help</p>     
+        </div>
+        <div class="mob_wrapper1">
+            <img src="icons/settings/icon1.svg" alt="">
+            <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">Referral Code</p>     
+        </div>
+        <div>
+        <button class="logout">Logout</button>
+        
+    </div>
+        
+    </div>
 
 </body>
 
-</html>
+</html

@@ -107,19 +107,33 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
 
     <style>
-    body {
-        font-family: 'Poppins' !important;
-    }
+   @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
 
-    input
 
-    /*, input[type=file]*/
-        {
-          background: #FFFFFF;
+body {
+    font-family: 'NATS', sans-serif;
+    font-weight:400;
+    padding-bottom:2rem;
+}
+
+    input,
+    input[type=file] {
+        background: #FFFFFF;
         box-shadow: 0px 0.7px 5px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
         border: none;
-        border-radius: 4px;
         width: 100%;
         min-width: 250px;
         padding: 8px 16px;
@@ -127,9 +141,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     }
 
     select {
-      background: #FFFFFF;
-        box-shadow: 0px 0.7px 5px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
+        background: #EFF8FFD9;
         border: none;
         border-radius: 4px;
         width: 100%;
@@ -151,20 +163,21 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
     /* Shared */
     .addBtn {
-        background-color: RoyalBlue;
-        border: none;
-        color: white;
-        padding: 10px 22px;
+        width: 342px;
+        height: 48px;
+        background: #0177FD;
         border-radius: 10px;
-        text-decoration: none;
-        margin: 5px;
-        width: 60%;
+        color:white;
+        padding-top:0.5rem;
+        font-size: 20px;
+    }
+    .addBtn:hover{
+        background-color:none;
     }
 
     .center-flex {
         display: flex;
-        align-items: center;
-        justify-content: space-around;
+        margin-left:20.3rem;
     }
 
     .signup {
@@ -186,8 +199,8 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     .flex-right,
     .flex-middle {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: left;
+        justify-content: top;
         flex-direction: column;
     }
 
@@ -200,7 +213,7 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
     }
 
     .align-middle {
-        margin-left: 15%;
+        margin-left: 5%;
     }
 
     .reset a {
@@ -209,62 +222,141 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
     .socials {
         border: none;
-        background: white;
+        background: none;
     }
 
-    /* The Modal (background) */
-    .modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1;
-        /* Sit on top */
-        padding-top: 100px;
-        /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 50%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
+  
+    .sharebutton{
+        width: 342px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 2px solid #0177FD;
+    border-radius: 10px;
+    padding-top:0.5rem;
+        font-size: 20px;
+        underline:none;
+        margin-left:5.5rem;
+    }
+    .sharebutton:hover{
+      background-color:whit;
+      background:white;
     }
 
-    /* Modal Content */
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 40% !important;
+    .overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+    
+  margin: 290px ;
+  margin-left:550px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 25%;
+  position: relative;
+  transition: all 5s ease-in-out;
+  box-shadow: 0px 0px 34.0377px rgba(0, 0, 0, 0.25);
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  background:none;
+  border:none;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+    @media screen and (max-width: 720px) {
+        .heading{
+            margin-left:2rem !important;
+        }
+        .leftinput{
+            width:auto !important;
+        }
+        .flex-left{
+            margin-left:2rem;
+        }
+        .flex-middle{
+            margin-left:2rem;
+        }
+        .flex-main_wrapper{
+            display:flex;
+            flex-direction:column;
+            gap:0 !important;
+        }
+        .flex-main{
+            display:flex;
+            flex-direction:column;
+        }
+        .user{
+            margin-left:6rem !important;
+        }
+        .star{
+            margin-left:7.5rem !important;
+        }
+        .center-flex {
+        display: flex;
+        flex-direction:column;
+        gap:1rem;
+        margin-left:2.3rem;
+    }
+    .addBtn{
+        width:auto;
+        margin-right:2rem;
+    }
+    .sharebutton{
+        width:auto;
+        margin-left:0;
+        margin-right:2rem;
+    }
+    .image1{
+        margin-left:10rem !important;
+    }
+    .chooseimage{
+        margin-left:6rem !important;
+    }
+    .text{
+        margin-left:6rem !important;
+    }
     }
 
-    /* The Close Button */
-    .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
     </style>
 
 </head>
 
 <body>
   <div id="content">
+        <br>
+        <h4 class="heading" style="margin-left:20rem; font-size:40px"> Profile Settings</h4>
 
         <form method="post" action="" enctype="multipart/form-data">
 
@@ -272,18 +364,19 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
             <div class="flex-main">
 
-                <div class="flex-left">
-                    User ID <br> <input type="text" name="dietitianuserID" value="<?php echo $dietitianuserID; ?>"
-                        disabled required />
+                <div style="display:flex; gap:3rem;margin-left:2rem;" class="flex-main_wrapper">
+                <div class="flex-left" style="font-size:18px">
+                    User ID <br> <input type="text" name="dietitianuserID" value="<?php echo $dietitianuserID;  ?>"
+                        disabled required style="width: 342px;color: #AEAEAE;" />
                     <br>
 
-                    Name <br> <input type="text" name="Name" value="<?php echo $name; ?>" disabled required />
+                    Name <br> <input type="text" name="Name" value="<?php echo $name; ?>" disabled required style="color: #AEAEAE;" />
                     <br>
 
-                    Email <br> <input type="email" name="email" value="<?php echo $email; ?>" disabled required />
+                    Email <br> <input type="email" name="email" value="<?php echo $email; ?>" disabled required style="color: #AEAEAE;"/>
                     <br>
 
-                    Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" required />
+                    Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" required style="color: #AEAEAE;"/>
                     <br>
 
                     Qualification <br>
@@ -295,14 +388,15 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
                         <option value="phd">PhD</option>
                     </select>
                     <?php } else { ?>
-                    <input type="text" name="qualification" value="<?php echo $qualification; ?>" required>
+                    <input type="text" name="qualification" value="<?php echo $qualification; ?>" required style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
                     Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled
-                        required />
-                    <a href="reset-pw.php" class='reset'>
-                        <p style="align: right; color: blue; font-size: 12px;">Reset Password?</p>
+                        required style="color: #AEAEAE;"/>
+                    <a href="reset-pw.php" class='reset' style="display:flex;justify-content:space-between;padding-left:3rem;padding-right:3rem">
+                        <p style=" color: blue; font-size: 12px;">Change Password</p>
+                        <p style=" color: blue; font-size: 12px">Forgot Password</p>
                     </a>
                     <br>
 
@@ -311,58 +405,59 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
 
                 <br><br>
 
-                <div class="flex-middle">
+                <div class="flex-middle" style="font-size:18px;font-weight:400">
 
                     Location <br>
                     <?php if (is_null($location) or $location=='') { ?>
-                    <input type="text" name="location" required>
+                    <input type="text" name="location" required style="width: 342px;" class="leftinput" style="color: #AEAEAE;">
                     <?php } else { ?>
-                    <input type="text" name="location" value="<?php echo $location; ?>" required>
+                    <input type="text" name="location" value="<?php echo $location; ?>" required style="width: 342px;" class="leftinput" style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
                     Age <br>
                     <?php if (is_null($age) or $age=='') { ?>
-                    <input type="text" name="age" required>
+                    <input type="text" name="age" required class="leftinput" style="color: #AEAEAE;">
                     <?php } else { ?>
-                    <input type="text" name="age" value="<?php echo $age; ?>" required>
+                    <input type="text" name="age" value="<?php echo $age; ?>" required class="leftinput" style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
                     Gender: <br>
                     <?php if (is_null($gender) or $gender=='') { ?>
-                    <select name="gender" id="gender" required>
+                    <select name="gender" id="gender" required class="leftinput">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other</option>
                         <option value="choosenot">Choose not to say</option>
                     </select>
                     <?php } else { ?>
-                    <input type="text" name="gender" value="<?php echo $gender; ?>" disabled required>
+                    <input type="text" name="gender" value="<?php echo $gender; ?>" disabled required class="leftinput" style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
                     Experience <br>
                     <?php if (is_null($experience) or $experience=='') { ?>
-                    <input type="text" name="experience" required>
+                    <input type="text" name="experience" required class="leftinput" style="color: #AEAEAE;">
                     <?php } else { ?>
-                    <input type="text" name="experience" value="<?php echo $experience; ?>">
+                    <input type="text" name="experience" value="<?php echo $experience; ?>" class="leftinput" style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
-                    Referral Code <br><input type="text" name="ref_code">
+                    Referral Code <br><input type="text" name="ref_code" class="leftinput">
                     <br>
 
-                    Achievements and Certificates <br><input type="text" name="ref_code">
+                    Achievements and Certificates <br><input type="text" name="ref_code" class="leftinput">
                     <br>
 
 
                 </div>
 
-                <div class="flex-right">
-                    <img src=<?php echo $path;?> style="height: 100px; width: 100px; border-radius: 30%;" alt="" /> <br>
-                    Profile Picture:
-                    <input type="file" name="my_image" style="width: 250px;" value="" required />
+                </div>
+                    <div class="flex-right">
+                    <img class="image1" src=<?php echo $path;?> style="height: 100px; width: 100px; border-radius: 30%;margin-left:4rem" alt="" /> <br>
+                    <span class="text"'>Profile Picture:</span>
+                    <input class="chooseimage"type="file" name="my_image" style="width: 250px;" value="" required />
                     <br>
 
                     <!--   socials  -->
@@ -381,10 +476,10 @@ if(isset($_POST['update']) || isset($_FILES['my_image'])) {
                     <button id="myBtn" style="border:none; background:none;"><img src="images/edit.svg"></button>
 
                     <!-- The Modal -->
-                    <div id="myModal" class="modal">
+                    <div id="myModal" class="modal" style="margin-top:5rem;">
 
-                        <!-- Modal content -->
-                        <div class="modal-content">
+                        <!--Modal content-->
+                        <div class="modal-content" >
                             <span class="close">&times;</span>
 
                             <form method="post" action=" " enctype="multipart/form-data">
@@ -475,11 +570,39 @@ if(isset($_POST['save_socials']) ) {
                 <br><br>
             </div>
 
-            <div class="center-flex align-middle"><button type="submit" class="addBtn" name="update">Save
-                    Changes</button></div>
-            <br>
+            <div class="center-flex"> <br> <br>
+                <a id="addBtn" href="profile_settings_edit.php">
+                    <div class="addBtn">
+                        <center>Confirm Changes</center>
+                    </div>
+                </a>
+
+                <a id="sharebutton" href="#popup1"  >
+                    <div class="sharebutton">
+                        <center >Share Profile</center>
+                    </div>
+                </a>
+                <!--link not working to move to next page-->
+            </div>
         </form>
     </div>
+
+
+
+
+    <!-------------------------------------POPUPS-------------------------------------------------->
+    <div id="popup1" class="overlay">
+	<div class="popup">
+		<h5 style="margin-left:1.5rem">Share Via <img src="images/shareeee.png" style="margin-left:0.5rem;width:4%"></h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content" style="display:flex;gap:1rem;margin-left:1rem">
+			<img src="images/WhatsApp.png" >
+            <img src="images/Twitter.png" >
+            <img src="images/Facebook.png" >
+            <img src="images/LinkedIn_Circled.png" >
+            <img src="images/Instagram.png" >
+		</div>
+	</div>
 </body>
 
 </html>

@@ -349,13 +349,13 @@ else{
                                 <div class="row">
                                     <div style="display:inline-block">
                                         <a href="update_plan.php?id=<?php echo $row['plan_id'] ?>" title="Update Record"
-                                            style="color#7282FB" data-toggle="tooltip"><span
+                                            style="color:#7282FB;padding-left:0.5rem;padding-right:0.5rem;height: 30px;border-radius: 8px;" data-toggle="tooltip"><span
                                                 class="fa fa-pencil"></span></a>
                                     </div>
-                                    <div style="display:inline-block">
+                                    <div style="display:inline-block;height:100%">
                                         <a onclick="return confirm('Are you sure?')"
                                             href="delete_plan.php?id=<?php echo $row['plan_id'] ?>"
-                                            title="Delete Record" style="color:#7282FB" data-toggle="tooltip"><span
+                                            title="Delete Record" style="color:#FF3D3D;padding-left:0.5rem;padding-right:0.5rem;height: 30px;border-radius: 8px;margin-top:10rem" data-toggle="tooltip"><span
                                                 class="fa fa-trash "></span></a>
                                     </div>
                                 </div>

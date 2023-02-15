@@ -26,9 +26,21 @@ include "navbar.php";
     </script>
 </head>
 <style>
+        @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
     height: 100vh;
     overflow: auto;
+    font-family: 'NATS', sans-serif !important;
 }
 
 #content {
@@ -44,10 +56,11 @@ body {
 
 .col {
     margin-right: 50px !important;
-    width: 25% !important;
+    width: 24% !important;
     margin-bottom: 20px !important;
     border-radius: 15px;
     padding: 15px;
+    height: 279.26px;
 }
 
 i {
@@ -81,7 +94,7 @@ a {
                     <div class="row">
                         <p style="text-align:center !important;">Personal Info</p>
                     </div>
-                    <div class="row"><i class="fa-solid fa-user"></i></div>
+                    <div class="row"><img src="images/User copy.png" style="width:60%;margin-left:6rem" alt=""></div>
                     <div class="row">
                         <p style="text-align:center;">Name,Plan,etc</p>
                     </div>
@@ -96,7 +109,7 @@ a {
                     <div class="row">
                         <p style="text-align:center !important;">Diet Chart</p>
                     </div>
-                    <div class="row"><i class="fa-solid fa-book"></i></div>
+                    <div class="row"><img src="images/Clipboard.png" style="width:70%;margin-left:4.5rem" alt=""></div>
                     <div class="row">
                         <p style="text-align:center;">Plan your diet</p>
                     </div>
@@ -110,7 +123,7 @@ a {
                     <div class="row">
                         <p style="text-align:center !important;">Metrics</p>
                     </div>
-                    <div class="row"><i class="fa-solid fa-chart-simple"></i></div>
+                    <div class="row"><img src="images/Combo Chart.png" style="width:60%;margin-left:6rem" alt=""></div>
                     <div class="row">
                         <p style="text-align:center;">Check progress</p>
                     </div>
@@ -126,7 +139,7 @@ a {
                     <div class="row">
                         <p style="text-align:center !important;">Tracker</p>
                     </div>
-                    <div class="row"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="row"><img src="images/Cutlery.png" style="width:55%;margin-left:9.5rem" alt=""></div>
                     <div class="row">
                         <p style="text-align:center;">Track Meal</p>
                     </div>
@@ -136,11 +149,10 @@ a {
             <div class="col " style="border: 1px solid #1FB688;
         color: #1FB688;text-align:center;">
                 <?php echo '<a style="color: #1FB688;" href="nameofpage.php?client_id='.$client_id.'">' ?>
-
                     <div class="row">
                         <p style="text-align:center !important;">Health Details</p>
                     </div>
-                    <div class="row"><i class="fa-solid fa-notes-medical"></i></div>
+                    <div class="row"><img src="images/Health Report.png" style="width:55%;margin-left:7rem" alt=""></div>
                     <div class="row">
                         <p style="text-align:center;">Form,Document</p>
                     </div>
@@ -154,7 +166,7 @@ a {
                     <div class="row">
                         <p style="text-align:center !important;">Chats</p>
                     </div>
-                    <div class="row"><i class="fa-brands fa-rocketchat"></i></div>
+                    <div class="row"><img src="images/Chat Bubble.png" style="width:55%;margin-left:7rem" alt=""></div>
                     <div class="row">
                         <p style="text-align:center;">Chat with ...</p>
                     </div>

@@ -13,7 +13,21 @@
     </script>
 
     <style>
-    #content {
+
+@font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+        font-family: 'NATS', sans-serif !important;
+        
+    }
+    #content{
         overflow: auto;
         display: flex;
         flex-direction: column;
@@ -66,15 +80,20 @@
     /* Style the tab */
     .tab {
         display: flex;
-        justify-content: space-around;
+        justify-content:center;
+       align-text:center;
+       margin-left:17rem;
+        width: 634px;
+        
         background-color: #FAFAFA;
-        border-radius: 10px;
+        border-radius: 52px;
     }
 
     /* Style the buttons inside the tab */
     .tab a {
         background-color: inherit;
-        border-radius: 10px;
+
+        border-radius: 52px;
         float: left;
         border: none;
         padding: 10px 40px;
@@ -82,7 +101,7 @@
         cursor: pointer;
         transition: 0.3s;
         font-size: 17px;
-        margin: 5px;
+        margin: 10px;
     }
 
     /* Change background color of buttons on hover */
@@ -110,7 +129,9 @@
     /*   FORM   */
     .form-flex {
         display: flex;
-        justify-content: space-around;
+        gap:2rem;
+        justify-content:center;
+        
     }
 
     .flex-left,
@@ -368,14 +389,14 @@ if( isset($_POST['save']) || isset($_FILES['my_image']))
       '$prot','$fat','$fibr','$carbo','$ingrd','$inst','$cate','$id','$imageandpath','$file1','$course')";
 
   //insert default values into ingredient table
-    // $sql1= "INSERT INTO `add_ingredient`(`ingrd_id`,`ingrd_name`,`quantity`) VALUES         
-    //        ('$ingrd','ingredients', '1')";
+     $sql1= "INSERT INTO `add_ingredient`(`ingrd_id`,`ingrd_name`,`quantity`) VALUES         
+            ('$ingrd','ingredients', '1')";
 
 
            //insert values into instruction table
-        //    $sql2 ="INSERT INTO `add_direction`(`dir_id`,`direction`) VALUES ('$inst','directions')";
+          $sql2 ="INSERT INTO `add_direction`(`dir_id`,`direction`) VALUES ('$inst','directions')";
           
-       if($conn -> query($sql)==true)
+      if($conn -> query($sql)==true && $conn -> query($sql1)== true && $conn -> query($sql2)==true)
        {
        echo '<div class="alert alert-primary" role="alert" style="text-align:center;">
        New Recipe Added;
@@ -402,23 +423,23 @@ if( isset($_POST['save']) || isset($_FILES['my_image']))
             <form action="create_recipe.php" method="POST" enctype="multipart/form-data">
                 <!------------------------------------------------DASHBOARD--------------------------------------------------------->
                 <div>
-                    <h3 style="font-size: 30px; color: #202224; font-weight: 400; margin: 5px;float:left">Add Recipe
-                    </h3>
-                    <button id="save" name="save" style="height:46px; width:151px; background:#D257E6; color:white;float:right;
+                    <h3 style="font-size: 30px; font-weight: 500; margin: 20px;float:left">Add Recipe</h3>
+                    <button id="save" name="save" style="height:46px; width:151px; background:#D257E6; color:white;float:right; margin-top:1.5rem;
          text-align:center; border:none;border-radius:15px;">Save </button>
                 </div>
                 <br><br><br>
 
 
-                <div style="display:flex;justify-content:center;align-items:center;margin-left:100px">
-                    <input type="file" class="custom-file-input" name="my_image" required>
+                <div style="margin-left:40%;">
+                <div><img src="images/camera.png" alt="" id="camera" style="width:28%"><input type="file"  id="my_image" style="display:none"  name="my_image" required></div>
+                    
 
                 </div>
                 <br><br>
 
                 <div class="tab">
                     <a href=" " style="text-decoration:none;background-color:#D257E6;color:white">Recipe Details</a>
-                    <!------ <button class="tablinks" onclick="openCity(event, 'ingredients')">Ingredients</button>  ------>
+                <!-----    <button class="tablinks" onclick="openCity(event, 'ingredients')">Ingredients</button>        ------>
                     <a href="#" style="text-decoration:none;"> Ingredients </a>
                     <a href="#" style="text-decoration:none;">Directions</a>
                 </div>
@@ -477,8 +498,8 @@ if( isset($_POST['save']) || isset($_FILES['my_image']))
                         <p style="color: black; font-weight: 600; font-size: 20px;">Nutritional Details</p>
                     </center>
 
-                    <div class="form-flex">
-                        <div class="flex-left">
+                    <div class="form-flex" >
+                        <div class="flex-left" >
                             <input type="text" name="cal" placeholder="Calories" required>
                             <br><br>
 
@@ -522,6 +543,18 @@ if( isset($_POST['save']) || isset($_FILES['my_image']))
             event.preventDefault();
         }
         </script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <!------js for add ingredients popup---->
+  <script>
+    $(document).ready(function() {
+        $("#camera").click(function() {
+            $("#my_image").trigger('click');
+
+        });
+
+    });
+    </script>
 
 </body>
 
@@ -531,6 +564,6 @@ if( isset($_POST['save']) || isset($_FILES['my_image']))
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6S
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6S">
 
 </html>

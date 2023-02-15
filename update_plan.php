@@ -8,7 +8,7 @@ include "navbar.php"
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infits | Create Plan</title>
+    <title>Infits | Update Plan</title>
     <link rel="stylesheet" href="create_plan.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
@@ -47,7 +47,7 @@ include "navbar.php"
 }
 
     body {
-        font-family: 'NATS', serif !important;
+        font-family: 'NATS', sans-serif;
     }
 .popup {
     display: none;
@@ -247,6 +247,10 @@ border-radius: 10px;
   #width{
     width:auto !important;
   }
+  #plussbutton{
+    margin-left:40% !important;
+  }
+ 
   
 }
 </style>
@@ -259,7 +263,7 @@ border-radius: 10px;
     <!-- Contents Start -->
     <div id="content">
 
-        <p class="header" style="font-size:30px;margin-left:3rem;margin-top:1rem">Create Plan</p>
+        <p class="header" style="font-size:30px;margin-left:3rem;margin-top:1rem">Update Plan</p>
 
         <!-- Other content -->
         <?php
@@ -325,8 +329,8 @@ border-radius: 10px;
                                 </script>
 
 
-                                <button onclick="showPopup()" style="display: inline-block; border:none;margin-left:15px;padding-left:1rem;padding-right:1rem;"
-                                    class="tag-item openButton openBtn" >+</button>
+                                <button  id="plussbutton "onclick="showPopup()" style="display: inline-block; border:none;margin-left:35%;padding-left:1rem;padding-right:1rem;"
+                                    class="tag-item openButton openBtn " >+</button>
                                 <div class="popup">
                                     <div class="blocker" onclick="hidePopup()"></div>
                                     <div class="contents">
@@ -392,11 +396,12 @@ border-radius: 10px;
                         <div style="display:flex">
                             <button name="final_cancel_btn" class="cancelbutton">Cancel</button>
                             <button name="final_update_btn" class="savebutton" type="submit">Save</button>
-                            <!----<button
-                                style="display:inline-block;width:35%; font-size:90%; background-color:#6883FB;color:white"
-                                name="final_save_btn" type="submit">Save as new</button>-->
+                            
                             
                         </div>
+                        <button class="savebutton"
+                                style="margin-top:1rem;margin-left:10rem"
+                                name="final_save_btn" type="submit">Save as new</button>
                         <br><br><br>
                     </div>
                 </div>

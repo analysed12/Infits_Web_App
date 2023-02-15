@@ -25,9 +25,24 @@
 
 </head>
 <style>
+@font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
 body {
     height: 100vh;
     overflow: auto;
+    font-family: 'NATS', sans-serif;
+    font-weight:400;
 }
 
 #content {
@@ -108,13 +123,13 @@ $result = mysqli_query($conn,$sql);
             // echo;
         ?>
 
-                    <h4>Client Profile</h4>
+                    <h4 style="font-size: 30px;margin-left:2rem">Client Profile</h4>
                     <div class="container">
-                        <div class="d-flex justify-content-center align-items-center" style="gap:50px">
+                        <div class="d-flex justify-content-center align-items-center; margin-top:10px" style="gap:20px">
                             <div class="" style="display:inline-block;"><img
-                                    style="height:100px;weight:100px;border-radius:50%;" src="images/profile-image.png"
+                            class="ronald" style="height:150px;weight:150px;border-radius:50%;"  src="images/ronalduser.png"
                                     alt=""></div>
-                            <div class="" style="display:inline-block"><?php echo $row['name'] ?></div>
+                            <div style="font-size: 30px;margin-top:50px"class="name" style="display:inline-block"><?php echo $row['name'] ?></div>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -170,7 +185,7 @@ border-radius: 8px;">Select</a>
                             </div>
                             <div class="col">
                                 <div class="row">Location</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['location'] ?>">
+                                <input type="text" class="row input-tag" value="<?php echo $row['location']; ?>">
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center align-items-center">
