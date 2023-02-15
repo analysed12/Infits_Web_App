@@ -19,7 +19,7 @@
 <body>
     <?php include 'navbar.php' ?>
 
-    <form class="content" method="post">
+    <div class="content">
         <div class="heading-box">
             <h1>Health Details Form</h1>
             <button id="save">Save</button>
@@ -29,54 +29,19 @@
             <div class="form-container">
 
                 <div class="form-title">
-                    <img src="icons/form-name.svg"><input type="text" name="formName" id="formName" placeholder="Enter form name">
+                    <img src="icons/form-name.svg">
+                    <input type="text" name="formName" id="formName" placeholder="Enter form name">
                 </div>
 
                 <div class="form-question-container">
 
-                    <div class="form-values-box">
-                        <div class="form-value">
-                            <h4 class="question">Question</h4>
-                            <p class="answer">Answer</p>
-                        </div>
-                        <div class="options">
-                            <div class="option editQuestion" title="Edit">
-                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M17.71 5.04055C18.1 4.65055 18.1 4.00055 17.71 3.63055L15.37 1.29055C15 0.900547 14.35 0.900547 13.96 1.29055L12.12 3.12055L15.87 6.87055M0 15.2505V19.0005H3.75L14.81 7.93055L11.06 4.18055L0 15.2505Z" />
-                                </svg>
-                            </div>
-                            <div class="option deleteQuestion" title="Delete">
-                                <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1.56534 16.3636H12.4745V3.63636H1.56534V16.3636ZM13.3836 0.909091H10.2017L9.29265 0H4.74718L3.83808 0.909091H0.65625V2.72727H13.3836V0.909091Z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Don't Add Elements here Elements are Added With JavaScript -->
 
-                    <div class="form-values-box">
-                        <div class="form-value">
-                            <h4 class="question">Question</h4>
-                            <p class="answer">Answer</p>
-                        </div>
-                        <div class="options">
-                            <div class="option editQuestion" title="Edit">
-                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M17.71 5.04055C18.1 4.65055 18.1 4.00055 17.71 3.63055L15.37 1.29055C15 0.900547 14.35 0.900547 13.96 1.29055L12.12 3.12055L15.87 6.87055M0 15.2505V19.0005H3.75L14.81 7.93055L11.06 4.18055L0 15.2505Z" />
-                                </svg>
-                            </div>
-                            <div class="option deleteQuestion" title="Delete">
-                                <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1.56534 16.3636H12.4745V3.63636H1.56534V16.3636ZM13.3836 0.909091H10.2017L9.29265 0H4.74718L3.83808 0.909091H0.65625V2.72727H13.3836V0.909091Z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button id="addQuestion" type="button">Add Question</button>
                 </div>
+                <button type="button" id="addQuestion" data-target="Add Question" onClick="addQuestion(this)">Add
+                    Question</button>
             </div>
-
-            <div id="popup">
+            <div id="popup" data-ans-type="text">
                 <h2>Edit Question</h2>
 
                 <input type="text" name="question" id="question" placeholder="Type your question here..">
@@ -98,46 +63,53 @@
                     </div>
                 </div>
 
-                <div class="answer-text-container">
-                    <input type="text" name="answer" id="answer" placeholder="Answer">
-                </div>
-
                 <div class="custom-input-container">
                     <div class="btn-box">
-                        <button id="addCheckbox"><img src="icons/add.svg"> <span>Add Checkbox</span></button>
-                        <button id="tableCheckbox"><img src="icons/add.svg"> <span>Create a table of Checkboxes</span></button>
+                        <button id="addCheckbox" type="button" onclick="addQuestionOption(this)">
+                            <img src="icons/add.svg">
+                            <span>Add Checkboxes</span></button>
+                        <button id="tableCheckbox" type="button"><img src="icons/add.svg"> <span>Create a table of
+                                Checkboxes</span></button>
 
-                        <button class="close"><img src="icons/CrossX.svg" alt="Close"></button>
+                        <button class="close" type="button" onclick="closeOptions(this)"><img src="icons/CrossX.svg"
+                                alt="Close"></button>
                     </div>
                     <div class="custom-input-row">
-                        <div class="rowOnly">
-                            <input type="checkbox" name="singleRow" id="singleRow">
-                            <label for="singleRow"><span>Yes</span> <img src="icons/edit-pencile.svg" title="Edit"></label>
-                        </div>
-                        <div class="rowOnly">
-                            <input type="checkbox" name="singleRow" id="singleRow">
-                            <label for="singleRow"><span>No</span> <img src="icons/edit-pencile.svg" title="Edit"></label>
+
+                        <!-- Don't Add Elements here Elements are Added With JavaScript -->
+
+                    </div>
+                </div>
+                <div class="custom-input-table-container">
+                    <div class="btn-box">
+                        <button id="addColumn" type="button" onclick="addColumn(this)"><img src="icons/add.svg">
+                            <span>Add Column</span></button>
+                        <button id="addRow" type="button" onclick="addRow(this)"><img src="icons/add.svg">
+                            <span>Add Row</span></button>
+
+                        <button class="close-custom-input-container" type="button" onclick="rmTable(this)"><img
+                                src="icons/CrossX.svg" alt="Close"></button>
+                    </div>
+                    <div class="custom-input-table">
+
+                        <div class="flex-input-container">
+                            <div class="column-container">
+
+                                <!-- Don't Add Elements here Elements are Added With JavaScript -->
+
+                            </div>
+                            <div class="row-container">
+
+                                <!-- Don't Add Elements here Elements are Added With JavaScript -->
+
+                            </div>
                         </div>
                     </div>
-                    <!-- <div class="custom-input-table">
-                        <div class="btn-box">
-                            <button id="addColumn"><img src="icons/add.svg"> Add Column</button>
-                            <button id="addRow"><img src="icons/add.svg"> Add Row</button>
-
-                            <button id="close"><img src="icons/CrossX.svg" alt="Close"></button>
-                        </div>
-                        <div class="table-input-container">
-                            <ul id="Column">
-                                <li><p>Yes </p> <img src="icons/edit-pencile.svg" alt="Edit" title="Edit"></li>
-                                <li><p>No </p> <img src="icons/edit-pencile.svg" alt="Edit" title="Edit"></li>
-                            </ul>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="controller-box">
-                    <button id="cancel">Cancel</button>
-                    <button id="save">Save</button>
+                    <button id="cancel" type="button" onclick="closePopup()">Cancel</button>
+                    <button id="popupSave" onclick="savePopup(this)">Save</button>
                 </div>
             </div>
 
@@ -150,6 +122,9 @@
                 </div>
 
                 <div id="selectedUser-box">
+
+                    <!-- Don't Add Elements here Elements are Added With JavaScript -->
+
 
                     <!-- <div class="selectedUser">
                         <p class="userName">Client 1</p>
@@ -175,6 +150,9 @@
 
                 <ul id="usersList">
 
+                    <!-- Don't Add Elements here Elements are Added With JavaScript -->
+
+
                     <!-- <li>
                         <input type="checkbox" name="checkBox" id="checkBox">
                         <label for="checkBox" class="userName">Client 1</label>
@@ -188,7 +166,7 @@
                 </ul>
             </div>
         </div>
-    </form>
+    </div>
 
     <script src="js/health_detail_form_create.js"></script>
 
