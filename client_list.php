@@ -14,11 +14,28 @@ include('navbar.php');
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <style>
+    @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
+body{
+    font-family: 'NATS', sans-serif !important;
+}
+
 .clients {
-    margin-left: 18rem;
+    margin-left: 20rem;
     font-weight: 400;
     margin-top: 1.5rem;
-    font-family: poppins;
+   
 }
 
 .clients_container {
@@ -28,7 +45,7 @@ include('navbar.php');
 
 .clients_operations {
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 #btn1 {
@@ -46,11 +63,12 @@ include('navbar.php');
     background-color: white;
     box-shadow: 0.7px 0.7px 2.5px 1.5px rgb(231, 208, 253);
     border-radius: 0.6rem;
-    font-size: medium;
+    font-size: 20px;
     border: none;
     display: flex;
     padding-top: 0.5rem;
-    padding-right: 0.5rem;
+    padding-right: 1rem;
+    padding-left:0.5rem;
 }
 
 #btn2 {
@@ -68,11 +86,12 @@ include('navbar.php');
 .search_client {
     width: auto;
     margin-top: 1rem;
-    color: #ACACAC;
+    color: #BBBBBB;
     background-color: white;
     box-shadow: 0.6px 0.6px 2px 1px #ccc;
     border-radius: 0.6rem;
-    font-size: medium;
+    font-size: 20px;
+    font-weight:400;
     border: none;
     display: flex;
     padding-top: 0.5rem;
@@ -84,6 +103,7 @@ include('navbar.php');
     background-color: white;
     border: none;
     color: #ACACAC;
+    margin-left:0.5rem;
 }
 
 .seach_clients_text {
@@ -92,6 +112,7 @@ include('navbar.php');
 
 .clients_container2 {
     margin-top: 2rem;
+    font-size:25px;
 }
 
 /* .clients_container3 {
@@ -147,6 +168,10 @@ img {
     margin-top: 0.8rem;
     width: auto;
 }
+#add_set_client{
+    margin-left:5rem !important;
+}
+
 
 
 @media screen and (max-width: 720px) {
@@ -163,6 +188,11 @@ img {
     .add_set_client {
         font-size: 0.8rem;
     }
+    #add_set_client{
+    margin-left:0% !important;
+}
+
+    
 
     .add_set {
         margin-top: 0.3rem;
@@ -223,24 +253,26 @@ img {
 .button-top{
     border:none;
     background:white;
-    border-bottom : 1px solid blue;
+    border-bottom : 4px solid #4B9AFB;
+    
+
 }
 </style>
 
 <body>
     <div class="clients">
-        <p style="font-size:1.7rem; font-weight:500">Clients</p>
+        <p style="font-size:40px; font-weight:500">Clients</p>
         <div class="clients_container">
-            <div class="search_client" style="margin-right:40px">
+            <div class="search_client" style="justify-content:center;align-elements:center">
                 <div><button id="btn3"><span class="material-symbols-outlined">search</span></button> </div>
-                <div>&nbsp&nbsp&nbsp&nbsp <input type="text" name="search_client" placeholder="Seach Clients"
-                        class="seach_clients_text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+                <div style="margin-left:1rem;margin-right:4rem"> <input type="text" name="search_client" placeholder="Seach Clients"
+                        class="seach_clients_text" style="width:60%"></div>
             </div>
 
 
             <div class="clients_operations">
-                <div class="add_set_client">
-                    <div><button id="btn1"><span class="material-symbols-outlined">add</span></button> </div>
+                <div class="add_set_client" id="add_set_client" >
+                    <div><button id="btn1" ><span class="material-symbols-outlined">add</span></button> </div>
                     <div class="add_set"> <span>Add Clients</span></div>
                 </div>
                 <div class="add_set_client">
@@ -263,7 +295,7 @@ img {
         <div class="clients_container2">
             <form action="" method="post">
                 <button class="button-top" name="active-btn">Active</button>
-                <button class="button-top" name="pending-btn">Pending</button>
+                <button class="button-top" name="pending-btn" style="margin-left:2rem">Pending</button>
             </form>
         </div>
         <br><br>

@@ -1,5 +1,9 @@
 <?php
 include('navbar.php');
+$name = '';
+if(isset($_POST['searching_btn'])){
+  $name = $_POST['search_client_name'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +17,6 @@ include('navbar.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <style>
       
-    
 .detailed_progress_container1{
     display: flex;
 }
@@ -250,6 +253,16 @@ header .current-date{
 }
 
 }
+
+.table{
+  visibility: hidden;
+}
+
+.search_client:hover + .table{
+  visibility: visible;
+}
+
+
     </style>
 </head>
 <body>
@@ -260,9 +273,17 @@ header .current-date{
             <div class="container1_leftside">
                 <p style="font-size:1.7rem;font-weight:700">Client Progress Details</p>
                 <div class="search_client">
-                    <div><button id="btn1"><span class="material-symbols-outlined">search</span></button> </div>
-                    <div>&nbsp&nbsp&nbsp&nbsp <input type="text" name="search_client" placeholder="Search Clients" class="seach_clients_text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>   
+                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <div> <input type="text" name="search_client_name" oninput="load_data(this.value)" id = "search_bar" placeholder="Search Clients" class="seach_clients_text"  autocomplete="off"></div>  
+                    <div><button id="btn1" type = "submit" name  = "searching_btn"><span class="material-symbols-outlined">search</span></button> </div>
+                </form>    
                 </div>
+             
+                <table class = "table">
+                <tbody id = "table_data">
+                </tbody>
+                </table>
+                
                 <div class="track_buttons" id="track">
                         <button id="btn2" onclick="myFunction()">On-Track</button>
                         <button id="btn2" onclick="myFunction2()">Off-Track</button>
@@ -343,7 +364,7 @@ header .current-date{
                             // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
                             currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
 
-                            if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+                            if(currMonth <script 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
                                 // creating a new date of current year & month and pass it as date value
                                 date = new Date(currYear, currMonth, new Date().getDate());
                                 currYear = date.getFullYear(); // updating current year with new date year
@@ -354,15 +375,16 @@ header .current-date{
                             renderCalendar(); // calling renderCalendar function
                         });
                     });
+
+                    </script>
                                     
-                </script>
     
                 
             </div>
             
         </div>
         
-<!--------------------------------------- webview of progress details--------------------------------------------------->
+ <!--------------------------------------- webview of progress details--------------------------------------------------->
 
         <div class="webview_progressdetails">
                     
@@ -397,7 +419,13 @@ header .current-date{
               }
               $on = array();
               $off = array();
-              $sql = $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne'";
+              if($name != ''){
+              $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne' AND client_id = '$name'" ;
+              }
+              else{
+                $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne'";
+              }
+              
               $result =$conn-> query($sql);
               $i=0;
               if ($result->num_rows > 0) 
@@ -414,7 +442,7 @@ header .current-date{
 
                         //for steps 
 
-                        //$step = "SELECT steps FROM `steptracker` WHERE clientid = $canme AND dateandtime = today's date";
+                        //$step = "SELECT steps FROM `steptracker` WHERE clientid = $canme AND dateandtime = today's date" ;
                         $step = "SELECT steps FROM `steptracker` WHERE clientid = '3' AND dateandtime = '2023-02-11 12:40:50'";
                         $stepgoal =$conn-> query($step);
                         $stepgoal1 = mysqli_fetch_assoc($stepgoal);
@@ -492,8 +520,6 @@ header .current-date{
                         if($r['steps']!= '-1' || $r['heart']!= '-1' || $r['weight']!= '-1' || $r['sleep']!= '-1' ){
                            echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client '.$r["name"].'</span></a></span></div>');
                         }
-                       
-
                         if($r['steps']!= '-1'){
                          
                           echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
@@ -507,8 +533,6 @@ header .current-date{
                           echo('<div class="info"><span>Weight </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' Kgs</span></div></div></div>');
                         }
                         if($r['sleep']!= '-1' ){
-                         
-                          
                           echo('<div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
                         }
                       }
@@ -674,17 +698,34 @@ header .current-date{
             
         </div>
 
-
-
-
-
-        
-
-
-
-
         
     </div>
+
+
+
+
+<script>
+
+function load_data(search = ''){
+   let xhr = new XMLHttpRequest();
+  xhr.open("GET", "searching.php?search="+search,true);
+  xhr.onload = function(){
+      // console.log(xhr.responseText);
+      document.getElementById('table_data').innerHTML = xhr.responseText;
+  }
+   xhr.send();
+
+
+
+}
+
+load_data();
+
+
+
+
+ 
+  </script>
     
 </body>
 </html>

@@ -33,6 +33,46 @@ include "server.php";
     font-weight: normal;
     font-style: normal;
 }
+.abcRioButton{
+    border-radius: 10px;
+    box-shadow: none !important;
+}
+.abcRioButtonContentWrapper {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #EAEAEA;
+    border-radius: 10px;
+    background: #FFFFFF;
+    margin-right: 15px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.abcRioButtonLightBlue {
+    color: #4B99FB;
+    font-weight: bolder;
+    height: 50px !important;
+    width: 130px !important;
+    border-radius: 10px !important;
+
+}
+.abcRioButtonIconImage{
+    height: 35px !important;
+    width: 35px !important;
+}
+.abcRioButtonIconImage svg{
+    height: 30px !important;
+    width: 30px !important;
+}
+.abcRioButtonContents{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 20px !important;
+/* line-height: 74px; */
+color: #4B99FB;
+}
 
 body {
     /* position: relative; */
