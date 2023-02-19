@@ -494,7 +494,9 @@ header .current-date{
                             $on[$i]['weight'] = $weightgoal1['goal'];
                             $off[$i]['weight'] = '-1';
                         }
+                        // 
                         else{
+                          
                           $on[$i]['weight'] ='-1';
                           $off[$i]['weight'] = $weightgoal1['goal'];
                         }
