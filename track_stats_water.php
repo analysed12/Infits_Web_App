@@ -19,19 +19,31 @@ if(isset($_POST['savegoal'])){
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
-    
-    $query = "UPDATE `goals` SET `water` = $goal WHERE `client_id` = $client";
-    $result = $conn->query($query) or die("Query Failed");
-    if($conn->affected_rows == 0){
-        $query="INSERT INTO `goals`(`dietition_id`, `client_id`, `water`) VALUES ('{$dietition}','{$client}','{$goal}')";
-        $result = $conn->query($query) or die("Query Failed");
+    $isSame =false;
+    $query = "SELECT `water` FROM `goals` WHERE `client_id` = {$client} AND `dietition_id` = '{$dietition}'";
+    $result = $conn->query($query) or die('Query Failed');
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            if($row['water'] == $goal){
+                $isSame = true;
+                break;
+            }
+        }
     }
-    
-    if($result){
-        unset($_POST["savegoal"]);
-        unset($_POST["setgoal"]);
-        header(("Location:track_stats_water.php?id={$clientId}"));
-        // exit();
+    if(!$isSame){
+        $query = "UPDATE `goals` SET `water` = $goal WHERE `client_id` = $client";
+        $result = $conn->query($query) or die("Query Failed");
+        if($conn->affected_rows == 0){
+            $query="INSERT INTO `goals`(`dietition_id`, `client_id`, `water`) VALUES ('{$dietition}','{$client}','{$goal}')";
+            $result = $conn->query($query) or die("Query Failed");
+        }
+        
+        if($result){
+            unset($_POST["savegoal"]);
+            unset($_POST["setgoal"]);
+            header(("Location:track_stats_water.php?id={$clientId}"));
+            // exit();
+        }
     }
 }
 // funtion to fetch
