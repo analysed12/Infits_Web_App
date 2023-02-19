@@ -629,7 +629,7 @@ function fetchInformation($client_id){
         </div>
 <?php
 $today = new DateTime();
-$query = "SELECT * FROM `create_event` WHERE dietitianuserID = '{$dietitian_id}' AND start_date > {$today->format('Y-m-d')} ORDER BY start_date;";
+$query = "SELECT * FROM `create_event` WHERE dietitianuserID = '{$dietitian_id}' AND start_date > '{$today->format('Y-m-d')} 00:00:00' ORDER BY start_date;";
 $up_event = fetchData($query);
 ?>
 <div class="dashboard_container2">
