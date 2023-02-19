@@ -376,6 +376,7 @@ border-radius: 18px;
                 </div>
             </li>
               </a>
+              <!-- // -->
               <a href="#">
             <li>
                 <div class="box img-6">
