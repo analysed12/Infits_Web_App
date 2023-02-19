@@ -263,7 +263,7 @@ img {
     <div class="clients">
         <p style="font-size:40px; font-weight:500">Clients</p>
         <div class="clients_container">
-            <div class="search_client" style="justify-content:center;align-elements:center">
+            <div class="search_client" style="justify-content:center;align-items:center">
                 <div><button id="btn3"><span class="material-symbols-outlined">search</span></button> </div>
                 <div style="margin-left:1rem;margin-right:4rem"> <input type="text" name="search_client" placeholder="Seach Clients"
                         class="seach_clients_text" style="width:60%"></div>
