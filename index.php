@@ -214,7 +214,7 @@ function fetchInformation($client_id){
     padding:0.5rem;
     padding-left:2.5rem;
     padding-right:2.5rem;
-    position:absoute:
+    position:absolute;
 
 
 }
@@ -884,7 +884,7 @@ if (mysqli_num_rows($result) > 0) {
                             <span style="font-weight:600">Robert Parker</span> <span style="color:#717171">16:45</span>
                             </div>
                             <div class="list2">
-                            <span style="margin-botton:4rem; color:#717171">Its Awesome</span>
+                            <span style="margin-bottom:4rem; color:#717171">Its Awesome</span>
                             <span id="two">2</span>
                             </div>
                             
@@ -901,7 +901,7 @@ if (mysqli_num_rows($result) > 0) {
                             <span style="font-weight:600">Robert Parker</span> <span id="time"style=";color:#717171">16:45</span>
                             </div>
                             <div class="list2">
-                            <span style="margin-botton:4rem; color:#717171">Its Awesome</span>
+                            <span style="margin-bottom:4rem; color:#717171">Its Awesome</span>
                             <span id="two" id="msg">2</span>
                             </div>
                             
