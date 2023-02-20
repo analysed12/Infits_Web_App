@@ -1,10 +1,10 @@
 <?php
-session_start();
+// session_start();
+include 'navbar.php';
 
 if (isset($_SESSION['dietitianuserID'])) {
     # database connection file
     include 'app/db.conn.php';
-    include 'navbar1.php';
 
     include 'app/helpers/user.php';
     include 'app/helpers/conversations.php';

@@ -9,7 +9,7 @@ $pass = "";
 
 # database name
 $db_name = "infits";
-$conn1 = mysqli_connect($sname, $uname, $pass, $db_name);
+$conn1 = mysqli_connect($sName, $uName, $pass, $db_name);
 
 #creating database connection
 try {

@@ -2,8 +2,8 @@
 
 // setting up the time Zone
 // It Depends on your location or your P.c settings
-define('TIMEZONE', 'Asia/Calcutta');
-date_default_timezone_set(TIMEZONE);
+// define('TIMEZONE', );
+date_default_timezone_set('Asia/Calcutta');
 
 function last_time($date_time)
 {
