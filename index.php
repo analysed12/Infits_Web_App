@@ -214,7 +214,7 @@ function fetchInformation($client_id){
     padding:0.5rem;
     padding-left:2.5rem;
     padding-right:2.5rem;
-    position:absoute:
+    position:absolute;
 
 
 }
@@ -630,7 +630,7 @@ function fetchInformation($client_id){
         </div>
 <?php
 $today = new DateTime();
-$query = "SELECT * FROM `create_event` WHERE dietitianuserID = '{$dietitian_id}' AND start_date > {$today->format('Y-m-d')} ORDER BY start_date;";
+$query = "SELECT * FROM `create_event` WHERE dietitianuserID = '{$dietitian_id}' AND start_date > '{$today->format('Y-m-d')} 00:00:00' ORDER BY start_date;";
 $up_event = fetchData($query);
 ?>
 <div class="dashboard_container2">
@@ -885,7 +885,7 @@ if (mysqli_num_rows($result) > 0) {
                             <span style="font-weight:600">Robert Parker</span> <span style="color:#717171">16:45</span>
                             </div>
                             <div class="list2">
-                            <span style="margin-botton:4rem; color:#717171">Its Awesome</span>
+                            <span style="margin-bottom:4rem; color:#717171">Its Awesome</span>
                             <span id="two">2</span>
                             </div>
                             
@@ -902,7 +902,7 @@ if (mysqli_num_rows($result) > 0) {
                             <span style="font-weight:600">Robert Parker</span> <span id="time"style=";color:#717171">16:45</span>
                             </div>
                             <div class="list2">
-                            <span style="margin-botton:4rem; color:#717171">Its Awesome</span>
+                            <span style="margin-bottom:4rem; color:#717171">Its Awesome</span>
                             <span id="two" id="msg">2</span>
                             </div>
                             

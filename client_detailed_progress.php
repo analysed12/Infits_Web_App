@@ -4,6 +4,10 @@ $name = '';
 if(isset($_POST['searching_btn'])){
   $name = $_POST['search_client_name'];
 }
+$name = '';
+if(isset($_POST['searching_btn'])){
+  $name = $_POST['search_client_name'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -430,14 +434,13 @@ header .current-date{
               $i=0;
               if ($result->num_rows > 0) 
               {
-
+               
                 while($row = $result->fetch_assoc())
                       {
                         $cname = $row['client_id'];
                         $on[$i]['name'] = $cname;
                         $off[$i]['name'] = $cname;
-
-
+                         $dat = date('Y-m-d');
                         //some changes is needed while linking.
 
                         //for steps 
@@ -446,9 +449,10 @@ header .current-date{
                         $step = "SELECT steps FROM `steptracker` WHERE clientid = '3' AND dateandtime = '2023-02-11 12:40:50'";
                         $stepgoal =$conn-> query($step);
                         $stepgoal1 = mysqli_fetch_assoc($stepgoal);
-                        // echo($stepgoal1['steps'].'---'.$row['steps']);
+                        if($stepgoal1 != null){
+
+                        
                         if($stepgoal1['steps'] >= $row['steps']){
-                            
                             $on[$i]['steps'] = $stepgoal1['steps'];
                             $off[$i]['steps'] = '-1';
                         }
@@ -456,44 +460,63 @@ header .current-date{
                             $on[$i]['steps'] ='-1';
                             $off[$i]['steps'] = $stepgoal1['steps'];
                         }
-                       
+                      }
+                      else{
+                        $on[$i]['steps'] ='-1';
+                            $off[$i]['steps'] = '-1';
+                      }
 
                         //for heart rate
-                        // //$heart = "SELECT average FROM `heartrate` WHERE clientID = $canme AND dateandtime = today's date";
-                        $heart = "SELECT average FROM `heartrate` WHERE clientID = '3' AND dateandtime = '2023-02-11 14:53:24'";
+                        $heart = "SELECT average FROM `heartrate` WHERE clientID = $cname AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                        // $heart = "SELECT average FROM `heartrate` WHERE clientID = '3' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
                         $heartgoal =$conn-> query($heart);
                         $heartgoal1 = mysqli_fetch_assoc($heartgoal);
-                        if($heartgoal1['average'] >= $row['heart']){
-                            $on[$i]['heart'] = $heartgoal1['average'];
-                            $off[$i]['heart'] = '-1';
-                        }
-                        else{
-                          $on[$i]['heart'] ='-1';
-                          $off[$i]['heart'] = $heartgoal1['average'];
-                        }
-
+                        if ($heartgoal1 != null)
+                        {
+                            if($heartgoal1['average'] >= $row['heart']){
+                                $on[$i]['heart'] = $heartgoal1['average'];
+                                $off[$i]['heart'] = '-1';
+                            }
+                            else{
+                              $on[$i]['heart'] ='-1';
+                              $off[$i]['heart'] = $heartgoal1['average'];
+                            }
+                      }
+                      else{
+                        $on[$i]['heart'] ='-1';
+                        $off[$i]['heart'] = '-1';
+                      }
 
                         //for weight 
-                        //$weight = "SELECT goal FROM `weighttracker` WHERE clientID = $came AND date = '2022-01-01 00:00:00'";
-                        $weight = "SELECT goal FROM `weighttracker` WHERE clientID = '3' AND date = '2022-01-01 00:00:00'";
+                        $weight = "SELECT goal FROM `weighttracker` WHERE clientID = $cname AND `date` >= '{$dat} 00:00:00' AND `date` < '{$dat} 23:59:59'";
+                        // $weight = "SELECT goal FROM `weighttracker` WHERE clientID = '3' AND `date` >= '{$dat} 00:00:00' AND `date` < '{$dat} 23:59:59'";
                         $weightgoal =$conn-> query($weight);
                         $weightgoal1 = mysqli_fetch_assoc($weightgoal);
+                        if($weightgoal1 != null){
                         if($weightgoal1['goal'] >= $row['weight']){
                             $on[$i]['weight'] = $weightgoal1['goal'];
                             $off[$i]['weight'] = '-1';
                         }
+                        // 
                         else{
+                          
                           $on[$i]['weight'] ='-1';
                           $off[$i]['weight'] = $weightgoal1['goal'];
                         }
+                      }
+                      else{
+                        $on[$i]['weight'] ='-1';
+                          $off[$i]['weight'] = '-1';
+                      }
 
                         
 
                         //for sleep 
-                        //$sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = $cname AND sleeptime = today's date";
-                        $sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = '3' AND sleeptime = '2022-01-01 10:10:00'";
+                        $sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = $cname AND `sleeptime` >= '{$dat} 00:00:00' AND `sleeptime` < '{$dat} 23:59:59'";
+                        // $sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = '3' AND `sleeptime` >= '{$dat} 00:00:00' AND `sleeptime` < '{$dat} 23:59:59'";
                         $sleepgoal =$conn-> query($sleep);
                         $sleepgoal1 = mysqli_fetch_assoc($sleepgoal);
+                        if($sleepgoal1 != null){
                         if($sleepgoal1['hrsSlept'] >= $row['sleep']){
                             $on[$i]['sleep'] = $sleepgoal1['hrsSlept'];
                             $off[$i]['sleep'] = '-1';
@@ -502,6 +525,11 @@ header .current-date{
                           $on[$i]['sleep'] ='-1';
                           $off[$i]['sleep'] = $sleepgoal1['hrsSlept'];
                         }
+                      }
+                      else{
+                        $on[$i]['sleep'] ='-1';
+                          $off[$i]['sleep'] ='-1';
+                      }
 
 
                   $i++;

@@ -327,7 +327,10 @@ border-radius: 18px;
     <div class="container">
         <div class="text-center">
             <img src="./images/settingDp.svg" class="rounded" alt="...">
+
+            <!-- while linking use this  -->
             <!-- <h3 class="display-6 right-float"><br /> <?php echo ($name[0]) ?><br /> <?php echo($name[1])?></h3> -->
+
             <h3 class="display-6 right-float" style = "margin-left: 25px;font-weight:400"><br />John <br/> Wayne</h3>
 
         </div>
@@ -335,54 +338,52 @@ border-radius: 18px;
 
     <div class="section">
         <ul class="grid" style="margin-left:10rem">
+             <a href="profile_settings_show.php" style = "text-decoration: none; padding: 0px;">
             <li>
                 <div class="box img-1">
-                    <a href="profile_settings_show.php">
                     <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">My Profile</p>
-                    </a>
                 </div>
             </li>
+</a>
+ <a href="referral_code.php">
             <li>
-                <div class="box img-2">
-                    <a href="referral_code.php">
-                        
+                <div class="box img-2">        
                     <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Referral Code</p>
-                    </a>
+                  
                 </div>
             </li>
+              </a>
+               <a href="about_us.php">
             <li>
-                <div class="box img-3">
-                    <a href="about_us.php">
-                        
+                <div class="box img-3">   
                      <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">About Us</p>
-                        
-                    </a>
                 </div>
             </li>
+             </a>
+             <a href="achivement.php">
             <li>
                 <div class="box img-4">
-                    <a href="achivement.php">
                         <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">My Achievements</p>
-            
-                    </a>
                 </div>
             </li>
+             </a>
+               <a href="refer.php">
             <li>
                 <div class="box img-5">
-                    <a href="refer.php">
+                   
                             <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Refer To Friends</p>
-                    </a>
+                  
                 </div>
             </li>
+              </a>
+              <!-- // -->
+              <a href="#">
             <li>
                 <div class="box img-6">
-                    <a href="#">
-                        
-                            <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Notifications</p>
-                       
-                    </a>
+                    <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Notifications</p>
                 </div>
             </li>
+              </a>
         </ul>
 
         <!-- <div class="logout-button-box">

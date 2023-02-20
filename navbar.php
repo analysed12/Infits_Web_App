@@ -99,6 +99,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     position: relative;
+    letter-spacing: 0 !important;
 }
 
 .sidenav .menu-bottom {
@@ -126,6 +127,7 @@ body {
     width: 20px;
     margin-right: 15px;
     margin-left: 10px;
+    border-radius: 0 !important;
 }
 
 .tabcontent {
@@ -360,18 +362,18 @@ a {
 <body>
     <div class="sidenav" id="sidenavbar">
         <img src="images/logo.png" class="sidenavlink" id="logo">
-        <a id="index" class="sidenavlink nav-index nav-track_stats_steps nav-track_stats_water nav-track_stats_heart nav-track_stats_sleep nav-track_stats_weight nav-track_stats_calorie" href="index.php"><img src="images/vec_dashboard.png" class="nav-icon">Dashboard</a>
-        <a id="messages" class="sidenavlink nav-messages" href="#"><img src="images/vec_messages.svg" class="nav-icon">Messages</a>
+        <a id="index" class="sidenavlink nav-index nav-task_list nav-track_stats_steps nav-track_stats_water nav-track_stats_heart nav-track_stats_sleep nav-track_stats_weight nav-track_stats_calorie" href="index.php"><img src="images/vec_dashboard.png" class="nav-icon">Dashboard</a>
+        <a id="messages" class="sidenavlink nav-messages" href=""><img src="images/vec_messages.svg" class="nav-icon">Messages</a>
         <a id="live" class="sidenavlink" href="#"><img src="images/vec_live.svg" class="nav-icon">Live</a>
         <a id="calendar_of_events" class="sidenavlink nav-calendar_of_events" href="calendar_of_events.php"><img src="images/vec_appointments.svg" class="nav-icon">Appoinments</a>
-        <a id="client_list" class="sidenavlink nav-client_list" href="client_list.php"><img src="images/vec_client_list.svg" class="nav-icon">Clients</a>
+        <a id="client_list" class="sidenavlink nav-client_list nav-setgoals" href="client_list.php"><img src="images/vec_client_list.svg" class="nav-icon">Clients</a>
         <a id="myplan" class="sidenavlink nav-myplan" href="myplan.php"><img src="images/vec_diet_plan.svg" class="nav-icon">Diet Plans</a>
         <a id="payments" class="sidenavlink nav-payments" href="#"><img src="images/vec_payments.svg" class="nav-icon">Payments</a>
         <a id="create_recipe" class="sidenavlink nav-create_recipe" href="all_recipes.php"><img src="images/vec_recipies.svg" class="nav-icon">Recipes</a>
         <a id="healthform" class="sidenavlink nav-healthform" href="#"><img src="images/vec_health_form.svg" class="nav-icon">Health Form</a>
 
         <div class="menu-bottom">
-            <a class="sidenavlink nav-get_help"><img src="images/vec_gethelp.svg" class="nav-icon">Get Help</a>
+            <a class="sidenavlink nav-help" href="help.php"><img src="images/vec_gethelp.svg" class="nav-icon">Get Help</a>
             <a class="sidenavlink nav-settings" href="settings.php"><img src="images/vec_settings.svg" class="nav-icon">Settings</a>
             <a href="logout.php" class="sidenavlink"><img src="images/vec_logout.svg" class="nav-icon">Log Out</a>
         </div>
