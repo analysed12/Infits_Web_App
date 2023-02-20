@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2023 at 05:10 PM
+-- Generation Time: Feb 20, 2023 at 06:00 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -902,12 +902,13 @@ INSERT INTO `chats` (`chat_id`, `from_id`, `to_id`, `message`, `opened`, `create
 (66, 1, 4, 'IMG-63ee745a67b809.51528075.png', 1, '2023-02-16 23:52:18'),
 (67, 1, 4, 'IMG-63ee7491e7aad0.71101733.jpg', 1, '2023-02-16 23:53:13'),
 (68, 4, 1, 'IMG-63ee74b34a79b2.11900534.png', 1, '2023-02-16 23:53:47'),
-(69, 1, 4, 'helo', 0, '2023-02-18 16:22:49'),
-(70, 1, 4, 'hiii', 0, '2023-02-18 16:47:30'),
-(71, 1, 4, 'IMG-63f0c38a4ef6c1.99543051.png', 0, '2023-02-18 17:54:42'),
-(72, 1, 4, 'IMG-63f0d614e75ff3.93358298.png', 0, '2023-02-18 19:13:48'),
-(73, 1, 4, 'IMG-63f0d630904f69.70174990.png', 0, '2023-02-18 19:14:16'),
-(74, 1, 4, 'hiii', 0, '2023-02-18 19:18:44');
+(69, 1, 4, 'helo', 1, '2023-02-18 16:22:49'),
+(70, 1, 4, 'hiii', 1, '2023-02-18 16:47:30'),
+(71, 1, 4, 'IMG-63f0c38a4ef6c1.99543051.png', 1, '2023-02-18 17:54:42'),
+(72, 1, 4, 'IMG-63f0d614e75ff3.93358298.png', 1, '2023-02-18 19:13:48'),
+(73, 1, 4, 'IMG-63f0d630904f69.70174990.png', 1, '2023-02-18 19:14:16'),
+(74, 1, 4, 'hiii', 1, '2023-02-18 19:18:44'),
+(75, 4, 1, 'sadasdsa', 1, '2023-02-20 21:03:21');
 
 -- --------------------------------------------------------
 
@@ -1151,6 +1152,7 @@ INSERT INTO `dietian_recipies` (`name`, `time`, `serving`, `link`, `calories`, `
 --
 
 CREATE TABLE `dietitian` (
+  `dietitian_id` int(11) NOT NULL,
   `dietitianuserID` varchar(25) NOT NULL,
   `password` varchar(12) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -1158,6 +1160,7 @@ CREATE TABLE `dietitian` (
   `email` varchar(40) NOT NULL,
   `mobile` varchar(20) NOT NULL,
   `profilePhoto` blob DEFAULT NULL,
+  `p_p` varchar(255) NOT NULL DEFAULT 'user-default.png',
   `location` varchar(20) NOT NULL,
   `age` int(11) NOT NULL,
   `gender` char(1) NOT NULL,
@@ -1169,20 +1172,21 @@ CREATE TABLE `dietitian` (
   `whatsapp` varchar(255) DEFAULT NULL,
   `twitter` varchar(255) DEFAULT NULL,
   `linkedin` varchar(255) DEFAULT NULL,
-  `instagram` varchar(255) DEFAULT NULL
+  `instagram` varchar(255) DEFAULT NULL,
+  `last_seen` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `dietitian`
 --
 
-INSERT INTO `dietitian` (`dietitianuserID`, `password`, `name`, `qualification`, `email`, `mobile`, `profilePhoto`, `location`, `age`, `gender`, `experience`, `about_me`, `no_of_clients`, `referral_code`, `facebook`, `whatsapp`, `twitter`, `linkedin`, `instagram`) VALUES
-('d005', 'good', 'Noha', '34', 'bn@ju.in', '87896767', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'ddd', 33, 'F', 23, 'xcdf', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL),
-('doo1', 'nbsnmbm', 'John', '56', 'dv@n.in', '8888888', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'pune', 45, 'M', 10, 'bhjg', 12, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL),
-('doo2', 'bvb', 'Sam', '32', 'gh@.in', '9999900', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'hjk', 21, 'M', 12, 'df', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL),
-('doo3', 'bbbnvb', 'Jam', '45', 'bnn@hm.in', '898098', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'bvb', 89, 'M', 45, 'vbvnfg', 67, 'yuigcv', NULL, NULL, NULL, NULL, NULL),
-('doo4', 'nbnbm', 'Tom', '23', 'hj@ju.in', '67687898', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'dfd', 34, 'M', 23, 'ffgf', 23, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL),
-('John_wayne', '123', 'John_wayne', 'na', 'na', 'na', NULL, 'na', 25, 'm', 5, 'shj jhb', 12, '', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dietitian` (`dietitian_id`, `dietitianuserID`, `password`, `name`, `qualification`, `email`, `mobile`, `profilePhoto`, `p_p`, `location`, `age`, `gender`, `experience`, `about_me`, `no_of_clients`, `referral_code`, `facebook`, `whatsapp`, `twitter`, `linkedin`, `instagram`, `last_seen`) VALUES
+(4, 'ash', '123456', 'John Doe', '45', 'bnn@hm.in', '898098', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'bvb', 89, 'M', 45, 'vbvnfg', 67, 'yuigcv', NULL, NULL, NULL, NULL, NULL, '2023-02-20 21:13:58'),
+(2, 'doo1', 'nbsnmbm', 'John', '56', 'dv@n.in', '8888888', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'pune', 45, 'M', 10, 'bhjg', 12, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
+(3, 'doo2', 'bvb', 'Sam', '32', 'gh@.in', '9999900', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'hjk', 21, 'M', 12, 'df', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
+(5, 'doo4', 'nbnbm', 'Tom', '23', 'hj@ju.in', '67687898', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'dfd', 34, 'M', 23, 'ffgf', 23, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
+(6, 'John_wayne', '123', 'John_wayne', 'na', 'na', 'na', NULL, 'user-default.png', 'na', 25, 'm', 5, 'shj jhb', 12, '', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
+(1, 'sabari', '123456', 'Sabari Nathan', '34', 'bn@ju.in', '87896767', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'ddd', 33, 'F', 23, 'xcdf', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL, '2023-02-20 22:22:59');
 
 -- --------------------------------------------------------
 
@@ -2691,7 +2695,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `p_p`, `last_seen`) VALUES
-(1, 'Sabari Nathan', 'sabari', '123456', 'user-default.png', '2023-02-19 21:40:00'),
+(1, 'Sabari Nathan', 'sabari', '123456', 'user-default.png', '2023-02-20 17:45:52'),
 (2, 'Ram Kumar', 'ram', '123456', 'user-default.png', '2023-01-23 19:57:35'),
 (3, 'Robin Dravid', 'raju', '123456', 'user-default.png', '2023-01-27 19:48:30'),
 (4, 'John Doe', 'ash', '123456', 'user-default.png', '2023-02-17 00:06:32'),
@@ -3585,7 +3589,8 @@ ALTER TABLE `dietian_recipies`
 -- Indexes for table `dietitian`
 --
 ALTER TABLE `dietitian`
-  ADD PRIMARY KEY (`dietitianuserID`);
+  ADD PRIMARY KEY (`dietitianuserID`),
+  ADD UNIQUE KEY `dietitian_id` (`dietitian_id`);
 
 --
 -- Indexes for table `dietitian_client`
@@ -3688,7 +3693,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `conversations`
@@ -3701,6 +3706,12 @@ ALTER TABLE `conversations`
 --
 ALTER TABLE `create_event`
   MODIFY `eventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `dietitian`
+--
+ALTER TABLE `dietitian`
+  MODIFY `dietitian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `dietition_tasks`
