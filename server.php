@@ -112,7 +112,7 @@ if (isset($_POST['login_user'])) {
           $query = "SELECT * FROM dietitian WHERE `dietitianuserID`='$dietitianuserID' AND `password`='$password'";
           $results = mysqli_query($conn, $query);
           if (mysqli_num_rows($results) == 1) {
-          $sql = "SELECT * FROM dietitian WHERE `email`='$dietitianuserID'";
+          $sql = "SELECT * FROM dietitian WHERE `dietitianuserID`='$dietitianuserID'";
           $result = mysqli_query($conn, $sql);
           $row = mysqli_fetch_assoc($result);
 
