@@ -161,19 +161,7 @@ body {
         width: auto;
     }
 
-    /* Shared */
-    .addBtn {
-        width: 342px;
-        height: 48px;
-        background: #0177FD;
-        border-radius: 10px;
-        color:white;
-        padding-top:0.5rem;
-        font-size: 20px;
-    }
-    .addBtn:hover{
-        background-color:none;
-    }
+   
 
     .center-flex {
         display: flex;
@@ -242,6 +230,9 @@ body {
       background:white;
     }
 
+   
+
+
     .overlay {
   position: fixed;
   top: 0;
@@ -295,7 +286,68 @@ body {
   max-height: 30%;
   overflow: auto;
 }
+  /* Shared */
+  .addBtn {
+        width: 342px;
+        height: 48px;
+        background: #0177FD;
+        border-radius: 10px;
+        color:white;
+        padding-top:0.5rem;
+        font-size: 20px;
+    }
+    .addBtn:hover{
+        background-color:none;
+    }
+    .modal{
+                            position: fixed;
+                            width:100%;
+                            height:100%;
+                            background: rgba(0, 0, 0, 0.6);
+                            transition: opacity 500ms;
+                            align-items:center;
+  
+                        }
+                        .modal-content{
+                            width:400px;
+                            height:250px;
+                            padding:20px;
+                            border-radius:20px;
+                            margin: 200px ;
+                            margin-left:550px;
+                            overflow:hidden;
+                            
+                        }
+                         /* Shared */
+                        .addBtn1 {
+                            border:none;
+                            background: #8C68F8;
+                            border-radius: 10px;
+                            color:white;
+                            padding:0.5rem;
+                            padding-left:2.5rem;
+                            padding-right:2rem;
+                            font-size: 20px;
+                        }
+                        .addBtn1:hover{
+                            background-color:none;
+                        }
+                        .discard{
+                            border: 2px solid #8C68F8; 
+                            background: white;
+                            border-radius: 10px;
+                            padding:0.5rem;
+                            padding-left:2.5rem;
+                            padding-right:2.5rem;
+                            font-size: 20px;
+                        }
+
     @media screen and (max-width: 720px) {
+        .popup{
+            margin:30%;
+            margin-top:50%;
+            width:40%;
+        }
         .heading{
             margin-left:2rem !important;
         }
@@ -444,6 +496,7 @@ body {
                     <?php } ?>
                     <br>
 
+                    
                     Referral Code <br><input type="text" name="ref_code" class="leftinput">
                     <br>
 
@@ -476,14 +529,14 @@ body {
                     <button id="myBtn" style="border:none; background:none;"><img src="images/edit.svg"></button>
 
                     <!-- The Modal -->
-                    <div id="myModal" class="modal" style="margin-top:5rem;">
+                    <div id="myModal" class="modal">
 
                         <!--Modal content-->
                         <div class="modal-content" >
                             <span class="close">&times;</span>
 
                             <form method="post" action=" " enctype="multipart/form-data">
-                                <select name="socials" id="socials" placeholder="Platform">
+                                <select name="socials" id="socials" placeholder="Platform" style="background-color:white;box-shadow: 0px 1.76208px 5.28625px rgba(0, 0, 0, 0.25);border-radius: 8.81041px;margin-right:1rem; color: #BBBBBB;">
                                     <option value="whatsapp">WhatsApp</option>
                                     <option value="twitter">Twitter</option>
                                     <option value="facebook">Facebook</option>
@@ -493,11 +546,15 @@ body {
                                 <br>
                                 <input type="text" placeholder="Copy Link Here" name="link">
                                 <br>
-                                <div class="center-flex align-middle"><button type="submit" class="addBtn"
-                                        name="save_socials">Save</button></div>
+                                <div style="display:flex;justify-content:space-evenly">
+                                    <button type="submit" class="addBtn1" name="save_socials">Save Changes</button>
+                                    <button class="discard">Discard</button>
+                                    
+                                    </div>
                         </div>
 
                     </div>
+                    
                     <?php
 //profile updation save button 
 if(isset($_POST['save_socials']) ) {
@@ -603,6 +660,7 @@ if(isset($_POST['save_socials']) ) {
             <img src="images/Instagram.png" >
 		</div>
 	</div>
+   
 </body>
 
 </html>

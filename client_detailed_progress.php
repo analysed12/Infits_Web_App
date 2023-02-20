@@ -1,5 +1,9 @@
 <?php
 include('navbar.php');
+$name = '';
+if(isset($_POST['searching_btn'])){
+  $name = $_POST['search_client_name'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +17,6 @@ include('navbar.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <style>
       
-    
 .detailed_progress_container1{
     display: flex;
 }
@@ -250,6 +253,16 @@ header .current-date{
 }
 
 }
+
+.table{
+  visibility: hidden;
+}
+
+.search_client:hover + .table{
+  visibility: visible;
+}
+
+
     </style>
 </head>
 <body>
@@ -260,22 +273,16 @@ header .current-date{
             <div class="container1_leftside">
                 <p style="font-size:1.7rem;font-weight:700">Client Progress Details</p>
                 <div class="search_client">
-                    <div> <input type="text" name="search_client" oninput="load_data(this.value)"  placeholder="Search Clients" class="seach_clients_text""></div>  
-                    <div><button id="btn1"><span class="material-symbols-outlined">search</span></button> </div>
-                    
+                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <div> <input type="text" name="search_client_name" oninput="load_data(this.value)" id = "search_bar" placeholder="Search Clients" class="seach_clients_text"  autocomplete="off"></div>  
+                    <div><button id="btn1" type = "submit" name  = "searching_btn"><span class="material-symbols-outlined">search</span></button> </div>
+                </form>    
                 </div>
              
-                <!-- <table>
+                <table class = "table">
                 <tbody id = "table_data">
                 </tbody>
-                </table> -->
-
-                <select name="clientName" id="table_data">
-                  <!-- <option value="this">this</option>
-                  <option value="that">that</option> -->
-                </select>
-
-
+                </table>
                 
                 <div class="track_buttons" id="track">
                         <button id="btn2" onclick="myFunction()">On-Track</button>
@@ -412,7 +419,13 @@ header .current-date{
               }
               $on = array();
               $off = array();
-              $sql = $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne'";
+              if($name != ''){
+              $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne' AND client_id = '$name'" ;
+              }
+              else{
+                $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne'";
+              }
+              
               $result =$conn-> query($sql);
               $i=0;
               if ($result->num_rows > 0) 
@@ -429,7 +442,7 @@ header .current-date{
 
                         //for steps 
 
-                        //$step = "SELECT steps FROM `steptracker` WHERE clientid = $canme AND dateandtime = today's date";
+                        //$step = "SELECT steps FROM `steptracker` WHERE clientid = $canme AND dateandtime = today's date" ;
                         $step = "SELECT steps FROM `steptracker` WHERE clientid = '3' AND dateandtime = '2023-02-11 12:40:50'";
                         $stepgoal =$conn-> query($step);
                         $stepgoal1 = mysqli_fetch_assoc($stepgoal);
@@ -702,9 +715,15 @@ function load_data(search = ''){
   }
    xhr.send();
 
+
+
 }
 
 load_data();
+
+
+
+
  
   </script>
     

@@ -381,6 +381,7 @@ function fetchInformation($client_id){
     justify-content: space-between;
     margin-top: 1rem;
     margin-bottom: 5rem;
+    margin-right:2rem;
 }
 .tasklist{
     display: flex;

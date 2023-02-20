@@ -11,26 +11,15 @@ include('navbar.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <style>
-@import url('https://fonts.googleapis.com/earlyaccess/nats.css');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
-@font-face {
-    font-family: 'NATS';
-    src:url('font/NATS.ttf.woff') format('woff'),
-        url('font/NATS.ttf.svg#NATS') format('svg'),
-        url('font/NATS.ttf.eot'),
-        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
+
+
 .body{
-    font-family: 'NATS', sans-serif;
+    font-family: 'NATS', sans-serif !important;
 }
 .client_progress{
     margin-top: 2rem;
     margin-left: 18rem;
-    font-family: poppins;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -158,14 +147,14 @@ include('navbar.php');
 <body>
     <div class="client_progress">
     <div class="dashboard_container3">
-            <div style="font-size:1.5rem; font-weight:600"> Client Progress</div>
+            <div style="font-size:1.8rem; font-weight:600"> Client Progress</div>
             <div class="details">
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
             </div>
             
         </div>
 
-        <div class="dashboard_container4">
+        <div class="dashboard_container4" >
 
             <div class="container4_wrapper1">
                 <div class="symbols"><div><img src="images/Frame.png" style="width:1.8rem"></div><div><span>Steps</span></div></div>
@@ -177,7 +166,7 @@ include('navbar.php');
                 
             </div>
 
-            <div class="container4_wrapper2">
+            <div class="container4_wrapper2" style="margin-top:1.5rem">
                 <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> Ronald Richards</span></a></span>
                 <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
                 <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>

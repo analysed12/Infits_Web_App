@@ -211,6 +211,9 @@ function getClientName($ID,$conn,$dietitianuserID){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
@@ -218,14 +221,23 @@ function getClientName($ID,$conn,$dietitianuserID){
     <title>Final Reminder</title>
 </head>
 <style>
-    body{
-        overflow-x: hidden;
+   
+   @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+    body {
+        font-family: 'NATS', sans-serif;
     }
-    .main{
-        font-family: 'NATS';
-    }
+   
     .ml{
-        margin-left: 40px;
+        margin-left: 45px;
     }
     .pl{
         padding-left: 40px;
@@ -243,7 +255,7 @@ function getClientName($ID,$conn,$dietitianuserID){
     .sub-heading{
         font-style: normal;
         font-weight: 400;
-        font-size: 35px;
+        font-size: 30px;
         line-height: 74px;
     }
     .cards{
@@ -294,7 +306,7 @@ function getClientName($ID,$conn,$dietitianuserID){
         position: absolute;
         z-index: 9;
         width: 465px;
-        height: 357.38px;
+
         background: linear-gradient(59.46deg, #FBB3F0 0.04%, #5CA7F8 100%);
         box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
@@ -305,10 +317,11 @@ function getClientName($ID,$conn,$dietitianuserID){
         transition: 0.5s ease-in-out;
     }
     .sr-inputs{
-        width: 75%;
+        width: 100%;
     }
     .sr-inputs select{
         width: 95%;
+        height:20%;
     }
     .card{
         display: flex;
@@ -337,14 +350,17 @@ function getClientName($ID,$conn,$dietitianuserID){
     .card0{
         background: linear-gradient(216.13deg, #5CA7F8 9.2%, #ABB3F0 91.57%);
         border: 1px solid #3A97FF;
+        cursor:pointer;
     }
     .card1{
         background: linear-gradient(37.35deg, #E2809B 0%, #EBD3C8 100%);
         border: 1px solid #E3738D;
+        cursor:pointer;
     }
     .card2{
         background: linear-gradient(37.35deg, #633FDD 0%, #AB84F0 100%);
         border: 1px solid #E3738D;
+        cursor:pointer;
     }
     .bottom{
         position: relative;
@@ -488,44 +504,75 @@ function getClientName($ID,$conn,$dietitianuserID){
         width: 45%;
     }
 
+    .tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    width: 22rem;
+    color: black;
+    font-size: 14px;
+    border: 1px solid  #e4e1e1;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.12);
+    border-radius: 10px;
+    padding: 0.4rem;
+  }
+  
+  .hover-text:hover .tooltip-text {
+    visibility: visible;
+  }
+  #right {
+    top: -2px;
+    left: 123%;
+  }
+  
+  .hover-text {
+    position: relative;
+    display: inline-block;
+    margin: 40px;
+    font-family: Avenir;
+    text-align: center;
+  }
+
 
 </style>
 <body>
     
 <div class="main">
     <!-- top -->
-    <div class="top">
+    <div class="top"style="display:flex;flex-direction:column">
         <!-- heading  -->
         <div class="row">
             <div class="col">
-                <h1 class="ml heading">Set Reminder for clients</h1>
+                <h1 class="ml" style="margin-top:1.5rem">Set Reminder for clients</h1>
             </div>
         </div>
         <!-- heading End -->
         <!-- sub heading -->
-        <div class="row">
-            <div class="col">
+        <div class="row" style="margin-left:1rem">
+            <div class="col" style="display:flex">
                 <h3 class="ml sub-heading">General Reminder</h3>
+                <div class="hover-text"style="margin-top:1.3rem" ><span class="material-symbols-outlined" style="color:#9C74F5">error</span>
+            <span class="tooltip-text" id="right">Set daily activity reminders for the clients from here!</span></div> 
             </div>
         </div>
         <!-- sub heading -->
 
         <!-- top cards -->
-        <div class="row">
+        <div class="row" style="margin-left:1rem">
             <div class="col">
                 <div class="cards ml">
                     <!-- set reminder 1 -->
                     <div class="set-reminder">
                         <!-- set pop 1 -->
-                        <div id="set-card-water" class="set-card">
+                        <div id="set-card-water" class="set-card" style="color:white">
                             <span class="close-btn" onclick="hideSetdialog('set-card-water','card1')">X</span>
-                            <div class="sr-inputs">
-                                <h2>Water Intake Reminder</h2>
-                                <p>Hourly water Intake Reminder</p>
+                            <div class="sr-inputs" >
+                                <p stye="line-height:0.5rem" >Water Intake Reminder</p>
+                                <h6 stye="line-height:0.5rem">Hourly water Intake Reminder</h6>
                                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                                    <div class="sr-1">
-                                        <p class="pc-title">Duration</p>
-                                        <select name="water_interval" id="">
+                                    <div class="sr-1" style="color:white">
+                                        <p class="pc-title" style="color:white">Duration</p>
+                                        <select name="water_interval" id="" >
                                             <option value="30 Min">30 Min</option>
                                             <option value="1 Hour">1 Hour</option>
                                             <option value="2 Hour">2 Hour</option>
@@ -533,8 +580,8 @@ function getClientName($ID,$conn,$dietitianuserID){
                                             <option value="4 Hour">4 Hour</option>
                                         </select>
                                     </div>
-                                    <div class="sr-2">
-                                        <p class="pc-title">Duration</p>
+                                    <div class="sr-2" style="color:white">
+                                        <p class="pc-title" style="color:white">Duration</p>
                                         <select name="water_amount" id="">
                                             <option value="1 Glass">1 Glass</option>
                                             <option value="2 Glasses">2 Glasses</option>

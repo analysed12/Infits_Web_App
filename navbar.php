@@ -367,7 +367,7 @@ a {
         <a id="client_list" class="sidenavlink nav-client_list" href="client_list.php"><img src="images/vec_client_list.svg" class="nav-icon">Clients</a>
         <a id="myplan" class="sidenavlink nav-myplan" href="myplan.php"><img src="images/vec_diet_plan.svg" class="nav-icon">Diet Plans</a>
         <a id="payments" class="sidenavlink nav-payments" href="#"><img src="images/vec_payments.svg" class="nav-icon">Payments</a>
-        <a id="create_recipe" class="sidenavlink nav-create_recipe" href="create_recipe.php"><img src="images/vec_recipies.svg" class="nav-icon">Recipes</a>
+        <a id="create_recipe" class="sidenavlink nav-create_recipe" href="all_recipes.php"><img src="images/vec_recipies.svg" class="nav-icon">Recipes</a>
         <a id="healthform" class="sidenavlink nav-healthform" href="#"><img src="images/vec_health_form.svg" class="nav-icon">Health Form</a>
 
         <div class="menu-bottom">

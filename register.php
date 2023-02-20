@@ -44,6 +44,7 @@ include "server.php";
 }
 body{
     font-family: 'NATS', sans-serif;
+    x-overflow:none;
 }
 
 .top_bar {
