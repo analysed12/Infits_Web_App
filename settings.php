@@ -370,9 +370,7 @@ border-radius: 18px;
                <a href="refer.php">
             <li>
                 <div class="box img-5">
-                   
                             <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Refer To Friends</p>
-                  
                 </div>
             </li>
               </a>

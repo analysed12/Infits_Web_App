@@ -1,6 +1,6 @@
 <?php session_start(); 
 include('config.php');
-
+    $_SESSION['name'] = "John_wayne";
 // $name = $_SESSION['name'] ;
 // if(!isset($_SESSION)) 
 // { 
