@@ -112,18 +112,7 @@ if (isset($_POST['login_user'])) {
           $query = "SELECT * FROM dietitian WHERE `dietitianuserID`='$dietitianuserID' AND `password`='$password'";
           $results = mysqli_query($conn, $query);
           if (mysqli_num_rows($results) == 1) {
-        // $sql  = "SELECT * FROM 
-        //        dietitian WHERE dietitianuserID=?";
-        // $stmt = $conn->prepare($sql);
-        // $stmt->execute([$dietitianuserID]);
-        // $user = $stmt->fetch();
-        // $_SESSION['dietitianuserID'] = $user['dietitianuserID'];
-        // $_SESSION['name'] = $user['name'];
-        // $_SESSION['dietitian_id'] = $user['dietitian_id'];
-        // var_dump($_SESSION);
-        // print_r($user);
-        // echo '123';
-        // die();
+        
 
           
           $sql = "SELECT * FROM dietitian WHERE `dietitianuserID`='$dietitianuserID'";
