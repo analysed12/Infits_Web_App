@@ -1,5 +1,141 @@
 <?php
+// session_start();
 include('navbar.php');
+// Get Id
+if(isset($_SESSION['name'])){
+    $dietitian_id = $_SESSION['name'];
+}else{
+    header('location: login.php');
+}
+// Configure Dates
+date_default_timezone_set("Asia/Calcutta");
+$date = new DateTime();
+function fetchData($query){
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    $result = $conn->query($query) or die("Query Failed");
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        $data[] =  $row;
+    }
+    $conn->close();
+    return ($data);
+}
+function fetchInformation($client_id){
+    date_default_timezone_set("Asia/Calcutta");
+    $date = new DateTime();
+    $data = array(
+        'steps'=> array(
+            'goal' => 0,
+            'progress' => 0,
+        ),
+        'heart' =>array(
+            // 'goal' => 0,
+            'progress' => 0,
+        ),
+        'water' =>array(
+            'goal' => 0,
+            'progress' => 0,
+        ),
+        'sleep' =>array(
+            'goal' => 0,
+            'progress' => 0,
+        ),
+        'weight' =>array(
+            'goal' => 0,
+            'progress' => 0,
+        ),
+        'calorie' =>array(
+            'goal' => 0,
+            'progress' => 0,
+        ),
+    );
+    $query = "SELECT steps FROM goals WHERE client_id = '$client_id'";
+    $value = fetchData($query);
+    if(!empty($value)){
+        $data['steps']['goal'] =$value[0]['steps'];
+    }else{
+        $data['steps']['goal'] = 0;
+    }
+    $query = "SELECT water FROM goals WHERE client_id = '$client_id'";
+    $value = fetchData($query);
+    if(!empty($value)){
+        $data['water']['goal'] =$value[0]['water'];
+    }else{
+        $data['water']['goal'] = 0;
+    }
+    $query = "SELECT sleep FROM goals WHERE client_id = '$client_id'";
+    $value = fetchData($query);
+    if(!empty($value)){
+        $data['sleep']['goal'] =$value[0]['sleep'];
+    }else{
+        $data['sleep']['goal'] = 0;
+    }
+    $query = "SELECT weight FROM goals WHERE client_id = '$client_id'";
+    $value = fetchData($query);
+    if(!empty($value)){
+        $data['weight']['goal'] =$value[0]['weight'];
+    }else{
+        $data['weight']['goal'] = 0;
+    }
+    $query = "SELECT calorie FROM goals WHERE client_id = '$client_id'";
+    $value = fetchData($query);
+    if(!empty($value)){
+        $data['calorie']['goal'] =$value[0]['calorie'];
+    }else{
+        $data['calorie']['goal'] = 0;
+    }
+    
+    $query = "SELECT SUM(steps) FROM steptracker WHERE clientID= '$client_id' AND `dateandtime` >= '{$date->format('y-m-d')} 00:00:00' AND `dateandtime` <= '{$date->format('y-m-d')} 23:59:59'";
+    $value = fetchData($query);
+    if($value[0]['SUM(steps)'] != ''){
+        $data['steps']['progress'] =$value[0]['SUM(steps)'];
+    }else{
+        $data['steps']['progress'] = 0;
+    }
+
+    $query = "SELECT avg(average) FROM heartrate WHERE clientID= '$client_id' AND `dateandtime` >= '{$date->format('y-m-d')} 00:00:00' AND `dateandtime` <= '{$date->format('y-m-d')} 23:59:59'";
+    $value = fetchData($query);
+    if($value[0]['avg(average)'] != ''){
+        $data['heart']['progress'] =$value[0]['avg(average)'];
+    }else{
+        $data['heart']['progress'] = 0;
+    }
+
+    $query = "SELECT SUM(drinkConsumed) FROM watertracker WHERE clientID= '$client_id' AND  `dateandtime` = '{$date->format('y-m-d')}'";
+    $value = fetchData($query);
+    if($value[0]['SUM(drinkConsumed)'] != ''){
+        $data['water']['progress'] =$value[0]['SUM(drinkConsumed)'];
+    }else{
+        $data['water']['progress'] = 0;
+    }
+
+    $query = "SELECT SUM(hrsSlept) FROM sleeptracker WHERE clientID= '$client_id' AND `sleeptime` >= '{$date->format('y-m-d')} 00:00:00' AND `waketime` <= '{$date->format('y-m-d')} 23:59:59'";
+    $hours = fetchData($query)[0]['SUM(hrsSlept)'];
+    $query = "SELECT SUM(minsSlept) FROM sleeptracker WHERE clientID= '$client_id' AND `sleeptime` >= '{$date->format('y-m-d')} 00:00:00' AND `waketime` <= '{$date->format('y-m-d')} 23:59:59'";
+    $mins = fetchData($query)[0]['SUM(minsSlept)'];
+    $data['sleep']['progress'] = (float) $hours + $mins/60;
+
+    $query = "SELECT avg(weight) FROM weighttracker WHERE clientID= '$client_id' AND `date` >= '{$date->format('y-m-d')} 00:00:00' AND `date` <= '{$date->format('y-m-d')} 23:59:59'";
+    $value = fetchData($query);
+    if($value[0]['avg(weight)'] != ''){
+        $data['weight']['progress'] =$value[0]['avg(weight)'];
+    }else{
+        $data['weight']['progress'] = 0;
+    }
+    
+    $query = "SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$client_id' AND `time` >= '{$date->format('y-m-d')} 00:00:00' AND `time` <= '{$date->format('y-m-d')} 23:59:59'";
+    $value = fetchData($query);
+    if($value[0]['SUM(caloriesconsumed)'] != ''){
+        $data['calorie']['progress'] =$value[0]['SUM(caloriesconsumed)'];
+    }else{
+        $data['calorie']['progress'] = 0;
+    }
+
+    return $data;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,26 +147,16 @@ include('navbar.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <style>
-@import url('https://fonts.googleapis.com/earlyaccess/nats.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
-@font-face {
-    font-family: 'NATS';
-    src:url('font/NATS.ttf.woff') format('woff'),
-        url('font/NATS.ttf.svg#NATS') format('svg'),
-        url('font/NATS.ttf.eot'),
-        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
 .body{
     font-family: 'NATS', sans-serif;
 }
 .client_progress{
     margin-top: 2rem;
     margin-left: 18rem;
-    font-family: poppins;
+    font-family: 'poppins';
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -164,7 +290,10 @@ include('navbar.php');
             </div>
             
         </div>
-
+<?php
+$query = "SELECT `client_id`,`name` FROM `addclient` WHERE dietitianuserID = '$dietitian_id' AND status = 1;";
+$data = fetchData($query);
+?>
         <div class="dashboard_container4">
 
             <div class="container4_wrapper1">
@@ -176,66 +305,56 @@ include('navbar.php');
                 <div class="symbols"><div><img src="images/Frame-5.png" style="width:1.8rem"></div><div><span>Calories</span></div></div>
                 
             </div>
-
+<?php
+if(!empty($data)){
+    $count = count($data);
+    // if($lim > count($data)){
+    //     $lim = count($data);
+    // }
+    for($i = 0; $i<$count; $i++){
+        $infom = fetchInformation($data[$i]['client_id']);
+?>
             <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
-                <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
+                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
+                <span><a href="track_stats_steps.php?id=<?php echo($data[$i]['client_id']) ?>" id="values" style="margin-left:5rem"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
+                <span><a href="" id="values" style=" margin-left:3rem"><?php echo($infom['heart']['progress']) ?> Bpm</a></span>
+                <span><a href="" id="values" style=" margin-left:4rem"><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
+                <span><a href="" id="values" style=" margin-left:4rem"><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
+                <span><a href="" id="values" style="margin-left:3rem"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</a></span>
+                <span><a href="" id="values" style=" margin-left:3rem"><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</a></span>
             </div>
-            <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
-                <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
-            </div>
-            <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
-                <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
-            </div>
-            <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
-                <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
-            </div>
-
+<?php
+    }
+}
+?>
     </div> 
     
                 
 
                 <!----------------------------MOBILE VIEW OF CLIENT PROGRESSS-------------------->
-
-                <div class="mobileview_clientprogress">
-
-
+<?php
+if(!empty($data)){
+    $count = count($data);
+    // if($lim > count($data)){
+    //     $lim = count($data);
+    // }
+    for($i = 0; $i<$count; $i++){
+        $infom = fetchInformation($data[$i]['client_id']);
+?>
+        <div class="mobileview_clientprogress">
 
             <div class="mob_wrapper1" >
-                <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
+                <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
                 <div class="row1" style="display:flex ; gap:2rem ">
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#F6A682"><img src="images/Frame.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545">5256/6000</span>
+                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></span>
                         </div>
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#EF80B2"><img src="images/Frame-1.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545">123 bpm</span>
+                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['heart']['progress']) ?> bpm</span>
                         </div>
                 </div>
 
@@ -243,12 +362,12 @@ include('navbar.php');
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#8FAFF3"><img src="images/Frame-2.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Water</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545">2/3 ltrs</span>
+                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</span>
                         </div>
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#7550E2"><img src="images/Frame-3.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545">7/8 hrs.</span>
+                            <span style="font-size:0.9rem;color:#454545"><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</span>
                         </div>
                 </div>
 
@@ -256,24 +375,23 @@ include('navbar.php');
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#788F96"><img src="images/Frame-4.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545">0.53/2 kg</span>
+                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</span>
                         </div>
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#E388A0"><img src="images/Frame-5.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Calories</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545">122/300 kcal</span>
+                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</span>
                         </div>
                 </div>
-
-
-
-
             </div>
-
+        </div>
+<?php
+    }
+}
+?>
 
     
     
-    </div>
     
 </body>
 </html>
