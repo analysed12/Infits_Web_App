@@ -2,11 +2,11 @@
 session_start();
 
 
+include 'navbar.php';
 
 
 if (isset($_SESSION['dietitianuserID'])) {
     # database connection file
-    include 'navbar1.php';
     include 'app/db.conn.php';
 
     include 'app/helpers/user.php';
