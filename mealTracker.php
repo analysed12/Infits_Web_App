@@ -1,6 +1,13 @@
+<?php
+  // session_start();
+    include("navbar.php");
+    //only client id should be changed while linking
+    // $clientID = $_SESSION["name"];
+    $clientId = "1";
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +21,7 @@
     
   />
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <title>Tracker1</title>
+    <title>MealTracker</title>
 </head>
 <style>
 html {
@@ -24,8 +31,6 @@ html {
 .slider{
   margin-top:100px;
 }
-
-
 
 #content {
     display: flex;
@@ -129,9 +134,6 @@ font-size: 15px;
       font-weight: bold;
     }
 
-
-
-
 /* MEDIA QUERY */
 
 
@@ -195,7 +197,7 @@ font-size: 15px;
 
 <script>
       $(document).ready(function () {
-        $("#btn2").click(function () {
+        $("#btn3").click(function () {
           $("#breakfast").hide();
           $("#snack").show();
           $("#lunch").hide();
@@ -206,7 +208,7 @@ font-size: 15px;
 
 <script>
      $(document).ready(function () {
-        $("#btn3").click(function () {
+        $("#btn2").click(function () {
           $("#breakfast").hide();
           $("#snack").hide();
           $("#lunch").show();
@@ -224,19 +226,10 @@ font-size: 15px;
           $("#dinner").show();
         });
       });
-    </script>
-
+</script>
 
 
 <body>
-
-
-    <!-- Navbar Start -->
-    <?php
-    include("navbar.php");
-    include('connection.php');
-    ?>
-    <!-- Navbar End -->
 
     <!-- Contents Start -->
     <div id="content">
@@ -249,25 +242,24 @@ font-size: 15px;
             date_default_timezone_set('Asia/Kolkata'); 
             print "". date("d M Y"); ?></p>
         </div>
-    <?php include("calendar.php");
-    ?>
+
 
     <!-- Other content -->
     <h3>today's meal
     </h3>
         <div class="time_events">
             <div class="time_container">
-                <div class="time_card">
-                    <div class="time_text" id = "btn1">Breakfast</div>
+                <div class="time_card" id = "btn1" style = "cursor: pointer;">
+                    <div class="time_text" >Breakfast</div>
                 </div>
-                <div class="time_card">
-                    <div class="time_text" id = "btn2">Lunch</div>
+                <div class="time_card" id = "btn2" style = "cursor: pointer;">
+                    <div class="time_text" >Lunch</div>
                 </div>
-                <div class="time_card">
-                    <div class="time_text" id = "btn3">Snack</div>
+                <div class="time_card" id = "btn3" style = "cursor: pointer;">
+                    <div class="time_text">Snack</div>
                 </div>
-                <div class="time_card">
-                    <div class="time_text" id = "btn4">Dinner</div>
+                <div class="time_card"  id = "btn4" style = "cursor: pointer;">
+                    <div class="time_text">Dinner</div>
                 </div>
             </div>
         </div>
@@ -277,8 +269,7 @@ font-size: 15px;
 
         <div id="breakfast">
           <?php
-                $date = "12 AUG 2022";
-                $clientId = "Azarudeen";
+                $date = date('Y-m-d');
                 $conn = new mysqli("localhost", "root", "", "infits");
                 if($conn->connect_error){
                         die("Connection failed :" . $conn->connect_error);
@@ -314,8 +305,7 @@ font-size: 15px;
 
           <div id="lunch">
           <?php
-                $date = "12 AUG 2022";
-                $clientId = "Azarudeen";
+                
                 $conn = new mysqli("localhost", "root", "", "infits");
                 if($conn->connect_error){
                         die("Connection failed :" . $conn->connect_error);
@@ -351,8 +341,6 @@ font-size: 15px;
 
           <div id="snack">
           <?php
-                $date = "12 AUG 2022";
-                $clientId = "Azarudeen";
                 $conn = new mysqli("localhost", "root", "", "infits");
                 if($conn->connect_error){
                         die("Connection failed :" . $conn->connect_error);
@@ -387,8 +375,7 @@ font-size: 15px;
 
           <div id="dinner">
           <?php
-                $date = "12 AUG 2022";
-                $clientId = "Azarudeen";
+      
                 $conn = new mysqli("localhost", "root", "", "infits");
                 if($conn->connect_error){
                         die("Connection failed :" . $conn->connect_error);
