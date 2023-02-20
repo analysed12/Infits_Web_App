@@ -1,7 +1,7 @@
 <?php  
 
-# check if username, password, name submitted
-if(isset($_POST['username']) &&
+# check if dietitianuserID, password, name submitted
+if(isset($_POST['dietitianuserID']) &&
    isset($_POST['password']) &&
    isset($_POST['name'])){
 
@@ -11,10 +11,10 @@ if(isset($_POST['username']) &&
    # get data from POST request and store them in var
    $name = $_POST['name'];
    $password = $_POST['password'];
-   $username = $_POST['username'];
+   $dietitianuserID = $_POST['dietitianuserID'];
 
    # making URL data format
-   $data = 'name='.$name.'&username='.$username;
+   $data = 'name='.$name.'&dietitianuserID='.$dietitianuserID;
 
    #simple form Validation
    if (empty($name)) {
@@ -24,9 +24,9 @@ if(isset($_POST['username']) &&
    	  # redirect to 'signup.php' and passing error message
    	  header("Location: ../../signup.php?error=$em");
    	  exit;
-   }else if(empty($username)){
+   }else if(empty($dietitianuserID)){
       # error message
-   	  $em = "Username is required";
+   	  $em = "dietitianuserID is required";
 
    	  /*
     	redirect to 'signup.php' and 
@@ -45,15 +45,15 @@ if(isset($_POST['username']) &&
    	  header("Location: ../../signup.php?error=$em&$data");
    	  exit;
    }else {
-   	  # checking the database if the username is taken
-   	  $sql = "SELECT username 
-   	          FROM users
-   	          WHERE username=?";
+   	  # checking the database if the dietitianuserID is taken
+   	  $sql = "SELECT dietitianuserID 
+   	          FROM dietitian
+   	          WHERE dietitianuserID=?";
       $stmt = $conn->prepare($sql);
-      $stmt->execute([$username]);
+      $stmt->execute([$dietitianuserID]);
 
       if($stmt->rowCount() > 0){
-      	$em = "The username ($username) is taken";
+      	$em = "The dietitianuserID ($dietitianuserID) is taken";
       	header("Location: ../../signup.php?error=$em&$data");
    	    exit;
       }else {
@@ -88,10 +88,10 @@ if(isset($_POST['username']) &&
 				// **/
 				if (in_array($img_ex_lc, $allowed_exs)) {
 					// /** 
-					//  renaming the image with user's username
-					//  like: username.$img_ex_lc
+					//  renaming the image with user's dietitianuserID
+					//  like: dietitianuserID.$img_ex_lc
 					// **/
-					$new_img_name = $username. '.'.$img_ex_lc;
+					$new_img_name = $dietitianuserID. '.'.$img_ex_lc;
 
 					# crating upload path on root directory
 					$img_upload_path = '../../uploads/'.$new_img_name;
@@ -114,18 +114,18 @@ if(isset($_POST['username']) &&
       	if (isset($new_img_name)) {
 
       		# inserting data into database
-            $sql = "INSERT INTO users
-                    (name, username, password, p_p)
+            $sql = "INSERT INTO dietitian
+                    (name, dietitianuserID, password, p_p)
                     VALUES (?,?,?,?)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$name, $username, $password, $new_img_name]);
+            $stmt->execute([$name, $dietitianuserID, $password, $new_img_name]);
       	}else {
             # inserting data into database
-            $sql = "INSERT INTO users
-                    (name, username, password)
+            $sql = "INSERT INTO dietitian
+                    (name, dietitianuserID, password)
                     VALUES (?,?,?)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$name, $username, $password]);
+            $stmt->execute([$name, $dietitianuserID, $password]);
       	}
 
       	# success message

@@ -363,7 +363,7 @@ a {
     <div class="sidenav" id="sidenavbar">
         <img src="images/logo.png" class="sidenavlink" id="logo">
         <a id="index" class="sidenavlink nav-index nav-task_list nav-track_stats_steps nav-track_stats_water nav-track_stats_heart nav-track_stats_sleep nav-track_stats_weight nav-track_stats_calorie" href="index.php"><img src="images/vec_dashboard.png" class="nav-icon">Dashboard</a>
-        <a id="messages" class="sidenavlink nav-messages" href=""><img src="images/vec_messages.svg" class="nav-icon">Messages</a>
+        <a id="messages" class="sidenavlink nav-messages" href="messages.php"><img src="images/vec_messages.svg" class="nav-icon">Messages</a>
         <a id="live" class="sidenavlink" href="#"><img src="images/vec_live.svg" class="nav-icon">Live</a>
         <a id="calendar_of_events" class="sidenavlink nav-calendar_of_events" href="calendar_of_events.php"><img src="images/vec_appointments.svg" class="nav-icon">Appoinments</a>
         <a id="client_list" class="sidenavlink nav-client_list nav-setgoals" href="client_list.php"><img src="images/vec_client_list.svg" class="nav-icon">Clients</a>

@@ -1,6 +1,6 @@
 <?php 
 
-function getConversation($user_id, $conn){
+function getConversation($dietitian_id, $conn){
     /**
       Getting all the conversations 
       for current (logged in) user
@@ -14,7 +14,7 @@ function getConversation($user_id, $conn){
 
 
     $stmt = $conn->prepare($sql);
-    $stmt->execute([$user_id, $user_id]);
+    $stmt->execute([$dietitian_id, $dietitian_id]);
 
     if($stmt->rowCount() > 0){
         $conversations = $stmt->fetchAll();
@@ -27,15 +27,15 @@ function getConversation($user_id, $conn){
         
         # looping through the conversations
         foreach($conversations as $conversation){
-            # if conversations user_1 row equal to user_id
-            if ($conversation['user_1'] == $user_id) {
+            # if conversations user_1 row equal to dietitian_id
+            if ($conversation['user_1'] == $dietitian_id) {
             	$sql2  = "SELECT *
-            	          FROM users WHERE user_id=?";
+            	          FROM dietitian WHERE dietitian_id=?";
             	$stmt2 = $conn->prepare($sql2);
             	$stmt2->execute([$conversation['user_2']]);
             }else {
             	$sql2  = "SELECT *
-            	          FROM users WHERE user_id=?";
+            	          FROM dietitian WHERE dietitian_id=?";
             	$stmt2 = $conn->prepare($sql2);
             	$stmt2->execute([$conversation['user_1']]);
             }

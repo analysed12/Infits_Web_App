@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['dietitianuserID'])) {
     # database connection file
     include 'app/db.conn.php';
     include 'navbar.php';
@@ -14,10 +14,10 @@ if (isset($_SESSION['username'])) {
 
 
     # Getting User data data
-    $user = getUser($_SESSION['username'], $conn);
+    $user = getUser($_SESSION['dietitianuserID'], $conn);
 
     # Getting User conversations
-    $conversations = getConversation($user['user_id'], $conn);
+    $conversations = getConversation($user['dietitian_id'], $conn);
 
 ?>
     <!DOCTYPE html>

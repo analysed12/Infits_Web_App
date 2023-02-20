@@ -4,7 +4,7 @@ session_start();
 
 
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['dietitianuserID'])) {
 	# database connection file
 	include 'navbar.php';
 	include 'app/db.conn.php';
@@ -21,10 +21,10 @@ if (isset($_SESSION['username'])) {
 	include 'app/helpers/last_chat.php';
 
 	# Getting User data data
-	$user = getUser($_SESSION['username'], $conn);
+	$user = getUser($_SESSION['dietitianuserID'], $conn);
 
 	# Getting User conversations
-	$conversations = getConversation($user['user_id'], $conn);
+	$conversations = getConversation($user['dietitian_id'], $conn);
 
 	if (!isset($_GET['user'])) {
 		header("Location: home.php");
@@ -39,9 +39,9 @@ if (isset($_SESSION['username'])) {
 		exit;
 	}
 
-	$chats = getChats($_SESSION['user_id'], $chatWith['user_id'], $conn);
+	$chats = getChats($_SESSION['dietitian_id'], $chatWith['dietitian_id'], $conn);
 
-	opened($chatWith['user_id'], $conn, $chats);
+	opened($chatWith['dietitian_id'], $conn, $chats);
 
 ?>
 
@@ -96,7 +96,7 @@ if (isset($_SESSION['username'])) {
 
 									foreach ($conversations as $conversation) { ?>
 										<li class="list-group-item">
-											<a href="chat.php?user=<?= $conversation['username'] ?>" class="d-flex
+											<a href="chat.php?user=<?= $conversation['dietitianuserID'] ?>" class="d-flex
 	    				          justify-content-between
 	    				          align-items-center">
 												<div class="d-flex
@@ -106,7 +106,7 @@ if (isset($_SESSION['username'])) {
 														<?= $conversation['name'] ?><br>
 														<small>
 															<?php
-															echo lastChat($_SESSION['user_id'], $conversation['user_id'], $conn);
+															echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
 															?>
 														</small>
 
@@ -245,7 +245,7 @@ if (isset($_SESSION['username'])) {
 							<?php
 							if (!empty($chats)) {
 								foreach ($chats as $chat) {
-									if ($chat['from_id'] == $_SESSION['user_id']) { ?>
+									if ($chat['from_id'] == $_SESSION['dietitian_id']) { ?>
 										<?php if (substr($chat['message'], 0, 4) == "IMG-") { ?>
 
 											<p class="rtext align-self-end">
@@ -305,7 +305,7 @@ if (isset($_SESSION['username'])) {
 
 							<input type="file" name="my_image">
 
-							<input type="submit" name="to_id" value="<?= $chatWith['user_id'] ?>">
+							<input type="submit" name="to_id" value="<?= $chatWith['dietitian_id'] ?>">
 
 						</form> -->
 
@@ -325,7 +325,7 @@ if (isset($_SESSION['username'])) {
 								height: 0;
 								visibility: hidden;">
 
-							<input type="hidden" name="to_id" value="<?= $chatWith['user_id'] ?>">
+							<input type="hidden" name="to_id" value="<?= $chatWith['dietitian_id'] ?>">
 
 						</form>
 
@@ -376,7 +376,7 @@ if (isset($_SESSION['username'])) {
 
 							$.post("app/ajax/insert.php", {
 									message: message,
-									to_id: <?= $chatWith['user_id'] ?>
+									to_id: <?= $chatWith['dietitian_id'] ?>
 								},
 								function(data, status) {
 									$("#message").val("");
@@ -392,12 +392,12 @@ if (isset($_SESSION['username'])) {
 							var formData = new FormData();
 
 							formData.append('my_image', imageInput);
-							formData.append('to_id', <?= $chatWith['user_id'] ?>);
+							formData.append('to_id', <?= $chatWith['dietitian_id'] ?>);
 							console.log(imageInput);
 
 							$.post("app/ajax/upload.php", {
 									my_image: imageInput,
-									to_id: <?= $chatWith['user_id'] ?>
+									to_id: <?= $chatWith['dietitian_id'] ?>
 								},
 								function(data, status) {
 									console.log("no error");
@@ -441,7 +441,7 @@ if (isset($_SESSION['username'])) {
 						// auto refresh / reload
 						let fechData = function() {
 							$.post("app/ajax/getMessage.php", {
-									id_2: <?= $chatWith['user_id'] ?>
+									id_2: <?= $chatWith['dietitian_id'] ?>
 								},
 								function(data, status) {
 									$("#chatBox").append(data);

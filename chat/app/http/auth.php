@@ -1,8 +1,8 @@
 <?php  
 session_start();
 
-# check if username & password  submitted
-if(isset($_POST['username']) &&
+# check if dietitianuserID & password  submitted
+if(isset($_POST['dietitianuserID']) &&
    isset($_POST['password'])){
 
    # database connection file
@@ -10,12 +10,12 @@ if(isset($_POST['username']) &&
    
    # get data from POST request and store them in var
    $password = $_POST['password'];
-   $username = $_POST['username'];
+   $dietitianuserID = $_POST['dietitianuserID'];
    
    #simple form Validation
-   if(empty($username)){
+   if(empty($dietitianuserID)){
       # error message
-      $em = "Username is required";
+      $em = "dietitianuserID is required";
 
       # redirect to 'index.php' and passing error message
       header("Location: ../../index.php?error=$em");
@@ -27,26 +27,26 @@ if(isset($_POST['username']) &&
       header("Location: ../../index.php?error=$em");
    }else {
       $sql  = "SELECT * FROM 
-               users WHERE username=?";
+               dietitian WHERE dietitianuserID=?";
       $stmt = $conn->prepare($sql);
-      $stmt->execute([$username]);
+      $stmt->execute([$dietitianuserID]);
 
-      # if the username is exist
+      # if the dietitianuserID is exist
       if($stmt->rowCount() === 1){
         # fetching user data
         $user = $stmt->fetch();
 
-        # if both username's are strictly equal
-        if ($user['username'] === $username) {
+        # if both dietitianuserID's are strictly equal
+        if ($user['dietitianuserID'] === $dietitianuserID) {
            
            # verifying the encrypted password
           // if (password_verify($password, $user['password'])) {
             if($user['password']=== $password){
             # successfully logged in
             # creating the SESSION
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['dietitianuserID'] = $user['dietitianuserID'];
             $_SESSION['name'] = $user['name'];
-            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['dietitian_id'] = $user['dietitian_id'];
 
             # redirect to 'home.php'
             header("Location: ../../home.php");
@@ -60,7 +60,7 @@ if(isset($_POST['username']) &&
           }
         }else {
           # error message
-          $em = "Incorect Username or password";
+          $em = "Incorect dietitianuserID or password";
 
           # redirect to 'index.php' and passing error message
           header("Location: ../../index.php?error=$em");

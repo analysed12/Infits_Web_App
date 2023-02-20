@@ -1,10 +1,10 @@
 <?php  
 
-function getUser($username, $conn){
-   $sql = "SELECT * FROM users 
-           WHERE username=?";
+function getUser($dietitianuserID, $conn){
+   $sql = "SELECT * FROM dietitian 
+           WHERE dietitianuserID=?";
    $stmt = $conn->prepare($sql);
-   $stmt->execute([$username]);
+   $stmt->execute([$dietitianuserID]);
 
    if ($stmt->rowCount() === 1) {
    	 $user = $stmt->fetch();

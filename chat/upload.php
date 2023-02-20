@@ -44,7 +44,7 @@ if (isset($_POST['submit']) && isset($_FILES['my_image'])) {
                 // Insert into Database
                 // $sql = "INSERT INTO `images` (`id`, `image_url`) VALUES (NULL, 'IMG-asdasd');"
                 $to_id = $_POST['to_id'];
-                $from_id = $_SESSION['user_id'];
+                $from_id = $_SESSION['dietitian_id'];
 
                 $sql = "INSERT INTO 
 	       chats (from_id, to_id, message) 

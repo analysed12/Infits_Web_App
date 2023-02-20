@@ -48,7 +48,7 @@ if (isset($_POST['to_id']) && isset($_FILES['my_image'])) {
                 // Insert into Database
                 // $sql = "INSERT INTO `images` (`id`, `image_url`) VALUES (NULL, 'IMG-asdasd');"
                 $to_id = $_POST['to_id'];
-                $from_id = $_SESSION['user_id'];
+                $from_id = $_SESSION['dietitian_id'];
                 echo "to $to_id ";
                 echo "from $from_id  ";
                 echo "$new_img_name";

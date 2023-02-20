@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['dietitianuserID'])) {
 ?>
 
 	<!DOCTYPE html>
@@ -43,9 +43,9 @@ if (!isset($_SESSION['username'])) {
 					$name = $_GET['name'];
 				} else $name = '';
 
-				if (isset($_GET['username'])) {
-					$username = $_GET['username'];
-				} else $username = '';
+				if (isset($_GET['dietitianuserID'])) {
+					$dietitianuserID = $_GET['dietitianuserID'];
+				} else $dietitianuserID = '';
 				?>
 
 				<div class="mb-3">
@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
 				<div class="mb-3">
 					<label class="form-label">
 						User name</label>
-					<input type="text" class="form-control" value="<?= $username ?>" name="username">
+					<input type="text" class="form-control" value="<?= $dietitianuserID ?>" name="dietitianuserID">
 				</div>
 
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['dietitianuserID'])) {
     # database connection file
     include 'app/db.conn.php';
 
@@ -11,10 +11,10 @@ if (isset($_SESSION['username'])) {
     include 'app/helpers/last_chat.php';
 
     # Getting User data data
-    $user = getUser($_SESSION['username'], $conn);
+    $user = getUser($_SESSION['dietitianuserID'], $conn);
 
     # Getting User conversations
-    $conversations = getConversation($user['user_id'], $conn);
+    $conversations = getConversation($user['dietitian_id'], $conn);
 
 ?>
     <!DOCTYPE html>
@@ -62,7 +62,7 @@ if (isset($_SESSION['username'])) {
 
                         foreach ($conversations as $conversation) { ?>
                             <li class="list-group-item">
-                                <a href="chat.php?user=<?= $conversation['username'] ?>" class="d-flex
+                                <a href="chat.php?user=<?= $conversation['dietitianuserID'] ?>" class="d-flex
 	    				          justify-content-between
 	    				          align-items-center p-2">
                                     <div class="d-flex
@@ -72,7 +72,7 @@ if (isset($_SESSION['username'])) {
                                             <?= $conversation['name'] ?><br>
                                             <small>
                                                 <?php
-                                                echo lastChat($_SESSION['user_id'], $conversation['user_id'], $conn);
+                                                echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
                                                 ?>
                                             </small>
                                         </h3>

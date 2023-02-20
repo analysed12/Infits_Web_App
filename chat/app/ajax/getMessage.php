@@ -3,14 +3,14 @@
 session_start();
 
 # check if the user is logged in
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['dietitianuserID'])) {
 
 	if (isset($_POST['id_2'])) {
 	
 	# database connection file
 	include '../db.conn.php';
 
-	$id_1  = $_SESSION['user_id'];
+	$id_1  = $_SESSION['dietitian_id'];
 	$id_2  = $_POST['id_2'];
 	$opend = 0;
 

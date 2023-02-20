@@ -2,7 +2,7 @@
 
 // setting up the time Zone
 // It Depends on your location or your P.c settings
-define('TIMEZONE', 'Asia/Kolkata');
+define('TIMEZONE', 'Asia/Calcutta');
 date_default_timezone_set(TIMEZONE);
 
 function last_time($date_time)

@@ -3,7 +3,7 @@
 session_start();
 
 # check if the user is logged in
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['dietitianuserID'])) {
     # check if the key is submitted
     if(isset($_POST['key'])){
        # database connection file
@@ -12,8 +12,8 @@ if (isset($_SESSION['username'])) {
 	   # creating simple search algorithm :) 
 	   $key = "%{$_POST['key']}%";
      
-	   $sql = "SELECT * FROM users
-	           WHERE username
+	   $sql = "SELECT * FROM dietitian
+	           WHERE dietitianuserID
 	           LIKE ? OR name LIKE ?";
        $stmt = $conn->prepare($sql);
        $stmt->execute([$key, $key]);
@@ -22,10 +22,10 @@ if (isset($_SESSION['username'])) {
          $users = $stmt->fetchAll();
 
          foreach ($users as $user) {
-         	if ($user['user_id'] == $_SESSION['user_id']) continue;
+         	if ($user['dietitian_id'] == $_SESSION['dietitian_id']) continue;
        ?>
        <li class="list-group-item">
-		<a href="chat.php?user=<?=$user['username']?>"
+		<a href="chat.php?user=<?=$user['dietitianuserID']?>"
 		   class="d-flex
 		          justify-content-between
 		          align-items-center p-2">
