@@ -37,7 +37,7 @@ if (isset($_SESSION['dietitianuserID'])) {
             <div class="d-flex
                 flex-coloumn
                 vh-100 chat" style="outline: 2px solid #EEEEEE; padding:20px!important;">
-                <div class="w-300" style="width:275px">
+                <div class="w-300" style="width:300px">
                     <div>
                         <div class="d-flex
     		            mb-2 p-2 
@@ -64,7 +64,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                         </div>
                         <div class="scroll">
-                            <ul id="chatList" class="list-group mvh-50 overflow-auto">
+                            <ul id="chatList" class="list-group mvh-50">
                                 <?php if (!empty($conversations)) { ?>
                                     <?php
 
@@ -72,10 +72,10 @@ if (isset($_SESSION['dietitianuserID'])) {
                                         <li class="list-group-item">
                                             <a href="chat_messages.php?user=<?= $conversation['dietitianuserID'] ?>" class="d-flex
 	    				          justify-content-between
-	    				          align-items-center p-1">
+	    				          align-items-center">
                                                 <div class="d-flex
 	    					            align-items-center">
-                                                    <img src="chat/uploads/<?= $conversation['p_p'] ?>" class="w-10 rounded-circle">
+                                                    <img src="chat/uploads/<?= $conversation['p_p'] ?>" class="rounded-circle" style="width:40px">
                                                     <h3 class="fs-xs m-2 text-dark">
                                                         <?= $conversation['name'] ?><br>
                                                         <small>
@@ -94,9 +94,11 @@ if (isset($_SESSION['dietitianuserID'])) {
                                                             <?php
                                                             echo last_time($conversation['last_seen']);
                                                             ?>
-                                                        </small>
-
+                                                        </small><br />
+                                                        <img class="" src="icons/DoubleTick.svg" style="width:16px">
                                                     </h3>
+
+
                                                 </div>
                                                 <?php if (last_seen($conversation['last_seen']) == "1") { ?>
                                                     <div title="online">
