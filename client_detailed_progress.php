@@ -4,10 +4,6 @@ $name = '';
 if(isset($_POST['searching_btn'])){
   $name = $_POST['search_client_name'];
 }
-$name = '';
-if(isset($_POST['searching_btn'])){
-  $name = $_POST['search_client_name'];
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -424,12 +420,13 @@ header .current-date{
               $on = array();
               $off = array();
               if($name != ''){
-              $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne' AND client_id = '$name'" ;
+              $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne' AND client_id LIKE '%$name%'" ;
               }
               else{
                 $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne'";
               }
-              
+            
+             
               $result =$conn-> query($sql);
               $i=0;
               if ($result->num_rows > 0) 
@@ -444,9 +441,9 @@ header .current-date{
                         //some changes is needed while linking.
 
                         //for steps 
-
-                        //$step = "SELECT steps FROM `steptracker` WHERE clientid = $canme AND dateandtime = today's date" ;
-                        $step = "SELECT steps FROM `steptracker` WHERE clientid = '3' AND dateandtime = '2023-02-11 12:40:50'";
+                        $step = "SELECT steps FROM `steptracker` WHERE clientid = $cname AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                        // $step = "SELECT steps FROM `steptracker` WHERE clientid = '1' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                       
                         $stepgoal =$conn-> query($step);
                         $stepgoal1 = mysqli_fetch_assoc($stepgoal);
                         if($stepgoal1 != null){

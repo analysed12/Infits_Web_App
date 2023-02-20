@@ -214,7 +214,7 @@ function fetchInformation($client_id){
     padding:0.5rem;
     padding-left:2.5rem;
     padding-right:2.5rem;
-    position:absolute;
+   
 
 
 }
@@ -381,7 +381,7 @@ function fetchInformation($client_id){
     justify-content: space-between;
     margin-top: 1rem;
     margin-bottom: 5rem;
-    margin-right:2rem;
+    margin-right:4rem;
 }
 .tasklist{
     display: flex;
@@ -885,7 +885,7 @@ if (mysqli_num_rows($result) > 0) {
                             <span style="font-weight:600">Robert Parker</span> <span style="color:#717171">16:45</span>
                             </div>
                             <div class="list2">
-                            <span style="margin-bottom:4rem; color:#717171">Its Awesome</span>
+                            <span style=" color:#717171">Its Awesome</span>
                             <span id="two">2</span>
                             </div>
                             
@@ -902,7 +902,7 @@ if (mysqli_num_rows($result) > 0) {
                             <span style="font-weight:600">Robert Parker</span> <span id="time"style=";color:#717171">16:45</span>
                             </div>
                             <div class="list2">
-                            <span style="margin-bottom:4rem; color:#717171">Its Awesome</span>
+                            <span style="color:#717171">Its Awesome</span>
                             <span id="two" id="msg">2</span>
                             </div>
                             

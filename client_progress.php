@@ -147,15 +147,16 @@ function fetchInformation($client_id){
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <style>
-
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
 .body{
-    font-family: 'NATS', sans-serif !important;
+    font-family: 'NATS', sans-serif;
 }
 .client_progress{
     margin-top: 2rem;
     margin-left: 18rem;
+    font-family: 'poppins';
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -283,14 +284,17 @@ function fetchInformation($client_id){
 <body>
     <div class="client_progress">
     <div class="dashboard_container3">
-            <div style="font-size:1.8rem; font-weight:600"> Client Progress</div>
+            <div style="font-size:1.5rem; font-weight:600"> Client Progress</div>
             <div class="details">
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
             </div>
             
         </div>
-
-        <div class="dashboard_container4" >
+<?php
+$query = "SELECT `client_id`,`name` FROM `addclient` WHERE dietitianuserID = '$dietitian_id' AND status = 1;";
+$data = fetchData($query);
+?>
+        <div class="dashboard_container4">
 
             <div class="container4_wrapper1">
                 <div class="symbols"><div><img src="images/Frame.png" style="width:1.8rem"></div><div><span>Steps</span></div></div>
@@ -301,15 +305,23 @@ function fetchInformation($client_id){
                 <div class="symbols"><div><img src="images/Frame-5.png" style="width:1.8rem"></div><div><span>Calories</span></div></div>
                 
             </div>
-
-            <div class="container4_wrapper2" style="margin-top:1.5rem">
-                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> Ronald Richards</span></a></span>
-                <span><a href="" id="values" style="margin-left:5rem">5256/6000</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">123 bpm</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">2/3 ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem">7/8 hrs.</a></span>
-                <span><a href="" id="values" style="margin-left:3rem">0.53/2 kg</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem">122/300 kcal</a></span>
+<?php
+if(!empty($data)){
+    $count = count($data);
+    // if($lim > count($data)){
+    //     $lim = count($data);
+    // }
+    for($i = 0; $i<$count; $i++){
+        $infom = fetchInformation($data[$i]['client_id']);
+?>
+            <div class="container4_wrapper2">
+                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
+                <span><a href="track_stats_steps.php?id=<?php echo($data[$i]['client_id']) ?>" id="values" style="margin-left:5rem"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
+                <span><a href="" id="values" style=" margin-left:3rem"><?php echo($infom['heart']['progress']) ?> Bpm</a></span>
+                <span><a href="" id="values" style=" margin-left:4rem"><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
+                <span><a href="" id="values" style=" margin-left:4rem"><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
+                <span><a href="" id="values" style="margin-left:3rem"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</a></span>
+                <span><a href="" id="values" style=" margin-left:3rem"><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</a></span>
             </div>
 <?php
     }
