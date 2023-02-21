@@ -275,12 +275,12 @@ img {
                     <div><button id="btn1" ><span class="material-symbols-outlined">add</span></button> </div>
                     <div class="add_set"> <span>Add Clients</span></div>
                 </div>
-                <div class="add_set_client">
+                <div onclick="open_link('setgoals.php')" class="add_set_client">
                     <div><button id="btn1"><span class="material-symbols-outlined">settings</span></button> </div>
                     <div class="add_set"> <span>Set Goals</span></div>
                 </div>
 
-                <div class="add_set_client">
+                <div onclick="open_link('set_reminders.php')" class="add_set_client">
                     <div><button id="btn1"><span class="material-symbols-outlined">notification_add</span></button>
                     </div>
                     <div class="add_set"> <span>Set Reminders</span></div>
@@ -333,7 +333,7 @@ img {
                     {
                         // $name_of_plan = $row1["name"];
                 
-                        echo "<div class='client-item'>";
+                    echo "<div class='client-item'>";
                     echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
                     echo "<div class='profile2'>";
                     echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
@@ -416,7 +416,10 @@ img {
 
 
     </div>
-
+<script>
+    function open_link(url){
+        window.location.href = url;
+    }
+</script>
 </body>
-
 </html>

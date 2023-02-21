@@ -1,6 +1,15 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $client_array = array(3,4,5);
-$dietitianuserID = 'John_wayne';
+
+// $keys = array_keys($_SESSION);
+// foreach ($keys as $key) {
+//     echo $_SESSION['dietitianuserID'] .$key . '<br>'; // print the key
+// }
+
+$dietitianuserID = $_SESSION['dietitianuserID'];
 // Handling Ajax Requests here
 if(isset($_POST['sidebarselection'])){
     $conn = new mysqli("localhost", "root", "", "infits");
@@ -12,6 +21,12 @@ if(isset($_POST['sidebarselection'])){
         $d_id = $_POST['dietitianuserID'];
         $water_interval = $_POST['water_interval'];
         $water_amount = $_POST['water_amount'];
+        $query = "SELECT reminder_id FROM `reminders` WHERE water_amount = '{$water_amount}' AND water_interval = '{$water_interval}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                $conn->close();
+                exit;
+            }
         $query = "UPDATE `reminders` SET water_interval = '{$water_interval}' , water_amount = '{$water_amount}' WHERE client_id = {$c_id} AND dietitianuserID = '{$d_id}';";
         $result = $conn->query($query) or die("Query Failed");
         if($conn->affected_rows == 0){
@@ -28,7 +43,12 @@ if(isset($_POST['sidebarselection'])){
         $lunch = $_POST['lunch_time'];
         $snacks = $_POST['snacks_time'];
         $dinner = $_POST['dinner_time'];
-        
+        $query = "SELECT reminder_id FROM `reminders` WHERE breakfast_time = '{$bf}' AND lunch_time = '{$lunch}' AND snacks_time = '{$snacks}' AND `dinner_time` AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                $conn->close();
+                exit;
+            }
         $query = "UPDATE `reminders` SET `breakfast_time`='{$bf}',`lunch_time`='{$lunch}',`snacks_time`='{$snacks}',`dinner_time`='{$dinner}' WHERE client_id = {$c_id} AND dietitianuserID = '{$d_id}';";
         $result = $conn->query($query) or die("Query Failed");
 
@@ -44,6 +64,12 @@ if(isset($_POST['sidebarselection'])){
         $d_id = $_POST['dietitianuserID'];
         $sleep_time = $_POST['sleep_time'];
         $wake_time = $_POST['wake_time'];
+        $query = "SELECT reminder_id FROM `reminders` WHERE sleep_time = '{$sleep_time}' AND wake_time = '{$wake_time}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                $conn->close();
+                exit;
+            }
         $query = "UPDATE `reminders` SET sleep_time = '{$sleep_time}' , wake_time = '{$wake_time}' WHERE client_id = {$c_id} AND dietitianuserID = '{$d_id}';";
         $result = $conn->query($query) or die("Query Failed");
         if($conn->affected_rows == 0){
@@ -70,7 +96,17 @@ if(isset($_POST['update_all'])){
         $water_interval = $_POST['water_interval'];
         $water_amount = $_POST['water_amount'];
         foreach ($c_ids as $c_id){
-            echo ('inside if');
+            $query = "SELECT reminder_id FROM `reminders` WHERE water_amount = '{$water_amount}' AND water_interval = '{$water_interval}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                continue;
+            }
+            $query = "SELECT reminder_id FROM `reminders` WHERE water_amount = '{$water_amount}' AND water_interval = '{$water_interval}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            echo $query;
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                continue;
+            }
             $query = "UPDATE `reminders` SET water_interval = '{$water_interval}' , water_amount = '{$water_amount}' WHERE client_id = {$c_id} AND dietitianuserID = '{$d_id}';";
             $result = $conn->query($query) or die("Query Failed");
             if($conn->affected_rows == 0){
@@ -90,6 +126,11 @@ if(isset($_POST['update_all'])){
         $snacks = $_POST['snacks_time'];
         $dinner = $_POST['dinner_time'];
         foreach ($c_ids as $c_id){
+            $query = "SELECT reminder_id FROM `reminders` WHERE breakfast_time = '{$bf}' AND lunch_time = '{$lunch}' AND snacks_time = '{$snacks}' AND `dinner_time` AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                continue;
+            }
             $query = "UPDATE `reminders` SET `breakfast_time`='{$bf}',`lunch_time`='{$lunch}',`snacks_time`='{$snacks}',`dinner_time`='{$dinner}' WHERE client_id = {$c_id} AND dietitianuserID = '{$d_id}';";
             $result = $conn->query($query) or die("Query Failed");
             if($conn->affected_rows == 0){
@@ -106,7 +147,11 @@ if(isset($_POST['update_all'])){
         $sleep_time = $_POST['sleep_time'];
         $wake_time = $_POST['wake_time'];
         foreach ($c_ids as $c_id){
-            // echo ('inside if');
+            $query = "SELECT reminder_id FROM `reminders` WHERE sleep_time = '{$sleep_time}' AND wake_time = '{$wake_time}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                continue;
+            }
             $query = "UPDATE `reminders` SET sleep_time = '{$sleep_time}' , wake_time = '{$wake_time}' WHERE client_id = {$c_id} AND dietitianuserID = '{$d_id}';";
             $result = $conn->query($query) or die("Query Failed");
             if($conn->affected_rows == 0){
@@ -131,13 +176,17 @@ if(isset($_POST['create_reminder'])){
         $water_interval = $_POST['water_interval'];
         $water_amount = $_POST['water_amount'];
         foreach ($client_array as $c_id) {
+            $query = "SELECT reminder_id FROM `reminders` WHERE water_amount = '{$water_amount}' AND water_interval = '{$water_interval}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                continue;
+            }
             $query = "UPDATE `reminders` SET water_interval = '{$water_interval}' , water_amount = '{$water_amount}' WHERE client_id = {$c_id} AND dietitianuserID = '{$dietitianuserID}';";
             $result = $conn->query($query) or die("Query Failed");
             if ($conn->affected_rows == 0) {
                 $query = "INSERT INTO `reminders`(`dietitianuserID`, `client_id`, `water_interval`, `water_amount`) VALUES ('{$dietitianuserID}',{$c_id},'{$water_interval}','{$water_amount}')";
                 $result = $conn->query($query) or die("Query Failed");
             }
-
         }
     }
 
@@ -151,7 +200,11 @@ if(isset($_POST['create_reminder'])){
         $snacks = $_POST['snacks_time'];
         $dinner = $_POST['dinner_time'];
         foreach ($client_array as $c_id){
-
+            $query = "SELECT reminder_id FROM `reminders` WHERE breakfast_time = '{$bf}' AND lunch_time = '{$lunch}' AND snacks_time = '{$snacks}' AND `dinner_time` AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                continue;
+            }
             $query = "UPDATE `reminders` SET `breakfast_time`='{$bf}',`lunch_time`='{$lunch}',`snacks_time`='{$snacks}',`dinner_time`='{$dinner}' WHERE client_id = {$c_id} AND dietitianuserID = '{$dietitianuserID}';";
             echo ($query);
             echo ('<br>');
@@ -167,6 +220,11 @@ if(isset($_POST['create_reminder'])){
         $sleep_time = $_POST['sleep_time'];
         $wake_time = $_POST['wake_time'];
         foreach ($client_array as $c_id){
+            $query = "SELECT reminder_id FROM `reminders` WHERE sleep_time = '{$sleep_time}' AND wake_time = '{$wake_time}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $result = $conn->query($query) or die('Query Failed');
+            if($result->num_rows > 0){
+                continue;
+            }
             $query = "UPDATE `reminders` SET sleep_time = '{$sleep_time}' , wake_time = '{$wake_time}' WHERE client_id = {$c_id} AND dietitianuserID = '{$dietitianuserID}';";
             $result = $conn->query($query) or die("Query Failed");
             if($conn->affected_rows == 0){
@@ -363,6 +421,7 @@ function getClientName($ID,$conn,$dietitianuserID){
         cursor:pointer;
     }
     .bottom{
+        margin-left: 13rem;
         position: relative;
     }
     .client-list-container {
@@ -371,7 +430,7 @@ function getClientName($ID,$conn,$dietitianuserID){
         padding-top: 40px;
     }
     .client_wrapper {
-        display: flex;
+        display: none;
         position: absolute;
         right: -350px;
         transition: 0.5s ease-in-out;
@@ -1137,13 +1196,15 @@ $i++;
         function showSelectClient(id){
             for(let i =0 ; i<allwrapper.length;i++){
                 allwrapper[i].style.right = '-350px';
+                allwrapper[i].style.display = 'none';
             }
             // console.log(id);
             document.getElementById(id).style.right = '90px';
+            document.getElementById(id).style.display = 'flex';
         }
         function hideSelectClient(){
-            // console.log(id);
             for(let i =0 ; i<allwrapper.length;i++){
+                allwrapper[i].style.display = 'none';
                 allwrapper[i].style.right = '-350px';
             }
             location.reload();
