@@ -53,13 +53,13 @@ if (isset($_SESSION['dietitianuserID'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chat App</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/chat_style.css">
         <link rel="icon" href="img/logo.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body>
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-row" style="margin: 0; height: 100%; overflow: hidden">
             <div class="d-flex
                 flex-coloumn
                 vh-100 chat" style="outline: 2px solid #EEEEEE; padding:20px!important;">
@@ -77,7 +77,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 								<h3 class="fs-xs m-2"><?= $user['name'] ?></h3>
 							</div> -->
                             <div class="mt-1">
-                                <h5>Messages</h5>
+                                <h5 class="chat-message-header">Messages</h5>
                             </div>
                             <!-- <a href="logout.php" class="btn fs-xs">L </a> -->
                         </div>
@@ -113,7 +113,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                                                     </h3>
                                                 </div>
                                                 <div class="d-flex
-	    					            align-items-center">
+	    					            align-items-center " style="margin-left: auto;" >
                                                     <h3 class="fs-xs p-2 text-dark">
 
                                                         <small>
@@ -297,26 +297,16 @@ if (isset($_SESSION['dietitianuserID'])) {
                             <?php } ?>
                         </div>
                     </div>
-                    <div class="input-group align-items-center ">
-
-
-                        <!-- backup -->
-                        <!-- <form action="app/ajax/upload.php" method="post" enctype="multipart/form-data">
-
-							<input type="file" name="my_image">
-
-							<input type="submit" name="to_id" value="<?= $chatWith['dietitian_id'] ?>">
-
-						</form> -->
 
 
 
 
-                        <!-- new one -->
+                    <div class="input-group align-items-center chat-end-align ">
+
                         <form id="form_input" action="app/ajax/upload.php" method="post" enctype="multipart/form-data">
 
-                            <label for="file-input" class="file-input-label">
-                                <i class="fa fa-paperclip"></i>
+                            <label for="file-input" class="file-input-label" style="margin-left: 20px">
+                                <i class="fa fa-paperclip "></i>
                             </label>
                             <input type="file" id="file-input" name="my_image" class="hide_input" style="position: absolute;top: 0;
 								left: 0;
@@ -329,16 +319,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                         </form>
 
-                        <!-- <form id="form_input" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
-							<button class="btn " id="file_input">
-								<label for="files" class="btn"><i class="fa fa-paperclip">
-									</i></label>
-								<input id="files" style="visibility:hidden;" type="file" name="file_input" onchange="javascript:document.getElementById('form_input').submit();">
-							</button>
-						</form> -->
-
-
-                        <textarea cols="3" id="message" class="form-control rounded-pill m-3 align-items-center "></textarea>
+                        <input type="text" id="message" class="form-control rounded-pill m-3 align-items-center " style="height: 50px;" ></input>
                         <button class="btn text-primary " styles="color: #0177FD!importtant;" id="sendBtn">
                             Send Message
 
