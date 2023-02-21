@@ -346,7 +346,7 @@ border-radius: 18px;
                 </div>
             </li>
              </a>
-               <a href="refer.php">
+               <a href="refer_friend.php">
             <li>
                 <div class="box img-5">
                     <img src="icons/settings/icon1.svg" alt="">
