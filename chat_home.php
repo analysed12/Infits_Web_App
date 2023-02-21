@@ -1,7 +1,9 @@
 <?php
+ob_start();
 // session_start();
 include 'navbar.php';
 
+// die();
 if (isset($_SESSION['dietitianuserID'])) {
     # database connection file
     include 'app/db.conn.php';
@@ -65,7 +67,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                         </div>
                         <div class="scroll">
                             <ul id="chatList" class="list-group mvh-50">
-                                <?php if (!empty($conversations)) { ?>
+                                <?php //if (!empty($conversations)) { ?>
                                     <?php
 
                                     foreach ($conversations as $conversation) { ?>
@@ -111,10 +113,10 @@ if (isset($_SESSION['dietitianuserID'])) {
                                             </a>
                                         </li>
                                     <?php } ?>
-                                <?php } else {
-                                    header("Location: index.php");
-                                    exit;
-                                } ?>
+                                <?php //} else {
+                                    //header("Location: index.php");
+                                    //exit;
+                                //} ?>
                                 <!-- <div class="alert alert-info 
     				            text-center">
 									<i class="fa fa-comments d-block fs-big"></i>
@@ -271,8 +273,17 @@ if (isset($_SESSION['dietitianuserID'])) {
     </html>
 <?php
 } else {
-    // header("Location: index.php");
-    echo "<script>window.location.href='index.php'</script>";
+    header("Location: index.php");
+    // echo "<script>window.location.href='index.php'</script>";
     exit;
 }
+$output = ob_get_clean();
+
+// Modify the headers
+header('Content-Type: text/html');
+header('Cache-Control: no-cache');
+
+// Flush the headers to the browser
+ob_end_flush();
+echo $output;
 ?>

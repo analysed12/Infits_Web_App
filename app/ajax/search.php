@@ -15,6 +15,8 @@ if (isset($_SESSION['dietitianuserID'])) {
 	   $sql = "SELECT * FROM dietitian
 	           WHERE dietitianuserID
 	           LIKE ? OR name LIKE ?";
+	// Actual Query Needed    
+	// $sql = "SELECT * FROM add_client WHERE dietitianuserID = '{$_SESSION['dietitianuserID']}' AND name LIKE ?";
        $stmt = $conn->prepare($sql);
        $stmt->execute([$key, $key]);
 
@@ -25,7 +27,7 @@ if (isset($_SESSION['dietitianuserID'])) {
          	if ($user['dietitian_id'] == $_SESSION['dietitian_id']) continue;
        ?>
        <li class="list-group-item">
-		<a href="chat.php?user=<?=$user['dietitianuserID']?>"
+		<a href="chat_messages.php?user=<?=$user['dietitianuserID']?>"
 		   class="d-flex
 		          justify-content-between
 		          align-items-center p-2">
