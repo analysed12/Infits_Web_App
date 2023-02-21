@@ -2,6 +2,7 @@
 include('navbar.php');
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,12 +41,27 @@ include('navbar.php');
   
 
     <title>All Recipe</title>
+    
 </head>
 <style>
-
+  @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
 body {
-        font-family: 'NATS', serif !important;
+  font-family: 'NATS', sans-serif;
         letter-spacing: 1px;
+        font-weight:400;
+        margin-bottom:2rem;
     }
     /* Style the tab content */
 
@@ -56,6 +72,45 @@ body {
     
 
   
+    }
+    .searchbox{
+    width: 360px;
+height: 45px;
+background: #FFFFFF;
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+padding:10px;
+
+    }
+    .savebutton{
+      width: 121px;
+height: 46px;
+background: #7282FB;
+border-radius: 8.99476px;
+color:white;
+border:none;
+
+    }
+    .addrecipe{
+      width: 85px;
+height: 85px;
+color:white;
+background: #9C74F5;
+border-radius:50%;
+padding-left:1.5rem;
+padding-right:1.5rem;
+font-size:30px;
+
+    }
+    .addrecipe:hover{
+      width: 85px;
+height: 85px;
+color:white;
+background: #9C74F5;
+border-radius:50%;
+padding-left:1.5rem;
+padding-right:1.5rem;
+font-size:30px;
     }
 
  recipe_flex{
@@ -73,41 +128,41 @@ body {
    border-radius:15px;
    font-size:20px;
    font-weight:400px;
-  height:180px;
-  //height:fit-content;
+  height:153px;
+ 
    width:280px;
 
 
 }
 .lunch{
-    background-color: #F3D1D2;
+   background-color:#ffe3f5;
     border-radius:15px;
    font-size:20px;
    font-weight:400px;
-height:180px;
-   //height:fit-content;
+height:154px;
+   
    width:280px;
 
 
 
 }
 .snacks{
-    background-color: #B8DDF1;
+    background-color:#e1f2f9 ;
     border-radius:15px;
    font-size:20px;
    font-weight:400px;
-   height:180px;
+   height:153px;
    width:280px;
    
 
 
 }
 .dinner{
-    background-color: #edb2b274;
+    background-color: #ffcbec;
     border-radius:15px;
    font-size:20px;
    font-weight:400px;
-   height:180px;
+   height:153px;
    width:280px;
 
 }
@@ -197,8 +252,108 @@ height:180px;
   padding: 20px 0;
 
 }
-.container1{
+.update_delete{
+  width: 151.28px;
+height: 129px;
+padding:25px;
+background: #FFFFFF;
+border: 0.723941px solid #E4E4E4;
+box-shadow: 0px 2.17182px 2.89576px rgba(0, 0, 0, 0.09);
+border-radius: 13.0309px;
 
+}
+#update_delete{
+  display:none;
+}
+.edit{
+  width: 93.45px;
+height: 39.87px;
+left: 29.32px;
+top: 19.93px;
+color:white;
+background: #A85CF1;
+border-radius: 6.23011px;
+padding:10px;
+padding-left:30px;
+}
+.edit:hover{
+  width: 93.45px;
+height: 39.87px;
+left: 29.32px;
+top: 19.93px;
+color:white;
+background: #A85CF1;
+border-radius: 6.23011px;
+padding:10px;
+padding-left:30px;
+}
+.delete{
+  width: 93.45px;
+height: 39.87px;
+left: 29.32px;
+top: 72.27px;
+color:white;
+background: #FF3D3D;
+border-radius: 6.23012px;
+padding:10px;
+padding-left:25px;
+}
+.delete:hover{
+  width: 93.45px;
+height: 39.87px;
+left: 29.32px;
+top: 72.27px;
+color:white;
+background: #FF3D3D;
+border-radius: 6.23012px;
+padding:10px;
+padding-left:25px;
+}
+.twelve{
+  width: 22px;
+height: 22px;
+border-radius:100%;
+color:white;
+padding-left:0.5rem;
+padding-right:0.5rem;
+
+background: #9C74F5;
+}
+.btn_medium{
+  width: 71px;
+height: 26.09px;
+border:none;
+color:white;
+background: #9C74F5;
+border-radius: 8px;
+}
+
+@media screen and (max-width: 720px){
+  .searchbox{
+    width:auto;
+  }
+  .header{
+    display:flex;
+    flex-direction:column !important;
+    margin:10px;
+    margin-left:20px;
+  }
+  .savebutton{
+    width:auto;
+  }
+  .middle_wrapper{
+    margin:20px !important;
+    margin-top:1.5rem !important;
+    
+  }
+  .grid-container{
+    display:flex;
+    flex-direction:column !important;
+    gap:2rem;
+  }
+  .cards{
+    grid-template-columns: repeat(1, minmax(auto, 1fr));
+  }
   
 
 }
@@ -262,8 +417,7 @@ height:180px;
         });
       });
     </script>
-
-
+               
 
 
 <body>
@@ -272,15 +426,14 @@ height:180px;
 
 
 <br>
-<div class="row" style="padding:2px;">
-        <div class="col-6" style="font-weight:bold;font-size:20px;">Recipes</div>
-        <div class="col-6" style="text-align:right">
-            <form class="search-form" method="post">
-                <input type="search" placeholder="Search here" name="sinput" class="search-box">
-                <button type="submit"  id ="seabtn" name="seabtn" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <a href="create_recipe.php"type="submit" id="new" name="newadd" style="background-color:#D257E6;color:white;border-radius:13px; border:none;">
-                 New Recipe </a>
-            </form>
+<div  class="header" style="display:flex ;justify-content:space-between">
+        <div  style="font-size:2.5rem;margin-left:2rem">Choose a recipe</div>
+        <div style="margin-right:2rem;display:flex;gap:1.5rem">
+        <div class="searchbox"><img src="images/vec_search.png" alt="">
+      <input type="text" placeholder="Search recipe here" style="border:none;font-size:1rem;margin-left:1rem">
+    </div>
+    <button class="savebutton">Save</button>
+            
         </div>
         
         
@@ -296,56 +449,61 @@ height:180px;
 
 
 
- <div class="grid-container" style="display:flex; flex-direction:row;justify-content:space-between; cursor:pointer; margin-left:10px;">
+ <div class="grid-container" style="display:flex; flex-direction:row;justify-content:space-evenly; cursor:pointer; margin-left:10px;">
             <div class ="breakfast" id="btn1"> 
                 
               <!-----  <img src=".\images\breakf.svg" style="float:right; margin-top:-20px;">  -->
 
-              <img src=".\images\din.svg" style="float:right; margin-top:-20px;">
-                <p style="margin-left:0px; margin-top:0px; z-index:1;"><strong><h3> Breakfast </h3> </strong>
-               <h6> Free menu planning </h6>
-             </p>
+              <img src="images/waffle.png" style="float:right; margin-top:-20px;border-radius:10px">
+              <img src="images/greenhalf1.png" style="float:left; margin-top:-20px;width: 90.01px;border-radius:10px">
+              <div style="text-align:center;font-size:31px;z-index:1;margin-left:4rem;margin-top:2rem  !important">Breakfast</div>
+                <img src="images/treebranch.png" style="float:left;border-radius:10px">
+                <img src="images/greenhalf2.png" style="float:right;width: 110.01px;overflow:hidden;border-radius:10px">
+               
+             
 
     </div>
 
             <div class ="lunch" id="btn2">
           <!------  <img src=".\images\lun.svg" style="float:right; margin-top:-20px;">  ---------->
-          <img src=".\images\din.svg" style="float:right; margin-top:-20px;">
-
-            <p style="margin-left:2px; margin-top:0px; z-index:1;"><strong><h3> Lunch </h3> </strong>
-            <h6> Free menu planning 
-to <br>suit your needs </h6>
-  </p>     
+          <img src="images/lunchbox.png" style="float:right; margin-top:-20px;border-radius:10px">
+              <img src="images/pinkhalf1.png" style="float:left; margin-top:-20px;width: 90.01px;border-radius:10px">
+              <div style="text-align:center;font-size:31px;z-index:1;margin-left:4rem;margin-top:2rem  !important">Lunch</div>
+                <img src="images/pinkbottom.png" style="float:left;border-radius:10px">
+                <img src="images/pinkhalf2.png" style="float:right;width: 110.01px;overflow:hidden;border-radius:10px">
+          
+      
            </div>
 
 
             <div class = "snacks" id="btn3">
            <!---- <img src=".\images\sna.svg" style="float:right; margin-top:-20px;">  ----->
-           <img src=".\images\din.svg" style="float:right; margin-top:-20px;">
-
-            <p style="margin-left:2px; margin-top:0px;"><strong><h3> Snacks </h3> </strong>
-            <h6> Free menu planning to <br>suit your needs </h6>
-  </p>
+           <img src="images/bluetop.png" style="float:right; margin-top:-20px;border-radius:10px">
+              <img src="images/bluehalf1.png" style="float:left; margin-top:-20px;width: 90.01px;border-radius:10px">
+              <div style="text-align:center;font-size:31px;z-index:1;margin-left:5rem;margin-top:2rem  !important">Snacks</div>
+                <img src="images/bluebottom.png" style="float:left;border-radius:10px">
+            
+     
             </div>
 
 
             <div class = "dinner" id="btn4">
-           <img src=".\images\din.svg" style="float:right; margin-top:-20px;">
-            <p style="margin-left:2px; margin-top:40px; z-index:1;"><strong><h3> Dinner </h3> </strong> 
-            <h6 style="padding:1px;"> Free menu planning 
-to <br> suit your needs </h6>
- </p>
+            <img src="images/redtop.png" style="float:right; margin-top:-20px;border-radius:10px">
+              <img src="images/redhalf1.png" style="float:left; margin-top:-20px;width: 90.01px;border-radius:10px">
+              <div style="text-align:center;font-size:31px;z-index:1;margin-left:4rem;margin-top:2.2rem  !important">Dinner</div>
+                <img src="images/redbottom.png" style="float:left;border-radius:10px;margin-top:19px">
+                <img src="images/redhalf2.png" style="float:right;width: 110.01px;overflow:hidden;border-radius:10px;margin-top:2px">
+         
               
         </div>
 </div>
    
 
 
-<div class="row" style="padding:1rem;">
-        <div class="col-6" style="font-weight:bold;font-size:20px;">All Recipes</div>
-        <div class="col-6" style="text-align:right">
-          <p id="vall" style="font-size:18px;"> </p>
-                        </div>
+<div class="middle_wrapper"style="display:flex;justify-content:space-between;margin:20px;margin-left:17rem;margin-right:2.5rem">
+  <span style="font-size:25px;font-weight:600">ALL Recipes</span>
+  <a href="" style="background-color:none;border:nome;color: #6A6A6A;font-size:20px">View All</a>
+</div>
 
 
 
@@ -445,29 +603,48 @@ to <br> suit your needs </h6>
                ?>
                
 
-            <div class="card" container style="padding:30px;">
+            <div class="card" container style="padding:15px">
                 <div class="card-upper">  
-                    <p id="bu" style="font-size:20px; font-weight:400px;color:red; z-index=1;"> Breakfast </p>   <p style="margin-left:20px; font-size:20px;color:red;">
-                     <span class="fa-thin fa-clock"></span><?php echo  ($t1[1]);?></p> </div>
+                    <p id="bu" style="font-size:20px; font-weight:bold"> Breakfast </p>  </div>
 
             <div class="img-dis" style="height:50%; width:inherit;text-align:center;"> 
-                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:100%; width:100%; object-fit:cover;"/>
+                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:100%; width:70%; object-fit:cover;border:none"/>
             </div>
-            <div class="card-upper" >
-               <p id="nm" style="font-size:19px; font-weight:600px;"> <?php echo $row['name'];?> </p>
-               <div class="wrap" style="display:flex;">
-               <a href="edit_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Update Record" style="color#7282FB" data-toggle="tooltip">
-                 <span class="fa fa-pencil"></span> </a>
+            <div class="card-upper" style="margin-top:1rem ;" >
+               <p id="nm" style="font-size:25px; font-weight:600;"> <?php echo $row['name'];?> </p>
+               <div class="wrap" style="display:flex;margin-top:0.8rem">
+               <!-----<button id="threedots" style="background-color:white;border:none"><i class="fa-solid fa-ellipsis-vertical" style="margin-top:1rem"></i></button>
+               <div id="update_delete">
+               <div class="update_delete" style="display:flex;flex-direction:column;gap:0.5rem;" >
+            <a class="edit" href="">Edit</a>
+                <a class="delete" href="">Delete</a>
+            </div>
+               </div>
+               <script>
+                  var modal = document.getElementById("update_delete");
+                  var btn = document.getElementById("threedots");
+                  btn.onclick = function() {
+                        modal.style.display = "block";
+                        btn.style.display = "none";
+                  }
+                        
+                </script> ------->
+                <a href="edit_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Update Record" style="color#7282FB" data-toggle="tooltip">
+                 <span class="fa fa-pencil" style="color:#A85CF1;"></span> </a>
                  <a onclick="return confirm('Are you sure?')" href="delete_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Delete Record" style="color#7282FB" data-toggle="tooltip"> 
-                  <span class="fa fa-trash "></span></a>
+                  <span class="fa fa-trash " style="color: #FF3D3D;"></span></a>
+           
             </div>
             </div>
+            
 
-            <div class="card-upper">
-            <p style="font-size:20px; font-weight:400;"> <span class="fa-thin fa-fire"></span><?php echo $row['calories'];?> </p> 
-        
-        
-            <p style="font-size:20px; font-weight:400;"> <?php echo $row['serving']; ?> <span>serve</span></p>
+            <div class="card-upper" >
+            <div><span class="twelve" style="margin-right:0.5rem">12</span>Steps</div>
+            <div style="color: #A3A1A1;font-size:20px"><i class="fa-regular fa-clock"></i> <span style="margin-bottom:1rem"><?php echo  ($t1[1]);?></span></div>
+            </div>
+            <div class="card-upper" style="margin-top:1rem">
+              <span><img src="images/calo.jpg" alt="" style="margin-right:0.3rem"><?php echo $row['calories'];?>kcal</span>
+              <span><button class="btn_medium">Medium</button></span>
 
             </div>
             
@@ -511,32 +688,35 @@ to <br> suit your needs </h6>
                ?>
                
 
-            <div class="card" container style="padding:30px;">
+            <div class="card" container style="padding:15px">
                 <div class="card-upper">  
-                    <p id="bu" style="font-size:20px; font-weight:400px;color:red; z-index=1;"> Lunch</p>   <p style="margin-left:20px; font-size:20px;color:red; ">
-                    <span class="fa-thin fa-clock"></span> <?php echo  ($t1[1]);?></p> </div>
+                    <p id="bu" style="font-size:20px; font-weight:bold"> Lunch</p>  </div>
 
-            <div class="img-dis" style="style="height:40%; width:inherit;text-align:center;"> 
-                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:80%; width:80%; object-fit:cover;"/>
+            <div class="img-dis" style="height:50%; width:inherit;text-align:center;"> 
+                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:80%; width:70%; object-fit:cover;"/>
             </div>
-            <div class="card-upper" >
-               <p id="nm" style="font-size:19px; font-weight:600px;"> <?php echo $row['name'];?> </p>
-               <div class="wrap" style="display:flex;">
+            <div class="card-upper"style="margin-top:1rem ;" >
+               <p id="nm" style="font-size:25px; font-weight:600;"> <?php echo $row['name'];?> </p>
+               <div class="wrap" style="display:flex;margin-top:0.8rem">
                <a href="edit_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Update Record" style="color#7282FB" data-toggle="tooltip">
-                 <span class="fa fa-pencil"></span> </a>
+                 <span class="fa fa-pencil" style="color:#A85CF1;"></span> </a>
                  <a onclick="return confirm('Are you sure?')" href="delete_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Delete Record" style="color#7282FB" data-toggle="tooltip"> 
-                  <span class="fa fa-trash "></span></a>
+                  <span class="fa fa-trash " style="color: #FF3D3D;"></span></a>
             </div>
             </div>
 
-            <div class="card-upper">
-            <p style="font-size:20px; font-weight:400;"> <span class="fa-thin fa-fire"></span><?php echo $row['calories'];?> </p>  
-
-            <p style="font-size:20px; font-weight:400px;"> <?php echo $row['serving'];?><span> serve </span></p>
+            
+            <div class="card-upper" >
+            <div><span class="twelve" style="margin-right:0.5rem">12</span>Steps</div>
+            <div style="color: #A3A1A1;font-size:20px"><i class="fa-regular fa-clock"></i> <span style="margin-bottom:1rem"><?php echo  ($t1[1]);?></span></div>
+            </div>
+            <div class="card-upper" style="margin-top:1rem">
+              <span><img src="images/calo.jpg" alt="" style="margin-right:0.3rem"><?php echo $row['calories'];?>kcal</span>
+              <span><button class="btn_medium">Medium</button></span>
 
             </div>
             
-            </div>            
+            </div>             
             <?php }} ?>
 
             </div> 
@@ -570,33 +750,33 @@ to <br> suit your needs </h6>
                ?>
                
 
-            <div class="card" container style="padding:30px;">
+            <div class="card" container style="padding:15px;">
                 <div class="card-upper">  
-                    <p id="bu" style="font-size:20px;  font-weight:400px;color:red; z-index=1;"> Snacks</p> 
-                      <p style="margin-left:20px; font-size:20px;color:red;"><span class="fa-thin fa-clock"></span> <?php echo  ($t1[1]);?></p> </div>
-
-            <div class="img-dis" style="style="height:50%; width:inherit;text-align:center;"> 
-                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:100%; width:100%; object-fit:cover;"/>
+                    <p id="bu" style="font-size:20px; font-weight:bold"> Snacks </p>  </div>
+            <div class="img-dis" style="height:50%; width:inherit;text-align:center;"> 
+                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:100%; width:70%; object-fit:cover;"/>
             </div>
-            <div class="card-upper" >
-               <p id="nm" style="font-size:19px; font-weight:600px;"> <?php echo $row['name'];?> </p>
-               <div class="wrap" style="display:flex;">
+            <div class="card-upper" style="margin-top:1rem ;">
+               <p id="nm" style="font-size:25px; font-weight:600px;"> <?php echo $row['name'];?> </p>
+               <div class="wrap" style="display:flex;margin-top:0.8rem">
                <a href="edit_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Update Record" style="color#7282FB" data-toggle="tooltip">
-                 <span class="fa fa-pencil"></span> </a>
+                 <span class="fa fa-pencil" style="color:#A85CF1;"></span> </a>
                  <a onclick="return confirm('Are you sure?')" href="delete_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Delete Record" style="color#7282FB" data-toggle="tooltip"> 
-                  <span class="fa fa-trash "></span></a>
+                  <span class="fa fa-trash " style="color: #FF3D3D;"></span></a>
             </div>
             </div>
 
-            <div class="card-upper">
-            <p style="font-size:20px; font-weight:400;"> <span class="fa-thin fa-fire"></span><?php echo $row['calories'];?> </p> 
-
-
-            <p style="font-size:20px; font-weight:400;"> <?php echo $row['serving']; ?> <span>serve </span></p>
+            <div class="card-upper" >
+            <div><span class="twelve" style="margin-right:0.5rem">12</span>Steps</div>
+            <div style="color: #A3A1A1;font-size:20px"><i class="fa-regular fa-clock"></i> <span style="margin-bottom:1rem"><?php echo  ($t1[1]);?></span></div>
+            </div>
+            <div class="card-upper" style="margin-top:1rem">
+              <span><img src="images/calo.jpg" alt="" style="margin-right:0.3rem"><?php echo $row['calories'];?>kcal</span>
+              <span><button class="btn_medium">Medium</button></span>
 
             </div>
             
-            </div>            
+            </div>           
             <?php }} ?>
 
             </div> 
@@ -630,43 +810,48 @@ to <br> suit your needs </h6>
                ?>
                
 
-            <div class="card" container style="padding:30px;">
+            <div class="card" container style="padding:15px;">
                 <div class="card-upper">  
-                    <p id="bu" style="font-size:20px; font-weight:400px;color:red; z-index=1;"> Dinner </p> 
-                      <p style="margin-left:20px; font-size:20px;color:red;"> <span class="fa-thin fa-clock"></span> <?php echo  ($t1[1]);?></p> </div>
+                    <p id="bu" style="font-size:20px; font-weight:bold;"> Dinner </p> </div>
 
-            <div class="img-dis" style="style="height:50%; width:inherit;text-align:center;"> 
-                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:100%; width:100%; object-fit:cover;"/>
+            <div class="img-dis"  style="height:50%; width:inherit;text-align:center;"> 
+                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:100%; width:70%; object-fit:cover;"/>
+            </div>
+            <div class="card-upper"style="margin-top:1rem ;" >
+               <p id="nm" style="font-size:25px; font-weight:600;""> <?php echo $row['name'];?> </p>
+               <div class="wrap"style="display:flex;margin-top:0.8rem">
+               <a href="edit_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Update Record" style="color#7282FB" data-toggle="tooltip">
+                 <span class="fa fa-pencil" style="color:#A85CF1;"></span> </a>
+                 <a onclick="return confirm('Are you sure?')" href="delete_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Delete Record" style="color#7282FB" data-toggle="tooltip"> 
+                  <span class="fa fa-trash " style="color: #FF3D3D;"></span></a>
+            </div>
             </div>
             <div class="card-upper" >
-               <p id="nm" style="font-size:19px; font-weight:600px;"> <?php echo $row['name'];?> </p>
-               <div class="wrap" style="display:flex;">
-               <a href="edit_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Update Record" style="color#7282FB" data-toggle="tooltip">
-                 <span class="fa fa-pencil"></span> </a>
-                 <a onclick="return confirm('Are you sure?')" href="delete_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Delete Record" style="color#7282FB" data-toggle="tooltip"> 
-                  <span class="fa fa-trash "></span></a>
+            <div><span class="twelve" style="margin-right:0.5rem">12</span>Steps</div>
+            <div style="color: #A3A1A1;font-size:20px"><i class="fa-regular fa-clock"></i> <span style="margin-bottom:1rem"><?php echo  ($t1[1]);?></span></div>
             </div>
-            </div>
-
-            <div class="card-upper">
-            <p style="font-size:20px; font-weight:400;"> <span class="fa-thin fa-fire"></span><?php echo $row['calories'];?> </p> 
-
-    
-
-            <p style="font-size:20px; font-weight:400;"><?php echo $row['serving']; ?> <span> serve <span></p>
+            <div class="card-upper" style="margin-top:1rem">
+              <span><img src="images/calo.jpg" alt="" style="margin-right:0.3rem"><?php echo $row['calories'];?>kcal</span>
+              <span><button class="btn_medium">Medium</button></span>
 
             </div>
-        
-            </div>  
+            
+            </div>
                   
             <?php }} ?>
 
             </div> 
+
+            
           
 
 
             
 </div>
+<div style="margin-left:93.5%">
+              <a href="create_recipe.php" class="addrecipe">+</a>
+            </div>
+            
 
 
 
