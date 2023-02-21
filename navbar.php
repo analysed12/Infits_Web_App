@@ -15,6 +15,16 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
+    @font-face {
+        font-family: 'NATS';
+        src: url('./font/NATS.ttf.woff') format('woff'),
+            url('./font/NATS.ttf.svg#NATS') format('svg'),
+            url('./font/NATS.ttf.eot'),
+            url('./font/NATS.ttf.eot?#iefix') format('embedded-opentype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
     body {
         margin: 0;
         /* width: 100vw;
@@ -160,7 +170,7 @@
         align-items: center;
         border: 1px solid #E5F1FF;
         background-color: #E5F1FF;
-        color: #0177FB;
+        color: #0177FB !important;
         border-radius: 10px;
     }
 
@@ -221,11 +231,18 @@
         font-size: 36px;
         margin-left: 50px;
     }
+
+    body #sidenavbar {
+        position: relative;
+        background-image: url("icons/SIdebar_vector.svg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 </style>
 
 <script>
     <?php
-        $name = "John Wayne";
+    $name = "John Wayne";
     ?>
 </script>
 
@@ -247,8 +264,6 @@
         <a onclick="openPage('Contact','nav-res','CONTACT US')">Recipes</a>
         <a onclick="openPage('Careers','nav-res','CAREERS')">Appoinments</a>
         <a onclick="openPage('Contact','nav-res','CONTACT US')">Client List</a>
-        <a href ="#"><img src ="icons/healthicon.svg">Health Form</a>
-
         <a>Settings</a>
         <a>Get Help</a>
         <a>Log Out</a>
@@ -270,7 +285,6 @@
                 src="images/vec_appointments.png" class="nav-icon">Appoinments</a>
         <a class="sidenavlink" onclick="openPage('Contact','sidenav','CONTACT US')"><img
                 src="images/vec_client_list.png" class="nav-icon">Client List</a>
-        <a class="sidenavlink" href="#"><img src="icons/healthicon.svg" class="nav-icon">Health Form</a>
         <div class="menu-bottom">
             <a class="sidenavlink"><img src="images/vec_gethelp.png" class="nav-icon">Get Help</a>
             <a class="sidenavlink"><img src="images/vec_settings.png" class="nav-icon">Settings</a>
@@ -301,7 +315,7 @@
             <img src="images/logo.png" id="logo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="#"><img src="images/vec_active_dashboard.png"> &nbsp&nbsp Dashboard</a>
-            <a href="#"><img src="images/vec_messages.png">&nbsp&nbsp Messages</a></a>
+            <a href="#"><img src="images/vec_messages.png">&nbsp&nbsp Messages</a>
             <a href="#"><img src="images/vec_live.png">&nbsp&nbsp Live</a>
             <a href="#"><img src="images/vec_mail.png">&nbsp&nbsp Mail</a>
             <a href="#"><img src="images/vec_recipies.png">&nbsp&nbsp Recipies</a>
@@ -314,9 +328,9 @@
         <span style="font-size:20px;cursor:pointer; margin: 5px;" onclick="openNav()">&#9776; Menu</span>
     </div>
     <script>
-            function openNav() {
-                document.getElementById("mySidenav").style.width = "250px";
-            }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";

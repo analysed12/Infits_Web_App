@@ -144,6 +144,17 @@ if ($conn->connect_error) {
         margin-top: 0px;
         justify-content: center;
     }
+    a{
+        text-decoration: none;
+        cursor:pointer;
+        color: #9E5EF4;
+    }
+    a :hover{
+        background-color:#ffffff;
+        text-decoration: none;
+        cursor:pointer;
+        color: #9E5EF4;
+    }
 
     .box .current,
     .box .btn:hover {
@@ -175,7 +186,7 @@ if ($conn->connect_error) {
                 <img class="profile-icon" src="icons/profile-icon.svg" alt="userprofile">
                 </img>
                 <p class="bold"> Ronald Richards </p>
-                <p style="color:#9E5EF4; "> Profile </p>
+                <p style="color:#9E5EF4; "> <a href = "#">Profile</a></p>
             </div>
             <div class="end">
                 <p class="end" style="color: #CACACA; "> Dec 23, 2022 18:52 </p>
@@ -185,21 +196,21 @@ if ($conn->connect_error) {
         <div class="forms">
             <img class="profile-icon" src="icons/profile-icon.svg" alt="userprofile"></img>
             <p class="bold"> Ronald Richards </p>
-            <p class="small" style="color:#9E5EF4;  font-size:20px;"> Profile </p>
+            <p class="small" style="color:#9E5EF4;  font-size:20px;"> <a href = "#">Profile</a></p>
             <p class="leftMargin" style="color: #CACACA;  font-size:17px;"> Dec 23, 2022 18:52 </p>
             <p style="color: #FF0000;"> Pending <img src="icons/pending.svg"></img></p>
         </div>
         <div class="forms">
             <img class="profile-icon" src="icons/profile-icon.svg" alt="userprofile"></img>
             <p class="bold"> Ronald Richards </p>
-            <p class="small" style="color:#9E5EF4;  font-size:20px;"> Profile </p>
+            <p class="small" style="color:#9E5EF4;  font-size:20px;"> <a href = "#">Profile</a></p>
             <p class="leftMargin" style="color: #CACACA;  font-size:17px;"> Dec 23, 2022 18:52 </p>
             <p style="color: #FF0000;"> Pending <img src="icons/pending.svg"></img></p>
         </div>
         <div class="forms">
             <img class="profile-icon" src="icons/profile-icon.svg" alt="userprofile"></img>
             <p class="bold"> Ronald Richards </p>
-            <p class="small" style="color:#9E5EF4;  font-size:20px;"> Profile </p>
+            <p class="small" style="color:#9E5EF4;  font-size:20px;"> <a href = "#">Profile</a></p>
             <p class="leftMargin" style="color: #CACACA;  font-size:17px;"> Dec 23, 2022 18:52 </p>
             <p style="color: #FF0000;"> Pending <img src="icons/pending.svg"></img></p>
         </div>

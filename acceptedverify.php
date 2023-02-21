@@ -29,7 +29,11 @@ if ($conn->connect_error) {
         font-weight: 400;
         margin-left: 200px;
     }
-
+    a{
+        text-decoration: none;
+        cursor:pointer;
+        color: #9E5EF4;
+    }
     .heading p {
 
         font-weight: 600;
@@ -172,21 +176,21 @@ if ($conn->connect_error) {
         <div class="forms">
             <img class="profile-icon" src="icons/profile-icon.svg" alt="userprofile"></img>
             <p class="bold"> Ronald Richards </p>
-            <p class="small" style="color:#9E5EF4;  font-size:20px;"> Profile </p>
+            <p class="small" style="color:#9E5EF4;  font-size:20px;"> <a href = "#">Profile</a></p>
             <p class="leftMargin" style="color: #CACACA;  font-size:17px;"> Dec 23, 2022 18:52 </p>
             <p style="color: #96C362;"> Verified! <img src="icons/Approval.svg"></img></p>
         </div>
         <div class="forms">
             <img class="profile-icon" src="icons/profile-icon.svg" alt="userprofile"></img>
             <p class="bold"> Ronald Richards </p>
-            <p class="small" style="color:#9E5EF4;  font-size:20px;"> Profile </p>
+            <p class="small" style="color:#9E5EF4;  font-size:20px;"><a href = "#">Profile</a></p>
             <p class="leftMargin" style="color: #CACACA;  font-size:17px;"> Dec 23, 2022 18:52 </p>
             <p style="color: #96C362;"> Verified! <img src="icons/Approval.svg"></img></p>
         </div>
         <div class="forms">
             <img class="profile-icon" src="icons/profile-icon.svg" alt="userprofile"></img>
             <p class="bold"> Ronald Richards </p>
-            <p class="small" style="color:#9E5EF4;  font-size:20px;"> Profile </p>
+            <p class="small" style="color:#9E5EF4;  font-size:20px;"> <a href = "#">Profile</a></p>
             <p class="leftMargin" style="color: #CACACA;  font-size:17px;"> Dec 23, 2022 18:52 </p>
             <p style="color: #96C362;"> Verified! <img src="icons/Approval.svg"></img></p>
         </div>

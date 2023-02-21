@@ -25,6 +25,12 @@ if ($conn->connect_error) {
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
+    *{
+        font-family: 'NATS';
+        font-style: normal;
+        font-weight: 400;
+        /* margin-left: 200px; */
+    }
     .container-sm {
         font-family: 'NATS';
         font-style: normal;
@@ -118,12 +124,29 @@ if ($conn->connect_error) {
         border-bottom: 3px solid #9E5EF4;
         border-radius: 0px;
     }
+    a{
+        text-decoration: none;
+        cursor:pointer;
+        color: #9E5EF4;
+    }
+
+    #verify{
+        background: #4B9AFB;
+        box-sizing: border-box;
+        width: 145px;
+        height: 55px;
+        border: 1.24px solid #4B9AFB;
+        border-radius: 10px;
+        color: #FFFFFF;
+        
+    }
 </style>
 <?php
 function random_strings()
 {
     $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    // return substr(str_shuffle($str_result), 0, 8); //length of the random code is 8
+    $a = substr(str_shuffle($str_result), 0, 8);  //length of the random code is 8
+    // document.getElementById("verify").innerHTML = $a;
 }
 $query = "UPDATE `dietitian` SET `dietician-referral` = 'random_strings()' WHERE `dietitianuserID` = 'John_wayne';";
 echo random_strings();
@@ -152,8 +175,8 @@ $query = "UPDATE `dietitian` SET `dietician-referral` = 'random_strings()' WHERE
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center" onclick="">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center" id="verify" onclick = "random_strings()">Generate a <br>verification code</button>
 
                 </div>
             </div>
@@ -161,72 +184,72 @@ $query = "UPDATE `dietitian` SET `dietician-referral` = 'random_strings()' WHERE
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center" id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
             <div class="card text-center m-3" style="width: 12rem;">
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center"id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
             <div class="card text-center m-3" style="width: 12rem;">
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center"id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
             <div class="card text-center m-3" style="width: 12rem;">
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center" id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
             <div class="card text-center m-3" style="width: 12rem;">
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center" id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
             <div class="card text-center m-3" style="width: 12rem;">
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center"id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
             <div class="card text-center m-3" style="width: 12rem;">
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center"id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
             <div class="card text-center m-3" style="width: 12rem;">
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center" id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
             <div class="card text-center m-3" style="width: 12rem;">
                 <div class="card-body center-block">
                     <img class="card-img-top rounded-circle img-center" src="images/account_name.svg" alt="Card image cap" style="width:80px;">
                     <p class="text-center">Ronald Richards</p>
-                    <p class="card-text text-center">Profile</p>
-                    <button type="button" class="btn btn-primary text-center">Generate a verification code</button>
+                    <p class="card-text text-center"><a href = "#">Profile</a></p>
+                    <button type="button" class="btn btn-primary text-center" id="verify">Generate a <br>verification code</button>
                 </div>
             </div>
         </div>
