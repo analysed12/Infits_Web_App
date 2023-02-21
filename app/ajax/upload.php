@@ -71,7 +71,7 @@ if (isset($_POST['to_id']) && isset($_FILES['my_image'])) {
 
                 echo "Inserted1 done";
                 // header("Location: ../../chat.php?user=$to_id");
-                header()
+                // header()
 
 
                 // mysqli_query($conn1, $sql);
