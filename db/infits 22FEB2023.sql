@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2023 at 04:26 PM
+-- Generation Time: Feb 22, 2023 at 06:12 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -99,9 +99,7 @@ INSERT INTO `add_direction` (`dir_id`, `direction`) VALUES
 (683, 'add some salt'),
 (683, 'boil for 1 hour'),
 (793, 'add some salt'),
-(204, 'cook good'),
-(741, 'directions'),
-(741, 'cook good');
+(204, 'cook good');
 
 -- --------------------------------------------------------
 
@@ -140,8 +138,7 @@ INSERT INTO `add_ingredient` (`ingrd_id`, `ingrd_image`, `ingrd_name`, `quantity
 (182, 0x494d472d36336337623631633439333438392e37323737393938382e6a70677c2e2f696d616765732f494d472d36336337623631633439333438392e37323737393938382e6a7067, 'salt', '1spoon'),
 (182, 0x494d472d36336337623731356436323866392e36353034373631392e6a70677c2e2f696d616765732f494d472d36336337623731356436323866392e36353034373631392e6a7067, 'sugar', '1spoon'),
 (924, 0x494d472d36336565366135633135636534362e31363134323837382e706e677c2e2f696d616765732f494d472d36336565366135633135636534362e31363134323837382e706e67, 'Salt', '2 '),
-(924, 0x494d472d36336565366137646239663562382e35363034323338312e706e677c2e2f696d616765732f494d472d36336565366137646239663562382e35363034323338312e706e67, 'sugar', '2'),
-(513, NULL, 'ingredients', '1');
+(924, 0x494d472d36336565366137646239663562382e35363034323338312e706e677c2e2f696d616765732f494d472d36336565366137646239663562382e35363034323338312e706e67, 'sugar', '2');
 
 -- --------------------------------------------------------
 
@@ -827,6 +824,32 @@ INSERT INTO `category` (`num`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chats`
+--
+
+CREATE TABLE `chats` (
+  `chat_id` int(11) NOT NULL,
+  `from_id` int(11) NOT NULL,
+  `to_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `opened` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chats`
+--
+
+INSERT INTO `chats` (`chat_id`, `from_id`, `to_id`, `message`, `opened`, `created_at`) VALUES
+(79, 6, 1, 'hey', 1, '2023-02-22 00:44:09'),
+(80, 4, 6, 'Hello I have Created new Chat', 1, '2023-02-22 00:53:41'),
+(81, 6, 1, 'hey', 0, '2023-02-22 22:36:52'),
+(82, 6, 1, 'Hey', 0, '2023-02-22 22:37:00'),
+(83, 6, 4, 'OK it was good', 0, '2023-02-22 22:37:19');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `client`
 --
 
@@ -899,6 +922,27 @@ CREATE TABLE `consultations` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `conversations`
+--
+
+CREATE TABLE `conversations` (
+  `conversation_id` int(11) NOT NULL,
+  `user_1` int(11) NOT NULL,
+  `user_2` int(11) NOT NULL,
+  `convo_time` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `conversations`
+--
+
+INSERT INTO `conversations` (`conversation_id`, `user_1`, `user_2`, `convo_time`) VALUES
+(11, 6, 1, '2023-02-22 00:44:09'),
+(12, 4, 6, '2023-02-22 00:53:41');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `create_client`
 --
 
@@ -958,8 +1002,7 @@ INSERT INTO `create_event` (`eventID`, `dietitianuserID`, `eventname`, `clientus
 (6, 'John_wayne', 'call with test2', '4', 'Video Chat', '2023-02-08 08:04:34', '2023-02-17 13:04:34', 'ONLINE', 'nsabd jddk', 'NA'),
 (7, 'John_wayne', 'Consultation', '1', 'Call', '2023-02-20 23:18:00', '2023-02-16 13:21:00', 'onlien', 'x<ZC', 'hello'),
 (8, 'John_wayne', 'Dietplan', '2', 'Call', '2023-02-14 22:00:00', '2023-05-19 22:00:00', 'onlien', 'nothing but just a try', 'hello'),
-(9, 'John_wayne', 'Dietplan', '1', 'Videocall', '2023-02-16 23:30:00', '2023-02-25 23:30:00', 'onlien', 'x<ZC', 'hello'),
-(10, 'John_wayne', 'Consultation', '1', 'Videocall', '2023-02-23 19:39:00', '2023-02-25 19:40:00', 'onlien', 'nothing but just a try', 'hello');
+(9, 'John_wayne', 'Dietplan', '1', 'Videocall', '2023-02-16 23:30:00', '2023-02-25 23:30:00', 'onlien', 'x<ZC', 'hello');
 
 -- --------------------------------------------------------
 
@@ -987,10 +1030,10 @@ CREATE TABLE `create_plan` (
 --
 
 INSERT INTO `create_plan` (`plan_id`, `dietitianuserID`, `profile`, `image`, `name`, `tags`, `duration`, `start_date`, `end_date`, `features`, `description`, `price`) VALUES
-(1, 'John_wayne', 'Plan test', 'No Image', 'TEST PLAN', 'Keto Diet , Vegan Diet', '2', '2022-03-02', '2023-03-07', '', 'NAjkd dkjsdn sdk', 500),
-(2, 'John_wayne', NULL, NULL, 'Hey', 'Keto Diet , Vegan Diet', NULL, '2023-02-23', '2023-02-25', 'good', 'nothing but just a try', 99),
-(3, 'John_wayne', NULL, NULL, 'Hey', 'Keto Diet , Vegan Diet', NULL, '2023-02-23', '2023-02-25', 'good', 'nothing but just a try', 99),
-(4, 'John_wayne', NULL, NULL, 'New Bug Fixed', 'Keto Diet , Vegan Diet', NULL, '2023-02-25', '2023-04-13', '', 'nothing but just a try', 99551);
+(1, 'John_wayne', NULL, NULL, 'Basic Plan', 'Keto Diet , Vegan Diet', NULL, '2023-02-01', '2023-03-31', 'Ye Naya Feature hai  , Try try , Try Once', 'nothing but just a try', 99),
+(3, 'John_wayne', NULL, NULL, 'Hey', 'Keto Diet , Vegan Diet', NULL, '2023-01-01', '2023-04-30', 'good', 'nothing but just a try', 99),
+(4, 'John_wayne', NULL, NULL, 'New Bug Fixed', 'Keto Diet , Vegan Diet', NULL, '2023-02-25', '2023-04-13', '', 'nothing but just a try', 99551),
+(5, 'John_wayne', NULL, NULL, 'Basic 77', 'Keto Diet , Vegan Diet', NULL, '2023-01-01', '2023-03-31', '', 'nothing but just a try', 78);
 
 -- --------------------------------------------------------
 
@@ -1031,7 +1074,6 @@ INSERT INTO `dietian_recipies` (`name`, `time`, `serving`, `link`, `calories`, `
 ('paneer tikka', '2hour|2hour', 5, 'HELLO HOW R U?', 22, 22, 22, 90, 22, 620, 501, 'masters', 'Sam', 'IMG-63b04431a6f277.95427466.jpg|./images/IMG-63b04431a6f277.95427466.jpg', 'file', 'masters', 14),
 ('banana shake', '1min|2min', 2, 'HELLO HOW R U?', 22, 1, 11, 90, 10, 912, 533, 'Breakfast', 'Sam', 'IMG-63bc02a93baa51.27799861.jpg|./images/IMG-63bc02a93baa51.27799861.jpg', 'file', 'Juice', 15),
 ('fgfg', '1hour|1hour', 3, 'HELLO HOW R U?', 23, 333, 34, 90, 21, 976, 683, 'dinner', 'Sam', 'IMG-63bc19dc524df9.21169176.jpg|./images/IMG-63bc19dc524df9.21169176.jpg', 'file', 'Paratha', 16),
-('test', '25|25', 1, 'HELLO HOW R U?', 74, 55, 222, 90, 22, 513, 741, 'Croissants', 'John_wayne', 'IMG-63f22ef8741d33.77268413.png|./images/IMG-63f22ef8741d33.77268413.png', 'file', 'Breakfast', 505),
 ('alooparatha', '3|2', 5, 'HELLO HOW R U?', 12, 34, 12, 90, 23, 987, 762, 'Breakfast', 'Sam', 'IMG-63baa0d65cdb83.27896423.jpg|./images/IMG-63baa0d65cdb83.27896423.jpg', 'file', 'Paratha', 17),
 ('orange juice', '10min|10min', 2, 'HELLO HOW R U?', 23, 11, 45, 90, 10, 841, 784, 'Breakfast', 'Sam', 'IMG-63baa40a29af79.37766680.jpg|./images/IMG-63baa40a29af79.37766680.jpg', 'file', 'Juice', 18),
 ('potato poha', '15min|15min', 4, 'HELLO HOW R U?', 4, 34, 23, 90, 11, 960, 793, 'snack', 'Sam', 'IMG-63bc1974405699.21855670.png|./images/IMG-63bc1974405699.21855670.png', 'file', 'Poha', 19),
@@ -1054,6 +1096,7 @@ CREATE TABLE `dietitian` (
   `email` varchar(40) NOT NULL,
   `mobile` varchar(20) NOT NULL,
   `profilePhoto` blob DEFAULT NULL,
+  `p_p` varchar(255) NOT NULL DEFAULT 'user-default.png',
   `location` varchar(20) NOT NULL,
   `age` int(11) NOT NULL,
   `gender` char(1) NOT NULL,
@@ -1065,20 +1108,21 @@ CREATE TABLE `dietitian` (
   `whatsapp` varchar(255) DEFAULT NULL,
   `twitter` varchar(255) DEFAULT NULL,
   `linkedin` varchar(255) DEFAULT NULL,
-  `instagram` varchar(255) DEFAULT NULL
+  `instagram` varchar(255) DEFAULT NULL,
+  `last_seen` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dietitian`
 --
 
-INSERT INTO `dietitian` (`dietitian_id`, `dietitianuserID`, `password`, `name`, `qualification`, `email`, `mobile`, `profilePhoto`, `location`, `age`, `gender`, `experience`, `about_me`, `no_of_clients`, `referral_code`, `facebook`, `whatsapp`, `twitter`, `linkedin`, `instagram`) VALUES
-(1, 'd005', 'good', 'Noha', '34', 'bn@ju.in', '87896767', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'ddd', 33, 'F', 23, 'xcdf', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL),
-(2, 'doo1', 'nbsnmbm', 'John', '56', 'dv@n.in', '8888888', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'pune', 45, 'M', 10, 'bhjg', 12, '8F93FCD1', NULL, NULL, NULL, NULL, NULL),
-(3, 'doo2', 'bvb', 'Sam', '32', 'gh@.in', '9999900', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'hjk', 21, 'M', 12, 'df', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL),
-(4, 'doo3', 'bbbnvb', 'Jam', '45', 'bnn@hm.in', '898098', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'bvb', 89, 'M', 45, 'vbvnfg', 67, 'yuigcv', NULL, NULL, NULL, NULL, NULL),
-(5, 'doo4', 'nbnbm', 'Tom', '23', 'hj@ju.in', '67687898', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'dfd', 34, 'M', 23, 'ffgf', 23, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL),
-(6, 'John_wayne', '123', 'John_wayne', 'na', 'na@gmail.com', 'na', NULL, 'na', 25, 'm', 5, 'shj jhb', 12, '', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dietitian` (`dietitian_id`, `dietitianuserID`, `password`, `name`, `qualification`, `email`, `mobile`, `profilePhoto`, `p_p`, `location`, `age`, `gender`, `experience`, `about_me`, `no_of_clients`, `referral_code`, `facebook`, `whatsapp`, `twitter`, `linkedin`, `instagram`, `last_seen`) VALUES
+(4, 'ash', '123456', 'John Doe', '45', 'bnn@hm.in', '898098', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'bvb', 89, 'M', 45, 'vbvnfg', 67, 'yuigcv', NULL, NULL, NULL, NULL, NULL, '2023-02-22 00:53:35'),
+(2, 'doo1', 'nbsnmbm', 'John', '56', 'dv@n.in', '8888888', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'pune', 45, 'M', 10, 'bhjg', 12, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
+(3, 'doo2', 'bvb', 'Sam', '32', 'gh@.in', '9999900', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'hjk', 21, 'M', 12, 'df', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
+(5, 'doo4', 'nbnbm', 'Tom', '23', 'hj@ju.in', '67687898', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'dfd', 34, 'M', 23, 'ffgf', 23, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
+(6, 'John_wayne', '123', 'John_wayne', 'na', 'na', 'na', NULL, 'user-default.png', 'na', 25, 'm', 5, 'shj jhb', 12, '', NULL, NULL, NULL, NULL, NULL, '2023-02-22 22:37:26'),
+(1, 'sabari', '123456', 'Sabari Nathan', '34', 'bn@ju.in', '87896767', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'ddd', 33, 'F', 23, 'xcdf', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL, '2023-02-22 00:50:13');
 
 -- --------------------------------------------------------
 
@@ -1129,7 +1173,7 @@ INSERT INTO `dietition_tasks` (`task_id`, `dietitianuserID`, `title`, `descripti
 (42, 'John_wayne', 'VC Meeting', 'fd fgfg', '2023-02-12', '23:30', '12:32', 0, '2023-02-12 15:58:24'),
 (43, 'John_wayne', 'VC Meeting', 'c s vsv', '2023-02-07', '22:02', '00:07', 0, '2023-02-15 13:33:13'),
 (44, 'John_wayne', 'VC Meeting', 'jknkjnk  n kj', '2023-02-15', '20:00', '21:00', 0, '2023-02-15 13:34:22'),
-(45, 'John_wayne', 'VC Meeting', 'asnjcnakcjndcnaj', '2023-02-08', '21:48', '12:51', 0, '2023-02-18 14:18:50');
+(45, 'John_wayne', 'Title', 'description', '2023-02-08', '20:49', '', 0, '2023-02-18 14:19:53');
 
 -- --------------------------------------------------------
 
@@ -1207,17 +1251,17 @@ CREATE TABLE `goals` (
 --
 
 INSERT INTO `goals` (`goal_id`, `dietition_id`, `client_id`, `steps`, `heart`, `water`, `weight`, `sleep`, `calorie`, `time`) VALUES
-(9, 'John_wayne', 2, 0, 0, 26, 0, 8, 209, '2023-02-12 09:35:54'),
+(9, 'John_wayne', 2, 3000, 0, 26, 0, 8, 209, '2023-02-12 09:35:54'),
 (10, 'John_wayne', 12, 0, 0, 0, 0, 0, 5000, '2023-02-12 09:37:13'),
-(11, 'John_wayne', 3, 7000, 300, 26, 67, 8, 5000, '2023-02-12 12:16:34'),
-(19, 'John_wayne', 1, 65500, 50, 30, 30, 13, 2000, '2023-02-12 15:40:27'),
-(20, 'John_wayne', 4, 0, 0, 0, 67, 8, 5000, '2023-02-12 16:00:44'),
-(21, 'John_wayne', 5, 0, 0, 0, 67, 8, 5000, '2023-02-14 14:51:40'),
-(29, 'John_wayne', 6, 0, 0, 0, 0, 8, 0, '2023-02-16 17:01:34'),
-(30, 'John_wayne', 7, 0, 0, 0, 0, 0, 0, '2023-02-16 17:01:35'),
-(31, 'John_wayne', 8, 0, 0, 0, 0, 0, 0, '2023-02-16 17:53:04'),
-(32, 'John_wayne', 9, 0, 0, 0, 0, 0, 0, '2023-02-17 15:36:09'),
-(33, 'John_wayne', 10, 0, 0, 0, 0, 0, 0, '2023-02-17 18:22:44'),
+(11, 'John_wayne', 3, 3000, 300, 26, 67, 8, 5000, '2023-02-12 12:16:34'),
+(19, 'John_wayne', 1, 3000, 0, 0, 0, 8, 5000, '2023-02-12 15:40:27'),
+(20, 'John_wayne', 4, 3000, 300, 0, 67, 8, 5000, '2023-02-12 16:00:44'),
+(21, 'John_wayne', 5, 3000, 300, 0, 67, 8, 5000, '2023-02-14 14:51:40'),
+(29, 'John_wayne', 6, 3000, 0, 0, 0, 8, 0, '2023-02-16 17:01:34'),
+(30, 'John_wayne', 7, 3000, 0, 0, 0, 0, 0, '2023-02-16 17:01:35'),
+(31, 'John_wayne', 8, 3000, 0, 0, 0, 0, 0, '2023-02-16 17:53:04'),
+(32, 'John_wayne', 9, 3000, 0, 0, 0, 0, 0, '2023-02-17 15:36:09'),
+(33, 'John_wayne', 10, 3000, 0, 0, 0, 0, 0, '2023-02-17 18:22:44'),
 (34, 'John_wayne', 11, 0, 0, 0, 0, 0, 0, '2023-02-17 18:22:45');
 
 -- --------------------------------------------------------
@@ -2570,6 +2614,32 @@ CREATE TABLE `template_name` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(1000) NOT NULL,
+  `p_p` varchar(255) DEFAULT 'user-default.png',
+  `last_seen` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `p_p`, `last_seen`) VALUES
+(1, 'Sabari Nathan', 'sabari', '123456', 'user-default.png', '2023-02-20 17:45:52'),
+(2, 'Ram Kumar', 'ram', '123456', 'user-default.png', '2023-01-23 19:57:35'),
+(3, 'Robin Dravid', 'raju', '123456', 'user-default.png', '2023-01-27 19:48:30'),
+(4, 'John Doe', 'ash', '123456', 'user-default.png', '2023-02-17 00:06:32'),
+(7, 'Aditya', 'aditya', '123456', 'aditya.jpg', '2023-02-13 10:17:14');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `watertracker`
 --
 
@@ -3408,6 +3478,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`num`);
 
 --
+-- Indexes for table `chats`
+--
+ALTER TABLE `chats`
+  ADD PRIMARY KEY (`chat_id`);
+
+--
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
@@ -3420,6 +3496,12 @@ ALTER TABLE `consultations`
   ADD UNIQUE KEY `dateAndTime` (`dateAndTime`),
   ADD KEY `consultation_fk1` (`dietitianID`),
   ADD KEY `consultation_fk2` (`clientID`);
+
+--
+-- Indexes for table `conversations`
+--
+ALTER TABLE `conversations`
+  ADD PRIMARY KEY (`conversation_id`);
 
 --
 -- Indexes for table `create_event`
@@ -3510,6 +3592,12 @@ ALTER TABLE `template_name`
   ADD PRIMARY KEY (`template_name`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- Indexes for table `watertracker`
 --
 ALTER TABLE `watertracker`
@@ -3538,16 +3626,28 @@ ALTER TABLE `category`
   MODIFY `num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `chats`
+--
+ALTER TABLE `chats`
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT for table `conversations`
+--
+ALTER TABLE `conversations`
+  MODIFY `conversation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `create_event`
 --
 ALTER TABLE `create_event`
-  MODIFY `eventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `eventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `create_plan`
 --
 ALTER TABLE `create_plan`
-  MODIFY `plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dietitian`
@@ -3559,19 +3659,25 @@ ALTER TABLE `dietitian`
 -- AUTO_INCREMENT for table `dietition_tasks`
 --
 ALTER TABLE `dietition_tasks`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `goals`
 --
 ALTER TABLE `goals`
-  MODIFY `goal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `goal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `reminders`
 --
 ALTER TABLE `reminders`
-  MODIFY `reminder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `reminder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
