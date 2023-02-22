@@ -101,6 +101,7 @@ padding-left:1.5rem;
 padding-right:1.5rem;
 font-size:30px;
 
+
     }
     .addrecipe:hover{
       width: 85px;
@@ -429,15 +430,16 @@ border-radius: 8px;
 <div  class="header" style="display:flex ;justify-content:space-between">
         <div  style="font-size:2.5rem;margin-left:2rem">Choose a recipe</div>
         <div style="margin-right:2rem;display:flex;gap:1.5rem">
-        <div class="searchbox"><img src="images/vec_search.png" alt="">
-      <input type="text" placeholder="Search recipe here" style="border:none;font-size:1rem;margin-left:1rem">
+        <div class="searchbox">
+          <form method="post">
+          <button style="background-color:white;border:none;" id ="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
+      <input type="search"   name="sinput"placeholder="Search recipe here" style="border:none;font-size:1rem;margin-left:1rem">
     </div>
-    <button class="savebutton">Save</button>
+    <button type="submit"class="savebutton">Save</button>
+          </form>
             
         </div>
-        
-        
-  </div>
+</div>
   <br>
     <!-------new recipe------>
     <?php
@@ -541,33 +543,34 @@ border-radius: 8px;
                ?>
                
 
-            <div class="card" style="padding:30px;">
+            <div class="card" style="padding:15px;">
                 <div class="card-upper">  
-                    <p id="bu" style="font-size:20px; font-weight:400px;color:red; z-index=1;"> Breakfast </p>   <p style="margin-left:20px; font-size:20px;color:red;">
-                     <span class="fa-thin fa-clock"></span><?php echo  ($t1[1]);?></p> </div>
+                    <p id="bu" style="font-size:20px; font-weight:bold"> Recipe </p> </div>
 
-            <div class="img-dis" style="height:50%; width:inherit; text-align:center;"> 
-                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:100%; width:100%; object-fit:cover;"/>
+            <div class="img-dis" style="height:50%; width:inherit;text-align:center;"> 
+                <img src="<?php echo $path;?>" alt="" title="<?php $ext[0]; ?>" style="height:100%; width:70%; object-fit:cover;"/>
             </div>
-            <div class="card-upper" >
-               <p id="nm" style="font-size:19px; font-weight:600px;"> <?php echo $row['name'];?> </p>
-               <div class="wrap" style="display:flex;">
+            <div class="card-upper" style="margin-top:1rem ;">
+               <p id="nm" style="font-size:25px; font-weight:600;"> <?php echo $row['name'];?> </p>
+               <div class="wrap" style="display:flex;margin-top:0.8rem">
                <a href="edit_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Update Record" style="color#7282FB" data-toggle="tooltip">
-                 <span class="fa fa-pencil"></span> </a>
+                 <span class="fa fa-pencil" style="color:#A85CF1;"></span> </a>
                  <a onclick="return confirm('Are you sure?')" href="delete_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Delete Record" style="color#7282FB" data-toggle="tooltip"> 
-                  <span class="fa fa-trash "></span></a>
+                  <span class="fa fa-trash " style="color: #FF3D3D;"></span></a>
             </div>
             </div>
 
-            <div class="card-upper">
-            <p style="font-size:20px; font-weight:400;"> <span class="fa-thin fa-fire"></span><?php echo $row['calories'];?> </p> 
-        
-        
-            <p style="font-size:20px; font-weight:400;"> <?php echo $row['serving']; ?> <span>serve</span></p>
+            <div class="card-upper" >
+            <div><span class="twelve" style="margin-right:0.5rem">12</span>Steps</div>
+            <div style="color: #A3A1A1;font-size:20px"><i class="fa-regular fa-clock"></i> <span style="margin-bottom:1rem"><?php echo  ($t1[1]);?></span></div>
+            </div>
+            <div class="card-upper" style="margin-top:1rem">
+              <span><img src="images/calo.jpg" alt="" style="margin-right:0.3rem"><?php echo $row['calories'];?>kcal</span>
+              <span><button class="btn_medium">Medium</button></span>
 
             </div>
             
-            </div>     
+            </div>      
              
             <?php }} }?>
 
@@ -848,7 +851,7 @@ border-radius: 8px;
 
             
 </div>
-<div style="margin-left:93.5%">
+<div style="margin-left:93.5%;margin-top:2rem;">
               <a href="create_recipe.php" class="addrecipe">+</a>
             </div>
             

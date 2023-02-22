@@ -4,6 +4,22 @@ include('navbar.php');
 // Get Id
 if(isset($_SESSION['name'])){
     $dietitian_id = $_SESSION['name'];
+
+    # database connection file
+    include 'app/db.conn.php';
+
+    include 'app/helpers/user.php';
+    include 'app/helpers/conversations.php';
+    include 'app/helpers/timeAgo.php';
+    include 'app/helpers/last_chat.php';
+    include 'app/helpers/timeHM.php';
+
+    # Getting User data data
+    $user = getUser($_SESSION['dietitianuserID'], $conn);
+
+    # Getting User conversations
+    $conversations = getConversation($user['dietitian_id'], $conn);
+
 }else{
     header('location: login.php');
 }
@@ -434,6 +450,10 @@ function fetchInformation($client_id){
     
     
 }
+.small-text-message{
+            font-size: 1rem;
+            color: rgba(0, 0, 0, 0.45);
+        }
 #today_tasks,
 #upcoming_tasks{
     display: none;
@@ -787,6 +807,91 @@ if(!empty($data)){
 <!----------------------------------------------------------------------------------------------------------------------------------->
         <div class="dashboard_container5">
 
+
+            <!-- chat -->
+
+<div class="container5_wrapper2">
+                <div class="tasklist">
+                    <p style="font-size:1.3rem ; font-weight:600">Messages</p>
+
+                    <span><a href="chat_home.php" style=" color:#717171 ; border:none">View All</a></span>
+                </div>
+                <!-- chat just added here -->
+                <div class="d-flex flex-coloumn chat messages" style="outline: 2px solid #EEEEEE; padding:20px!important;">
+                    <div class="" style="width:360px">
+                        <?php
+                        $counter = 0;
+                        foreach ($conversations as $conversation) { ?>
+                            <li class="list-group-item">
+                                <a href="chat_messages.php?user=<?= $conversation['dietitianuserID'] ?>" class="d-flex
+	    				          justify-content-between
+	    				          align-items-center">
+                                    <div class="d-flex
+	    					            align-items-center">
+                                        <img src="chat/uploads/<?= $conversation['p_p'] ?>" class="rounded-circle" style="width:40px">
+                                        <h3 class="fs-xs m-2 text-dark">
+                                            <?= $conversation['name'] ?><br>
+                                            <small class="small-text-message">
+                                                <?php
+                                                echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
+                                                ?>
+                                            </small>
+
+                                        </h3>
+                                    </div>
+                                    <div class="d-flex
+	    					            align-items-center " style="margin-left: auto;">
+                                        <h3 class="fs-xs p-2 text-dark">
+
+                                            <small class="small-text-message">
+                                                <?php
+                                                echo last_time($conversation['last_seen']);
+                                                ?>
+                                            </small><br />
+                                            <img class="" src="icons/DoubleTick.svg" style="width:16px">
+                                        </h3>
+
+
+                                    </div>
+                                    <?php if (last_seen($conversation['last_seen']) == "1") { ?>
+                                        <div title="online">
+
+                                        </div>
+                                    <?php } else { ?>
+                                        <div title="offline">
+                                        </div>
+                                    <?php } ?>
+                                </a>
+                            </li>
+                        <?php
+                          $counter++;
+                          if ($counter == 4) {
+                              break;
+                          }
+                    } ?>
+                    </div>
+
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+                    <script>
+                        $(document).ready(function() {
+
+                            let lastSeenUpdate = function() {
+                                $.get("app/ajax/update_last_seen.php");
+                            }
+                            lastSeenUpdate();
+
+                            setInterval(lastSeenUpdate, 10000);
+
+                        });
+                    </script>
+                </div>
+            </div>
+
+
+
+
             <div class="container5_wrapper1">
                 <div class="tasklist">
                     <p style="font-size:1.3rem ; font-weight:600">My Task List</p>
@@ -867,8 +972,7 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
                 
             </div>
-
-
+<!-- 
             <div class="container5_wrapper2">
                 <div class="tasklist">
                     <p style="font-size:1.3rem ; font-weight:600">Messages</p>
@@ -912,7 +1016,7 @@ if (mysqli_num_rows($result) > 0) {
                         
                     </div> 
                 
-            </div>
+            </div> -->
          
         </div>
 
