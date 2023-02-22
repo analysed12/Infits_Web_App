@@ -1,12 +1,5 @@
 <?php if (session_status() === PHP_SESSION_NONE) { session_start(); }
 include('config.php');
-    // $_SESSION['name'] = "John_wayne";
-// $name = $_SESSION['name'] ;
-// if(!isset($_SESSION)) 
-// { 
-//     session_start(); 
-// } 
-
   if (!isset($_SESSION['name'])) {
   	$_SESSION['msg'] = "You must log in first";
   	header('location: login.php');
@@ -201,11 +194,9 @@ body {
     justify-self: center;
 }
 
-a:hover,
+a.sidenavlink:hover,
 .navactive {
     align-items: center;
-    border: 1px solid #E5F1FF;
-    /* background-color: #E5F1FF; */
     background: rgba(114, 130, 251, 0.1);
     color: #0177FB !important;
     border-radius: 10px;

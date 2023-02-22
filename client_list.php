@@ -411,10 +411,7 @@ img {
         </div>
 
     </div>
-
-
-
-
+    
     </div>
 <script>
     function open_link(url){
