@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_POST['to_id']) && isset($_FILES['my_image'])) {
-    include 'navbar.php';
+   
     include '../db.conn.php';
 
     include '../helpers/user.php';
@@ -15,9 +15,10 @@ if (isset($_POST['to_id']) && isset($_FILES['my_image'])) {
 
     include '../helpers/last_chat.php';
 
-    // echo "<pre>";
-    // print_r($_FILES['my_image']);
-    // echo "</pre>";
+    echo "<pre>";
+    print_r($_FILES['my_image']);
+    echo "</pre>";
+    
 
     // echo "Hello";
     $img_name = $_FILES['my_image']['name'];
@@ -41,17 +42,16 @@ if (isset($_POST['to_id']) && isset($_FILES['my_image'])) {
             echo "Inside else Hello";
             if (in_array($img_ex_lc, $allowed_exs)) {
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '../../uploads/' . $new_img_name;
+                $img_upload_path = '../../chat/uploads/'.$new_img_name;
                 move_uploaded_file($tmp_name, $img_upload_path);
                 echo "Insert";
-                // echo getcwd();
-                // Insert into Database
-                // $sql = "INSERT INTO `images` (`id`, `image_url`) VALUES (NULL, 'IMG-asdasd');"
+             
                 $to_id = $_POST['to_id'];
                 $from_id = $_SESSION['dietitian_id'];
                 echo "to $to_id ";
                 echo "from $from_id  ";
                 echo "$new_img_name";
+                echo "$img_upload_path";
                 
 
                 $sql = "INSERT INTO 
@@ -70,8 +70,8 @@ if (isset($_POST['to_id']) && isset($_FILES['my_image'])) {
                 // $res  = $stmt->execute([$new_img_name]);
 
                 echo "Inserted1 done";
-                // header("Location: ../../chat.php?user=$to_id");
-                header()
+                header("Location: ../../chat_home.php");
+                // header()
 
 
                 // mysqli_query($conn1, $sql);

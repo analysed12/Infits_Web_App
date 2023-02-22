@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "navbar.php"
 ?>
 <!DOCTYPE html>
@@ -601,20 +602,25 @@ if (isset($_POST['final_save_btn'])){
     // $tags = "hello" ;
         $planname = $_POST['plan_name'];
         // dieticianid....This is a session variable
-        $profile = $_SESSION['name'];
+        $dietitianuserID = $_SESSION['dietitianuserID'];
         // $profile = "Azarudeen";
         $duration="hello";
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'];
         $description = $_POST['description'];
         $price = $_POST['price'];
-        $myarray = $_POST['text_arr'];
-        $features = implode(" , ",$myarray);
+        if(isset($_POST['text_arr'])){
+            $myarray = $_POST['text_arr'];
+        }
+        $features = '';
+        if(!empty($myarray)){
+            $features = implode(" , ",$myarray);
+        }
   
-            $sql1 = "INSERT INTO `create_plan` (`profile`,`name`,`tags`, `start_date`, `end_date`,`features`, `description`, `price`) VALUES ('$profile','$planname','$tags','$start_date','$end_date','$features','$description','$price')";
+            $sql1 = "INSERT INTO `create_plan` (`dietitianuserID`,`name`,`tags`, `start_date`, `end_date`,`features`, `description`, `price`) VALUES ('$dietitianuserID','$planname','$tags','$start_date','$end_date','$features','$description','$price')";
+            echo $sql1;
             $result1=mysqli_query($conn,$sql1);
-            printf("<script>location.href='myplan
-            .php'</script>");
+            header('Location: myplan.php');
    
 }
             ?>
@@ -622,6 +628,17 @@ if (isset($_POST['final_save_btn'])){
     <!-- Pop up ends -->
 
 </body>
+<?php
+$output = ob_get_clean();
+
+// Modify the headers
+header('Content-Type: text/html');
+header('Cache-Control: no-cache');
+
+// Flush the headers to the browser
+ob_end_flush();
+echo $output;
+?>
 <script>
 $(document).ready(function() {
     $('#languages').multiselect({

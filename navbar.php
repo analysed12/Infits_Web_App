@@ -1,12 +1,5 @@
-<?php session_start(); 
+<?php if (session_status() === PHP_SESSION_NONE) { session_start(); }
 include('config.php');
-    $_SESSION['name'] = "John_wayne";
-// $name = $_SESSION['name'] ;
-// if(!isset($_SESSION)) 
-// { 
-//     session_start(); 
-// } 
-
   if (!isset($_SESSION['name'])) {
   	$_SESSION['msg'] = "You must log in first";
   	header('location: login.php');
@@ -201,11 +194,9 @@ body {
     justify-self: center;
 }
 
-a:hover,
+a.sidenavlink:hover,
 .navactive {
     align-items: center;
-    border: 1px solid #E5F1FF;
-    /* background-color: #E5F1FF; */
     background: rgba(114, 130, 251, 0.1);
     color: #0177FB !important;
     border-radius: 10px;
@@ -363,13 +354,13 @@ a {
     <div class="sidenav" id="sidenavbar">
         <img src="images/logo.png" class="sidenavlink" id="logo">
         <a id="index" class="sidenavlink nav-index nav-task_list nav-track_stats_steps nav-track_stats_water nav-track_stats_heart nav-track_stats_sleep nav-track_stats_weight nav-track_stats_calorie" href="index.php"><img src="images/vec_dashboard.png" class="nav-icon">Dashboard</a>
-        <a id="messages" class="sidenavlink nav-messages" href="chat_home.php"><img src="images/vec_messages.svg" class="nav-icon">Messages</a>
+        <a id="messages" class="sidenavlink nav-chat_home" href="chat_home.php"><img src="images/vec_messages.svg" class="nav-icon">Messages</a>
         <a id="live" class="sidenavlink" href="#"><img src="images/vec_live.svg" class="nav-icon">Live</a>
         <a id="calendar_of_events" class="sidenavlink nav-calendar_of_events" href="calendar_of_events.php"><img src="images/vec_appointments.svg" class="nav-icon">Appoinments</a>
-        <a id="client_list" class="sidenavlink nav-client_list nav-setgoals" href="client_list.php"><img src="images/vec_client_list.svg" class="nav-icon">Clients</a>
+        <a id="client_list" class="sidenavlink nav-client_list nav-client_dashboard nav-setgoals nav-set_reminders nav-mealTracker" href="client_list.php"><img src="images/vec_client_list.svg" class="nav-icon">Clients</a>
         <a id="myplan" class="sidenavlink nav-myplan" href="myplan.php"><img src="images/vec_diet_plan.svg" class="nav-icon">Diet Plans</a>
         <a id="payments" class="sidenavlink nav-payments" href="#"><img src="images/vec_payments.svg" class="nav-icon">Payments</a>
-        <a id="create_recipe" class="sidenavlink nav-create_recipe" href="create_recipe.php"><img src="images/vec_recipies.svg" class="nav-icon">Recipes</a>
+        <a id="create_recipe" class="sidenavlink nav-all_recipes nav-create_recipe" href="all_recipes.php"><img src="images/vec_recipies.svg" class="nav-icon">Recipes</a>
         <a id="healthform" class="sidenavlink nav-healthform" href="#"><img src="images/vec_health_form.svg" class="nav-icon">Health Form</a>
 
         <div class="menu-bottom">
@@ -384,7 +375,7 @@ a {
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
                 <strong>
                     <?php
-                    $id11 = $_SESSION['name'] ;
+                    $id11 = $_SESSION['dietitianuserID'] ;
                     $sql1 = "SELECT name FROM dietitian WHERE dietitianuserID ='$id11'";
                     $res = mysqli_query($conn,$sql1);
                     $row = mysqli_fetch_assoc($res) ; 

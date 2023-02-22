@@ -37,7 +37,7 @@ $name =  explode(" ", $row['name'] );
 body {
     height:100%;
         font-family: 'NATS', sans-serif !important;
-        padding-bottom:2rem;
+        margin-bottom:2rem !important;
 }
 
 .nav {
@@ -146,11 +146,7 @@ body {
 }
 
 .img-1 {
-    background:
-
-        /* bottom, image */
-        url(./icons/settings/icon1.svg);
-    background-position: center top;
+  
 
     /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
@@ -164,11 +160,7 @@ body {
 }
 
 .img-2 {
-    background:
-
-        /* bottom, image */
-        url(./icons/settings/icon1.svg);
-    background-position: center top;
+   
 
     /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
@@ -180,11 +172,7 @@ body {
 }
 
 .img-3 {
-    background:
-
-        /* bottom, image */
-        url(./icons/settings/icon2.svg);
-    background-position: center top;
+    
 
     /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
@@ -195,11 +183,7 @@ body {
 }
 
 .img-4 {
-    background:
-
-        /* bottom, image */
-        url(./icons/settings/icon4.svg);
-    background-position: center top;
+   
 
     /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
@@ -210,11 +194,7 @@ body {
 }
 
 .img-5 {
-    background:
-
-        /* bottom, image */
-        url(./icons/settings/icon1.svg);
-    background-position: center top;
+    
 
     /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
@@ -225,12 +205,7 @@ body {
 }
 
 .img-6 {
-    background:
-
-        /* bottom, image */
-        url(./icons/settings/icon4.svg);
-    background-repeat: no-repeat;
-    background-position: center top;
+    
 
     /* border: 1px solid #000000; */
     color: #f3e7e3 !important;
@@ -341,36 +316,41 @@ border-radius: 18px;
              <a href="profile_settings_show.php" style = "text-decoration: none; padding: 0px;">
             <li>
                 <div class="box img-1">
-                    <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">My Profile</p>
+                    <img src="icons/settings/icon1.svg" alt="">
+                    <p style="text-align:center !important;font-weight: 400;color:black;font-size: 25px;margin-top:3rem">My Profile</p>
                 </div>
             </li>
 </a>
  <a href="referral_code.php">
             <li>
-                <div class="box img-2">        
-                    <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Referral Code</p>
+                <div class="box img-2"> 
+                    <img src="icons/settings/icon1.svg" alt="">       
+                    <p style="text-align:center !important;font-weight: 400;color:black;font-size: 25px;margin-top:3rem">Referral Code</p>
                   
                 </div>
             </li>
               </a>
                <a href="about_us.php">
             <li>
-                <div class="box img-3">   
-                     <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">About Us</p>
+                <div class="box img-3"> 
+                    <img src="icons/settings/icon2.svg" alt="">  
+                     <p style="text-align:center !important;font-weight: 400;color:black;font-size: 25px;margin-top:3rem">About Us</p>
                 </div>
             </li>
              </a>
              <a href="achivement.php">
             <li>
                 <div class="box img-4">
-                        <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">My Achievements</p>
+                    <img src="icons/settings/icon4.svg" alt="">
+                        <p style="text-align:center !important;font-weight: 400;color:black;font-size: 25px;margin-top:3rem">My Achievements</p>
                 </div>
             </li>
              </a>
-               <a href="refer.php">
+               <a href="refer_friend.php">
             <li>
                 <div class="box img-5">
-                            <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Refer To Friends</p>
+                    <img src="icons/settings/icon1.svg" alt="">
+                            <p style="text-align:center !important;font-weight: 400;color:black;font-size: 25px;margin-top:3rem">Refer To Friends</p>
                 </div>
             </li>
               </a>
@@ -378,7 +358,8 @@ border-radius: 18px;
               <a href="#">
             <li>
                 <div class="box img-6">
-                    <p style="text-align:center !important;margin-top:4rem;font-weight: 400;color:black;font-size: 25px;margin-top:5rem">Notifications</p>
+                    <img src="icons/settings/icon4.svg" alt="">
+                    <p style="text-align:center !importan;font-weight: 400;color:black;font-size: 25px;margin-top:3rem">Notifications</p>
                 </div>
             </li>
               </a>

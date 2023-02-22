@@ -26,15 +26,6 @@ include "navbar.php";
     </script>
 </head>
 <style>
-        @font-face {
-    font-family: 'NATS';
-    src:url('font/NATS.ttf.woff') format('woff'),
-        url('font/NATS.ttf.svg#NATS') format('svg'),
-        url('font/NATS.ttf.eot'),
-        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
 
 
 body {
@@ -134,7 +125,7 @@ a {
 
             <div class="col " style="border: 1px solid #76A5FF;
         color: #76A5FF;text-align:center;">
-                <?php echo '<a style="color:#76A5FF;" href="nameofpage.php?client_id='.$client_id.'">' ?>
+                <?php echo '<a style="color:#76A5FF;" href="mealTracker.php?client_id='.$client_id.'">' ?>
 
                     <div class="row">
                         <p style="text-align:center !important;">Tracker</p>

@@ -6,7 +6,7 @@
 
 
 
-        $query = "SELECT client_id FROM `goals_` WHERE client_id LIKE '%$search%' LIMIT 3";
+        $query = "SELECT client_id FROM `goals` WHERE client_id LIKE '%$search%' LIMIT 3";
         $res = mysqli_query($con, $query);
 
         if(mysqli_num_rows($res)==0){

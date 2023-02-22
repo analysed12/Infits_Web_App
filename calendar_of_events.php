@@ -280,9 +280,9 @@ a:hover {
                     <div class="row">
                         <div class="col-lg-12">
                             <div>
-                                <h5 style="display:inline-block;">Calendar</h5>
+                                <h3 style="display:inline-block;padding:1.5rem">Calendar</h3>
                                 <a href="createevent.php" class="event_btn" style="display:inline-block; float:right;background: #7A78FD;
-            border-radius: 7px;border: none; color: white; padding:10px">+ Create Schedule</a>
+            border-radius: 7px;border: none; color: white; padding:10px;margin-top:1.5rem">+ Create Schedule</a>
                             </div>
                             <br>
                             <div id="calendar"></div>

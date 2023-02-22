@@ -1,10 +1,12 @@
 <?php
-  // session_start();
-    include("navbar.php");
-    //only client id should be changed while linking
-    // $clientID = $_SESSION["name"];
-    $clientId = "1";
-    ?>
+// session_start();
+include("navbar.php");
+if(isset($_GET['client_id'])){
+  $clientId = $_GET['client_id'];
+}else{
+  header('Location: client_list.php');
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">

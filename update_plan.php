@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "navbar.php"
 ?>
 <!DOCTYPE html>
@@ -14,9 +15,6 @@ include "navbar.php"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -31,16 +29,6 @@ include "navbar.php"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
-/* Add Tags Popup */
-@font-face {
-    font-family: 'NATS';
-    src:url('font/NATS.ttf.woff') format('woff'),
-        url('font/NATS.ttf.svg#NATS') format('svg'),
-        url('font/NATS.ttf.eot'),
-        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #BBBBBB;
   opacity: 1; /* Firefox */
@@ -424,20 +412,29 @@ if (isset($_POST['final_update_btn'])){
         $tags = implode(" , ",$name_arr);
         $planname = $_POST['plan_name'];
         // dieticianid....This is a session variable
-        $profile = "Azarudeen";
-        $duration="hello";
+        $dietitianuserID = $_SESSION['dietitianuserID'];
+        // $duration="hello";
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'];
         $description = $_POST['description'];
         $price = $_POST['price'];
-        $myarray = $_POST['text_arr'];
-        $features = implode(" , ",$myarray);
+        if(isset($_POST['text_arr'])){
+            $myarray = $_POST['text_arr'];
+        }
+        $features = '';
+        if(!empty($myarray)){
+            $features = implode(" , ",$myarray);
+        }
 
 
-        $sql1 = "UPDATE `create_plan` SET plan_id=$id,name='$planname',tags='$tags',start_date='$start_date',end_date='$end_date',features='$features',description='$description',price='$price' WHERE plan_id=$id";
+        $sql1 = "UPDATE `create_plan` SET name='$planname',tags='$tags',start_date='$start_date',end_date='$end_date',features='$features',description='$description',price='$price' WHERE plan_id=$id AND dietitianuserID = '$dietitianuserID'";
+        // echo $sql1;
         $result1=mysqli_query($conn,$sql1);
+        // echo $result1;
+        // die();
 
         if($result1){
+            header('Location: myplan.php');
 
         }
         else{
@@ -453,20 +450,24 @@ else if (isset($_POST['final_save_btn'])){
     $tags = implode(" , ",$name_arr);
     $planname = $_POST['plan_name'];
     // dieticianid....This is a session variable
-    $profile = "Azarudeen";
-    $duration="hello";
+    $dietitianuserID = $_SESSION['dietitianuserID'];
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     $description = $_POST['description'];
     $price = $_POST['price'];
-    $myarray = $_POST['text_arr'];
-    $features = implode(" , ",$myarray);
+    if(isset($_POST['text_arr'])){
+        $myarray = $_POST['text_arr'];
+    }
+    $features = '';
+    if(!empty($myarray)){
+        $features = implode(" , ",$myarray);
+    }
 
-    $sql2 = "INSERT INTO `create_plan` (`profile`,`name`,`tags`, `start_date`, `end_date`,`features`, `description`, `price`) VALUES ('$profile','$planname','$tags','$start_date','$end_date','$features','$description','$price')";
+    $sql2 = "INSERT INTO `create_plan` (`dietitianuserID`,`name`,`tags`, `start_date`, `end_date`,`features`, `description`, `price`) VALUES ('$dietitianuserID','$planname','$tags','$start_date','$end_date','$features','$description','$price')";
     $result2=mysqli_query($conn,$sql2);
 
     if($result2){
-
+        header('Location: myplan.php');
     }
     else{
         die(mysqli_error($conn));
@@ -495,10 +496,6 @@ function showPopup() {
 function hidePopup() {
     popup.classList.remove('open');
 }
-</script>
-
-
-<script>
 $(document).ready(function() {
     var max = 10;
     var cnt = 1;
@@ -519,5 +516,15 @@ $(document).ready(function() {
     });
 });
 </script>
+<?php
+$output = ob_get_clean();
 
+// Modify the headers
+header('Content-Type: text/html');
+header('Cache-Control: no-cache');
+
+// Flush the headers to the browser
+ob_end_flush();
+echo $output;
+?>
 </html>

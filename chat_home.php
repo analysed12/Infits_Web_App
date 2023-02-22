@@ -1,7 +1,9 @@
 <?php
+ob_start();
 // session_start();
 include 'navbar.php';
 
+// die();
 if (isset($_SESSION['dietitianuserID'])) {
     # database connection file
     include 'app/db.conn.php';
@@ -11,6 +13,7 @@ if (isset($_SESSION['dietitianuserID'])) {
     include 'app/helpers/timeAgo.php';
     include 'app/helpers/last_chat.php';
     include 'app/helpers/timeHM.php';
+
 
     # Getting User data data
     $user = getUser($_SESSION['dietitianuserID'], $conn);
@@ -27,7 +30,7 @@ if (isset($_SESSION['dietitianuserID'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chat App - Home</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/chat_style.css">
         <link rel="icon" href="img/logo.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -37,7 +40,7 @@ if (isset($_SESSION['dietitianuserID'])) {
             <div class="d-flex
                 flex-coloumn
                 vh-100 chat" style="outline: 2px solid #EEEEEE; padding:20px!important;">
-                <div class="w-300" style="width:275px">
+                <div class="w-300" style="width:300px">
                     <div>
                         <div class="d-flex
     		            mb-2 p-2 
@@ -51,7 +54,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 								<h3 class="fs-xs m-2"><?= $user['name'] ?></h3>
 							</div> -->
                             <div class="mt-1">
-                                <h5>Messages</h5>
+                                <h5 class="chat-message-header">Messages</h5>
                             </div>
                             <!-- <a href="logout.php" class="btn fs-xs">L </a> -->
                         </div>
@@ -64,18 +67,18 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                         </div>
                         <div class="scroll">
-                            <ul id="chatList" class="list-group mvh-50 overflow-auto">
-                                <?php if (!empty($conversations)) { ?>
+                            <ul id="chatList" class="list-group mvh-50">
+                                <?php //if (!empty($conversations)) { ?>
                                     <?php
 
                                     foreach ($conversations as $conversation) { ?>
                                         <li class="list-group-item">
                                             <a href="chat_messages.php?user=<?= $conversation['dietitianuserID'] ?>" class="d-flex
 	    				          justify-content-between
-	    				          align-items-center p-1">
+	    				          align-items-center">
                                                 <div class="d-flex
 	    					            align-items-center">
-                                                    <img src="chat/uploads/<?= $conversation['p_p'] ?>" class="w-10 rounded-circle">
+                                                    <img src="chat/uploads/<?= $conversation['p_p'] ?>" class="rounded-circle" style="width:40px">
                                                     <h3 class="fs-xs m-2 text-dark">
                                                         <?= $conversation['name'] ?><br>
                                                         <small>
@@ -87,16 +90,18 @@ if (isset($_SESSION['dietitianuserID'])) {
                                                     </h3>
                                                 </div>
                                                 <div class="d-flex
-	    					            align-items-center">
+	    					            align-items-center " style="margin-left: auto;" >
                                                     <h3 class="fs-xs p-2 text-dark">
 
                                                         <small>
                                                             <?php
                                                             echo last_time($conversation['last_seen']);
                                                             ?>
-                                                        </small>
-
+                                                        </small><br />
+                                                        <img class="" src="icons/DoubleTick.svg" style="width:16px">
                                                     </h3>
+
+
                                                 </div>
                                                 <?php if (last_seen($conversation['last_seen']) == "1") { ?>
                                                     <div title="online">
@@ -109,10 +114,10 @@ if (isset($_SESSION['dietitianuserID'])) {
                                             </a>
                                         </li>
                                     <?php } ?>
-                                <?php } else {
-                                    header("Location: index.php");
-                                    exit;
-                                } ?>
+                                <?php //} else {
+                                    //header("Location: index.php");
+                                    //exit;
+                                //} ?>
                                 <!-- <div class="alert alert-info 
     				            text-center">
 									<i class="fa fa-comments d-block fs-big"></i>
@@ -270,6 +275,16 @@ if (isset($_SESSION['dietitianuserID'])) {
 <?php
 } else {
     header("Location: index.php");
+    // echo "<script>window.location.href='index.php'</script>";
     exit;
 }
+$output = ob_get_clean();
+
+// Modify the headers
+header('Content-Type: text/html');
+header('Cache-Control: no-cache');
+
+// Flush the headers to the browser
+ob_end_flush();
+echo $output;
 ?>

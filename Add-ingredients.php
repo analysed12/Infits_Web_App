@@ -308,7 +308,7 @@ body{
 <div id="content">
        <form action =" " method="POST" enctype="multipart/form-data">
       <!------------------------------------------------DASHBOARD--------------------------------------------------------->
-     <div class="head">   <h3 style="font-size: 30px; color: #202224; font-weight: 400;">New Recipe</h3>
+     <div class="head" style="margin:30px">   <h3 style="font-size: 30px; color: #202224; font-weight: 600;">New Recipe</h3>
         <button id="save" name="save" style="height:46px; width:151px; background:#D257E6; color:white;
          text-align:center; border:none;border-radius:15px;">Save </button> </div>
 
