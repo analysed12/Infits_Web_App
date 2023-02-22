@@ -420,10 +420,10 @@ header .current-date{
               $on = array();
               $off = array();
               if($name != ''){
-              $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne' AND client_id LIKE '%$name%'" ;
+              $sql = "SELECT * FROM `goals` WHERE dietition_id = 'John_wayne' AND client_id LIKE '%$name%'" ;
               }
               else{
-                $sql = "SELECT * FROM `goals_` WHERE dietition_id = 'John_wayne'";
+                $sql = "SELECT * FROM `goals` WHERE dietition_id = 'John_wayne'";
               }
             
              
