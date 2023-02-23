@@ -34,7 +34,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 			<div class="d-flex
 			            align-items-center">
 
-			    <img src="uploads/<?=$user['p_p']?>"
+			    <img src="chat/uploads/<?=$user['p_p']?>"
 			         class="w-10 rounded-circle">
 
 			    <h3 class="fs-xs m-2">

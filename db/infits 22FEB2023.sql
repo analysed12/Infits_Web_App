@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 20, 2023 at 06:00 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Host: 127.0.0.1
+-- Generation Time: Feb 22, 2023 at 06:12 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `addclient` (
   `plan_id` int(11) NOT NULL,
   `status` int(11) DEFAULT NULL,
   `client_code` varchar(150) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `addclient`
@@ -71,7 +71,7 @@ INSERT INTO `addclient` (`dietitianuserID`, `client_id`, `profile`, `name`, `gen
 CREATE TABLE `add_direction` (
   `dir_id` int(11) NOT NULL,
   `direction` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `add_direction`
@@ -112,7 +112,7 @@ CREATE TABLE `add_ingredient` (
   `ingrd_image` blob DEFAULT NULL,
   `ingrd_name` varchar(255) DEFAULT NULL,
   `quantity` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `add_ingredient`
@@ -156,7 +156,7 @@ CREATE TABLE `calorietracker` (
   `protein` int(11) DEFAULT NULL,
   `fat` int(11) DEFAULT NULL,
   `clientID` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `calorietracker`
@@ -803,7 +803,7 @@ INSERT INTO `calorietracker` (`caloriesconsumed`, `meal`, `goal`, `time`, `carbs
 CREATE TABLE `category` (
   `num` int(11) NOT NULL,
   `category` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
@@ -834,81 +834,18 @@ CREATE TABLE `chats` (
   `message` text NOT NULL,
   `opened` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `chats`
 --
 
 INSERT INTO `chats` (`chat_id`, `from_id`, `to_id`, `message`, `opened`, `created_at`) VALUES
-(1, 3, 1, 'Hiii', 1, '2023-01-23 19:59:22'),
-(2, 3, 2, 'Heloo', 0, '2023-01-23 19:59:32'),
-(3, 4, 1, 'Hi', 1, '2023-01-23 23:57:56'),
-(4, 4, 2, 'heloooo\n', 0, '2023-01-24 19:21:29'),
-(5, 4, 3, 'Hiii', 1, '2023-01-24 19:21:43'),
-(6, 4, 1, 'hi\n', 1, '2023-01-25 20:21:13'),
-(7, 1, 2, 'hii\n', 0, '2023-01-27 19:19:04'),
-(8, 1, 2, 'helloo\n', 0, '2023-01-27 19:20:28'),
-(9, 1, 3, 'HIiiii\n', 1, '2023-01-27 19:22:36'),
-(10, 1, 3, 'hiii', 1, '2023-01-27 19:26:01'),
-(11, 1, 4, 'hiii', 1, '2023-01-27 19:26:11'),
-(12, 1, 2, 'hiii\n', 0, '2023-01-27 19:59:48'),
-(13, 1, 4, 'hi\n', 1, '2023-01-27 20:00:35'),
-(14, 1, 4, 'Helloo', 1, '2023-01-27 20:00:40'),
-(15, 4, 1, 'hii', 1, '2023-01-28 00:07:43'),
-(16, 1, 2, 'hiii', 0, '2023-01-28 00:21:14'),
-(17, 4, 1, 'hiii\n', 1, '2023-01-28 00:21:25'),
-(18, 1, 2, 'hii', 0, '2023-01-28 00:21:32'),
-(19, 1, 4, 'hiii\n', 1, '2023-01-28 00:21:43'),
-(20, 4, 1, 'hiii', 1, '2023-01-28 00:21:49'),
-(21, 1, 4, 'hiasdasda', 1, '2023-01-28 00:21:59'),
-(22, 1, 4, 'asdasdasd', 1, '2023-01-28 00:22:03'),
-(23, 1, 4, 'asdas', 1, '2023-01-28 00:22:05'),
-(24, 1, 2, 'HIiii Rammm how r u?\n', 0, '2023-01-28 12:27:55'),
-(25, 1, 4, 'Hii Akashhhh!', 1, '2023-01-28 12:28:07'),
-(26, 1, 3, 'Hiii Rajii', 0, '2023-01-28 12:28:15'),
-(32, 1, 2, 'hiiii', 0, '2023-01-28 14:21:13'),
-(33, 1, 2, 'hello', 0, '2023-01-28 14:21:17'),
-(34, 1, 2, 'Hiiii', 0, '2023-01-28 14:32:30'),
-(35, 1, 2, 'asdasdasd', 0, '2023-01-28 14:32:34'),
-(36, 1, 2, 'asdasd', 0, '2023-01-28 14:32:36'),
-(37, 1, 2, 'asdasd', 0, '2023-01-28 14:32:37'),
-(38, 4, 1, 'Hiii Sabari', 1, '2023-01-31 19:18:54'),
-(39, 1, 3, 'Hi Robin', 0, '2023-01-31 19:25:35'),
-(40, 1, 3, 'Heloo \nvanakkam', 0, '2023-01-31 19:25:42'),
-(41, 1, 3, 'Heii', 0, '2023-01-31 19:25:47'),
-(42, 1, 3, 'hii', 0, '2023-01-31 19:25:50'),
-(43, 1, 3, 'hello', 0, '2023-01-31 19:25:54'),
-(44, 1, 2, 'Hi Ram Kumar', 0, '2023-01-31 19:26:12'),
-(45, 1, 4, 'Hi John', 1, '2023-01-31 19:28:33'),
-(46, 4, 1, 'Hiiii sabari', 1, '2023-02-09 20:41:20'),
-(47, 1, 2, 'HI', 0, '2023-02-10 18:43:45'),
-(48, 1, 4, 'Helllo', 1, '2023-02-10 18:44:09'),
-(49, 4, 1, 'Hiii chetram\n', 1, '2023-02-10 18:44:19'),
-(50, 1, 2, 'hii', 0, '2023-02-13 14:21:26'),
-(51, 4, 1, 'hiii', 1, '2023-02-13 14:22:05'),
-(52, 1, 4, 'Hello! Have you seen my backpack anywhere in office?', 1, '2023-02-13 15:56:56'),
-(53, 4, 1, 'Hi, yes, David have found it, ask our concierge 👀 ', 1, '2023-02-13 15:58:24'),
-(54, 1, 4, 'See you at office tomorrow!', 1, '2023-02-13 15:58:56'),
-(55, 1, 4, 'Thank you for work, see you!', 1, '2023-02-13 15:59:14'),
-(56, 4, 1, 'Thank you for work, see you!', 1, '2023-02-13 15:59:23'),
-(57, 1, 4, 'Hiii John', 1, '2023-02-13 20:08:34'),
-(58, 1, 2, 'see', 0, '2023-02-16 19:19:46'),
-(59, 1, 3, 'ssss', 0, '2023-02-16 19:20:00'),
-(60, 1, 2, 'testing', 0, '2023-02-16 22:43:36'),
-(61, 1, 2, 'testing', 0, '2023-02-16 22:44:27'),
-(64, 1, 2, 'IMG-63ee66486cdeb9.81573635.png', 0, '2023-02-16 22:52:16'),
-(65, 1, 2, 'IMG-63ee700ed05603.09358328.jpg', 0, '2023-02-16 23:33:58'),
-(66, 1, 4, 'IMG-63ee745a67b809.51528075.png', 1, '2023-02-16 23:52:18'),
-(67, 1, 4, 'IMG-63ee7491e7aad0.71101733.jpg', 1, '2023-02-16 23:53:13'),
-(68, 4, 1, 'IMG-63ee74b34a79b2.11900534.png', 1, '2023-02-16 23:53:47'),
-(69, 1, 4, 'helo', 1, '2023-02-18 16:22:49'),
-(70, 1, 4, 'hiii', 1, '2023-02-18 16:47:30'),
-(71, 1, 4, 'IMG-63f0c38a4ef6c1.99543051.png', 1, '2023-02-18 17:54:42'),
-(72, 1, 4, 'IMG-63f0d614e75ff3.93358298.png', 1, '2023-02-18 19:13:48'),
-(73, 1, 4, 'IMG-63f0d630904f69.70174990.png', 1, '2023-02-18 19:14:16'),
-(74, 1, 4, 'hiii', 1, '2023-02-18 19:18:44'),
-(75, 4, 1, 'sadasdsa', 1, '2023-02-20 21:03:21');
+(79, 6, 1, 'hey', 1, '2023-02-22 00:44:09'),
+(80, 4, 6, 'Hello I have Created new Chat', 1, '2023-02-22 00:53:41'),
+(81, 6, 1, 'hey', 0, '2023-02-22 22:36:52'),
+(82, 6, 1, 'Hey', 0, '2023-02-22 22:37:00'),
+(83, 6, 4, 'OK it was good', 0, '2023-02-22 22:37:19');
 
 -- --------------------------------------------------------
 
@@ -931,7 +868,7 @@ CREATE TABLE `client` (
   `verification` tinyint(1) NOT NULL DEFAULT 0,
   `height` int(11) NOT NULL,
   `weight` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `client`
@@ -953,7 +890,7 @@ CREATE TABLE `clientcon` (
   `ClientName` text NOT NULL,
   `question` text NOT NULL,
   `answers` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -967,7 +904,7 @@ CREATE TABLE `client_health_files` (
   `files` text NOT NULL,
   `upload_date` text NOT NULL,
   `type` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -980,7 +917,7 @@ CREATE TABLE `consultations` (
   `dietitianID` varchar(25) NOT NULL,
   `clientID` varchar(25) NOT NULL,
   `status` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -993,20 +930,15 @@ CREATE TABLE `conversations` (
   `user_1` int(11) NOT NULL,
   `user_2` int(11) NOT NULL,
   `convo_time` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `conversations`
 --
 
 INSERT INTO `conversations` (`conversation_id`, `user_1`, `user_2`, `convo_time`) VALUES
-(1, 3, 1, '2023-02-17 11:06:31'),
-(2, 3, 2, '2023-02-17 11:06:31'),
-(3, 4, 1, '2023-02-17 11:06:31'),
-(4, 4, 2, '2023-02-17 11:06:31'),
-(5, 4, 3, '2023-02-17 11:06:31'),
-(6, 1, 2, '2023-02-17 11:06:31'),
-(7, 2, 1, '2023-02-17 11:06:31');
+(11, 6, 1, '2023-02-22 00:44:09'),
+(12, 4, 6, '2023-02-22 00:53:41');
 
 -- --------------------------------------------------------
 
@@ -1027,7 +959,7 @@ CREATE TABLE `create_client` (
   `plantitle` text NOT NULL,
   `plandescription` text NOT NULL,
   `referalcode` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `create_client`
@@ -1055,7 +987,7 @@ CREATE TABLE `create_event` (
   `place_of_meeting` varchar(150) DEFAULT NULL,
   `description` varchar(400) DEFAULT NULL,
   `attachment` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `create_event`
@@ -1080,6 +1012,7 @@ INSERT INTO `create_event` (`eventID`, `dietitianuserID`, `eventname`, `clientus
 
 CREATE TABLE `create_plan` (
   `plan_id` int(11) NOT NULL,
+  `dietitianuserID` varchar(30) NOT NULL,
   `profile` text DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
@@ -1090,14 +1023,17 @@ CREATE TABLE `create_plan` (
   `features` varchar(255) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   `price` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `create_plan`
 --
 
-INSERT INTO `create_plan` (`plan_id`, `profile`, `image`, `name`, `tags`, `duration`, `start_date`, `end_date`, `features`, `description`, `price`) VALUES
-(1, 'Plan test', 'No Image', 'TEST PLAN', 'Fit', '2', '2022-03-01', '2023-03-31', 'Fit', 'NAjkd dkjsdn sdk', 500);
+INSERT INTO `create_plan` (`plan_id`, `dietitianuserID`, `profile`, `image`, `name`, `tags`, `duration`, `start_date`, `end_date`, `features`, `description`, `price`) VALUES
+(1, 'John_wayne', NULL, NULL, 'Basic Plan', 'Keto Diet , Vegan Diet', NULL, '2023-02-01', '2023-03-31', 'Ye Naya Feature hai  , Try try , Try Once', 'nothing but just a try', 99),
+(3, 'John_wayne', NULL, NULL, 'Hey', 'Keto Diet , Vegan Diet', NULL, '2023-01-01', '2023-04-30', 'good', 'nothing but just a try', 99),
+(4, 'John_wayne', NULL, NULL, 'New Bug Fixed', 'Keto Diet , Vegan Diet', NULL, '2023-02-25', '2023-04-13', '', 'nothing but just a try', 99551),
+(5, 'John_wayne', NULL, NULL, 'Basic 77', 'Keto Diet , Vegan Diet', NULL, '2023-01-01', '2023-03-31', '', 'nothing but just a try', 78);
 
 -- --------------------------------------------------------
 
@@ -1123,7 +1059,7 @@ CREATE TABLE `dietian_recipies` (
   `file` text DEFAULT NULL,
   `course` varchar(200) NOT NULL,
   `recipe_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dietian_recipies`
@@ -1174,19 +1110,19 @@ CREATE TABLE `dietitian` (
   `linkedin` varchar(255) DEFAULT NULL,
   `instagram` varchar(255) DEFAULT NULL,
   `last_seen` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dietitian`
 --
 
 INSERT INTO `dietitian` (`dietitian_id`, `dietitianuserID`, `password`, `name`, `qualification`, `email`, `mobile`, `profilePhoto`, `p_p`, `location`, `age`, `gender`, `experience`, `about_me`, `no_of_clients`, `referral_code`, `facebook`, `whatsapp`, `twitter`, `linkedin`, `instagram`, `last_seen`) VALUES
-(4, 'ash', '123456', 'John Doe', '45', 'bnn@hm.in', '898098', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'bvb', 89, 'M', 45, 'vbvnfg', 67, 'yuigcv', NULL, NULL, NULL, NULL, NULL, '2023-02-20 21:13:58'),
+(4, 'ash', '123456', 'John Doe', '45', 'bnn@hm.in', '898098', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'bvb', 89, 'M', 45, 'vbvnfg', 67, 'yuigcv', NULL, NULL, NULL, NULL, NULL, '2023-02-22 00:53:35'),
 (2, 'doo1', 'nbsnmbm', 'John', '56', 'dv@n.in', '8888888', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'pune', 45, 'M', 10, 'bhjg', 12, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
 (3, 'doo2', 'bvb', 'Sam', '32', 'gh@.in', '9999900', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'hjk', 21, 'M', 12, 'df', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
 (5, 'doo4', 'nbnbm', 'Tom', '23', 'hj@ju.in', '67687898', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'dfd', 34, 'M', 23, 'ffgf', 23, 'E7AC6E43', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
-(6, 'John_wayne', '123', 'John_wayne', 'na', 'na', 'na', NULL, 'user-default.png', 'na', 25, 'm', 5, 'shj jhb', 12, '', NULL, NULL, NULL, NULL, NULL, '2023-02-20 18:22:48'),
-(1, 'sabari', '123456', 'Sabari Nathan', '34', 'bn@ju.in', '87896767', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'ddd', 33, 'F', 23, 'xcdf', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL, '2023-02-20 22:22:59');
+(6, 'John_wayne', '123', 'John_wayne', 'na', 'na', 'na', NULL, 'user-default.png', 'na', 25, 'm', 5, 'shj jhb', 12, '', NULL, NULL, NULL, NULL, NULL, '2023-02-22 22:37:26'),
+(1, 'sabari', '123456', 'Sabari Nathan', '34', 'bn@ju.in', '87896767', 0x494d472d36336263303161386533643162392e32353139353234392e706e677c2e2f696d616765732f494d472d36336263303161386533643162392e32353139353234392e706e67, 'user-default.png', 'ddd', 33, 'F', 23, 'xcdf', 12, 'rytutyf', NULL, NULL, NULL, NULL, NULL, '2023-02-22 00:50:13');
 
 -- --------------------------------------------------------
 
@@ -1197,7 +1133,7 @@ INSERT INTO `dietitian` (`dietitian_id`, `dietitianuserID`, `password`, `name`, 
 CREATE TABLE `dietitian_client` (
   `dietitianID` varchar(25) NOT NULL,
   `clientID` varchar(25) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1215,7 +1151,7 @@ CREATE TABLE `dietition_tasks` (
   `end_time` varchar(30) NOT NULL,
   `add_to_calander` int(1) NOT NULL DEFAULT 0,
   `time` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dietition_tasks`
@@ -1255,7 +1191,7 @@ CREATE TABLE `diet_chart` (
   `thursday` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `friday` text NOT NULL,
   `saturday` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `diet_chart`
@@ -1289,7 +1225,7 @@ CREATE TABLE `food_data_base_for_diet_chart` (
   `photo` varchar(50) NOT NULL,
   `category` varchar(50) NOT NULL,
   `preparation` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1308,7 +1244,7 @@ CREATE TABLE `goals` (
   `sleep` int(11) NOT NULL,
   `calorie` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `goals`
@@ -1340,7 +1276,7 @@ CREATE TABLE `heartrate` (
   `dateandtime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `maximum` text NOT NULL,
   `minimum` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `heartrate`
@@ -1726,7 +1662,7 @@ CREATE TABLE `live` (
   `note` text NOT NULL,
   `status` varchar(40) NOT NULL,
   `viewer` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1743,7 +1679,7 @@ CREATE TABLE `mealtracker` (
   `meal` varchar(30) NOT NULL,
   `clientID` varchar(30) NOT NULL,
   `position` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1757,7 +1693,7 @@ CREATE TABLE `messages` (
   `message` varchar(300) NOT NULL,
   `messageBy` varchar(10) NOT NULL,
   `time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1779,7 +1715,7 @@ CREATE TABLE `reminders` (
   `snacks_time` varchar(30) NOT NULL,
   `dinner_time` varchar(30) NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reminders`
@@ -1810,7 +1746,7 @@ CREATE TABLE `sample` (
   `time` text NOT NULL,
   `date` text NOT NULL,
   `value` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1825,7 +1761,7 @@ CREATE TABLE `sleeptracker` (
   `hrsSlept` int(11) DEFAULT NULL,
   `goal` int(11) NOT NULL,
   `minsSlept` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sleeptracker`
@@ -2275,7 +2211,7 @@ CREATE TABLE `steptracker` (
   `calories` int(11) NOT NULL,
   `goal` int(11) NOT NULL,
   `clientid` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `steptracker`
@@ -2661,7 +2597,7 @@ CREATE TABLE `subscribedclient` (
   `enddate` timestamp NOT NULL DEFAULT current_timestamp(),
   `dietChart` varchar(30) DEFAULT NULL,
   `dietitianID` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2673,7 +2609,7 @@ CREATE TABLE `template_name` (
   `template_name` varchar(30) NOT NULL,
   `diet_chart` text NOT NULL,
   `dietitianuserID` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2688,7 +2624,7 @@ CREATE TABLE `users` (
   `password` varchar(1000) NOT NULL,
   `p_p` varchar(255) DEFAULT 'user-default.png',
   `last_seen` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -2715,7 +2651,7 @@ CREATE TABLE `watertracker` (
   `time` text NOT NULL,
   `type` text DEFAULT NULL,
   `amount` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `watertracker`
@@ -3101,7 +3037,7 @@ CREATE TABLE `weighttracker` (
   `bmi` float NOT NULL,
   `goal` float NOT NULL,
   `clientID` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `weighttracker`
@@ -3485,7 +3421,7 @@ CREATE TABLE `_goals` (
   `forWhat` varchar(25) NOT NULL,
   `goal` int(11) NOT NULL,
   `clientID` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `_goals`
@@ -3693,19 +3629,25 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `conversation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `conversation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `create_event`
 --
 ALTER TABLE `create_event`
   MODIFY `eventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `create_plan`
+--
+ALTER TABLE `create_plan`
+  MODIFY `plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dietitian`
