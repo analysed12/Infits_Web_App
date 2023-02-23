@@ -262,6 +262,9 @@ span.ep-edit {
     justify-content: flex-end;
     padding-right: 5rem;
     padding-bottom: 2rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 .create {
     width: 284px;
