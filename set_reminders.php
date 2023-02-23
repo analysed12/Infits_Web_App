@@ -234,7 +234,7 @@ if(isset($_POST['create_reminder'])){
         }
     }
     $conn->close();
-    header(("Location: set_reminder_backend.php"));
+    header(("Location: set_reminders.php"));
 }
 
 
@@ -1243,7 +1243,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',water_interval: interval.value,water_amount:amount.value},
             success: function(data) {
                 // Handle the response here
@@ -1266,7 +1266,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',water_interval: null,water_amount:null},
             success: function(data) {
                 // Handle the response here
@@ -1294,7 +1294,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',bf_time: bf_time.value,lunch_time:lunch_time.value,snacks_time:snacks_time.value,dinner_time:dinner_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1317,7 +1317,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',bf_time: null,lunch_time:null,snacks_time:null,dinner_time:null},
             success: function(data) {
                 // Handle the response here
@@ -1342,7 +1342,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',sleep_time: sleep_time.value,wake_time:wake_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1365,7 +1365,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',sleep_time: null,wake_time:null},
             success: function(data) {
                 // Handle the response here
@@ -1382,7 +1382,7 @@ $i++;
         console.log(getSelectedClients(selected));
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', water_interval: water_interval.value, water_amount:water_amount.value},
             success: function(data) {
                 // Handle the response here
@@ -1407,7 +1407,7 @@ $i++;
         console.log(dinner_time.value);
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', bf_time: bf_time.value,lunch_time:lunch_time.value,snacks_time:snacks_time.value,dinner_time:dinner_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1425,7 +1425,7 @@ $i++;
         console.log(getSelectedClients(selected));
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', sleep_time: sleep_time.value,wake_time:wake_time.value},
             success: function(data) {
                 // Handle the response here
