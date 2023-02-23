@@ -1,7 +1,5 @@
-<?php "navbar.php" ?>
-<?php session_start(); 
- //$ingid = $_SESSION['id'];
- //$var = $_SESSION['receipe_id'] ?>
+<?php include('navbar.php') ?>
+
 
 
 <!Doctype html>

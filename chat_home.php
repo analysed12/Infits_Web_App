@@ -14,6 +14,7 @@ if (isset($_SESSION['dietitianuserID'])) {
     include 'app/helpers/last_chat.php';
     include 'app/helpers/timeHM.php';
 
+
     # Getting User data data
     $user = getUser($_SESSION['dietitianuserID'], $conn);
 
@@ -53,7 +54,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 								<h3 class="fs-xs m-2"><?= $user['name'] ?></h3>
 							</div> -->
                             <div class="mt-1">
-                                <h5>Messages</h5>
+                                <h5 class="chat-message-header">Messages</h5>
                             </div>
                             <!-- <a href="logout.php" class="btn fs-xs">L </a> -->
                         </div>
@@ -89,7 +90,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                                                     </h3>
                                                 </div>
                                                 <div class="d-flex
-	    					            align-items-center">
+	    					            align-items-center " style="margin-left: auto;" >
                                                     <h3 class="fs-xs p-2 text-dark">
 
                                                         <small>
