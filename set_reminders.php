@@ -234,7 +234,7 @@ if(isset($_POST['create_reminder'])){
         }
     }
     $conn->close();
-    header(("Location: set_reminder_backend.php"));
+    header(("Location: set_reminders.php"));
 }
 
 
@@ -292,6 +292,8 @@ function getClientName($ID,$conn,$dietitianuserID){
 
     body {
         font-family: 'NATS', sans-serif !important;
+        margin-bottom:2rem;
+        overflow-x:hidden;
     }
    
     .ml{
@@ -313,7 +315,7 @@ function getClientName($ID,$conn,$dietitianuserID){
     .sub-heading{
         font-style: normal;
         font-weight: 400;
-        font-size: 30px;
+        font-size: 25px;
         line-height: 74px;
     }
     .cards{
@@ -387,13 +389,7 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
         
         transition: 0.5s ease-in-out;
     }
-    .sr-inputs{
-        width: 100%;
-    }
-    .sr-inputs select{
-        width: 95%;
-        height:20%;
-    }
+ 
     .card{
         display: flex;
         justify-content: center;
@@ -439,13 +435,14 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     }
     .client-list-container {
         display: flex;
-        justify-content: center;
+        
         padding-top: 40px;
     }
     .client_wrapper {
         display: none;
-        right: -350px;
-        transition: 0.5s ease-in-out;
+    
+        animation-duration: 1s;
+        animation-name: slidein;
         flex-direction: column;
         width: 380px;
         
@@ -453,9 +450,20 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
         border-radius: 15px;
     }
+    @keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
     
     .wrapper-top {
-        /* height: 45%; */
+       
         padding-bottom: 25px;
     }
     .searchclient{
@@ -553,7 +561,7 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
         padding: 15px;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        
     }
     .pc-left,
     .pc-middle{
@@ -565,9 +573,6 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     }
     .pc-right {
     width: 10%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
     }
     .pc-title{
         
@@ -575,7 +580,6 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
         font-size: 20px;
         line-height: 23px;
         color: #000000;
-        margin-block: 5px;
     }
     .calorie-input {
         width: 45%;
@@ -704,9 +708,45 @@ border-radius: 13.3333px;
         position: absolute;
         width:auto;
     }
-    .pr-container{
-        margin-left:0 !important;
+    .pr-container{  
+        width:auto;
     }
+    .past-reminder{
+        width:auto;
+        height:auto;
+        
+    }
+    .past-card{
+        display:flex;
+        flex-direction:column;
+    }
+    .pc-right{
+        display:flex !important;
+        width:auto;
+        margin-top:1rem;
+        justify-content:space-evenly;
+        
+
+    }
+    .pc-left,
+    .pc-middle{
+        width: auto;
+        margin-top:1rem;
+    }
+    .border{
+        width:auto;
+    }
+    .tooltip-text{
+        width:auto;
+    }
+    .pl{
+        padding-left: 0px;
+        margin-left:2rem;
+    }
+    .col-8{
+        width:100%;
+    }
+   
    
   
   }
@@ -985,7 +1025,7 @@ border-radius: 13.3333px;
             </div>
         </div>
                     </div>
-        <div style="border-bottom: 2px solid #EFEFEF;margin-top:3.5rem;margin-left:10%;margin-right:10%"></div>
+        <div class="border" style="border-bottom: 2px solid #EFEFEF;margin-top:3.5rem;margin-left:10%;margin-right:10%"></div>
         <!-- top cards -->
         <script>
             function showSetDialog(divid,cardid){
@@ -1070,7 +1110,7 @@ if (mysqli_num_rows($result_water) > 0) {
                                     </select>
                                 </div>
                                 <div class="pc-right">
-                                    <button class="pc-btn1" type="button"  onclick="showSelectClient('water_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button>
+                                    <button class="pc-btn1" type="button"  onclick="showSelectClient('water_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br> <br>
                                     <button class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_water('water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
                             </div>
@@ -1154,7 +1194,7 @@ if (mysqli_num_rows($result_calorie) > 0) {
                                     </div>
                                 </div>
                                 <div class="pc-right">
-                                    <button style="background: #E493A5;" class="pc-btn1" type="button"  onclick="showSelectClient('calorie_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button>
+                                    <button style="background: #E493A5;" class="pc-btn1" type="button"  onclick="showSelectClient('calorie_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
                                     <button style="background: #E493A5;" class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_calorie('calorie_selected<?php echo($i) ?>' , 'bf_time<?php echo($i) ?>' ,'lunch_time<?php echo($i) ?>', 'snacks_time<?php echo($i) ?>', 'dinner_time<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
                             </div>
@@ -1199,7 +1239,7 @@ if (mysqli_num_rows($result_sleep) > 0) {
                                         <option value="12:00 AM">12:00 AM</option>
                                     </select>
                                 </div>
-                                <div class="pc-middle">
+                                <div class="pc-middle" >
                                     <p class="pc-title">Time to wakeup</p>
                                     <select name="" id="wake_time<?php echo($i) ?>" class="water_bottom">
                                         <option value="<?php echo($row['wake_time']) ?>"><?php echo($row['wake_time']) ?></option>
@@ -1211,7 +1251,7 @@ if (mysqli_num_rows($result_sleep) > 0) {
                                     </select>
                                 </div>
                                 <div class="pc-right">
-                                    <button style="background: #7A55E3;" class="pc-btn1" type="button"  onclick="showSelectClient('sleep_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button>
+                                    <button style="background: #7A55E3;" class="pc-btn1" type="button"  onclick="showSelectClient('sleep_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
                                     <button style="background: #7A55E3;" class="pc-btn1" type="button" onclick="submitForm_sleep('sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" id="savereminderwaterpc" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
                             </div>
@@ -1441,7 +1481,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',water_interval: interval.value,water_amount:amount.value},
             success: function(data) {
                 // Handle the response here
@@ -1464,7 +1504,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',water_interval: null,water_amount:null},
             success: function(data) {
                 // Handle the response here
@@ -1492,7 +1532,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',bf_time: bf_time.value,lunch_time:lunch_time.value,snacks_time:snacks_time.value,dinner_time:dinner_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1515,7 +1555,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',bf_time: null,lunch_time:null,snacks_time:null,dinner_time:null},
             success: function(data) {
                 // Handle the response here
@@ -1540,7 +1580,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',sleep_time: sleep_time.value,wake_time:wake_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1563,7 +1603,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',sleep_time: null,wake_time:null},
             success: function(data) {
                 // Handle the response here
@@ -1580,7 +1620,7 @@ $i++;
         console.log(getSelectedClients(selected));
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', water_interval: water_interval.value, water_amount:water_amount.value},
             success: function(data) {
                 // Handle the response here
@@ -1605,7 +1645,7 @@ $i++;
         console.log(dinner_time.value);
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', bf_time: bf_time.value,lunch_time:lunch_time.value,snacks_time:snacks_time.value,dinner_time:dinner_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1623,7 +1663,7 @@ $i++;
         console.log(getSelectedClients(selected));
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', sleep_time: sleep_time.value,wake_time:wake_time.value},
             success: function(data) {
                 // Handle the response here
