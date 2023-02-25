@@ -28,21 +28,25 @@ if (isset($_SESSION['dietitianuserID'])) {
     $conversations = getConversation($user['dietitian_id'], $conn);
 
     if (!isset($_GET['user'])) {
-        header("Location: home.php");
+        header("Location: chat_home.php");
         exit;
     }
+    // echo $_GET['user'];
+    //  print_r(getUser($_GET['user'], $conn));
+    // die();
 
     # Getting User data data
-    $chatWith = getUser($_GET['user'], $conn);
+    $chatWith = getClient($_GET['user'], $conn);
+    // print_r($chatWith);
 
     if (empty($chatWith)) {
-        header("Location: home.php");
+        header("Location: chat_home.php");
         exit;
     }
 
-    $chats = getChats($_SESSION['dietitian_id'], $chatWith['dietitian_id'], $conn);
+    $chats = getChats($_SESSION['dietitian_id'], $chatWith['client_id'], $conn);
 
-    opened($chatWith['dietitian_id'], $conn, $chats);
+    opened($chatWith['client_id'], $conn, $chats);
 
 ?>
 
@@ -107,7 +111,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                                                         <?= $conversation['name'] ?><br>
                                                         <small>
                                                             <?php
-                                                            echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
+                                                            echo lastChat($_SESSION['dietitian_id'], $conversation['client_id'], $conn);
                                                             ?>
                                                         </small>
 
@@ -244,6 +248,8 @@ if (isset($_SESSION['dietitianuserID'])) {
     	               d-flex flex-column
     	               mt-2 chat-box" id="chatBox">
                             <?php
+                            // print_r($chats);
+
                             if (!empty($chats)) {
                                 foreach ($chats as $chat) {
                                     if ($chat['from_id'] == $_SESSION['dietitian_id']) { ?>
@@ -316,13 +322,13 @@ if (isset($_SESSION['dietitianuserID'])) {
 								height: 0;
 								visibility: hidden;">
 
-                            <input type="hidden" name="to_id" value="<?= $chatWith['dietitian_id'] ?>">
+                            <input type="hidden" name="to_id" value="<?= $chatWith['client_id'] ?>">
 
                         </form>
 
                         <input type="text" id="message" class="form-control rounded-pill m-3 align-items-center " style="height: 50px;" ></input>
                         <button class="btn text-primary " styles="color: #0177FD!importtant;" id="sendBtn">
-                            Send Message
+                            Send Message1
 
                         </button>
                     </div>
@@ -353,12 +359,13 @@ if (isset($_SESSION['dietitianuserID'])) {
                     $(document).ready(function() {
 
                         $("#sendBtn").on('click', function() {
+                            console.log("sendBtn works");
                             message = $("#message").val();
                             if (message == "") return;
 
                             $.post("app/ajax/insert.php", {
                                     message: message,
-                                    to_id: <?= $chatWith['dietitian_id'] ?>
+                                    to_id: <?= $chatWith['client_id'] ?>,
                                 },
                                 function(data, status) {
                                     $("#message").val("");
@@ -374,12 +381,12 @@ if (isset($_SESSION['dietitianuserID'])) {
                             var formData = new FormData();
 
                             formData.append('my_image', imageInput);
-                            formData.append('to_id', <?= $chatWith['dietitian_id'] ?>);
+                            formData.append('to_id', <?= $chatWith['client_id'] ?>);
                             console.log(imageInput);
 
                             $.post("app/ajax/upload.php", {
                                     my_image: imageInput,
-                                    to_id: <?= $chatWith['dietitian_id'] ?>
+                                    to_id: <?= $chatWith['client_id'] ?>
                                 },
                                 function(data, status) {
                                     console.log("no error");
@@ -423,7 +430,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                         // auto refresh / reload
                         let fechData = function() {
                             $.post("app/ajax/getMessage.php", {
-                                    id_2: <?= $chatWith['dietitian_id'] ?>
+                                    id_2: <?= $chatWith['client_id'] ?>
                                 },
                                 function(data, status) {
                                     $("#chatBox").append(data);

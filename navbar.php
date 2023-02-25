@@ -375,6 +375,7 @@ a {
             <p id="topnav-content-1">Good Morning, <span id="topnav-content-1-name">
                 <strong>
                     <?php
+
                      $id11 = $_SESSION['dietitianuserID'] ;
                     $sql1 = "SELECT name FROM dietitian WHERE dietitianuserID ='$id11'";
                     $res = mysqli_query($conn,$sql1);

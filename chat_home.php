@@ -15,10 +15,14 @@ if (isset($_SESSION['dietitianuserID'])) {
     include 'app/helpers/timeHM.php';
 
 
-    # Getting User data data
-    $user = getUser($_SESSION['dietitianuserID'], $conn);
 
-    # Getting User conversations
+    # Getting User data data
+
+    $user = getUser($_SESSION['dietitianuserID'], $conn);
+    // print_r($user);
+    // die();
+
+    # Getting User conversations //working for getting the clients user in left side
     $conversations = getConversation($user['dietitian_id'], $conn);
 
 ?>
@@ -73,7 +77,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                                     foreach ($conversations as $conversation) { ?>
                                         <li class="list-group-item">
-                                            <a href="chat_messages.php?user=<?= $conversation['dietitianuserID'] ?>" class="d-flex
+                                            <a href="chat_messages.php?user=<?= $conversation['clientuserID'] ?>" class="d-flex
 	    				          justify-content-between
 	    				          align-items-center">
                                                 <div class="d-flex
@@ -83,7 +87,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                                                         <?= $conversation['name'] ?><br>
                                                         <small>
                                                             <?php
-                                                            echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
+                                                            echo lastChat($_SESSION['dietitian_id'], $conversation['client_id'], $conn);
                                                             ?>
                                                         </small>
 
