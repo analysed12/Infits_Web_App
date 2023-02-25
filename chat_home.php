@@ -15,7 +15,9 @@ if (isset($_SESSION['dietitianuserID'])) {
     include 'app/helpers/timeHM.php';
 
 
-    # Getting User data data (the dietitian)
+
+    # Getting User data data
+
     $user = getUser($_SESSION['dietitianuserID'], $conn);
     // print_r($user);
     // die();

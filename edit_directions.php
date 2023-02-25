@@ -1,6 +1,5 @@
-// $var = $_SESSION['dirtid'];
- // $rid = $_SESSION['receipe_id'];?>
- <?php "navbar.php" ?>
+
+ <?php include('navbar.php') ?>
 	
 
 <!DOCTYPE html>

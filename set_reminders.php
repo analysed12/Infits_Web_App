@@ -234,7 +234,7 @@ if(isset($_POST['create_reminder'])){
         }
     }
     $conn->close();
-    header(("Location: set_reminder_backend.php"));
+    header(("Location: set_reminders.php"));
 }
 
 
@@ -291,7 +291,9 @@ function getClientName($ID,$conn,$dietitianuserID){
 }
 
     body {
-        font-family: 'NATS', sans-serif;
+        font-family: 'NATS', sans-serif !important;
+        margin-bottom:2rem;
+        overflow-x:hidden;
     }
    
     .ml{
@@ -313,7 +315,7 @@ function getClientName($ID,$conn,$dietitianuserID){
     .sub-heading{
         font-style: normal;
         font-weight: 400;
-        font-size: 30px;
+        font-size: 25px;
         line-height: 74px;
     }
     .cards{
@@ -322,7 +324,7 @@ function getClientName($ID,$conn,$dietitianuserID){
         gap: 5%;
     }
     .set-reminder{
-        position: relative;
+
     }
     .close-btn {
     position: absolute;
@@ -345,42 +347,49 @@ function getClientName($ID,$conn,$dietitianuserID){
         flex-wrap: wrap;
     }
 
-    .sr-1 {
-        width: 50%;
-    }
-
-    .sr-2 {
-        width: 50%;
-    }
-
-    .sr-3 {
-        width: 50%;
-    }
-
-    .sr-4 {
-        width: 50%;
-    }
     .set-card {
-        position: absolute;
+      position:absolute;
         z-index: 9;
-        width: 465px;
+        width: 450px;
+        display:flex;
+        flex-direction:column;
 
         background: linear-gradient(59.46deg, #FBB3F0 0.04%, #5CA7F8 100%);
         box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
-        display: flex;
+        
         padding: 25px;
-        justify-content: center;
-        align-items: center;
+        
         transition: 0.5s ease-in-out;
     }
-    .sr-inputs{
-        width: 100%;
+    .set-card2 {
+      position:absolute;
+        z-index: 9;
+        width: 450px;
+        display:flex;
+        flex-direction:column;
+        background: linear-gradient(59.46deg, #E2809B 0.04%, #EBD3C8 100%);
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        padding: 25px;
+        transition: 0.5s ease-in-out;
+        
     }
-    .sr-inputs select{
-        width: 95%;
-        height:20%;
+      .set-card3 {
+      position:absolute;
+        z-index: 9;
+        width: 450px;
+        display:flex;
+        flex-direction:column;
+        background: linear-gradient(59.46deg, #633FDD 0.04%, #AB84F0 100%);
+box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        
+        padding: 25px;
+        
+        transition: 0.5s ease-in-out;
     }
+ 
     .card{
         display: flex;
         justify-content: center;
@@ -421,29 +430,40 @@ function getClientName($ID,$conn,$dietitianuserID){
         cursor:pointer;
     }
     .bottom{
-        margin-left: 13rem;
-        position: relative;
+        margin-left: 1rem;
+       
     }
     .client-list-container {
         display: flex;
-        justify-content: center;
+        
         padding-top: 40px;
     }
     .client_wrapper {
         display: none;
-        position: absolute;
-        right: -350px;
-        transition: 0.5s ease-in-out;
+    
+        animation-duration: 1s;
+        animation-name: slidein;
         flex-direction: column;
-        width: 347px;
-        /* height: 610px; */
+        width: 380px;
+        
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
         border-radius: 15px;
     }
+    @keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
     
     .wrapper-top {
-        /* height: 45%; */
+       
         padding-bottom: 25px;
     }
     .searchclient{
@@ -464,7 +484,7 @@ function getClientName($ID,$conn,$dietitianuserID){
         outline: none;
     }
     .wrapper-bottom {
-        min-height: 400px;
+        min-height: 300px;
         overflow-y: scroll;
     }
     .wrapper-bottom::-webkit-scrollbar{
@@ -526,16 +546,22 @@ function getClientName($ID,$conn,$dietitianuserID){
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
         border-radius: 15px;
-        padding: 10px;
+        padding:4px;
+        padding-left:10px;
+        padding-right:10px;
         margin-bottom: 20px;
+        background: url(images/bottomvec.png);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: bottom right;
         width: 708px;
-        height: 118px;
+        height: 130px;
     }
     .past-card {
         padding: 15px;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        
     }
     .pc-left,
     .pc-middle{
@@ -547,17 +573,13 @@ function getClientName($ID,$conn,$dietitianuserID){
     }
     .pc-right {
     width: 10%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
     }
     .pc-title{
-        font-style: normal;
-        font-weight: 700;
-        font-size: 17px;
+        
+        font-weight: 550;
+        font-size: 20px;
         line-height: 23px;
         color: #000000;
-        margin-block: 5px;
     }
     .calorie-input {
         width: 45%;
@@ -591,6 +613,143 @@ function getClientName($ID,$conn,$dietitianuserID){
     font-family: Avenir;
     text-align: center;
   }
+  .select_option{
+    background: #FFFFFF;
+border: 0.821875px solid #DFDFDF;
+box-shadow: 0px 1.64375px 3.2875px rgba(0, 0, 0, 0.08);
+border-radius: 8.21875px;
+width:80%;
+
+
+
+  }
+  .select_option1{
+    border:none;
+    color: #DDDDDD;
+    border-radius: 8.21875px;
+    width:80%;
+    padding-left:1rem;
+  
+  }
+  .select_option2{
+    background: #FFFFFF;
+border: 0.821875px solid #DFDFDF;
+box-shadow: 0px 1.64375px 3.2875px rgba(0, 0, 0, 0.08);
+border-radius: 8.21875px;
+width:100%;
+
+
+
+  }
+  .select_option3{
+    border:none;
+    color: #DDDDDD;
+    border-radius: 8.21875px;
+    width:100%;
+    padding-left:1rem;
+  
+  }
+  .set_button{
+    width: 151.99px;
+height: 40.97px;
+color:#64A8F8;
+border:none;
+margin-left:2rem;
+margin-top:2rem;
+padding-bottom:1.5rem;
+background: #FFFFFF;
+box-shadow: 0px 3.28622px 3.28622px rgba(0, 0, 0, 0.28);
+border-radius: 8.21555px;
+  }
+  .header{
+    display:flex;
+    gap:5rem;
+  }
+  .water_bottom{
+    background: #FFFFFF;
+border: 0.996877px solid #DFDFDF;
+box-shadow: 0px 1.99375px 3.98751px rgba(0, 0, 0, 0.08);
+border-radius: 9.96877px;
+color: #DDDDDD;
+padding-left:1rem;
+padding-right:1rem;
+  }
+ 
+  .pc-btn1{
+    width: 42.5px;
+height: 40px;
+border:none;
+
+background: #61A8F8;
+border-radius: 13.3333px;
+  }
+
+  @media screen and (max-width: 720px) {
+    .header{
+        display:flex;
+        flex-direction:column;
+        gap:2rem;
+    }
+    .set-card{
+        left: 25px;
+        top: 307.5px;
+        position: absolute;
+        width:auto;
+    }
+    .set-card2{
+        left: 25px;
+        top: 307.5px;
+        position: absolute;
+        width:auto;
+    }
+    .set-card3{
+        left: 25px;
+        top: 307.5px;
+        position: absolute;
+        width:auto;
+    }
+    .pr-container{  
+        width:auto;
+    }
+    .past-reminder{
+        width:auto;
+        height:auto;
+        
+    }
+    .past-card{
+        display:flex;
+        flex-direction:column;
+    }
+    .pc-right{
+        display:flex !important;
+        width:auto;
+        margin-top:1rem;
+        justify-content:space-evenly;
+        
+
+    }
+    .pc-left,
+    .pc-middle{
+        width: auto;
+        margin-top:1rem;
+    }
+    .border{
+        width:auto;
+    }
+    .tooltip-text{
+        width:auto;
+    }
+    .pl{
+        padding-left: 0px;
+        margin-left:2rem;
+    }
+    .col-8{
+        width:100%;
+    }
+   
+   
+  
+  }
 
 
 </style>
@@ -620,43 +779,65 @@ function getClientName($ID,$conn,$dietitianuserID){
         <div class="row" style="margin-left:1rem">
             <div class="col">
                 <div class="cards ml">
-                    <!-- set reminder 1 -->
-                    <div class="set-reminder">
+                    <div class="header">
+                        <!-- set reminder 1 -->
+                    <div class="set-reminder" >
                         <!-- set pop 1 -->
                         <div id="set-card-water" class="set-card" style="color:white">
                             <span class="close-btn" onclick="hideSetdialog('set-card-water','card1')">X</span>
-                            <div class="sr-inputs" >
-                                <p stye="line-height:0.5rem" >Water Intake Reminder</p>
-                                <h6 stye="line-height:0.5rem">Hourly water Intake Reminder</h6>
-                                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                                    <div class="sr-1" style="color:white">
-                                        <p class="pc-title" style="color:white">Duration</p>
-                                        <select name="water_interval" id="" >
-                                            <option value="30 Min">30 Min</option>
-                                            <option value="1 Hour">1 Hour</option>
-                                            <option value="2 Hour">2 Hour</option>
-                                            <option value="3 Hour">3 Hour</option>
-                                            <option value="4 Hour">4 Hour</option>
-                                        </select>
-                                    </div>
-                                    <div class="sr-2" style="color:white">
-                                        <p class="pc-title" style="color:white">Duration</p>
-                                        <select name="water_amount" id="">
+                            <div style="display:flex;flex-direction:column">
+                            <span>Water Intake Reminder</span>
+                            <span style="line-height:0.1rem;font-size:16px">Hourly Water Intake Reminder</span>
+                            
+                           </div>
+                    
+                           <div style="display:flex">
+                            
+
+                            <div style="width:100%">
+                            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                             <div style="margin-top:1rem">
+                                 <span style="color:white;font-size: 14.788px;">Duration(Time Gap Interval)</span> <br>
+                                 <div class="select_option" >
+                                 <select name="water_interval" class="select_option1" >
+                                             <option value="30 Min">30 Min</option>
+                                             <option value="1 Hour">1 Hour</option>
+                                             <option value="2 Hour">2 Hour</option>
+                                             <option value="3 Hour">3 Hour</option>
+                                             <option value="4 Hour">4 Hour</option>
+                                         </select>
+                                 </div>
+                                 
+                             </div>
+
+                             <div>
+                                 <span style="color:white;font-size: 14.788px;">Quantity</span> <br>
+                                 <div class="select_option" >
+                                 <select name="water_amount" class="select_option1">
                                             <option value="1 Glass">1 Glass</option>
                                             <option value="2 Glasses">2 Glasses</option>
                                             <option value="3 Glasses">3 Glasses</option>
                                             <option value="4 Glasses">4 Glasses</option>
                                         </select>
-                                    </div>
-                                    <input hidden name="create_reminder">
-                                    <button name="create_reminder_water" type="submit">Set</button>
-                                </form>
-
+                                 </div>
+                                 
+                             </div>
+ 
+                            
                             </div>
-                            <div class="sr-img">
+
+                            <div style="margin-top:3rem">
                                 <img src="images/man_drinking_water.png" alt="">
                             </div>
+                            </div>
+                            <input hidden name="create_reminder">
+                                    <button name="create_reminder_water" type="submit" class="set_button" >Set</button>
+                                    </form>
+                          
+                            
                         </div>
+                            
+                        
                         <!-- set pop 1 -->
                         <!-- card 1 -->
                         <div id="card0" class="card card0" onclick="showSetDialog('set-card-water','card1')">
@@ -676,58 +857,92 @@ function getClientName($ID,$conn,$dietitianuserID){
                     <!-- set reminder 2 -->
                     <div class="set-reminder">
                         <!-- set pop 2 -->
-                        <div id="set-card-calorie" class="set-card">
+                        <div id="set-card-calorie" class="set-card2" style="color:white">
                             <span class="close-btn" onclick="hideSetdialog('set-card-calorie','card2')">X</span>
-                            <div class="sr-inputs">
-                                <h2>Calorie Intake Reminder</h2>
-                                <p>Hourly water Intake Reminder</p>
-                                <form class="calorie-form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" >
-                                    <div class="sr-1">
-                                        <p class="pc-title">BreakFast</p>
-                                        <select name="bf_time" id="">
+                            <div style="display:flex;flex-direction:column">
+                            <span>Eating Reminder</span>
+                            <span style="line-height:0.1rem;font-size:16px">Eating reminder to follow with other diet chart</span> 
+                           </div>
+
+                           <div style="display:flex">
+                            
+
+                            <div style="width:100%">
+                            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                             <div style="display:flex;gap:0.5rem">
+                             <div style="margin-top:1rem">
+                                 <span style="color:white;font-size: 14.788px;">Breakfast</span> <br>
+                                 <div class="select_option2" >
+                                 <select name="bf_time" class="select_option3">
                                             <option value="07:00 AM">07:00 AM</option>
                                             <option value="07:30 AM">07:30 AM</option>
                                             <option value="08:00 AM">08:00 AM</option>
                                             <option value="08:30 AM">08:30 AM</option>
                                             <option value="09:00 AM">09:00 AM</option>
                                         </select>
-                                    </div>
-                                    <div class="sr-2">
-                                        <p class="pc-title">Lunch</p>
-                                        <select name="lunch_time" id="">
+                                 </div>
+                                 
+                             </div>
+
+                             <div style="margin-top:1rem">
+                                 <span style="color:white;font-size: 14.788px;">Lunch</span> <br>
+                                 <div class="select_option2" >
+                                 <select name="lunch_time" class="select_option3">
                                             <option value="07:30 PM">07:30 PM</option>
                                             <option value="08:00 PM">08:00 PM</option>
                                             <option value="08:30 PM">08:30 PM</option>
                                             <option value="09:00 PM">09:00 PM</option>
                                             <option value="09:30 PM">09:30 PM</option>
                                         </select>
-                                    </div>
-                                    <div class="sr-3">
-                                        <p class="pc-title">Snacks</p>
-                                        <select name="snacks_time" id="">
+                                 </div>
+                                 
+                             </div>
+
+                             
+                             </div>
+
+                             <div style="display:flex;gap:0.5rem">
+                             <div style="margin-top:1rem">
+                                 <span style="color:white;font-size: 14.788px;">Snacks</span> <br>
+                                 <div class="select_option2" >
+                                 <select name="snacks_time"  class="select_option3">
                                             <option value="04:00 PM">04:00 PM</option>
                                             <option value="04:30 PM">04:30 PM</option>
                                             <option value="05:00 PM">05:00 PM</option>
                                         </select>
-                                    </div>
-                                    <div class="sr-4">
-                                        <p class="pc-title">Dinner</p>
-                                        <select name="dinner_time" id="">
+                                 </div>
+                                 
+                             </div>
+
+                             <div style="margin-top:1rem">
+                                 <span style="color:white;font-size: 14.788px;">Dinner</span> <br>
+                                 <div class="select_option2" >
+                                 <select name="dinner_time" class="select_option3">
                                             <option value="07:30 PM">07:30 PM</option>
                                             <option value="08:00 PM">08:00 PM</option>
                                             <option value="08:30 PM">08:30 PM</option>
                                             <option value="09:00 PM">09:00 PM</option>
                                             <option value="09:30 PM">09:30 PM</option>
                                         </select>
-                                    </div>
-                                    <input hidden name="create_reminder">
-                                    <button name="create_reminder_calorie" type="submit">Set</button>
-                                </form>
+                                 </div>
+                                 
+                             </div>
 
+                             
+                             </div>
+ 
+                            
                             </div>
-                            <div class="sr-img">
-                                <img src="images/man_drinking_water.png" alt="">
+
+                            <div style="margin-top:5rem;margin-right:0rem">
+                                <img src="images/park.png"style="width:99%" >
                             </div>
+                            </div>
+
+                            <input hidden name="create_reminder">
+                                    <button name="create_reminder_water" type="submit" class="set_button" style="color: #E3869F;margin-left:4.5rem">Set</button>
+                                    </form>
+                           
                         </div>
                         <!-- set pop 2 -->
                         <!-- card 2 -->
@@ -745,40 +960,57 @@ function getClientName($ID,$conn,$dietitianuserID){
                     <!-- set reminder 3 -->
                     <div class="set-reminder">
                         <!-- set pop 3 -->
-                        <div id="set-card-sleep" class="set-card">
+                        <div id="set-card-sleep" class="set-card3" style="color:white">
                             <span class="close-btn" onclick="hideSetdialog('set-card-sleep','')">X</span>
-                            <div class="sr-inputs">
-                                <h2>Sleep Reminder</h2>
-                                <p>Hourly water Intake Reminder</p>
-                                <form action="<?php $_SERVER['PHP_SELF'] ?>" method= "POST">
-                                    <div class="sr-1">
-                                        <p class="pc-title">Duration</p>
-                                        <select name="sleep_time" id="">
+                            <div style="display:flex;flex-direction:column">
+                            <span>Sleep</span>
+                            <span style="line-height:0.1rem;font-size:16px">Duration of sleep</span>
+                            
+                           </div>
+                    
+                           <div style="display:flex">
+                            
+
+                            <div style="width:100%">
+                            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                             <div style="margin-top:1rem">
+                                 <span style="color:white;font-size: 14.788px;">Time to sleep</span> <br>
+                                 <div class="select_option" >
+                                 <select name="sleep_time" class="select_option1">
                                             <option value="09:30 PM">09:30 PM</option>
                                             <option value="10:00 PM">10:00 PM</option>
                                             <option value="11:00 PM">11:00 PM</option>
                                             <option value="11:30 PM">11:30 PM</option>
                                             <option value="12:00 AM">12:00 AM</option>
                                         </select>
-                                    </div>
-                                    <div class="sr-2">
-                                        <p class="pc-title">Duration</p>
-                                        <select name="wake_time" id="">
+                                 </div>
+                                 
+                             </div>
+
+                             <div>
+                                 <span style="color:white;font-size: 14.788px;">Time to wake</span> <br>
+                                 <div class="select_option" >
+                                 <select name="wake_time" class="select_option1">
                                             <option value="05:00 AM">05:00 AM</option>
                                             <option value="05:15 AM">05:15 AM</option>
                                             <option value="05:30 AM">05:30 AM</option>
                                             <option value="05:45 AM">05:45 AM</option>
                                             <option value="06:00 AM">06:00 AM</option>
                                         </select>
-                                    </div>
-                                    <input hidden name="create_reminder">
-                                    <button name="create_reminder_sleep" type="submit">Set</button>
-                                </form>
+                                 </div>
+                                 
+                             </div>
+ 
+                            
+                            </div>
 
+                            <div style="margin-top:3rem">
+                                <img src="images/mansleeping.png" alt="">
                             </div>
-                            <div class="sr-img">
-                                <img src="images/man_drinking_water.png" alt="">
                             </div>
+                            <input hidden name="create_reminder">
+                                    <button name="create_reminder_water" type="submit" class="set_button" style="color: #6843DF;">Set</button>
+                                    </form>
                         </div>
                         <!-- set pop 3 -->
                         <!-- card 3 -->
@@ -792,6 +1024,8 @@ function getClientName($ID,$conn,$dietitianuserID){
                 </div>
             </div>
         </div>
+                    </div>
+        <div class="border" style="border-bottom: 2px solid #EFEFEF;margin-top:3.5rem;margin-left:10%;margin-right:10%"></div>
         <!-- top cards -->
         <script>
             function showSetDialog(divid,cardid){
@@ -823,11 +1057,15 @@ function getClientName($ID,$conn,$dietitianuserID){
 
     <!-- bottom start -->
     <div class="bottom">
-        <div class="row" style="padding-bottom: 320px;">
+        <div class="row" >
             <!-- Sub heading -->
-            <div class="col-12">
-                <h3 class="pl sub-heading">Past Reminder</h3>
+            <div class="row" style="margin-left:2.9rem">
+            <div class="col" style="display:flex">
+                <h3 class=" sub-heading">Past Reminder</h3>
+                <div class="hover-text"style="margin-top:1.6rem" ><span class="material-symbols-outlined" style="color:#9C74F5">error</span>
+            <span class="tooltip-text" id="right">View all the reminders already set for the clients from here!</span></div> 
             </div>
+        </div>
             <!-- Sub heading -->
             <!-- Past Cards col-8 -->
             <div class="col-8">
@@ -845,14 +1083,14 @@ if (mysqli_num_rows($result_water) > 0) {
             unset($map_water[$key]);
         }
 ?>
-                <div class="pl pr-container">
-                    <p class="pr-heading"><img src="" alt="">Water Intake Reminder</p>
+                <div class="pl pr-container" style="margin-left:1rem">
+                    <p class="pr-heading"><img src="images/waterdrop1.png" style="margin-bottom:0.2rem;margin-right:0.5rem">Water Intake Reminder</p>
                     <div class="past-reminder pr-water">
                         <form id="" action="" method="POST">
                             <div class="past-card">
                                 <div class="pc-left">
-                                    <p class="pc-title">Interval</p>
-                                    <select name="" id="water_interval<?php echo($i) ?>">
+                                    <p class="pc-title">Duration(Time gap interval)</p>
+                                    <select name="" id="water_interval<?php echo($i) ?>" class="water_bottom">
                                         <option selected value="<?php echo ($row['water_interval']) ?>"><?php echo ($row['water_interval']) ?></option>
                                         <option value="30 Min">30 Min</option>
                                         <option value="1 Hour">1 Hour</option>
@@ -862,9 +1100,9 @@ if (mysqli_num_rows($result_water) > 0) {
                                     </select>
                                 </div>
                                 <div class="pc-middle">
-                                    <p class="pc-title">Amount</p>
-                                    <select name="" id="water_amount<?php echo($i) ?>">
-                                        <option selected value="<?php echo ($row['water_amount']) ?>"><?php echo ($row['water_amount']) ?></option>
+                                    <p class="pc-title">Quantity</p>
+                                    <select class="water_bottom" name="" id="water_amount<?php echo($i) ?>">
+                                        <option  selected value="<?php echo ($row['water_amount']) ?>"><?php echo ($row['water_amount']) ?></option>
                                         <option value="1 Glass">1 Glass</option>
                                         <option value="2 Glasses">2 Glasses</option>
                                         <option value="3 Glasses">3 Glasses</option>
@@ -872,8 +1110,8 @@ if (mysqli_num_rows($result_water) > 0) {
                                     </select>
                                 </div>
                                 <div class="pc-right">
-                                    <button class="pc-btn1" type="button"  onclick="showSelectClient('water_wrapper<?php echo($i) ?>')">c</button>
-                                    <button type="button" id="savereminderwaterpc" onclick="submitForm_water('water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="pc-btn2">T</button>
+                                    <button class="pc-btn1" type="button"  onclick="showSelectClient('water_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br> <br>
+                                    <button class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_water('water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
                             </div>
                         </form>
@@ -904,15 +1142,15 @@ if (mysqli_num_rows($result_calorie) > 0) {
 // }
 // die();
 ?>
-                <div class="pl pr-container">
-                    <p class="pr-heading"><img src="" alt="">Eat  Reminder</p>
+                <div class="pl pr-container" style="margin-left:1rem">
+                    <p class="pr-heading" style="color: #E493A5;"><img src="images/knifefork.png" style="margin-bottom:0.2rem;margin-right:0.5rem">Eating  Reminder</p>
                     <div class="past-reminder pr-calorie">
                         <form id="" action="" method="POST">
                             <div class="past-card">
                                 <div class="pc-left" style="display: flex;justify-content: space-between;">
                                     <div class="calorie-input">
                                         <p class="pc-title">Breakfast</p>
-                                        <select name="" id="bf_time<?php echo($i) ?>">
+                                        <select class="water_bottom" name="" id="bf_time<?php echo($i) ?>">
                                             <option selected value="<?php echo ($row['breakfast_time']) ?>"><?php echo ($row['breakfast_time']) ?></option>
                                             <option value="07:00 AM">07:00 AM</option>
                                             <option value="07:30 AM">07:30 AM</option>
@@ -923,7 +1161,7 @@ if (mysqli_num_rows($result_calorie) > 0) {
                                     </div>
                                     <div class="calorie-input">
                                         <p class="pc-title">Lunch</p>
-                                        <select name="" id="lunch_time<?php echo($i) ?>">
+                                        <select class="water_bottom"  name="" id="lunch_time<?php echo($i) ?>">
                                             <option selected value="<?php echo ($row['lunch_time']) ?>"><?php echo ($row['lunch_time']) ?></option>
                                             <option value="12:30 PM">12:30 PM</option>
                                             <option value="01:00 PM">01:00 PM</option>
@@ -936,7 +1174,7 @@ if (mysqli_num_rows($result_calorie) > 0) {
                                 <div class="pc-middle" style="display: flex;justify-content: space-between;">
                                     <div class="calorie-input">
                                         <p class="pc-title">Snacks</p>
-                                        <select name="" id="snacks_time<?php echo($i) ?>">
+                                        <select class="water_bottom"  name="" id="snacks_time<?php echo($i) ?>">
                                             <option selected value="<?php echo ($row['snacks_time']) ?>"><?php echo ($row['snacks_time']) ?></option>
                                             <option value="04:00 PM">04:00 PM</option>
                                             <option value="04:30 PM">04:30 PM</option>
@@ -945,7 +1183,7 @@ if (mysqli_num_rows($result_calorie) > 0) {
                                     </div>
                                     <div class="calorie-input">
                                         <p class="pc-title">Dinner</p>
-                                        <select name="" id="dinner_time<?php echo($i) ?>">
+                                        <select class="water_bottom"  name="" id="dinner_time<?php echo($i) ?>">
                                             <option selected value="<?php echo ($row['dinner_time']) ?>"><?php echo ($row['dinner_time']) ?></option>
                                             <option value="07:30 PM">07:30 PM</option>
                                             <option value="08:00 PM">08:00 PM</option>
@@ -956,8 +1194,8 @@ if (mysqli_num_rows($result_calorie) > 0) {
                                     </div>
                                 </div>
                                 <div class="pc-right">
-                                    <button class="pc-btn1" type="button"  onclick="showSelectClient('calorie_wrapper<?php echo($i) ?>')">c</button>
-                                    <button type="button" id="savereminderwaterpc" onclick="submitForm_calorie('calorie_selected<?php echo($i) ?>' , 'bf_time<?php echo($i) ?>' ,'lunch_time<?php echo($i) ?>', 'snacks_time<?php echo($i) ?>', 'dinner_time<?php echo($i) ?>')" class="pc-btn2">T</button>
+                                    <button style="background: #E493A5;" class="pc-btn1" type="button"  onclick="showSelectClient('calorie_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
+                                    <button style="background: #E493A5;" class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_calorie('calorie_selected<?php echo($i) ?>' , 'bf_time<?php echo($i) ?>' ,'lunch_time<?php echo($i) ?>', 'snacks_time<?php echo($i) ?>', 'dinner_time<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
                             </div>
                         </form>
@@ -985,14 +1223,14 @@ if (mysqli_num_rows($result_sleep) > 0) {
             unset($map_sleep[$key]);
         }
 ?>
-                <div class="pl pr-container">
-                    <p class="pr-heading"><img src="" alt="">Sleep Reminder</p>
+                <div class="pl pr-container" style="margin-left:1rem">
+                    <p class="pr-heading" style="color: #7A55E3;"><img src="images/Frame-3.png" style="width:5%;margin-bottom:0.2rem;margin-right:0.5rem"> Sleep Reminder</p>
                     <div class="past-reminder pr-water">
                         <form id="" action="" method="POST">
                             <div class="past-card">
                                 <div class="pc-left">
-                                    <p class="pc-title">Sleep Time</p>
-                                    <select name="" id="sleep_time<?php echo($i) ?>">
+                                    <p class="pc-title">Time to sleep</p>
+                                    <select name="" id="sleep_time<?php echo($i) ?>" class="water_bottom">
                                         <option value="<?php echo($row['sleep_time']) ?>"><?php echo($row['sleep_time']) ?></option>
                                         <option value="09:30 PM">09:30 PM</option>
                                         <option value="10:00 PM">10:00 PM</option>
@@ -1001,9 +1239,9 @@ if (mysqli_num_rows($result_sleep) > 0) {
                                         <option value="12:00 AM">12:00 AM</option>
                                     </select>
                                 </div>
-                                <div class="pc-middle">
-                                    <p class="pc-title">Wake Time</p>
-                                    <select name="" id="wake_time<?php echo($i) ?>">
+                                <div class="pc-middle" >
+                                    <p class="pc-title">Time to wakeup</p>
+                                    <select name="" id="wake_time<?php echo($i) ?>" class="water_bottom">
                                         <option value="<?php echo($row['wake_time']) ?>"><?php echo($row['wake_time']) ?></option>
                                         <option value="05:00 AM">05:00 AM</option>
                                         <option value="05:15 AM">05:15 AM</option>
@@ -1013,8 +1251,8 @@ if (mysqli_num_rows($result_sleep) > 0) {
                                     </select>
                                 </div>
                                 <div class="pc-right">
-                                    <button class="pc-btn1" type="button"  onclick="showSelectClient('sleep_wrapper<?php echo($i) ?>')">c</button>
-                                    <button type="button" onclick="submitForm_sleep('sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" id="savereminderwaterpc" class="pc-btn2">T</button>
+                                    <button style="background: #7A55E3;" class="pc-btn1" type="button"  onclick="showSelectClient('sleep_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
+                                    <button style="background: #7A55E3;" class="pc-btn1" type="button" onclick="submitForm_sleep('sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" id="savereminderwaterpc" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
                             </div>
                         </form>
@@ -1041,15 +1279,15 @@ if (mysqli_num_rows($result_water) > 0) {
 ?>
                     <div class="client_wrapper" id="water_wrapper<?php echo($i) ?>">
                             <div class="wrapper-top">
-                                <div style="text-align:center"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Water Goal</span>
+                                <div style="text-align:center;margin-top:1rem"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Water Goal</span>
                                 </div>
-                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign goal</span>
+                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
                                 <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
                                     <div class="searchclient">
                                     <img src="images/greyglass.png">
                                     <input type="text" placeholder="Search Clients">
                                     </div>
-                                    <button class="clientChange" onclick="hideSelectClient()" style="background-color: #68A9F7"><img src="images/right.png" ></button>
+                                    <button class="clientChange" onclick="hideSelectClient()" style="background-color: #68A9F7;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
                                     
                                 </div>
                                 <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
@@ -1091,15 +1329,15 @@ if (mysqli_num_rows($result_calorie) > 0) {
 ?>
                     <div class="client_wrapper" id="calorie_wrapper<?php echo($i) ?>">
                             <div class="wrapper-top">
-                                <div style="text-align:center"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Eating reminder</span>
+                                <div style="text-align:center;margin-top:1rem"><img src="images/knifefork.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Eating</span>
                                 </div>
-                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients</span>
+                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
                                 <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
                                     <div class="searchclient">
                                     <img src="images/greyglass.png">
                                     <input type="text" placeholder="Search Clients">
                                     </div>
-                                    <button class="clientChange" onclick="hideSelectClient()" style="background-color: #68A9F7"><img src="images/right.png" ></button>
+                                    <button class="clientChange" onclick="hideSelectClient()" style="background: #E493A5;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
                                     
                                 </div>
                                 <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
@@ -1142,15 +1380,15 @@ if (mysqli_num_rows($result_sleep) > 0) {
 ?>
                     <div class="client_wrapper" id="sleep_wrapper<?php echo($i) ?>">
                             <div class="wrapper-top">
-                                <div style="text-align:center"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Sleep Reminder</span>
+                                <div style="text-align:center;margin-top:1rem"><img src="images/Frame-3.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Sleep </span>
                                 </div>
-                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients</span>
+                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
                                 <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
                                     <div class="searchclient">
                                     <img src="images/greyglass.png">
                                     <input type="text" placeholder="Search Clients">
                                     </div>
-                                    <button class="clientChange" onclick="hideSelectClient()" style="background-color: #68A9F7"><img src="images/right.png" ></button>
+                                    <button class="clientChange" onclick="hideSelectClient()" style="background: #7A55E3;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
                                     
                                 </div>
                                 <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
@@ -1243,7 +1481,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',water_interval: interval.value,water_amount:amount.value},
             success: function(data) {
                 // Handle the response here
@@ -1266,7 +1504,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',water_interval: null,water_amount:null},
             success: function(data) {
                 // Handle the response here
@@ -1294,7 +1532,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',bf_time: bf_time.value,lunch_time:lunch_time.value,snacks_time:snacks_time.value,dinner_time:dinner_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1317,7 +1555,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',bf_time: null,lunch_time:null,snacks_time:null,dinner_time:null},
             success: function(data) {
                 // Handle the response here
@@ -1342,7 +1580,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.value,dietitianuserID:'<?php echo($dietitianuserID) ?>',sleep_time: sleep_time.value,wake_time:wake_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1365,7 +1603,7 @@ $i++;
         client.parentElement.remove();
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {sidebarselection: true,client_id: client.nextElementSibling.innerText,dietitianuserID:'<?php echo($dietitianuserID) ?>',sleep_time: null,wake_time:null},
             success: function(data) {
                 // Handle the response here
@@ -1382,7 +1620,7 @@ $i++;
         console.log(getSelectedClients(selected));
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', water_interval: water_interval.value, water_amount:water_amount.value},
             success: function(data) {
                 // Handle the response here
@@ -1407,7 +1645,7 @@ $i++;
         console.log(dinner_time.value);
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', bf_time: bf_time.value,lunch_time:lunch_time.value,snacks_time:snacks_time.value,dinner_time:dinner_time.value},
             success: function(data) {
                 // Handle the response here
@@ -1425,7 +1663,7 @@ $i++;
         console.log(getSelectedClients(selected));
         $.ajax({
             type: "POST",
-            url: "set_reminder_backend.php",
+            url: "set_reminders.php",
             data: {update_all: true,client_id: getSelectedClients(selected), dietitianuserID:'<?php echo($dietitianuserID) ?>', sleep_time: sleep_time.value,wake_time:wake_time.value},
             success: function(data) {
                 // Handle the response here
