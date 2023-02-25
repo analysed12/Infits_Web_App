@@ -2309,7 +2309,7 @@ $i++;
                 // Handle the response here
                 console.log(data);
                 console.log('hel form');
-                window.location.relaod();
+                window.location.reload();
             }
         });
     }
