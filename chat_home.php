@@ -25,6 +25,12 @@ if (isset($_SESSION['dietitianuserID'])) {
     # Getting User conversations //working for getting the clients user in left side
     $conversations = getConversation($user['dietitian_id'], $conn);
 
+    $chatWith = getClient($_GET['user'], $conn);
+    // $chats = getChats($_SESSION['dietitian_id'], $chatWith['client_id'], $conn);
+
+    // opened($chatWith['client_id'], $conn, $chats);
+
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -224,7 +230,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                     $.post("app/ajax/insert.php", {
                             message: message,
-                            to_id: <?= $chatWith['dietitian_id'] ?>
+                            to_id: <?= $chatWith['client_id'] ?>
                         },
                         function(data, status) {
                             $("#message").val("");
@@ -252,7 +258,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                 // auto refresh / reload
                 let fechData = function() {
                     $.post("app/ajax/getMessage.php", {
-                            id_2: <?= $chatWith['dietitian_id'] ?>
+                            id_2: <?= $chatWith['client_id'] ?>
                         },
                         function(data, status) {
                             $("#chatBox").append(data);

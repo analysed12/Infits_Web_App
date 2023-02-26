@@ -34,12 +34,12 @@ ORDER BY conversation_id DESC";
             # if conversations user_1 row equal to dietitian_id
             if ($conversation['user_1'] == $dietitian_id) {
             	$sql2  = "SELECT *
-            	          FROM client WHERE client_id=?";
+            	          FROM addclient WHERE client_id=?";
             	$stmt2 = $conn->prepare($sql2);
             	$stmt2->execute([$conversation['user_2']]);
             }else {
             	$sql2  = "SELECT *
-            	          FROM client WHERE client_id=?";
+            	          FROM addclient WHERE client_id=?";
             	$stmt2 = $conn->prepare($sql2);
             	$stmt2->execute([$conversation['user_1']]);
             }

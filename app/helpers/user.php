@@ -1,7 +1,7 @@
 <?php
 
 // function getUser($dietitianuserID, $conn){
-//    $sql = "SELECT * FROM client 
+//    $sql = "SELECT * FROM addclient 
 //            WHERE clientuserID=?";
 //    $stmt = $conn->prepare($sql);
 //    $stmt->execute([$dietitianuserID]);
@@ -35,7 +35,7 @@ function getUser($dietitianuserID, $conn)
 
 function getClient($clientuserID, $conn)
 {
-        $sql = "SELECT * FROM client 
+        $sql = "SELECT * FROM addclient 
             WHERE clientuserID=?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$clientuserID]);
