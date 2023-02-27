@@ -294,6 +294,8 @@ function getClientName($ID,$conn,$dietitianuserID){
         font-family: 'NATS', sans-serif !important;
         margin-bottom:2rem;
         overflow-x:hidden;
+        margin-bottom:2rem;
+        overflow-x:hidden;
     }
    
     .ml{
@@ -389,8 +391,13 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
         
         transition: 0.5s ease-in-out;
     }
-    
- 
+    .sr-inputs{
+        width: 100%;
+    }
+    .sr-inputs select{
+        width: 95%;
+        height:20%;
+    }
     .card{
         display: flex;
         justify-content: center;

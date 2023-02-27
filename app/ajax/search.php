@@ -12,8 +12,8 @@ if (isset($_SESSION['dietitianuserID'])) {
 	   # creating simple search algorithm :) 
 	   $key = "%{$_POST['key']}%";
      
-	   $sql = "SELECT * FROM dietitian
-	           WHERE dietitianuserID
+	   $sql = "SELECT * FROM addclient
+	           WHERE clientuserID
 	           LIKE ? OR name LIKE ?";
 	// Actual Query Needed    
 	// $sql = "SELECT * FROM add_client WHERE dietitianuserID = '{$_SESSION['dietitianuserID']}' AND name LIKE ?";
@@ -24,10 +24,10 @@ if (isset($_SESSION['dietitianuserID'])) {
          $users = $stmt->fetchAll();
 
          foreach ($users as $user) {
-         	if ($user['dietitian_id'] == $_SESSION['dietitian_id']) continue;
+         	// if ($user['dietitian_id'] == $_SESSION['dietitian_id']) continue;
        ?>
        <li class="list-group-item">
-		<a href="chat_messages.php?user=<?=$user['dietitianuserID']?>"
+		<a href="chat_messages.php?user=<?=$user['clientuserID']?>"
 		   class="d-flex
 		          justify-content-between
 		          align-items-center p-2">

@@ -15,11 +15,21 @@ if (isset($_SESSION['dietitianuserID'])) {
     include 'app/helpers/timeHM.php';
 
 
-    # Getting User data data
-    $user = getUser($_SESSION['dietitianuserID'], $conn);
 
-    # Getting User conversations
+    # Getting User data data
+
+    $user = getUser($_SESSION['dietitianuserID'], $conn);
+    // print_r($user);
+    // die();
+
+    # Getting User conversations //working for getting the clients user in left side
     $conversations = getConversation($user['dietitian_id'], $conn);
+
+    $chatWith = getClient($_GET['user'], $conn);
+    // $chats = getChats($_SESSION['dietitian_id'], $chatWith['client_id'], $conn);
+
+    // opened($chatWith['client_id'], $conn, $chats);
+
 
 ?>
     <!DOCTYPE html>
@@ -73,7 +83,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                                     foreach ($conversations as $conversation) { ?>
                                         <li class="list-group-item">
-                                            <a href="chat_messages.php?user=<?= $conversation['dietitianuserID'] ?>" class="d-flex
+                                            <a href="chat_messages.php?user=<?= $conversation['clientuserID'] ?>" class="d-flex
 	    				          justify-content-between
 	    				          align-items-center">
                                                 <div class="d-flex
@@ -83,7 +93,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                                                         <?= $conversation['name'] ?><br>
                                                         <small>
                                                             <?php
-                                                            echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
+                                                            echo lastChat($_SESSION['dietitian_id'], $conversation['client_id'], $conn);
                                                             ?>
                                                         </small>
 
@@ -220,7 +230,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                     $.post("app/ajax/insert.php", {
                             message: message,
-                            to_id: <?= $chatWith['dietitian_id'] ?>
+                            to_id: <?= $chatWith['client_id'] ?>
                         },
                         function(data, status) {
                             $("#message").val("");
@@ -248,7 +258,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                 // auto refresh / reload
                 let fechData = function() {
                     $.post("app/ajax/getMessage.php", {
-                            id_2: <?= $chatWith['dietitian_id'] ?>
+                            id_2: <?= $chatWith['client_id'] ?>
                         },
                         function(data, status) {
                             $("#chatBox").append(data);
