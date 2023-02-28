@@ -1,0 +1,123 @@
+    @font-face {
+        font-family: "NATS";
+        src: url("font/NATS.ttf.woff") format("woff"), url("font/NATS.ttf.svg#NATS") format("svg"), url("font/NATS.ttf.eot"), url("font/NATS.ttf.eot?#iefix") format("embedded-opentype");
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+     ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #bbbbbb;
+        opacity: 1;
+        /* Firefox */
+    }
+    
+    body {
+        font-family: "NATS", sans-serif;
+        letter-spacing: 1px;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        background-color: #2b0e0e;
+        color: black;
+    }
+    
+    .tabcontent {
+        padding: 6px 30px;
+        border: none;
+        border-top: none;
+    }
+    
+    .searchbox {
+        width: auto;
+        width: 360px;
+        height: 45px;
+        background: #ffffff;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .header {
+        display: flex;
+        flex-direction: row !important;
+        margin: 10px;
+        margin-left: 20px;
+        justify-content: space-between;
+        letter-spacing: 0em;
+    }
+    
+    .grid-container {
+        display: relative;
+        flex-direction: row !important;
+        gap: 2rem;
+        display: flex;
+        justify-content: space-between;
+        margin: 40px;
+        margin-right: -40px;
+        padding: 30px;
+        margin-left: 100px;
+    }
+    
+    .img-container {
+        position: relative;
+    }
+    
+    .grid-header {
+        position: absolute;
+        margin-top: 2rem;
+        margin-left: 1rem;
+        font-family: NATS;
+        font-size: 35px;
+        font-weight: 400;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    
+    .grid-text {
+        font-family: "NATS";
+        font-style: normal;
+        position: absolute;
+        margin-top: 5rem;
+        margin-left: 1rem;
+        font-family: NATS;
+        font-weight: 400;
+        line-height: 17px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: #6a6a6a;
+        font-size: 19.1321px;
+        line-height: 88%;
+        display: flex;
+        align-items: center;
+        width: 150px;
+    }
+    
+    #myDIV {
+        padding-left: 350px;
+        overflow: auto;
+        width: auto;
+    }
+    /* #scroll {
+        width: auto;
+    } */
+    /* .savebutton {
+    width: 121px;
+    height: 46px;
+    background: #7282FB;
+    border-radius: 8.99476px;
+    color: white;
+    border: none;
+} */
+    
+    @media screen and (max-width: 720px) {
+        .searchbox {
+            width: auto;
+        }
+        .header {
+            display: flex;
+            flex-direction: column !important;
+            margin: 10px;
+            margin-left: 20px;
+        }
+    }
