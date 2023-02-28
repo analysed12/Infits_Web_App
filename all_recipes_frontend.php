@@ -112,6 +112,11 @@ include('navbar.php');
         <span style="font-size:25px;font-weight:400; margin-left:20px">ALL Recipes</span>
         <a href="" style="background-color:none;border:nome;color: #6A6A6A;font-size:20px">View All</a>
 
+    </div>
+
+    <div class="flex row ">
+
+
 
         <div class="card" style="padding:15px; width:300px">
             <div class="card-upper">
@@ -142,7 +147,21 @@ include('navbar.php');
             </div>
 
         </div>
+
+        <div class="card d-flex" style="padding:15px; width:300px">
+            <div class="card-upper d-flex justify-content-between">
+                <p id="bu" class="card-upper-text"> Medium </p>
+                <p id="bu" class="card-upper-text"> Medium </p>
+
+            </div>
+            <div class="img-dis" style="width:100%; text-align:center;">
+                <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
+            </div>
+
+        </div>
+
     </div>
+
 
 
     <script>

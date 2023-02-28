@@ -98,6 +98,26 @@
         overflow: auto;
         width: auto;
     }
+    
+    .card {
+        background: #FFFFFF;
+        border-radius: 15.8334px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+        margin: 20px;
+    }
+    
+    .card-upper-text {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 5px 10px;
+        background-color: #FEA945;
+        box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.75);
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+    }
     /* #scroll {
         width: auto;
     } */
