@@ -118,17 +118,51 @@
         font-size: 12px;
         line-height: 18px;
     }
-    /* #scroll {
-        width: auto;
-    } */
-    /* .savebutton {
-    width: 121px;
-    height: 46px;
-    background: #7282FB;
-    border-radius: 8.99476px;
-    color: white;
-    border: none;
-} */
+    
+    .card-food {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 27px;
+        letter-spacing: -0.11428570002317429px;
+        text-align: left;
+    }
+    
+    .card-calorie {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 12px;
+        letter-spacing: 0em;
+        text-align: left;
+        align-items: center;
+        /* or 8px */
+        display: flex;
+        color: #A3A1A1;
+    }
+    
+    .card-num-circle {
+        background: #9C74F5;
+        border-radius: 50px;
+        color: white;
+        padding: 5px
+    }
+    
+    .card-num {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        /* identical to box height */
+        /* color: #FFFFFF; */
+        color: #9C74F5;
+    }
+    
+    .recipe-add-btn {
+        position: inherit;
+        justify-content: flex-end;
+        display: flex;
+        margin: 0px -60px 0px -60px;
+        margin-bottom: 200px;
+    }
     
     @media screen and (max-width: 720px) {
         .searchbox {
