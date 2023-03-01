@@ -79,6 +79,7 @@ body {
         color:white;
         border:none;
         font-size: 15px;
+        margin-top:0.5rem;
     }
     .live_rightside{
         margin:2rem;
