@@ -115,38 +115,41 @@ include('navbar.php');
     </div>
 
     <div class="flex row ">
+        <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
+            <div class="card-upper d-flex justify-content-between">
+                <p id="bu" class="card-upper-text"> Medium </p>
+                <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
 
-
-
-        <!-- <div class="card" style="padding:15px; width:300px">
-            <div class="card-upper">
-                <p id="bu" style="font-size:20px; font-weight:bold"> Recipe </p>
             </div>
-
-            <div class="img-dis" style="height:50%; width:inherit;text-align:center;">
+            <div class="img-dis" style="width:100%; text-align:center;">
                 <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
             </div>
-            <div class="card-upper" style="margin-top:1rem ;">
-                <p id="nm" style="font-size:25px; font-weight:600;"> <?php echo $row['name']; ?> </p>
-                <div class="wrap" style="display:flex;margin-top:0.8rem">
-                    <a href="edit_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Update Record" style="color#7282FB" data-toggle="tooltip">
-                        <span class="fa fa-pencil" style="color:#A85CF1"></span> </a>
-                    <a onclick="return confirm('Are you sure?')" href="delete_recipe.php?id=<?php echo $row['recipe_id'] ?>" title="Delete Record" style="color#7282FB" data-toggle="tooltip">
-                        <span class="fa fa-trash " style="color: #FF3D3D"></span></a>
+            <div class="d-flex justify-content-between">
+                <p class="card-food">Aloo Paratha</p>
+
+                <div class="header">
+                    <div class="dropdown ">
+                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
+                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                        </div>
+
+                        <div  class="dropdown-content dropdown-card ">
+                            <a class="edit-button" href="#">Edit</a>
+                            <a class="delete-button"href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between" style="align-items:center;">
+                <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
+                <div class="d-flex align-items-center card-num">
+                    <div class="card-num-circle">12 </div> &nbsp;
+                    <div class="">Steps</div>
                 </div>
             </div>
 
-            <div class="card-upper">
-                <div><span class="twelve" style="margin-right:0.5rem">12</span>Steps</div>
-                <div style="color: #A3A1A1;font-size:20px"><i class="fa-regular fa-clock"></i> <span style="margin-bottom:1rem"><?php echo ($t1[1]); ?></span></div>
-            </div>
-            <div class="card-upper" style="margin-top:1rem">
-                <span><img src="images/calo.jpg" alt="" style="margin-right:0.3rem"><?php echo $row['calories']; ?>kcal</span>
-                <span><button class="btn_medium">Medium</button></span>
+        </div>
 
-            </div>
-
-        </div> -->
 
         <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
             <div class="card-upper d-flex justify-content-between">
@@ -159,14 +162,25 @@ include('navbar.php');
             </div>
             <div class="d-flex justify-content-between">
                 <p class="card-food">Aloo Paratha</p>
-                <img src="./icons/vertical-three-dots.svg" alt="">
+                <div class="header">
+                    <div class="dropdown ">
+                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
+                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                        </div>
+
+                        <div  class="dropdown-content dropdown-card ">
+                            <a class="edit-button" href="#">Edit</a>
+                            <a class="delete-button"href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between" style="align-items:center;">
                 <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num"> 
-                    <div class="card-num-circle">12 </div>   &nbsp; 
+                <div class="d-flex align-items-center card-num">
+                    <div class="card-num-circle">12 </div> &nbsp;
                     <div class="">Steps</div>
-               </div>
+                </div>
             </div>
 
         </div>
@@ -183,14 +197,25 @@ include('navbar.php');
             </div>
             <div class="d-flex justify-content-between">
                 <p class="card-food">Aloo Paratha</p>
-                <img src="./icons/vertical-three-dots.svg" alt="">
+                <div class="header">
+                    <div class="dropdown ">
+                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
+                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                        </div>
+
+                        <div  class="dropdown-content dropdown-card ">
+                            <a class="edit-button" href="#">Edit</a>
+                            <a class="delete-button"href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between" style="align-items:center;">
                 <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num"> 
-                    <div class="card-num-circle">12 </div>   &nbsp; 
+                <div class="d-flex align-items-center card-num">
+                    <div class="card-num-circle">12 </div> &nbsp;
                     <div class="">Steps</div>
-               </div>
+                </div>
             </div>
 
         </div>
@@ -207,14 +232,25 @@ include('navbar.php');
             </div>
             <div class="d-flex justify-content-between">
                 <p class="card-food">Aloo Paratha</p>
-                <img src="./icons/vertical-three-dots.svg" alt="">
+                <div class="header">
+                    <div class="dropdown ">
+                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
+                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                        </div>
+
+                        <div  class="dropdown-content dropdown-card ">
+                            <a class="edit-button" href="#">Edit</a>
+                            <a class="delete-button"href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between" style="align-items:center;">
                 <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num"> 
-                    <div class="card-num-circle">12 </div>   &nbsp; 
+                <div class="d-flex align-items-center card-num">
+                    <div class="card-num-circle">12 </div> &nbsp;
                     <div class="">Steps</div>
-               </div>
+                </div>
             </div>
 
         </div>
@@ -231,14 +267,25 @@ include('navbar.php');
             </div>
             <div class="d-flex justify-content-between">
                 <p class="card-food">Aloo Paratha</p>
-                <img src="./icons/vertical-three-dots.svg" alt="">
+                <div class="header">
+                    <div class="dropdown ">
+                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
+                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                        </div>
+
+                        <div  class="dropdown-content dropdown-card ">
+                            <a class="edit-button" href="#">Edit</a>
+                            <a class="delete-button"href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between" style="align-items:center;">
                 <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num"> 
-                    <div class="card-num-circle">12 </div>   &nbsp; 
+                <div class="d-flex align-items-center card-num">
+                    <div class="card-num-circle">12 </div> &nbsp;
                     <div class="">Steps</div>
-               </div>
+                </div>
             </div>
 
         </div>
@@ -255,49 +302,36 @@ include('navbar.php');
             </div>
             <div class="d-flex justify-content-between">
                 <p class="card-food">Aloo Paratha</p>
-                <img src="./icons/vertical-three-dots.svg" alt="">
+                <div class="header">
+                    <div class="dropdown ">
+                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
+                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                        </div>
+
+                        <div  class="dropdown-content dropdown-card ">
+                            <a class="edit-button" href="#">Edit</a>
+                            <a class="delete-button"href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between" style="align-items:center;">
                 <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num"> 
-                    <div class="card-num-circle">12 </div>   &nbsp; 
+                <div class="d-flex align-items-center card-num">
+                    <div class="card-num-circle">12 </div> &nbsp;
                     <div class="">Steps</div>
-               </div>
+                </div>
             </div>
 
         </div>
 
 
-        <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
-            <div class="card-upper d-flex justify-content-between">
-                <p id="bu" class="card-upper-text"> Medium </p>
-                <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
-
-            </div>
-            <div class="img-dis" style="width:100%; text-align:center;">
-                <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="card-food">Aloo Paratha</p>
-                <img src="./icons/vertical-three-dots.svg" alt="">
-            </div>
-            <div class="d-flex justify-content-between" style="align-items:center;">
-                <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num"> 
-                    <div class="card-num-circle">12 </div>   &nbsp; 
-                    <div class="">Steps</div>
-               </div>
-            </div>
-
-        </div>
-
-       
         <div class="recipe-add-btn">
             <img src="./images/recipe_add.png" alt="">
         </div>
 
 
-       
+
 
     </div>
 
@@ -310,6 +344,29 @@ include('navbar.php');
             let y = element.scrollTop;
             document.getElementById("demo").innerHTML = "Horizontally: " + x.toFixed() + "<br>Vertically: " + y.toFixed();
         }
+
+
+        function showDropdown() {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].classList.add('show');
+            }
+        }
+
+        var removeDropdown = document.getElementById("myDropdownIcon");
+        window.onclick = function(event) {
+
+            if (event.target !== removeDropdown && !removeDropdown.contains(event.target)) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains("show")) {
+                        openDropdown.classList.remove("show");
+                    }
+                }
+            }
+        };
     </script>
 </body>
 
