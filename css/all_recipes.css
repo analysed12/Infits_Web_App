@@ -118,17 +118,101 @@
         font-size: 12px;
         line-height: 18px;
     }
-    /* #scroll {
-        width: auto;
-    } */
-    /* .savebutton {
-    width: 121px;
-    height: 46px;
-    background: #7282FB;
-    border-radius: 8.99476px;
-    color: white;
-    border: none;
-} */
+    
+    .card-food {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 27px;
+        letter-spacing: -0.11428570002317429px;
+        text-align: left;
+    }
+    
+    .card-calorie {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 12px;
+        letter-spacing: 0em;
+        text-align: left;
+        align-items: center;
+        /* or 8px */
+        display: flex;
+        color: #A3A1A1;
+    }
+    
+    .card-num-circle {
+        background: #9C74F5;
+        border-radius: 50px;
+        color: white;
+        padding: 5px
+    }
+    
+    .card-num {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        /* identical to box height */
+        /* color: #FFFFFF; */
+        color: #9C74F5;
+    }
+    
+    .recipe-add-btn {
+        position: inherit;
+        justify-content: flex-end;
+        display: flex;
+        margin: 0px -60px 0px -60px;
+        margin-bottom: 200px;
+    }
+    
+    .dropdown {
+        position: absolute;
+        display: inline-block;
+        right: 0.4em;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        margin-top: 0px;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+    
+    .dropdown-content a {
+        color: white;
+        padding: 12px 14px;
+        font-weight: 500;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .dropdown-content .edit-button {
+        background: #A85CF1;
+        text-align: center;
+        border-radius: 7px;
+        margin-bottom: 10px;
+    }
+    
+    .dropdown-content .delete-button {
+        background: #FF3D3D;
+        border-radius: 7px;
+        text-align: center;
+    }
+    
+    .show {
+        display: block !important;
+    }
+    
+    .dropdown-card {
+        background: #FFFFFF;
+        border: 0.723941px solid #E4E4E4;
+        box-shadow: 0px 2.17182px 2.89576px rgba(0, 0, 0, 0.09);
+        border-radius: 13.0309px;
+        padding: 20px;
+    }
     
     @media screen and (max-width: 720px) {
         .searchbox {
