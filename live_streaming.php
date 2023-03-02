@@ -281,7 +281,7 @@ border-radius: 10px;
         <div class="popup_msg">Sure you want to end live video?</div>
         <div>
             <a href="live.php" style="background-color:none"><button class="end">End</button></a>
-            <a href="live_call.php" style="background-color:none"><button class="cancel">Cancel</button></a>
+            <a href="live_streaming.php" style="background-color:none"><button class="cancel">Cancel</button></a>
         </div>
 		
 	</div>
