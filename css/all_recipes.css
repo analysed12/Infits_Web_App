@@ -55,7 +55,7 @@
         margin: 40px;
         margin-right: -40px;
         padding: 30px;
-        margin-left: 100px;
+        /* margin-left: 100px; */
     }
     
     .img-container {
@@ -212,6 +212,19 @@
         box-shadow: 0px 2.17182px 2.89576px rgba(0, 0, 0, 0.09);
         border-radius: 13.0309px;
         padding: 20px;
+    }
+    
+    .filter-outline {
+        /* border: none; */
+        box-sizing: border-box;
+        border: 1.5px solid #B85AEC;
+        border-radius: 15px;
+    }
+    
+    .filter-line {
+        border: none;
+        /* opacity: 0.54; */
+        border-left: 1.5px solid #B85AEC;
     }
     
     @media screen and (max-width: 720px) {
