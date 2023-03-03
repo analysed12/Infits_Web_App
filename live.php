@@ -145,7 +145,7 @@ body {
         <div class="live_leftside">
             <h1>Live</h1>
             <div class="streaming_live">
-                <div style="display:flex;justify-content:space-between"><span style="font-size:26px">Now Streaming Live</span> <button class="go_live">Go Live</button></div>
+                <div style="display:flex;justify-content:space-between"><span style="font-size:26px">Now Streaming Live</span> <a href="live_streaming.php" style="background-color:none"><button class="go_live">Go Live</button></a></div>
                 <div style="margin-top:1rem;display:flex;gap:1rem">
                     <img src="images/liveprofile.png" style="border-radius:50%;width: 75.67px;height:75.67px;margin-top:0.5rem">
                     <div>
@@ -542,7 +542,6 @@ border-radius: 15px;
     .month-list{
         position: fixed;
        right:30px;
-       
         gap: 1px;
     }
 

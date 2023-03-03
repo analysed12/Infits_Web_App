@@ -58,26 +58,24 @@ include('navbar.php');
     </div>
 
 
+
+
     <!-- breakfast lunch dinner -->
-    <div class="grid-container" style="display:flex; flex-direction:row;justify-content:space-evenly; cursor:pointer; margin-left:10px;" id="myDIV" onscroll="myFunction()">
+    <div class="grid-container" style="display:flex; flex-direction:row;justify-content: space-around; cursor:pointer;" id="myDIV1" onscroll="myFunction()">
         <div class="breakfast" id="btn1">
 
-            <img src=".\images\breakfast.png" style="float:right; margin-top:-20px;">
+            <img src="./images/recipe_all.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
-                <div class="grid-header">Breakfast</div>
+                <div class="grid-header">All Recipe</div>
                 <div class="grid-text">Free menu planning
                     to suit your needs</div>
             </div>
-
-
-
-
         </div>
 
         <div class="lunch" id="btn2">
-            <img src=".\images\lunch.png" style="float:right; margin-top:-20px;">
+            <img src="./images/recipe_all_time_fav.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
-                <div class="grid-header">Lunch</div>
+                <div class="grid-header">All time fav</div>
                 <div class="grid-text">Free menu planning
                     to suit your needs</div>
             </div>
@@ -87,23 +85,39 @@ include('navbar.php');
 
 
         <div class="snacks" id="btn3">
-            <img src=".\images\snacks.png" style="float:right; margin-top:-20px;">
+            <img src="./images/recipe_recomended.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
-                <div class="grid-header">Snacks</div>
+                <div class="grid-header">Recommended</div>
                 <div class="grid-text">Free menu planning
                     to suit your needs</div>
             </div>
         </div>
 
-        <div class="dinner" id="btn4">
-            <img src=".\images\dinner.png" style="float:right; margin-top:-20px;">
-            <div class="img-container">
-                <div class="grid-header">Dinner</div>
-                <div class="grid-text">Free menu planning
-                    to suit your needs</div>
-            </div>
 
+    </div>
+
+
+    <div class="middle_wrapper" style="display:flex;justify-content:flex-start;margin:20px;margin-left:17rem;margin-right:2.5rem">
+
+        <div class="filter-outline" style="display:flex; justify-content:space-between; align-items:center; margin:5px; margin-left:20px;">
+            <div style="padding:15px 30px; 
+color: #B85AEC;">Oats</div>
+            <img class="filter-line" style="padding:5px;" src="./images/recipe_default.png" alt="">
         </div>
+        <div class="filter-outline" style="display:flex; justify-content:space-between; align-items:center; margin:5px; margin-left:20px;">
+            <div style="padding:15px 30px; 
+color: #B85AEC; ">Oats</div>
+            <img class="filter-line" style="padding:5px;" src="./images/recipe_default.png" alt="">
+        </div>
+        <div class="filter-outline" style="display:flex; justify-content:space-between; align-items:center; margin:5px; margin-left:20px;">
+            <div style="padding:15px 30px;
+color: #B85AEC; ">Oats</div>
+            <img class="filter-line" style="padding:5px;" src="./images/recipe_default.png" alt="">
+        </div>
+
+
+
+
     </div>
 
 
@@ -133,9 +147,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -168,9 +182,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -203,9 +217,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -238,9 +252,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -273,9 +287,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -308,9 +322,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -339,7 +353,7 @@ include('navbar.php');
 
     <script>
         function myFunction() {
-            const element = document.getElementById("myDIV");
+            const element = document.getElementById("myDIV1");
             let x = element.scrollLeft;
             let y = element.scrollTop;
             document.getElementById("demo").innerHTML = "Horizontally: " + x.toFixed() + "<br>Vertically: " + y.toFixed();
