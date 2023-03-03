@@ -61,7 +61,7 @@ include('navbar.php');
 
 
     <!-- breakfast lunch dinner -->
-    <div class="grid-container" style="display:flex; flex-direction:row;justify-content:flex-end; cursor:pointer; margin-left:10px;" id="myDIV" onscroll="myFunction()">
+    <div class="grid-container" style="display:flex; flex-direction:row;justify-content: space-around; cursor:pointer;" id="myDIV1" onscroll="myFunction()">
         <div class="breakfast" id="btn1">
 
             <img src="./images/recipe_all.png" style="float:right; margin-top:-20px;">
@@ -353,7 +353,7 @@ color: #B85AEC; ">Oats</div>
 
     <script>
         function myFunction() {
-            const element = document.getElementById("myDIV");
+            const element = document.getElementById("myDIV1");
             let x = element.scrollLeft;
             let y = element.scrollTop;
             document.getElementById("demo").innerHTML = "Horizontally: " + x.toFixed() + "<br>Vertically: " + y.toFixed();
