@@ -99,6 +99,12 @@
         width: auto;
     }
     
+    #myDIV1 {
+        /* padding-left: 350px; */
+        overflow: auto;
+        width: auto;
+    }
+    
     .card {
         background: #FFFFFF;
         border-radius: 15.8334px;
@@ -227,7 +233,15 @@
         border-left: 1.5px solid #B85AEC;
     }
     
-    @media screen and (max-width: 720px) {
+    .white {
+        color: #FFFFFF;
+    }
+    
+    .lwhite {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .l @media screen and (max-width: 720px) {
         .searchbox {
             width: auto;
         }
