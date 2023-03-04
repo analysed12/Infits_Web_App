@@ -111,7 +111,7 @@ body {
         display:flex;
         gap:1.5rem;
         justify-content:center;
-        margin-top:2rem;
+        margin-top:1.5rem;
     }
     @media screen and (max-width: 1200px){
         .rightside{
@@ -255,7 +255,7 @@ body {
         <div class="rightside">
             <h1 class="h1">Ready to join?</h1>
             <div class="buttons" style="display:flex;gap:1.5rem;">
-                <button class="joincall">Join Call</button>
+                <a href="live_personalcall.php" style="background-color:none"><button class="joincall">Join Call</button></a>
                 <button class="cancel">Cancel</button>
                 
             </div>
