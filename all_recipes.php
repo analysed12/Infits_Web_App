@@ -58,23 +58,23 @@ include('navbar.php');
     </div>
 
 
-    <!-- breakfast lunch dinner -->
+    <!-- breakfast lunch snacks dinner -->
     <div class="grid-container" style="display:flex; flex-direction:row;justify-content:space-evenly; cursor:pointer; margin-left:10px;" id="myDIV" onscroll="myFunction()">
-        <div class="breakfast" id="btn1">
+        <a href="recipe_breakfast.php" style="color: inherit;" class="breakfast" id="btn1">
+            
+                <img src=".\images\breakfast.png" style="float:right; margin-top:-20px;">
+                <div class="img-container">
+                    <div class="grid-header" >Breakfast</div>
+                    <div class="grid-text">Free menu planning
+                        to suit your needs</div>
+                </div>
+            
 
-            <img src=".\images\breakfast.png" style="float:right; margin-top:-20px;">
-            <div class="img-container">
-                <div class="grid-header">Breakfast</div>
-                <div class="grid-text">Free menu planning
-                    to suit your needs</div>
-            </div>
 
 
+        </a>
 
-
-        </div>
-
-        <div class="lunch" id="btn2">
+        <a href="recipe_lunch.php"   style="color: inherit;" class="lunch" id="btn2">
             <img src=".\images\lunch.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
                 <div class="grid-header">Lunch</div>
@@ -82,20 +82,20 @@ include('navbar.php');
                     to suit your needs</div>
             </div>
 
-        </div>
+        </a>
 
 
 
-        <div class="snacks" id="btn3">
+        <a href="recipe_snacks.php"   style="color: inherit;" class="snacks" id="btn3">
             <img src=".\images\snacks.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
                 <div class="grid-header">Snacks</div>
                 <div class="grid-text">Free menu planning
                     to suit your needs</div>
             </div>
-        </div>
+        </a>
 
-        <div class="dinner" id="btn4">
+        <a href="recipe_dinner.php" style="color: inherit;" class="dinner" id="btn4">
             <img src=".\images\dinner.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
                 <div class="grid-header">Dinner</div>
@@ -103,7 +103,7 @@ include('navbar.php');
                     to suit your needs</div>
             </div>
 
-        </div>
+        </a>
     </div>
 
 
@@ -133,9 +133,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -168,9 +168,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -203,9 +203,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -238,9 +238,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -273,9 +273,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -308,9 +308,9 @@ include('navbar.php');
                             <img class="" src="./icons/vertical-three-dots.svg" alt="">
                         </div>
 
-                        <div  class="dropdown-content dropdown-card ">
+                        <div class="dropdown-content dropdown-card ">
                             <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button"href="#">Delete</a>
+                            <a class="delete-button" href="#">Delete</a>
                         </div>
                     </div>
                 </div>

@@ -62,36 +62,36 @@ include('navbar.php');
 
     <!-- breakfast lunch dinner -->
     <div class="grid-container" style="display:flex; flex-direction:row;justify-content: space-around; cursor:pointer;" id="myDIV1" onscroll="myFunction()">
-        <div class="breakfast" id="btn1">
+        <a href="all_recipes.php" style="color: inherit;" class="breakfast" id="btn1">
 
             <img src="./images/recipe_all.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
-                <div class="grid-header">All Recipe</div>
-                <div class="grid-text">Free menu planning
+                <div class="grid-header white">All Recipe</div>
+                <div class="grid-text lwhite">Free menu planning
                     to suit your needs</div>
             </div>
-        </div>
+        </a>
 
-        <div class="lunch" id="btn2">
+        <a href="#" style="color: inherit;" class="lunch" id="btn2">
             <img src="./images/recipe_all_time_fav.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
-                <div class="grid-header">All time fav</div>
-                <div class="grid-text">Free menu planning
+                <div class="grid-header white">All time fav</div>
+                <div class="grid-text lwhite">Free menu planning
                     to suit your needs</div>
             </div>
 
-        </div>
+        </a>
 
 
 
-        <div class="snacks" id="btn3">
+        <a href="#" style="color: inherit;" class="snacks" id="btn3">
             <img src="./images/recipe_recomended.png" style="float:right; margin-top:-20px;">
             <div class="img-container">
-                <div class="grid-header">Recommended</div>
-                <div class="grid-text">Free menu planning
+                <div class="grid-header white">Recommended</div>
+                <div class="grid-text lwhite">Free menu planning
                     to suit your needs</div>
             </div>
-        </div>
+        </a>
 
 
     </div>
