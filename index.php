@@ -833,7 +833,7 @@ if(!empty($data)){
                                             <?= $conversation['name'] ?><br>
                                             <small class="small-text-message">
                                                 <?php
-                                                echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
+                                                echo lastChat($_SESSION['dietitian_id'], $conversation['dietitianuserID'], $conn);
                                                 ?>
                                             </small>
 
