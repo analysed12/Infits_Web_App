@@ -127,8 +127,7 @@ $res = mysqli_query($conn, $sql);
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12 d-flex flex-wrap">
+    <div class="flex row">
         <?php while ($d = mysqli_fetch_assoc($res)) {
             $drecipe_recipe = explode(',', $d['drecipe_recipe']);
             $steps = count($drecipe_recipe);
@@ -176,7 +175,7 @@ $res = mysqli_query($conn, $sql);
                 </div>
             </div>
         <?php } ?>
-        </div>
+        
     </div>
 
     <div class="recipe-add-btn" style="padding-right:100px">
