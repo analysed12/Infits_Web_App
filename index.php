@@ -921,7 +921,7 @@ if (mysqli_num_rows($result) > 0) {
         if($row['end_time'] != ''){
             $end = date("g:i a", strtotime($row['end_time']));
         }
-
+//
 ?>
                         <!-- task -->
                         <div class="list_tasklist_container" >
