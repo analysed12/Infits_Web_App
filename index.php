@@ -625,8 +625,8 @@ function fetchInformation($client_id){
             </div>
             <div class="container2_rightside" >
                 <div class="addbutton" id="addbutton">
-                    <button id="addbtn">Add Task</button>
-                    <button id="addbtn" class="add">Add Client</button>
+                    <button id="addbtn" onclick ="window.location.href='task_list.php'">Add Task</button>
+                    <button id="addbtn" onclick ="window.location.href='client_list.php'" class="add">Add Client</button>
                 </div>
                 <div><button id="btn1" class="btn-add">+</button></div>
                 <script>
@@ -685,7 +685,6 @@ if(!empty($up_event)){
                 <a href="client_progress.php"><button id="details">View All</button></a>
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
             </div>
-            
         </div>
 <?php
 $query = "SELECT `client_id`,`name` FROM `addclient` WHERE dietitianuserID = '$dietitian_id' AND status = 1;";
@@ -833,7 +832,7 @@ if(!empty($data)){
                                             <?= $conversation['name'] ?><br>
                                             <small class="small-text-message">
                                                 <?php
-                                                echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
+                                                echo lastChat($_SESSION['dietitian_id'], $conversation['dietitianuserID'], $conn);
                                                 ?>
                                             </small>
 
@@ -902,9 +901,15 @@ if(!empty($data)){
                     <button id="btn7" class="btn6 task-btn" onclick="openTask('btn7','upcoming_tasks')">Upcoming</button>
                     <div id="today_tasks">
 <?php 
-
 $query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = '{$dietitian_id}' AND date = '{$today->format('Y-m-d')}' ORDER BY date,start_time LIMIT 3";
-$result = mysqli_query($conn, $query);
+// $query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = 'John_wayne' AND date = '2023-02-03' ORDER BY date,start_time LIMIT 3";
+// echo($today->format('Y-m-d'));
+$con = new mysqli("localhost", "root", "", "infits");
+$result = mysqli_query($con, $query);
+$rowcount=mysqli_num_rows($result);
+//   printf("Result set has %d rows.\n",$rowcount);
+//   while($row = mysqli_fetch_assoc($result)){
+//     echo $row['title'];
 if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)){
         // $date = new DateTime($row['date']);
@@ -938,7 +943,9 @@ if (mysqli_num_rows($result) > 0) {
                     <div id="upcoming_tasks">
 <?php 
 $query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = '{$dietitian_id}' AND date > '{$today->format('Y-m-d')}' ORDER BY date,start_time LIMIT 3";
-$result = mysqli_query($conn, $query);
+$con = new mysqli("localhost", "root", "", "infits");
+$result = mysqli_query($con, $query);
+
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         // $date = new DateTime($row['date']);
