@@ -1,5 +1,5 @@
 <?php include('navbar.php');
-$sql = "SELECT * FROM `default_recipes`";
+$sql = "SELECT * FROM `default_recipes` WHERE drecipe_category LIKE 'br%';";
 $res = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -111,7 +111,7 @@ $res = mysqli_query($conn, $sql);
 
 <body>
     <div class="header" style="align-items:center;">
-        <div style="font-size:2.5rem;margin-left:3rem ">Recipes <small style="color: #787885; font-size:1rem; margin-left:1rem;">All Recipes</small></div>
+        <div style="font-size:2.5rem;margin-left:3rem ">Recipes <small style="color: #787885; font-size:1rem; margin-left:1rem;">All Breakfast Recipes</small></div>
         <div style="margin-right:2rem;display:flex;gap:1.5rem">
             <div class="searchbox">
                 <button style="background-color:white;border:none;" id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
@@ -174,6 +174,32 @@ $res = mysqli_query($conn, $sql);
     <div class="recipe-add-btn" style="padding-right:100px">
         <img src="./images/recipe_add.png" alt="">
     </div>
+
+    <script>
+        function showDropdown(event) {
+            var dropdown = event.currentTarget.parentNode.querySelector(".dropdown-content");
+            dropdown.classList.toggle("show");
+            setTimeout(removeDropDown, 5000);
+        }
+
+        function removeDropDown() {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].classList.remove('show');
+            }
+        }
+
+        function removeDropdown(event) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains("show") && !openDropdown.contains(event.target)) {
+                    openDropdown.classList.remove("show");
+                }
+            }
+        }
+    </script>
 
 </body>
 
