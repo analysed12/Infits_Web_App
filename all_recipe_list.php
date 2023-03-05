@@ -1,5 +1,9 @@
 <?php include('navbar.php');
-$sql = "SELECT * FROM `default_recipes`";
+if(isset($_GET['category'])){
+    $sql = "SELECT * FROM `default_recipes` WHERE drecipe_category = '{$_GET['category']}'";
+}else{
+    $sql = "SELECT * FROM `default_recipes`";
+}
 $res = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -17,6 +21,9 @@ $res = mysqli_query($conn, $sql);
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        body{
+            overflow-x: hidden;
+        }
         .header {
             display: flex;
             flex-direction: row !important;
@@ -111,7 +118,7 @@ $res = mysqli_query($conn, $sql);
 
 <body>
     <div class="header" style="align-items:center;">
-        <div style="font-size:2.5rem;margin-left:3rem ">Recipes <small style="color: #787885; font-size:1rem; margin-left:1rem;">All Recipes</small></div>
+        <div style="font-size:2.5rem;margin-left:3rem ">Recipes <small style="color: #787885; font-size:1rem; margin-left:1rem;"><?php if(isset($_GET['category'])){ echo ucwords($_GET['category']); }else{ echo 'All Recipes'; } ?></small></div>
         <div style="margin-right:2rem;display:flex;gap:1.5rem">
             <div class="searchbox">
                 <button style="background-color:white;border:none;" id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
@@ -120,7 +127,8 @@ $res = mysqli_query($conn, $sql);
         </div>
     </div>
 
-    <div class="flex row">
+    <div class="row">
+        <div class="col-12 d-flex flex-wrap">
         <?php while ($d = mysqli_fetch_assoc($res)) {
             $drecipe_recipe = explode(',', $d['drecipe_recipe']);
             $steps = count($drecipe_recipe);
@@ -157,7 +165,7 @@ $res = mysqli_query($conn, $sql);
                 </div>
             </div>
         <?php } ?>
-        
+        </div>
     </div>
 
     <div class="recipe-add-btn" style="padding-right:100px">
