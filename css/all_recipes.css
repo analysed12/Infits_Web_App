@@ -241,7 +241,7 @@
         color: rgba(255, 255, 255, 0.9);
     }
     
-    .l @media screen and (max-width: 720px) {
+    @media screen and (max-width: 720px) {
         .searchbox {
             width: auto;
         }
