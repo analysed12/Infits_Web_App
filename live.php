@@ -27,6 +27,12 @@ body {
         overflow-x: hidden;
         
     }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #BBBBBB;
+  opacity: 1; /* Firefox */
+  padding:1rem;
+  font-size: 18px;
+}
     .live{
         display:flex;
         gap:3rem;
@@ -64,7 +70,7 @@ body {
     }
     .left_wrapper1{
         width: 163px;
-        height: 207px;
+        height: 238px;
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
         border-radius: 14px;
@@ -79,6 +85,15 @@ body {
         color:white;
         border:none;
         font-size: 15px;
+        margin-top:0.5rem;
+    }
+    .btn_joincall{
+        width: 132px;
+        height: 26px;
+        background: #FFFFFF;
+        border: 1px solid #2667FF;
+        border-radius: 8px;
+        color: #2667FF;
         margin-top:0.5rem;
     }
     .live_rightside{
@@ -99,11 +114,26 @@ body {
         border-radius: 15px;
     }
     .livebutton{
-        width: 80px;
-        height: 80px;
+        width: 55px;
+        height: 55px;
         border:none;
         border-radius:50%;
         background: linear-gradient(180deg, #3666FD 0%, #C855E9 100%);
+        margin-left:1rem;
+        
+    }
+    .live_footer{
+        width: 333px;
+        height: 97px;
+        background: #FFFFFF;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+        border-radius: 50px;
+        color: #4B9AFB;
+        font-size: 30px;
+        padding:10px;
+        display:flex;
+        justify-content:center;
+        padding-top:1.5rem;
     }
     .calendar{
         
@@ -111,11 +141,254 @@ body {
         border: 1px solid #CCCCCC;
         border-radius: 15px;
     }
+    .modal{
+        position: fixed;
+        width:100%;
+        height:100%;
+        background: rgba(0, 0, 0, 0.6);
+        transition: opacity 500ms;
+        align-items:center;
+  
+    }
+        .modal-content{
+            
+            width: 495px;
+            
+            left: 500px;
+            top: 20px;
+            background: #FFFFFF;
+            border: 1px solid #DDD9D9;
+            border-radius: 17px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+            
+        
+            
+            
+        
+                            
+    }
+    .title{
+        width: 443px;
+        height: 48px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        border:none;
+    }
+    .description{
+        width: 442px;
+        height: 113px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        border:none;
+       
+    }
+    .text_box{
+        width: 152px;
+        height: 40px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        border:none;
+    }
+    .switch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 30px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.model-center{
+    margin-top:1.5rem;
+    display:flex;
+
+}
+
+.cancel_btn{
+    width: 176px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 2px solid #4B9AFB;
+    border-radius: 10px;
+    color: #4B9AFB;
+    font-size: 24px;
+}
+.save_btn{
+    width: 186px;
+    height: 48px;
+    background: #4B9AFB;
+    border-radius: 10px;
+    color: white;
+    font-size: 24px;
+    border:none;
+}
+.bottom_buttons{
+    display:flex;
+    gap:2rem;
+    justify-content:center;
+    margin-top:1.5rem;
+    margin-bottom:2rem;
+}
+.sliding-cal {
+   
+   position: relative;
+   
+   width: 495px;
+height: 86px;
+   overflow: scroll;
+   background: #FFFFFF;
+   border: 1px solid rgba(225, 225, 225, 0.66);
+   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+   
+ }
+ #slider-content {
+   
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  display: flex;
+ 
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  width: 80px;
+  background-color: white;
+font-size: 22px;
+
+}
+.day{
+    line-height:0;
+}
+.date{
+    line-height:0;
+}
+.item:hover{
+   
+    border-radius: 50px;
+    color: white;
+    width: 59px;
+    height: 84px;
+  
+    background: linear-gradient(180deg, #3861FB 0%, #3363FD 100%);
+    cursor: pointer;
+}
+
+.sliding-cal::-webkit-scrollbar {
+  display: none;
+}
 
 
+.sliding-cal {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+                            
+
+
+@media screen and (max-width: 400px){
+        .bottom_buttons{
+            display:flex;
+            gap:2rem;
+            flex-direction:column;
+            margin-top:1.5rem;
+            align-items:center;
+
+        }
+
+
+}
 
 
     @media screen and (max-width: 720px){
+        .item {
+        width: 80px !important;
+      }
+      .sliding-cal{
+        width: 100% !important;
+      }
+        .modal-content{
+            margin:20px;
+            left:0;
+            top:0;
+            width:auto;
+            height:auto;
+            
+        }
+        .title{
+            width:100%;
+        }
+        .description{
+            width:100%;
+        }
+        .model-center{
+            margin-top:1.5rem;
+            display:flex;
+            flex-direction:column;
+            text-align:center;
+
+        }
+        
         .live{
             display:flex;
             flex-direction:column;
@@ -134,6 +407,9 @@ body {
         }
         .leftside_footer{
             grid-template-columns: repeat(2, minmax(auto, 1fr));
+        }
+        .bottom_buttons{
+            padding:20px;
         }
        
     }
@@ -166,6 +442,7 @@ body {
                    <div style="display:flex;justify-content:center;gap:0.3rem"><img src="images/calenderlive.png" style="width:17%"> <span>09/05/2022</span></div>
                    <div style="display:flex;justify-content:center;gap:0.3rem;margin-top:0.3rem"> <img src="images/clocklive.png" style="width:15%;height:15%"> <span>2:00 p.m.</span></div>
                    </div>
+                  <a href="live_joincall.php" style="background-color:none"> <button class="btn_joincall">Join Call</button></a>
                    <button class="btn_setreminder">Set Reminder</button>
                     
                 </div>
@@ -571,7 +848,7 @@ border-radius: 15px;
                 </div>
                 
                </div>
-               <div style="float:right;margin-top:1rem"><button class="livebutton"><img src="images/livebutton.png" alt=""></button></div>
+               <div class="live_footer" style="margin-top:1rem">Create Meeting<button class="livebutton" id="livebutton"><img src="images/livebutton.png" style="width:99.5%;"></button></div>
 
                 
                 
@@ -581,6 +858,166 @@ border-radius: 15px;
         <!------------------------------RIGHTSIDE------------------------------------->
 
     </div>
+
+    <!-----------------------------SCHEDULING LIVE-------------------------------->
+
+    <div id="myModal" class="modal">
+
+                <!--Modal content-->
+                <div class="modal-content" >
+                    <div style="margin-top:1rem;">
+                        <h2 style="text-align:center">Scheduling live</h2>
+                        <h4 style="text-align:center;color: #7C7C7C;"> 
+                        <script>
+                        // Creating a date object
+                        var today = new Date();
+
+                        // Getting full month name (e.g. "June")
+                        var month = today.toLocaleString('default', { month: 'long' });
+                        document.write(month);
+                        </script> </h4>
+                    </div> 
+
+                    <div class="sliding-cal col-sm-12">
+                        <div id="slider-content"></div>
+                    </div>
+
+
+                    <div style="padding:20px;">
+                        <p style="font-size: 25px;">Title</p>
+                        <input type="text" class="title">
+                    </div>
+                    <div style=" padding-left:20px;padding-right:20px">
+                        <p style="font-size: 25px;">Description (Optional)</p>
+                        <input type="text" class="description">
+                    </div>
+                    <div class="model-center" style="padding-left:20px;padding-right:20px">
+                        <div style="display:flex;flex-direction:column;gap:1rem">
+                            <div style="display:flex;gap:0.4rem"><img src="images/calenderlive.png" style="width:10%;margin-top:0.5rem">
+                            <div contentEditable="true" class="text_box" style="padding:10px"> 
+                            <script>var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+                            document.write(utc);</script></div>
+                       </div>
+                        <div style="display:flex;gap:0.4rem"><img src="images/clocklive.png" style="width:10%;margin-top:0.5rem"><form><input type="time" name="mytime" id="mytime" class="text_box" style="padding:10px"placeholder="Set Time"></div>
+                    </form> </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;margin-top:1rem">
+                        <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        </label>
+                        <p style="font-size: 25px;">Set Reminder</p>
+                        </div>
+
+                    </div>
+                    <div class="bottom_buttons">
+                        <a href="live.php" style="background-color:none"><button class="cancel_btn">Cancel</button></a>
+                        <button class="save_btn">Save</button>
+                        
+                    </div>
+                
+                    
+                </div>
+
+    </div>
+
+    <script>
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
+
+                    // Get the button that opens the modal
+                    var btn = document.getElementById("livebutton");
+
+                    // When the user clicks the button, open the modal 
+                    btn.onclick = function() {
+                        event.preventDefault(); //keeps page from refreshing
+                        modal.style.display = "block";
+                    }
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function(event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+                    </script>
+
+
+
+     <!-----------------------------SCHEDULING LIVE-------------------------------->
+     <script>
+                        
+                            const Date_function = () =>{
+                                var now = new Date();
+                            var value;
+                            const str = obtain_Date(now,0);
+                            const startdate = new Date(str);
+
+                            const currentDate = new Date();
+                            const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+                            
+                            var i=0;
+                            while(i<daysInMonth)
+                            {
+                            value = obtain_Date(startdate,i);
+                            days = ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'];
+                            console.log(value.getDate())
+                            html = `<div class="item">
+                            <div class="day">`+days[parseInt(value.getDay())] +`</div><br>
+                            <div class="date">`+value.getDate()+ `</div>
+                            
+                            </div>`
+                            document.getElementById('slider-content').innerHTML += html ;
+                            i++; 
+                            }
+                            }
+                            
+                            // Obtain specific dates -->
+                            const obtain_Date = (date,x) =>{  
+                                var newdate = new Date();
+                                newdate.setDate(date.getDate() + x)
+                            
+                                return newdate;
+                            }
+                            
+                            
+                            Date_function();
+                            
+                            
+                            const slider = document.querySelector('#slider-content');
+                            
+                            let sliderGrabbed = false;
+                            
+                            
+                            slider.addEventListener('mousedown', (e) => {
+                                sliderGrabbed = true;
+                                slider.style.cursor = 'grabbing';
+                            })
+                            
+                            slider.addEventListener('mouseup', (e) => {
+                                sliderGrabbed = false;
+                                slider.style.cursor = 'grab';
+                            })
+                            
+                            slider.addEventListener('mouseleave', (e) => {
+                                sliderGrabbed = false;
+                            })
+                            
+                            slider.addEventListener('mousemove', (e) => {
+                                if(sliderGrabbed){
+                                    slider.parentElement.scrollLeft -= e.movementX;
+                                }
+                            })
+                            
+                            slider.addEventListener('wheel', (e) =>{
+                                e.preventDefault()
+                                slider.parentElement.scrollLeft += e.deltaY;
+                            })
+                            
+                            function getScrollPercentage(){
+                            return ((slider.parentElement.scrollLeft / (slider.parentElement.scrollWidth - slider.parentElement.clientWidth) ) * 100);
+                            }
+                            
+                            </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 
