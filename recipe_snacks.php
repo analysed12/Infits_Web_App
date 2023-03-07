@@ -124,231 +124,71 @@ color: #B85AEC; ">Oats</div>
     <!-- all recipes -->
     <div class="middle_wrapper" style="display:flex;justify-content:space-between;margin:20px;margin-left:17rem;margin-right:2.5rem">
         <span style="font-size:25px;font-weight:400; margin-left:20px">ALL Recipes</span>
-        <a href="" style="background-color:none;border:nome;color: #6A6A6A;font-size:20px">View All</a>
+        <a href="recipe_all_snacks.php" style="background-color:none;border:nome;color: #6A6A6A;font-size:20px">View All</a>
 
     </div>
 
-    <div class="flex row ">
-        <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
-            <div class="card-upper d-flex justify-content-between">
-                <p id="bu" class="card-upper-text"> Medium </p>
-                <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
+ <!-- recipes from db -->
+ <?php
+    $sql = "SELECT * FROM `default_recipes` WHERE drecipe_category LIKE 'sn%';";
 
-            </div>
-            <div class="img-dis" style="width:100%; text-align:center;">
-                <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="card-food">Aloo Paratha</p>
+    $res = mysqli_query($conn, $sql);
+    ?>
 
-                <div class="header">
-                    <div class="dropdown ">
-                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
-                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
-                        </div>
+    <div class="flex row">
+        <?php $counter = 0;  
+    while ($d = mysqli_fetch_assoc($res)) {
+            $drecipe_recipe = explode(',', $d['drecipe_recipe']);
+            $steps = count($drecipe_recipe);
+            $drecipe_nutritional = $d['drecipe_nutritional information'];
 
-                        <div class="dropdown-content dropdown-card ">
-                            <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button" href="#">Delete</a>
-                        </div>
-                    </div>
+            $drecipe_nutritional = trim($drecipe_nutritional, '{}');
+            $pairs = explode(', ', $drecipe_nutritional);
+            $nutritional = array();
+           foreach ($pairs as $pair) {
+                list($key, $value) = explode(': ', $pair);
+                $key = trim($key, "'");
+                $value = trim($value, "'");
+                $nutritional[$key] = $value;
+            }
+            if ($counter == 5) {
+                break; 
+            }
+            $counter++;
+        ?>
+            <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
+                <div class="card-upper d-flex justify-content-between">
+                    <p id="bu" class="card-upper-text"> Medium </p>
+                    <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
                 </div>
-            </div>
-            <div class="d-flex justify-content-between" style="align-items:center;">
-                <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num">
-                    <div class="card-num-circle">12 </div> &nbsp;
-                    <div class="">Steps</div>
+                <div class="img-dis" style="width:100%; text-align:center;">
+                    <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
                 </div>
-            </div>
+                <div class="d-flex justify-content-between">
+                    <p class="card-food"><?php echo $d['drecipe_name'] ?></p>
+                    <div class="header">
+                        <div class="dropdown ">
+                            <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown(event)">
+                                <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                            </div>
 
-        </div>
-
-
-        <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
-            <div class="card-upper d-flex justify-content-between">
-                <p id="bu" class="card-upper-text"> Medium </p>
-                <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
-
-            </div>
-            <div class="img-dis" style="width:100%; text-align:center;">
-                <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="card-food">Aloo Paratha</p>
-                <div class="header">
-                    <div class="dropdown ">
-                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
-                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
-                        </div>
-
-                        <div class="dropdown-content dropdown-card ">
-                            <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button" href="#">Delete</a>
+                            <div id="myDropdownContent" class="dropdown-content dropdown-card ">
+                                <a style="color: white;" class="edit-button" href="#">Edit</a>
+                                <a style="color: white;" class="delete-button" href="#">Delete</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="d-flex justify-content-between" style="align-items:center;">
-                <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num">
-                    <div class="card-num-circle">12 </div> &nbsp;
-                    <div class="">Steps</div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
-            <div class="card-upper d-flex justify-content-between">
-                <p id="bu" class="card-upper-text"> Medium </p>
-                <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
-
-            </div>
-            <div class="img-dis" style="width:100%; text-align:center;">
-                <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="card-food">Aloo Paratha</p>
-                <div class="header">
-                    <div class="dropdown ">
-                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
-                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
-                        </div>
-
-                        <div class="dropdown-content dropdown-card ">
-                            <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button" href="#">Delete</a>
-                        </div>
+                <div class="d-flex justify-content-between" style="align-items:center;">
+                    <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> <?php echo $nutritional['Calories'] ?> kcal</p>
+                    <div class="d-flex align-items-center card-num">
+                        <div class="card-num-circle"><?= $steps ?> </div> &nbsp;
+                        <div class="">Steps</div>
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-between" style="align-items:center;">
-                <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num">
-                    <div class="card-num-circle">12 </div> &nbsp;
-                    <div class="">Steps</div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
-            <div class="card-upper d-flex justify-content-between">
-                <p id="bu" class="card-upper-text"> Medium </p>
-                <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
-
-            </div>
-            <div class="img-dis" style="width:100%; text-align:center;">
-                <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="card-food">Aloo Paratha</p>
-                <div class="header">
-                    <div class="dropdown ">
-                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
-                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
-                        </div>
-
-                        <div class="dropdown-content dropdown-card ">
-                            <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button" href="#">Delete</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between" style="align-items:center;">
-                <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num">
-                    <div class="card-num-circle">12 </div> &nbsp;
-                    <div class="">Steps</div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
-            <div class="card-upper d-flex justify-content-between">
-                <p id="bu" class="card-upper-text"> Medium </p>
-                <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
-
-            </div>
-            <div class="img-dis" style="width:100%; text-align:center;">
-                <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="card-food">Aloo Paratha</p>
-                <div class="header">
-                    <div class="dropdown ">
-                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
-                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
-                        </div>
-
-                        <div class="dropdown-content dropdown-card ">
-                            <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button" href="#">Delete</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between" style="align-items:center;">
-                <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num">
-                    <div class="card-num-circle">12 </div> &nbsp;
-                    <div class="">Steps</div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
-            <div class="card-upper d-flex justify-content-between">
-                <p id="bu" class="card-upper-text"> Medium </p>
-                <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
-
-            </div>
-            <div class="img-dis" style="width:100%; text-align:center;">
-                <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="card-food">Aloo Paratha</p>
-                <div class="header">
-                    <div class="dropdown ">
-                        <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown()">
-                            <img class="" src="./icons/vertical-three-dots.svg" alt="">
-                        </div>
-
-                        <div class="dropdown-content dropdown-card ">
-                            <a class="edit-button" href="#">Edit</a>
-                            <a class="delete-button" href="#">Delete</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between" style="align-items:center;">
-                <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> 299 kcal</p>
-                <div class="d-flex align-items-center card-num">
-                    <div class="card-num-circle">12 </div> &nbsp;
-                    <div class="">Steps</div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="recipe-add-btn">
-            <img src="./images/recipe_add.png" alt="">
-        </div>
-
-
-
-
+        <?php } ?>
     </div>
-
 
 
     <script>
@@ -360,27 +200,30 @@ color: #B85AEC; ">Oats</div>
         }
 
 
-        function showDropdown() {
+
+        function showDropdown(event) {
+            var dropdown = event.currentTarget.parentNode.querySelector(".dropdown-content");
+            dropdown.classList.toggle("show");
+            setTimeout(removeDropDown, 5000);
+        }
+
+        function removeDropDown() {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             for (var i = 0; i < dropdowns.length; i++) {
-                dropdowns[i].classList.add('show');
+                dropdowns[i].classList.remove('show');
             }
         }
 
-        var removeDropdown = document.getElementById("myDropdownIcon");
-        window.onclick = function(event) {
-
-            if (event.target !== removeDropdown && !removeDropdown.contains(event.target)) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains("show")) {
-                        openDropdown.classList.remove("show");
-                    }
+        function removeDropdown(event) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains("show") && !openDropdown.contains(event.target)) {
+                    openDropdown.classList.remove("show");
                 }
             }
-        };
+        }
     </script>
 </body>
 
