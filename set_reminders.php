@@ -704,6 +704,9 @@ border-radius: 13.3333px;
     
 
   @media screen and (max-width: 720px) {
+    .row>*{
+        width:auto;
+    }
     .header{
         display:flex;
         overflow-x:scroll;
@@ -782,7 +785,7 @@ border-radius: 13.3333px;
       }
       .client_wrapper{
        
-        margin-left:2rem;
+        margin-left:1rem;
         width:auto;
        
       }

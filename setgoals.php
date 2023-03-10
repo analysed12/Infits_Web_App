@@ -558,7 +558,8 @@ margin-top: 2.5rem;
 
   .pastreminders{
     display: flex;
-    gap: 3rem;
+    justify-content:space-between;
+    margin-right:4rem;
   }
 .rightside_wrapper1{
     width: 347px;
@@ -570,7 +571,7 @@ margin-top: 2.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
     animation-name: slidein;
     
     
@@ -579,12 +580,12 @@ margin-top: 2.5rem;
 @keyframes slidein {
   from {
     margin-left: 100%;
-    width: 300%;
+    
   }
 
   to {
     margin-left: 0%;
-    width: 100%;
+    
   }
 }
 
@@ -658,7 +659,7 @@ margin-top: 2.5rem;
   display: none;
 }
 .mobview_wrapper1{
-  width: 272px;
+  width: auto;
   height: 300px;
   background: #FFFFFF;
   border-radius: 15px;
@@ -671,7 +672,10 @@ margin-top: 2.5rem;
   background-position: bottom left;
 }
 
+@media screen and (max-width: 1200px){
+    
 
+}
   
   @media screen and (max-width: 720px) {
     .setgoals{
@@ -686,6 +690,9 @@ margin-top: 2.5rem;
         gap: 1rem;
     }
     .setgoals_contaner1{
+        display: flex;
+    flex-direction: column;
+    gap:0;
         margin-left: 1rem;
       }
       .setgoals_popup2{
@@ -708,8 +715,8 @@ margin-top: 2.5rem;
       }
       .rightside_wrapper1{
         display: flex;
-        left: 35px;
-        top: 307.5px;
+      margin-left:2rem;
+      width:auto
       }
       .pastreminders_rightside{
         left: 35px;
@@ -981,7 +988,7 @@ if (mysqli_num_rows($result_heart) > 0) {
                         <span >Beats per minute</span>
                         <input value="<?php echo($row['heart']) ?>" name="past_goal_heart<?php echo($i) ?>" id="label2" min="0" type="number" placeholder="0000 BPM">
                     </div>
-                    <button onclick="showWrapper('heartwrapper<?php echo($i) ?>')" class="userimage" style="background-color: #DA83C3;margin-left:0.7rem" id="userimage2"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <button onclick="showWrapper('heartwrapper<?php echo($i) ?>')" class="userimage" style="background-color: #DA83C3;margin-left:0.6rem" id="userimage2"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('heart','past_goal_heart<?php echo($i) ?>','heart_selected<?php echo($i) ?>')" class="userimage" style="background-color: #DA83C3;"><img src="images/right.png" ></button>
                     
                 </div>
@@ -1016,7 +1023,7 @@ if (mysqli_num_rows($result_water) > 0) {
                         <span >Quantity</span>
                         <input value="<?php echo($row['water']) ?>" name="past_goal_water<?php echo($i) ?>" id="label2" min="0" type="number" placeholder="0000 Liters">
                     </div>
-                    <button onclick="showWrapper('waterwrapper<?php echo($i) ?>')" class="userimage" style="background-color: #68A9F7;margin-left:0.5rem" id="userimage3"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <button onclick="showWrapper('waterwrapper<?php echo($i) ?>')" class="userimage" style="background-color: #68A9F7;margin-left:0.7rem" id="userimage3"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('water','past_goal_water<?php echo($i) ?>','water_selected<?php echo($i) ?>')" class="userimage" style="background-color: #68A9F7;"><img src="images/right.png" ></button>
                     
                 </div>
@@ -1051,7 +1058,7 @@ if (mysqli_num_rows($result_sleep) > 0) {
                         <span >Sleep time</span>
                         <input value="<?php echo($row['sleep']) ?>" name="past_goal_sleep<?php echo($i) ?>" id="label2" min="0" type="number" placeholder="0000 Hours">
                     </div>
-                    <button onclick="showWrapper('sleepwrapper<?php echo($i) ?>')" class="userimage" style="background-color: #805AE5;" id="userimage4"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <button onclick="showWrapper('sleepwrapper<?php echo($i) ?>')" class="userimage" style="background-color: #805AE5;margin-left:0.7rem" id="userimage4"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('sleep','past_goal_sleep<?php echo($i) ?>','sleep_selected<?php echo($i) ?>')" class="userimage" style="background-color: #805AE5;"><img src="images/right.png" ></button>
                     
                 </div>
@@ -1085,7 +1092,7 @@ if (mysqli_num_rows($result_weight) > 0) {
                         <span >Weight Count</span>
                         <input value="<?php echo($row['weight']) ?>" name="past_goal_weight<?php echo($i) ?>" id="label2" min="0" type="number" placeholder="0000 KG">
                     </div>
-                    <button onclick="showWrapper('weightwrapper<?php echo($i) ?>')" class="userimage" style="background-color: #7F9FA4;position:static;margin-left:1.3rem" id="userimage5"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <button onclick="showWrapper('weightwrapper<?php echo($i) ?>')" class="userimage" style="background-color: #7F9FA4;position:static;margin-left:0.8rem" id="userimage5"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('weight','past_goal_weight<?php echo($i) ?>','weight_selected<?php echo($i) ?>')" class="userimage" style="background-color: #7F9FA4;position:static"><img src="images/right.png" ></button>
                     
                 </div>
@@ -1120,7 +1127,7 @@ if (mysqli_num_rows($result_calorie) > 0) {
                         <span >Calorie Count</span>
                         <input value="<?php echo($row['calorie']) ?>" name="past_goal_calorie<?php echo($i) ?>" id="label2" min="0" type="number" placeholder="0000 Kcal">
                     </div>
-                    <button onclick="showWrapper('caloriewrapper<?php echo($i) ?>')" class="userimage" style="background-color: #E39F9A;margin-left:0.5rem" id="userimage6"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <button onclick="showWrapper('caloriewrapper<?php echo($i) ?>')" class="userimage" style="background-color: #E39F9A;margin-left:0.8rem" id="userimage6"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('calorie','past_goal_calorie<?php echo($i) ?>','calorie_selected<?php echo($i) ?>')" class="userimage" style="background-color: #E39F9A;"><img src="images/right.png" ></button>
                     
                 </div>
@@ -1162,23 +1169,24 @@ if (mysqli_num_rows($result_steps) > 0) {
                <div style="display:flex; flex-direction:column;gap:1rem">
 
                <div class="mobview_wrapper1">
-                    <div style="margin-left:3rem;margin-top:0.8rem"><img src="images/Frame.png" style="width:2rem"><span style="color:#FFA578 ; font-size:1.5rem;margin-left:0.5rem">Step Goals</span></div>  
-                    <span style="color:#FF8B8B; font-size:1.3rem; margin-left:4.5rem">Daily Steps</span>
+                    <div style="display:flex;justify-content:center;margin-top:0.8rem"><img src="images/Frame.png" style="width:2rem"><span style="color:#FFA578 ; font-size:1.5rem;margin-left:0.5rem">Step Goals</span></div>  
+                    <span style="color:#FF8B8B; font-size:1.3rem;display:flex;justify-content:center">Daily Steps</span>
                     <div style="display:flex;flex-direction:column;font-size:1.5rem; font-weight:400;margin-top:1rem">
-                        <span style="font-weight:600;margin-left:4rem ">No. of steps</span>
-                        <input value="<?php echo($row['steps']) ?>" name="mob_past_goal_steps<?php echo($i) ?>" id="label2" min="0" type="number" placeholder="0000 Steps">
+                        <span style="font-weight:600;display:flex;justify-content:center">No. of steps</span>
+                        <input  value="<?php echo($row['steps']) ?>" name="mob_past_goal_steps<?php echo($i) ?>" id="label3" min="0" type="number" placeholder="0000 Steps">
                     </div> 
-                    
-                    <button onclick="showWrapper('mobstepswrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #F3A181 ; position:static;margin-left:4.2rem" id="mob_userimage1"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <div style="display:flex;justify-content:center">
+                    <button onclick="showWrapper('mobstepswrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #F3A181 ; position:static" id="mob_userimage1"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('steps','mob_past_goal_steps<?php echo($i) ?>','mob_steps_selected<?php echo($i) ?>')" class="userimage3" style="background-color: #F3A181;position:static ; margin-left:0.5rem"><img src="images/right.png" ></button>
+                    </div>
                 </div>
 
 
                 <!------------------------------------------1 wrapper-------------------------------------------------->
             <div class="rightside_wrapper1 sidewrapper mobstepswrapper<?php echo($i) ?>" id="mobside_wrapper1">
                 <div style="text-align:center"><img src="images/Frame.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Step Goal</span></div>
-                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign goal</span>
-                <div style="display:flex; gap:1rem">
+                <span style="font-size:1.7rem; display:flex;justify-content:center">Select clients to assign goal</span>
+                <div style="display:flex;justify-content:center; gap:1rem;padding-right:1rem">
                     <div class="searchclient">
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
@@ -1189,7 +1197,7 @@ if (mysqli_num_rows($result_steps) > 0) {
                 <div id="mob_steps_selected<?php echo($i) ?>" style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
                     <?php foreach ($list as $c) {
                     $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-                    <span class="bluetext" style="margin-left:1rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_steps_unselected<?php echo($i) ?>','mob_steps_selected<?php echo($i) ?>','steps','mob_past_goal_steps<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
+                    <span class="bluetext" style="margin-left:1rem;margin-right:2.5rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_steps_unselected<?php echo($i) ?>','mob_steps_selected<?php echo($i) ?>','steps','mob_past_goal_steps<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
                     <?php } ?>
                 </div>
 
@@ -1228,23 +1236,24 @@ if (mysqli_num_rows($result_heart) > 0) {
         }
 ?>      
                  <div class="mobview_wrapper1">
-                    <div style="margin-left:2rem;margin-top:0.8rem"><img src="images/Frame-1.png" style="width:2rem"><span style="color:#E882B8 ; font-size:1.5rem;margin-left:0.5rem">Heart Rate Goal</span></div>  
-                    <span style="color:#FF8B8B; font-size:1.3rem; margin-left:4rem">Daily Heart Rate</span>
+                    <div style="display:flex;justify-content:center;margin-top:0.8rem"><img src="images/Frame-1.png" style="width:2rem"><span style="color:#E882B8 ; font-size:1.5rem;margin-left:0.5rem">Heart Rate Goal</span></div>  
+                    <span style="color:#FF8B8B; font-size:1.3rem; display:flex;justify-content:center">Daily Heart Rate</span>
                     <div style="display:flex;flex-direction:column;font-size:1.5rem; font-weight:400;margin-top:1rem">
-                        <span style="font-weight:600;margin-left:3.8rem ">Beats per min</span>
+                        <span style="font-weight:600;display:flex;justify-content:center ">Beats per min</span>
                         <input value="<?php echo($row['heart']) ?>" name="mob_past_goal_heart<?php echo($i) ?>" id="label3" min="0" type="number" placeholder="0000 BPM">
                     </div> 
-                    
-                    <button onclick="showWrapper('mobheartwrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #E882B8 ; position:static;margin-left:4.2rem" id="mob_userimage2"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <div style="display:flex;justify-content:center">
+                    <button onclick="showWrapper('mobheartwrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #E882B8 ; position:static;" id="mob_userimage2"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('heart','mob_past_goal_heart<?php echo($i) ?>','mob_heart_selected<?php echo($i) ?>')" class="userimage3" style="background-color: #E882B8;position:static ; margin-left:0.5rem"><img src="images/right.png" ></button>
+                   </div>
                 </div>
 
 
                 <!-------------------------------------------------2 wrapper------------------------------------------->
              <div class="rightside_wrapper1 sidewrapper mobheartwrapper<?php echo($i) ?>" id="mobside_wrapper2">
                 <div style="text-align:center"><img src="images/Frame-1.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Heart Rate Goal</span></div>
-                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign goal</span>
-                <div style="display:flex; gap:1rem">
+                <span style="font-size:1.7rem; display:flex;justify-content:center">Select clients to assign goal</span>
+                <div style="display:flex;justify-content:center ;gap:1rem;padding-right:1rem">
                     <div class="searchclient">
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
@@ -1255,7 +1264,7 @@ if (mysqli_num_rows($result_heart) > 0) {
                 <div id="mob_heart_unselected<?php echo($i) ?>" style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
                     <?php foreach ($list as $c) {
                     $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-                    <span class="bluetext" style="margin-left:1rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_heart_unselected<?php echo($i) ?>','mob_heart_selected<?php echo($i) ?>','heart','mob_past_goal_heart<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
+                    <span class="bluetext" style="margin-left:1rem;margin-right:2.5rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_heart_unselected<?php echo($i) ?>','mob_heart_selected<?php echo($i) ?>','heart','mob_past_goal_heart<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
                     <?php } ?>
                 </div>
 
@@ -1294,15 +1303,16 @@ if (mysqli_num_rows($result_water) > 0) {
         }
 ?>
                 <div class="mobview_wrapper1">
-                    <div style="margin-left:2.4rem;margin-top:0.8rem"><img src="images/Frame-2.png" style="width:2rem"><span style="color:#68A9F7 ; font-size:1.5rem;margin-left:0.5rem">Water Goal</span></div>  
-                    <span style="color:#FF8B8B; font-size:1.3rem; margin-left:3.4rem">Daily Water Intake</span>
+                    <div style="display:flex;justify-content:center;margin-top:0.8rem"><img src="images/Frame-2.png" style="width:2rem"><span style="color:#68A9F7 ; font-size:1.5rem;margin-left:0.5rem">Water Goal</span></div>  
+                    <span style="color:#FF8B8B; font-size:1.3rem; display:flex;justify-content:center">Daily Water Intake</span>
                     <div style="display:flex;flex-direction:column;font-size:1.5rem; font-weight:400;margin-top:1rem">
-                        <span style="font-weight:600;margin-left:3.8rem ">Quantity</span>
+                        <span style="font-weight:600;display:flex;justify-content:center ">Quantity</span>
                         <input value="<?php echo($row['water']) ?>" name="mob_past_goal_water<?php echo($i) ?>" id="label3" min="0" type="number" placeholder="0000 Liters">
                     </div> 
-                    
-                    <button onclick="showWrapper('mobwaterwrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #68A9F7 ; position:static;margin-left:4.2rem" id="mob_userimage3"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <div style="display:flex;justify-content:center">
+                    <button onclick="showWrapper('mobwaterwrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #68A9F7 ; position:static;" id="mob_userimage3"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('water','mob_past_goal_water<?php echo($i) ?>','mob_water_selected<?php echo($i) ?>')" class="userimage3" style="background-color: #68A9F7;position:static ; margin-left:0.5rem"><img src="images/right.png" ></button>
+                    </div>
                 </div>
 
 
@@ -1310,8 +1320,8 @@ if (mysqli_num_rows($result_water) > 0) {
                 <!-------------------------------------------------3 wrapper------------------------------------------->
             <div class="rightside_wrapper1 sidewrapper mobwaterwrapper<?php echo($i) ?>" id="mobside_wrapper3">
                 <div style="text-align:center"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Water Goal</span></div>
-                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign goal</span>
-                <div style="display:flex; gap:1rem">
+                <span style="font-size:1.7rem; display:flex;justify-content:center">Select clients to assign goal</span>
+                <div style="display:flex;justify-content:center; gap:1rem;padding-right:1rem">
                     <div class="searchclient">
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
@@ -1322,7 +1332,7 @@ if (mysqli_num_rows($result_water) > 0) {
                 <div id="mob_water_unselected<?php echo($i) ?>" style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
                     <?php foreach ($list as $c) {
                     $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-                    <span class="bluetext" style="margin-left:1rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_water_unselected<?php echo($i) ?>','mob_water_selected<?php echo($i) ?>','water','mob_past_goal_water<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
+                    <span class="bluetext" style="margin-left:1rem;margin-right:2.5rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_water_unselected<?php echo($i) ?>','mob_water_selected<?php echo($i) ?>','water','mob_past_goal_water<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
                     <?php } ?>
                 </div>
 
@@ -1359,23 +1369,24 @@ if (mysqli_num_rows($result_sleep) > 0) {
         }
 ?>
                 <div class="mobview_wrapper1">
-                    <div style="margin-left:2.4rem;margin-top:0.8rem"><img src="images/Frame-3.png" style="width:2rem"><span style="color:#805AE5 ; font-size:1.5rem;margin-left:0.5rem">Sleep Goal</span></div>  
-                    <span style="color:#FF8B8B; font-size:1.3rem; margin-left:2.8rem">Daily Sleep Duration</span>
+                    <div style="display:flex;justify-content:center;margin-top:0.8rem"><img src="images/Frame-3.png" style="width:2rem"><span style="color:#805AE5 ; font-size:1.5rem;margin-left:0.5rem">Sleep Goal</span></div>  
+                    <span style="color:#FF8B8B; font-size:1.3rem;display:flex;justify-content:center">Daily Sleep Duration</span>
                     <div style="display:flex;flex-direction:column;font-size:1.5rem; font-weight:400;margin-top:1rem">
-                        <span style="font-weight:600;margin-left:3.8rem ">Sleep time</span>
+                        <span style="font-weight:600;display:flex;justify-content:center ">Sleep time</span>
                         <input value="<?php echo($row['sleep']) ?>" name="mob_past_goal_sleep<?php echo($i) ?>" id="label3" min="0" type="number" placeholder="0000 Hours">
                     </div> 
-                    
-                    <button onclick="showWrapper('mobsleepwrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #805AE5 ; position:static;margin-left:4.2rem" id="mob_userimage4"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <div style="display:flex;justify-content:center">
+                    <button onclick="showWrapper('mobsleepwrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #805AE5 ; position:static;" id="mob_userimage4"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('sleep','mob_past_goal_sleep<?php echo($i) ?>','mob_sleep_selected<?php echo($i) ?>')" class="userimage3" style="background-color: #805AE5;position:static ; margin-left:0.5rem"><img src="images/right.png" ></button>
+                    </div>
                 </div>
 
 
                  <!--------------------------------------------------4 wrapper------------------------------------------>
             <div class="rightside_wrapper1 sidewrapper mobsleepwrapper<?php echo($i) ?>" id="mobside_wrapper4">
                 <div style="text-align:center"><img src="images/Frame-3.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Sleep Goal</span></div>
-                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign goal</span>
-                <div style="display:flex; gap:1rem">
+                <span style="font-size:1.7rem; display:flex;justify-content:center">Select clients to assign goal</span>
+                <div style="display:flex;justify-content:center; gap:1rem ;padding-right:1rem">
                     <div class="searchclient">
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
@@ -1386,7 +1397,7 @@ if (mysqli_num_rows($result_sleep) > 0) {
                 <div id="mob_sleep_selected<?php echo($i) ?>" style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
                     <?php foreach ($list as $c) {
                     $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-                    <span class="bluetext" style="margin-left:1rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_sleep_unselected<?php echo($i) ?>','mob_sleep_selected<?php echo($i) ?>','sleep','mob_past_goal_sleep<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
+                    <span class="bluetext" style="margin-left:1rem;margin-right:2.5rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_sleep_unselected<?php echo($i) ?>','mob_sleep_selected<?php echo($i) ?>','sleep','mob_past_goal_sleep<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
                     <?php } ?>
                 </div>
 
@@ -1419,15 +1430,16 @@ if (mysqli_num_rows($result_weight) > 0) {
         }
 ?>
                  <div class="mobview_wrapper1">
-                    <div style="margin-left:2.4rem;margin-top:0.8rem"><img src="images/Frame-4.png" style="width:2rem"><span style="color:#7F9FA4 ; font-size:1.5rem;margin-left:0.5rem">Weight Goal</span></div>  
-                    <span style="color:#FF8B8B; font-size:1.3rem; margin-left:2.8rem">Daily Weight Count</span>
+                    <div style="display:flex;justify-content:center;margin-top:0.8rem"><img src="images/Frame-4.png" style="width:2rem"><span style="color:#7F9FA4 ; font-size:1.5rem;margin-left:0.5rem">Weight Goal</span></div>  
+                    <span style="color:#FF8B8B; font-size:1.3rem; display:flex;justify-content:center">Daily Weight Count</span>
                     <div style="display:flex;flex-direction:column;font-size:1.5rem; font-weight:400;margin-top:1rem">
-                        <span style="font-weight:600;margin-left:3.8rem ">Weight Count</span>
-                        <input value="<?php echo($row['weight']) ?>" name="mob_past_goal_weight<?php echo($i) ?>" id="label2" min="0" type="number" placeholder="0000 KG">
+                        <span style="font-weight:600;display:flex;justify-content:center ">Weight Count</span>
+                        <input value="<?php echo($row['weight']) ?>" name="mob_past_goal_weight<?php echo($i) ?>" id="label3" min="0" type="number" placeholder="0000 KG">
                     </div> 
-                    
-                    <button onclick="showWrapper('mobweightwrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #7F9FA4 ; position:static;margin-left:4.2rem" id="mob_userimage5"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <div style="display:flex;justify-content:center">
+                    <button onclick="showWrapper('mobweightwrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #7F9FA4 ; position:static" id="mob_userimage5"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('weight','mob_past_goal_weight<?php echo($i) ?>','mob_weight_selected<?php echo($i) ?>')" class="userimage3" style="background-color: #7F9FA4;position:static ; margin-left:0.5rem"><img src="images/right.png" ></button>
+                    </div>
                 </div>
 
 
@@ -1436,8 +1448,8 @@ if (mysqli_num_rows($result_weight) > 0) {
                 <!-----------------------------------------------5 wrapper--------------------------------------------->
              <div class="rightside_wrapper1 sidewrapper mobweightwrapper<?php echo($i) ?>" id="mobside_wrapper5">
                 <div style="text-align:center"><img src="images/Frame-4.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Weight Goal</span></div>
-                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign goal</span>
-                <div style="display:flex; gap:1rem">
+                <span style="font-size:1.7rem; display:flex;justify-content:center">Select clients to assign goal</span>
+                <div style="display:flex;justify-content:center; gap:1rem;padding-right:1rem">
                     <div class="searchclient">
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
@@ -1448,7 +1460,7 @@ if (mysqli_num_rows($result_weight) > 0) {
                 <div id="mob_weight_selected<?php echo($i) ?>" style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
                     <?php foreach ($list as $c) {
                     $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-                    <span class="bluetext" style="margin-left:1rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_weight_unselected<?php echo($i) ?>','mob_weight_selected<?php echo($i) ?>','weight','mob_past_goal_weight<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
+                    <span class="bluetext" style="margin-left:1rem;margin-right:2.5rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_weight_unselected<?php echo($i) ?>','mob_weight_selected<?php echo($i) ?>','weight','mob_past_goal_weight<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
                     <?php } ?>
                 </div>
 
@@ -1483,23 +1495,24 @@ if (mysqli_num_rows($result_calorie) > 0) {
         }
 ?>
                  <div class="mobview_wrapper1">
-                    <div style="margin-left:2.4rem;margin-top:0.8rem"><img src="images/Frame-5.png" style="width:2rem"><span style="color:#E39F9A ; font-size:1.5rem;margin-left:0.5rem">Calorie Count</span></div>  
-                    <span style="color:#FF8B8B; font-size:1.3rem; margin-left:3rem">Daily Calorie Count</span>
+                    <div style="display:flex;justify-content:center;margin-top:0.8rem"><img src="images/Frame-5.png" style="width:2rem"><span style="color:#E39F9A ; font-size:1.5rem;margin-left:0.5rem">Calorie Count</span></div>  
+                    <span style="color:#FF8B8B; font-size:1.3rem; display:flex;justify-content:center">Daily Calorie Count</span>
                     <div style="display:flex;flex-direction:column;font-size:1.5rem; font-weight:400;margin-top:1rem">
-                        <span style="font-weight:600;margin-left:3.8rem ">Calorie Count</span>
+                        <span style="font-weight:600;display:flex;justify-content:center ">Calorie Count</span>
                         <input value="<?php echo($row['calorie']) ?>" name="mob_past_goal_calorie<?php echo($i) ?>" id="label3" min="0" type="number" placeholder="0000 Kcal">
                     </div> 
-                    
-                    <button onclick="showWrapper('mobcaloriewrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #E39F9A ; position:static;margin-left:4.2rem" id="mob_userimage6"><img src="images/mdi_user-circle-outline.png" ></button>
+                    <div style="display:flex;justify-content:center">
+                    <button onclick="showWrapper('mobcaloriewrapper<?php echo($i) ?>')" class="userimage3" style="background-color: #E39F9A ; position:static" id="mob_userimage6"><img src="images/mdi_user-circle-outline.png" ></button>
                     <button onclick="update_goal('calorie','mob_past_goal_calorie<?php echo($i) ?>','mob_calorie_selected<?php echo($i) ?>')" class="userimage3" style="background-color: #E39F9A;position:static ; margin-left:0.5rem"><img src="images/right.png" ></button>
+                    </div>
                 </div>
 
 <!-----------------------------------------------------------------------WRAPPER 6------------------------------------------>
 
                 <div class="rightside_wrapper1 sidewrapper mobcaloriewrapper<?php echo($i) ?>" id="mobside_wrapper6">
                 <div style="text-align:center"><img src="images/Frame-5.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Calorie Goal</span></div>
-                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign goal</span>
-                <div style="display:flex; gap:1rem">
+                <span style="font-size:1.7rem; display:flex;justify-content:center">Select clients to assign goal</span>
+                <div style="display:flex;justify-content:center; gap:1rem;padding-right:1rem">
                     <div class="searchclient">
                     <img src="images/greyglass.png">
                     <span style="color:#ACACAC"> Search Clients</span>
@@ -1510,7 +1523,7 @@ if (mysqli_num_rows($result_calorie) > 0) {
                 <div id="mob_calorie_selected<?php echo($i) ?>" style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
                     <?php foreach ($list as $c) {
                     $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-                    <span class="bluetext" style="margin-left:1rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_calorie_unselected<?php echo($i) ?>','mob_calorie_selected<?php echo($i) ?>','calorie','mob_past_goal_calorie<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
+                    <span class="bluetext" style="margin-left:1rem;margin-right:2.5rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_calorie_unselected<?php echo($i) ?>','mob_calorie_selected<?php echo($i) ?>','calorie','mob_past_goal_calorie<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
                     <?php } ?>
                 </div>
 
