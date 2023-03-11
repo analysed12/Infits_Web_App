@@ -345,7 +345,19 @@ font-size: 22px;
 
                             
 
+@media screen and (max-width: 1200px){
+    .live{
+            display:flex;
+            flex-direction:column;
+            gap:0;
+        }
+        .streaming_live{
+            width:auto;
+            height: 220px;
+           
+        }
 
+}
 @media screen and (max-width: 400px){
         .bottom_buttons{
             display:flex;
