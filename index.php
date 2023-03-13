@@ -4,7 +4,18 @@ include('navbar.php');
 // Get Id
 if(isset($_SESSION['name'])){
     $dietitian_id = $_SESSION['name'];
+<<<<<<< Updated upstream
 
+=======
+    $user=$_SESSION['name'];
+    $sql="SELECT * FROM addclient WHERE dietitianuserID='$user'";
+    $q="SELECT * FROM create_event WHERE dietitianuserID='$user'";
+    $result = $conn->query($sql);
+    $req= $conn->query($q);
+    if(mysqli_num_rows($result)<1 && mysqli_num_rows($req)<1){
+        header('Location:upcomingevents.php');
+    }
+>>>>>>> Stashed changes
     # database connection file
     include 'app/db.conn.php';
 
@@ -348,7 +359,10 @@ function fetchInformation($client_id){
     justify-content: flex-end;
     width: 95%;
     padding-right: 1.5rem;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 }
 .symbols-container,
 .values-container{
@@ -625,8 +639,13 @@ function fetchInformation($client_id){
             </div>
             <div class="container2_rightside" >
                 <div class="addbutton" id="addbutton">
+<<<<<<< Updated upstream
                     <button id="addbtn" onclick ="window.location.href='task_list.php'">Add Task</button>
                     <button id="addbtn" onclick ="window.location.href='client_list.php'" class="add">Add Client</button>
+=======
+                    <button id="addbtn">Add Task</button>
+                    <button id="addbtn" class="add">Add Client</button>
+>>>>>>> Stashed changes
                 </div>
                 <div><button id="btn1" class="btn-add">+</button></div>
                 <script>
@@ -659,7 +678,11 @@ if(!empty($up_event)){
     $EC  = count($up_event);
     $color = 0;
     for($i=0;$i<$EC;$i++){
+<<<<<<< Updated upstream
         $time = new DateTime($up_event[$i]['start_date']);
+=======
+        $time = new DateTime($up_event[$i]['start_date']);}
+>>>>>>> Stashed changes
 ?>
             <div class="container2_wrapper box<?php echo($color) ?>">
                 <div class="container2_upper">
@@ -675,16 +698,27 @@ if(!empty($up_event)){
         $color = 0;
     }
     }
+<<<<<<< Updated upstream
 }
 ?>
 </div>
 
+=======
+
+?>
+</div>
+
+>>>>>>> Stashed changes
         <div class="dashboard_container3">
             <div style="font-size:35px; font-weight:600"> Client Progress</div>
             <div class="details">
                 <a href="client_progress.php"><button id="details">View All</button></a>
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
             </div>
+<<<<<<< Updated upstream
+=======
+            
+>>>>>>> Stashed changes
         </div>
 <?php
 $query = "SELECT `client_id`,`name` FROM `addclient` WHERE dietitianuserID = '$dietitian_id' AND status = 1;";
@@ -832,7 +866,11 @@ if(!empty($data)){
                                             <?= $conversation['name'] ?><br>
                                             <small class="small-text-message">
                                                 <?php
+<<<<<<< Updated upstream
                                                 echo lastChat($_SESSION['dietitian_id'], $conversation['dietitianuserID'], $conn);
+=======
+                                                echo lastChat($_SESSION['dietitian_id'], $conversation['dietitian_id'], $conn);
+>>>>>>> Stashed changes
                                                 ?>
                                             </small>
 
@@ -901,6 +939,7 @@ if(!empty($data)){
                     <button id="btn7" class="btn6 task-btn" onclick="openTask('btn7','upcoming_tasks')">Upcoming</button>
                     <div id="today_tasks">
 <?php 
+<<<<<<< Updated upstream
 $query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = '{$dietitian_id}' AND date = '{$today->format('Y-m-d')}' ORDER BY date,start_time LIMIT 3";
 // $query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = 'John_wayne' AND date = '2023-02-03' ORDER BY date,start_time LIMIT 3";
 // echo($today->format('Y-m-d'));
@@ -910,6 +949,11 @@ $rowcount=mysqli_num_rows($result);
 //   printf("Result set has %d rows.\n",$rowcount);
 //   while($row = mysqli_fetch_assoc($result)){
 //     echo $row['title'];
+=======
+
+$query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = '{$dietitian_id}' AND date = '{$today->format('Y-m-d')}' ORDER BY date,start_time LIMIT 3";
+$result = mysqli_query($conn, $query);
+>>>>>>> Stashed changes
 if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)){
         // $date = new DateTime($row['date']);
@@ -921,7 +965,11 @@ if (mysqli_num_rows($result) > 0) {
         if($row['end_time'] != ''){
             $end = date("g:i a", strtotime($row['end_time']));
         }
+<<<<<<< Updated upstream
 //
+=======
+
+>>>>>>> Stashed changes
 ?>
                         <!-- task -->
                         <div class="list_tasklist_container" >
@@ -943,9 +991,13 @@ if (mysqli_num_rows($result) > 0) {
                     <div id="upcoming_tasks">
 <?php 
 $query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = '{$dietitian_id}' AND date > '{$today->format('Y-m-d')}' ORDER BY date,start_time LIMIT 3";
+<<<<<<< Updated upstream
 $con = new mysqli("localhost", "root", "", "infits");
 $result = mysqli_query($con, $query);
 
+=======
+$result = mysqli_query($conn, $query);
+>>>>>>> Stashed changes
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         // $date = new DateTime($row['date']);

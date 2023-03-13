@@ -6,6 +6,15 @@ include 'navbar.php';
 // die();
 if (isset($_SESSION['dietitianuserID'])) {
     # database connection file
+<<<<<<< Updated upstream
+=======
+    $user=$_SESSION['dietitianuserID'];
+    $sql="SELECT * FROM messages where dietitianID='$user'";
+    $result=$conn->query($sql);
+    if(mysqli_num_rows($result)<1){
+        header('Location:message.php');
+    }
+>>>>>>> Stashed changes
     include 'app/db.conn.php';
 
     include 'app/helpers/user.php';

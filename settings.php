@@ -338,7 +338,11 @@ border-radius: 18px;
                 </div>
             </li>
              </a>
+<<<<<<< Updated upstream
              <a href="achivement.php">
+=======
+             <a href="myachievements.php">
+>>>>>>> Stashed changes
             <li>
                 <div class="box img-4">
                     <img src="icons/settings/icon4.svg" alt="">
