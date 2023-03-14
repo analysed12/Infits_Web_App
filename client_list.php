@@ -183,7 +183,7 @@ img {
     margin: 0 auto;
     /* background-color:rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
     display: none;
     transition: all 0.4 ease-in-out !important;
 }
@@ -303,6 +303,7 @@ img {
     /* box-shadow: 0px 10px 15px rgba(136, 136, 136, 0.05); */
     border-radius: 15px;
     position: relative;
+    
 
 }
 
@@ -332,7 +333,7 @@ img {
                     <div class="add_set"> <span>Add Clients</span></div>
                 </div>
                 <div onclick="toast('Set Goals');" class="add_set_client">
-                    <div><button id="btn1"><span class="material-symbols-outlined">settings</span></button> </div>
+                    <div><button  id="btn1"><span class="material-symbols-outlined">settings</span></button> </div>
                     <div class="add_set"> <span>Set Goals</span></div>
                 </div>
 
@@ -355,7 +356,7 @@ img {
             </form>
         </div>
         <br><br>
-        <!-- <input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row["name"]."'> -->
+        
         <div class="client-container">
             <?php
                 if(isset($_POST['pending-btn']))
@@ -392,7 +393,7 @@ img {
                     echo "<div class='client-item'>";
                     echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
                     echo "<div class='profile2'>";
-                    echo "<input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row["name"]."'>";
+                    echo "<input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row["client_id"]."'>";
                     echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
                     echo "<a href='client_profile.php?client_id=".$row['client_id']."'>Profile</a>";
                     echo "<div>";
@@ -444,7 +445,7 @@ img {
                     }
                  
                     echo "<div class='client-item'>";
-                    echo "<input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row["name"]."'>";
+                    echo "<input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row['client_id']."'>";
                     echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
                     echo "<div class='profile2'>";
                     echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
@@ -475,8 +476,9 @@ img {
         </h1>
 
         <div id="toast__btns">
-
-          <button class="btn btn1" >
+            <form action=""  method="POST" id='form'>
+            <input style='cursor:pointer' id='form__input' type='text' hidden name='clientList' value=''>
+             <button type="submit" class="btn btn1" >
             <span>
                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.3767 3.99431V8.54725H13.859V3.99431M13.859 10.0649H15.3767V11.5825H13.859M7.02961 0.200195C6.6271 0.200195 6.24108 0.36009 5.95647 0.644704C5.67185 0.929318 5.51196 1.31534 5.51196 1.71784C5.50663 1.7911 5.50663 1.86464 5.51196 1.9379C3.32655 2.5829 1.71784 4.61655 1.71784 7.02961V11.5825L0.200195 13.1002V13.859H13.859V13.1002L12.3414 11.5825V7.02961C12.3414 4.61655 10.7327 2.5829 8.54725 1.9379C8.55258 1.86464 8.55258 1.7911 8.54725 1.71784C8.54725 1.31534 8.38736 0.929318 8.10275 0.644704C7.81813 0.36009 7.43211 0.200195 7.02961 0.200195ZM5.51196 14.6178C5.51196 15.0203 5.67185 15.4064 5.95647 15.691C6.24108 15.9756 6.6271 16.1355 7.02961 16.1355C7.43211 16.1355 7.81813 15.9756 8.10275 15.691C8.38736 15.4064 8.54725 15.0203 8.54725 14.6178H5.51196Z" fill="white"/>
@@ -486,9 +488,68 @@ img {
           </button>
            <button onclick='close()' class="btn btn2">Cancle</button>
 
+        </form>
+
+         
+
         </div>
     </div>
     
-<script src="client_listScript.js"></script>
+<script>
+        const popUp = document.querySelector("#toast");
+        const btn1 = document.querySelector(".btn1");
+        const btn2 = document.querySelector(".btn2");
+        const btn__span = document.querySelector(".btn__span");
+        const myCheckBox = document.querySelectorAll(".myCheckboxs");
+        const form = document.querySelector("#form");
+        const from__input = document.querySelector("#from__input");
+
+        let selectedClients = [];
+
+        // display checkBox and popUp here...
+        const toast = (val) => {
+            popUp.style.display = "inline-flex";
+            btn__span.innerHTML = val;
+            myCheckBox.forEach((items) => {
+                items.style.display = "block";
+            });
+        };
+
+        // after checking the checkbox...the further opration...
+        btn1.addEventListener("click", () => {
+        if (btn__span.innerHTML == "Set Goals") { //the set goals page linking and sending the data...
+            myCheckBox.forEach((items) => {
+                if (items.checked) {
+                    selectedClients.push(items.value);
+                }
+                form__input.value = JSON.stringify(selectedClients);
+                form.action = "setgoals.php";
+                console.log( "setgoals");
+            });
+            window.location.href = "setgoals.php";
+        } else if (btn__span.innerHTML == "Set Reminders") {   //the set Reminders page linking and sending the data...
+             
+            myCheckBox.forEach((items) => {
+                if (items.checked) {
+                    selectedClients.push(items.value);
+                }
+                form__input.value = JSON.stringify(selectedClients);
+                form.action = 'set_reminders.php';
+                console.log( "Set Reminders", selectedClients);
+            });
+            window.location.href = "set_reminders.php";
+        }
+        });
+
+        // hide checkBox and popUp here...
+        btn2.addEventListener("click", (e) => {
+            e.preventDefault();
+            popUp.style.display = "none";
+            myCheckBox.forEach((items) => {
+                items.style.display = "none";
+            });
+        });
+
+</script>
 </body>
 </html>
