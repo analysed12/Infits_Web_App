@@ -54,13 +54,14 @@ if (isset($_POST['reg_user'])) {
   	mysqli_query($conn, $query);
 
     # creating the Session
-    $_SESSION['dietitianuserID'] = $user['dietitianuserID'];
-    $_SESSION['name'] = $user['name'];
-    $_SESSION['dietitian_id'] = $user['dietitian_id'];
+    // $_SESSION['dietitianuserID'] = $user['dietitianuserID'];
+    // $_SESSION['name'] = $user['name'];
+    // $_SESSION['dietitian_id'] = $user['dietitian_id'];
 
-  	$_SESSION['name'] = $name;
-  	$_SESSION['success'] = "You are now logged in";
-  	header('location: index.php');
+  	// $_SESSION['name'] = $name;
+  	// $_SESSION['success'] = "You are now logged in";
+  	// header('location: index.php');
+     header('location: login.php');
   }
 }
 
@@ -127,9 +128,10 @@ if (isset($_POST['login_user'])) {
           // print_r($result);
           // echo '123';
           // die();
-            // $_SESSION['name'] = $dietitianuserID;
+            $_SESSION['name'] = $dietitianuserID;
             $_SESSION['success'] = "You are now logged in";
             header('location: index.php');
+           
           }else {
               array_push($errors, "Wrong Username/password combination");
               // header('location: sign_in_new.php');

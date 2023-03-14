@@ -1,8 +1,16 @@
 <?php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$client_array = array(3,4,5);
+$client_array = array();
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $clientList = json_decode($_POST['clientList']);
+    $client_array = $clientList;
+
+    
+}
+    // exit;
 
 // $keys = array_keys($_SESSION);
 // foreach ($keys as $key) {
@@ -461,7 +469,7 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     @keyframes slidein {
   from {
     margin-left: 100%;
-    
+    width: 300%;
   }
 
   to {
@@ -579,7 +587,9 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     .pc-middle select{
         width: 95%;
     }
-    
+    .pc-right {
+    width: 10%;
+    }
     .pc-title{
         
         font-weight: 550;
@@ -685,29 +695,15 @@ padding-right:1rem;
     width: 42.5px;
 height: 40px;
 border:none;
-  
 
 background: #61A8F8;
 border-radius: 13.3333px;
   }
-  .pc-right{
-    width:10%
-  }
-  .pc-bottom{
-        display:none;
-    }
-
-    #mobside_wrapper1{
-        display: none;
-      }
-
-    
 
   @media screen and (max-width: 720px) {
     .header{
         display:flex;
-        overflow-x:scroll;
-        width:auto;
+        flex-direction:column;
         gap:2rem;
     }
     .set-card{
@@ -741,23 +737,13 @@ border-radius: 13.3333px;
         flex-direction:column;
     }
     .pc-right{
-        display:none !important;
-       
-        
-        
-
-    }
-    .pc-bottom{
         display:flex !important;
         width:auto;
         margin-top:1rem;
         justify-content:space-evenly;
         
-        
 
     }
-    
-
     .pc-left,
     .pc-middle{
         width: auto;
@@ -776,16 +762,6 @@ border-radius: 13.3333px;
     .col-8{
         width:100%;
     }
-   
-      #mobside_wrapper1{
-        display: none;
-      }
-      .client_wrapper{
-       
-        margin-left:2rem;
-        width:auto;
-       
-      }
    
    
   
@@ -1122,9 +1098,7 @@ if (mysqli_num_rows($result_water) > 0) {
             $key = array_search($c, $allClients);
             unset($map_water[$key]);
         }
-?>     
-
-<div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:1.5rem">
+?>
                 <div class="pl pr-container" style="margin-left:1rem">
                     <p class="pr-heading"><img src="images/waterdrop1.png" style="margin-bottom:0.2rem;margin-right:0.5rem">Water Intake Reminder</p>
                     <div class="past-reminder pr-water">
@@ -1155,61 +1129,10 @@ if (mysqli_num_rows($result_water) > 0) {
                                     <button class="pc-btn1" type="button"  onclick="showSelectClient('water_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br> <br>
                                     <button class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_water('water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
-                                <div class="pc-bottom" id="pc_bottom">
-                                    <button class="pc-btn1" type="button"  onclick="showSelectClient('water_wrapper1<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br> <br>
-                                    <button class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_water('water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
-                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
-
-
-                <div class="client_wrapper" id="water_wrapper1<?php echo($i) ?>">
-                            <div class="wrapper-top">
-                                <div style="text-align:center;margin-top:1rem"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Water Goal</span>
-                                </div>
-                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
-                                <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
-                                    <div class="searchclient">
-                                    <img src="images/greyglass.png">
-                                    <input type="text" placeholder="Search Clients">
-                                    </div>
-                                    <button class="clientChange" onclick="hideSelectClient()" style="background-color: #68A9F7;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
-                                    
-                                </div>
-                                <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
-                                    <div id="water_selected<?php echo($i) ?>" style="display:flex;flex-wrap: wrap;gap: 15px;width: 90%;margin-left: 10px;">
-                                    <?php foreach ($list as $c) {
-                                        $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-                                        <span class="bluetext water_client"><span><?php echo($c_name) ?> </span><span onclick="deSelectClient_water(this,'water_unselected<?php echo($i) ?>','water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="close-cut">&times;</span><span hidden><?php echo($c)?></span></span>
-                                    <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wrapper-bottom">
-                                <div id="water_unselected<?php echo($i) ?>" class="checkbox" style="padding-left:2rem">
-                                    <?php foreach ($map_water as $r) {
-                                        $c_name = getClientName($r, $conn,$dietitianuserID); ?>
-
-                                        <div class="client-name">
-                                            <input onclick="selectClient_water(this,'water_selected<?php echo($i) ?>','water_unselected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" type="checkbox" id="<?php echo($r) ?>" value="<?php echo($r) ?>">
-                                            <label for="<?php echo($r) ?>" ><?php echo($c_name) ?></label>
-                                        </div>
-
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-
-
-        </div>
-
-
- 
-
-                
 <?php
 $i++;
     }
@@ -1235,8 +1158,6 @@ if (mysqli_num_rows($result_calorie) > 0) {
 // }
 // die();
 ?>
-
-<div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:1.5rem">
                 <div class="pl pr-container" style="margin-left:1rem">
                     <p class="pr-heading" style="color: #E493A5;"><img src="images/knifefork.png" style="margin-bottom:0.2rem;margin-right:0.5rem">Eating  Reminder</p>
                     <div class="past-reminder pr-calorie">
@@ -1292,57 +1213,10 @@ if (mysqli_num_rows($result_calorie) > 0) {
                                     <button style="background: #E493A5;" class="pc-btn1" type="button"  onclick="showSelectClient('calorie_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
                                     <button style="background: #E493A5;" class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_calorie('calorie_selected<?php echo($i) ?>' , 'bf_time<?php echo($i) ?>' ,'lunch_time<?php echo($i) ?>', 'snacks_time<?php echo($i) ?>', 'dinner_time<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
-                                <div class="pc-bottom">
-                                    <button style="background: #E493A5;" class="pc-btn1" type="button"  onclick="showSelectClient('calorie_wrapper1<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
-                                    <button style="background: #E493A5;" class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_calorie('calorie_selected<?php echo($i) ?>' , 'bf_time<?php echo($i) ?>' ,'lunch_time<?php echo($i) ?>', 'snacks_time<?php echo($i) ?>', 'dinner_time<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
-                                </div>
-                                
                             </div>
                         </form>
                     </div>
                 </div>
-
-
-
-                <div class="client_wrapper" id="calorie_wrapper1<?php echo($i) ?>">
-                            <div class="wrapper-top">
-                                <div style="text-align:center;margin-top:1rem"><img src="images/knifefork.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Eating</span>
-                                </div>
-                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
-                                <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
-                                    <div class="searchclient">
-                                    <img src="images/greyglass.png">
-                                    <input type="text" placeholder="Search Clients">
-                                    </div>
-                                    <button class="clientChange" onclick="hideSelectClient()" style="background: #E493A5;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
-                                    
-                                </div>
-                                <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
-                                    <div id="calorie_selected<?php echo($i) ?>" style="display:flex;flex-wrap: wrap;gap: 15px;width: 90%;margin-left: 10px;">
-                                        <?php foreach ($list as $c) {
-                                            $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-                                            <span class="bluetext calorie_client"><span><?php echo($c_name) ?> </span><span onclick="deSelectClient_calorie(this,'calorie_unselected<?php echo($i) ?>','calorie_selected<?php echo($i) ?>','bf_time<?php echo($i) ?>','lunch_time<?php echo($i) ?>','snacks_time<?php echo($i) ?>','dinner_time<?php echo($i) ?>')" class="close-cut">&times;</span><span hidden><?php echo($c)?></span></span>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wrapper-bottom">
-                                <div id="calorie_unselected<?php echo($i) ?>" class="checkbox" style="padding-left:2rem">
-                                    <?php foreach ($map_calorie as $r) {
-                                        $c_name = getClientName($r, $conn,$dietitianuserID); ?>
-
-                                        <div class="client-name">
-                                            <input onclick="selectClient_calorie(this,'calorie_selected<?php echo($i) ?>','calorie_unselected<?php echo($i) ?>','bf_time<?php echo($i) ?>','lunch_time<?php echo($i) ?>','snacks_time<?php echo($i) ?>','dinner_time<?php echo($i) ?>')" type="checkbox" id="<?php echo($r) ?>" value="<?php echo($r) ?>">
-                                            <label for="<?php echo($r) ?>" ><?php echo($c_name) ?></label>
-                                        </div>
-
-                                    <?php } ?>
-
-                                </div>
-                            </div>
-                        </div>
-
-    </div>
 <?php
 $i++;
     }
@@ -1365,8 +1239,6 @@ if (mysqli_num_rows($result_sleep) > 0) {
             unset($map_sleep[$key]);
         }
 ?>
-
-<div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:1.5rem">
                 <div class="pl pr-container" style="margin-left:1rem">
                     <p class="pr-heading" style="color: #7A55E3;"><img src="images/Frame-3.png" style="width:5%;margin-bottom:0.2rem;margin-right:0.5rem"> Sleep Reminder</p>
                     <div class="past-reminder pr-water">
@@ -1398,64 +1270,10 @@ if (mysqli_num_rows($result_sleep) > 0) {
                                     <button style="background: #7A55E3;" class="pc-btn1" type="button"  onclick="showSelectClient('sleep_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
                                     <button style="background: #7A55E3;" class="pc-btn1" type="button" onclick="submitForm_sleep('sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" id="savereminderwaterpc" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
-                                <div class="pc-bottom" id="pc_bottom">
-                                    <button style="background: #7A55E3;" class="pc-btn1" type="button"  onclick="showSelectClient('sleep_wrapper1<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
-                                    <button style="background: #7A55E3;" class="pc-btn1" type="button" onclick="submitForm_sleep('sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" id="savereminderwaterpc" class="pc-btn2"><img src="images/right.png" alt=""></button>
-                                </div>
-                                
                             </div>
                         </form>
                     </div>
                 </div>
-
-
-
-
-                <div class="client_wrapper" id="sleep_wrapper1<?php echo($i) ?>">
-                            <div class="wrapper-top">
-                                <div style="text-align:center;margin-top:1rem"><img src="images/Frame-3.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Sleep </span>
-                                </div>
-                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
-                                <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
-                                    <div class="searchclient">
-                                    <img src="images/greyglass.png">
-                                    <input type="text" placeholder="Search Clients">
-                                    </div>
-                                    <button class="clientChange" onclick="hideSelectClient()" style="background: #7A55E3;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
-                                    
-                                </div>
-                                <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
-                                    <div id="sleep_selected<?php echo($i) ?>" style="display:flex;flex-wrap: wrap;gap: 15px;width: 90%;margin-left: 10px;">
-                                        <?php foreach ($list as $c) {
-                                            $c_name = getClientName($c, $conn,$dietitianuserID); ?>
-
-                                            <span class="bluetext sleep_client"><span><?php echo($c_name) ?> </span><span onclick="deSelectClient_sleep(this,'sleep_unselected<?php echo($i) ?>','sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" class="close-cut">&times;</span><span hidden><?php echo($c)?></span></span>
-
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wrapper-bottom">
-                                <div id="sleep_unselected<?php echo($i) ?>" class="checkbox" style="padding-left:2rem">
-                                    <?php foreach ($map_sleep as $r) {
-                                        $c_name = getClientName($r, $conn,$dietitianuserID); ?>
-
-                                        <div class="client-name">
-                                            <input onclick="selectClient_sleep(this,'sleep_selected<?php echo($i) ?>','sleep_unselected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" type="checkbox" id="<?php echo($r) ?>" value="<?php echo($r) ?>">
-                                            <label for="<?php echo($r) ?>" ><?php echo($c_name) ?></label>
-                                        </div>
-
-                                    <?php } ?>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
- 
-                
-    </div>              
 <?php
 $i++;
     }
@@ -1474,10 +1292,7 @@ if (mysqli_num_rows($result_water) > 0) {
     $i = 0;
     while ($row = mysqli_fetch_assoc($result_water)) {
         $list = explode(',', $row['GROUP_CONCAT(client_id)']);
-
 ?>
-
-
                     <div class="client_wrapper" id="water_wrapper<?php echo($i) ?>">
                             <div class="wrapper-top">
                                 <div style="text-align:center;margin-top:1rem"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Water Goal</span>
@@ -1514,9 +1329,6 @@ if (mysqli_num_rows($result_water) > 0) {
                                 </div>
                             </div>
                         </div>
-
-
-        
 <?php
 $i++;
     }
