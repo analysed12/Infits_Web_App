@@ -1,5 +1,10 @@
 <?php
-$client_array = array(3,4,5);
+$client_array = array();
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $clientList = json_decode($_POST['clientList']);
+    $client_array = $clientList;
+   
+}
 $dietitianuserID = 'John_wayne';
 // handle Ajax here
 if(isset($_POST['update_goal'])){
@@ -744,7 +749,7 @@ margin-top: 2.5rem;
 <body>
 
     <div class="setgoals">
-        <p style="font-size:2rem; font-weight:400">Set Goals For Clients</p>
+        <p style="font-size:2rem; font-weight:400">Set Goals For Clients </p>
         <div class="generalgoals"><div style="font-size:1.5rem; font-weight:400">General Goals</div>
             <div class="hover-text"style="margin-top:0.3rem" ><span class="material-symbols-outlined" style="color:#9C74F5">error</span>
             <span class="tooltip-text" id="right">Set default daily fitness for all the clients from here!</span></div> 
