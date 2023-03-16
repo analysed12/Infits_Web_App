@@ -58,7 +58,7 @@
 
         <img src="images/No messages.svg" alt="No Forms">
         <h1>You haven't created any form yet!</h1>
-        <button id="createForm">Create Form</button>
+        <a style="background-color:none" href="health_detail_form_create.php"><button id="createForm">Create Form</button></a>
 
     </div>
 </body>

@@ -33,6 +33,7 @@ if ($conn->connect_error) {
     flex-direction: column;
     padding: 40px 16px;
     font-family: "NATS";
+    order:2;
 }
 
 .content .heading-box {
@@ -155,13 +156,15 @@ if ($conn->connect_error) {
     backdrop-filter: blur(2px);
     z-index: 1;
 } */
-.content #addDocumentPopup.active {
+ #addDocumentPopup.active {
     display: flex;
 }
 
-.content #addDocumentPopup {
-    position: fixed;
+ #addDocumentPopup {
+    position:fixed;
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #FFFFFF;
     height: 200px;
     width: 350px;
@@ -171,13 +174,14 @@ if ($conn->connect_error) {
     justify-content: space-evenly;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
+    z-index:999;
 }
 
-.content #addDocumentPopup h2 {
+ #addDocumentPopup h2 {
     font-size: 2rem;
 }
 
-.content #addDocumentPopup button#fileUpload {
+ #addDocumentPopup button#fileUpload {
     border: 1px solid #6883FB;
     background-color: #FFFFFF;
     height: 42px;
@@ -193,17 +197,16 @@ if ($conn->connect_error) {
     -o-border-radius: 10px;
 }
 
-.content #addDocumentPopup button#fileUpload span {
+ #addDocumentPopup button#fileUpload span {
     margin-right: 15px;
 }
 
-.content #addDocumentPopup .option-box {
+ #addDocumentPopup .option-box {
     display: flex;
     justify-content: space-evenly;
     width: 80%;
 }
-
-.content #addDocumentPopup .option-box button {
+ #addDocumentPopup .option-box button {
     height: 42px;
     width: 115px;
     font-size: 1.3rem;
@@ -214,12 +217,12 @@ if ($conn->connect_error) {
     -o-border-radius: 10px;
 }
 
-.content #addDocumentPopup .option-box #cancel {
+#addDocumentPopup .option-box #cancel {
     background-color: #FFFFFF;
     border: 1px solid #6883FB;
 }
 
-.content #addDocumentPopup .option-box #save {
+ #addDocumentPopup .option-box #save {
     background-color: #6883FB;
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
@@ -399,13 +402,15 @@ if ($conn->connect_error) {
     justify-content: space-between;
     width: 100px;
 }
-.content .health-form-container #form-documents .share-popup.show {
+ .share-popup.show {
     display: flex;
 }
-.content .health-form-container #form-documents .share-popup {
-    position: fixed;
+.share-popup {
+    position:relative;
     background-color: #FFFFFF;
-    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
@@ -413,27 +418,92 @@ if ($conn->connect_error) {
     width: 330px;
     box-shadow: 0px 2px 5px 0px rgb(0 0 0 / 25%);
     border-radius: 15px;
+    padding-top:1.5rem;
 }
-.content .health-form-container #form-documents .share-popup p{
+.share-popup p{
     font-size: 1.4rem;
+    text-align:center;
+    display:flex;
+    justify-content:space-between;
+    padding-left:20px;
+    padding-right:20px;
 }
-.content .health-form-container #form-documents .share-popup p img{
+.share-popup p img{
     margin-left: 15px;
 }
-.content .health-form-container #form-documents .share-popup .share-icon-container{
+.share-popup .share-icon-container{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
 }
-.content .health-form-container #form-documents .share-popup .share-icon-container .share-icon{
+.share-popup .share-icon-container .share-icon{
     cursor:pointer;
 }
+.modal{
+        position: fixed;
+        width:100%;
+        height:100%;
+        background: rgba(0, 0, 0, 0.6);
+        transition: opacity 500ms;
+        align-items:center;
+  
+    }
+    .cont{
+        display: flex;
+  flex-direction: column;
+    }
+    @media screen and (max-width: 400px){
+        .content .health-form-container .title-options-container{
+            width:100px;
+        }
+
+    }
+    @media screen and (max-width: 720px){
+       
+        .content .health-form-container .title-options-container{
+            width:350px;
+        }
+        .content .health-form-container .title-options-container .border-bottom{
+            width:100px;
+        }
+        .content .health-form-container .title-options-container .border-bottom.right {
+    transform: translate(220px, 20px);
+    width: 100px;
+    -webkit-transform: translate(220px, 20px);
+    -moz-transform: translate(220px, 20px);
+    -ms-transform: translate(220px, 20px);
+    -o-transform: translate(220px, 20px);
+}
+.content .health-form-container .title-options-container h3 {
+    font-size: 100%;
+    
+}
+        
+    }
         </style>
 </head>
 
 <body>
     <?php include 'navbar.php' ?>
+    <div class="cont">
+    <div id="addDocumentPopup">
+
+<h2>Add Document</h2>
+
+<button id="fileUpload"><span><svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+            <path
+                d="M1.0625 11.3333H5.3125V17H11.6875V11.3333H15.9375L8.5 3.77778L1.0625 11.3333ZM17 1.88889L0 1.88889V0L17 0V1.88889Z"
+                fill="#9A5EF5" />
+        </svg></span> Upload File</button>
+
+<div class="option-box">
+    <button id="cancel">Cancel</button>
+    <button id="save">Save</button>
+</div>
+
+</div> 
+
 
     <div class="content">
         <!-- <div id="addDocumentPopup">
@@ -455,26 +525,14 @@ if ($conn->connect_error) {
 
         </div> -->
 
-        <div id="addDocumentPopup">
-
-            <h2>Add Document</h2>
-
-            <button id="fileUpload"><span><svg width="17" height="17" viewBox="0 0 17 17" fill="none">
-                        <path
-                            d="M1.0625 11.3333H5.3125V17H11.6875V11.3333H15.9375L8.5 3.77778L1.0625 11.3333ZM17 1.88889L0 1.88889V0L17 0V1.88889Z"
-                            fill="#9A5EF5" />
-                    </svg></span> Upload File</button>
-
-            <div class="option-box">
-                <button id="cancel">Cancel</button>
-                <button id="save">Save</button>
-            </div>
-
-        </div>
+        
+     
+                    
+                    
 
         <div class="heading-box">
             <h1>Health Details Form and Documents</h1>
-            <button data-btn="edit">Edit</button>
+            <button data-btn="edit" id="edit_btn">Edit</button>
         </div>
 
         <div class="health-form-container">
@@ -525,7 +583,7 @@ if ($conn->connect_error) {
                         </div>
                         <div class="options">
                             <img src="icons/download.svg" alt="Download" title="Download">
-                            <img src="icons/share.svg" alt="Share" title="Share" class="shareBtn">
+                            <button id="popup_btn" style="background-color:white;border:none"><img src="icons/share.svg" alt="Share" title="Share" class="shareBtn"></button>
                             <img src="icons/delete.svg" alt="Delete" title="Delete">
                         </div>
                     </div>
@@ -533,8 +591,9 @@ if ($conn->connect_error) {
                 }
 
                 ?>
-                <div class="share-popup" id="sharePopup">
-                    <p>Share via <img src="icons/share2.svg" alt="Share" title="Share"></p>
+                <div id="myModal" class="modal">
+                <div class="share-popup " >
+                    <p><span>Share via <img src="icons/share2.svg" alt="Share" title="Share"></span> <span class="close" style="font-size:30px;cursor:pointer">&times;</span></p>
                     <div class="share-icon-container">
                         <div class="share-icon"><img src="icons/whatsapp.svg" alt="whatsapp"></div>
                         <div class="share-icon"><img src="icons/twitter.svg" alt="twitter"></div>
@@ -543,15 +602,46 @@ if ($conn->connect_error) {
                         <div class="share-icon"><img src="icons/instagram.svg" alt="instagram"></div>
                     </div>
                 </div>
+                </div>
             </div>
 
         </div>
     </div>
+    </div>
+    <script>
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
+
+                    // Get the button that opens the modal
+                    var button = document.getElementById("popup_btn");
+
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // When the user clicks the button, open the modal 
+                    button.onclick = function() {
+                        
+                        modal.style.display = "block";
+                    }
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                    }
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function(event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+                    </script>
 
     <script>
         const formDetails = document.querySelector("#form-details");
         const formDocuments = document.querySelector("#form-documents");
         const borderBottom = document.querySelector(".border-bottom");
+        const editbtn = document.querySelector("#edit_btn");
         const btn = document.querySelector("[data-btn");
         let popup = document.querySelector("#addDocumentPopup");
         let shareBtn = document.querySelectorAll(".shareBtn");
@@ -593,6 +683,10 @@ if ($conn->connect_error) {
                 //For showing The btn According to Content
                 btn.innerHTML = "Edit";
                 btn.setAttribute("data-btn", "edit");
+                btn.addEventListener("click", () => {
+            document.location.href = 'health_detail_form_create.php';
+        });
+                
             } else if (content === 2) {
                 //For Border-Bottom Animation
                 borderBottom.classList.add("right");
@@ -635,14 +729,14 @@ if ($conn->connect_error) {
         //         });
         //     }
         // });
-        console.log(sharePopup);
-        console.log(shareBtn);
-        for (const index of shareBtn) {
-            index.addEventListener("click", () => {
-                sharePopup.classList.add("show");
-                console.log("Clicked");
-            });
-        }
+        // console.log(sharePopup);
+        // console.log(shareBtn);
+        // for (const index of shareBtn) {
+        //     index.addEventListener("click", () => {
+        //         sharePopup.classList.add("show");
+        //         console.log("Clicked");
+        //     });
+        // }
     </script>
 
 </body>
