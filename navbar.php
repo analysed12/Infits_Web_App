@@ -392,91 +392,12 @@ a {
             <img id="notifications-pop" src="images/vec_notification.png" style="height: 20px; width: 20px;">
 
             <div class="noti-box">
-                <div class="top"><span>Notifications</span><span id="noti-close">x</span></div>
-                <div class="notifications">
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                    <!-- noti -->
-                    <div class="notification">
-                        <img src="./upload/pp.jpg" alt="">
-                        <div class="noti-description">
-                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
-                            <span class="noti-time">1 min</span>
-                        </div>
-                    </div>
-                    <!-- noti -->
-                </div>
+                <div class="top"><span>Notifications</span><span id="noti-close" >x</span></div>
+                <?php
+                include ('noti_test.php');
+                ?>
             </div>
+            
             <?php
                 $currentUser = $_SESSION['name'];
            	  	$sql ="select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
