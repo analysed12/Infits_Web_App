@@ -44,7 +44,7 @@
 
 <script>
 
-
+        localStorage.setItem('key', '0');
         setInterval(function() {
         $.ajax({
         url: 'noti_test.php',
@@ -54,13 +54,31 @@
         });
         }, 1800000);
 
+
+        setInterval(function() {
+        $.ajax({
+        url: 'noti_test.php',
+        success: function(data) {
+        $('#2ref').html(data);
+        }
+        });
+        }, 3600000);
+
 </script>
 
 <?php
+
+function showAlert($message) {
+        echo "<script>alert('$message');</script>";
+      }
+
+
+
 $time = date("Y-m-d H:i:s");
 ?>
 
 <body>
+        
        <div id="ref">
        <?php
         $conn = mysqli_connect('localhost','root', '', 'infits');
@@ -70,7 +88,7 @@ $time = date("Y-m-d H:i:s");
         //change dietition_id to session variable 
         $sql = 'SELECT * FROM notification WHERE dietition_id = "Peter" AND read_or_not = "0" ORDER BY time DESC';
         $result = $conn->query($sql);
-        $count = 1;
+        
         ?>
 
 
@@ -80,10 +98,6 @@ $time = date("Y-m-d H:i:s");
                 if($result->num_rows > 0){
 
                         while($row = $result->fetch_assoc()){
-                                if($count==1){
-                                        echo "<script>alert('" . $row['message'] . "');</script>";
-                                        $count=2;
-                                }
                         echo('     <div class="notification">');
                         echo('          <img src="./upload/pp.jpg" alt="">');
                         echo('          <div class="noti-description">');
@@ -92,16 +106,21 @@ $time = date("Y-m-d H:i:s");
                         echo('          </div>');
                         echo('     </div>');
                         }
-
-
-                        
+      
                 }
+
+                else{
+                        echo("no new notifcations");
+                }
+
+               
+
                 ?>
         </div>
         <?php
         // 
         echo($time);
-        $sql1 = "SELECT `dietitianuserID` FROM live WHERE dateandtime BETWEEN NOW() AND ADDTIME(NOW(), '00:30:00')";
+        $sql1 = "SELECT `dietitianuserID` FROM live WHERE 'dietitianuserID'= 'Peter' AND dateandtime BETWEEN NOW() AND ADDTIME(NOW(), '00:30:00')";
         $result1 = $conn->query($sql1);
         if($result1->num_rows > 0){
                 while($row1 = $result1->fetch_assoc()){
@@ -109,6 +128,40 @@ $time = date("Y-m-d H:i:s");
                         $sql2= "INSERT INTO `notification`(`dietition_id`, `message`, `time`, `read_or_not`) VALUES ('$nameid','You have a live session in 30 mins!',NOW(),'0')";
                         $conn->query($sql2);
                 }}
+
+        ?>
+
+        </div>
+
+        <div id="2ref">
+        <?php
+
+        //changes needed in dietition id while linking 
+        $sql11 = 'SELECT * FROM notification WHERE dietition_id = "Peter" AND read_or_not = "0" ORDER BY time DESC LIMIT 1';
+        $result11 = $conn->query($sql11);
+        if($result11->num_rows > 0){
+                while($row12= $result11->fetch_assoc()){
+                        ?>
+                         <script>
+
+                               if(localStorage.getItem(key)=='0'){
+                                       <?php
+                                         showAlert($row12['message']);
+                                         ?>
+                                         localStorage.setItem('key', "1");
+                                 } 
+                        </script> 
+
+                 <?php                      
+                        $a = $row12['dietition_id'];
+                        $b = $row12['message'];
+                       $c = $row12['time'];
+
+                        $sq = "UPDATE `notification` SET `read_or_not`='1' WHERE `dietition_id`='$a' AND `message`='$b' AND `time`='$c'"; 
+                        $conn->query($sq);
+                }
+        }
+
 
         ?>
         </div>
