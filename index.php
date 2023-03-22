@@ -4,7 +4,6 @@ include('navbar.php');
 // Get Id
 if(isset($_SESSION['dietitianuserID'])){
     $dietitian_id = $_SESSION['dietitianuserID'];
-
     $user=$_SESSION['name'];
     $sql="SELECT * FROM addclient WHERE dietitianuserID='$user'";
     $q="SELECT * FROM create_event WHERE dietitianuserID='$user'";
@@ -13,7 +12,6 @@ if(isset($_SESSION['dietitianuserID'])){
     if(mysqli_num_rows($result)<1 && mysqli_num_rows($req)<1){
         header('Location:upcomingevents.php');
     }
-    
     # database connection file
     include 'app/db.conn.php';
 
