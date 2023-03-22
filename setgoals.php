@@ -1,11 +1,13 @@
 <?php
 $client_array = array();
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $clientList = json_decode($_POST['clientList']);
-    $client_array = $clientList;
+if(isset($_POST['clientList'])){
+     $client_array = json_decode($_POST['clientList']);
    
 }
-$dietitianuserID = 'John_wayne';
+if(!isset($_SESSION)){
+    session_start();
+}
+$dietitianuserID = $_SESSION['dietitian_id'];
 // handle Ajax here
 if(isset($_POST['update_goal'])){
     $type = $_POST['update_goal'];
@@ -263,7 +265,7 @@ if(isset($_POST['create_goal'])){
 }
 
 include('navbar.php');
-$sql = "SELECT GROUP_CONCAT(client_id) FROM `addclient` WHERE dietitianuserID = '{$dietitianuserID}';";
+$sql = "SELECT GROUP_CONCAT(client_id) FROM `addclient` WHERE dietition_id = '{$dietitianuserID}';";
 $result = mysqli_query($conn, $sql) or die('failed');
 if(mysqli_num_rows($result)>0){
     $allClients = array();
@@ -273,7 +275,7 @@ if(mysqli_num_rows($result)>0){
     }
 }
 function getClientName($ID,$conn,$dietitianuserID){
-    $query = "SELECT name FROM `addclient` WHERE client_id = {$ID} AND dietitianuserID = '{$dietitianuserID}'";
+    $query = "SELECT name FROM `addclient` WHERE client_id = {$ID} AND dietition_id = '{$dietitianuserID}'";
     $name = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($name)) {
         return ($row['name']);
@@ -1193,7 +1195,8 @@ if (mysqli_num_rows($result_steps) > 0) {
                 </div>
                 <div id="mob_steps_selected<?php echo($i) ?>" style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
                     <?php foreach ($list as $c) {
-                    $c_name = getClientName($c, $conn,$dietitianuserID); ?>
+                        $c_name = getClientName($c, $conn,$dietitianuserID); 
+                        ?>
                     <span class="bluetext" style="margin-left:1rem"><?php echo($c_name) ?> <span onclick="deselectClient(this,'mob_steps_unselected<?php echo($i) ?>','mob_steps_selected<?php echo($i) ?>','steps','mob_past_goal_steps<?php echo($i); ?>')" class="close" id="close2">&times;</span><span hidden><?php echo($c) ?></span></span>
                     <?php } ?>
                 </div>
@@ -1216,7 +1219,6 @@ $i++;
     }
 }
 ?>
-
 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------> 
 <?php
@@ -1333,6 +1335,7 @@ if (mysqli_num_rows($result_water) > 0) {
 
                 <div id="mob_water_selected<?php echo($i) ?>" class="checkbox" style="padding-left:2rem">
                     <?php foreach ($map_water as $r) {
+
                     $c_name = getClientName($r, $conn,$dietitianuserID); ?>
                     <div><input onclick="selectClient(this,'mob_water_selected<?php echo($i) ?>','mob_water_unselected<?php echo($i) ?>','water','mob_past_goal_water<?php echo($i) ?>')" type="checkbox" id="clientscheck" value="<?php echo($r) ?>" >
                     <label id="checklabel" ><?php echo($c_name) ?></label></div>
@@ -1536,13 +1539,6 @@ $i++;
     }
 }
 ?>
-
-
-                
-                
-
-
-
 
             </div>
 
@@ -1833,12 +1829,6 @@ $i++;
                 
             </div>
           
-            
-
-
-
-
-
         </div>        
 </div>
 
@@ -1959,324 +1949,9 @@ $i++;
 
 
 
-
-
-
-<!---------------------------------------------SCRIPT OF RIGHTSIDE POPUP OF PAST GOALS---------------->
-                   <script>
-                    
-
-                    //  var x = document.getElementById("rightside_wrapper1");
-                    //  var y = document.getElementById("rightside_wrapper2");
-                    //  var z = document.getElementById("rightside_wrapper3");
-                    //  var a = document.getElementById("rightside_wrapper4");
-                    //  var b = document.getElementById("rightside_wrapper5");
-                    //  var c = document.getElementById("rightside_wrapper6");
-                    // var userbtn1 = document.getElementById("userimage1");
-                    
-                    // userbtn1.onclick = function() {
-                            
-                    // if (x.style.display === "block") {
-                    //     x.style.display = "none";
-                    
-                    // } else {
-                    //     x.style.display = "block";
-                    //     y.style.display = "none";
-                    //     z.style.display = "none";
-                    //     a.style.display = "none";
-                    //     b.style.display = "none";
-                    //     c.style.display = "none";
-                
-                    // }
-                    // }
-
-
-
-
-                    // var x = document.getElementById("rightside_wrapper1");
-                    //  var y = document.getElementById("rightside_wrapper2");
-                    //  var z = document.getElementById("rightside_wrapper3");
-                    //  var a = document.getElementById("rightside_wrapper4");
-                    //  var b = document.getElementById("rightside_wrapper5");
-                    //  var c = document.getElementById("rightside_wrapper6");
-                    //     var userbtn2 = document.getElementById("userimage2");
-                    //     userbtn2.onclick = function() {
-                            
-                    //     if (y.style.display === "block") {
-                    //     y.style.display = "none";
-                    
-                    // } else {
-                    //     y.style.display = "block";
-                    //     x.style.display = "none";
-                    //     z.style.display = "none";
-                    //     a.style.display = "none";
-                    //     b.style.display = "none";
-                    //     c.style.display = "none";
-                
-                    // }
-                    // }
-
-
-                    // var x = document.getElementById("rightside_wrapper1");
-                    //  var y = document.getElementById("rightside_wrapper2");
-                    //  var z = document.getElementById("rightside_wrapper3");
-                    //  var a = document.getElementById("rightside_wrapper4");
-                    //  var b = document.getElementById("rightside_wrapper5");
-                    //  var c = document.getElementById("rightside_wrapper6");
-                    //     var userbtn4 = document.getElementById("userimage4");
-                    //     userbtn4.onclick = function() {
-                            
-                    //     if (z.style.display === "block") {
-                    //     z.style.display = "none";
-                    
-                    // } else {
-                    //     z.style.display = "block";
-                    //     x.style.display = "none";
-                    //     y.style.display = "none";
-                    //     a.style.display = "none";
-                    //     b.style.display = "none";
-                    //     c.style.display = "none";
-                
-                    // }
-                    // }
-
-                    // var x = document.getElementById("rightside_wrapper1");
-                    //  var y = document.getElementById("rightside_wrapper2");
-                    //  var z = document.getElementById("rightside_wrapper3");
-                    //  var a = document.getElementById("rightside_wrapper4");
-                    //  var b = document.getElementById("rightside_wrapper5");
-                    //  var c = document.getElementById("rightside_wrapper6");
-                    //     var userbtn3 = document.getElementById("userimage3");
-                    //     userbtn3.onclick = function() {
-                            
-                    //     if (a.style.display === "block") {
-                    //     a.style.display = "none";
-                    
-                    // } else {
-                    //     a.style.display = "block";
-                    //     x.style.display = "none";
-                    //     y.style.display = "none";
-                    //     z.style.display = "none";
-                    //     b.style.display = "none";
-                    //     c.style.display = "none";
-                
-                    // }
-                    // }
-
-
-                    //  var x = document.getElementById("rightside_wrapper1");
-                    //  var y = document.getElementById("rightside_wrapper2");
-                    //  var z = document.getElementById("rightside_wrapper3");
-                    //  var a = document.getElementById("rightside_wrapper4");
-                    //  var b = document.getElementById("rightside_wrapper5");
-                    //  var c = document.getElementById("rightside_wrapper6");
-                    //     var userbtn5 = document.getElementById("userimage5");
-                    //     userbtn5.onclick = function() {
-                            
-                    //     if (b.style.display === "block") {
-                    //     b.style.display = "none";
-                    
-                    // } else {
-                    //     b.style.display = "block";
-                    //     x.style.display = "none";
-                    //     y.style.display = "none";
-                    //     z.style.display = "none";
-                    //     a.style.display = "none";
-                    //     c.style.display = "none";
-                
-                    // }
-                    // }
-
-
-
-                    // var x = document.getElementById("rightside_wrapper1");
-                    //  var y = document.getElementById("rightside_wrapper2");
-                    //  var z = document.getElementById("rightside_wrapper3");
-                    //  var a = document.getElementById("rightside_wrapper4");
-                    //  var b = document.getElementById("rightside_wrapper5");
-                    //  var c = document.getElementById("rightside_wrapper6");
-                    //     var userbtn6 = document.getElementById("userimage6");
-                    //     userbtn6.onclick = function() {
-                            
-                    //     if (c.style.display === "block") {
-                    //     c.style.display = "none";
-                    
-                    // } else {
-                    //     c.style.display = "block";
-                    //     x.style.display = "none";
-                    //     y.style.display = "none";
-                    //     z.style.display = "none";
-                    //     a.style.display = "none";
-                    //     b.style.display = "none";
-                
-                    // }
-                    // }
-                        
-                </script> 
-
-
-
-
-
-<!--------------------------------------------Script for mobview side past goals popup------------------------------->
-                     <script>
-
-                    //  var e = document.getElementById("mobside_wrapper1");
-                    //  var f = document.getElementById("mobside_wrapper2");
-                    //  var g = document.getElementById("mobside_wrapper3");
-                    //  var h = document.getElementById("mobside_wrapper4");
-                    //  var i = document.getElementById("mobside_wrapper5");
-                    //  var j = document.getElementById("mobside_wrapper6");
-                    //     var mobuserbtn1 = document.getElementById("mob_userimage1");
-                    //     mobuserbtn1.onclick = function() {
-                            
-                    //     if (e.style.display === "block") {
-                    //     e.style.display = "none";
-                    
-                    // } else {
-                    //     e.style.display = "block";
-                    //     f.style.display = "none";
-                    //     g.style.display = "none";
-                    //     h.style.display = "none";
-                    //     i.style.display = "none";
-                    //     j.style.display = "none";
-                
-                    // }
-                    // }
-
-
-
-                    // var e = document.getElementById("mobside_wrapper1");
-                    //  var f = document.getElementById("mobside_wrapper2");
-                    //  var g = document.getElementById("mobside_wrapper3");
-                    //  var h = document.getElementById("mobside_wrapper4");
-                    //  var i = document.getElementById("mobside_wrapper5");
-                    //  var j = document.getElementById("mobside_wrapper6");
-                    //     var mobuserbtn2 = document.getElementById("mob_userimage2");
-                    //     mobuserbtn2.onclick = function() {
-                            
-                    //     if (f.style.display === "block") {
-                    //     f.style.display = "none";
-                    
-                    // } else {
-                    //     f.style.display = "block";
-                    //     e.style.display = "none";
-                    //     g.style.display = "none";
-                    //     h.style.display = "none";
-                    //     i.style.display = "none";
-                    //     j.style.display = "none";
-                
-                
-                    // }
-                    // }
-
-
-
-                    // var e = document.getElementById("mobside_wrapper1");
-                    //  var f = document.getElementById("mobside_wrapper2");
-                    //  var g = document.getElementById("mobside_wrapper3");
-                    //  var h = document.getElementById("mobside_wrapper4");
-                    //  var i = document.getElementById("mobside_wrapper5");
-                    //  var j = document.getElementById("mobside_wrapper6");
-                    //     var mobuserbtn3 = document.getElementById("mob_userimage3");
-                    //     mobuserbtn3.onclick = function() {
-                            
-                    //     if (g.style.display === "block") {
-                    //     g.style.display = "none";
-                    
-                    // } else {
-                        
-                    //     g.style.display = "block";
-                    //     f.style.display = "none";
-                    //     e.style.display = "none";
-                    //     h.style.display = "none";
-                    //     i.style.display = "none";
-                    //     j.style.display = "none";
-                
-                
-                    // }
-                    // }
-
-
-
-                    // var e = document.getElementById("mobside_wrapper1");
-                    //  var f = document.getElementById("mobside_wrapper2");
-                    //  var g = document.getElementById("mobside_wrapper3");
-                    //  var h = document.getElementById("mobside_wrapper4");
-                    //  var i = document.getElementById("mobside_wrapper5");
-                    //  var j = document.getElementById("mobside_wrapper6");
-                    //     var mobuserbtn4 = document.getElementById("mob_userimage4");
-                    //     mobuserbtn4.onclick = function() {
-                            
-                    //     if (h.style.display === "block") {
-                    //     h.style.display = "none";
-                    
-                    // } else {
-                    //     h.style.display = "block";
-                    //     f.style.display = "none";
-                    //     g.style.display = "none";
-                    //     e.style.display = "none";
-                    //     i.style.display = "none";
-                    //     j.style.display = "none";
-                
-                
-                    // }
-                    // }
-
-                    // var e = document.getElementById("mobside_wrapper1");
-                    //  var f = document.getElementById("mobside_wrapper2");
-                    //  var g = document.getElementById("mobside_wrapper3");
-                    //  var h = document.getElementById("mobside_wrapper4");
-                    //  var i = document.getElementById("mobside_wrapper5");
-                    //  var j = document.getElementById("mobside_wrapper6");
-                    //     var mobuserbtn5 = document.getElementById("mob_userimage5");
-                    //     mobuserbtn5.onclick = function() {
-                            
-                    //     if (i.style.display === "block") {
-                    //     i.style.display = "none";
-                    
-                    // } else {
-                    //     i.style.display = "block";
-                    //     f.style.display = "none";
-                    //     g.style.display = "none";
-                    //     h.style.display = "none";
-                    //     e.style.display = "none";
-                    //     j.style.display = "none";
-                
-                
-                    // }
-                    // }
-
-
-
-
-                    // var e = document.getElementById("mobside_wrapper1");
-                    //  var f = document.getElementById("mobside_wrapper2");
-                    //  var g = document.getElementById("mobside_wrapper3");
-                    //  var h = document.getElementById("mobside_wrapper4");
-                    //  var i = document.getElementById("mobside_wrapper5");
-                    //  var j = document.getElementById("mobside_wrapper6");
-                    //     var mobuserbtn6 = document.getElementById("mob_userimage6");
-                    //     mobuserbtn6.onclick = function() {
-                            
-                    //     if (j.style.display === "block") {
-                    //     j.style.display = "none";
-                    
-                    // } else {
-                    //     j.style.display = "block";
-                    //     f.style.display = "none";
-                    //     g.style.display = "none";
-                    //     h.style.display = "none";
-                    //     i.style.display = "none";
-                    //     e.style.display = "none";
-                
-                
-                    // }
-                    // }
-                        
-                     </script>
 <script>
     function showWrapper(toShow){
+        console.log(toShow);
         const all_wrappers = document.getElementsByClassName('sidewrapper');
         for(let i=0;i<all_wrappers.length;i++){
             all_wrappers[i].style.display = 'none';
@@ -2366,9 +2041,6 @@ $i++;
         });
     }
 </script>
-
-
-
 
 
                       
