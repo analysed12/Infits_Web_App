@@ -1,5 +1,13 @@
 <?php
 include('navbar.php');
+if(isset($_SESSION['dietitianuserID'])){
+    $dietitian_id = $_SESSION['dietitianuserID'];
+    $sql="SELECT * FROM addclient WHERE dietitianuserID='$dietitian_id'";
+    $result = $conn->query($sql);
+    if(mysqli_num_rows($result)<1){
+        header('Location:clientlist.php');
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

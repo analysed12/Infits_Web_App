@@ -1,10 +1,10 @@
 <?php
 include "navbar.php";
-$id = $_SESSION["name"];
+$id = $_SESSION["dietitianuserID"];
 $sql = "SELECT * FROM dietitian Where dietitianuserID ='$id' ";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($result);
-$name =  explode(" ", $row['name'] );
+$name =  explode(" ", $row['dietitianuserID'] );
 ?>
 <!DOCTYPE HTML>
 <html lang="en" dir="ltr">
@@ -338,7 +338,7 @@ border-radius: 18px;
                 </div>
             </li>
              </a>
-             <a href="achivement.php">
+             <a href="myachievements.php">
             <li>
                 <div class="box img-4">
                     <img src="icons/settings/icon4.svg" alt="">
