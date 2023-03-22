@@ -693,6 +693,9 @@ border-radius: 13.3333px;
   }
 
   @media screen and (max-width: 720px) {
+    .row>*{
+        width:auto;
+    }
     .header{
         display:flex;
         flex-direction:column;
@@ -755,6 +758,18 @@ border-radius: 13.3333px;
         width:100%;
     }
    
+
+      #mobside_wrapper1{
+        display: none;
+      }
+      .client_wrapper{
+       
+        margin-left:1rem;
+        width:auto;
+       
+      }
+   
+
    
   
   }

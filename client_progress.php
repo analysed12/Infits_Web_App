@@ -177,15 +177,15 @@ function fetchInformation($client_id){
     margin-top:0.5rem;
 }
 .dashboard_container4{
-    margin-left: 3.7rem;
+    margin-left: 1rem;
    
 }
-.container4_wrapper1{
+.container4_wrapper1 {
     display: flex;
-    gap: 2.5rem;
-    font-weight: 500;
-    margin-left: 16rem;
-    margin-top: 1rem;
+    justify-content: flex-end;
+    width: 95%;
+    padding-right: 1.5rem;
+
 }
 .material-symbols-outlined{
     margin-top: 0.1rem;
@@ -195,22 +195,24 @@ function fetchInformation($client_id){
     display: flex;
     gap:0.2rem;
 }
+.symbols.col-2 img {
+	scale: 0.8;
+}
 
-.container4_wrapper2{
+.container4_wrapper2 {
     display: flex;
-  
     background-color: #FDFDFD;
     border: 1px solid #e4e1e1;
-    width:fit-content;
+    width: fit-content;
     padding: 0.7rem;
-    padding-left:1rem;
-    padding-right:1.5rem;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
     border-radius: 0.5rem;
     margin-top: 1rem;
-
-    
+    justify-content: space-between;
+    width: 95%;
 }
-#values{
+.values{
     margin-top: 2rem;
     background-color:#FDFDFD;
     color:#454545;
@@ -242,6 +244,28 @@ function fetchInformation($client_id){
     
     display: none;
 }
+.symbols-container,
+.values-container{
+    display: flex;
+    /* gap: 4rem; */
+    font-weight: 400;
+    justify-content: flex-end;
+    width: 75%;
+    align-items: center;
+    font-size: 20px;
+}
+@media screen and (max-width: 1100px){
+    .dashboard_container3{
+        display:flex;
+        gap:1rem !important;
+        
+        justify-content:space-between;
+    }
+    .details{
+        margin-left:0;
+    }
+
+}
 @media screen and (max-width: 720px){
     .dashboard_container4{
         display: none;
@@ -263,11 +287,13 @@ function fetchInformation($client_id){
     .mobileview_clientprogress{
         display: flex;
         flex-direction: column;
+        margin-right:2rem;
+        
         gap: 1rem;
         box-shadow: 0 4px 7px rgba(0,0,0,0.12);
         border-radius: 0.7rem;
         padding: 1rem;
-        width: 260px;
+        width: auto;
         height: 283px;
         margin-left: 2rem;
     }
@@ -296,14 +322,16 @@ $data = fetchData($query);
 ?>
         <div class="dashboard_container4">
 
-            <div class="container4_wrapper1">
-                <div class="symbols"><div><img src="images/Frame.png" style="width:1.8rem"></div><div><span>Steps</span></div></div>
-                <div class="symbols"><div><img src="images/Frame-1.png" style="width:1.8rem"></div><div><span>Heart Rate</span></div></div>
-                <div class="symbols"><div><img src="images/Frame-2.png" style="width:1.8rem"></div><div><span>Water</span></div></div>
-                <div class="symbols"><div><img src="images/Frame-3.png" style="width:1.8rem"></div><div><span>Sleep</span></div></div>
-                <div class="symbols"><div><img src="images/Frame-4.png" style="width:1.8rem"></div><div><span>Weight</span></div></div>
-                <div class="symbols"><div><img src="images/Frame-5.png" style="width:1.8rem"></div><div><span>Calories</span></div></div>
-                
+        <div class="container4_wrapper1">
+                <div style="width: 25%;"></div>
+                <div class="symbols-container col-12">
+                    <div class="symbols col-2"><img src="images/Frame.png" style="width:1.8rem"><span>Steps</span></div>
+                    <div class="symbols col-2"><img src="images/Frame-1.png" style="width:1.8rem"><span>Heart Rate</span></div>
+                    <div class="symbols col-2"><img src="images/Frame-2.png" style="width:1.8rem"><span>Water</span></div>
+                    <div class="symbols col-2"><img src="images/Frame-3.png" style="width:1.8rem"><span>Sleep</span></div>
+                    <div class="symbols col-2"><img src="images/Frame-4.png" style="width:1.8rem"><span>Weight</span></div>
+                    <div class="symbols col-2"><img src="images/Frame-5.png" style="width:1.8rem"><span>Calories</span></div>
+                </div>
             </div>
 <?php
 if(!empty($data)){
@@ -314,14 +342,19 @@ if(!empty($data)){
     for($i = 0; $i<$count; $i++){
         $infom = fetchInformation($data[$i]['client_id']);
 ?>
-            <div class="container4_wrapper2">
-                <span><a href="" style="background-color:#FDFDFD; color:black;font-weight:600; border:none; margin-top:1rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
-                <span><a href="track_stats_steps.php?id=<?php echo($data[$i]['client_id']) ?>" id="values" style="margin-left:5rem"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
-                <span><a href="" id="values" style=" margin-left:3rem"><?php echo($infom['heart']['progress']) ?> Bpm</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem"><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
-                <span><a href="" id="values" style=" margin-left:4rem"><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
-                <span><a href="" id="values" style="margin-left:3rem"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</a></span>
-                <span><a href="" id="values" style=" margin-left:3rem"><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</a></span>
+             <div class="container4_wrapper2">
+                <span style="width: 25%;">
+                <a href="" style="background-color:#FDFDFD; color:black;font-weight:600; font-size:20px; border:none; margin-top:1rem">
+                <img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> <?php echo($data[$i]['name']) ?></a>
+                </span>
+                <div class="values-container col-12">
+                    <span class="col-2"><a href="track_stats_steps.php?id=<?php echo($data[$i]['client_id']) ?>" class="values"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
+                    <span class="col-2"><a href="track_stats_heart.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['heart']['progress']) ?> Bpm</a></span>
+                    <span class="col-2"><a href="track_stats_water.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
+                    <span class="col-2"><a href="track_stats_sleep.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
+                    <span class="col-2"><a href="track_stats_weight.php?id=<?php echo($data[$i]['client_id']) ?>" class="values"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</a></span>
+                    <span class="col-2"><a href="track_stats_calorie.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</a></span>
+                </div>
             </div>
 <?php
     }
@@ -344,8 +377,8 @@ if(!empty($data)){
         <div class="mobileview_clientprogress">
 
             <div class="mob_wrapper1" >
-                <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
-                <div class="row1" style="display:flex ; gap:2rem ">
+                <span style="display:flex;justify-content:center" ><a href="" style=" color:black;font-weight:500; border:none;background-color:white; "><span ><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
+                <div class="row1" style="display:flex ; justify-content:space-between">
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#F6A682"><img src="images/Frame.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
@@ -358,7 +391,7 @@ if(!empty($data)){
                         </div>
                 </div>
 
-                <div class="row2" style="display:flex ; gap:2rem">
+                <div class="row2" style="display:flex; justify-content:space-between">
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#8FAFF3"><img src="images/Frame-2.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Water</span></div></div>
@@ -371,7 +404,7 @@ if(!empty($data)){
                         </div>
                 </div>
 
-                <div class="row3" style="display:flex ; gap:2rem">
+                <div class="row3" style="display:flex ; justify-content:space-between">
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#788F96"><img src="images/Frame-4.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>

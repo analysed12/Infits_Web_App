@@ -545,7 +545,7 @@ border-radius: 15px;
         </div>
         <div class="right">
             <button id="home">Home</button>
-            <button class="sign" onclick="window.location.href = 'register.php';">SignUp</button>
+            <button class="sign" onclick="window.location.href = 'sign_up_new.php';">SignUp</button>
         </div>
     </div>
 
@@ -601,7 +601,7 @@ border-radius: 15px;
                             <p></p>
                             <div class="sign_in_sec">
                                 <span style="font-size:17px">Don't have an Account?</span>
-                                <div><a href="register.php" style="text-align: center;text-decoration:none;color:#4F1963;font-weight:500;font-size:17px;margin-left:6rem">Sign up</a>
+                                <div><a href="sign_up_new.php" style="text-align: center;text-decoration:none;color:#4F1963;font-weight:500;font-size:17px;margin-left:6rem">Sign up</a>
                                 </div>
                             </div>
                         </div>

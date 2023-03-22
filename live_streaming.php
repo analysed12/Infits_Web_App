@@ -62,7 +62,7 @@ body {
     .rightside_header{
         display:flex;
         gap:1rem;
-        justify-content:center;
+        float:left;
     }
   
     .mic_icon{
@@ -204,7 +204,8 @@ border: 1px solid #B636DF;
 border-radius: 10px;
 
 }
-    @media screen and (max-width: 720px){
+
+    @media screen and (max-width: 1200px){
         .popup{
             margin:10%;
             margin-top:50%;
