@@ -1,5 +1,6 @@
 <?php
 include('navbar.php');
+$id = $_SESSION['dietitianuserID'] ;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -361,7 +362,6 @@ img {
             <?php
                 if(isset($_POST['pending-btn']))
                 {
-                    $id = $_SESSION['name'] ;
                     $sql = "SELECT * FROM addclient WHERE dietitianuserID='$id' AND status=0";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0)
@@ -413,7 +413,7 @@ img {
                 }
                 else
                 {
-                    $id = $_SESSION['name'] ;
+                   
                     $sql = "SELECT * FROM addclient WHERE dietitianuserID='$id' AND status=1";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0)

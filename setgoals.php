@@ -2,7 +2,6 @@
 $client_array = array();
 if(isset($_POST['clientList'])){
      $client_array = json_decode($_POST['clientList']);
-   
 }
 if(!isset($_SESSION)){
     session_start();

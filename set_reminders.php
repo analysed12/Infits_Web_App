@@ -4,18 +4,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $client_array = array();
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $clientList = json_decode($_POST['clientList']);
-    $client_array = $clientList;
-
-    
+if(isset($_POST['clientList'])){
+    $client_array = json_decode($_POST['clientList']);
 }
-    // exit;
 
-// $keys = array_keys($_SESSION);
-// foreach ($keys as $key) {
-//     echo $_SESSION['dietitianuserID'] .$key . '<br>'; // print the key
-// }
 
 $dietitianuserID = $_SESSION['dietitianuserID'];
 // Handling Ajax Requests here
