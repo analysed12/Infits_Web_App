@@ -1,13 +1,15 @@
 <?php
 include('navbar.php');
+
 if(isset($_SESSION['dietitianuserID'])){
-    $dietitian_id = $_SESSION['dietitianuserID'];
-    $sql="SELECT * FROM addclient WHERE dietitianuserID='$dietitian_id'";
+    $id = $_SESSION['dietitianuserID'] ;
+    $sql="SELECT * FROM addclient WHERE dietitianuserID='$id'";
     $result = $conn->query($sql);
     if(mysqli_num_rows($result)<1){
         header('Location:clientlist.php');
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -179,6 +181,57 @@ img {
 #add_set_client{
     margin-left:5rem !important;
 }
+#toast{
+    position: fixed;
+    bottom: 0;
+    left: 20%;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding:10px 5px;
+    width: 70%;
+    margin: 0 auto;
+    /* background-color:rgba(0, 0, 0, 0.1); */
+    border-radius: 10px;
+    /* backdrop-filter: blur(10px); */
+    display: none;
+    transition: all 0.4 ease-in-out !important;
+}
+#toast__h1{
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    color: #000000;
+}
+.btn1{
+    background: #9C74F5;
+    color: #FFFFFF;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    transition: all 0.2 .2 ease-in ;
+}
+.btn2{
+    color: #9C74F5 !important;
+    background: #FFFFFF;
+    border: 1px solid #9C74F5;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+ .btn{
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    margin:0 5px;    
+}
+.myCheckboxs{
+  
+    position: absolute;
+    top: 10%;
+    right:6%;
+    display: none;
+}
 
 
 
@@ -198,6 +251,7 @@ img {
     }
     #add_set_client{
     margin-left:0% !important;
+
 }
 
     
@@ -234,7 +288,10 @@ img {
     .clients_container3 {
         display: none;
     }
-
+    #toast{
+        flex-direction: column;
+         width: 70%;
+    }
 
 }
 
@@ -255,6 +312,8 @@ img {
     border: 1px solid #D9D9D9;
     /* box-shadow: 0px 10px 15px rgba(136, 136, 136, 0.05); */
     border-radius: 15px;
+    position: relative;
+    
 
 }
 
@@ -283,12 +342,12 @@ img {
                     <div><button id="btn1" ><span class="material-symbols-outlined">add</span></button> </div>
                     <div class="add_set"> <span>Add Clients</span></div>
                 </div>
-                <div onclick="open_link('setgoals.php')" class="add_set_client">
-                    <div><button id="btn1"><span class="material-symbols-outlined">settings</span></button> </div>
+                <div onclick="toast('Set Goals');" class="add_set_client">
+                    <div><button  id="btn1"><span class="material-symbols-outlined">settings</span></button> </div>
                     <div class="add_set"> <span>Set Goals</span></div>
                 </div>
 
-                <div onclick="open_link('set_reminders.php')" class="add_set_client">
+                <div onclick="toast('Set Reminders');" class="add_set_client">
                     <div><button id="btn1"><span class="material-symbols-outlined">notification_add</span></button>
                     </div>
                     <div class="add_set"> <span>Set Reminders</span></div>
@@ -307,12 +366,11 @@ img {
             </form>
         </div>
         <br><br>
-
+        
         <div class="client-container">
             <?php
                 if(isset($_POST['pending-btn']))
                 {
-                    $id = $_SESSION['name'] ;
                     $sql = "SELECT * FROM addclient WHERE dietitianuserID='$id' AND status=0";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0)
@@ -344,6 +402,7 @@ img {
                     echo "<div class='client-item'>";
                     echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
                     echo "<div class='profile2'>";
+                    echo "<input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row["client_id"]."'>";
                     echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
                     echo "<a href='client_profile.php?client_id=".$row['client_id']."'>Profile</a>";
                     echo "<div>";
@@ -363,7 +422,7 @@ img {
                 }
                 else
                 {
-                    $id = $_SESSION['name'] ;
+                   
                     $sql = "SELECT * FROM addclient WHERE dietitianuserID='$id' AND status=1";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0)
@@ -395,6 +454,7 @@ img {
                     }
                  
                     echo "<div class='client-item'>";
+                    echo "<input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row['client_id']."'>";
                     echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
                     echo "<div class='profile2'>";
                     echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
@@ -417,14 +477,88 @@ img {
 
 
         </div>
-
-    </div>
     
     </div>
+    <div id="toast">
+        <h1 id="toast__h1">
+          Select the clients for whom you want the reminders to be set!
+        </h1>
+
+        <div id="toast__btns">
+            <form action=""  method="POST" id='form'>
+            <input style='cursor:pointer' id='form__input' type='text' hidden name='clientList' value=''>
+             <button type="submit" class="btn btn1" >
+            <span>
+                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.3767 3.99431V8.54725H13.859V3.99431M13.859 10.0649H15.3767V11.5825H13.859M7.02961 0.200195C6.6271 0.200195 6.24108 0.36009 5.95647 0.644704C5.67185 0.929318 5.51196 1.31534 5.51196 1.71784C5.50663 1.7911 5.50663 1.86464 5.51196 1.9379C3.32655 2.5829 1.71784 4.61655 1.71784 7.02961V11.5825L0.200195 13.1002V13.859H13.859V13.1002L12.3414 11.5825V7.02961C12.3414 4.61655 10.7327 2.5829 8.54725 1.9379C8.55258 1.86464 8.55258 1.7911 8.54725 1.71784C8.54725 1.31534 8.38736 0.929318 8.10275 0.644704C7.81813 0.36009 7.43211 0.200195 7.02961 0.200195ZM5.51196 14.6178C5.51196 15.0203 5.67185 15.4064 5.95647 15.691C6.24108 15.9756 6.6271 16.1355 7.02961 16.1355C7.43211 16.1355 7.81813 15.9756 8.10275 15.691C8.38736 15.4064 8.54725 15.0203 8.54725 14.6178H5.51196Z" fill="white"/>
+                    </svg>
+
+                </span><span class='btn__span'></span>
+          </button>
+           <button onclick='close()' class="btn btn2">Cancle</button>
+
+        </form>
+
+         
+
+        </div>
+    </div>
+    
 <script>
-    function open_link(url){
-        window.location.href = url;
-    }
+        const popUp = document.querySelector("#toast");
+        const btn1 = document.querySelector(".btn1");
+        const btn2 = document.querySelector(".btn2");
+        const btn__span = document.querySelector(".btn__span");
+        const myCheckBox = document.querySelectorAll(".myCheckboxs");
+        const form = document.querySelector("#form");
+        const from__input = document.querySelector("#from__input");
+
+        let selectedClients = [];
+
+        // display checkBox and popUp here...
+        const toast = (val) => {
+            popUp.style.display = "inline-flex";
+            btn__span.innerHTML = val;
+            myCheckBox.forEach((items) => {
+                items.style.display = "block";
+            });
+        };
+
+        // after checking the checkbox...the further opration...
+        btn1.addEventListener("click", () => {
+        if (btn__span.innerHTML == "Set Goals") { //the set goals page linking and sending the data...
+            myCheckBox.forEach((items) => {
+                if (items.checked) {
+                    selectedClients.push(items.value);
+                }
+                form__input.value = JSON.stringify(selectedClients);
+                form.action = "setgoals.php";
+                console.log( "setgoals");
+            });
+            window.location.href = "setgoals.php";
+        } else if (btn__span.innerHTML == "Set Reminders") {   //the set Reminders page linking and sending the data...
+             
+            myCheckBox.forEach((items) => {
+                if (items.checked) {
+                    selectedClients.push(items.value);
+                }
+                form__input.value = JSON.stringify(selectedClients);
+                form.action = 'set_reminders.php';
+                console.log( "Set Reminders", selectedClients);
+            });
+            window.location.href = "set_reminders.php";
+        }
+        });
+
+        // hide checkBox and popUp here...
+        btn2.addEventListener("click", (e) => {
+            e.preventDefault();
+            popUp.style.display = "none";
+            myCheckBox.forEach((items) => {
+                items.style.display = "none";
+            });
+        });
+
 </script>
 </body>
 </html>
