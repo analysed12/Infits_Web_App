@@ -2,8 +2,8 @@
 // session_start();
 include('navbar.php');
 // Get Id
-if(isset($_SESSION['name'])){
-    $dietitian_id = $_SESSION['name'];
+if(isset($_SESSION['dietitianuserID'])){
+    $dietitian_id = $_SESSION['dietitianuserID'];
 
     # database connection file
     include 'app/db.conn.php';
