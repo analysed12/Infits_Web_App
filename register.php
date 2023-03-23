@@ -25,6 +25,7 @@ include "server.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="GOOGLE_SIGNIN_CLIENT_ID">
 
@@ -378,13 +379,14 @@ body{
 
 .input_bar {
     background: #F9F9FF;
-border: 1px solid #EAEAEA;
-border-radius: 15px;
+    border: 1px solid #EAEAEA;
+    border-radius: 15px;
     padding-left: 40px;
     width: 300px;
     height: 50px;
     margin: 10px;
-    color: #CDCDCD;
+    /* color: #CDCDCD; */
+    color: #000000;
 }
 
 .left_column {
@@ -510,7 +512,7 @@ border-radius: 15px;
 
 .sign_up {
     background: #4B99FB;
-border-radius: 15px;
+    border-radius: 15px;
     width: 130px;
     height: 50px;
     border: none;
@@ -525,6 +527,7 @@ border-radius: 15px;
     flex-direction: row;
 
 }
+
 
 .sign_in_sec {
     margin-left: 30px;
@@ -600,10 +603,12 @@ border-radius: 15px;
                     <span style="font-size: 25px;color: #4F1963;margin-left:1rem"> Sign Up With</span>
                 </div>
                 <div class="gf_btns">
-                    <button class="google">
-                        <img src="images/google.svg" alt="">
-                        <span style="color: #4B99FB;font-size:27px;margin-left:0.4rem">Google</span>
-                    </button>
+                    <div data-onsuccess="onSignIn">
+                        <button class="google" >
+                            <img src="images/google.svg" alt="">
+                            <span style="color: #4B99FB;font-size:27px;margin-left:0.4rem">Google</span>
+                        </button>
+                    </div>
                     <button class="facebook" style="margin-left:1rem">
                         <img src="images/facebook.svg" alt="">
                         <span style="color: #4B99FB;font-size:27px">Facebook</span>
@@ -634,8 +639,14 @@ border-radius: 15px;
                         </div>
                         <div class="ip_box">
                             <img src="images/shield.svg" alt="">
-                            <input class="input_bar" name="password" id="password" type="text"
+                            <input class="input_bar" name="password" id="password" type="password"
                                 placeholder="       Password">
+                        </div>
+
+                        <div class="ip_box" style="margin-top:0rem">
+                            <img src="images/shield.svg" alt="">
+                            <input class="input_bar" name="password_2" id="retype_password" type="password"
+                                placeholder="       Confirm Password">
                         </div>
                         
                         <div class="check">
@@ -645,7 +656,7 @@ border-radius: 15px;
                         </div>
                         <div class="sign_btn_section">
                             <div class="sign_btn">
-                                <button type="submit" class="sign_up btn" name="reg_user">Sign Up</button>
+                                <button type="submit" class="sign_up btn " name="reg_user">Sign Up</button>
                             </div>
                             <div class="sign_in_sec" style="font-size: 25px;">
                                 <span>Already have an account?</span>
@@ -665,11 +676,11 @@ border-radius: 15px;
                     <img src="images/mobile.svg" style="width:500px;height:500px">
                 </div>
 
-                <div class="ip_box" style="margin-top:4rem">
+                <!-- <div class="ip_box" style="margin-top:4rem">
                             <img src="images/shield.svg" alt="">
                             <input class="input_bar" name="password_2" id="retype_password" type="text"
                                 placeholder="       Confirm Password">
-                </div>
+                </div> -->
 
                 <span class="referral_text">Have a referral code? Verify here</span>
                 <div class="refferal_code">
@@ -751,30 +762,56 @@ border-radius: 15px;
 
         </div>
     </div>
-    <script type="text/javascript">
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
+    <!-- <script type="text/javascript">
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
 
 
-        if (profile) {
-            $.ajax({
-                type: 'POST',
-                url: 'social_login.php',
-                data: {
-                    id: profile.getId(),
-                    name: profile.getName(),
-                    email: profile.getEmail()
+                if (profile) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'social_login.php',
+                        data: {
+                            id: profile.getId(),
+                            name: profile.getName(),
+                            email: profile.getEmail()
+                        }
+                    }).done(function(data) {
+                        window.location.href = 'index.php';
+                    }).fail(function() {
+                        alert("Something went wrong !!");
+                    });
                 }
-            }).done(function(data) {
-                window.location.href = 'index.php';
-            }).fail(function() {
-                alert("Something went wrong !!");
-            });
-        }
 
 
+            }
+    </script> -->
+
+    <script type="text/javascript">
+// google signin
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('profile')
+
+    if (profile) {
+        $.ajax({
+            type: 'POST',
+            url: 'social_login.php',
+            data: {
+                id: profile.getId(),
+                name: profile.getName(),
+                email: profile.getEmail()
+            }
+        }).done(function(data) {
+            window.location.href = 'index.php';
+        }).fail(function() {
+            alert("Something went wrong !!");
+        });
     }
-    </script>
+
+
+}
+</script>
 
     </div>
 </body>

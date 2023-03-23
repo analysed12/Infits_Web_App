@@ -5,6 +5,12 @@ include 'navbar.php';
 
 // die();
 if (isset($_SESSION['dietitianuserID'])) {
+    $user=$_SESSION['dietitianuserID'];
+    $sql="SELECT * FROM messages where dietitianID='$user'";
+    $result=$conn->query($sql);
+    if(mysqli_num_rows($result)<1){
+        header('Location:message.php');
+    }
     # database connection file
     include 'app/db.conn.php';
 
