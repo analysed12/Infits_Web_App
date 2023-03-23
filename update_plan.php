@@ -473,6 +473,10 @@ else if (isset($_POST['final_save_btn'])){
         die(mysqli_error($conn));
     }
 }
+else if(isset($_POST['final_cancel_btn'])){
+    header('Location: myplan.php');
+    die('');
+}
             ?>
 
     <!-- Pop up ends -->

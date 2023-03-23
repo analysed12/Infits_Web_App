@@ -1,3 +1,6 @@
+<?php
+include ('navbar.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    </head>
     <style>
     @import url('https://fonts.googleapis.com/earlyaccess/nats.css');
     @font-face {
@@ -24,10 +27,15 @@
     font-weight: normal;
     font-style: normal;
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
 
     body {
         font-family: 'NATS', serif !important;
         letter-spacing: 1px;
+        z-index: 1;
     }
 
     .card {
@@ -63,7 +71,7 @@
     .card-upper-details {
         /* background-color: green; */
         /* width: 60%; */
-        display: inline;
+         display: inline;
         /* padding: 1rem; */
     }
 
@@ -169,13 +177,10 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
     </script>
-</head>
+
 
 <body>
-    <?php
-include "navbar.php";
-?>
-
+  
 
 
 
@@ -203,7 +208,7 @@ include "navbar.php";
     <div class="row">
         <div class="col-md-12">
             <div class="container">
-                <div class="cards">
+                 <div class="cards">
                     <?php
 
 if(isset($_POST['search-btn']))
