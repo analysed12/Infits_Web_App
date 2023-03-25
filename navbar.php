@@ -394,7 +394,7 @@ a {
             <div class="noti-box">
                 <div class="top"><span>Notifications</span><span id="noti-close" >x</span></div>
                 <?php
-                include ('noti_test.php');
+                //include ('noti_test.php');
                 ?>
             </div>
             
