@@ -136,8 +136,6 @@ body {
     font-weight: 500;
     font-size: 25px;
     color: #8081F9;
-    align-item;
-    centre;
     margin-left:0.7rem;
 }
 
@@ -535,9 +533,10 @@ body {
     color: #B4B4B4;
 }
 
-
-.sign_in_sec span {
-
+.sign_in_sec{
+text-decoration: none;
+}
+.sign_in_sec span  {
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
@@ -654,9 +653,9 @@ body {
                                 <button type="submit" class="btn sign_up" name="login_user" style="font-size: 25px;">Get OTP</button>
                             </div>
                             <p></p>
-                            <div class="sign_in_sec">
+                            <a href="/login.php" class="sign_in_sec">
                                 <span style="font-size:20px; color:#4F1963;"><i class="fa-solid fa-arrow-left me-2"></i>Back to Sign in</span>
-                            </div>
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -666,12 +665,7 @@ body {
             <div class="mobile">
                 <img src="images/forgotpassword.png" alt="">
             </div>
-            <!--  -->
-
-            <!-- <center>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-</center>  -->
-            <!--  -->
+           
         </div>
     <hr  id="hr" style="border: 1px solid #F3F3FF;width: 1204px;">
     </div>

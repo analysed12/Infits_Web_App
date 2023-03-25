@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Refer friend </title>
+    <!---------------bootstrap cdn------------------------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <style>
+        #copy-input {
+           width: 200px;
+           padding: 10px;
+        }
+
         #content h1 {
-            margin-left: 30px;
+            margin-left:15.5rem;
             margin-top: 10px;
             font-size: 2rem;
         }
@@ -36,7 +44,10 @@
         }
 
         #content .flex-container .refer-code-container img {
-            width: 100%;
+            /* width: 100%; */
+            width: 320px;
+            height: 309px;
+
         }
 
         #content .flex-container .refer-code-container .refer-code-box {
@@ -76,6 +87,10 @@
             -moz-border-radius: 10px;
             -ms-border-radius: 10px;
             -o-border-radius: 10px;
+            font-family: 'NATS';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
         }
 
         #content .flex-container .friend-list-box {
@@ -99,6 +114,7 @@
         #content .flex-container .friend-list-box{
             /* border: 1px solid red; */
             width: 500px;
+            margin-bottom: 5rem;
         }
         #content .flex-container .friend-list-box ul {
             /* border: 1px solid red; */
@@ -110,22 +126,24 @@
             list-style: none;
             padding: 20px;
             position: relative;
-            height: 100%;
+            height:30rem;
             width: 100%;
-            overflow-x: auto;
+            overflow: hidden;
+            overflow-y: scroll;
         }
 
         #content .flex-container .friend-list-box ul::-webkit-scrollbar {
-            width: 10px;
+            width: 10px;    
         }
 
         #content .flex-container .friend-list-box ul::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 5px #4b9afb;
+            background:#F3F3F3;
+;
             border-radius: 10px;
         }
 
         #content .flex-container .friend-list-box ul::-webkit-scrollbar-thumb {
-            background: rgb(111, 174, 245);
+            background: #D6D6D6;
             border-radius: 10px;
         }
 
@@ -150,12 +168,22 @@
         }
 
         #content .flex-container .friend-list-box ul li .user .para-box p {
+            color: black;
             line-height: 2px;
+            font-family: 'NATS';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 22px;
         }
 
         #content .flex-container .friend-list-box ul li .user .para-box p.company {
-            font-size: 0.7rem;
+            font-family: 'NATS';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 17px;
             padding-left: 2px;
+            color: #051532;
+            opacity: 0.6;
         }
 
         #content .flex-container .friend-list-box ul li .status {
@@ -169,6 +197,11 @@
 
         #content .flex-container .friend-list-box ul li .status span.accepted {
             color: #45e945;
+        }
+        @media only screen and (max-width:768px) {
+            #content h1{
+                margin-left:1.5rem;
+            }
         }
     </style>
 
@@ -184,7 +217,11 @@
             <div class="refer-code-container">
                 <img src="images/istockphoto-1394169876-612x612 1.svg" alt="SVG">
                 <div class="refer-code-box">
-                    <p id="refer-code">mir20220320 <button id="copyBtn">Copy</button></p>
+                    <div class="input-group mb-3">
+                        <input type="text" id="copy-input"  class="form-control border-primary text-primary border-end-0" placeholder="Enter referral code" aria-label="Referral code" aria-describedby="button-addon2">
+                        <button id="copy-button" class="btn btn-outline-primary border-start-0" type="button" id="button-addon2">copy</button>
+                      </div>
+                    <!-- <p id="refer-code">mir20220320 <button id="copyBtn">Copy</button></p> -->
                     <button id="share">Share</button>
                 </div>
             </div>
@@ -195,23 +232,35 @@
                 </div>
                 <ul>
 
-                    <?php for ($i = 0; $i < 7; $i++) { ?>
-                        <li>
-                            <div class="user">
-                                <img src="images/friend1.svg" alt="">
+                    <?php for ($i = 0; $i < 10 ; $i++) { ?>
+                        <li style="cursor: pointer;">
+                            <a href="#" class="user">
+                                <img src="images/Frame 5435.svg" alt="profile_photo">
                                 <div class="para-box">
                                     <p class="name">Tongkun Lee</p>
                                     <p class="company">Facebook</p>
                                 </div>
-                            </div>
-                            <div class="status">
+                            </a>
+                            <a href="#" class="status">
                                 <span>Invite</span>
-                            </div>
+                            </a>
                         </li>
                     <?php } ?>
                 </ul>
             </div>
         </div>
     </div>
+<script>
+const copyInput = document.getElementById("copy-input");
+const copyButton = document.getElementById("copy-button");
 
+copyButton.addEventListener("click", () => {
+  copyInput.select();
+  document.execCommand("copy");
+  alert("Copied to clipboard");
+});
+</script>
+    <!----------------------bootstrap js cdn-------------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
 </html>

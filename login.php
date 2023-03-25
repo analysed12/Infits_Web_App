@@ -1,79 +1,9 @@
-<?php session_start();?>
+
 <?php
 include "server.php";
-include "check_fblogin.php"
-?>
-<?php
-//require 'fb-init.php'
-?>
-<!----------------------------google login code ---------------------------->
-<?php
-
-//index.php
-
-//Include Configuration File
-include('config_login.php');
-
-$login_button = '';
-
-
-if(isset($_GET["code"]))
-{
-
- $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
-
-
- if(!isset($token['error']))
- {
- 
-  $google_client->setAccessToken($token['access_token']);
-
- 
-  $_SESSION['access_token'] = $token['access_token'];
-
-
-  $google_service = new Google_Service_Oauth2($google_client);
-
- 
-  $data = $google_service->userinfo->get();
-
- //below you can find get profile data and store into $_SESSION variable
-  if(!empty($data['given_name']))
-  {
-   $_SESSION['user_first_name'] = $data['given_name'];
-  }
-
-  if(!empty($data['family_name']))
-  {
-   $_SESSION['user_last_name'] = $data['family_name'];
-  }
-
-  if(!empty($data['email']))
-  {
-   $_SESSION['user_email_address'] = $data['email'];
-  }
-
-  if(!empty($data['gender']))
-  {
-   $_SESSION['user_gender'] = $data['gender'];
-  }
-
-  if(!empty($data['picture']))
-  {
-   $_SESSION['user_image'] = $data['picture'];
-  }
- }
-}
-
-
-if(!isset($_SESSION['access_token']))
-//create a url to obtain user authorization
-{
-
- $login_button =  '<a href="'.$google_client->createAuthUrl().'"></a>';
-}
 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -681,12 +611,7 @@ border-radius: 15px;
 </style>
 
 <body>
-       <?php //if(isset($_SESSION['access_token'])):?>
-        <div class="container">
-            <?php //echo "Hello," .$user->getField('name');?>
-            <!-- <a href="logout.php">Logout</a> -->
-        </div>
-        <?php// else: ?>
+      
     <div class="top_bar">
         <div class="left">
             <div class="bg">
@@ -715,7 +640,7 @@ border-radius: 15px;
                 <div class="gf_btns">
                 
                     <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-                    <a href="<?php echo $google_client->createAuthUrl() ?>" class="google">
+                    <a href="#"class="google">
                         <img style="width: 30px; height: 30px;" src="images/google.svg" alt="">
                         <span class="ps-2">Google</span>
                     </a>       
@@ -749,7 +674,7 @@ border-radius: 15px;
                                 <img style="cursor: pointer; width: 22px; height: 19px;"src="images/eye.png" id="eyeicon" alt="eye">
                         </div>
                        
-                        <a href="forgotpassword.php" style="display: flex; justify-content: end; margin-right: 30px; text-decoration:none">Forgot password?</a>
+                        <a href="forgot_password.php" style="display: flex; justify-content: end; margin-right: 30px; text-decoration:none">Forgot password?</a>
                         <br><br>
                         <div class="sign_btn_section">
                             <div class="sign_btn" style="background: #4B99FB;border-radius:15px">
@@ -908,20 +833,7 @@ border-radius: 15px;
     }
 </script>
 
-<?php
-            
-   if($login_button == '')
-   {
-    
-    //echo '<h3><a href="logout.php">Logout</h3></div>';
-    $_SESSION['success'] = "You are now logged in";
-            header('location: index.php');
-   }
-   else
-   {
-    echo '<div align="center">'.$login_button . '</div>';
-   }
-   ?>
+
       <!-----------------------------facebook login code----------------------------------->
     
 <!-- <script>
