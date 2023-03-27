@@ -6,9 +6,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\Linking_branch\infits\PHPMailer\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\htdocs\Linking_branch\infits\PHPMailer\PHPMailer-master\src\SMTP.php';
-require 'C:\xampp\htdocs\Linking_branch\infits\PHPMailer\PHPMailer-master\src\Exception.php';
+require 'PHPMailer\PHPMailer-master\src\PHPMailer.php';
+require 'PHPMailer\PHPMailer-master\src\SMTP.php';
+require 'PHPMailer\PHPMailer-master\src\Exception.php';
 
 if(isset($_POST['get_otp']))
 {
@@ -50,16 +50,17 @@ $mail->setFrom('<email>','<app password>');
    //Set email format to HTML
    $mail->Subject = 'Verify your code';
    //$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-     $mail->Body=(" Your otp number.".$otp);
+     $mail->Body=(" Your otp number is ".$otp)  ; 
     //$mail->AltBody = 'This is the body in plain text for
-    $mail->isHTML(true);  
+    $mail->isHTML(true);
+      
 
      if(!$mail -> send())
      {
      	
-       echo ' <div class="alert alert-primary" role="alert" style="text-align:center;">
-       Mail not send;
-     </div>';
+       echo "<div class='alert alert-primary' role='alert' style='text-align:center;'>
+       {$mail->Body}
+     </div>";
     
     
         
@@ -70,9 +71,9 @@ $mail->setFrom('<email>','<app password>');
 
     else {
     
-         echo'<div class="alert alert-primary" role="alert" style="text-align:center;">
+         echo"<div class='alert alert-primary' role='alert' style='text-align:center;'>
          Mail send Please check your email for otp!
-       </div>';
+       </div>";
           
          header('Location:reset_password.php');
         
@@ -469,6 +470,10 @@ font-size: 15px;
 
 color: #FFFFFF;
 }
+.backtosignin{
+    cursor: pointer;
+
+}
 </style>
 <body>
     <div class="top_bar">
@@ -480,7 +485,7 @@ color: #FFFFFF;
         </div>
         <div class="right">
             <button id="home">Home</button>
-            <button class="sign">SignUp</button>
+            <button class="sign" onclick="openregister()">SignUp</button>
         </div>
     </div>
 
@@ -504,7 +509,7 @@ color: #FFFFFF;
                     </div>
                     <div class="get_otp">
                         <button class="get_otp_btn" name="get_otp" id="get_otp">Get OTP</button>
-                        <span><-Back to Sign In</span>
+                        <span class="backtosignin"><-Back to Sign In</span>
                     </div>
                 </div>
             </div>
@@ -574,6 +579,17 @@ color: #FFFFFF;
         </div>
         </div>
 </body>
+<script>
+    let backtosignin=document.querySelector('.backtosignin');
+
+    function opensignin(){
+        window.location.href="login.php";
+    }
+    backtosignin.addEventListener('click',opensignin);
+    function openregister(){
+       window.location.href="register.php";
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6S

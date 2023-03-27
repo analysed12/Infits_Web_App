@@ -175,6 +175,9 @@ header .current-date {
 
 .calendar-side {
     /* padding: 20px; */
+    width:280px;
+    margin-right:20px;
+   
 }
 
 .calendar-side li {
@@ -199,12 +202,13 @@ header .current-date {
 
 .calendar-side li {
     color: #333;
-    width: calc(100% / 7);
+    width: calc(100% /7);
     font-size: 10px;
 }
 
 .calendar-side .weeks li {
     font-weight: 500;
+    
     cursor: default;
 }
 
@@ -247,9 +251,7 @@ header .current-date {
     cursor: pointer;
 }
 
-.flex-item {
-    border-left: 2px solid #E8ECF5;
-}
+
 
 .schedule {
     margin-left: 15px;
@@ -267,6 +269,102 @@ a:hover {
 .fc-axis {
     color: #AAAAAA !important;
 }
+@media screen and (min-width:720px){
+    .flex-item {
+    border-left: 2px solid #E8ECF5;
+}
+
+}
+@media screen and (max-width:459px){
+  
+ 
+    .calender h3{
+        padding:0.5rem !important;
+        box-sizing:border-box;
+        margin-top:15px;
+    }
+    .calender .event_btn {
+        /* margin-left:20px; */
+       height:40px;
+       font-size:12px;
+       width:fit-content;
+    }
+    .schedule{
+        margin-left:20%;
+    }
+    
+    
+}
+@media screen and (max-width:480px){
+    .fc-toolbar.fc-header-toolbar{
+        margin:1rem auto 2rem auto;
+        display:flex;
+        width:fit-content;
+        flex-direction:column;
+    }
+    .schedule{
+        margin-left:20%;
+    }
+    .fc-toolbar .fc-right{
+        margin-bottom:10px;
+        float:center;
+    }
+    .fc-toolbar .fc-left{
+        margin-bottom:20px;
+        float:none;
+    }
+    .fc-title{
+        word-wrap:break-word;
+        font-size:10px;
+    }
+    .flex-item{
+        margin-top:50px;
+    } 
+}
+@media screen and (max-width: 720px) {
+    
+    .container-main{
+        flex-direction:column;
+        margin-bottom:20px;
+        margin-left:1rem;
+        z-index:-1;
+    }
+    .schedule{
+        margin-left:20%;
+    }
+    .calendar-side li{
+        font-size:15px;
+        
+    }
+    .calender{
+        display:flex;
+        /* flex-wrap:wrap; */
+    }
+    .calender h3{
+        font-size:30px;
+    }
+    .calender .event_btn {
+        /* margin-left:20px; */
+       height:40px;
+       
+    }
+    .calender h3{
+        padding:0rem;
+    }
+    .wrapper{
+        margin-top:50px;
+    }
+    .calendar-side{
+        width:80%;
+        margin:auto;
+    }
+    .fixed{
+        width:100%;
+    }
+
+    
+}
+
 
 /* Side Calendar */
 </style>
@@ -279,8 +377,8 @@ a:hover {
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div>
-                                <h3 style="display:inline-block;padding:1.5rem">Calendar</h3>
+                            <div class="calender">
+                                <h3 style="display:inline-block;padding:1.5rem;">Calendar</h3>
                                 <a href="createevent.php" class="event_btn" style="display:inline-block; float:right;background: #7A78FD;
             border-radius: 7px;border: none; color: white; padding:10px;margin-top:1.5rem">+ Create Schedule</a>
                             </div>
@@ -315,6 +413,7 @@ a:hover {
                         <ul class="days"></ul>
                     </div>
                 </div>
+            
                 <!-- Todays Schedule -->
                 <div class="schedule">
                     <p style="font-weight:bold;">Todays Schedule</p>

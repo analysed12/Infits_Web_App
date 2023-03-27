@@ -1,254 +1,370 @@
-    @font-face {
-        font-family: "NATS";
-        src: url("font/NATS.ttf.woff") format("woff"), url("font/NATS.ttf.svg#NATS") format("svg"), url("font/NATS.ttf.eot"), url("font/NATS.ttf.eot?#iefix") format("embedded-opentype");
-        font-weight: normal;
-        font-style: normal;
-    }
+@font-face {
+    font-family: "NATS";
+    src: url("font/NATS.ttf.woff") format("woff"), url("font/NATS.ttf.svg#NATS") format("svg"), url("font/NATS.ttf.eot"), url("font/NATS.ttf.eot?#iefix") format("embedded-opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+::placeholder {
+    color: #bbbbbb;
+    opacity: 1;
+}
+
+body {
+    font-family: "NATS", sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    background-color: #2b0e0e;
+    color: black;
+}
+
+.tabcontent {
+    padding: 6px 30px;
+    border: none;
+    border-top: none;
+}
+
+.searchbox {
+    width: auto;
+    width: 360px;
+    height: 50px;
+    background: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row !important;
+    margin: 10px;
+    margin-left: 20px;
+    justify-content: space-between;
+    letter-spacing: 0em;
+}
+
+#myDIV {
+    margin-right: 0px;
+}
+
+#myDIV1 {
+    margin: 0px;
+    /* overflow: auto; */
+    /* margin-right: 0px; */
+    /* width: 100vw !important; */
+    /* border: 2px solid red; */
+}
+
+.card {
+    background: #FFFFFF;
+    border-radius: 15.8334px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    margin: 60px;
+}
+
+.card-upper-text {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px;
+    background-color: #FEA945;
+    box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.75);
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+}
+.card-food {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 27px;
+    letter-spacing: -0.11428570002317429px;
+    text-align: left;
+}
+
+.card-calorie {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+    align-items: center;
+    /* or 8px */
+    display: flex;
+    color: #A3A1A1;
+}
+
+.card-num-circle {
+    background: #9C74F5;
+    border-radius: 50px;
+    color: white;
+    padding: 5px
+}
+
+.card-num {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: #9C74F5;
+}
+
+.recipe-add-btn {
+    position: inherit;
+    justify-content: flex-end;
+    display: flex;
+    margin: 0px -60px 0px -60px;
+    margin-bottom: 100px;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    right: 0.4em;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    margin-top: 0px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content .edit-button {
+    background: #A85CF1;
+    text-align: center;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+
+.dropdown-content .delete-button {
+    background: #FF3D3D;
+    border-radius: 7px;
+    text-align: center;
+}
+
+.show {
+    display: block !important;
+}
+
+.dropdown-card {
+    background: #FFFFFF;
+    border: 0.723941px solid #E4E4E4;
+    box-shadow: 0px 2.17182px 2.89576px rgba(0, 0, 0, 0.09);
+    border-radius: 13.0309px;
+    padding: 20px;
+}
+
+.filter-outline {
+    /* border: none; */
+    box-sizing: border-box;
+    border: 1.5px solid #B85AEC;
+    border-radius: 15px;
+}
+
+.filter-line {
+    border: none;
+    /* opacity: 0.54; */
+    border-left: 1.5px solid #B85AEC;
+}
+
+.white {
+    color: #FFFFFF;
+}
+
+.lwhite {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.container1{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin-top: 32px;
+    gap: 2rem;
+    width: auto;
+    height: max-content;
+    padding: 4px;
+    overflow-x: scroll;
+}
+.container1 .top-card{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 313.47px;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 35px;
+    border-radius: 16px;
+}
+.container1 .top-card .imag{
+    position: absolute;
+}
+.container1 .top-card .im1{
+    width: 150px;
+    height: 200px;
+    top: -8px;
+    right: 2px;
+}
+.container1 .top-card .im2{
+    width: 170.01px;
+    height: 52px;
+    transform: rotate(45deg);
+    bottom: -5px;
+    left: -30px;
+    transform: scale(1.4);
+}
+.top-card h3::before{
+    content: '';
+    width: 260px;
+    height: 220px;
+    border: 1px solid rgba(234, 139, 139, 0.907);
+    border-radius: 50%;
+    position: absolute;
+    top: -60px;
+    left: -60px;
+}
+#myDIV1 h3::before{
+    content: '';
+    width: 260px;
+    height: 220px;
     
-     ::placeholder {
-        /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: #bbbbbb;
-        opacity: 1;
-        /* Firefox */
+    border: 1px solid rgba(234, 139, 139, 0.907);
+    border-radius: 50%;
+    position: absolute;
+    top: -60px;
+    left: -60px;
+}
+.breakfast .top-card h3::before{
+    border: 1px solid rgb(255, 255, 255);
+}
+.snacks .top-card h3::before{
+    border: 1px solid rgb(255, 255, 255);
+}
+.lunch .top-card h3::before{
+    border: 1px solid #dbaaab;
+
+}
+.dinner .top-card h3::before{
+    border: 1px solid #dc898a;
+}
+#myDIV1 .breakfast .top-card h3::before{
+    border: 1px solid #92ceb6;;
+}
+#myDIV1 .snacks .top-card h3::before{
+    border: 1px solid  #5191af;;
+}
+#myDIV1 .lunch .top-card h3::before{
+    border: 1px solid #dbaaab;
+
+}
+
+#myDIV1 .lunches .top-card h3::before{
+    border: 1px solid #917dda;;
+}
+#myDIV a,
+    #myDIV1 a{
+    cursor: pointer;
+}
+#myDIV1 a:hover,
+#myDIV a:hover{
+    text-decoration: none;
+}
+.container1 .top-card .im2-2{
+    transform: scale(1.6) scaleX(-1) rotate(-10deg);
+}
+.container1 .top-card .ci{
+    width: 110px;
+    position: absolute;
+    height: 100px;
+    border-radius: 50%;
+}
+.container1 .top-card .ci1{
+    top: -60px;
+    right: 50px;
+}
+.container1 .top-card .ci2{
+    bottom: -70px;
+    right: 2px;
+}
+.container-1 .top-card h5,p,br{
+    margin-right: 70px;
+    margin-bottom: 35px;
+    font-weight: 400;
+    line-height: 88%;
+}
+.recipe-add-btn{
+    position: inherit;
+    justify-content: flex-end;
+    display: flex;
+    margin-bottom: 80px;
+    width: 320px;
+    height: 80px;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    margin-left: 1100px;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+
+.btn{
+    margin-top: 10px;
+    position: relative;
+    margin-left: 1500px;
+
+}
+.btn .butt{
+    background: #9C74F5;
+    border: 0px;
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 35px;
+    right: 25px;
+    width: 85px;
+    height: 85px;
+    font-size: 40px;
+}
+
+@media only screen and (min-width:300px) and (max-width:600px){
+    .header{
+        flex-direction: column !important;
+        margin-top: 20px;
     }
-    
-    body {
-        font-family: "NATS", sans-serif;
-        letter-spacing: 1px;
-        font-weight: 400;
-        margin-bottom: 2rem;
-        background-color: #2b0e0e;
-        color: black;
+
+    .container1{
+        grid-template-columns: auto auto auto auto;
+        margin: 34px 15px;
+        margin-right: 420px;
+        gap: 1.5rem;
     }
-    
-    .tabcontent {
-        padding: 6px 30px;
-        border: none;
-        border-top: none;
+
+    .category{
+        width:100%;
+        overflow-x:scroll
     }
-    
-    .searchbox {
-        width: auto;
-        width: 360px;
-        height: 45px;
-        background: #ffffff;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
-        padding: 10px;
-    }
-    
-    .header {
-        display: flex;
-        flex-direction: row !important;
-        margin: 10px;
-        margin-left: 20px;
-        justify-content: space-between;
-        letter-spacing: 0em;
-    }
-    
-    .grid-container {
-        display: relative;
-        flex-direction: row !important;
-        gap: 2rem;
-        display: flex;
-        justify-content: space-between;
-        margin: 40px;
-        margin-right: -40px;
-        padding: 30px;
-        /* margin-left: 100px; */
-    }
-    
-    .img-container {
-        position: relative;
-    }
-    
-    .grid-header {
-        position: absolute;
-        margin-top: 2rem;
-        margin-left: 1rem;
-        font-family: NATS;
-        font-size: 35px;
-        font-weight: 400;
-        line-height: 31px;
-        letter-spacing: 0em;
-        text-align: left;
-    }
-    
-    .grid-text {
-        font-family: "NATS";
-        font-style: normal;
-        position: absolute;
-        margin-top: 5rem;
-        margin-left: 1rem;
-        font-family: NATS;
-        font-weight: 400;
-        line-height: 17px;
-        letter-spacing: 0em;
-        text-align: left;
-        color: #6a6a6a;
-        font-size: 19.1321px;
-        line-height: 88%;
-        display: flex;
-        align-items: center;
-        width: 150px;
-    }
-    
-    #myDIV {
-        padding-left: 350px;
-        overflow: auto;
-        width: auto;
-    }
-    
-    #myDIV1 {
-        /* padding-left: 350px; */
-        overflow: auto;
-        width: auto;
-    }
-    
-    .card {
-        background: #FFFFFF;
-        border-radius: 15.8334px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-        margin: 20px;
-    }
-    
-    .card-upper-text {
-        font-size: 20px;
-        font-weight: bold;
-        padding: 5px 10px;
-        background-color: #FEA945;
-        box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.75);
-        border-radius: 8px;
-        color: white;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 18px;
-    }
-    
-    .card-food {
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 27px;
-        letter-spacing: -0.11428570002317429px;
-        text-align: left;
-    }
-    
-    .card-calorie {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 12px;
-        letter-spacing: 0em;
-        text-align: left;
-        align-items: center;
-        /* or 8px */
-        display: flex;
-        color: #A3A1A1;
-    }
-    
-    .card-num-circle {
-        background: #9C74F5;
-        border-radius: 50px;
-        color: white;
-        padding: 5px
-    }
-    
-    .card-num {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 18px;
-        /* identical to box height */
-        /* color: #FFFFFF; */
-        color: #9C74F5;
-    }
-    
-    .recipe-add-btn {
-        position: inherit;
-        justify-content: flex-end;
-        display: flex;
-        margin: 0px -60px 0px -60px;
-        margin-bottom: 100px;
-    }
-    
-    .dropdown {
-        position: absolute;
-        display: inline-block;
-        right: 0.4em;
-    }
-    
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        margin-top: 0px;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        overflow: auto;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
-    
-    .dropdown-content a {
-        color: white;
-        padding: 12px 14px;
-        font-weight: 500;
-        text-decoration: none;
-        display: block;
-    }
-    
-    .dropdown-content .edit-button {
-        background: #A85CF1;
-        text-align: center;
-        border-radius: 7px;
-        margin-bottom: 10px;
-    }
-    
-    .dropdown-content .delete-button {
-        background: #FF3D3D;
-        border-radius: 7px;
-        text-align: center;
-    }
-    
-    .show {
-        display: block !important;
-    }
-    
-    .dropdown-card {
-        background: #FFFFFF;
-        border: 0.723941px solid #E4E4E4;
-        box-shadow: 0px 2.17182px 2.89576px rgba(0, 0, 0, 0.09);
-        border-radius: 13.0309px;
-        padding: 20px;
-    }
-    
-    .filter-outline {
-        /* border: none; */
-        box-sizing: border-box;
-        border: 1.5px solid #B85AEC;
-        border-radius: 15px;
-    }
-    
-    .filter-line {
-        border: none;
-        /* opacity: 0.54; */
-        border-left: 1.5px solid #B85AEC;
-    }
-    
-    .white {
-        color: #FFFFFF;
-    }
-    
-    .lwhite {
-        color: rgba(255, 255, 255, 0.9);
-    }
-    
-    @media screen and (max-width: 720px) {
-        .searchbox {
-            width: auto;
+
+    .recipe-add-btn{
+        margin-left: 100px;
         }
-        .header {
-            display: flex;
-            flex-direction: column !important;
-            margin: 10px;
-            margin-left: 20px;
-        }
+    
+    .btn{
+        margin-top: 120px;
+        margin-left: 350px;
     }
+}

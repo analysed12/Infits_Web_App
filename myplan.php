@@ -39,13 +39,14 @@
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
+       
     }
 
     .cards {
-        max-width: 1200px;
+        max-width: 1000px;
         margin: 0 auto;
         display: grid;
-        gap: 1rem;
+        gap: 1.5rem;
         grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     }
 
@@ -100,6 +101,7 @@
 
     .search-box {
         border: none !important;
+       
 
     }
 
@@ -107,19 +109,28 @@
         outline: none !important;
     }
 
-    .search-icon {
+    /* .search-icon {
         border: none;
         background: white;
+        padding: 0 10px;
 
-    }
+    } */
 
-    .search-form {
+    /* .search-form {
         border: 1px solid #E1E1E1;
         width: fit-content;
         float: right;
         /* padding: 2px; */
-        border-radius: 5px;
-    }
+        /* border-radius: 5px;
+        box-sizing: border-box;
+        position: absolute;
+        width:40%;
+        right: 20%;
+        left:70%;
+       background: #FFFFFF;
+       border: 2px solid #E1E1E1;
+    
+    } */ 
 
     a:hover {
         cursor: pointer;
@@ -131,18 +142,16 @@
         background-color: blue;
     }
 
-    .search-list {
+    /* .search-list {
         width: 200px;
     }
 
     .search-list li {
         border: 1px solid black;
         background-color: lightblue;
-    }
+    } */
 
-    #display {
-        z-index: 10 !important;
-    }
+    
     
     #btn1{
     border: none;
@@ -155,6 +164,17 @@
     padding-right: 1.4rem;
     position:relative;
     margin-left:93%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+.searchbox {
+    width: 400px;
+    height: 45px;
+    margin-left: 10rem;
+    background: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 10px;
 }
 
 
@@ -163,6 +183,29 @@
         font-size:35px !important;
     }
 }
+@media screen and (max-width: 720px) {
+   .card{
+     margin: auto;
+     width:90%;
+     padding-right: 2rem;
+    }
+}
+@media screen and (max-width: 720px) {
+    .searchbox{
+        /* width: 2rem; */
+        margin: auto;
+        width: 12rem;
+    }
+}
+@media screen and (max-width: 720px) {
+    #btn1{
+        
+       right: 3rem;
+    }
+}
+
+
+
     </style>
     <script>
     $(document).ready(function() {
@@ -182,12 +225,16 @@ include "navbar.php";
     <div class="row" style="padding:1rem;">
         <div class="col-6" id="heading"style="font-weight:400;font-size:48px;color:black !important">Diet Plans</div>
         <div class="col-6" style="text-align:right">
-            <div class="card-body">
-                <form method="POST" class="search-form form-inline" style="width:200px;display:inline-block;">
-                    <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
-                        name="search">
-                    <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
+            <div class="card-body dig searchbox">
+                <form method="POST" class="search-form form-inline " >
+                <!-- <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
                             class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
+                        name="search" > -->
+                        <button style="background-color:white;border:none;" id="btn_search"  class="search-icon" name="search-btn"><img src="images/vec_search.png" alt=""></button>
+                         <input type="text"  placeholder="Search plan" class="search-box form-control w-50" id="search"
+                        name="search" style="border:none;font-size:1rem;margin-left:1rem  ">
+                    
                     <div id="display">
                     </div>
                 </form>

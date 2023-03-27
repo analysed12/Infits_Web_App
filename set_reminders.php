@@ -1,18 +1,18 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$client_array = array();
-if(isset($_POST['clientList'])){
-    $client_array = json_decode($_POST['clientList']);
-}
+$client_array = array(3,4,5);
 
+// $keys = array_keys($_SESSION);
+// foreach ($keys as $key) {
+//     echo $_SESSION['dietitianuserID'] .$key . '<br>'; // print the key
+// }
 
 $dietitianuserID = $_SESSION['dietitianuserID'];
 // Handling Ajax Requests here
 if(isset($_POST['sidebarselection'])){
-    $conn = new mysqli("localhost", "root", "", "infits");
+    $conn = new mysqli("localhost:3307", "root", "", "infits");
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
@@ -86,7 +86,7 @@ if(isset($_POST['sidebarselection'])){
 
 if(isset($_POST['update_all'])){
     
-    $conn = new mysqli("localhost", "root", "", "infits");
+    $conn = new mysqli("localhost:3307", "root", "", "infits");
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
@@ -168,7 +168,7 @@ if(isset($_POST['update_all'])){
 
 // New Reminder Form 
 if(isset($_POST['create_reminder'])){
-    $conn = new mysqli("localhost", "root", "", "infits");
+    $conn = new mysqli("localhost:3307", "root", "", "infits");
     if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
@@ -176,29 +176,31 @@ if(isset($_POST['create_reminder'])){
         $water_interval = $_POST['water_interval'];
         $water_amount = $_POST['water_amount'];
         foreach ($client_array as $c_id) {
-            $query = "SELECT reminder_id FROM `reminders` WHERE water_amount = '{$water_amount}' AND water_interval = '{$water_interval}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $query = "SELECT reminder_id FROM `reminders` WHERE water_amount = '{$water_amount}' AND water_interval = '{$water_interval}' AND dietitianuserID= '{$dietitianuserID}';";
             $result = $conn->query($query) or die('Query Failed');
             if($result->num_rows > 0){
                 continue;
             }
-            $query = "UPDATE `reminders` SET water_interval = '{$water_interval}' , water_amount = '{$water_amount}' WHERE client_id = {$c_id} AND dietitianuserID = '{$dietitianuserID}';";
+            $query = "UPDATE `reminders` SET water_interval = '{$water_interval}' , water_amount = '{$water_amount}' WHERE  dietitianuserID = '{$dietitianuserID}';";
             $result = $conn->query($query) or die("Query Failed");
             if ($conn->affected_rows == 0) {
-                $query = "INSERT INTO `reminders`(`dietitianuserID`, `client_id`, `water_interval`, `water_amount`) VALUES ('{$dietitianuserID}',{$c_id},'{$water_interval}','{$water_amount}')";
+                $query = "INSERT INTO `reminders`(`dietitianuserID`, `water_interval`, `water_amount`) VALUES ('{$dietitianuserID}','{$water_interval}','{$water_amount}')";
                 $result = $conn->query($query) or die("Query Failed");
             }
         }
     }
 
     if(isset($_POST['create_reminder_calorie'])){
-        $conn = new mysqli("localhost", "root", "", "infits");
+        $conn = new mysqli("localhost:3307", "root", "", "infits");
         if($conn->connect_error){
             die("Connection failed :" . $conn->connect_error);
         }
         $bf = $_POST['bf_time'];
+        echo $bf;
         $lunch = $_POST['lunch_time'];
         $snacks = $_POST['snacks_time'];
         $dinner = $_POST['dinner_time'];
+       
         foreach ($client_array as $c_id){
             $query = "SELECT reminder_id FROM `reminders` WHERE breakfast_time = '{$bf}' AND lunch_time = '{$lunch}' AND snacks_time = '{$snacks}' AND `dinner_time` AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
             $result = $conn->query($query) or die('Query Failed');
@@ -206,7 +208,7 @@ if(isset($_POST['create_reminder'])){
                 continue;
             }
             $query = "UPDATE `reminders` SET `breakfast_time`='{$bf}',`lunch_time`='{$lunch}',`snacks_time`='{$snacks}',`dinner_time`='{$dinner}' WHERE client_id = {$c_id} AND dietitianuserID = '{$dietitianuserID}';";
-            echo ($query);
+            //echo ($query);
             echo ('<br>');
             $result = $conn->query($query) or die("Query Failed");
             if($conn->affected_rows == 0){
@@ -220,15 +222,16 @@ if(isset($_POST['create_reminder'])){
         $sleep_time = $_POST['sleep_time'];
         $wake_time = $_POST['wake_time'];
         foreach ($client_array as $c_id){
-            $query = "SELECT reminder_id FROM `reminders` WHERE sleep_time = '{$sleep_time}' AND wake_time = '{$wake_time}' AND client_id = {$c_id} AND dietitianuserID= '{$dietitianuserID}';";
+            $query = "SELECT reminder_id FROM `reminders` WHERE sleep_time = '{$sleep_time}' AND wake_time = '{$wake_time}' AND  dietitianuserID= '{$dietitianuserID}';";
             $result = $conn->query($query) or die('Query Failed');
             if($result->num_rows > 0){
                 continue;
             }
-            $query = "UPDATE `reminders` SET sleep_time = '{$sleep_time}' , wake_time = '{$wake_time}' WHERE client_id = {$c_id} AND dietitianuserID = '{$dietitianuserID}';";
+            $query = "UPDATE `reminders` SET sleep_time = '{$sleep_time}' , wake_time = '{$wake_time}' WHERE  dietitianuserID = '{$dietitianuserID}';";
+            //echo $query;
             $result = $conn->query($query) or die("Query Failed");
             if($conn->affected_rows == 0){
-                $query = "INSERT INTO `reminders`(`dietitianuserID`, `client_id`, `sleep_time`, `wake_time`) VALUES ('{$dietitianuserID}',{$c_id},'{$sleep_time}','{$wake_time}')";
+                $query = "INSERT INTO `reminders`(`dietitianuserID`, `sleep_time`, `wake_time`) VALUES ('{$dietitianuserID}','{$sleep_time}','{$wake_time}')";
                 $result = $conn->query($query) or die("Query Failed");
             }
         }
@@ -250,7 +253,7 @@ if(mysqli_num_rows($result)>0){
     }
 }
 function getClientName($ID,$conn,$dietitianuserID){
-    $query = "SELECT name FROM `addclient` WHERE client_id = {$ID} AND dietitianuserID = '{$dietitianuserID}'";
+    $query = "SELECT name FROM `addclient` WHERE dietitianuserID = '{$dietitianuserID}'";
     $name = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($name)) {
         return ($row['name']);
@@ -461,7 +464,7 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     @keyframes slidein {
   from {
     margin-left: 100%;
-    width: 300%;
+    
   }
 
   to {
@@ -579,9 +582,7 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     .pc-middle select{
         width: 95%;
     }
-    .pc-right {
-    width: 10%;
-    }
+    
     .pc-title{
         
         font-weight: 550;
@@ -687,18 +688,32 @@ padding-right:1rem;
     width: 42.5px;
 height: 40px;
 border:none;
+  
 
 background: #61A8F8;
 border-radius: 13.3333px;
   }
+  .pc-right{
+    width:10%
+  }
+  .pc-bottom{
+        display:none;
+    }
 
-  @media screen and (max-width: 720px) {
+    #mobside_wrapper1{
+        display: none;
+      }
+
+    
+
+  @media screen and (max-width: 1000px) {
     .row>*{
         width:auto;
     }
     .header{
         display:flex;
-        flex-direction:column;
+        overflow-x:scroll;
+        width:auto;
         gap:2rem;
     }
     .set-card{
@@ -732,13 +747,23 @@ border-radius: 13.3333px;
         flex-direction:column;
     }
     .pc-right{
+        display:none !important;
+       
+        
+        
+
+    }
+    .pc-bottom{
         display:flex !important;
         width:auto;
         margin-top:1rem;
         justify-content:space-evenly;
         
+        
 
     }
+    
+
     .pc-left,
     .pc-middle{
         width: auto;
@@ -758,7 +783,6 @@ border-radius: 13.3333px;
         width:100%;
     }
    
-
       #mobside_wrapper1{
         display: none;
       }
@@ -769,7 +793,6 @@ border-radius: 13.3333px;
        
       }
    
-
    
   
   }
@@ -1051,6 +1074,23 @@ border-radius: 13.3333px;
         <div class="border" style="border-bottom: 2px solid #EFEFEF;margin-top:3.5rem;margin-left:10%;margin-right:10%"></div>
         <!-- top cards -->
         <script>
+             const allwrapper = document.getElementsByClassName('client_wrapper');
+        function showSelectClient(id){
+            for(let i =0 ; i<allwrapper.length;i++){
+                allwrapper[i].style.right = '-350px';
+                allwrapper[i].style.display = 'none';
+            }
+            // console.log(id);
+            document.getElementById(id).style.right = '90px';
+            document.getElementById(id).style.display = 'flex';
+        }
+        function hideSelectClient(){
+            for(let i =0 ; i<allwrapper.length;i++){
+                allwrapper[i].style.display = 'none';
+                allwrapper[i].style.right = '-350px';
+            }
+            location.reload();
+        }
             function showSetDialog(divid,cardid){
                 const showDialog = document.getElementById(divid);
                 const allcards = document.getElementsByClassName('set-card');
@@ -1105,7 +1145,9 @@ if (mysqli_num_rows($result_water) > 0) {
             $key = array_search($c, $allClients);
             unset($map_water[$key]);
         }
-?>
+?>     
+
+<div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:1.5rem">
                 <div class="pl pr-container" style="margin-left:1rem">
                     <p class="pr-heading"><img src="images/waterdrop1.png" style="margin-bottom:0.2rem;margin-right:0.5rem">Water Intake Reminder</p>
                     <div class="past-reminder pr-water">
@@ -1136,10 +1178,61 @@ if (mysqli_num_rows($result_water) > 0) {
                                     <button class="pc-btn1" type="button"  onclick="showSelectClient('water_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br> <br>
                                     <button class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_water('water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
+                                <div class="pc-bottom" id="pc_bottom">
+                                    <button class="pc-btn1" type="button"  onclick="showSelectClient('water_wrapper1<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br> <br>
+                                    <button class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_water('water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
+
+
+
+                <div class="client_wrapper" id="water_wrapper1<?php echo($i) ?>">
+                            <div class="wrapper-top">
+                                <div style="text-align:center;margin-top:1rem"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Water Goal</span>
+                                </div>
+                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
+                                <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
+                                    <div class="searchclient">
+                                    <img src="images/greyglass.png">
+                                    <input type="text" placeholder="Search Clients">
+                                    </div>
+                                    <button class="clientChange" onclick="hideSelectClient()" style="background-color: #68A9F7;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
+                                    
+                                </div>
+                                <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
+                                    <div id="water_selected<?php echo($i) ?>" style="display:flex;flex-wrap: wrap;gap: 15px;width: 90%;margin-left: 10px;">
+                                    <?php foreach ($list as $c) {
+                                        $c_name = getClientName($c, $conn,$dietitianuserID); ?>
+                                        <span class="bluetext water_client"><span><?php echo($c_name) ?> </span><span onclick="deSelectClient_water(this,'water_unselected<?php echo($i) ?>','water_selected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" class="close-cut">&times;</span><span hidden><?php echo($c)?></span></span>
+                                    <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper-bottom">
+                                <div id="water_unselected<?php echo($i) ?>" class="checkbox" style="padding-left:2rem">
+                                    <?php foreach ($map_water as $r) {
+                                        $c_name = getClientName($r, $conn,$dietitianuserID); ?>
+
+                                        <div class="client-name">
+                                            <input onclick="selectClient_water(this,'water_selected<?php echo($i) ?>','water_unselected<?php echo($i) ?>','water_interval<?php echo($i) ?>','water_amount<?php echo($i) ?>')" type="checkbox" id="<?php echo($r) ?>" value="<?php echo($r) ?>">
+                                            <label for="<?php echo($r) ?>" ><?php echo($c_name) ?></label>
+                                        </div>
+
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+
+
+        </div>
+
+
+ 
+
+                
 <?php
 $i++;
     }
@@ -1165,6 +1258,8 @@ if (mysqli_num_rows($result_calorie) > 0) {
 // }
 // die();
 ?>
+
+<div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:1.5rem">
                 <div class="pl pr-container" style="margin-left:1rem">
                     <p class="pr-heading" style="color: #E493A5;"><img src="images/knifefork.png" style="margin-bottom:0.2rem;margin-right:0.5rem">Eating  Reminder</p>
                     <div class="past-reminder pr-calorie">
@@ -1220,10 +1315,57 @@ if (mysqli_num_rows($result_calorie) > 0) {
                                     <button style="background: #E493A5;" class="pc-btn1" type="button"  onclick="showSelectClient('calorie_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
                                     <button style="background: #E493A5;" class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_calorie('calorie_selected<?php echo($i) ?>' , 'bf_time<?php echo($i) ?>' ,'lunch_time<?php echo($i) ?>', 'snacks_time<?php echo($i) ?>', 'dinner_time<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
+                                <div class="pc-bottom">
+                                    <button style="background: #E493A5;" class="pc-btn1" type="button"  onclick="showSelectClient('calorie_wrapper1<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
+                                    <button style="background: #E493A5;" class="pc-btn1" type="button" id="savereminderwaterpc" onclick="submitForm_calorie('calorie_selected<?php echo($i) ?>' , 'bf_time<?php echo($i) ?>' ,'lunch_time<?php echo($i) ?>', 'snacks_time<?php echo($i) ?>', 'dinner_time<?php echo($i) ?>')" class="pc-btn2"><img src="images/right.png" alt=""></button>
+                                </div>
+                                
                             </div>
                         </form>
                     </div>
                 </div>
+
+
+
+                <div class="client_wrapper" id="calorie_wrapper1<?php echo($i) ?>">
+                            <div class="wrapper-top">
+                                <div style="text-align:center;margin-top:1rem"><img src="images/knifefork.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Eating</span>
+                                </div>
+                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
+                                <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
+                                    <div class="searchclient">
+                                    <img src="images/greyglass.png">
+                                    <input type="text" placeholder="Search Clients">
+                                    </div>
+                                    <button class="clientChange" onclick="hideSelectClient()" style="background: #E493A5;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
+                                    
+                                </div>
+                                <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
+                                    <div id="calorie_selected<?php echo($i) ?>" style="display:flex;flex-wrap: wrap;gap: 15px;width: 90%;margin-left: 10px;">
+                                        <?php foreach ($list as $c) {
+                                            $c_name = getClientName($c, $conn,$dietitianuserID); ?>
+                                            <span class="bluetext calorie_client"><span><?php echo($c_name) ?> </span><span onclick="deSelectClient_calorie(this,'calorie_unselected<?php echo($i) ?>','calorie_selected<?php echo($i) ?>','bf_time<?php echo($i) ?>','lunch_time<?php echo($i) ?>','snacks_time<?php echo($i) ?>','dinner_time<?php echo($i) ?>')" class="close-cut">&times;</span><span hidden><?php echo($c)?></span></span>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper-bottom">
+                                <div id="calorie_unselected<?php echo($i) ?>" class="checkbox" style="padding-left:2rem">
+                                    <?php foreach ($map_calorie as $r) {
+                                        $c_name = getClientName($r, $conn,$dietitianuserID); ?>
+
+                                        <div class="client-name">
+                                            <input onclick="selectClient_calorie(this,'calorie_selected<?php echo($i) ?>','calorie_unselected<?php echo($i) ?>','bf_time<?php echo($i) ?>','lunch_time<?php echo($i) ?>','snacks_time<?php echo($i) ?>','dinner_time<?php echo($i) ?>')" type="checkbox" id="<?php echo($r) ?>" value="<?php echo($r) ?>">
+                                            <label for="<?php echo($r) ?>" ><?php echo($c_name) ?></label>
+                                        </div>
+
+                                    <?php } ?>
+
+                                </div>
+                            </div>
+                        </div>
+
+    </div>
 <?php
 $i++;
     }
@@ -1246,6 +1388,8 @@ if (mysqli_num_rows($result_sleep) > 0) {
             unset($map_sleep[$key]);
         }
 ?>
+
+<div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:1.5rem">
                 <div class="pl pr-container" style="margin-left:1rem">
                     <p class="pr-heading" style="color: #7A55E3;"><img src="images/Frame-3.png" style="width:5%;margin-bottom:0.2rem;margin-right:0.5rem"> Sleep Reminder</p>
                     <div class="past-reminder pr-water">
@@ -1277,10 +1421,64 @@ if (mysqli_num_rows($result_sleep) > 0) {
                                     <button style="background: #7A55E3;" class="pc-btn1" type="button"  onclick="showSelectClient('sleep_wrapper<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
                                     <button style="background: #7A55E3;" class="pc-btn1" type="button" onclick="submitForm_sleep('sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" id="savereminderwaterpc" class="pc-btn2"><img src="images/right.png" alt=""></button>
                                 </div>
+                                <div class="pc-bottom" id="pc_bottom">
+                                    <button style="background: #7A55E3;" class="pc-btn1" type="button"  onclick="showSelectClient('sleep_wrapper1<?php echo($i) ?>')"><img src="images/mdi_user-circle-outline.png" alt=""></button> <br><br>
+                                    <button style="background: #7A55E3;" class="pc-btn1" type="button" onclick="submitForm_sleep('sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" id="savereminderwaterpc" class="pc-btn2"><img src="images/right.png" alt=""></button>
+                                </div>
+                                
                             </div>
                         </form>
                     </div>
                 </div>
+
+
+
+
+                <div class="client_wrapper" id="sleep_wrapper1<?php echo($i) ?>">
+                            <div class="wrapper-top">
+                                <div style="text-align:center;margin-top:1rem"><img src="images/Frame-3.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Sleep </span>
+                                </div>
+                                <span style="font-size:1.7rem; margin-left:2.1rem">Select clients to assign reminder</span>
+                                <div style="display:flex;justify-content: space-between;padding: 0 30px;margin: 20px 0;">
+                                    <div class="searchclient">
+                                    <img src="images/greyglass.png">
+                                    <input type="text" placeholder="Search Clients">
+                                    </div>
+                                    <button class="clientChange" onclick="hideSelectClient()" style="background: #7A55E3;border:none;border-radius:8.5px"><img src="images/right.png" ></button>
+                                    
+                                </div>
+                                <div style="display:flex; flex-direction:column;gap:0.5rem;margin-top:2rem;margin-left:1rem">
+                                    <div id="sleep_selected<?php echo($i) ?>" style="display:flex;flex-wrap: wrap;gap: 15px;width: 90%;margin-left: 10px;">
+                                        <?php foreach ($list as $c) {
+                                            $c_name = getClientName($c, $conn,$dietitianuserID); ?>
+
+                                            <span class="bluetext sleep_client"><span><?php echo($c_name) ?> </span><span onclick="deSelectClient_sleep(this,'sleep_unselected<?php echo($i) ?>','sleep_selected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" class="close-cut">&times;</span><span hidden><?php echo($c)?></span></span>
+
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper-bottom">
+                                <div id="sleep_unselected<?php echo($i) ?>" class="checkbox" style="padding-left:2rem">
+                                    <?php foreach ($map_sleep as $r) {
+                                        $c_name = getClientName($r, $conn,$dietitianuserID); ?>
+
+                                        <div class="client-name">
+                                            <input onclick="selectClient_sleep(this,'sleep_selected<?php echo($i) ?>','sleep_unselected<?php echo($i) ?>','sleep_time<?php echo($i) ?>','wake_time<?php echo($i) ?>')" type="checkbox" id="<?php echo($r) ?>" value="<?php echo($r) ?>">
+                                            <label for="<?php echo($r) ?>" ><?php echo($c_name) ?></label>
+                                        </div>
+
+                                    <?php } ?>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+ 
+                
+    </div>              
 <?php
 $i++;
     }
@@ -1299,7 +1497,10 @@ if (mysqli_num_rows($result_water) > 0) {
     $i = 0;
     while ($row = mysqli_fetch_assoc($result_water)) {
         $list = explode(',', $row['GROUP_CONCAT(client_id)']);
+
 ?>
+
+
                     <div class="client_wrapper" id="water_wrapper<?php echo($i) ?>">
                             <div class="wrapper-top">
                                 <div style="text-align:center;margin-top:1rem"><img src="images/Frame-2.png" style="width:2.2rem" ><span style="font-size:2rem;margin-left:1rem">Water Goal</span>
@@ -1336,6 +1537,9 @@ if (mysqli_num_rows($result_water) > 0) {
                                 </div>
                             </div>
                         </div>
+
+
+        
 <?php
 $i++;
     }
@@ -1452,8 +1656,8 @@ $i++;
         </div>
     </div>
     <!-- bottom end -->
-    <script>
-        const allwrapper = document.getElementsByClassName('client_wrapper');
+   <!-- <script>
+     const allwrapper = document.getElementsByClassName('client_wrapper');
         function showSelectClient(id){
             for(let i =0 ; i<allwrapper.length;i++){
                 allwrapper[i].style.right = '-350px';
@@ -1470,7 +1674,7 @@ $i++;
             }
             location.reload();
         }
-    </script>
+   </script> -->
 
 
 <!-- main end -->

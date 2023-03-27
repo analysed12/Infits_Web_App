@@ -13,7 +13,7 @@
 .dashboard{
     margin-top: 1rem;
     margin-left: 17rem;
-
+    
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -86,7 +86,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
 }
 #btn1{
     border: none;
@@ -98,7 +98,7 @@
     padding-left: 1.1rem;
     padding-right: 1.1rem;
     position:relative;
-
+    
 }
 .dashboard_container5{
     background: #FDFDFD;
@@ -122,7 +122,7 @@
 }
 .task,.message{
     display:flex;
-    width:50%;
+    
     justify-content:space-between;
 }
 .view{
@@ -136,7 +136,7 @@
     align-items:center;
     justify-content:center;
     width:30%;
-    margin-left:6rem;
+    margin-left:11rem;
     margin-top:2rem;
 }
 #today{
@@ -184,7 +184,7 @@
 @media screen and (max-width: 720px) {
     .dashboard_comtainer1{
         display: flex;
-        gap:4rem;
+        gap:2rem;
     }
     .dashboard{
         margin-left: 2rem;
@@ -219,10 +219,14 @@
     .dashboard_comtainer1{
         /* flex-wrap:wrap; */
         flex-direction:column;
-
+        
     }
     .dashboard_comtainer1 p{
         margin-top:-30px;
+    }
+    .dashboard_container12{
+        width:100% !important;
+        flex-wrap:wrap;
     }
 }
 @media screen and (max-width: 920px) {
@@ -232,11 +236,15 @@
     .dashboard_container3{
         display: flex;
         flex-direction: column;
-
+        
     }
     .details{
         margin-left:0px;
     } 
+    .dashboard_container12{
+        width:100% !important;
+        flex-wrap:wrap;
+    }
 }
 </style>
 <body>
@@ -248,12 +256,12 @@
    <div class="dashboard_comtainer1">
             <p style="font-size: 40px;font-weight:600;margin-bottom: 0;" class="dash">Dashboard</p>
             <p style="font-weight:600;font-size:25px">Upcoming Events</p>
-
+        
     </div>
     <div class="dashboard_container2">
         <div style="font-size:24px;font-weight:500;color:#434343;">No Upcoming events currently!</div>
         <div class="schedule">
-            <a href="#"><button id="schedule">Check schedule</button></a>
+            <a href="calendar_of_events.php"><button id="schedule">Check schedule</button></a>
         </div>
     </div>
     <div class="dashboard_container3">
@@ -262,14 +270,14 @@
                 <a href="#"><button id="details">View All</button></a>
                 <a href="#"><button id="details">View Detailed Progress</button></a>
             </div>
-
+            
     </div>
 
     <div class="dashboard_container4">
 
         <div class="container4_wrapper1">
             <div style="width: 35%;" class="plus">
-                <div><button id="btn1" class="btn-add">+</button></div>
+                <div><a href=""><button id="btn1" class="btn-add">+</button></a></div>
             </div>
             <div class="symbols-container col-8">
                 <div class="symbols col-2"><img src="images/Frame.png" style="width:1.8rem"><span>Steps</span></div>
@@ -292,7 +300,7 @@
         <div class="hyphen"><p>-</p></div>
     </div>
 
-    <div class="dashboard_container6">
+    <!-- <div class="dashboard_container6">
         <div class="task">
             <p style="font-weight:600;font-size:2rem;">My Tasks List</p>
             <div class="view"><a href="#"><button id="details">View All</button></a></div>
@@ -321,7 +329,37 @@
                 <a href="#"><button id="today">Start a chat</button>
             </div>
         </div>
+    </div> -->
+    <div class="dashboard_container10" style="display:flex;flex-direction:row; justify-content:space-between; width:100%;">
+    <div class="dashboard_container12" style="display:flex;flex-direction:column; margin-top: 0.5rem; width:40%;">
+        <div class="task">
+            <p style="font-weight:600;font-size:2rem;">My Tasks List</p>
+            <div class="view"><a href="#"><button id="details">View All</button></a></div>
+        </div>
+        <div class="dashboard_container8">
+            <div class="dashboard_container7">
+                <a href="#"><button id="today">Today</button>
+                <a href="#"><button id="upcoming">Upcoming</button>
+            </div>
+            <div class="dashboard_container9">
+                <div style="font-size:24px;font-weight:500;color:#434343;">No task created for today!</div>
+                <a href="task_list.php"><button id="today">Create task</button>
+            </div>
+        </div>
     </div>
+    <div class="dashboard_container12" style="display:flex;flex-direction:column; margin-top: 0.5rem; width:40%;">
+        <div class="message" >
+            <p style="font-weight:600;font-size:2rem; color:black;">Messages</p>
+            <div class="view"><a href="#"><button id="details">View All</button></a></div>
+        </div>
+        <div class="dashboard_container8">
+            <div class="dashboard_container11">
+                <div style="font-size:24px;font-weight:500;color:#434343;">No message yet!</div>
+                <a href="chat_home.php"><button id="today">Start a chat</button>
+            </div>
+        </div>
+    </div>
+    </div> 
 </div>
 </body>
 </html>

@@ -40,7 +40,7 @@
         font-weight:400;
         margin:auto 10px;
     }
-
+    
     @media screen and (max-width: 720px){
         .text-start{
             margin-top:40px;
@@ -59,7 +59,7 @@
             margin-left:20px;
         }
     }
-
+    
 </style>
 <body>
 <?php

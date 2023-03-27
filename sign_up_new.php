@@ -612,7 +612,12 @@ color: #4B99FB;
                         <span>Sign Up with</span>
                     </div>
                     <div class="gf_btns">
-                    <div class="g-signin2"data-onsuccess="onSignIn"></div>
+                    <div data-onsuccess="onSignIn">
+                        <button class="google" >
+                            <img src="images/google.svg" alt="">
+                            <span style="color: #4B99FB;font-size:27px;margin-left:0.4rem">Google</span>
+                        </button>
+                    </div>
                         <button class="facebook">
                             <img src="images/facebook.svg" alt="">
                             <span>Facebook</span>
@@ -732,30 +737,33 @@ color: #4B99FB;
                     </div>
             </div>
        </div>
-       <script type="text/javascript">
-        function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
 
+<script type="text/javascript">
+// google signin
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('profile')
 
-        if (profile) {
-            $.ajax({
-                type: 'POST',
-                url: 'social_login.php',
-                data: {
-                    id: profile.getId(),
-                    name: profile.getName(),
-                    email: profile.getEmail()
-                }
-            }).done(function(data) {
-                window.location.href = 'index.php';
-            }).fail(function() {
-                alert("Something went wrong !!");
-            });
-        }
-
-
+    if (profile) {
+        $.ajax({
+            type: 'POST',
+            url: 'social_login.php',
+            data: {
+                id: profile.getId(),
+                name: profile.getName(),
+                email: profile.getEmail()
+            }
+        }).done(function(data) {
+            window.location.href = 'index.php';
+        }).fail(function() {
+            alert("Something went wrong !!");
+        });
     }
-    </script>
+    
+
+
+}
+</script>
     </div>
 </body>
 </html>

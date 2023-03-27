@@ -21,9 +21,9 @@
     .container{
         margin-top:15vh;
     }
-
+    
     @media screen and (max-width: 720px){
-
+        
         .text-start{
             margin-top:40px;
             margin-right:100px;
@@ -43,7 +43,7 @@
             margin-left:20px;
         }
     }
-
+    
 </style>
 <body>
 <?php

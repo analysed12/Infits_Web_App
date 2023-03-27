@@ -1,7 +1,8 @@
 <?php 
  include "navbar.php";
-    $currentUser = $_SESSION['name'];
-   $query = "select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
+    $name = $_SESSION['name'];
+    $currentUser = substr($name, 0, -4);
+    $query = "select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
     $result = mysqli_query($conn, $query); // Use curly braces to access array members inside strings
     if($result->num_rows > 0){ 
       while($row = $result->fetch_assoc()){
@@ -22,15 +23,12 @@
         $instagram = $row['instagram'];
         $profilePhoto = $row['profilePhoto'];
 
-        //if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
-         //$path = "./upload/pp.jpg";
-          
-      
-      //} else { 
-
-        //   $ext= explode('|',$row['profilePhoto']);
-        //   $path = $ext[1] . "/" .$ext[0];
-      //}
+        if (is_null($row['profilePhoto']) or $row['profilePhoto']=' ') {
+            $path = "./upload/pp.jpg";
+        } else { 
+            $ext= explode('|',$row['profilePhoto']);
+            $path = $ext[1]. "/" .$ext[0];
+        }
       }
     }
 
@@ -396,7 +394,7 @@ body {
 
                 <div class="flex-right" >
 
-                    <img  class="user"src=<?php echo $path;?> style="height: 100px; width: 100px; border-radius: 30%;margin-left:1rem" />
+                    <img class = "user" src="<?php echo $path;?>"  style="height: 100px; width: 100px; border-radius: 30%;" alt="" />
                     <div class="star" style="margin-left:2.7rem;margin-bottom:2rem;background:none">
                         <img src="images/star.png"style="background:none"ui >
                         <span>4.8</span>

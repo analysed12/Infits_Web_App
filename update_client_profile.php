@@ -1,4 +1,48 @@
-<?php include 'navbar.php'; ?>
+<?php include 'navbar.php'; 
+
+$client_id = $_GET['client_id'];
+
+$sql = "SELECT * from `addclient` where client_id='$client_id'";
+$result = mysqli_query($conn,$sql);
+        while($row = mysqli_fetch_array($result)){
+                    $plan_id = $row["plan_id"] ;
+                    $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $plan_id";
+                    $sql2 = "SELECT * FROM client WHERE client_id = $client_id";
+                    $result1 = mysqli_query($conn, $sql1);
+                    $result2 = mysqli_query($conn, $sql2);
+                    $row1 = mysqli_fetch_assoc($result1);
+                    $row2 = mysqli_fetch_assoc($result2);
+                    $date1 = strtotime($row1["start_date"]);
+                    $date2 = strtotime($row1["end_date"]);
+                    $months = 0;
+                        
+                while (($date1 = strtotime('+1 MONTH', $date1)) <= $date2)
+                            $months++;
+            // echo;
+            
+        if(isset($_POST['update'])){
+            $email = mysqli_real_escape_string($conn, $_POST['email']);
+            $height = mysqli_real_escape_string($conn, $_POST['height']);
+            $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+            $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+            $age = mysqli_real_escape_string($conn, $_POST['age']);
+            $about = mysqli_real_escape_string($conn, $_POST['about']);
+
+
+            $sql3 = "UPDATE addclient SET email = '$email',
+              gender = '$gender',
+              phone = '$phone',
+              height = '$height',
+              age = '$age',
+              about = '$about'
+              where `client_id` = '$client_id'";
+             mysqli_query($conn, $sql3);
+
+            $_SESSION['success'] = "Information Updated";
+            header("Location: client_profile.php?client_id=$client_id");
+              }
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -100,29 +144,8 @@ input {
         <div id="content">
 
             <div class="add-client-area">
-                <form method="post" action="update_client_profile.php">
+                <form method="post" action="">
                     <br>
-                    <?php
-
-$client_id = $_GET['client_id'];
-// echo $id ;
-$sql = "SELECT * from `addclient` where client_id='$client_id'";
-$result = mysqli_query($conn,$sql);
-        while($row = mysqli_fetch_array($result)){
-            $plan_id = $row["plan_id"] ;
-
-                        $sql1 = "SELECT * FROM create_plan WHERE `plan_id`= $plan_id";
-                        $result1 = mysqli_query($conn, $sql1);
-                        $row1 = mysqli_fetch_assoc($result1);
-                        $date1 = strtotime($row1["start_date"]);
-                        $date2 = strtotime($row1["end_date"]);
-                        $months = 0;
-                        
-                        while (($date1 = strtotime('+1 MONTH', $date1)) <= $date2)
-                            $months++;
-            // echo;
-        ?>
-
                     <h4 style="font-size: 30px;margin-left:2rem">Client Profile</h4>
                     <div class="container">
                         <div class="d-flex justify-content-center align-items-center; margin-top:10px" style="gap:20px">
@@ -134,31 +157,31 @@ $result = mysqli_query($conn,$sql);
                         <div class="row">
                             <div class="col">
                                 <div class="row">Email</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['email'] ?>">
+                                <input type="text" name = "email" class="row input-tag" value="<?php echo $row['email'] ?>">
                             </div>
                             <div class="col">
                                 <div class="row">Phone No.</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['phone'] ?>">
+                                <input type="text" name = "phone" class="row input-tag" value="<?php echo $row['phone'] ?>">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="row">Gender</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['gender'] ?>">
+                                <input type="text" name = "gender" class="row input-tag" value="<?php echo $row['gender'] ?>">
                             </div>
                             <div class="col">
                                 <div class="row">Height</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['height'] ?>">
+                                <input type="text" name = "height" class="row input-tag" value="<?php echo $row['height'] ?>">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="row">Age</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['age'] ?>">
+                                <input type="text" name = "age" class="row input-tag" value="<?php echo $row['age'] ?>">
                             </div>
                             <div class="col">
                                 <div class="row">About</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['about'] ?>">
+                                <input type="text" name = "about" class="row input-tag" value="<?php echo $row['about'] ?>">
                             </div>
                         </div>
                         <div class="row">
@@ -185,13 +208,14 @@ border-radius: 8px;">Select</a>
                             </div>
                             <div class="col">
                                 <div class="row">Location</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['location']; ?>">
+                                <input type="text" class="row input-tag" value="<?php echo $row2['location']; ?>">
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center align-items-center">
 
-                            <button type=" submit" class="editBtn" name="edit_client" style="width:20%;
-    margin-top:30px"><a href="client_profile.php?client_id=<?php echo $client_id?>">Confirm Edit</a></button>
+                            
+
+                            <button class="editBtn" name="update" style="width:20%;margin-top:20px;text-align:center">Confirm Edit</button>
 
 
                         </div>
