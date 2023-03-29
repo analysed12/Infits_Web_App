@@ -8,6 +8,73 @@ $errors = array();
 
 include "config.php";
 
+// if(isset($_SESSION['login_id'])){
+//   header('Location: index.php');
+//   exit;
+// }
+require './google-api/vendor/autoload.php';
+// Creating new google client instance
+$client = new Google_Client();
+// Enter your Client ID
+$client->setClientId('521781014869-9736qs9ctqvakeb0ffnh9k7f9f0jakct.apps.googleusercontent.com');
+// Enter your Client Secrect
+$client->setClientSecret('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');
+// Enter the Redirect URL
+$client->setRedirectUri('http://localhost/Infits_Web_App/login.php');
+// Adding those scopes which we want to get (email & profile Information)
+$client->addScope("email");
+$client->addScope("profile");
+
+if(isset($_GET['code'])):
+  $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+  if(!isset($token["error"])){
+      $client->setAccessToken($token['access_token']);
+      // getting profile information
+      $google_oauth = new Google_Service_Oauth2($client);
+      $google_account_info = $google_oauth->userinfo->get();
+  
+      // Storing data into database
+      $id = mysqli_real_escape_string($conn, $google_account_info->id);
+      $full_name = mysqli_real_escape_string($conn, trim($google_account_info->name));
+      $email = mysqli_real_escape_string($conn, $google_account_info->email);
+      $profile_pic = mysqli_real_escape_string($conn, $google_account_info->picture);
+      // checking user already exists or not
+      $get_user = mysqli_query($conn, "SELECT * FROM `dietitian` WHERE `dietitianuserID`='$id'");
+      $row = mysqli_fetch_assoc($get_user);
+      if(mysqli_num_rows($get_user) > 0){
+          $_SESSION['login_id'] = $id;
+          $_SESSION['dietitianuserID'] = $row['dietitianuserID'];
+          $_SESSION['name'] = $row['name'];
+          $_SESSION['dietitian_id'] = $row['dietitian_id'];  
+          header('Location: index.php');
+          exit;
+      }
+      else{
+          // if user not exists we will insert the user
+          $insert = mysqli_query($conn, "INSERT INTO `dietitian`(`dietitianuserID`,`name`,`email`,`p_p`) VALUES('$id','$full_name','$email','$profile_pic')");
+          echo $id;
+          echo $full_name;
+          echo $email;
+          echo $profile_pic;
+          if($insert){
+              $_SESSION['login_id'] = $id; 
+              header('Location: index.php');
+              exit;
+          }
+          else{
+              echo "Sign up failed!(Something went wrong).";
+          }
+      }
+  }
+  else{
+      header('Location: login.php');
+      exit;
+  }
+else: 
+  // Google Login Url = $client->createAuthUrl(); 
+endif;
+ 
+
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form

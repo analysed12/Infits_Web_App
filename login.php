@@ -1,14 +1,9 @@
 
 <?php
 include "server.php";
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -640,14 +635,14 @@ border-radius: 15px;
                 <div class="gf_btns">
                 
                     <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-                    <a href="#"class="google">
+                    <a href="<?php echo $client->createAuthUrl(); ?>" class="google">
                         <img style="width: 30px; height: 30px;" src="images/google.svg" alt="">
                         <span class="ps-2">Google</span>
                     </a>       
-                            <a class="facebook">
-                                         <img style="width: 30px; height: 30px;"src="images/facebook.svg" alt="">
-                                         <span class="ps-2">Facebook</span>
-                            </a> 
+                    <a class="facebook">
+                        <img style="width: 30px; height: 30px;"src="images/facebook.svg" alt="">
+                        <span class="ps-2">Facebook</span>
+                    </a> 
                 
                          
                   
@@ -832,55 +827,6 @@ border-radius: 15px;
         }
     }
 </script>
-
-
-      <!-----------------------------facebook login code----------------------------------->
-    
-<!-- <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '913030780033033',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v12.0'
-    });
-      FB.AppEvents.logPageView();   
-    };
-   (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    
-    function fbLogin(){
-        FB.login(function (response){
-            if(response.authResponse){
-                fbAfterLogin();
-            }
-        });
-    } 
-
-    function fbAfterLogin(){
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') { 
-            FB.api('/me', function(response) {
-                console.log(response);
-             jQuery.ajax({
-              url: 'check_fblogin.php',
-              type: 'post',
-              data: 'name='+response.name+'&id='+response.id,
-              success:function(result){
-                 window.location.href = 'login.php';
-              }
-             });
-      
-    });
-    }
-});
-    }
-</script> -->
 </body>
 </html>
 

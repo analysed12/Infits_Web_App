@@ -1,6 +1,79 @@
+<?php session_start(); ?>
+<?php include('config.php');?>
+
 <?php
-include "server.php";
-?>
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer\PHPMailer-master\src\PHPMailer.php';
+require 'PHPMailer\PHPMailer-master\src\SMTP.php';
+require 'PHPMailer\PHPMailer-master\src\Exception.php';
+
+if(isset($_POST['get_otp']))
+{
+    $email = $_POST['email'];
+$query = "Select * from dietitian where email ='$email'";
+$result = mysqli_query($conn,$query);
+if(mysqli_num_rows($result) == 0){
+    echo ' <div class="alert alert-primary" role="alert" style="text-align:center;">
+       E-Mail not Found;
+     </div>';
+}else{
+$otp = rand(100000,999999);
+$_SESSION['otp'] = $otp;
+// $email = $_POST['email'];
+
+$_SESSION['mail'] =$email;
+
+//echo $otp;
+
+$mail = new PHPMailer();
+$mail->CharSet = "utf-8";
+
+$mail->isSMTP();              
+$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+$mail->Username   = '<email>';                                                                 //SMTP user name
+$mail->Password  ='<app password>';                                                         //Password
+$mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+$mail->Port       = 587;              //Default port 587
+$mail->SMTPDebug = 0;
+//Receipents
+
+$mail->setFrom('<email>','<app password>');
+ $mail->addAddress($email);     //Add a recipient
+
+  //Attachments
+// $mail->addAttachment('/file');         //Add attachments
+
+   //Set email format to HTML
+   $mail->Subject = 'Verify your code';
+   //$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+     $mail->Body=(" Your otp number is ".$otp)  ; 
+    //$mail->AltBody = 'This is the body in plain text for
+    $mail->isHTML(true);
+      
+
+     if(!$mail -> send())
+     {
+     	echo "<div class='alert alert-primary' role='alert' style='text-align:center;'>
+       {$mail->Body}
+     </div>";
+    //$mail->setFrom('email account', 'OTP Verification');
+} 
+
+    else {
+    
+         echo"<div class='alert alert-primary' role='alert' style='text-align:center;'>
+         Mail send Please check your email for otp!
+       </div>";
+          
+         header('Location:reset_password.php');
+        
+ }
+    }}
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,14 +81,8 @@ include "server.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ICONS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Forgot Password</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -393,43 +460,7 @@ body {
 
 }
 
-.gf_btns {
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; */
-    flex-direction: row;
-    padding: 10px;
-}
 
-.google {
-    height: 50px;
-    width: 150px;
-    border-radius: 15px;
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
-    border: 1px solid #EAEAEA;
-    border-radius: 15px;
-    background: #FFFFFF;
-    margin-right: 10px;
-    color: #4B99FB;
-}
-
-.facebook {
-    height: 50px;
-    width: 160px;
-    border-radius: 15px;
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
-    border: 1px solid #EAEAEA;
-    border-radius: 15px;
-    background: #FFFFFF;
-    margin-left: 10px;
-    color: #4B99FB;
-}
 
 .form_inputs {
     display: flex;
@@ -630,19 +661,16 @@ text-decoration: none;
                     
 
                 </div>
+                <form action="forgot_password.php" method="post">
                 <span class="mt-5 ms-0"><img src="images/Line70.png"><span style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">Enter email to get OTP</span></span>
             
              
 
                 <div class="form_inputs login-area">
-                    <form action="" method="post">
-                    <?php include('errors.php'); 
-                   ?>
-
                         <!-- Main Form -->
                         <div class="ip_box">
                             <img style="height: 25px;width: 25px" src="images/letter.svg" >
-                            <input class="input_bar" id="email" type="text" name="dietitianuserID"
+                            <input class="input_bar" id="email" type="text" name="email"
                                 placeholder="Email">
                         </div>
                       
@@ -650,9 +678,9 @@ text-decoration: none;
                        
                         <div class="sign_btn_section mt-3">
                             <div class="sign_btn" style="background: #4B99FB;border-radius:15px">
-                                <button type="submit" class="btn sign_up" name="login_user" style="font-size: 25px;">Get OTP</button>
+                                <button type="submit" class="btn sign_up" name="get_otp" style="font-size: 25px;" id="get_otp">Get OTP</button>
                             </div>
-                            <p></p>
+                            
                             <a href="/login.php" class="sign_in_sec">
                                 <span style="font-size:20px; color:#4F1963;"><i class="fa-solid fa-arrow-left me-2"></i>Back to Sign in</span>
                             </a>
@@ -788,30 +816,4 @@ text-decoration: none;
  </div>
 </div>
 </body>
-<script type="text/javascript">
-// google signin
-function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-
-
-    if (profile) {
-        $.ajax({
-            type: 'POST',
-            url: 'social_login.php',
-            data: {
-                id: profile.getId(),
-                name: profile.getName(),
-                email: profile.getEmail()
-            }
-        }).done(function(data) {
-            window.location.href = 'index.php';
-        }).fail(function() {
-            alert("Something went wrong !!");
-        });
-    }
-
-
-}
-</script>
-
 </html>

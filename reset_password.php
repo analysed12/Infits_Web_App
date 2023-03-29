@@ -211,106 +211,6 @@ body {
 .get-vec {
     margin-bottom: -110px;
 }
-
-.play_store {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    padding: 20px;
-}
-
-.content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.apple {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    background: #FFFFFF;
-    border: 2px solid #817FF8;
-    border-radius: 50px;
-    width: 176px;
-    height: 64px;
-    margin-right: 10px;
-
-    /* padding: 10px; */
-}
-
-.content p {
-    font-family: 'Calibri';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 90.84%;
-    /* or 11px */
-
-    color: #000000;
-}
-
-.content span {
-    font-family: 'Calibri';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 90.84%;
-    /* or 11px */
-
-
-    color: #000000;
-}
-
-.apple img {
-    margin-top: -110px;
-}
-
-.play {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    background: #FFFFFF;
-    border: 2px solid #817FF8;
-    border-radius: 50px;
-    width: 180px;
-    height: 64px;
-    margin-left: 10px;
-}
-
-.play p {
-    font-family: 'Calibri';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 90.84%;
-    /* or 11px */
-
-    color: #000000;
-}
-
-.play span {
-    font-family: 'Calibri';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 90.84%;
-    /* or 11px */
-
-
-    color: #000000;
-}
-
-.play img {
-    margin-top: -110px;
-    margin-left: 10px;
-}
-
 .sform {
     display: flex;
     justify-content: center;
@@ -394,45 +294,6 @@ body {
     color: #4F1963;
 
 }
-
-.gf_btns {
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; */
-    flex-direction: row;
-    padding: 10px;
-}
-
-.google {
-    height: 50px;
-    width: 150px;
-    border-radius: 15px;
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
-    border: 1px solid #EAEAEA;
-    border-radius: 15px;
-    background: #FFFFFF;
-    margin-right: 10px;
-    color: #4B99FB;
-}
-
-.facebook {
-    height: 50px;
-    width: 160px;
-    border-radius: 15px;
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
-    border: 1px solid #EAEAEA;
-    border-radius: 15px;
-    background: #FFFFFF;
-    margin-left: 10px;
-    color: #4B99FB;
-}
-
 .form_inputs {
     display: flex;
     justify-content: space-between;
@@ -456,7 +317,7 @@ body {
     border: 1px solid #EAEAEA;
     border-radius: 15px;
     padding: 10px;
-    width: 300px;
+    width: 430px;
     height: 50px;
     margin: 10px;
 }
@@ -504,6 +365,22 @@ body {
     border: none;
     color: #FFFFFF;
 }
+.reset {
+    background: #4B99FB;
+    border-radius: 15px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    color: #FFFFFF;
+}
+#reset-sec{
+    margin-top: 3rem;
+    margin-left: 0px;
+}
+#reset-sec-2{
+    margin-top: 3rem;
+    margin-left: 0px;
+}
 
 .sign_btn_section {
     display: flex;
@@ -525,7 +402,7 @@ body {
     border: 1px solid #F9F9FF;
     border-radius: 15px;
     padding-left: 40px !important;
-    width: 30px;
+    width: 430px;
     height: 50px;
     margin: 10px;
     font-family: 'manrope',sans-serif;
@@ -631,27 +508,23 @@ body {
                     
 
                 </div>
-                <span class="mt-5 ms-0"><img src="images/Line70.png"><span style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">An OTP has been sent to your email</span></span>
-            
-             
-
+                <!-----------------------enter otp section---------------->
+              <div id="reset-sec">
+                <span class="mt-5 ms-0"><img src="images/Line70.png"><span id="subtitle" style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">An OTP has been sent to your email</span></span>
                 <div class="form_inputs login-area">
-                    <form action="" method="post">
+                    <!-- <form action="" method="post">
                     <?php include('errors.php'); 
-                   ?>
-
+                   ?> -->
                         <!-- Main Form -->
                         <div class="ip_box">
-                            <img style="height: 25px;width: 25px;background: #4B99FB;" src="images/otp.svg" >
+                            <img src="images/teenyicons_otp-outline.png">
                             <input class="input_bar" id="email" type="text" name="dietitianuserID"
                                 placeholder="Enter OTP">
                         </div>
-                      
-                       
-                       
+                                         
                         <div class="sign_btn_section mt-3">
                             <div class="sign_btn" style="background: #4B99FB;border-radius:15px">
-                                <button type="submit" class="btn sign_up" name="login_user" style="font-size: 25px;">Confirm</button>
+                                <button id="confirm-btn" class="btn sign_up" name="" style="font-size: 25px;" onclick="closeForm()">Confirm</button>
                             </div>
                             <p></p>
                             <div class="sign_in_sec">
@@ -660,6 +533,38 @@ body {
                         </div>
                     </form>
                 </div>
+              </div>
+               <!-----------------------new reset password section---------------->
+              <div id="reset-sec-2" style="display: none;">
+                <span class="mt-5 ms-0"><img src="images/Line70.png"><span id="subtitle" style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">Set a new password for your account </span></span>
+                <div class="form_inputs login-area">
+                     <!-- Main Form -->
+                        <div class="ip_box">
+                            <img src="images/Security Shield Green.png" >
+                            <input class="input_bar" id="password" type="text" name=""
+                                placeholder="Enter new password">
+                                <img style="cursor: pointer; width: 22px; height: 19px;"src="images/eye.png" id="eyeicon" alt="eye">
+                        </div>
+                      
+                        <div class="ip_box">
+                            <img src="images/Security Shield Green.png" >
+                            <input class="input_bar" id="cpassword" type="text" name=""
+                                placeholder="Confirm new password">
+                                <img style="cursor: pointer; width: 22px; height: 19px;"src="images/eye.png" id="ceyeicon" alt="eye">
+                        </div>
+                       
+                        <div class="sign_btn_section mt-3">
+                            <div class="sign_btn" style="background: #4B99FB;border-radius:15px">
+                                <button id="confirm-btn" type="submit" class="btn reset" name="" style="font-size: 25px;" onclick="window.location.href = 'login.php';">Reset Password</button>
+                            </div>
+                            <p></p>
+                            <div class="sign_in_sec">
+                                <span style="font-size:20px; color:#4F1963;">Resend OTP <span class="text-muted ms-2 font-size:20px;"> 0 : 57</span></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+              </div>
             </div> 
         </div>
         <div class="col-sm-6">
@@ -668,6 +573,7 @@ body {
             </div>
             
         </div>
+        <!-------------------------footer section----------------------------------->
     <hr  id="hr" style="border: 1px solid #F3F3FF;width: 1204px;">
     </div>
     <div class="row" id="parent-lg" style="margin-top:2rem">
@@ -788,31 +694,49 @@ body {
      </div>
  </div>
 </div>
-</body>
-<script type="text/javascript">
-// google signin
-function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-
-
-    if (profile) {
-        $.ajax({
-            type: 'POST',
-            url: 'social_login.php',
-            data: {
-                id: profile.getId(),
-                name: profile.getName(),
-                email: profile.getEmail()
-            }
-        }).done(function(data) {
-            window.location.href = 'index.php';
-        }).fail(function() {
-            alert("Something went wrong !!");
-        });
-    }
-
-
+<script>
+function closeForm() {
+  let div2 = document.getElementById("reset-sec");
+  let div1 = document.getElementById("reset-sec-2");
+  
+  if (div1.style.display === "none") {
+    div1.style.display = "block";
+    div2.style.display = "none";
+  } else {
+    div1.style.display = "none";
+    div2.style.display = "block";
+  }
 }
+   
 </script>
 
+<script>
+        let eyeicon = document.getElementById("eyeicon");
+        let password = document.getElementById("password");
+    
+        eyeicon.onclick = function(){
+            if(password.type == "password"){
+                password.type = "text";
+                eyeicon.src = "./images/eye-open.png";
+            }else{
+                password.type = "password";
+                eyeicon.src = "./images/eye.png";
+            }
+        }
+    </script>
+      <script>
+        let ceyeicon = document.getElementById("ceyeicon");
+        let cpassword = document.getElementById("cpassword");
+    
+        ceyeicon.onclick = function(){
+            if(cpassword.type == "password"){
+                cpassword.type = "text";
+                ceyeicon.src = "./images/eye-open.png";
+            }else{
+                cpassword.type = "password";
+                ceyeicon.src = "./images/eye.png";
+            }
+        }
+    </script>
+</body>
 </html>
