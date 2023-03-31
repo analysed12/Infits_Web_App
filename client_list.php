@@ -191,6 +191,7 @@ img {
     padding:10px 5px;
     width: 70%;
     margin: 0 auto;
+    margin-bottom: 1rem;
     /* background-color:rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
     /* backdrop-filter: blur(10px); */

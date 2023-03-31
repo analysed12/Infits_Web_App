@@ -1,15 +1,15 @@
 <?php if (session_status() === PHP_SESSION_NONE) { session_start(); }
 include('config.php');
-  if (!isset($_SESSION['name'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
-  }
+if (!isset($_SESSION['name'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+}
 
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['name']);
-  	header("location: login.php");
-  }
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['name']);
+    header("location: login.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +21,7 @@ include('config.php');
     <title>Infits</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <style>
@@ -136,6 +137,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: auto;
     padding-top: 1vh;
     border-bottom: #E8ECF5 2px solid;
 }
@@ -218,17 +220,50 @@ a {
 
 @media screen and (min-width: 720px) {
 
-    /* Styles go here */
-    .mobile-menu {
-        display: none;
-    }
+/* Styles go here */
+.mobile-menu {
+    display: none;
+}
 }
 
 @media (min-width: 0px) and (max-width: 720px) {
-    .sidenav {
-        display: none;
-    }
+.sidenav {
+    display: none;
 }
+}
+
+@media only screen and (max-width:300px){
+        .sidenav {
+            display: none;
+        }
+
+        .topnav{
+            width: 350%;
+            border-bottom: 4px solid #E8ECF5;
+        }
+
+        #topnav-content-1{
+            font-size: 70px;
+        }
+
+        #topnav-content-2{
+            font-size: 60px;
+        }
+
+    }
+
+
+    @media only screen and (min-width:300px) and (max-width:600px){
+        .sidenav {
+            display: none;
+        }
+
+        .topnav{
+            width:120%;
+            border-bottom: 4px solid #E8ECF5;
+        }
+
+    }
 
 /*--------------------- MOBILE SIDENAV---------------------*/
 /*HAMBURGER MENU*/
@@ -286,7 +321,6 @@ a {
     border-radius: 20px;
     background: #FFFFFF;
     padding: 15px 20px;
-
     display: none;
     /* transition: 0.3s ease-in-out; */
     /* animation: slideDown 1s forwards; */
@@ -308,7 +342,9 @@ a {
       top: -500px;
     }
 }
-
+.serchi{
+    display:none;
+}
 .top {
     display: flex;
     justify-content: space-between;
@@ -376,11 +412,12 @@ a {
                 <strong>
                     <?php
 
-                     $id11 = $_SESSION['dietitianuserID'] ;
+                    $id11 = $_SESSION['dietitianuserID'] ;
                     $sql1 = "SELECT name FROM dietitian WHERE dietitianuserID ='$id11'";
                     $res = mysqli_query($conn,$sql1);
-                    $row = mysqli_fetch_assoc($res) ; 
-                    echo $row['name'];
+                    $user = mysqli_fetch_array($res, MYSQLI_ASSOC);
+                    // $row = mysqli_fetch_assoc($res) ; 
+                    echo ($_SESSION['dietitianuserID']);
                     ?>
                 </strong></span></p>
             <p id="topnav-content-2">Your performance summary this week</p>
@@ -388,16 +425,115 @@ a {
         <div class="topnav-icons">
             <img src="images/pp.png" style="height: 24px; width: 24; display:none;" id="addusermale">
 
-            <img src="images/vec_search.png" style="height: 20px; width: 20px;">
-            <img id="notifications-pop" src="images/vec_notification.png" style="height: 20px; width: 20px;">
+            <!-- <img src="images/vec_search.png" style="height: 20px; width: 20px;" class="sea"> -->
+        <!-- <div style="margin-right:2rem;display:flex;gap:1.5rem">
+            <div class="searchbox">
+                <form action="searching.php" method="POST">
+                    <input type="text" name="search" placeholder="Search here" style="border:none;font-size:1rem;margin-left:1rem">
+                    <button><img src="images/vec_search.png" alt=""></button>
+            </div>
+        </div> -->
 
+        <div class="search-box">
+                <button onclick="mysearchFunc()" id="toggleSearch" style="border-style:none;background:white;"><img src="images/vec_search.png" style="height: 20px; width: 20px;" class="sea"></button> 
+                <form class="serchi">
+                <div style="display:flex;">
+                <input type="text" name="search" id="search-box">
+                <button type="submit" style="border-style:none;background:white;"><img src="images/vec_search.png" style="height: 20px; width: 20px;" class="sea"></button>
+                <ul id="suggestions">
+                </ul>
+                </div>
+                </form>
+        </div> 
+        <!-- <div class="search-box">
+                <form action="search_results.php" method="POST">
+                    <input type="text" name="search" placeholder="Type to search">
+                    <button onclick="mysearchFunc()" style="border-style:none;background:white;"><img src="images/vec_search.png" style="height: 20px; width: 20px;" class="sea"></button>
+            </div> -->
+        
+            <img id="notifications-pop" src="images/vec_notification.png" style="height: 20px; width: 20px;">
             <div class="noti-box">
-                <div class="top"><span>Notifications</span><span id="noti-close" >x</span></div>
+                <div class="top" ><span>Notifications</span><span id="noti-close">x</span></div>
                 <?php
                 include ('noti_test.php');
                 ?>
+                <!-- <div class="notifications">
+                   
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                  
+                    
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                   
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                   
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification">
+                        <img src="./upload/pp.jpg" alt="">
+                        <div class="noti-description">
+                            <span class="title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, dignissimos.</span>
+                            <span class="noti-time">1 min</span>
+                        </div>
+                    </div>
+                   
+                </div> -->
             </div>
-            
             <?php
                 $currentUser = $_SESSION['name'];
            	  	$sql ="select * from `dietitian` where `dietitianuserID` = '$currentUser' ";
@@ -446,7 +582,7 @@ a {
             <a href="#"><img src="images/vec_settings.png">&nbsp&nbsp Settings</a>
             <a href="#"><img src="images/vec_logout.png">&nbsp&nbsp Log Out</a>
         </div>
-        <span style="font-size:20px;cursor:pointer; margin: 5px;" onclick="openNav()">&#9776; Menu</span>
+        <span style="font-size:60px;cursor:pointer; margin: 5px;" onclick="openNav()" id="navbar-res">&#9776;</span>
     </div>
     <script>
     function openNav() {
@@ -484,9 +620,60 @@ a {
     // get the url and add active to page 
     const currentPath = window.location.pathname;
     const lastPage = currentPath.split('/').pop().split('.').shift();
-    console.log(lastPage);
+     console.log(lastPage);
     // document.getElementById(lastPage).classList.add('navactive');
-    document.getElementsByClassName('nav-' + lastPage)[0].classList.add('navactive');
+     document.getElementsByClassName('nav-' + lastPage)[0].classList.add('navactive');
+
+    // $(document).ready(function(){
+    //         $('#search-box').on('input', function(){
+    //             var query = $(this).val();
+    //             $.ajax({
+    //                 url: 'search.php',
+    //                 type: 'GET',
+    //                 data: {query: query},
+    //                 dataType: 'json',
+    //                 success: function(data){
+    //                     $('#suggestions').empty();
+    //                     $.each(data, function(index, value){
+    //                         $('#suggestions').append('<li>'+value+'</li>');
+    //                     });
+    //                 }
+    //             });
+    //         });
+    //         $('form').on('submit', function(event){
+    //             event.preventDefault();
+    //             var query = $('#search-box').val();
+    //             // // var inputBox = document.getElementById("tableColumnInput");
+    //             // // var inputValue = inputBox.value;
+    //             // var url = "pages.php?query=" + query;
+    //             // window.location.href = url;
+
+    //             window.location.href = 'recipe_breakfast.php?query=' + query; // Navigate to search.php with search query parameter
+    //         });
+
+    //         $(document).on('click', '.suggestion', function(event){
+    //             event.preventDefault();
+    //             var suggestion = $(this).text();
+    //             $('#search-box').val(suggestion);
+    //             console.log(suggestion);
+    //             // $('#suggestions').empty();
+    //             // window.location.href = 'recipe_breakfast.php?query=' + suggestion; // Navigate to search.php with suggestion parameter
+    //         });
+    //     });
+    //     var flag=false;
+    //     function mysearchFunc() {
+    //         var d=document.getElementsByClassName("serchi")[0];
+    //         console.log(d);
+    //         if (flag==true){
+    //             d.style.display="none";
+    //             flag=false;
+    //         }
+    //         else{
+    //             d.style.display="flex";
+    //             flag=true;
+    //             document.getElementById("toggleSearch").style.display="none";
+    //         }
+    //     }
     </script>
 </body>
 
