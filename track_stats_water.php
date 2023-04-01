@@ -1417,4 +1417,3 @@ new Chart(weeklyChart, {
 </script>
 </body>
 </html>
-

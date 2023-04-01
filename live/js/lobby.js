@@ -10,9 +10,9 @@ form.addEventListener('submit', (e) => {
 
     sessionStorage.setItem('display_name', e.target.name.value)
 
-    let inviteCode = e.target.room.value
+    let inviteCode = window.prompt("Enter room name:");
     if (!inviteCode) {
         inviteCode = String(Math.floor(Math.random() * 10000))
     }
-    window.location = `room.php?room=${inviteCode}`
+    window.location = `./live_streaming.php?room=${inviteCode}`
 })

@@ -44,7 +44,7 @@ let joinRoomInit = async() => {
     channel.on('MemberLeft', handleMemberLeft)
     channel.on('ChannelMessage', handleChannelMessage)
 
-    getMembers()
+    // getMembers()
     addBotMessageToDom(`Welcome to the room ${displayName}! 👋`)
 
     client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' })
@@ -69,10 +69,8 @@ let joinStream = async() => {
     let player = `<div class="video__container" id="user-container-${uid}">
                     <div class="video-player" id="user-${uid}"></div>
                  </div>`
-
-    document.getElementById('streams__container').insertAdjacentHTML('beforeend', player)
+    document.getElementById('stream__box').insertAdjacentHTML('beforeend', player)
     document.getElementById(`user-container-${uid}`).addEventListener('click', expandVideoFrame)
-
     localTracks[1].play(`user-${uid}`)
     await client.publish([localTracks[0], localTracks[1]])
 }

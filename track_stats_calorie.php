@@ -44,6 +44,7 @@ function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
     $conn->close();
     return ($data);
 }
+
 if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
     $CustomData = array(
         'value' => array(),
@@ -1395,8 +1396,32 @@ new Chart(weeklyChart, {
     },
     }
 });
+
+function redirectTo(id, topage) {
+
+
+// createElement Create a new form element
+const form = document.createElement('form');
+
+// Define form attributes
+form.method = 'POST';
+form.action = topage;
+
+// input element for the ID value
+const idInput = document.createElement('input');
+idInput.type = 'hidden';
+idInput.name = 'id';
+idInput.value = id;
+
+// Append the input element to the form
+form.appendChild(idInput);
+
+// Submiting the form to redirect to the update_plan.php
+document.body.appendChild(form);
+form.submit();
+}
+
 </script>
 </body>
 </html>
-
 
