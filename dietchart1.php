@@ -696,11 +696,11 @@ weight: 700px; */
     <div class="main">
     <div class="top">
         <p> New Diet Chart</p>
-        <img src="Vector (1).png">
+        <img src="images/Vector (1) (1).png">
      </div>
      <div class="top-right">
         <button class="btn" text="submit"> <span>Connect to plan</span> </button>
-           <img id="myimg" src="Vector (2).png">
+           <img id="myimg" src="images/Vector (2) (1).png">
            
     </div>
      </div>
@@ -734,10 +734,10 @@ weight: 700px; */
         <div class="left">
         <h3> In Morning </h3> </div>
         <div class="tabs">
-            <button class="btn11"><img src="plus.png"></button>
-            <button class="btn11"><img src="plus.png"></button>
-            <button class="btn11"><img src="plus.png"></button>
-            <button class="btn11"><img src="plus.png"></button>
+            <button class="btn11"><img src="images/plus.png"></button>
+            <button class="btn11"><img src="images/plus.png"></button>
+            <button class="btn11"><img src="images/plus.png"></button>
+            <button class="btn11"><img src="images/plus.png"></button>
         </div>
            
         </div>
@@ -749,10 +749,10 @@ weight: 700px; */
         <div class="left">
         <h3> After Break </h3> </div>
         <div class="tabs">
-            <button class="btn11"><img src="plus.png"></button>
-            <button class="btn11"><img src="plus.png"></button>
-            <button class="btn11"><img src="plus.png"></button>
-            <button class="btn11"><img src="plus.png"></button>
+            <button class="btn11"><img src="images/plus.png"></button>
+            <button class="btn11"><img src="images/plus.png"></button>
+            <button class="btn11"><img src="images/plus.png"></button>
+            <button class="btn11"><img src="images/plus.png"></button>
         </div>
 
      </div>

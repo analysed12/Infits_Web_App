@@ -616,12 +616,12 @@
     <div class="main">
     <div class="top">
         <p> New Diet Chart</p>
-        <img src="Vector (1).png">
+        <img src="images/Vector (1) (1).png">
      </div>
      <div class="top-right">
         <button class="btn" text="submit"> <span>Connect to plan</span> </button>
           
-           <div class="hover-text"style="margin-top:1.3rem" ><span class="material-symbols-outlined" style="color:#9C74F5"> <img id="myimg" src="Vector (2).png"></span>
+           <div class="hover-text"style="margin-top:1.3rem" ><span class="material-symbols-outlined" style="color:#9C74F5"> <img id="myimg" src="images/Vector (2) (1).png"></span>
             <span class="tooltip-text" id="tooltipright">Choose a plan to connect it with the specific diet chart!</span> 
     </div>
            
@@ -680,11 +680,11 @@
         <div class="left">
         <h3> In Morning </h3> </div>
            <div class="right">
-            <img src="7306600-removebg-preview 2.png" style="width: 20.73px,height: 24px,left: 804px,top: 220px;">
+            <img src="images/7306600-removebg-preview 2.png" style="width: 20.73px,height: 24px,left: 804px,top: 220px;">
             <h5 style="text-align : right , margin-right:0% , margin-left:100% , font-size: 5px , font-weight: 200; "> 200kcal <h5>
           </div>
         </div>
-        <img src="Screenshot__136_-removebg-preview 6.png">
+        <img src="images/Screenshot__136_-removebg-preview 6.png">
         <h2 style="display: flex ,align-items: center;" style="border-radius: 10px , border: 0.880519px solid #9C74F5;"> Aloo Paratha </h2>
     </div>
     <br/>
@@ -693,11 +693,11 @@
         <div class="left">
         <h3> After Break </h3> </div>
            <div class="right">
-            <img src="7306600-removebg-preview 2.png" style="width: 20.73px,height: 24px,left: 804px,top: 220px;">
+            <img src="images/7306600-removebg-preview 2.png" style="width: 20.73px,height: 24px,left: 804px,top: 220px;">
             <h5 style="text-align : right , margin-right:0% , margin-left:100% , font-size: 5px , font-weight: 200; "> 200kcal <h5>
           </div>
         </div>
-        <img src="after.png" style="border-radius: 10px , border: 0.880519px solid #9C74F5;">
+        <img src="images/after.png" style="border-radius: 10px , border: 0.880519px solid #9C74F5;">
         <h2 style="margin-left: 15px ,margin-right: 15px"> Bananas </h2>
     </div>
 
