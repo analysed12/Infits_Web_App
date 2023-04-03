@@ -321,8 +321,22 @@ img {
 .button-top{
     border:none;
     background:white;
-    border-bottom : 4px solid #4B9AFB;
     
+    
+
+}
+
+
+.button-top:focus{
+    border-bottom : 4px solid #4B9AFB;
+
+}
+.button-top:active{
+    border-bottom : 4px solid #4B9AFB;
+
+}
+.button-top:hover{
+    border-bottom : 4px solid #4B9AFB;
 
 }
 </style>
@@ -362,8 +376,8 @@ img {
 
         <div class="clients_container2">
             <form action="" method="post">
-                <button class="button-top" name="active-btn">Active</button>
-                <button class="button-top" name="pending-btn" style="margin-left:2rem">Pending</button>
+                <button class="button-top active-button" name="active-btn">Active</button>
+                <button class="button-top pending-btn" name="pending-btn" style="margin-left:2rem">Pending</button>
             </form>
         </div>
         <br><br>

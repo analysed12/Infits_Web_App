@@ -55,20 +55,20 @@ body {
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
-    padding: 20px;
+    padding-bottom: 20px;
 }
 
 .input-tag {
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 7px;
     color: #C4C4C4;
 }
 
 
 .container {
-    width: 65% !important;
+    width: 100% !important;
 }
 
 .row {
@@ -95,7 +95,7 @@ body {
         width:auto;
     }
     h4{
-        margin-left:0 !important;
+        margin-bottom:2rem !important;
     }
     .ronald{
         width:90px !important;
@@ -108,6 +108,14 @@ height: 52px !important;
     .name{
         margin-top:0 !important;
     }
+}
+
+@media screen and (max-width: 400px){
+    .row {
+        display: block;
+        width: 100%;
+    }
+  
 }
 </style>
 
@@ -148,7 +156,7 @@ $result = mysqli_query($conn,$sql);
                     <div class="container">
                         <div class="d-flex justify-content-center align-items-center; margin-top:10px" style="gap:20px">
                             <div class="" style="display:inline-block;"><img class="ronald"
-                                    style="height:150px;weight:150px;border-radius:50%;" src="images/ronalduser.png"
+                                    style="height:150px;width:150px;border-radius:50%;" src="images/ronalduser.png"
                                     alt=""></div>
                             <div style="font-size: 30px;margin-top:50px"class="name" style="display:inline-block"><?php echo $row['name'] ?></div>
                         </div>

@@ -65,13 +65,13 @@ body{
       margin-right: 30px;
       margin-left: 50px;
   }
+
   .cards a{
     display:inline-block;
 }
-
-  .grid-header {
+  .top-card h3 {
         position: absolute;
-        margin-top: -6.5rem;
+        margin-top:4rem ;
         margin-left: 5rem;
         font-family: NATS;
         font-size: 40px;
@@ -79,14 +79,200 @@ body{
         line-height: 31px;
         letter-spacing: 0em;
         text-align: left;
+        z-index: 2;
     }
 
+  .top-card{
+    width: 275px;
+    height: 170px;
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-left: 30px;
   
+  }   
+ 
+  .img_b_1{
+    position: absolute;
+    width: 140px;
+    height: 120px;
+    left: 378px;
+    top: 1px;
+    border-radius: 20px;
+      
+}
+  .img_b_2{
+    position: absolute;
+    width: 90px;
+    height: 65px;
+    left:243px;
+    top: 1px;
+    border-top-left-radius: 20px;
+}
+  .img_b_3{
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    left: 418px;
+    top: 121.5px;
+    border-bottom-right-radius: 20px;
 
+}
+.img_b_4{
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    left: 242px;
+    top: -6px;
+    border-radius: 20px;
+}
+.img_b_5{
+    position: absolute;
+    width: 226.78px;
+    height: 60px;
+    left: 230px;
+    top: 110px;
+    border-radius: 20px;
+}
+.img_b_6{
+    position: absolute;
+    width: 80px;
+    height:70px;
+    left: 245px;
+    top: 102px;
+    border-radius: 20px;
+}
+.img_l_1{
+    position: absolute;
+    width: 140px;
+    height: 120px;
+    left: 691px;
+    top: 1px;
+    border-radius: 20px;    
+}
+  .img_l_2{
+    position: absolute;
+    width: 90px;
+    height: 65px;
+    left:556px;
+    top: 2px;
+    border-top-left-radius: 20px;
+}
+  .img_l_3{
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    left: 730px;
+    top: 121.5px;
+    border-bottom-right-radius: 20px;
+
+  }
+.img_l_4{
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    left: 557px;
+    top: 91.5px;
+    border-radius: 20px;
+}
+.img_l_5{
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    left: 555px;
+    top: -6px;
+    border-radius: 20px;
+}
+.img_s_1{
+    position: absolute;
+    width: 140px;
+    height: 120px;
+    left: 62.8rem;
+    top: 1px;
+    border-radius: 20px;
+}
+  .img_s_2{
+    position: absolute;
+    width: 90px;
+    height: 65px;
+    left:54.3rem;
+    top: 1px;
+    border-top-left-radius: 20px;
+}
+  .img_s_3{
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    left: 65.3rem;
+    top: 121.5px;
+    border-bottom-right-radius: 20px;
+  }
+.img_s_4{
+    position: absolute;
+    width: 110px;
+    height: 70px;
+    left: 54.3rem;
+    top: 101px;
+    border-radius: 20px;
+
+}
+.img_s_5{
+    position: absolute;
+    width|: 170px;
+    height: 100px;
+    left: 54.3rem;
+    top: -6px;
+    border-radius: 20px;
+}
+
+.img_d_1{
+    position: absolute;
+   width: 120px;
+    height: 100px;
+    left: 83.7rem;
+    top: 1px;
+    border-radius: 20px;
+
+}
+  .img_d_2{
+    position: absolute;
+    width: 90px;
+    height: 65px;
+    left:73.9rem;
+    top: 1px;
+    border-top-left-radius: 20px;
+
+}
+  .img_d_3{
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    left: 84.8rem;
+    top: 121.5px;
+    border-bottom-right-radius: 20px;
+
+
+  }
+.img_d_4{
+    position: absolute;
+    width: 80px;
+    height: 50px;
+    left: 73.8rem;
+    top: 121px;
+    border-radius: 20px;
+
+}
+.img_d_5{
+    position: absolute;
+    width|: 170px;
+    height: 100px;
+    left: 73.8rem;
+    top: -6px;
+    border-radius: 20px;
+
+}
 
   .cards img{
       margin-top: 30px;
-      border-radius: 20px;
       margin-right: 10px;
      
   }
@@ -105,15 +291,15 @@ body{
       margin-top: 30px;
   } 
   .main-card{
-    margin-left: -20px;
+    margin-left:230px;
   }
   .cards1{
-      position: relative;
       font-family: 'Poppins';
-      width:21%;
+      width:23%;
       display:inline-block;
       margin-top: 30px;
       margin-bottom: 30px;
+      margin-right: 30px;
       background-color:#fff;
       padding: 20px;
       border-radius: 20px;
@@ -127,7 +313,7 @@ body{
   }
   .image button{
     position: relative;
-      transform: translate(120%, -320%);
+      transform: translate(150%, -370%);
       background-color: #fff;
       color: #000;
       font-size: 15px;
@@ -287,35 +473,131 @@ display: block;
         overflow-x: auto;
         margin-top:70px;
      }
-     .cards img{
-            margin-right: 35px;
-          margin-left: 20px;
-          width:250px;
-      }
-      .grid-header {
-        position: absolute;
-        margin-top: -6rem;
-        margin-left: 4rem;
-        font-family: NATS;
-        font-size: 40px;
-        font-weight: 500;
-        line-height: 31px;
-        letter-spacing: 0em;
-        text-align: left;
-    }
 
       .main-card{
-        margin-left: -20px;
+        margin-left: 220px;
       }
     
       .cards1 {
           width: 40%;
-          margin-right:-35px;
+          margin-right:-15px;
           margin-bottom: 10px;
           
       }
+
+      .img_b_1{
+    position: absolute;
+    left: 168px;
+    top: 1px;
+}
+  .img_b_2{
+    position: absolute;
+    left:33px;
+    top: 1px;
+    }
+.img_b_3{
+    position: absolute;
+    left: 208px;
+    top: 121.5px;
+  }
+.img_b_4{
+    position: absolute;
+    left: 30px;
+    top: -6px;
+}
+.img_b_5{
+    position: absolute;
+    left: 20px;
+    top: 110px;
+}
+.img_b_6{
+    position: absolute; 
+    left: 30px;
+    top: 100px;
+}
+.img_l_1{
+    position: absolute;
+    left: 478px;
+    top: 1px;
+    
+}
+  .img_l_2{
+    position: absolute;
+    left:342px;
+    top: 1px;
+}
+  .img_l_3{
+    position: absolute;
+    left: 518px;
+    top: 121.5px;
+
+  }
+.img_l_4{
+    position: absolute;
+    left: 343px;
+    top: 91px;
+}
+.img_l_5{
+    position: absolute;
+    left: 343px;
+    top: -6px;
+}
+.img_s_1{
+    position: absolute;
+    left: 49.2rem;
+    top: 1px;
+}
+  .img_s_2{
+    position: absolute;
+    left:40.8rem;
+    top: 1px;
+}
+  .img_s_3{
+    position: absolute;
+    left: 51.8rem;
+    top: 121.5px;
+
+  }
+.img_s_4{
+    position: absolute;
+    left: 40.8rem;
+    top: 101px;
+}
+.img_s_5{
+    position: absolute;
+    left: 40.8rem;
+    top: -6px;
+}
+.img_d_1{
+    position: absolute;
+    left: 70rem;
+    top: 1px;
+}
+  .img_d_2{
+    position: absolute;
+    left:60.2rem;
+    top: 1px;
+}
+  .img_d_3{
+    position: absolute;
+    left: 71.1rem;
+    top: 121.5px;
+
+  }
+.img_d_4{
+    position: absolute;
+    left: 60rem;
+    top: 121px;
+}
+.img_d_5{
+    position: absolute;
+    left: 60rem;
+    top: -6px;
+}
+
+    
       .image button {
-          transform: translate(105%, -290%);
+          transform: translate(110%, -300%);
           font-size: 13px;
           padding: 3px;
           width: 80px;;
@@ -421,6 +703,118 @@ display: block;
         overflow-x: auto;
         
       }
+
+
+  .img_b_1{
+    position: absolute;
+    left: 168px;
+    top: 1px;
+}
+  .img_b_2{
+    position: absolute;
+    left:33px;
+    top: 1px;
+    }
+.img_b_3{
+    position: absolute;
+    left: 208px;
+    top: 121.5px;
+  }
+.img_b_4{
+    position: absolute;
+    left: 30px;
+    top: -6px;
+}
+.img_b_5{
+    position: absolute;
+    left: 20px;
+    top: 110px;
+}
+.img_b_6{
+    position: absolute; 
+    left: 30px;
+    top: 100px;
+}
+.img_l_1{
+    position: absolute;
+    left: 478px;
+    top: 1px;
+    
+}
+  .img_l_2{
+    position: absolute;
+    left:342px;
+    top: 1px;
+}
+  .img_l_3{
+    position: absolute;
+    left: 518px;
+    top: 121.5px;
+
+  }
+.img_l_4{
+    position: absolute;
+    left: 343px;
+    top: 91px;
+}
+.img_l_5{
+    position: absolute;
+    left: 343px;
+    top: -6px;
+}
+.img_s_1{
+    position: absolute;
+    left: 49.2rem;
+    top: 1px;
+}
+  .img_s_2{
+    position: absolute;
+    left:40.8rem;
+    top: 1px;
+}
+  .img_s_3{
+    position: absolute;
+    left: 51.8rem;
+    top: 121.5px;
+
+  }
+.img_s_4{
+    position: absolute;
+    left: 40.8rem;
+    top: 101px;
+}
+.img_s_5{
+    position: absolute;
+    left: 40.8rem;
+    top: -6px;
+}
+.img_d_1{
+    position: absolute;
+    left: 70rem;
+    top: 1px;
+}
+  .img_d_2{
+    position: absolute;
+    left:60.2rem;
+    top: 1px;
+}
+  .img_d_3{
+    position: absolute;
+    left: 71.1rem;
+    top: 121.5px;
+
+  }
+.img_d_4{
+    position: absolute;
+    left: 60rem;
+    top: 121px;
+}
+.img_d_5{
+    position: absolute;
+    left: 60rem;
+    top: -6px;
+}
+
       .main-card{
         margin-left:-2px;
       }
@@ -496,39 +890,61 @@ display: block;
         </div> 
     </div> 
 
-    <div class="cards" style="margin-left:20px">
+    <div class="cards" style="margin-left:20px" >
         
         <a href="recipe_breakfast.php" style="color: inherit;" class="breakfast" id="btn1">
-        <img src="images/breakfast.png" width="270px" heigth="250px" style=" margin-left:40px;">
-            <div class="img-container">
-                    <div class="grid-header" style="margin-left:5.5rem;">Breakfast</div>
+                <div class="top-card" style=" background-color: #61de99;">
+                 
+                <img src="images/img_b_1.png" class="img_b_1">
+                    <img src="images/img_b_2.png" class="img_b_2">
+                    <img src="images/img_b_3.png" class="img_b_3">
+                    <h3 style="margin-top:70px; margin-left:70px; color: #000000;font-weight: 400;">Breakfast</h3>
+                    <img src="images/img_b_4.png" class="img_b_4" >
+                    <img src="images/img_b_5.png" class="img_b_5 ">
+                    <img src="images/img_b_6.png" class="img_b_6">
                 </div>
             </a>
 
-        <a href="recipe_lunch.php" style="color: inherit;" class="lunch" id="btn2">
-        <img src="images/lunch.png" width="270px" heigth="250px" style=" margin-left:20px;">
-            <div class="img-container">
-                <div class="grid-header" style="margin-left:7rem;">Lunch</div>
+  
+        <a href="recipe_snacks.php" style="color: inherit;" class="snacks" id="btn3">
+        <div class="top-card" style=" background-color: #ebbcbd; display:inline-block;">
+        <img src="images/img_l_1.png" class="img_l_1">
+                <img src="images/img_l_2.png" class="img_l_2">
+                <img src="images/img_l_3.png" class="img_l_3">
+                <h3 style="margin-top:70px; margin-left:90px; color: #000000;font-weight: 400;">Lunch</h3>
+                <img src="images/img_l_4.png" class="img_l_4" >
+                <img src="images/img_l_5.png" class="img_l_5 ">
             </div>
+        </a>
 
+    <a href="recipe_dinner.php" style="color: inherit;" class="dinner" id="btn4">
+            <div class="top-card" style=" background-color:#a6d5ee;;">
+            <img src="images/img_s_1.png" class="img_s_1">
+                <img src="images/img_s_2.png" class="img_s_2">
+                <img src="images/img_s_3.png" class="img_s_3">
+                <h3 style="margin-top:70px; margin-left:87px; color: #000000;font-weight: 400;">Snacks</h3>
+                <img src="images/img_s_4.png" class="img_s_4" >
+                <img src="images/img_s_5.png" class="img_s_5 ">
+            </div>
         </a>
 
         <a href="recipe_lunch.php" style="color: inherit;" class="lunch" id="btn2">
-        <img src="images/Snacks.png" width="270px" heigth="250px" style=" margin-left:20px;">
-       <div class="img-container">
-                <div class="grid-header" style="margin-left:6.5rem;">Snacks</div>
+            <div class="top-card" style=" background-color: #e39494;">
+                <img src="images/img_d_1.png" class="img_d_1">
+                <img src="images/img_d_2.png" class="img_d_2">
+                <img src="images/img_d_3.png" class="img_d_3">
+                <h3 style="margin-top:70px; margin-left:87px; color: #000000;font-weight: 400;">Dinner</h3>
+                <img src="images/img_d_4.png" class="img_d_4" >
+                <img src="images/img_d_5.png" class="img_d_5 ">
             </div>
-
-        </a>
-        <a href="recipe_lunch.php" style="color: inherit;" class="lunch" id="btn2">
-        <img src="images/Dinner.png" width="270px" heigth="250px" style=" margin-left:20px;">
-         <div class="img-container">
-                <div class="grid-header"  style="margin-left:7rem;">Dinner</div>
-            </div>
-
         </a>
     </div>
 
+
+
+
+
+    
 
 
     <div> 
@@ -544,29 +960,6 @@ display: block;
   <?php
     $sql = "SELECT * FROM `default_recipes`";
     $res = mysqli_query($conn, $sql);
-    ?>
-
-    <div class="flex row">
-        <?php $counter = 0;
-        while ($d = mysqli_fetch_assoc($res)) {
-            $drecipe_recipe = explode(',', $d['drecipe_recipe']);
-            $steps = count($drecipe_recipe);
-            $drecipe_nutritional = $d['drecipe_nutritional information'];
-
-            $drecipe_nutritional = trim($drecipe_nutritional, '{}');
-            $pairs = explode(', ', $drecipe_nutritional);
-            $nutritional = array();
-            foreach ($pairs as $pair) {
-                list($key, $value) = explode(': ', $pair);
-                $key = trim($key, "'");
-                $value = trim($value, "'");
-                $nutritional[$key] = $value;
-            }
-            if ($counter == 5) {
-                break;
-            }
-            $counter++;
-        }
         ?>
 
         
@@ -577,7 +970,7 @@ display: block;
             <button>Breakfast</button>
         </div>
         <div class="title">
-        <h5 style="margin-left: 10px;"><?php echo $d['drecipe_name'] ?></h5>
+        <h5 style="margin-left: 10px;">Recipe name</h5>
             <div class="dropdown">
                 <img src="images/vec_more.png" height="15px" style="margin-right: 15px; margin-top: 8px; cursor:pointer" onclick="showDropdown(event)">
        
@@ -614,7 +1007,7 @@ display: block;
             <button>Breakfast</button>
         </div>
         <div class="title">
-            <h5 style="margin-left: 10px;"><?php echo $d['drecipe_name'] ?></h5>
+            <h5 style="margin-left: 10px;">Recipe name</h5>
             <div class="dropdown">
                 <img src="images/vec_more.png" height="15px" style="margin-right: 15px; margin-top: 8px; cursor:pointer" onclick="showDropdown(event)">
        
@@ -650,7 +1043,7 @@ display: block;
             <button>Breakfast</button>
         </div>
         <div class="title">
-            <h5 style="margin-left: 10px;"><?php echo $d['drecipe_name'] ?></h5>
+            <h5 style="margin-left: 10px;">Recipe name</h5>
             <div class="dropdown">
                 <img src="images/vec_more.png" height="15px" style="margin-right: 15px; margin-top: 8px; cursor:pointer" onclick="showDropdown(event)">
        
@@ -686,7 +1079,7 @@ display: block;
             <button>Breakfast</button>
         </div>
         <div class="title">
-            <h5 style="margin-left: 10px;"><?php echo $d['drecipe_name'] ?></h5>
+            <h5 style="margin-left: 10px;">Recipe name</h5>
             <div class="dropdown">
                 <img src="images/vec_more.png" height="15px" style="margin-right: 15px; margin-top: 8px; cursor:pointer" onclick="showDropdown(event)">
        
@@ -722,7 +1115,7 @@ display: block;
             <button>Breakfast</button>
         </div>
         <div class="title">
-            <h5 style="margin-left: 10px;"><?php echo $d['drecipe_name'] ?></h5>
+            <h5 style="margin-left: 10px;">Recipe name</h5>
             <div class="dropdown">
                 <img src="images/vec_more.png" height="15px" style="margin-right: 15px; margin-top: 8px; cursor:pointer" onclick="showDropdown(event)">
        
@@ -758,7 +1151,7 @@ display: block;
             <button>Breakfast</button>
         </div>
         <div class="title">
-            <h5 style="margin-left: 10px;"><?php echo $d['drecipe_name']?></h5>
+            <h5 style="margin-left: 10px;">Recipe name</h5>
             <div class="dropdown">
                 <img src="images/vec_more.png" height="15px" style="margin-right: 15px; margin-top: 8px; cursor:pointer" onclick="showDropdown(event)">
        
@@ -791,13 +1184,12 @@ display: block;
     
             
         
-    <a href="#"><img src="images/9_plus.png" width="150px" style="margin-left: -40px;"></a>
+    <a href="#"><img src="images/9_plus.png" width="150px" style="margin-left:-40px;"></a>
 </div> 
 </div>    
 
 <script>
   
-
        function showDropdown(event) {
            var dropdown = event.currentTarget.parentNode.querySelector(".dropdown-content");
            dropdown.classList.toggle("show");

@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(isset($_SESSION['dietitianuserID'])){
+  header('Location: index.php');
+  exit;
+}
 
 // initializing variables
 $name = "";

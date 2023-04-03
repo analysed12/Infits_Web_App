@@ -21,10 +21,16 @@ include "navbar.php";
     @import url('https://fonts.googleapis.com/earlyaccess/nats.css');
 
     body {
-        font-family: 'NATS', serif !important;
-        letter-spacing: 1px;
+        font-family: 'NATS', sans-serif !important;
+        font-style:normal;
+        overflow-x:hidden;
     }
 
+    .sidenav .sidenavlink{
+        font-weight:600!important;
+        font-size:20px;
+        letter-spacing:2.4px!important;
+    }
     .card {
         /* background-color: dodgerblue; */
         color: black;
@@ -40,7 +46,8 @@ include "navbar.php";
         max-width: 1200px;
         margin: 0 auto;
         display: grid;
-        gap: 1rem;
+        gap: 4rem;
+        
         grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     }
 
@@ -79,12 +86,16 @@ include "navbar.php";
         background-color: #7282FB;
         color: white;
         margin: 5px;
-        padding: 5px;
-        border-radius: 5px;
+        padding: 10px;
+        border-radius: 15px;
+        font-size:20px;
+        font-weight:400!important;
     }
 
     .card-middle {
         padding: 1rem;
+        color: #919191!important;
+        font-weight:400!important;
     }
 
     .card-below {
@@ -118,7 +129,8 @@ include "navbar.php";
 
     a:hover {
         cursor: pointer;
-        background-color: yellow;
+        background-color:rgba(114, 130, 251, 0.1);
+        color:black;
     }
 
     .box input {
@@ -148,6 +160,8 @@ include "navbar.php";
         border: 1px solid #7282FB;
         margin-right: 40px;
         text-align: center;
+        font-size:20px;
+        font-weight:400 !important;
     }
 
     .planBtn2 {
@@ -158,7 +172,51 @@ include "navbar.php";
         display: inline-block;
         color: white;
         text-align: center;
+        font-size:20px;
+        font-weight:400 !important;
 
+    }
+    .row{
+        font-size:17px;
+        font-weight:600!important;
+        letter-spacing:1.5px;
+        
+    } 
+   
+    @media screen and (max-width: 470px){
+        .search-form{
+           margin-right:20px
+        }
+        .card{
+            width: 90% !important;;
+        }
+    }
+    @media screen and (max-width: 600px){
+        .search-form{
+            margin-top:30px;
+            margin-bottom:10px;
+            
+        }
+        .card{
+            width:95%;
+        }
+
+    }
+    @media screen and (max-width: 720px) {
+        .search-form {
+            width: 300px !important;
+        }
+        .card-body{
+        margin-top:-60px;
+    }
+    }
+    .card-body{
+        flex-direction:column;
+    }
+    .col-6{
+        max-width:100%;
+        flex:50 50 50%;
+        margin:auto;
     }
     </style>
     <script>
@@ -171,15 +229,15 @@ include "navbar.php";
 <body>
 
 
-    <div class="row" style="padding:1rem;">
-        <div class="col-6" style="font-weight:bold;font-size:20px;">My Plans</div>
+    <div class="row" style="padding:1rem 0rem 1rem 1rem;">
+        <div class="col-6 " style="font-weight:bold;font-size:40px;letter-spacing:2px;">All Diet Plans</div>
         <div class="col-6" style="text-align:right">
-            <div class="card-body">
-                <form method="POST" class="search-form form-inline" style="width:200px;">
-                    <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
-                        name="search">
+            <div class="card-body" style="">
+                <form method="POST" class="search-form form-inline" style="width:400px;background: #FFFFFF;border: 1px solid #E1E1E1;border-radius: 10px;position:relative;">
+                    <input type="text" placeholder="Search Plan" class="search-box form-control w-75" id="search"
+                        name="search" style="color: #667080;font-weight:600!important;font-size:20px;margin-left:30px;letter-spacing:1.5px;">
                     <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
-                            class="fa-solid fa-magnifying-glass"></i></button>
+                            class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;margin-top:-8px;color:#667080;"></i></button>
                     <div id="display">
                     </div>
                 </form>
@@ -227,17 +285,17 @@ if(isset($_POST['search-btn']))
                                         <?php echo $row1['name']?></div>
                                     <div class="w-100"></div>
                                     <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
-                                            style="font-weight:bold">Rs.<?php echo $row1['price'] ?></span>/month
+                                            style="font-weight:bold">Rs.<?php echo $row1['price'] ?></span>/months
                                     </div>
                                     <div class="col-7"
                                         style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:bold;display:flex;align-items:center;justify-content:center;">
-                                        <?php echo $months ?> Month
+                                        <?php echo $months ?> Months
                                     </div>
                                     <div class="w-100"></div>
                                     <?php
                                             $mark=explode(',', $row1['tags']);//what will do here
                                             foreach($mark as $out) {
-                                               echo '<div class="tag-element" style="width:auto;">'.$out.'</div>';
+                                               echo '<div class="tag-element" style="width:auto; font-weight:400!important;font-size:20px;">'.$out.'</div>';
                                             }
                                             ?>
 
@@ -246,10 +304,10 @@ if(isset($_POST['search-btn']))
 
 
                         </div>
-                        <div class="card-middle row"><?php echo $row1['description']?></div>
+                        <div class="card-middle" style="color: #919191!important;font-weight:400!important;"><?php echo $row1['description']?></div>
                         <div class="card-below row">
                             <div class="col">
-                                <div class="row">FEATURES</div>
+                                <div class="row" >FEATURES</div>
                                 <div class="row">
                                     <?php
                                             $mark=explode(',', $row1['features']);//what will do here
@@ -264,7 +322,7 @@ if(isset($_POST['search-btn']))
                         </div>
                         <div class="" style="display:flex; align-items:center;justify-content:center; ">
                             <a class="planBtn1" href="update_plan.php?id=<?php echo $row1['plan_id'] ?>">Edit Plan</a>
-                            <a class="planBtn2">Choose Plan</a>
+                            <a class="planBtn2" >Choose Plan</a>
                         </div>
                     </div>
 
@@ -332,7 +390,7 @@ else{
 
                                                 // echo '<div>';
                                                 echo '<div style="display:inline-block;width:auto;margin-right:5px; "><i style="color:black;" class="fa-regular fa-circle-check"></i></div>';
-                                                echo '<div style="display:inline-block;width:auto; margin-right:20px;">'.$out.'</div>';
+                                                echo '<div style="display:inline-block;width:auto; margin-right:20px;font-style:normal; font-size:20px;font-weight:600!important;letter-spacing:0.9px;">'.$out.'</div>';
                                                 // echo '</div>';
                                             
                                             }

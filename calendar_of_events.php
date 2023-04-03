@@ -38,6 +38,7 @@
 }
 body {
         font-family: 'NATS', sans-serif;
+        margin-bottom:2rem;
         
     }
 html {
@@ -533,19 +534,20 @@ $(document).ready(function() {
     display_events();
 }); //end document.ready block
 function display_events() {
-    var events = new Array();
+    let events=[];
     $.ajax({
         url: 'display_event.php',
         dataType: 'json',
         success: function(response) {
             var result = response.data;
             $.each(result, function(i, item) {
-                events.push({
+                let newEvent = {
                     event_id: result[i].eventID,
                     title: result[i].eventname,
-                    start: result[i].start_date,
-                    end: result[i].end_date,
-                });
+                    start: moment(result[i].start_date).format("YYYY-MM-DDTHH:mm:ss"),
+                    end: moment(result[i].end_date).format("YYYY-MM-DDTHH:mm:ss"),
+                };
+                events.push(newEvent);
             })
             var calendar = $('#calendar').fullCalendar({
                 defaultView: 'agendaWeek',

@@ -1,3 +1,19 @@
+<?php
+
+
+if(isset($_SESSION['dietitianuserID'])){
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    $tasks_id = $_SESSION['dietitianuserID'];
+    $sql="SELECT count(*) FROM create_plan WHERE `dietitianuserID`='$tasks_id'";
+    $result = $conn->query($sql);
+    if(empty($result->fetch_assoc())){
+        header('Location:dietplan.php');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

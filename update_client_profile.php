@@ -97,26 +97,26 @@ body {
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
-    padding: 20px;
+    padding-bottom: 20px;
 }
 
 .input-tag {
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 7px;
     color: #C4C4C4;
 }
 
 
 .container {
-    width: 65% !important;
+    width: 100% !important;
 }
 
 .row {
-    width: 100% !important;
-    margin-top: 10px !important;
-    ;
+    width: 87% ;
+    margin-top: 10px ;
+    margin-left:2rem;
 }
 
 .editBtn {
@@ -134,6 +134,41 @@ body {
 
 input {
     border: none;
+}
+
+@media screen and (max-width: 720px){
+    .row{
+        margin-left:0% !important;
+        width:auto;
+    }
+    h4{
+        margin-bottom:2rem !important;
+    }
+    .ronald{
+        width:90px !important;
+        height:90px !important;
+    }
+    .editBtn{
+        width: 197px !important;
+        height: 52px !important;
+    }
+    .name{
+        margin-top:0 !important;
+    }
+    /* .container {
+        width: 100% !important;
+    } */
+}
+
+@media screen and (max-width: 520px){
+    .row {
+        display: block;
+        width: 100%;
+    }
+   
+    .cta-select  {
+        margin-top: 10px;
+    }
 }
 </style>
 
@@ -191,7 +226,7 @@ input {
                             </div>
                             <div class="col">
                                 <div class="row">Duration</div>
-                                <div class="row input-tag"><?php echo $months ?> Months</div>
+                                <input  type="text" class="row input-tag" value="<?php echo $months ." "."Months" ?>"> 
                             </div>
                         </div>
                         <div class="row">
@@ -201,6 +236,7 @@ input {
                                     <div class="input-tag"
                                         style="display:inline-block;width:50% !important; margin-right:10%;">
                                         <?php echo $row1['name'] ?></div>
+                                        
                                     <a href="select_client_plan.php?client_id=<?php echo $client_id?>" class="" style="display:inline-block;width:40% !important;background: #FFFFFF;text-align:center;padding-top:5px;
 border: 1px solid #6883FB;
 border-radius: 8px;">Select</a>

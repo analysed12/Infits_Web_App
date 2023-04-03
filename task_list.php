@@ -1,4 +1,19 @@
 <?php
+
+include 'navbar.php';
+
+if(isset($_SESSION['dietitianuserID'])){
+    $conn = new mysqli("localhost", "root", "", "infits");
+    if($conn->connect_error){
+        die("Connection failed :" . $conn->connect_error);
+    }
+    $tasks_id = $_SESSION['dietitianuserID'];
+    $sql="SELECT count(*) FROM dietition_tasks WHERE `dietitianuserID`='$tasks_id' ";
+    $result = $conn->query($sql);
+    if(empty($result->fetch_assoc())){
+        header('Location:tasklist.php');
+    }
+}
 if(isset($_POST['add_calender'])){
     $conn = new mysqli("localhost", "root", "", "infits");
     if($conn->connect_error){
@@ -37,7 +52,7 @@ if(isset($_POST['delete_task'])){
     exit();
 }
 
-include('navbar.php');
+
 $today = new DateTime();
 $dietition = 'John_wayne';
 if(isset($_POST['create-submit'])){
@@ -527,11 +542,11 @@ if (mysqli_num_rows($result) > 0) {
                         <div class="sub-input">
                             <div class="input">
                                 <label for="task-from-time">From</label>
-                                <input type="time" name="task-from-time" id="task-from-time">
+                                <input type="time" name="task-from-time" id="task-from-time" required>
                             </div>
                             <div class="input">
                                 <label for="task-to-time">To</label>
-                                <input type="time" name="task-to-time" id="task-to-time">
+                                <input type="time" name="task-to-time" id="task-to-time" required>
                             </div>
                         </div>
                         <div class="btns">
@@ -605,6 +620,27 @@ if (mysqli_num_rows($result) > 0) {
                 }
             });
         }
+
+        // Date Picker Validation Added
+
+        $(document).ready(function() {
+            $(function() {
+                var dtToday = new Date();
+
+                var month = dtToday.getMonth() + 1;
+                var day = dtToday.getDate();
+                var year = dtToday.getFullYear();
+
+                if(month<10)
+                    month = '0' + month.toString();
+                if(day<10)
+                    day = '0' + day.toString();
+
+                var maxDate = year + '-' + month + '-' + day;
+
+                $('#task-date').attr('min', maxDate);
+            })
+        })
         // create Task
         const createBtn = document.getElementById('create-task');
         const background = document.getElementById('background');
@@ -682,7 +718,6 @@ if (mysqli_num_rows($result) > 0) {
             }
             });
         }
-
     </script>
 </body>
 </html>

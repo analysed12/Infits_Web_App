@@ -153,7 +153,7 @@ body {
     background-repeat: no-repeat;
     border-radius: 20px;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
-    align-text:center;
+    text-align:center;
     width: 160px;
     height: 171px !important;
 
@@ -215,27 +215,31 @@ body {
     height: 171px;
 }
 
+/* .info {
+     position: absolute;
+     bottom: 0px;
+    display: flex;
+    justify-content: center;
+    width: inherit;
+    height: inherit;
+    text-align: center;
+} */
+
 .info {
      position: absolute;
      bottom: 0px;
-    /* display: flex;
-    justify-content: center; */ 
-    /* width: inherit;
-    height: inherit; */
     text-align: center;
-
-
 }
 
-.info h3 {
-    /* font-family: 'Pacifico', cursive; 
+/* .info h3 {
+    font-family: 'Pacifico', cursive; 
     font-weight: 400;
 	color: black;
 	font-size: 42px;
 	margin: 0 30px;
 	padding: 100px 0 0 0;
-	line-height:1.5;  */
-}
+	line-height:1.5; 
+} */
 
 .info p {
     color: rgb(9, 9, 9);
@@ -359,7 +363,7 @@ border-radius: 18px;
             <li>
                 <div class="box img-6">
                     <img src="icons/settings/icon4.svg" alt="">
-                    <p style="text-align:center !importan;font-weight: 400;color:black;font-size: 25px;margin-top:3rem">Notifications</p>
+                    <p style="text-align:center!important ;font-weight: 400;color:black;font-size: 25px;margin-top:3rem;">Notifications</p>
                 </div>
             </li>
               </a>
@@ -370,8 +374,9 @@ border-radius: 18px;
         </div> -->
     </div>
     <div>
-        <button class="logout">Logout</button>
-        
+        <form action="logout.php">
+            <button tupe="submit" class="logout">Logout</button>
+        </form>
     </div>
     </div>
 <!--------------------------------------------------MOBVIEW------------------------------>

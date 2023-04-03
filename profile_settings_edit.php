@@ -145,13 +145,16 @@ body {
     }
 
     select {
-        background: #EFF8FFD9;
+        /* background: #EFF8FFD9; */
+        box-shadow: 0px 0.7px 5px rgba(0, 0, 0, 0.25);
         border: none;
-        border-radius: 4px;
+        border-radius: 10px;
         width: 100%;
         min-width: 250px;
-        padding: 8px 16px;
+        padding: 0px 16px;
         gap: 8px;
+        height:48px;
+       justify-content:flex-start;
     }
 
     input[type=sign-up] {
@@ -365,18 +368,28 @@ body {
         }
         .flex-left{
             margin-left:2rem;
+            width:90%
         }
         .flex-middle{
             margin-left:2rem;
+            width:90%;
         }
         .flex-main_wrapper{
             display:flex;
             flex-direction:column;
             gap:0 !important;
+            width:90%;
+        }
+        .flex-main_wrapper input{
+            width:auto !important;
         }
         .flex-main{
             display:flex;
             flex-direction:column;
+            width:100%;
+        }
+        .flex-main input{
+            width:100%;
         }
         .user{
             margin-left:6rem !important;
@@ -399,16 +412,23 @@ body {
         margin-left:0;
         margin-right:2rem;
     }
-    .image1{
+    /* .image1{
         margin-left:10rem !important;
-    }
+    } */
     .chooseimage{
         margin-left:6rem !important;
     }
     .text{
         margin-left:6rem !important;
     }
+    .profiles{
+        margin:auto;
     }
+    }
+    @media screen and (max-width: 1000px){
+        .center-flex{
+            display:flex;
+            margin-top:20px;
 
     </style>
 
@@ -426,15 +446,15 @@ body {
             <div class="flex-main">
 
                 <div style="display:flex; gap:3rem;margin-left:2rem;" class="flex-main_wrapper">
-                <div class="flex-left" style="font-size:18px">
+                <div class="flex-left"  style="font-size:20px;font-weight:400px;">
                     User ID <br> <input type="text" name="dietitianuserID" value="<?php echo $dietitianuserID;  ?>"
-                        disabled required style="width: 342px;color: #AEAEAE;" />
+                        required style="width:342px;color: #AEAEAE;height:48px;" />
                     <br>
 
-                    Name <br> <input type="text" name="Name" value="<?php echo $name; ?>" disabled required style="color: #AEAEAE;" />
+                    Name <br> <input type="text" name="Name" value="<?php echo $name; ?>"  required style="color: #AEAEAE;" />
                     <br>
 
-                    Email <br> <input type="email" name="email" value="<?php echo $email; ?>" disabled required style="color: #AEAEAE;"/>
+                    Email <br> <input type="email" name="email" value="<?php echo $email; ?>" required style="color: #AEAEAE;"/>
                     <br>
 
                     Mobile Number <br> <input type="text" name="mobile" value="<?php echo $mobile; ?>" required style="color: #AEAEAE;"/>
@@ -453,11 +473,11 @@ body {
                     <?php } ?>
                     <br>
 
-                    Password: <br> <input type="password" name="password" value="<?php echo $password; ?>" disabled
+                    Password <br> <input type="password" name="password" value="<?php echo $password; ?>" 
                         required style="color: #AEAEAE;"/>
-                    <a href="reset_password.php" class='reset' style="display:flex;justify-content:space-between;padding-left:3rem;padding-right:3rem">
-                        <p style=" color: blue; font-size: 12px;">Change Password</p>
-                        <p style=" color: blue; font-size: 12px">Forgot Password</p>
+                    <a href="reset_password.php" class='reset' style="display:flex;justify-content:space-between;text-decoration:none;width:80%;">
+                        <p style=" color: #0177FD; font-size: 14px; font-weight:400px;">Change Password</p>
+                        <p style=" color: #0177FD; font-size: 14px;font-weight:40px;">Forgot Password</p>
                     </a>
                     <br>
 
@@ -466,13 +486,13 @@ body {
 
                 <br><br>
 
-                <div class="flex-middle" style="font-size:18px;font-weight:400">
+                <div class="flex-middle"  style="font-size:20px;font-weight:400px;">
 
                     Location <br>
                     <?php if (is_null($location) or $location=='') { ?>
-                    <input type="text" name="location" required style="width: 342px;" class="leftinput" style="color: #AEAEAE;">
+                    <input type="text" name="location" required style="width: 342px;height:48px;" class="leftinput" style="color: #AEAEAE;">
                     <?php } else { ?>
-                    <input type="text" name="location" value="<?php echo $location; ?>" required style="width: 342px;" class="leftinput" style="color: #AEAEAE;">
+                    <input type="text" name="location" required value="<?php echo $location; ?>" required style="width:342px;" class="leftinput" style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
@@ -480,11 +500,11 @@ body {
                     <?php if (is_null($age) or $age=='') { ?>
                     <input type="text" name="age" required class="leftinput" style="color: #AEAEAE;">
                     <?php } else { ?>
-                    <input type="text" name="age" value="<?php echo $age; ?>" required class="leftinput" style="color: #AEAEAE;">
+                    <input type="text" name="age" required value="<?php echo $age; ?>" required class="leftinput" style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
-                    Gender: <br>
+                    Gender <br>
                     <?php if (is_null($gender) or $gender=='') { ?>
                     <select name="gender" id="gender" required class="leftinput">
                         <option value="male">Male</option>
@@ -493,7 +513,7 @@ body {
                         <option value="choosenot">Choose not to say</option>
                     </select>
                     <?php } else { ?>
-                    <input type="text" name="gender" value="<?php echo $gender; ?>" disabled required class="leftinput" style="color: #AEAEAE;">
+                    <input type="text" name="gender" value="<?php echo $gender; ?>"  required class="leftinput" style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
@@ -501,15 +521,15 @@ body {
                     <?php if (is_null($experience) or $experience=='') { ?>
                     <input type="text" name="experience" required class="leftinput" style="color: #AEAEAE;">
                     <?php } else { ?>
-                    <input type="text" name="experience" value="<?php echo $experience; ?>" class="leftinput" style="color: #AEAEAE;">
+                    <input type="text" name="experience" required value="<?php echo $experience; ?>" class="leftinput" style="color: #AEAEAE;">
                     <?php } ?>
                     <br>
 
                     
-                    Referral Code <br><input type="text" name="ref_code" class="leftinput">
+                    Referral Code <br><input required type="text" name="ref_code" class="leftinput">
                     <br>
 
-                    Achievements and Certificates <br><input type="text" name="ref_code" class="leftinput">
+                    Achievements and Certificates <br><input required type="text" name="ref_code" class="leftinput">
                     <br>
 
 
@@ -517,21 +537,26 @@ body {
 
                 </div>
                     <div class="flex-right">
-                    <img class="image1" src=<?php echo $path;?> style="height: 100px; width: 100px; border-radius: 30%;margin-left:4rem" alt="" /> <br>
-                    <span class="text"'>Profile Picture:</span>
-                    <input class="chooseimage"type="file" name="my_image" style="width: 250px;" value="" requied/>
-                    <br>
+                        <div class="profiles" style="display:flex;flex-direction:column;position:relative; width:fit-content;">
+                   <center> <img class="image1" src=<?php echo $path;?> style="height: 115px; width: 115px; border-radius: 30%;z-index:-1;margin-left:4rem;" alt=""   /></center>
+                    <button class="edit" id="edit" onclick="clickMe()" style="border:2px solid white; background:#0177FD; border-radius:50%; width:32px;height:32px;position:absolute;right:20px;bottom:10px;"><img src="images/edit.svg" style=""></button>
+                    </div>
 
+                    <!-- <div class="dialog" style="display:none">
+                    <span class="text">Profile Picture:</span> -->
+                    <input class="chooseimage"  id= "chooseimage"type="file" name="my_image" style="width: 250px; display:none;" value="" requied/>
+                    <br>
+                    <!-- </div> -->
                     <!--   socials  -->
-                    <button class='socials'><img src="images/WhatsApp.svg" style="height: 33px;"> &nbsp;
+                    <button class='socials' style="font-size:20px;font-weight:400px;"><img src="images/WhatsApp.svg" style="height: 33px; "> &nbsp;
                         WhatsApp</button><br>
-                    <button class='socials'><img src="images/Twitter.svg" style="height: 33px;"> &nbsp;
+                    <button class='socials' style="font-size:20px;font-weight:400px;"><img src="images/Twitter.svg" style="height: 33px;"> &nbsp;
                         Twitter</button><br>
-                    <button class='socials'><img src="images/LinkedIn.svg" style="height: 33px;"> &nbsp;
+                    <button class='socials' style="font-size:20px;font-weight:400px;"><img src="images/LinkedIn.svg" style="height: 33px;"> &nbsp;
                         LinkedIn</button><br>
-                    <button class='socials'><img src="images/Instagram.svg" style="height: 33px;"> &nbsp;
+                    <button class='socials' style="font-size:20px;font-weight:400px;"><img src="images/Instagram.svg" style="height: 33px;"> &nbsp;
                         Instagram</button><br>
-                    <button class='socials'><img src="images/Facebook.svg" style="height: 33px;"> &nbsp;
+                    <button class='socials' style="font-size:20px;font-weight:400px;"><img src="images/Facebook.svg" style="height: 33px;"> &nbsp;
                         Facebook</button><br>
 
                     <!-- Trigger/Open The Modal -->
@@ -625,6 +650,14 @@ body {
                                 modal.style.display = "none";
                             }
                         }
+
+                        var edit1 = document.getElementById("edit");
+                        var chooseimage= document.getElementById("chooseimage");
+                        function clickMe(){
+                            chooseimage.click();
+                        }
+                        
+           
                     </script>
 
                 </div>

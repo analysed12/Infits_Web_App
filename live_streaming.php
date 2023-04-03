@@ -57,6 +57,7 @@ height: 400px;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            padding-left: 13px;
 
         }
 
