@@ -783,6 +783,7 @@ margin-top: 2.5rem;
                             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                                 <input name="create_goal_steps" id="label1" min="0" type="number" placeholder="0000 Steps">
                                 <input name="create_goal" hidden>
+                                <input hidden name="clientList" value='<?=$_POST['clientList']?>'>
                                 <button type="submit" id="button2" class="setbutton">Set</button>  
                             </form>
                         </div>
@@ -807,6 +808,7 @@ margin-top: 2.5rem;
                             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                                 <input name="create_goal_heart" id="label1" min="0" type="number" placeholder="0000 BPM">
                                 <input name="create_goal" hidden>
+                                <input hidden name="clientList" value='<?=$_POST['clientList']?>'>
                                 <button type="submit" id="button4" class="setbutton">Set</button>  
                             </form>
                         </div>
@@ -836,6 +838,7 @@ margin-top: 2.5rem;
                             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                             <input name="create_goal_sleep" id="label1" min="0" type="number" placeholder="0000 Hours">
                             <input name="create_goal" hidden>
+                            <input hidden name="clientList" value='<?=$_POST['clientList']?>'>
                             <button type="submit" id="button6" class="setbutton">Set</button>
                             </form>
                         </div>
@@ -860,6 +863,7 @@ margin-top: 2.5rem;
                             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                             <input name="create_goal_weight" id="label1" min="0" type="number" placeholder="0000 KG">
                             <input name="create_goal" hidden>
+                            <input hidden name="clientList" value='<?=$_POST['clientList']?>'>
                             <button type="submit" id="button8" class="setbutton">Set</button>
                             </form>  
                         </div>
@@ -889,6 +893,7 @@ margin-top: 2.5rem;
                             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                             <input name="create_goal_water" id="label1" min="0" type="number" placeholder="0000 liters">
                             <input name="create_goal" hidden>
+                            <input hidden name="clientList" value='<?=$_POST['clientList']?>'>
                             <button type="submit" id="button10" class="setbutton">Set</button>
                             </form>   
                         </div>
@@ -913,6 +918,7 @@ margin-top: 2.5rem;
                             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                             <input name="create_goal_calorie" id="label1" min="0" type="number" placeholder="0000 BPM">
                             <input name="create_goal" hidden>
+                            <input hidden name="clientList" value='<?=$_POST['clientList']?>'>
                             <button type="submit" id="button12" class="setbutton">Set</button>
                             </form>   
                         </div>
