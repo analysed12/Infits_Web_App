@@ -650,7 +650,7 @@ body{
                         </div>
                         
                         <div class="check">
-                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked>
                             <label for="vehicle1" style="margin-left:1rem"> I've read and agree with Terms and Services <br>and the Privacy
                                 Policy of INFITS </label>
                         </div>

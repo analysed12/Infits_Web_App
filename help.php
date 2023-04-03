@@ -68,7 +68,7 @@
       <img src="images/help.png" height="300px">
     </div>  
 
-    <a href="faq.html" style="text-decoration: none;">
+    <a href="FAQ.php" style="text-decoration: none;">
     <div class="help-box">
       <div class="help-content">
       <img src="images/faq.png" style="margin-right:20px ;margin-left:20px ; height: 100px;">

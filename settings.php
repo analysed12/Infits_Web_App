@@ -289,6 +289,18 @@ border-radius: 18px;
     .webview{
         display:none;
     }
+    .mob_wrapper1{
+    
+    margin:2rem;
+    display: flex;
+    
+
+     width: auto;
+height: auto;
+
+
+
+}
     .mobview{
         display:flex;
         flex-direction:column;
@@ -325,7 +337,7 @@ border-radius: 18px;
                 </div>
             </li>
 </a>
- <a href="referral_code.php">
+ <a href="#">
             <li>
                 <div class="box img-2"> 
                     <img src="icons/settings/icon1.svg" alt="">       
@@ -359,7 +371,7 @@ border-radius: 18px;
             </li>
               </a>
               <!-- // -->
-              <a href="#">
+              <a href="notification.php">
             <li>
                 <div class="box img-6">
                     <img src="icons/settings/icon4.svg" alt="">
@@ -383,10 +395,11 @@ border-radius: 18px;
 
     <div class="mobview">
         <div class="profileimg" >
-        <img src="./images/settingDp.svg" id="pfp" style="margin-left:9.5rem;width:30%">
-        <p  style = "margin-left: 25px;font-weight:400;font-size:30px;margin-top:0;text-align:center">John Wayne</p>
+        <img src="./images/settingDp.svg" id="pfp" style=" display: block;margin-left: auto;margin-right: auto;width:30%">
+        <p  style = "font-weight:400;font-size:30px;text-align:center">John Wayne</p>
         </div>
-
+        
+         
         <div class="mob_wrapper1">
             <img src="icons/settings/icon1.svg" alt="">
             <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">Referral Code</p>     
@@ -412,8 +425,9 @@ border-radius: 18px;
             <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">Referral Code</p>     
         </div>
         <div>
-        <button class="logout">Logout</button>
-        
+        <form action="logout.php">
+            <button tupe="submit" class="logout">Logout</button>
+        </form>
     </div>
         
     </div>

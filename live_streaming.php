@@ -293,6 +293,7 @@ height: 400px;
 #stream__box{
   background-color: #3f434a;
   height: 40vh;
+  width:90%;
   display: block;
   background-image: url("./images/ronald_small.png");
   background-repeat: no-repeat;
@@ -464,12 +465,15 @@ width: 700px;
                     </button>
                 </div>
 
-                <button id="join-btn">Join Stream</button>
+               <div style="display:flex;justify-content:space-between">
+               <button id="join-btn">Join Stream</button>
+                <a href="#popup1">
+                <div style="float:right"><button class="btn_endlive">End Live Video</button></div>
+                </a>
+               </div>
 
             </div>
-            <a href="#popup1">
-                <div style="float:right"><button class="btn_endlive">End Live Video</button></div>
-            </a>
+            
 
         </div>
         <div class="livecall_rightside">

@@ -185,6 +185,7 @@ function fetchInformation($client_id){
 
     body {
         font-family: 'NATS', sans-serif !important;
+        margin:0;
     }
 .dashboard{
     margin-top: 1rem;
@@ -198,7 +199,7 @@ function fetchInformation($client_id){
 }
 .dashboard_comtainer1{
     display: flex;
-    /* gap: 40rem; */
+    
     justify-content: space-between;
 }
 .container2_rightside {
@@ -509,7 +510,8 @@ function fetchInformation($client_id){
 .mobile-card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap:10px;
+    justify-content:center;
 }
 .mobileview_clientprogress{
     display: none;
@@ -557,7 +559,7 @@ function fetchInformation($client_id){
     border-radius: 0.7rem;
     padding: 1rem;
     width: 280px;
-    height: 283px;
+    height: auto;
     margin-left: 3rem;
     margin-right: 2rem;
 }
@@ -620,12 +622,13 @@ function fetchInformation($client_id){
 }
 }
 @media screen and (max-width: 720px) {
-    .dashboard_comtainer1{
-        display: flex;
-        gap:4rem;
-    }
+  
     .dashboard{
-        margin-left: 2rem;
+        
+        display: flex;
+    flex-direction: column;
+    justify-content:center;
+   margin-left:2rem;
     }
     .dashboard_container2{
         display: flex;
@@ -633,6 +636,7 @@ function fetchInformation($client_id){
         gap: 1rem;
         margin-left: 3rem;
     }
+
 
 }
 @media screen and (max-width: 720px){
@@ -847,7 +851,7 @@ if(!empty($data)){
 
         <div class="mob_wrapper1" >
             <span class="up"><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
-            <div class="row1" style="display:flex ; gap:2rem ">
+            <div class="row1" style="display:flex ; gap:2rem;justify-content:center ">
                     <div class="steps">
                         <div class="symbols">
                         <div style="color:#F6A682"><img src="images/Frame.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
@@ -860,7 +864,7 @@ if(!empty($data)){
                     </div>
             </div>
 
-            <div class="row2" style="display:flex ; gap:2rem">
+            <div class="row2" style="display:flex ; gap:2rem;justify-content:center">
                     <div class="steps">
                         <div class="symbols">
                         <div style="color:#8FAFF3"><img src="images/Frame-2.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Water</span></div></div>
@@ -873,7 +877,7 @@ if(!empty($data)){
                     </div>
             </div>
 
-            <div class="row3" style="display:flex ; gap:2rem">
+            <div class="row3" style="display:flex ; gap:2rem;justify-content:center">
                     <div class="steps">
                         <div class="symbols">
                         <div style="color:#788F96"><img src="images/Frame-4.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
@@ -1046,7 +1050,7 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
                 <!-- chat just added here -->
                 <div class="d-flex flex-coloumn chat messages" style="outline: 2px solid #EEEEEE; padding:20px;">
-                    <div class="" style="width:300px">
+                    <div class="" >
                         <?php
                         $counter = 0;
                         foreach ($conversations as $conversation) { ?>
