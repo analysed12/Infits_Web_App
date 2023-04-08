@@ -520,6 +520,7 @@ body {
             <img src="images/Instagram.png" >
 		</div>
 	</div>
+                    </div>
 
 
 </body>

@@ -250,7 +250,7 @@ include "navbar.php";
                         <button style="background-color:white;border:none;" id="btn_search"  class="search-icon" name="search-btn"><img src="images/vec_search.png" alt=""></button>
                          <input type="text"  placeholder="Search plan" class="search-box form-control w-50" id="search"
                         name="search" style="border:none;font-size:1rem;margin-left:1rem  ">
-                    
+       
                     <div id="display">
                     </div>
                 </form>

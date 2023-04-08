@@ -1,5 +1,9 @@
 <?php
 include('navbar.php');
+$name = '';
+if(isset($_POST['searching_btn'])){
+  $name = $_POST['search_client_name'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +43,7 @@ body{
 .search_client{ 
     margin: 1.5rem;
     margin-top: 2.5rem;
-    width: 25rem; 
+    width: 23rem; 
     color: #ACACAC;   
     background-color:white;
     box-shadow: 0.6px 0.6px 2px 1px #ccc;
@@ -47,8 +51,10 @@ body{
     font-size: medium;
     border: none;
     display: flex;
+    gap:1rem;
     padding-top: 0.5rem;
     padding-right: 0.5rem;
+    
 }
 #btn1{
     width: auto;
@@ -112,6 +118,13 @@ body{
 }
 .detailed_progress_container2{
   display: none;
+}
+.table{
+  visibility: hidden;
+}
+
+.search_client:hover + .table{
+  visibility: visible;
 }
 
 
@@ -361,10 +374,18 @@ display: none;
             <div class="container1_leftside">
                 <p style="font-size:2rem;font-weight:700">Client Progress Details</p>
                
+                
+                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                 <div class="search_client">
-                    <div><button id="btn1"><span class="material-symbols-outlined">search</span></button> </div>
-                    <div>&nbsp&nbsp&nbsp&nbsp <input type="text" name="search_client" placeholder="Search Clients" class="seach_clients_text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>   
-                </div>
+                <div><button id="btn1" type = "submit" name  = "searching_btn"><span class="material-symbols-outlined">search</span></button> </div>
+                    <div> <input type="text" name="search_client_name" oninput="load_data(this.value)" id = "search_bar" placeholder="Search Clients" class="seach_clients_text"  autocomplete="off"></div>  
+                    </div>
+                </form> 
+                <table class = "table" id = "recommendBox">
+                <tbody id = "table_data">
+                </tbody>
+                </table>   
+                
                 <div class="track_buttons" id="track">
                         <button id="btn2" onclick="myFunction()">On-Track</button>
                         <button id="btn2" onclick="myFunction2()">Off-Track</button>
@@ -492,78 +513,206 @@ display: none;
                     }
                 </script>
 
+<?php
+              $conn = new mysqli("localhost", "root", "", "infits");
+              if($conn->connect_error){
+                die("Connection failed :" . $conn->connect_error);
+              }
+              $on = array();
+              $off = array();
+              if($name != ''){
+              $sql = "SELECT * FROM `goals` WHERE dietition_id = 'Jane' AND client_id LIKE '%$name%'" ;
+              }
+              else{
+                $sql = "SELECT * FROM `goals` WHERE dietition_id = 'Jane'";
+              }
+              
+
+             
+              $result =$conn-> query($sql);
+              $i=0;
+              if ($result->num_rows > 0) 
+              {
+               
+                while($row = $result->fetch_assoc())
+                      {
+                        $c_id = $row['client_id'];
+                        $q = "SELECT clientUserID FROM `dietitian_client` WHERE  `Client_id` = $c_id";
+                        $res =$conn-> query($q);
+                        $c_name = mysqli_fetch_array($res);
+                        $cname = $c_name['clientUserID'];
+                        $on[$i]['name'] = $cname;
+                        $off[$i]['name'] = $cname;
+                         $dat = date('Y-m-d');
+                        //some changes is needed while linking.
+
+                        //for steps 
+                        $step = "SELECT steps FROM `steptracker` WHERE clientid = '$cname' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                        // $step = "SELECT steps FROM `steptracker` WHERE clientid = '1' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                       
+                        $stepgoal =$conn-> query($step);
+                        $stepgoal1 = mysqli_fetch_assoc($stepgoal);
+                        if($stepgoal1 != null){
+
+                        
+                        if($stepgoal1['steps'] >= $row['steps']){
+                            $on[$i]['steps'] = $stepgoal1['steps'];
+                            $off[$i]['steps'] = '-1';
+                        }
+                        else{
+                            $on[$i]['steps'] ='-1';
+                            $off[$i]['steps'] = $stepgoal1['steps'];
+                        }
+                      }
+                      else{
+                        $on[$i]['steps'] ='-1';
+                            $off[$i]['steps'] = '-1';
+                      }
+
+                        //for heart rate
+                        $heart = "SELECT average FROM `heartrate` WHERE clientID = '$cname' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                        // $heart = "SELECT average FROM `heartrate` WHERE clientID = '3' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                        $heartgoal =$conn-> query($heart);
+                        $heartgoal1 = mysqli_fetch_assoc($heartgoal);
+                        if ($heartgoal1 != null)
+                        {
+                            if($heartgoal1['average'] >= $row['heart']){
+                                $on[$i]['heart'] = $heartgoal1['average'];
+                                $off[$i]['heart'] = '-1';
+                            }
+                            else{
+                              $on[$i]['heart'] ='-1';
+                              $off[$i]['heart'] = $heartgoal1['average'];
+                            }
+                      }
+                      else{
+                        $on[$i]['heart'] ='-1';
+                        $off[$i]['heart'] = '-1';
+                      }
+
+                        //for weight 
+                        $weight = "SELECT goal FROM `weighttracker` WHERE clientID = '$cname' AND `date` >= '{$dat} 00:00:00' AND `date` < '{$dat} 23:59:59'";
+                        // $weight = "SELECT goal FROM `weighttracker` WHERE clientID = '3' AND `date` >= '{$dat} 00:00:00' AND `date` < '{$dat} 23:59:59'";
+                        $weightgoal =$conn-> query($weight);
+                        $weightgoal1 = mysqli_fetch_assoc($weightgoal);
+                        if($weightgoal1 != null){
+                        if($weightgoal1['goal'] >= $row['weight']){
+                            $on[$i]['weight'] = $weightgoal1['goal'];
+                            $off[$i]['weight'] = '-1';
+                        }
+                        // 
+                        else{
+                          
+                          $on[$i]['weight'] ='-1';
+                          $off[$i]['weight'] = $weightgoal1['goal'];
+                        }
+                      }
+                      else{
+                        $on[$i]['weight'] ='-1';
+                          $off[$i]['weight'] = '-1';
+                      }
+
+                        
+
+                        //for sleep 
+                        $sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = '$cname' AND `sleeptime` >= '{$dat} 00:00:00' AND `sleeptime` < '{$dat} 23:59:59'";
+                        // $sleep = "SELECT hrsSlept FROM `sleeptracker` WHERE clientID = '3' AND `sleeptime` >= '{$dat} 00:00:00' AND `sleeptime` < '{$dat} 23:59:59'";
+                        $sleepgoal =$conn-> query($sleep);
+                        $sleepgoal1 = mysqli_fetch_assoc($sleepgoal);
+                        if($sleepgoal1 != null){
+                        if($sleepgoal1['hrsSlept'] >= $row['sleep']){
+                            $on[$i]['sleep'] = $sleepgoal1['hrsSlept'];
+                            $off[$i]['sleep'] = '-1';
+                        }
+                        else{
+                          $on[$i]['sleep'] ='-1';
+                          $off[$i]['sleep'] = $sleepgoal1['hrsSlept'];
+                        }
+                      }
+                      else{
+                        $on[$i]['sleep'] ='-1';
+                          $off[$i]['sleep'] ='-1';
+                      }
+
+
+                  $i++;
+                  }
+              }
+              
+              ?>
+
+
 
 
 <div class="webview_progressdetails">
 
             <div class="detailed_progress_container2" id="container2">
                 <div class="container2_wrapper1">
-                  <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
-                  <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">4855 steps</span></div></div></div>
-                  <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                  <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
+                <?php
+                      foreach($on as $r){
+                        if($r['steps']!= '-1' || $r['heart']!= '-1' || $r['weight']!= '-1' || $r['sleep']!= '-1' ){
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem">Client '.$r["name"].'</span></a></span></div>');
+                        }
+                        if($r['steps']!= '-1'){
+                         
+                          echo(' <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
+                        }
+                        if($r['heart']!= '-1'){
+                         
+                          echo(' <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
+                        }
+                        if($r['weight']!='-1'){
+                         
+                          echo('<div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' Kgs</span></div></div></div>');
+                        }
+                        if($r['sleep']!= '-1' ){
+                          echo('<div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
+                        }
+                      }
+                ?>
+                  
                 </div>
 
-                <div class="container2_wrapper1">
-                  <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
-                  <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">4855 steps</span></div></div></div>
-                  <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                  <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
-                </div>
-
-                <div class="container2_wrapper1">
-                  <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
-                  <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">4855 steps</span></div></div></div>
-                  <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                  <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
-                </div>
-                <div class="container2_wrapper1">
-                  <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
-                  <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">4855 steps</span></div></div></div>
-                  <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                  <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
-                </div>  
+                
             </div>
 
             
             <div class="detailed_progress_container2" id="container3">
                 <div class="container2_wrapper1">
-                  <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
+                <?php
+                      foreach($off as $r){
+                        if($r['steps']!='-1' || $r['heart']!='-1' || $r['weight']!='-1' || $r['sleep']!='-1' ){
+                          // echo("hi");
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client  '.$r["name"].'</span></a></span></div>');
+                        }
+                        // echo("hiiii");
+                        if($r['steps']!='-1'){
+                          // echo("bue steps");
+                          echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
+                        }
+                        if($r['heart']!='-1'){
+                          
+                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
+                        }
+                        if($r['weight']!='-1'){
+                         
+                          echo('<div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' kgs</span></div></div></div>');
+                        }
+                        if($r['sleep']!='-1'){
+                         
+                          echo('<div class="info"><span>Sleep </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
+                        }
+                        
+                      }
+                ?>
+                  <!-- <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
                   <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">2356 steps</span></div></div></div>
                   <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
                   <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
+                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div> -->
                 </div>
 
-                <div class="container2_wrapper1">
-                  <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
-                  <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">2356 steps</span></div></div></div>
-                  <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                  <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
-                </div>
-
-                <div class="container2_wrapper1">
-                  <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
-                  <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">2356 steps</span></div></div></div>
-                  <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                  <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
-                </div>
-                
-                <div class="container2_wrapper1">
-                  <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
-                  <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">2356 steps</span></div></div></div>
-                  <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                  <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div>
-                </div>
-
-            </div>
+               
 
 
             
@@ -633,90 +782,8 @@ display: none;
                                     </div>
                             </div>
                      </div>
-                     <div class="mob_container1_wrapper1" >
-                            <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
-                            <div class="row1" style="display:flex ; gap:2rem ">
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">5256 steps</span>
-                                    </div>
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">150 bpm</span>
-                                    </div>
-                            </div>
-
-                            <div class="row2" style="display:flex ; gap:2rem">
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">1.6 kg</span>
-                                    </div>
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">7 hrs.</span>
-                                    </div>
-                            </div>
-                     </div>
-                     <div class="mob_container1_wrapper1" >
-                            <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
-                            <div class="row1" style="display:flex ; gap:2rem ">
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">5256 steps</span>
-                                    </div>
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">150 bpm</span>
-                                    </div>
-                            </div>
-
-                            <div class="row2" style="display:flex ; gap:2rem">
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">1.6 kg</span>
-                                    </div>
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">7 hrs.</span>
-                                    </div>
-                            </div>
-                     </div>
-                     <div class="mob_container1_wrapper1" >
-                            <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
-                            <div class="row1" style="display:flex ; gap:2rem ">
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">5256 steps</span>
-                                    </div>
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">150 bpm</span>
-                                    </div>
-                            </div>
-
-                            <div class="row2" style="display:flex ; gap:2rem">
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">1.6 kg</span>
-                                    </div>
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">7 hrs.</span>
-                                    </div>
-                            </div>
-                     </div>
+                    
+                   
                        
             </div>
 
@@ -752,97 +819,49 @@ display: none;
 
 
                     
-                    <div class="mob_container1_wrapper1" >
-                                    <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
-                                    <div class="row1" style="display:flex ; gap:2rem ">
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">2356 steps</span>
-                                            </div>
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">150 bpm</span>
-                                            </div>
-                                    </div>
-
-                                    <div class="row2" style="display:flex ; gap:2rem">
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">1.6 kg</span>
-                                            </div>
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">7 hrs.</span>
-                                            </div>
-                                    </div>
-                    </div>
-
-                    <div class="mob_container1_wrapper1" >
-                                    <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
-                                    <div class="row1" style="display:flex ; gap:2rem ">
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">2356 steps</span>
-                                            </div>
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">150 bpm</span>
-                                            </div>
-                                    </div>
-
-                                    <div class="row2" style="display:flex ; gap:2rem">
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">1.6 kg</span>
-                                            </div>
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">7 hrs.</span>
-                                            </div>
-                                    </div>
-                    </div>
+                 
 
 
-                    
-                    <div class="mob_container1_wrapper1" >
-                                    <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
-                                    <div class="row1" style="display:flex ; gap:2rem ">
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">2356 steps</span>
-                                            </div>
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">150 bpm</span>
-                                            </div>
-                                    </div>
 
-                                    <div class="row2" style="display:flex ; gap:2rem">
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">1.6 kg</span>
-                                            </div>
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">7 hrs.</span>
-                                            </div>
-                                    </div>
-                    </div>
+                 
             </div>
       </div>
   </div>
     
+
+  <script>
+
+function load_data(search = ''){
+   let xhr = new XMLHttpRequest();
+  xhr.open("GET", "searching.php?search="+search,true);
+  xhr.onload = function(){
+      // console.log(xhr.responseText);
+      document.getElementById('table_data').innerHTML = xhr.responseText;
+  }
+   xhr.send();
+
+
+
+}
+
+load_data();
+
+
+// const searchBar = document.querySelector('#search_bar');
+// const recommendationBox = document.querySelector('#recommendBox');
+
+// searchBar.addEventListener('focus', function() {
+//   recommendationBox.classList.remove('recommendBox');
+// });
+
+// searchBar.addEventListener('blur', function() {
+//   recommendationBox.classList.add('recommendBox');
+// });
+
+
+
+
+ 
+  </script>
 </body>
 </html>

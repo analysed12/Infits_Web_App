@@ -25,7 +25,7 @@ include "navbar.php";
         font-style:normal;
         overflow-x:hidden;
     }
-
+    
     .sidenav .sidenavlink{
         font-weight:600!important;
         font-size:20px;
@@ -190,17 +190,23 @@ include "navbar.php";
         .card{
             width: 90% !important;;
         }
+        
     }
     @media screen and (max-width: 600px){
         .search-form{
-            margin-top:30px;
+            margin-top:40px;
             margin-bottom:10px;
             
         }
         .card{
             width:95%;
         }
-
+        .fa-solid {
+            margin-top:-30px !important;
+            position:absolute;
+            left:10px;
+        }
+        
     }
     @media screen and (max-width: 720px) {
         .search-form {
@@ -233,11 +239,11 @@ include "navbar.php";
         <div class="col-6 " style="font-weight:bold;font-size:40px;letter-spacing:2px;">All Diet Plans</div>
         <div class="col-6" style="text-align:right">
             <div class="card-body" style="">
-                <form method="POST" class="search-form form-inline" style="width:400px;background: #FFFFFF;border: 1px solid #E1E1E1;border-radius: 10px;position:relative;">
-                    <input type="text" placeholder="Search Plan" class="search-box form-control w-75" id="search"
-                        name="search" style="color: #667080;font-weight:600!important;font-size:20px;margin-left:30px;letter-spacing:1.5px;">
-                    <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
-                            class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;margin-top:-8px;color:#667080;"></i></button>
+                <form method="POST" class="search-form form-inline" style="width:400px;background: #FFFFFF;box-shadow: 0.6px 0.6px 1px 1px #ccc;border-radius: 0.5rem;position:relative;">
+                    <input type="text" placeholder="Search Plan" class="search-box form-control w-30" id="search"
+                        name="search" style="color: #ACACAC;font-weight:400!important;font-size:18px;margin-left:4rem;letter-spacing:0.5px;">
+                    <button type="submit" id="btn_search" class="search-icon" name="search-btn" style="margin:auto;"><i
+                            class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;margin-top:-8px;color:#ACACAC;"></i></button>
                     <div id="display">
                     </div>
                 </form>
