@@ -531,50 +531,8 @@ include('navbar.php');
 <script type="text/javascript" src="./live/js/room.js"></script>
 <script type="text/javascript" src="./live/js/room_rtm.js"></script>
 <script type="text/javascript" src="./live/js/room_rtc.js"></script>
-<script>
-    function submitEmoji() {
-        var input = document.getElementById("myInputMessage");
-        input.value = "😊";
-        var event = new KeyboardEvent("keydown", {
-            keyCode: 13,
-            bubbles: true,
-            cancelable: true
-        });
 
-        input.focus();
-        if (event.keyCode === 13) {
-            setTimeout(function() {
-                input.dispatchEvent(event);
-                console.log("workingg!!1")
-            }, 1000);
-        } else {
-            input.dispatchEvent(event);
-            console.log("Not workingg!!1")
-        }
+    
 
-        
-    }
-
-    function submitThumb() {
-        var input = document.getElementById("myInputMessage");
-        input.value = "👍";
-        var event = new KeyboardEvent("keydown", {
-            keyCode: 13,
-            bubbles: true,
-            cancelable: true
-        });
-
-        input.focus();
-        if (event.keyCode === 13) {
-            setTimeout(function() {
-                input.dispatchEvent(event);
-                console.log("workingg!!1")
-            }, 1000);
-        } else {
-            input.dispatchEvent(event);
-            console.log("Not workingg!!1")
-        }
-    }
-</script>
 
 </html>

@@ -98,7 +98,6 @@ let addMessageToDom = (name, message) => {
     }
 }
 
-
 let addBotMessageToDom = (botMessage) => {
     let messagesWrapper = document.getElementById('_messages')
 
@@ -121,6 +120,25 @@ let leaveChannel = async() => {
     await channel.leave()
     await rtmClient.logout()
 }
+
+function submitEmoji() {
+
+    let message = "😊";
+    channel.sendMessage({ text: JSON.stringify({ 'type': 'chat', 'message': message, 'displayName': displayName }) })
+    addMessageToDom(displayName, message)
+    e.target.reset()
+
+
+}
+
+function submitThumb() {
+    let message = "👍";
+    channel.sendMessage({ text: JSON.stringify({ 'type': 'chat', 'message': message, 'displayName': displayName }) })
+    addMessageToDom(displayName, message)
+    e.target.reset()
+
+}
+
 
 window.addEventListener('beforeunload', leaveChannel)
 let messageForm = document.getElementById('message__form')
