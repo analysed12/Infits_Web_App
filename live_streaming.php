@@ -48,7 +48,7 @@ include('navbar.php');
         .livecall_leftside {
             margin: 2rem;
             width: 625px;
-height: 400px;
+            height: 400px;
 
         }
 
@@ -278,156 +278,160 @@ height: 400px;
 
 
         #stream__container {
-  justify-self: center;
-  width: 80vw; /* default width */
-  max-width: calc(100% - 40.7rem); /* maximum width */
-  position: fixed;
-  left: 15.7rem;
-  top: calc(100vh - 72px);
-  overflow-y: auto;
-  height: 100%;
-  
-}
+            justify-self: center;
+            width: 80vw;
+            /* default width */
+            max-width: calc(100% - 40.7rem);
+            /* maximum width */
+            position: fixed;
+            left: 15.7rem;
+            top: calc(100vh - 72px);
+            overflow-y: auto;
+            height: 100%;
+
+        }
 
 
-#stream__box{
-  background-color: #3f434a;
-  height: 40vh;
-  width:90%;
-  display: block;
-  background-image: url("./images/ronald_small.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+        #stream__box {
+            background-color: #3f434a;
+            height: 40vh;
+            width: 90%;
+            display: block;
+            background-image: url("./images/ronald_small.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
 
-#stream__box .video__container{
-  border: 2px solid #000;
-  border-radius: 0;
-  height: 100%!important;
-  width:100%!important;
+        #stream__box .video__container {
+            border: 2px solid #000;
+            border-radius: 0;
+            height: 100% !important;
+            width: 100% !important;
 
-  background-size: 300px;
-  border-radius: 15px;
-}
+            background-size: 300px;
+            border-radius: 15px;
+        }
 
-#stream__box video{
-  border-radius: 0;
-}
+        #stream__box video {
+            border-radius: 0;
+        }
 
-#streams__container{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2em;
-  justify-content: center;
-  align-items: center;
-  margin-top: 25px;
-  margin-bottom: 20px;
-  width: 625px;
-height: 432px;
-}
+        #streams__container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2em;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+            margin-bottom: 20px;
+            width: 625px;
+            height: 432px;
+        }
 
-.video__container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border:2px solid #b366f9;
-  border-radius: 5%;
-  cursor: pointer;
-  overflow: hidden;
-  height: 440px;
-width: 700px;
+        .video__container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #b366f9;
+            border-radius: 5%;
+            cursor: pointer;
+            overflow: hidden;
+            height: 440px;
+            width: 700px;
 
-  background-image: url("/images/logo.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 75px;
-}
+            background-image: url("/images/logo.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 75px;
+        }
 
-.video-player{
-  height: 100%;
-  width: 100%;
-}
+        .video-player {
+            height: 100%;
+            width: 100%;
+        }
 
-.video-player video{
-  border-radius: 5%;
-}
-#stream__box {
-  position: relative;
-  border-radius: 15px;
-}
+        .video-player video {
+            border-radius: 5%;
+        }
 
-.stream__focus {
-  width: 100%;
-  height: 100%;
-}
+        #stream__box {
+            position: relative;
+            border-radius: 15px;
+        }
 
-.stream__focus iframe {
-  width: 100%;
-  height: 100%;
-}
+        .stream__focus {
+            width: 100%;
+            height: 100%;
+        }
 
-.stream__actions {
-  /* position: fixed;
+        .stream__focus iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .stream__actions {
+            /* position: fixed;
   bottom: 1rem; */
-  border-radius: 8px;
-  /* background-color: #1a1a1a60; */
-  padding: 1rem;
-  /* left: 50%;
+            border-radius: 8px;
+            /* background-color: #1a1a1a60; */
+            padding: 1rem;
+            /* left: 50%;
   display: none; */
-  gap: 1rem;
-  /* transform: translateX(-50%); */
-  display: flex;
-}
+            gap: 1rem;
+            /* transform: translateX(-50%); */
+            display: flex;
+        }
 
-.stream__actions a,
-.stream__actions button {
-  cursor: pointer;
-  background-color: #262625;
-  color: #fff;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: all 0.2s ease-in-out;
-}
+        .stream__actions a,
+        .stream__actions button {
+            cursor: pointer;
+            background-color: #262625;
+            color: #fff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.2s ease-in-out;
+        }
 
-.stream__actions a svg,
-.stream__actions button svg {
-  width: 1.5rem;
-  height: 1.5rem;
-  fill: #ede0e0;
-}
+        .stream__actions a svg,
+        .stream__actions button svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #ede0e0;
+        }
 
-.stream__actions a.active,
-.stream__actions button.active,
-.stream__actions a:hover,
-.stream__actions button:hover {
-  background-color: #845695;
-}
+        .stream__actions a.active,
+        .stream__actions button.active,
+        .stream__actions a:hover,
+        .stream__actions button:hover {
+            background-color: #845695;
+        }
 
 
-#join-btn{
-  background-color: #845695;
-  font-size: 18px;
-  padding: 11px 51px;
-  border: none;
-  color:#fff;
+        #join-btn {
+            background-color: #845695;
+            font-size: 18px;
+            padding: 11px 51px;
+            border: none;
+            color: #fff;
 
-  /* position: fixed;
+            /* position: fixed;
   bottom: 1rem; */
-  border-radius: 8px;
-  /* left:50%;
+            border-radius: 8px;
+            /* left:50%;
   transform: translateX(-50%); */
-  cursor: pointer;
-  margin-left: 16px;
-  margin-top: 20px;
-}
-#_messages{
-    padding-left: 12px;
-    padding-top: 8px;
-}
+            cursor: pointer;
+            margin-left: 16px;
+            margin-top: 20px;
+        }
+
+        #_messages {
+            padding-left: 12px;
+            padding-top: 8px;
+        }
     </style>
 </head>
 
@@ -439,7 +443,7 @@ width: 700px;
 
 
                 <div id="stream__box"></div>
-                
+
                 <!-- <div id="streams__container"></div> -->
 
                 <div class="stream__actions">
@@ -465,15 +469,15 @@ width: 700px;
                     </button>
                 </div>
 
-               <div style="display:flex;justify-content:space-between">
-               <button id="join-btn">Join Stream</button>
-                <a href="#popup1">
-                <div style="float:right"><button class="btn_endlive">End Live Video</button></div>
-                </a>
-               </div>
+                <div style="display:flex;justify-content:space-between">
+                    <button id="join-btn">Join Stream</button>
+                    <a href="#popup1">
+                        <div style="float:right"><button class="btn_endlive">End Live Video</button></div>
+                    </a>
+                </div>
 
             </div>
-            
+
 
         </div>
         <div class="livecall_rightside">
@@ -491,9 +495,9 @@ width: 700px;
                 <form id="message__form">
                     <div class="chatbottom">
 
-                        <input type="text" class="meassage_input" name="message" placeholder="Send a message....">
-                        <span class="thumb"><img src="images/thumbsup.png" style="width:49%"></span>
-                        <span class="thumb"><img src="images/emoji.png" style="width:70%"></span>
+                        <input id="myInputMessage" type="text" class="meassage_input" name="message" placeholder="Send a message....">
+                        <span onclick="submitThumb()" class="thumb"><img src="images/thumbsup.png" style="width:49%"></span>
+                        <span onclick="submitEmoji()" class="thumb" type="submit"><img src="images/emoji.png" style="width:70%"></span>
 
 
                     </div>
@@ -527,5 +531,8 @@ width: 700px;
 <script type="text/javascript" src="./live/js/room.js"></script>
 <script type="text/javascript" src="./live/js/room_rtm.js"></script>
 <script type="text/javascript" src="./live/js/room_rtc.js"></script>
+
+    
+
 
 </html>
