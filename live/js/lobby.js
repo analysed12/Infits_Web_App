@@ -12,7 +12,11 @@ form.addEventListener('submit', (e) => {
 
     let inviteCode = window.prompt("Enter room name:");
     if (!inviteCode) {
-        inviteCode = String(Math.floor(Math.random() * 10000))
+        window.location = `./live.php`
+
+        // inviteCode = String(Math.floor(Math.random() * 10000))
+    } else {
+        window.location = `./live_streaming.php?room=${inviteCode}`
     }
-    window.location = `./live_streaming.php?room=${inviteCode}`
+
 })
