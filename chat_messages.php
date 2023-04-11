@@ -235,7 +235,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                         </div>
 
                         <div class="d-flex  align-items-center ">
-                            <button onclick="videocall('<?= $chatWith['clientuserID'] ?>', '<?=  $_SESSION['name']?>')"><img class="m-2" src="icons/videocall.png" style="width:20px"/></button>
+                            <div onclick="videocall('<?= $chatWith['clientuserID'] ?>', '<?=  $_SESSION['name']?>')"><img class="m-2" src="icons/videocall.png" style="width:20px"/></div>
                             <img class="m-2 mr-5" src="icons/vector-i.png" style="width:20px">
                           
 
@@ -330,7 +330,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                         <input type="text" id="message" class="form-control rounded-pill m-3 align-items-center " style="height: 50px;" ></input>
                         <button class="btn text-primary " styles="color: #0177FD!importtant;" id="sendBtn">
-                            Send Message1
+                            Send Message
 
                         </button>
                     </div>
