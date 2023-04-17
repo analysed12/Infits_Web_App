@@ -264,7 +264,7 @@ if(isset($_POST['create_goal'])){
 }
 
 include('navbar.php');
-$sql = "SELECT GROUP_CONCAT(client_id) FROM `addclient` WHERE dietition_id = '{$dietitianuserID}';";
+$sql = "SELECT GROUP_CONCAT(client_id) FROM `addclient` WHERE dietitian_id = '{$dietitianuserID}';";
 $result = mysqli_query($conn, $sql) or die('failed');
 if(mysqli_num_rows($result)>0){
     $allClients = array();
@@ -274,7 +274,7 @@ if(mysqli_num_rows($result)>0){
     }
 }
 function getClientName($ID,$conn,$dietitianuserID){
-    $query = "SELECT name FROM `addclient` WHERE client_id = {$ID} AND dietition_id = '{$dietitianuserID}'";
+    $query = "SELECT name FROM `addclient` WHERE client_id = {$ID} AND dietitian_id = '{$dietitianuserID}'";
     $name = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($name)) {
         return ($row['name']);
