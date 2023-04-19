@@ -611,7 +611,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                     <div class="d-flex flex-row justify-content-between">
                         <div class="d-flex  align-items-center">
                             <img src="chat/uploads/<?= $chatWith['p_p'] ?>" class="rounded-circle" style="width:50px">
-
+                           
                             <h6 class="display-4 fs-sm m-2">
                                 <?= $chatWith['name'] ?> <br>
                                 <div class="d-flex
@@ -634,10 +634,12 @@ if (isset($_SESSION['dietitianuserID'])) {
                         </div>
 
                         <div class="d-flex  align-items-center ">
-                            <img class="m-2" src="icons/videocall.png" style="width:20px">
+                            <div onclick="videocall('<?= $chatWith['clientuserID'] ?>', '<?=  $_SESSION['name']?>')"><img class="m-2" src="icons/videocall.png" style="width:20px"/></div>
                             <img class="m-2 mr-5" src="icons/vector-i.png" style="width:20px">
+                          
 
                         </div>
+                        
 
                     </div>
 
@@ -727,7 +729,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                         <input type="text" id="message" class="form-control rounded-pill m-3 align-items-center " style="height: 50px;" ></input>
                         <button class="btn text-primary " styles="color: #0177FD!importtant;" id="sendBtn">
-                            Send Message1
+                            Send Message
 
                         </button>
                     </div>
@@ -740,6 +742,19 @@ if (isset($_SESSION['dietitianuserID'])) {
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
                 <script>
+
+                    function videocall(user, display_name){
+                        console.log("helloooooooo")
+                        console.log(user);
+                        sessionStorage.setItem('display_name', display_name);
+
+
+                        window.location = `./live_streaming.php?room=${user}`;
+                        console.log(user);
+
+                    }
+
+
                     var scrollDown = function() {
                         let chatBox = document.getElementById('chatBox');
                         chatBox.scrollTop = chatBox.scrollHeight;
