@@ -79,7 +79,9 @@ let switchToCamera = async() => {
     let player = `<div class="video__container" id="user-container-${uid}">
                     <div class="video-player" id="user-${uid}"></div>
                  </div>`
-    displayFrame.insertAdjacentHTML('beforeend', player)
+
+    // displayFrame.insertAdjacentHTML('beforeend', player)
+    document.getElementById('stream__box').insertAdjacentHTML('beforeend', player)
 
     await localTracks[0].setMuted(true)
     await localTracks[1].setMuted(true)
@@ -180,13 +182,15 @@ let toggleScreen = async(e) => {
         localScreenTracks = await AgoraRTC.createScreenVideoTrack()
 
         document.getElementById(`user-container-${uid}`).remove()
-        displayFrame.style.display = 'block'
+            // displayFrame.style.display = 'block'
 
         let player = `<div class="video__container" id="user-container-${uid}">
                 <div class="video-player" id="user-${uid}"></div>
             </div>`
 
-        displayFrame.insertAdjacentHTML('beforeend', player)
+        document.getElementById('stream__box').insertAdjacentHTML('beforeend', player)
+
+        // displayFrame.insertAdjacentHTML('beforeend', player)
         document.getElementById(`user-container-${uid}`).addEventListener('click', expandVideoFrame)
 
         userIdInDisplayFrame = `user-container-${uid}`
