@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 ob_start();
 // session_start();
 include 'navbar.php';
@@ -32,7 +31,7 @@ if (isset($_SESSION['dietitianuserID'])) {
     # Getting User conversations //working for getting the clients user in left side
     $conversations = getConversation($user['dietitian_id'], $conn);
 
-    $chatWith = getClient($_GET['user'], $conn);
+    // $chatWith = getClient($_GET['user'], $conn);
     // $chats = getChats($_SESSION['dietitian_id'], $chatWith['client_id'], $conn);
 
     // opened($chatWith['client_id'], $conn, $chats);
@@ -50,14 +49,72 @@ if (isset($_SESSION['dietitianuserID'])) {
         <link rel="stylesheet" href="css/chat_style.css">
         <link rel="icon" href="images/logo.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .card-body{
+                padding: 0% !important;
+            }
+            .w-300{
+                    width: 99% !important;
+                }
+            @media (min-width: 75px){
+                body{
+                    overflow-x: hidden !important;
+                }
+            }
+            
+            /* For screens smaller than 576px (extra small screens) */
+            @media (min-width: 215px) and (max-width: 387.98px) { 
+            /* CSS rules for extra small screens */
+            
+                .d-flex.flex-row{
+                    margin: 0;
+                    height: 100%;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    overflow: hidden !important;
+                    /* width:665px !important; */
+                }
+                
+            }
+            @media (max-width: 575.98px) and (min-width: 388px) { 
+            /* CSS rules for extra small screens */
+            
+                .d-flex.flex-row{
+                    margin-top: -10px;
+                    height: 100%;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    overflow: hidden !important;
+                    /* width:665px !important; */
+                }
+                
+            }
+
+            /* For screens larger than or equal to 576px (small screens) */
+            @media (min-width: 576px) and (max-width: 767.99px) {
+            /* CSS rules for small screens */
+            .d-flex.flex-row{
+                    margin-top: -100px;
+                    height: 100%;
+                    display: flex !important;
+                    flex-direction: column !important;
+                }
+                .w-300{
+                    margin-top:86px;
+                }
+            }
+            .bt-outline{
+                border: none;
+            }
+        </style>
     </head>
 
-    <body>
+    <body style="z-index:-10;">
         <div class="d-flex flex-row">
             <div class="d-flex
                 flex-coloumn
-                vh-100 chat" style="outline: 2px solid #EEEEEE; padding:20px!important;">
-                <div class="w-300" style="width:300px">
+                vh-100 chat" style="outline: 2px solid #EEEEEE; padding:20px!important;z-index:0;">
+                <div class="w-300">
                     <div>
                         <div class="d-flex
     		            mb-2 p-2 
@@ -77,11 +134,29 @@ if (isset($_SESSION['dietitianuserID'])) {
                         </div>
 
                         <div class="input-group mb-3 bt-outline ">
-                            <button class="btn  grey-color text-secondary" id="serachBtn">
+                            <!-- <button class="btn  grey-color text-secondary" id="serachBtn">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <input type="text" placeholder="Search" id="searchText" class="form-control bg-light text-secondary">
+                            <input type="text" placeholder="Search" id="searchText" class="form-control bg-light text-secondary"> -->
+                            <!-- <div class="card-body dig searchbox">
+                            <form method="POST" class="search-form form-inline " style="display: flex; border: none; border-radius: 0.6rem; font-size: 20px; font-weight: 400; padding-top: 0.5rem; padding-right: 0.5rem; color: #BBBBBB; background-color: white; box-shadow: 0.6px 0.6px 2px 1px #ccc;">
+                            //<button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
+                                   //     class="fa-solid fa-magnifying-glass"></i></button>
+                                //<input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
+                                  //  name="search" >  NOT NEEDE FRom start
+                                    <button style="background-color:white;border:none;" id="btn_search" class="search-icon" name="search-btn"><img src="images/vec_search.png" alt=""></button> 
+                                    <input type="text" placeholder="Search Client" class="search-box form-control w-50" id="search" name="search" style="border:none;font-size:1rem;margin-left:1rem  ">
 
+                                <div id="display">
+                                </div>
+                            </form>
+                        </div>-->
+                        <div class="input-group mb-3 bt-outline " style="display: flex; border: none; border-radius: 0.6rem; font-size: 20px; font-weight: 400; padding-top: 0.5rem; padding-right: 0.5rem; color: #BBBBBB; background-color: white; box-shadow: 0.6px 0.6px 2px 1px #ccc;">
+                            <button class="btn  grey-color text-secondary" style="background-color:white !important;border:none;" id="serachBtn">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <input type="text" placeholder="Search" id="searchText"  style="background-color:white !important;border:none;" class="form-control bg-light text-secondary">
+                        </div>
                         </div>
                         <div class="scroll">
                             <ul id="chatList" class="list-group mvh-50">

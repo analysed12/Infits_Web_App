@@ -50,8 +50,8 @@ if(isset($_SESSION['dietitianuserID'])){
         /* background-color: dodgerblue; */
         color: black;
         padding: 1rem;
-        height: auto;
-        width: auto;
+        height: 440px;
+        width: 480px;
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
@@ -62,8 +62,10 @@ if(isset($_SESSION['dietitianuserID'])){
         max-width: 1000px;
         margin: 0 auto;
         display: grid;
+        /* flex-wrap:wrap; */
         gap: 1.5rem;
         grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        /* border:2px solid black; */
     }
 
     .card-upper {
@@ -117,8 +119,6 @@ if(isset($_SESSION['dietitianuserID'])){
 
     .search-box {
         border: none !important;
-       
-
     }
 
     input:focus {
@@ -150,7 +150,7 @@ if(isset($_SESSION['dietitianuserID'])){
 
     a:hover {
         cursor: pointer;
-        background-color: yellow;
+        background-color: lightblue;
     }
 
     .box input {
@@ -184,9 +184,8 @@ if(isset($_SESSION['dietitianuserID'])){
     margin-bottom: 1rem;
 }
 .searchbox {
-    width: 400px;
+    width: 270px;
     height: 45px;
-    margin-left: 10rem;
     background: #ffffff;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -194,10 +193,73 @@ if(isset($_SESSION['dietitianuserID'])){
 }
 
 
+.row5{
+    /* border:1px solid black; */
+    width: 48px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: -21px;
+}
+.toptext{
+    display:flex;
+    justify-content:space-between;
+    height:56px;
+    align-items:center;
+   padding: 30px 5%;
+   margin:20px 10px;
+}
+#heading{
+    font-size:45px ;
+}
+
+@media screen and (max-width: 1190px) {
+    .card{
+        margin: auto;
+    }
+    .searchbox{
+        width:200px;
+    }
+    .left{
+        margin-left:10px;
+    }
+    .cards{
+        margin-left:10px;
+
+    }
+}
+@media screen and (max-width: 480px){
+   .container{
+    width:auto;
+   }
+    .cards{
+    width:auto;
+   }
+    .card{
+    width:auto;
+   }
+   #heading{
+        font-size:25px !important;
+    }
+}
+@media (max-width: 414px){
+.toptext{
+    width: 125%;
+}
+}
 @media screen and (max-width: 720px) {
     #heading{
-        font-size:35px !important;
+        font-size:45px !important;
     }
+    .container{
+        padding:0;
+    }
+    .cards{
+        margin:0;
+    }
+    
+}
+#search{
+    margin-top:2px;
 }
 @media screen and (max-width: 720px) {
    .card{
@@ -221,7 +283,9 @@ if(isset($_SESSION['dietitianuserID'])){
 }
 
 
-
+.bord{
+    border:1px solid black;
+}
     </style>
     <script>
     $(document).ready(function() {
@@ -237,19 +301,18 @@ include "navbar.php";
 
 
 
-
-    <div class="row" style="padding:1rem;">
+<!-- <div class="toptext" style="padding:1rem;">
         <div class="col-6" id="heading"style="font-weight:400;font-size:48px;color:black !important">Diet Plans</div>
-        <div class="col-6" style="text-align:right">
+        <div class="col-6" style="margin-top: 15px;">
             <div class="card-body dig searchbox">
                 <form method="POST" class="search-form form-inline " >
-                <!-- <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
+                 <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
                             class="fa-solid fa-magnifying-glass"></i></button>
                     <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
-                        name="search" > -->
+                        name="search" > 
                         <button style="background-color:white;border:none;" id="btn_search"  class="search-icon" name="search-btn"><img src="images/vec_search.png" alt=""></button>
                          <input type="text"  placeholder="Search plan" class="search-box form-control w-50" id="search"
-                        name="search" style="border:none;font-size:1rem;margin-left:1rem  ">
+                        name="search" style="margin-top: 3px;border:none;font-size:1rem;margin-left:1rem  ">
        
                     <div id="display">
                     </div>
@@ -260,6 +323,28 @@ include "navbar.php";
                 </div>
             </div>
 
+        </div>
+    </div> -->
+    <div class="toptext">
+          <div class="left" id="heading">Diet Plans</div>
+           <div class="right">
+           <div class="card-body dig searchbox">
+                <form method="POST" class="search-form form-inline " >
+                 <button type="submit" style="background-color:white;border:none;margin-top:11px" id="btn_search" class="search-icon" name="search-btn"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
+                        name="search" > 
+                        
+                    <div id="display">
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-item-action" id="content">
+                </div>
+            </div>
+
+        </div>
         </div>
     </div>
 
@@ -311,18 +396,28 @@ if(isset($_POST['search-btn']))
                                 </div>
                             </div>
                             <div class="card-upper-options col-1">
-                                <div class="row">
-                                    <div style="display:inline-block">
+ hi
+                            <div class="r">
+                                    <!-- <div>
+                                        ho
+                                      <span class="fa fa-pencil"></span>
+                                    </div>
+                                    <div>
+                                      <span class="fa fa-trash "></span>
+                                    </div> -->
+                                   <!-- style="display:inline-block" -->
+                                    <!-- <div  >
                                         <a href="update_plan.php?id=<?php echo $row1['plan_id'] ?>"
                                             title="Update Record" style="color#7282FB" data-toggle="tooltip"><span
                                                 class="fa fa-pencil"></span></a>
                                     </div>
-                                    <div style="display:inline-block">
+                                     style="display:inline-block" -->
+                                    <!-- <div >
                                         <a onclick="return confirm('Are you sure?')"
                                             href="delete_plan.php?id=<?php echo $row1['plan_id'] ?>"
                                             title="Delete Record" style="color:#7282FB" data-toggle="tooltip"><span
                                                 class="fa fa-trash "></span></a>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -409,16 +504,22 @@ else{
                             </div> -->
                             
                             <div class="card-upper-options col-1">
-                                <div class="row">
+                                <div class="row5">
+                                    <!-- <div>
+                                      <span class="fa fa-pencil"></span>
+                                    </div>
+                                    <div>
+                                      <span class="fa fa-trash "></span>
+                                    </div> -->
                                     <div style="display:inline-block">
                                         <a href="update_plan.php?id=<?php echo $row['plan_id'] ?>" title="Update Record"
-                                            style="color:#7282FB;padding-left:0.5rem;padding-right:0.5rem;height: 30px;border-radius: 8px;" data-toggle="tooltip"><span
+                                            style="color:#7282FB;height: 30px;border-radius: 8px;" data-toggle="tooltip"><span
                                                 class="fa fa-pencil"></span></a>
                                     </div>
                                     <div style="display:inline-block;height:100%">
                                         <a onclick="return confirm('Are you sure?')"
                                             href="delete_plan.php?id=<?php echo $row['plan_id'] ?>"
-                                            title="Delete Record" style="color:#FF3D3D;padding-left:0.5rem;padding-right:0.5rem;height: 30px;border-radius: 8px;margin-top:10rem" data-toggle="tooltip"><span
+                                            title="Delete Record" style="color:#FF3D3D;height: 30px;border-radius: 8px;margin-top:10rem" data-toggle="tooltip"><span
                                                 class="fa fa-trash "></span></a>
                                     </div>
                                 </div>

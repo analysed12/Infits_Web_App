@@ -151,9 +151,16 @@ include("navbar.php");
     text-align: center;
     padding-top: 5px;
 }
-.black{
-    background-color:black;;
-}
+/* @media only screen and (max-width: 600px){
+    #mobile_btn{
+        padding: 30px 0px;        
+    }
+   /*  #new_btn{
+        padding: 30px 0px;
+    } 
+    
+} */
+
 </style>
 
 <body>
@@ -172,7 +179,8 @@ include("navbar.php");
                 <div class="eve_form" style="color:#4B9AFB">
                     <!-- Event name field -->
                     <label for="subject" class="event_title">EVENT NAME</label>
-                    <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px;"
+                    <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+border-radius: 10px; border: 1px solid #F1F1F1;"
                         required>
                         <option value="Consultation">Consultation</option>
                         <option value="Dietplan">Diet Plan</option>
@@ -184,14 +192,14 @@ include("navbar.php");
                     <div class="reminder">
                         <div class="event_title">REMINDER TYPE</div>
                         <div class="rem">
-                            <div style="display: inline-block;" class="rem-item item1"><i
+                            <div style="display: inline-block;" class="rem-item"><i
                                     class="fa-solid fa-suitcase rem_icon"></i>Consultation</div>
-                            <div style="display: inline-block;" class="rem-item item2"><i
+                            <div style="display: inline-block;" class="rem-item"><i
                                     class="fa-solid fa-apple-whole rem_icon"></i>Diet Plan</div>
-                            <div style="display: inline-block;" class="rem-item item3"><i
+                            <div style="display: inline-block;" class="rem-item"><i
                                     class="fa-solid fa-phone rem_icon"></i>Call
                             </div>
-                            <div style="display: inline-block;" class="rem-item item4"><i
+                            <div style="display: inline-block;" class="rem-item"><i
                                     class="fa-solid fa-add rem_icon"></i>Others
                             </div>
                         </div>
@@ -207,14 +215,12 @@ include("navbar.php");
                         <div class="input-icons">
                             <i class="fa-solid fa-user icon">
                             </i>
-                            <select style="border-top:none;border-left:none;border-right:none" name="clientname"
+                            <select style="border-top:none;border-left:none;border-right:none; border-bottom:none;" name="clientname"
                                 class="input-field" required>
                                 <option value="" disabled selected>Add Client</option>
                                 <?php
                                 $id = $_SESSION['name'] ;
-                                $arr=explode(" ",$id);
-                                $cutname=$arr[0];
-                                $query = "SELECT client_id,name FROM addclient WHERE dietitianuserID = '$cutname' ";
+                                $query = "SELECT client_id,name FROM addclient WHERE dietitianuserID = '$id' ";
                                 $result1=mysqli_query($conn,$query); 
                                 while($row = mysqli_fetch_assoc($result1) ){ ?>
                                 <option value="<?php echo $row['name']?>"><?php echo $row['name']?></option>
@@ -228,7 +234,7 @@ include("navbar.php");
                         <div class="input-icons">
                             <i class="fa-solid fa-suitcase icon">
                             </i>
-                            <select style="border-top:none;border-left:none;border-right:none" name="meetingtype"
+                            <select style="border-top:none;border-left:none;border-right:none;border-bottom:none;" name="meetingtype"
                                 class="input-field" required>
                                 <option value="" disabled selected>Meeting Type</option>
                                 <option value="Videocall">Video Call</option>
@@ -239,13 +245,13 @@ include("navbar.php");
 
 
                         <!-- Date and Time fields -->
-                        <div class="txt button" style="border-bottom:1.8px solid black;" id="button">
+                        <div class="txt button"  id="button">
                             <i class="fa-solid fa-calendar-days txticon" style="display:inline-block;color:black !important">
                             </i>
                             <p style="display:inline-block;color:black !important">Date and Time</p>
                         </div>
 
-                        <!-- Date and Time Pop up -->
+                        <!-- Date and Time Pop up style="border-bottom:1.8px solid black;" -->
                         <div id="bg_container" class="bg-popContainer" style="color:black" >
                             <div class="pop-box">
                                 <div id="close" class="closer">+</div>
@@ -267,7 +273,7 @@ include("navbar.php");
                         <div class="input-icons">
                             <i class="fa-solid fa-location icon">
                             </i>
-                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                            <input style="border-top:none;border-left:none;border-right:none;border-bottom:none;" class="input-field"
                                 type="text" placeholder="Place of meeting" name="placeofmeeting">
                         </div>
 
@@ -275,7 +281,7 @@ include("navbar.php");
                         <div class="input-icons">
                             <i class="fa-solid fa-bars icon">
                             </i>
-                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                            <input style="border-top:none;border-left:none;border-right:none;border-bottom:none;" class="input-field"
                                 type="text" placeholder="Add Description" name="description" required>
                         </div>
 
@@ -283,15 +289,15 @@ include("navbar.php");
                         <div class="input-icons">
                             <i class="fa-solid fa-paperclip icon">
                             </i>
-                            <input style="border-top:none;border-left:none;border-right:none" class="input-field"
+                            <input style="border-top:none;border-left:none;border-right:none;border-bottom:none;" class="input-field"
                                 type="text" placeholder="Attachment" name="attachment" required>
                         </div>
                     </div>
 
                     <div style="width:100%; margin-left:10%; margin-right:10%">
                         <a href="createevent.php"><input style="display:inline-block; color:black; background:white;"
-                                class="form_btn" placeholder="Cancel"></input></a>
-                        <button style="display:inline-block; background: #4B9AFB;" class="form_btn" name="submit"
+                                class="form_btn " id='mobile_btn' placeholder="Cancel"></input></a>
+                        <button style="display:inline-block; background: #4B9AFB;" id='new_btn' class="form_btn" name="submit"
                             type="submit">Book Appointment</button>
                     </div>
                 </div>
@@ -325,40 +331,6 @@ include("navbar.php");
 
 </body>
 <script>
-       let item1=document.querySelector('.item1');
-    let item2=document.querySelector('.item2');
-    let item3=document.querySelector('.item3');
-    let item4=document.querySelector('.item4');
-   function removecolor(){
-    let items=document.querySelectorAll('.rem-item');
-    //console.log(items);
-  items.forEach((item)=>{
-    if(item.classList.value.includes("black")){
-        let a=item.classList.value;
-      item.classList.remove("black");
-    }
-  });
-   }
-function addfun1(){
-    removecolor();
-  item1.classList.add('black');
-}
-function addfun2(){
-    removecolor();
-  item2.classList.add('black');
-}
-function addfun3(){
-    removecolor();
-  item3.classList.add('black');
-}
-function addfun4(){
-    removecolor();
-  item4.classList.add('black');
-}
-item1.addEventListener('click',addfun1);
-item2.addEventListener('click',addfun2);
-item3.addEventListener('click',addfun3);
-item4.addEventListener('click',addfun4);
 // get elements by id
 
 const popOutButton = document.getElementById("button")

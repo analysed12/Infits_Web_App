@@ -142,8 +142,10 @@ body {
 }
 
 .mobile img {
-    width: 550px;
-    height: 550px;
+    /* width: 550px;
+    height: 550px; */
+    width: 460px;
+    height: 460px;
     margin-top:6rem;
 }
 
@@ -215,9 +217,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-
-}
+    flex-direction: column;}
 
 .bottom_logo {
     /* margin-left: 80px; */
@@ -310,16 +310,43 @@ body {
     height: 50px;
     width: 430px;
     margin: 10px;
+    padding-left: 40px !important;
+    font-family: 'manrope',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #B4B4B4;
 }
 
 #password {
     background: #F9F9FF;
-    border: 1px solid #EAEAEA;
+    border: 1px solid #F9F9FF;
     border-radius: 15px;
     padding: 10px;
-    width: 430px;
     height: 50px;
+    width: 430px;
     margin: 10px;
+    padding-left: 40px !important;
+    font-family: 'manrope',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #B4B4B4;
+}
+#cpassword {
+    background: #F9F9FF;
+    border: 1px solid #F9F9FF;
+    border-radius: 15px;
+    padding: 10px;
+    height: 50px;
+    width: 430px;
+    margin: 10px;
+    padding-left: 40px !important;
+    font-family: 'manrope',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #B4B4B4;
 }
 
 .input_container {
@@ -344,17 +371,17 @@ body {
 
 .ip_box {
     display: flex;
-    
     align-items: center;
     flex-direction: row;
     color: #B4B4B4;
-    
-
 }
 
 .ip_box img {
     z-index: 2;
     margin-right: -45px;
+    width: 23px;
+    height: 23px;
+
 }
 
 .sign_up {
@@ -398,7 +425,7 @@ body {
 }
 
 .input_bar {
-    background: #F9F9FF;
+    
     border: 1px solid #F9F9FF;
     border-radius: 15px;
     padding-left: 40px !important;
@@ -411,6 +438,7 @@ body {
     font-size: 15px;
     color: #B4B4B4;
 }
+
 
 
 .sign_in_sec span {
@@ -429,6 +457,15 @@ body {
 .row{
     margin-left:2rem;
 }
+.hr{
+border: 1px solid #F3F3FF;
+    width: 1204px;
+    margin-left: 23px;
+}
+/* input[type="text"] {
+  background-color: black !important;
+} */
+
 @media screen and (max-width: 720px) {
     .sform{
         margin-left: 4rem;
@@ -510,16 +547,18 @@ body {
                 </div>
                 <!-----------------------enter otp section---------------->
               <div id="reset-sec">
-                <span class="mt-5 ms-0"><img src="images/Line70.png"><span id="subtitle" style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">An OTP has been sent to your email</span></span>
+              <span class="mt-5 " style="margin-left:55px !important" ><img src="images/Line70.png"><span id="subtitle" style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">An OTP has been sent to your email</span></span>
+
+                <!-- <span class="mt-5 ms-0"><img src="images/Line70.png"><span id="subtitle" style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">An OTP has been sent to your email</span></span> -->
                 <div class="form_inputs login-area">
                     <!-- <form action="" method="post">
                     <?php include('errors.php'); 
                    ?> -->
                         <!-- Main Form -->
                         <div class="ip_box">
-                            <img src="images/teenyicons_otp-outline.png">
-                            <input class="input_bar" id="email" type="text" name="dietitianuserID"
-                                placeholder="Enter OTP">
+                            <img src="images/teenyicons_otp-outline.png" ">
+                            <input  id="email" type="text" name="dietitianuserID"
+                                placeholder="Enter OTP" style="background-color: black;">
                         </div>
                                          
                         <div class="sign_btn_section mt-3">
@@ -536,21 +575,21 @@ body {
               </div>
                <!-----------------------new reset password section---------------->
               <div id="reset-sec-2" style="display: none;">
-                <span class="mt-5 ms-0"><img src="images/Line70.png"><span id="subtitle" style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">Set a new password for your account </span></span>
+                <span class="mt-5 " style="margin-left:55px !important" ><img src="images/Line70.png"><span id="subtitle" style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">An OTP has been sent to your email</span></span>
                 <div class="form_inputs login-area">
                      <!-- Main Form -->
                         <div class="ip_box">
                             <img src="images/Security Shield Green.png" >
-                            <input class="input_bar" id="password" type="password" name=""
-                                placeholder="Enter new password">
-                                <img style="cursor: pointer; width: 22px; height: 19px;"src="images/eye.png" id="eyeicon" alt="eye">
+                            <input  id="password" type="password" name=""
+                                placeholder="Enter new password" style="background-color: #F9F9FF;">
+                                <img style="cursor: pointer; width: 17px;height:14px;position: relative;right: 45px"src="images/eye.png" id="eyeicon" alt="eye">
                         </div>
                       
                         <div class="ip_box">
                             <img src="images/Security Shield Green.png" >
-                            <input class="input_bar" id="cpassword" type="password" name=""
-                                placeholder="Confirm new password">
-                                <img style="cursor: pointer; width: 22px; height: 19px;"src="images/eye.png" id="ceyeicon" alt="eye">
+                            <input  id="cpassword" type="password" name=""
+                                placeholder="Confirm new password" style="background-color: #F9F9FF;">
+                                <img style="cursor: pointer; width: 17px; height:14px;position: relative;right: 45px"src="images/eye.png" id="ceyeicon" alt="eye">
                         </div>
                        
                         <div class="sign_btn_section mt-3">
@@ -574,7 +613,7 @@ body {
             
         </div>
         <!-------------------------footer section----------------------------------->
-    <hr  id="hr" style="border: 1px solid #F3F3FF;width: 1204px;">
+    <hr  id="hr" class="hr">
     </div>
     <div class="row" id="parent-lg" style="margin-top:2rem">
         <div class="col-sm-4 " id="btml">

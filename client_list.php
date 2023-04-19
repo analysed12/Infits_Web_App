@@ -39,6 +39,7 @@ if(isset($_SESSION['dietitianuserID'])){
 }
 body{
     font-family: 'NATS', sans-serif !important;
+    overflow-x:hidden !important;
 }
 
 .clients {
@@ -74,6 +75,7 @@ body{
     box-shadow: 0.7px 0.7px 2.5px 1.5px rgb(231, 208, 253);
     border-radius: 0.6rem;
     font-size: 20px;
+    font-weight:400;
     border: none;
     display: flex;
     padding-top: 0.5rem;
@@ -94,7 +96,7 @@ body{
 }
 
 .search_client {
-    width: auto;
+    width:343px;
     margin-top: 1rem;
     color: #BBBBBB;
     background-color: white;
@@ -106,6 +108,7 @@ body{
     display: flex;
     padding-top: 0.5rem;
     padding-right: 0.5rem;
+    margin-right:1rem;
 }
 
 #btn3 {
@@ -140,6 +143,7 @@ body{
 
 #active:hover {
     border-bottom: 0.25rem solid #4B9AFB;
+    border-radius:17px;
 }
 
 .client_wrapper1 {
@@ -165,8 +169,8 @@ body{
 }
 
 img {
-    width: 4rem;
-    height: 5rem;
+    width:87px;
+    height: 87px;
     border-radius: 100%;
 }
 
@@ -232,6 +236,7 @@ img {
     top: 10%;
     right:6%;
     display: none;
+    border:1px solid #7282FB;
 }
 
 
@@ -258,7 +263,9 @@ img {
     
 
     .add_set {
-        margin-top: 0.3rem;
+        /* margin-bottom:1rem; */
+        font-size:25px;
+        font-weight:400;
     }
 
     .client_wrapper1 {
@@ -283,7 +290,10 @@ img {
 
     .clients_operations {
         display: flex;
+        
         gap: 0.5rem;
+        max-width:fit-content;
+        margin-left:0rem !important;
     }
 
     .clients_container3 {
@@ -304,17 +314,22 @@ img {
 
 .client-item {
     padding: 30px 10px;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     /* text-align: center; */
     margin: 5px;
     width: 150px;
     flex-basis: 300px;
     background: #FAFAFA;
-    border: 1px solid #D9D9D9;
+    /* border: 1px solid #D9D9D9; */
     /* box-shadow: 0px 10px 15px rgba(136, 136, 136, 0.05); */
     border-radius: 15px;
     position: relative;
     
+
+}
+.client-item:hover{
+    border: 1px solid #D9D9D9;
+    box-shadow: 0px 10px 15px rgba(136, 136, 136, 0.05);
 
 }
 
@@ -330,6 +345,7 @@ img {
 .button-top:focus{
     border-bottom : 4px solid #4B9AFB;
 
+
 }
 .button-top:active{
     border-bottom : 4px solid #4B9AFB;
@@ -339,6 +355,16 @@ img {
     border-bottom : 4px solid #4B9AFB;
 
 }
+@media screen and (max-width: 1100px){
+    .clients_container{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:0.5rem;
+    }
+    .clients_operations{
+        margin-left:-5rem;
+    }
+}
 </style>
 
 <body>
@@ -347,7 +373,7 @@ img {
         <div class="clients_container">
             <div class="search_client" style="justify-content:center;align-items:center">
                 <div><button id="btn3"><span class="material-symbols-outlined">search</span></button> </div>
-                <div style="margin-left:1rem;margin-right:4rem"> <input type="text" name="search_client" placeholder="Seach Clients"
+                <div style="margin-left:1rem;margin-right:4rem;margin-bottom:0.5rem;"> <input type="text" name="search_client" placeholder="Search Clients"
                         class="seach_clients_text" style="width:60%"></div>
             </div>
 
@@ -355,7 +381,7 @@ img {
             <div class="clients_operations">
                 <div class="add_set_client" id="add_set_client" >
                     <div><button id="btn1" ><span class="material-symbols-outlined">add</span></button> </div>
-                    <div class="add_set"> <span>Add Clients</span></div>
+                    <div class="add_set"> <span">Add Clients</span></div>
                 </div>
                 <div onclick="toast('Set Goals');" class="add_set_client">
                     <div><button  id="btn1"><span class="material-symbols-outlined">settings</span></button> </div>
@@ -382,7 +408,7 @@ img {
         </div>
         <br><br>
         
-        <div class="client-container">
+        <div class="client-container" >
             <?php
                 if(isset($_POST['pending-btn']))
                 {
@@ -414,18 +440,18 @@ img {
                     {
                         // $name_of_plan = $row1["name"];
                 
-                    echo "<div class='client-item'>";
-                    echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
+                    echo "<div class='client-item'id='card' >";
+                    echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='images/unsplash.png'></div>";
                     echo "<div class='profile2'>";
-                    echo "<input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row["client_id"]."'>";
-                    echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
-                    echo "<a href='client_profile.php?client_id=".$row['client_id']."'>Profile</a>";
+                    echo "<input style='cursor:pointer;border:1px solid #7282FB;' id='chk' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row["client_id"]."'>";
+                    echo "<p style='font-weight:400;text-transform:capitalize;font-size:22px;line-height:88%;'>".$row["name"]."</p>";
+                    echo "<a href='client_profile.php?client_id=".$row['client_id']."' style='font-size:18px;font-weight:400;line-height:88%;padding:0px !important;margin-top:-1rem;'>Profile</a>";
                     echo "<div>";
                     echo "<div class='box1' style='display:inline-block;background: #FFFFFF;
-                    border: 1px solid #4B9AFB;
-                    border-radius: 6px;padding:5px;margin-top:5px';margin-right:5px;>".$plan_name."</div>";
+                    border: 1px solid #4B9AFB;font-size:13px;font-weight:400;
+                    border-radius: 6px;padding:5px;margin-top:5px;margin-right:15px;'>".$plan_name."</div>";
                     echo "<div class='box2' style='display:inline-block;background: #FFFFFF;
-                    border: 1px solid #4B9AFB;
+                    border: 1px solid #4B9AFB;font-size:13px;font-weight:400;
                     border-radius: 6px;padding:5px;margin-top:5px;margin-left:5px;'>".$plan_duration." </div>";
                     echo "</div>";
     
@@ -468,19 +494,19 @@ img {
                         $plan_duration = $months." Month" ;
                     }
                  
-                    echo "<div class='client-item'>";
-                    echo "<input style='cursor:pointer' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row['client_id']."'>";
-                    echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='./icons/profile6.png'></div>";
+                    echo "<div class='client-item' id='card'>";
+                    echo "<input style='cursor:pointer;solid border:1px solid #7282FB;' id='chk' class='myCheckboxs' type='checkbox' name='checkbox_name[]' value='".$row['client_id']."'>";
+                    echo "<div class='profile1' style='float:left; margin-right:10px;'><img src='images/unsplash.png'></div>";
                     echo "<div class='profile2'>";
-                    echo "<p style='font-weight:bold;text-transform:uppercase;'>".$row["name"]."</p>";
-                    echo "<a href='client_dashboard.php?client_id=".$row['client_id']."'>Profile</a>";
+                    echo "<p style='font-weight:400;text-transform:capitalize;font-size:22px;line-height:88%;'>".$row["name"]."</p>";
+                    echo "<a href='client_dashboard.php?client_id=".$row['client_id']."' style='font-size:18px;font-weight:400;line-height:88%;padding:0px !important;margin-top:-1rem;'>Profile</a>";
                     echo "<div>";
                     echo "<div class='box1' style='display:inline-block;background: #FFFFFF;
-                    border: 1px solid #4B9AFB;
-                    border-radius: 6px;padding:5px;margin-top:5px';margin-right:5px;>".$plan_name."</div>";
+                    border: 1px solid #4B9AFB;font-size:13px;font-weight:400;
+                    border-radius: 6px;padding:5px;margin-top:5px;margin-right:5px;'>".$plan_name."</div>";
                     echo "<div class='box2' style='display:inline-block;background: #FFFFFF;
-                    border: 1px solid #4B9AFB;
-                    border-radius: 6px;padding:5px;margin-top:5px;margin-left:5px;'>".$plan_duration." </div>";
+                    border: 1px solid #4B9AFB;font-size:13px;font-weight:400;
+                    border-radius: 6px;padding:5px;margin-top:5px';margin-right:5px;'>".$plan_duration." </div>";
                     echo "</div>";
     
                     echo "</div>";
@@ -510,7 +536,7 @@ img {
 
                 </span><span class='btn__span'></span>
           </button>
-           <button onclick='close()' class="btn btn2">Cancle</button>
+           <button onclick='close()' class="btn btn2">Cancel</button>
 
         </form>
 
@@ -520,6 +546,11 @@ img {
     </div>
     
 <script>
+    document.getElementsByClassName('client-item').onclick=function(){
+        var checkbox= document.getElementById('chk');
+        checkbox.checked=!checkbox.checked;
+    }
+   
         const popUp = document.querySelector("#toast");
         const btn1 = document.querySelector(".btn1");
         const btn2 = document.querySelector(".btn2");

@@ -315,6 +315,11 @@ body {
     flex-direction: column;
 
 }
+.mt-5{
+    margin-right: 6.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
 
 .bottom_logo {
     /* margin-left: 80px; */
@@ -455,7 +460,7 @@ body {
     border: 1px solid #F9F9FF;
     border-radius: 15px;
     padding: 10px;
-    width: 300px;
+    width: 350px;
     height: 50px;
     margin: 10px;
 }
@@ -465,7 +470,7 @@ body {
 border: 1px solid #EAEAEA;
 border-radius: 15px;
     padding: 10px;
-    width: 300px;
+    width: 350px;
     height: 50px;
     margin: 10px;
 }
@@ -560,6 +565,25 @@ border-radius: 15px;
 .row{
     margin-left:2rem;
 }
+.down{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 124.84%;
+    color: #A6A6A6;
+    margin-top: 3rem;
+    gap:2rem;
+}
+
+@media screen and (max-width: 720px) {
+.sform{
+    margin-left:9rem;
+}
+}
 @media screen and (max-width: 720px) {
     #home{
         margin-left:13rem;
@@ -569,16 +593,19 @@ border-radius: 15px;
     height: 400px;
     margin-left: 6rem;
 }
+
 .left_links{
     margin-left: 8rem;
 }
 .right_links{
     margin-left: 3rem;
+    margin-top: 2rem;
 }
 .sign{
-    margin-left:11rem;
+    margin-left:2rem;
 }
 #hr{
+
     display:none;
 }
 #btml{
@@ -605,6 +632,14 @@ border-radius: 15px;
     margin-left: -530px;
 }
 }
+@media screen and (max-width: 768px){
+    .sign{
+        margin-left: 11rem;
+    }
+    
+}
+
+
 </style>
 
 <body>
@@ -616,7 +651,8 @@ border-radius: 15px;
             </div>
             <img src="images/infits_logo.svg" style="margin-top:0.8rem;margin-left:0.8rem">
         </div>
-        <div class="right d-none d-sm-block">
+        <div class="up">  
+            <!--class="right d-none d-sm-block"  -->
             <button id="home" onclick="window.location.href = 'index.php';">Home</button>
             <button class="sign" onclick="window.location.href = 'register.php';">SignUp</button>
         </div>
@@ -629,7 +665,7 @@ border-radius: 15px;
             <div class="sform">
                 <div class="header_sigin">
                     <img src="images/bg_patch_small.svg" >
-                    <span style="font-size: 100px;font-weight:400">Sign In</span>
+                    <span style="font-size: 100px;font-weight:400; margin-right: 5rem;">Sign In</span>
                     
 
                 </div>
@@ -637,15 +673,18 @@ border-radius: 15px;
                 <div class="gf_btns">
                 
                     <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-                    <a href="#"class="google">
+                    <a href="<?php echo $client->createAuthUrl(); ?>" class="google">
                         <img style="width: 30px; height: 30px;" src="images/google.svg" alt="">
                         <span class="ps-2">Google</span>
                     </a>       
-                            <a class="facebook">
-                                         <img style="width: 30px; height: 30px;"src="images/facebook.svg" alt="">
-                                         <span class="ps-2">Facebook</span>
-                            </a> 
-                
+
+                    <form method="post" action="#">
+                    <button type="submit" name="login" value="Facebook" class="facebook">
+                    <img style="width: 30px; height: 30px;" src="images/facebook.svg" alt="">
+                    <span class="ps-2">Facebook</span>
+                    </button>
+                    </form>
+    <!-- Make sure that you are viewing the page on a web server or localhost. If you are viewing the page locally, the button may not show up because Facebook requires a valid URL to work. -->
                          
                   
                 </div>
@@ -668,14 +707,14 @@ border-radius: 15px;
                             <img style="height: 25px; width: 25px;"src="images/shield.svg" alt="">
                             <input name="password" class="input_bar" id="password" type="password"
                                 placeholder="Password">
-                                <img style="cursor: pointer; width: 22px; height: 19px;"src="images/eye.png" id="eyeicon" alt="eye">
+                                <img style="cursor: pointer; width: 22px; height: 19px; margin-left:-38px;"src="images/eye.png" id="eyeicon" alt="eye">
                         </div>
                        
                         <a href="forgot_password.php" style="display: flex; justify-content: end; margin-right: 30px; text-decoration:none">Forgot password?</a>
                         <br><br>
                         <div class="sign_btn_section">
                             <div class="sign_btn" style="background: #4B99FB;border-radius:15px">
-                                <button type="submit" class="btn sign_up" name="login_user" style="font-size: 25px;">Login</button>
+                                <button type="submit" class="btn sign_up" name="login_user" style="font-size: 25px;">Sign In</button>
                             </div>
                             <p></p>
                             <div class="sign_in_sec">
@@ -694,7 +733,7 @@ border-radius: 15px;
             </div>
            
         </div>
-    <hr  id="hr" style="border: 1px solid #F3F3FF;width: 1204px;">
+    <hr  id="hr" style="border: 2px solid #EDEDFE; width: 1204px;">
     </div>
     <div class="row" id="parent-lg" style="margin-top:2rem">
         <div class="col-sm-4 " id="btml">
@@ -718,7 +757,7 @@ border-radius: 15px;
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="left_links">
+                    <div class="left_links" style="margin-right: 10rem;">
                         <span class="link"style="margin-top:3rem; color: #4F1963;" >Company</span>
                         <a class="link" style="color: #8E8E8E; text-decoration: none;">About</a>
                         <a class="link" style="color: #8E8E8E; text-decoration: none;">Features</a>
@@ -747,6 +786,10 @@ border-radius: 15px;
                                 </div>
                             </a>
                             </div>
+                            <div class="down">
+                                <h6>Terms of use</h6>
+                                <h6>Privacy Policy</h6>
+                                  </div>
                     </div>
                 </div>
             </div>
@@ -788,6 +831,10 @@ border-radius: 15px;
                              </div>
                          </a>
                          </div>
+                         <div class="down">
+                                <h6>Terms of use</h6>
+                                <h6>Privacy Policy</h6>
+                                  </div>
                  </div>
              </div>
          </div>

@@ -133,6 +133,8 @@ span.client-name {
     font-size: 27px;
     line-height: 88%;
     color: #000000;
+    width:161px;
+    text-align:center;
 }
 
 button.btn {
@@ -410,6 +412,10 @@ border:none;
       }
 }
 @media screen and (max-width: 720px){
+    span .client-name{
+        font-size:20px !important;
+        width:130px !important;
+    }
       .img111{
         display: none;
       }
@@ -436,7 +442,45 @@ border:none;
       .vcode_footer{
         margin-left: 2rem;
       }
+      .tab-content{
+        margin-left:1.5rem;
      
+      }
+      .tab-content{
+        margin-left:1rem;
+        
+      }
+      .gap-lg-6{
+        gap:1rem !important;
+      }
+      .gap-lg-5{
+        gap:1rem !important;
+      }
+     
+    }
+    @media screen and (max-width:932px){
+        .tab-content{
+        margin-left:1rem;
+        
+      }
+      .gap-lg-6{
+        gap:1rem !important;
+      }
+      .gap-lg-5{
+        gap:1rem !important;
+      }
+    }
+    @media screen and (max-width:1100px){
+        .tab-content{
+        margin-left:1rem;
+        
+      }
+      .gap-lg-6{
+        gap:0.5rem !important;
+      }
+      .gap-lg-5{
+        gap:0.5rem !important;
+      }
     }
 </style>
 <body>
@@ -475,17 +519,33 @@ border:none;
                         <div class="ccard-left gap-md-2 gap-lg-5">
                             <img class="profile" src="images/client1.png" alt="">
                             <span class="client-name">Cheeku</span>
-                            <button type="button" class="btn" id="btn_verified">profile</button>
+                            <button type="button" class="btn" id="btn_verified">Profile</button>
                         </div>
                         <div class="ccard-right gap-md-2 gap-lg-5">
                             <span class="date">Dec 23,2022</span>
                             <span class="time">18:52</span>
                             <div class="verified-client">
                                 <span>Verified!</span>
-                                <img src="images/Approval.svg" alt="">
+                                <img src="images/Approval.png" alt="">
                             </div>
                         </div>
                     </div>
+                    <div id="flexchange" class="client-card gap-1 gap-md-3 gap-lg-6 ">
+                        <div class="ccard-left gap-md-2 gap-lg-5">
+                            <img class="profile" src="images/client1.png" alt="">
+                            <span class="client-name">Ishita Kapahi</span>
+                            <button type="button" class="btn" id="btn_verified">Profile</button>
+                        </div>
+                        <div class="ccard-right gap-md-2 gap-lg-5">
+                            <span class="date">Dec 23,2022</span>
+                            <span class="time">18:52</span>
+                            <div class="verified-client">
+                                <span>Verified!</span>
+                                <img src="images/Approval.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    
                     
                    
                 </div>
@@ -497,7 +557,22 @@ border:none;
                         <div class="ccard-left gap-md-2 gap-lg-5">
                             <img class="profile" src="images/client1.png" alt="">
                             <span class="client-name">Cheeku</span>
-                            <button type="button" class="btn" id="btn_pending">profile</button>
+                            <button type="button" class="btn" id="btn_pending">Profile</button>
+                        </div>
+                        <div class="ccard-right gap-md-2 gap-lg-5">
+                            <span class="date">Dec 23,2022</span>
+                            <span class="time">18:52</span>
+                            <div class="pending-client">
+                                <span>pending!</span>
+                                <img src="images/pending-client.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div  id="flexchange" class="client-card gap-1 gap-md-3 gap-lg-6">
+                        <div class="ccard-left gap-md-2 gap-lg-5">
+                            <img class="profile" src="images/client1.png" alt="">
+                            <span class="client-name">Ishita Kapahi</span>
+                            <button type="button" class="btn" id="btn_pending">Profile</button>
                         </div>
                         <div class="ccard-right gap-md-2 gap-lg-5">
                             <span class="date">Dec 23,2022</span>

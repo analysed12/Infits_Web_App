@@ -6,7 +6,8 @@ if(isset($_POST['clientList'])){
 if(!isset($_SESSION)){
     session_start();
 }
-$dietitianuserID = $_SESSION['dietitian_id'];
+$dietitianuserID = $_SESSION['dietitianuserID'];
+
 // handle Ajax here
 if(isset($_POST['update_goal'])){
     $type = $_POST['update_goal'];
@@ -264,7 +265,7 @@ if(isset($_POST['create_goal'])){
 }
 
 include('navbar.php');
-$sql = "SELECT GROUP_CONCAT(client_id) FROM `addclient` WHERE dietition_id = '{$dietitianuserID}';";
+$sql = "SELECT GROUP_CONCAT(client_id) FROM `addclient` WHERE dietitian_id = '{$dietitianuserID}';";
 $result = mysqli_query($conn, $sql) or die('failed');
 if(mysqli_num_rows($result)>0){
     $allClients = array();
@@ -274,7 +275,7 @@ if(mysqli_num_rows($result)>0){
     }
 }
 function getClientName($ID,$conn,$dietitianuserID){
-    $query = "SELECT name FROM `addclient` WHERE client_id = {$ID} AND dietition_id = '{$dietitianuserID}'";
+    $query = "SELECT name FROM `addclient` WHERE client_id = {$ID} AND dietitian_id = '{$dietitianuserID}'";
     $name = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($name)) {
         return ($row['name']);
@@ -944,6 +945,7 @@ margin-top: 2.5rem;
             <!---------------------------------------------------------------------------------------------->
 <?php
 $map_steps = $map;
+// $sql_steps = "SELECT steps, GROUP_CONCAT(client_id) FROM `goals` WHERE `dietition_id` = '{$dietitianuserID}' AND steps != '' GROUP BY steps ORDER BY time DESC";
 $sql_steps = "SELECT steps, GROUP_CONCAT(client_id) FROM `goals` WHERE `dietition_id` = '{$dietitianuserID}' AND steps != '' GROUP BY steps ORDER BY time DESC";
 $result_steps = mysqli_query($conn, $sql_steps) or die('failed');
 if (mysqli_num_rows($result_steps) > 0) {

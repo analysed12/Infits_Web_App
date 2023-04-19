@@ -719,9 +719,9 @@ function fetchInformation($client_id){
             </div>
             <div class="container2_rightside" >
                 <div class="addbutton" id="addbutton">
-                <button id="addbtn" onclick ="window.location.href='task_list.php'">Add Event</button>
+                <button id="addbtn" onclick ="window.location.href='calendar_of_events.php'">Add Event</button>
                     <button id="addbtn" onclick ="window.location.href='task_list.php'">Add Task</button>
-                    <button id="addbtn" onclick ="window.location.href='client_list.php'" class="add">Add Client</button>
+                    <button id="addbtn" onclick ="window.location.href='add_client.php'" class="add">Add Client</button>
                 </div>
                 <div><button id="btn1" class="btn-add">+</button></div>
                 <script>

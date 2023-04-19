@@ -377,6 +377,183 @@ include('navbar.php');
         }
 
 
+        /*************************styles for calendar table*************************************/
+        .light {
+            border: 1px solid #CCCCCC;
+            border-radius: 15px;
+            background: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width:100%;
+            padding: 0.5rem;
+        }
+
+        body {
+            /* font-family: Arial, sans-serif;
+            background-color: #f4f4f4; */
+        }
+
+        #month-year-dropdown {
+            display: inline-block;
+            position:relative;
+            font-size: 16px;
+            color: #333;
+            /* border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff; */
+            /* padding: 8px; */
+            cursor: pointer;
+            font-family: NATS;
+            font-size: 23px;
+            font-weight: 400;
+            /* line-height: 35px;
+            letter-spacing: 0px; */
+
+
+        }
+
+        #month-year-dropdown:hover {
+            border-color: #aaa;
+        }
+
+        #month-year-dropdown:focus {
+            border-color: #3e90ff;
+            box-shadow: 0 0 0 2px #3e90ff;
+            outline: none;
+        }
+
+        #month-year-dropdown .dropdown-menu {
+            display: none;
+            position:absolute;
+            top: 100%;
+            left: -70%;
+            min-width: 150px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            overflow-x:hidden;
+            --bs-dropdown-padding-x: 1rem;
+        }
+        #month-year-dropdown .dropdown-menu::-webkit-scrollbar{
+            width: 10px;
+        }
+        #month-year-dropdown .dropdown-menu::-webkit-scrollbar-track{
+            background:#F3F3F3;
+        }
+        #month-year-dropdown .dropdown-menu::-webkit-scrollbar-thumb{
+            background: #D6D6D6;
+            border-radius: 10px;
+        }
+        #month-year-dropdown.show .dropdown-menu {
+            display:block;
+            padding: 0rem 2rem;
+        }
+
+        #month-year-dropdown .dropdown-menu .row {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px;
+        }
+
+        #month-year-dropdown .dropdown-menu .row .month {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 40px;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: fit-content;
+        }
+
+        #month-year-dropdown .dropdown-menu .row .month:hover {
+            background-color: #f4f4f4;
+        }
+
+        #month-year-dropdown .dropdown-menu .row .month.active {
+            background-color: #3e90ff;
+            color: #fff;
+        }
+
+        #month-year-dropdown .dropdown-menu .row .year {
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+            width: fit-content;
+        }
+
+        #month-year-dropdown .dropdown-menu .row .prev-year,
+        #month-year-dropdown .dropdown-menu .row .next-year {
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+            /* margin: 5px; */
+            width: fit-content;
+        }
+
+        #month-year-dropdown .dropdown-menu .row .prev-year:hover,
+        #month-year-dropdown .dropdown-menu .row .next-year:hover {
+            color: #333;
+        }
+
+        #calendar {
+            margin-top: 10px;
+        }
+
+        table {
+            width: 290px;
+            border-collapse: unset;
+
+        }
+        #calendar td.todays {
+    border: 1px solid #7282FB;
+    border-radius: 50px !important;
+}
+        th,
+
+        td {
+            /* border: 1px solid #ccc; */
+            padding: 5px;
+            text-align: center;
+            transition: all 0.2s ease-in-out;
+            border-radius: 50%;
+
+        }
+
+        td:hover {
+            transform: scale(1.2);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+
+
+        th {
+
+
+            font-family: 'NATS';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 21px;
+            line-height: 150%;
+            color: #737373;
+        }
+
+        td.today {
+            /* background-color: #3e90ff;
+            color: #fff; */
+            border: 2px solid #3e90ff;
+        }
+
+        /***************************calendar style end*********************************/
 
         @media screen and (max-width: 1200px) {
             .live {
@@ -391,9 +568,22 @@ include('navbar.php');
 
             }
 
+            .btn-title {
+                /* border: 1px solid red; */
+                width: auto;
+                /* height: 5rem; */
+
         }
 
-        @media screen and (max-width: 400px) {
+            select option {
+                text-align: center;
+                background-color: #FBFBFB;
+                font-size: 14px;
+            }
+
+        }
+
+        @media screen and (max-width: 300px) {
             .bottom_buttons {
                 display: flex;
                 gap: 2rem;
@@ -403,6 +593,9 @@ include('navbar.php');
 
             }
 
+            .live_footer {
+                justify-content: space-around !important;
+            }
 
         }
 
@@ -469,6 +662,24 @@ include('navbar.php');
                 padding: 20px;
             }
 
+            .live_footer {
+                justify-content: end !important;
+            }
+
+            select option {
+                text-align: center;
+                background-color: #FBFBFB;
+                font-size: 12px;
+            }
+
+            .live_rightside {
+                margin-top: 3rem;
+                margin: 0px 1rem;
+            }
+            .create-meet-btn{
+                display: flex;
+                justify-content: center !important;
+            }
         }
     </style>
 </head>
@@ -533,9 +744,27 @@ include('navbar.php');
 
         <div class="live_rightside">
             <h4>Schedule meetings</h4>
-
-            <!-------CALENDER---------------------------------------------------------------------------------------------------->
+            <!--------------------------------new calendar---------------------------------->
+            <div class="d-flex justify-content-center">
             <div class="light">
+                <div id="month-year-dropdown">
+                    <span id="selected-month-year">Select a month and year</span>
+                    <i class='fas fa-angle-down ms-1' style="color: #CCCCCC; font-size: x-small;"></i>
+                    <div class="dropdown-menu">
+                        <div class="row">
+                            <div class="prev-year">&laquo;</div>
+                            <div class="year"></div>
+                            <div class="next-year">&raquo;</div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div id="calendar"></div>
+            </div>
+          </div> 
+            <!-------CALENDER---------------------------------------------------------------------------------------------------->
+            <!-- <div class="light">
                 <div class="calendar">
                     <div class="calendar-header" style="color: #737373;">
                         <span class="month-picker" id="month-picker">April</span>
@@ -565,9 +794,9 @@ include('navbar.php');
 
 
                 </div>
-            </div>
+            </div>  -->
 
-            <script>
+            <!-- <script>
                 let calendar = document.querySelector('.calendar')
 
                 const month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -657,9 +886,9 @@ include('navbar.php');
                     ++curr_year.value
                     generateCalendar(curr_month.value, curr_year.value)
                 }
-            </script>
+            </script> -->
 
-            <style>
+            <!-- <style>
                 :root {
                     --dark-body: #4d4c5a;
                     --dark-main: #141529;
@@ -902,7 +1131,7 @@ include('navbar.php');
                     }
 
                 }
-            </style>
+            </style> -->
 
 
             <!-------CALENDER------------------------------------------------------------------------------------------->
@@ -927,8 +1156,13 @@ include('navbar.php');
                 </div>
 
             </div>
-            <div class="live_footer" style="margin-top:1rem">Create Meeting<button class="livebutton" id="livebutton"><img src="images/livebutton.png" style="width:99.5%;"></button></div>
-
+            <div class="create-meet-btn d-flex justify-content-end">
+                <div class="live_footer" style="margin-top:1rem">
+                    <p class="btn-title pt-2">Create Meeting</p><button class="livebutton" id="livebutton"><img
+                            src="images/livebutton.png"
+                            style="width:99.5%; display: flex; align-items: center;"></button>
+                </div>
+            </div>
 
 
 
@@ -1103,7 +1337,353 @@ include('navbar.php');
             return ((slider.parentElement.scrollLeft / (slider.parentElement.scrollWidth - slider.parentElement.clientWidth)) * 100);
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!----------------------------calendar js------------------------->
+    <!-- <script>
+    const calendarBody = document.getElementById("calendarBody");
+  const monthSelector = document.getElementById("monthSelector");
+const yearSelector = document.getElementById("yearSelector");
+
+let currentDate = new Date();
+
+// initialize calendar on load
+renderCalendar(currentDate);
+
+// add options to month selector
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+for (let i = 0; i < 12; i++) {
+  const option = document.createElement("option");
+  option.value = i;
+  option.text = monthNames[i];
+  if (i === currentDate.getMonth()) {
+    option.selected = true;
+  }
+  monthSelector.appendChild(option);
+}
+
+// add options to year selector
+const currentYear = currentDate.getFullYear();
+for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+  const option = document.createElement("option");
+  option.value = i;
+  option.text = i;
+if (i === currentYear) {
+option.selected = true;
+}
+yearSelector.appendChild(option);
+}
+
+// handle month/year change
+monthSelector.addEventListener("change", handleDateChange);
+yearSelector.addEventListener("change", handleDateChange);
+
+function handleDateChange() {
+const selectedMonth = parseInt(monthSelector.value);
+const selectedYear = parseInt(yearSelector.value);
+const newDate = new Date(selectedYear, selectedMonth);
+renderCalendar(newDate);
+}
+
+function renderCalendar(date) {
+calendarBody.innerHTML = "";
+const month = date.getMonth();
+const year = date.getFullYear();
+const firstDay = new Date(year, month, 1);
+const lastDay = new Date(year, month + 1, 0);
+const numDays = lastDay.getDate();
+const startDay = firstDay.getDay();
+
+for (let i = 0; i < 6; i++) {
+const row = document.createElement("tr");
+for (let j = 0; j < 7; j++) {
+const cell = document.createElement("td");
+if (i === 0 && j < startDay) {
+cell.innerHTML = "";
+} else if ((i * 7 + j - startDay) < numDays) {
+cell.innerHTML = i * 7 + j - startDay + 1;
+if (year === currentDate.getFullYear() && month === currentDate.getMonth() && i * 7 + j - startDay + 1 === currentDate.getDate()) {
+cell.classList.add("current");
+}
+} else {
+cell.innerHTML = "";
+}
+row.appendChild(cell);
+}
+calendarBody.appendChild(row);
+}
+}
+</script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Define the months and years to be displayed in the dropdown
+        const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
+        const currentYear = new Date().getFullYear();
+        const years = [currentYear - 1, currentYear, currentYear + 1];
+
+        // Set the initial selected month and year to the current month and year
+        const currentDate = new Date();
+        let selectedMonth = months[currentDate.getMonth()];
+        let selectedYear = currentDate.getFullYear();
+
+        $("#selected-month-year").text(selectedMonth + " " + selectedYear);
+
+        // Generate the calendar table
+        let firstDay = new Date(selectedYear, months.indexOf(selectedMonth), 1);
+        let lastDay = new Date(selectedYear, months.indexOf(selectedMonth) + 1, 0);
+        let table = $("<table>");
+        let tbody = $("<tbody>");
+        let row = $("<tr>");
+        let dayNames = ["S", "M", "T", "W", "T", "F", "S"];
+        for (let i = 0; i < dayNames.length; i++) {
+            let th = $("<th>").text(dayNames[i]);
+            row.append(th);
+        }
+        tbody.append(row);
+        let date = 1;
+        let todays = new Date();
+        
+        for (let i = 0; i < 6; i++) {
+            row = $("<tr>");
+            for (let j = 0; j < 7; j++) {
+                if ((i === 0 && j < firstDay.getDay()) || date > lastDay.getDate()) {
+                    let td = $("<td>");
+                    row.append(td);
+                } 
+                else {
+                    let td = $("<td>").text(date);
+                    if (selectedMonth === months[todays.getMonth()] && selectedYear === todays.getFullYear() && date === todays.getDate()) {
+                        td.addClass("todays");
+                    }
+                    row.append(td);
+                    date++;
+                }
+            }
+            tbody.append(row);
+        }
+        table.append(tbody);
+        $("#calendar").html(table);
+
+        function updateSelectedMonthYear(month, year) {
+            selectedMonth = month;
+            selectedYear = year;
+            $("#selected-month-year").text(selectedMonth + " " + selectedYear);
+
+            // Generate the calendar table
+            let firstDay = new Date(selectedYear, months.indexOf(selectedMonth), 1);
+            let lastDay = new Date(selectedYear, months.indexOf(selectedMonth) + 1, 0);
+            let table = $("<table>");
+            let tbody = $("<tbody>");
+            let row = $("<tr>");
+            let dayNames = ["S", "M", "T", "W", "T", "F", "S"];
+            for (let i = 0; i < dayNames.length; i++) {
+                let th = $("<th>").text(dayNames[i]);
+                row.append(th);
+            }
+            tbody.append(row);
+            let date = 1;
+            let today = new Date();
+            // let currentdate = new Date().getDate(); 
+            for (let i = 0; i < 6; i++) {
+                row = $("<tr>");
+                for (let j = 0; j < 7; j++) {
+                    if ((i === 0 && j < firstDay.getDay()) || date > lastDay.getDate()) {
+                        let td = $("<td>");
+                        row.append(td);
+                    } else {
+                        let td = $("<td>").text(date);
+                        if (selectedMonth === months[today.getMonth()] && selectedYear === today.getFullYear() && date === today.getDate()) {
+                            td.addClass("today");
+                        }
+                        row.append(td);
+                        date++;
+                    }
+                    
+                }
+                tbody.append(row);
+        
+            }
+            table.append(tbody);
+            $("#calendar").html(table);
+        }
+
+        // Update the displayed year and months in the dropdown
+        function updateDropdownYear(year) {
+
+            $(".dropdown-menu .year").text(year);
+            $(".dropdown-menu .row:not(:first-child)").remove();
+            for (let i = 0; i < months.length; i += 3) {
+                let month1 = months[i];
+                let month2 = months[i + 1] || "";
+                let month3 = months[i + 2] || "";
+                let row = $("<div>").addClass("row");
+                let monthEl1 = $("<div>").addClass("month").text(month1);
+                let monthEl2 = $("<div>").addClass("month").text(month2);
+                let monthEl3 = $("<div>").addClass("month").text(month3);
+                if (selectedMonth === month1 && selectedYear === year) {
+                    monthEl1.addClass("active");
+                }
+                if (selectedMonth === month2 && selectedYear === year) {
+                    monthEl2.addClass("active");
+                }
+                if (selectedMonth === month3 && selectedYear === year) {
+                    monthEl3.addClass("active");
+                }
+                monthEl1.click(function () {
+                    updateSelectedMonthYear(month1, year);
+                });
+                monthEl2.click(function () {
+                    updateSelectedMonthYear(month2, year);
+                });
+                monthEl3.click(function () {
+                    updateSelectedMonthYear(month3, year);
+                });
+                row.append(monthEl1);
+                row.append(monthEl2);
+                row.append(monthEl3);
+                $(".dropdown-menu").append(row);
+            }
+
+        }
+
+        // Initialize the dropdown with the current year and months
+        updateDropdownYear(currentYear);
+        // Add event listeners for the previous and next year buttons
+        $(".dropdown-menu .prev-year").click(function () {
+            let currentYear = parseInt($(".dropdown-menu .year").text());
+            updateDropdownYear(currentYear - 1);
+            $("#month-year-dropdown").toggleClass("show");
+        });
+        $(".dropdown-menu .next-year").click(function () {
+            let currentYear = parseInt($(".dropdown-menu .year").text());
+            updateDropdownYear(currentYear + 1);
+            $("#month-year-dropdown").toggleClass("show");
+        });
+
+        // Show or hide the dropdown menu when the dropdown is clicked
+        $("#month-year-dropdown").click(function (event) {
+            event.stopPropagation();
+            $("#month-year-dropdown").toggleClass("show");
+        });
+
+        // Hide the dropdown menu when the user clicks outside of the dropdown area
+        $(document).click(function (event) {
+            if (!$(event.target).closest("#month-year-dropdown").length) {
+                $("#month-year-dropdown").removeClass("show");
+            }
+        });
+        
+    //    dragging
+    // console.clear();
+
+// idle
+// -> onPointerDown
+// dragging
+// -> onPointerMove / onPointerOver
+// <- onPointerUp
+
+/* NOTE: We retooled the data to be based on first selection and second selection. We'll calculate which is the start & end date later in the `updateDOM` function. */
+const data = {
+  firDate: null,
+  secondDate: null
+};
+
+const machine = {
+  initial: 'idle',
+  states: {
+    idle: {
+      on: {
+        pointerdown: (data, event) => {
+          data.firDate = +event.currentTarget.dataset.day;
+          data.secondDate = null;
+          return 'dragging';
+        }
+      }
+    },
+    dragging: {
+      on: {
+        pointerover: (data, event) => {
+          data.secondDate = +event.currentTarget.dataset.day;
+          
+          return 'dragging';
+        },
+        pointerup: 'idle',
+        pointercancel: 'idle'
+      }
+    }
+  }
+};
+
+// idle
+let currentState = machine.initial;
+
+function send(event) {
+  const transition = machine
+    .states[currentState]
+    .on[event.type];
+
+  if (typeof transition === 'function') {
+    currentState = transition(data, event);
+    updateDOM();
+  } else if (transition) {
+    currentState = transition;
+    updateDOM();
+  }
+}
+
+/* ---------------------------------- */
+
+const allDayEls = document.querySelectorAll('[data-day]');
+
+allDayEls.forEach(dayEl => {
+  dayEl.addEventListener('pointerdown', send);
+  dayEl.addEventListener('pointerover', send);
+});
+
+document.body.addEventListener('pointerup', send);
+
+/* ---------------------------------- */
+
+function updateDOM(){
+  document.querySelectorAll('[data-selected]')
+    .forEach(el => {
+      delete el.dataset.selected
+    });
+  
+  const strtDate = Math.min(data.firDate, data.secondDate);
+  const endDate = Math.max(data.firDate, data.secondDate);
+  
+  if ( startDate ) {
+    const startDateEl = document.querySelector(`[data-day="${strtDate}"]`);
+    startDateEl.dataset.selected = "start";
+  }
+  
+  if ( endDate ) {
+    const endDateEl = document.querySelector(`[data-day="${endDate}"]`);
+    endDateEl.dataset.selected = "end";
+  }
+}
+
+
+
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
     <script type="text/javascript" src="./live/js/lobby.js"></script>
 
 </body>

@@ -152,15 +152,17 @@ function fetchInformation($client_id){
 
 .body{
     font-family: 'NATS', sans-serif;
+    font-weight: 400;
 }
 .client_progress{
     margin-top: 2rem;
-    margin-left: 18rem;
-    font-family: 'poppins';
+    /* margin-left: 18rem; */
+    
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 1rem;
+    width: auto;
 }
 #details{
     color: #717171;
@@ -169,12 +171,13 @@ function fetchInformation($client_id){
 
 }
 .details{
-    margin-left: 45rem;
+    
     border:none;
 }
 .dashboard_container3{
     display: flex;
-    margin-top:0.5rem;
+    justify-content: space-between;
+    margin:0 2rem;
 }
 .dashboard_container4{
     margin-left: 1rem;
@@ -258,11 +261,24 @@ function fetchInformation($client_id){
     .dashboard_container3{
         display:flex;
         gap:1rem !important;
-        
         justify-content:space-between;
     }
     .details{
         margin-left:0;
+    }
+    .symbols img{
+        text-align: center;
+    }
+    .symbols span {
+        display: none;
+    }
+    .show {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .values {
+        font-size: 13px;
     }
 
 }
@@ -280,7 +296,10 @@ function fetchInformation($client_id){
         justify-content:space-between;
     }
     .client_progress{
-        margin-left:1rem;
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
         
     }
   
@@ -294,8 +313,13 @@ function fetchInformation($client_id){
         border-radius: 0.7rem;
         padding: 1rem;
         width: auto;
-        height: 283px;
-        margin-left: 2rem;
+        height: auto;
+        margin: 0;
+        /* margin-left: 2rem; */
+    }
+    .client_data {
+        font-size: 0.8rem;
+        text-align: right;
     }
     .list1{
     display:flex;
@@ -305,12 +329,19 @@ function fetchInformation($client_id){
     display:flex;
     gap:9rem;
 }
+    .steps {
+        width: 100%;
+        display: flex;
+       
+        align-items: center;
+        padding: 10px;
+    }
 }
 </style>
 <body>
     <div class="client_progress">
     <div class="dashboard_container3">
-            <div style="font-size:1.5rem; font-weight:600"> Client Progress</div>
+            <div style="font-size:1.5rem; font-weight:600">Client Progress</div>
             <div class="details">
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
             </div>
@@ -343,12 +374,14 @@ if(!empty($data)){
         $infom = fetchInformation($data[$i]['client_id']);
 ?>
              <div class="container4_wrapper2">
+            <div class="show">
                 <span style="width: 25%;">
                 <a href="" style="background-color:#FDFDFD; color:black;font-weight:600; font-size:20px; border:none; margin-top:1rem">
                 <img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> <?php echo($data[$i]['name']) ?></a>
                 </span>
+                </div>
                 <div class="values-container col-12">
-                    <span class="col-2"><a href="track_stats_steps.php?id=<?php echo($data[$i]['client_id']) ?>" class="values"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
+                <span class="col-2" style=""><a href="track_stats_steps.php?id=<?php echo($data[$i]['client_id']) ?>" class="values"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></a></span>
                     <span class="col-2"><a href="track_stats_heart.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['heart']['progress']) ?> Bpm</a></span>
                     <span class="col-2"><a href="track_stats_water.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</a></span>
                     <span class="col-2"><a href="track_stats_sleep.php?id=<?php echo($data[$i]['client_id']) ?>" class="values" ><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</a></span>
@@ -377,17 +410,17 @@ if(!empty($data)){
         <div class="mobileview_clientprogress">
 
             <div class="mob_wrapper1" >
-                <span style="display:flex;justify-content:center" ><a href="" style=" color:black;font-weight:500; border:none;background-color:white; "><span ><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
+                <span style="display:flex;justify-content:center;"><a href="" style=" color:black;font-weight:500; border:none;background-color:white; "><span ><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> <?php echo($data[$i]['name']) ?></span></a></span>
                 <div class="row1" style="display:flex ; justify-content:space-between">
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#F6A682"><img src="images/Frame.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></span>
+                            <span class="client_data" style="color:#454545"><?php echo($infom['steps']['progress'] . '/' . $infom['steps']['goal']) ?></span>
                         </div>
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#EF80B2"><img src="images/Frame-1.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['heart']['progress']) ?> bpm</span>
+                            <span class="client_data" style="font-size:0.9rem;color:#454545"><?php echo($infom['heart']['progress']) ?> bpm</span>
                         </div>
                 </div>
 
@@ -395,12 +428,12 @@ if(!empty($data)){
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#8FAFF3"><img src="images/Frame-2.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Water</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</span>
+                            <span class="client_data" style="color:#454545"><?php echo($infom['water']['progress'] . '/' . $infom['water']['goal']) ?> ltrs</span>
                         </div>
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#7550E2"><img src="images/Frame-3.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545"><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</span>
+                            <span class="client_data" style="color:#454545"><?php echo(round($infom['sleep']['progress'],2) . '/' . $infom['sleep']['goal']) ?> hrs.</span>
                         </div>
                 </div>
 
@@ -408,12 +441,12 @@ if(!empty($data)){
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#788F96"><img src="images/Frame-4.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</span>
+                            <span class="client_data" style="color:#454545"><?php echo($infom['weight']['progress'] . '/' . $infom['weight']['goal']) ?> kg</span>
                         </div>
                         <div class="steps">
                             <div class="symbols">
                             <div style="color:#E388A0"><img src="images/Frame-5.png" style="width:1.8rem"></div><div style="margin-top:0.2rem; font-weight:500"><span>Calories</span></div></div>
-                            <span style="font-size:0.9rem;color:#454545"><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</span>
+                            <span class="client_data" style="color:#454545"><?php echo($infom['calorie']['progress'] . '/' . $infom['calorie']['goal']) ?> kcal</span>
                         </div>
                 </div>
             </div>

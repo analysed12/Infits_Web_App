@@ -91,8 +91,8 @@ body{
 
 }
 .container1_rightside{
-    margin-left: 28.5rem;
-    margin-top:38px;
+    margin-left: 30.9rem;
+    margin-top:33px;
 }
 .container2_wrapper1{
   width: 70rem;
@@ -120,12 +120,13 @@ body{
   display: none;
 }
 .table{
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .search_client:hover + .table{
   visibility: visible;
 }
+
 
 
 /* Calender css starts */
@@ -276,27 +277,29 @@ display: none;
   
 }
 .mobview_container1{
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  gap:1rem;
   margin-left: 10px;
  justify-content:center;
 }
 .mob_container1_wrapper1{
   border: 1px;
-  width: 250px;
+  width: 250px; 
   border-radius: 10px;
   justify-content: center;
   box-shadow:0.6px 0.6px 2px 1px #ccc;
-  display:inline-block;
+  display:block;
   margin-left:20px;
   margin-top:15px;
+  
 }
 .steps{
  margin-left: 25px;
 }
 #track{
-  display:none;
+  display: none;
 }
-
 }
 @media screen and (min-width: 720px) and (max-width: 900px) {
   .container1_rightside{
@@ -338,16 +341,16 @@ display: none;
 .mobview_progressdetails{
   display: inline-block;
   gap: 3rem;
-  
 }
 .mobview_container1{
-  display:inline-block;
-  margin-left: 80px;
- justify-content:center;
+  gap:10rem;
+  margin-left: 50px;
+  justify-content:center;
+ 
 }
 .mob_container1_wrapper1{
   border: 1px;
-  width: 250px;
+  width: 300px;
   border-radius: 10px;
   justify-content: center;
   box-shadow:0.6px 0.6px 2px 1px #ccc;
@@ -360,10 +363,11 @@ display: none;
  margin-left: 25px;
 }
 #track{
-  display:none;
+  display: none;
+}
 }
 
-}
+
     </style>
 </head>
 <body>
@@ -376,21 +380,20 @@ display: none;
                
                 
                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                <div class="search_client">
-                <div><button id="btn1" type = "submit" name  = "searching_btn"><span class="material-symbols-outlined">search</span></button> </div>
-                    <div> <input type="text" name="search_client_name" oninput="load_data(this.value)" id = "search_bar" placeholder="Search Clients" class="seach_clients_text"  autocomplete="off"></div>  
-                    </div>
+                        <div class="search_client">
+                                <div><button id="btn1" type = "submit" name ="searching_btn"><span class="material-symbols-outlined">search</span></button> </div>
+                                <div> <input type="text" name="search_client_name" oninput="load_data(this.value)" id = "search_bar" placeholder="Search Clients" class="seach_clients_text"  autocomplete="off"></div>  
+                        </div>
                 </form> 
-                <table class = "table" id = "recommendBox">
-                <tbody id = "table_data">
-                </tbody>
+                <table class = "table" id = "recommendBox" style = "display:block;">
+                        <tbody id = "table_data">
+                        </tbody>
                 </table>   
                 
                 <div class="track_buttons" id="track">
                         <button id="btn2" onclick="myFunction()">On-Track</button>
                         <button id="btn2" onclick="myFunction2()">Off-Track</button>
                 </div>
-
                 
                 
             </div>
@@ -401,7 +404,7 @@ display: none;
             <div class="container1_rightside">
                 <div class="wrapper">
                     <header>
-                        <p style="margin-left:1.5rem" class="current-date"></p>
+                        <p style="margin-left:1.5rem " class="current-date"></p>
                         <div class="icons">
                         <span id="prev" class="material-symbols-rounded">chevron_left</span>
                         <span id="next" class="material-symbols-rounded">chevron_right</span>
@@ -544,11 +547,12 @@ display: none;
                         $on[$i]['name'] = $cname;
                         $off[$i]['name'] = $cname;
                          $dat = date('Y-m-d');
+
                         //some changes is needed while linking.
 
                         //for steps 
-                        $step = "SELECT steps FROM `steptracker` WHERE clientid = '$cname' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
-                        // $step = "SELECT steps FROM `steptracker` WHERE clientid = '1' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                        // $step = "SELECT steps FROM `steptracker` WHERE clientid = '$cname' AND `dateandtime` >= '{$dat} 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
+                        $step = "SELECT steps FROM `steptracker` WHERE clientid = '$cname' AND `dateandtime` >= '2023-03-10 00:00:00' AND `dateandtime` < '{$dat} 23:59:59'";
                        
                         $stepgoal =$conn-> query($step);
                         $stepgoal1 = mysqli_fetch_assoc($stepgoal);
@@ -647,18 +651,19 @@ display: none;
 <div class="webview_progressdetails">
 
             <div class="detailed_progress_container2" id="container2">
-                <div class="container2_wrapper1">
+                
                 <?php
+                
                       foreach($on as $r){
+                        echo('<div class="container2_wrapper1">');
                         if($r['steps']!= '-1' || $r['heart']!= '-1' || $r['weight']!= '-1' || $r['sleep']!= '-1' ){
-                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem">Client '.$r["name"].'</span></a></span></div>');
+                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> <b>'.$r["name"].'</b></span></a></span></div>');
                         }
-                        if($r['steps']!= '-1'){
+                        if($r['steps']!= '-1' ){
                          
-                          echo(' <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
+                          echo('<div class="info"><span>Steps</span><div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
                         }
-                        if($r['heart']!= '-1'){
-                         
+                        if($r['heart'] != '-1'){
                           echo(' <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
                         }
                         if($r['weight']!='-1'){
@@ -668,54 +673,41 @@ display: none;
                         if($r['sleep']!= '-1' ){
                           echo('<div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
                         }
+                        echo('</div>');
                       }
+                      
                 ?>
-                  
-                </div>
-
-                
+               
             </div>
 
             
             <div class="detailed_progress_container2" id="container3">
-                <div class="container2_wrapper1">
-                <?php
-                      foreach($off as $r){
-                        if($r['steps']!='-1' || $r['heart']!='-1' || $r['weight']!='-1' || $r['sleep']!='-1' ){
-                          // echo("hi");
-                           echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"> Client  '.$r["name"].'</span></a></span></div>');
+                
+                        <?php
+                        foreach($off as $r){
+                          echo('<div class="container2_wrapper1">');
+                                if($r['steps']!='-1' || $r['heart']!='-1' || $r['weight']!='-1' || $r['sleep']!='-1' ){
+                                echo('<div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem">   '.$r["name"].'</span></a></span></div>');
+                                }
+                                if($r['steps']!='-1'){
+                                echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
+                                }
+                                if($r['heart']!='-1'){
+                                echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
+                                }
+                                if($r['weight']!='-1'){
+                                echo('<div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' kgs</span></div></div></div>');
+                                }
+                                if($r['sleep']!='-1'){
+                                echo('<div class="info"><span>Sleep </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
+                                }
+                                echo('</div> ');
+                                
                         }
-                        // echo("hiiii");
-                        if($r['steps']!='-1'){
-                          // echo("bue steps");
-                          echo('<div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["steps"].' steps</span></div></div></div>');
-                        }
-                        if($r['heart']!='-1'){
-                          
-                          echo('<div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["heart"].' bpm</span></div></div></div>');
-                        }
-                        if($r['weight']!='-1'){
-                         
-                          echo('<div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["weight"].' kgs</span></div></div></div>');
-                        }
-                        if($r['sleep']!='-1'){
-                         
-                          echo('<div class="info"><span>Sleep </span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">'.$r["sleep"].' hours</span></div></div></div>');
-                        }
-                        
-                      }
-                ?>
-                  <!-- <div style="margin-top:0.5rem"><span><img src="images/ronald.jpg" style="width:2rem; background-color:#f8f6f6;border-radius:1rem;margin-right:0.5rem"><b>Ronald Richards</b></span></a></span></div>
-                  <div class="info"><span>Steps</span> <div class="symbols"><div><img src="images/orange.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">2356 steps</span></div></div></div>
-                  <div class="info"><span>Heart Rate</span> <div class="symbols"><div><img src="images/pink.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">150 bpm</span></div></div></div>
-                  <div class="info"><span>Weight</span> <div class="symbols"><div><img src="images/blue.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">1.6kg</span></div></div></div>
-                  <div class="info"><span>Sleep</span> <div class="symbols"><div><img src="images/purple.png" alt=""></div><div style="margin-top:0.1rem"><span style="margin-left:0.5rem">7 hrs</span></div></div></div> -->
-                </div>
+                        ?>
+                
+        </div>
 
-               
-
-
-            
         </div>
 
 
@@ -723,108 +715,151 @@ display: none;
         <!--------------------------------------- mobview of progress details--------------------------------------------------->
 
         <div class="mobview_progressdetails">
-                    <div class="track_buttons">
-                        <button id="btn2" onclick="myFunction3()">On-Track</button>
-                        <button id="btn2" onclick="myFunction4()">Off-Track</button>
-                    </div>
+                <div class="track_buttons">
+                <button id="btn2" onclick="myFunction3()">On-Track</button>
+                <button id="btn2" onclick="myFunction4()">Off-Track</button>
+                </div>
 
-                    <script>
-                    function myFunction3() {
-                    var x = document.getElementById("container4");
-                    var y = document.getElementById("container5");
-                    
-                    if (x.style.display === "block") {
+                <script>
+                        function myFunction3() {
+                        var x = document.getElementById("container4");
+                        var y = document.getElementById("container5");
+                        
+                        if (x.style.display === "block") {
                         x.style.display = "none";
-                    } else {
+                        } else {
                         x.style.display = "block";
                         y.style.display = "none";
-                    }
-                    }
-                    function myFunction4() {
-                    var x = document.getElementById("container5");
-                    var y = document.getElementById("container4");
-                    if (x.style.display === "block") {
+                        }
+                        }
+                        function myFunction4() {
+                        var x = document.getElementById("container5");
+                        var y = document.getElementById("container4");
+                        if (x.style.display === "block") {
                         x.style.display = "none";
-                    } else {
+                        } else {
                         x.style.display = "block";
                         y.style.display = "none";
-                    }
-                    }
+                        }
+                        }
                 </script>
 
 
-            <div class="mobview_container1" id="container4">
-                    <div class="mob_container1_wrapper1" >
-                            <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
-                            <div class="row1" style="display:flex ; gap:2rem ">
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">5256 steps</span>
+                <div class="mobview_container1" id="container4">
+                        <?php
+                            foreach($on as $r){
+                        ?>
+                       <div class="mob_container1_wrapper1" >
+                           <?php
+                              if($r['steps']!='-1' || $r['heart']!='-1' || $r['weight']!='-1' || $r['sleep']!='-1' ){
+                                echo('<span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem">  '.$r["name"].'</span></a></span>');
+                              }
+                          ?>
+                          <div class="row1" style="display:flex; gap:2rem ">
+                              <div class="steps">
+                                <div class="symbols">
+                                  <?php
+                                    if($r['steps']!='-1'){
+                                      echo('<div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
+                                            <span style="font-size:0.9rem;color:#454545">'.$r["heart"].' steps</span>');
+                                    }
+                                  ?>
+                                </div>
+                                <div class="steps">
+                                  <div class="symbols">
+                                    <?php
+                                      if($r['heart']!='-1'){
+                                        echo('<div style="color:#F6A682"><span class="material-symbols-outlined">monitor heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
+                                              <span style="font-size:0.9rem;color:#454545">'.$r["heart"].' steps</span>');
+                                      }
+                                    ?>
+                                  </div>
+                                </div>
+
+                                <div class="row2" style="display:flex ; gap:2rem">
+                                  <div class="steps">
+                                    <div class="symbols">
+                                      <?php
+                                        if($r['weight']!='-1'){
+                                          echo('<div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
+                                                <span style="font-size:0.9rem;color:#454545">'.$r["weight"].' steps</span>');
+                                        }
+                                      ?>
                                     </div>
                                     <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">150 bpm</span>
+                                      <div class="symbols">
+                                        <?php
+                                          if($r['sleep']!='-1'){
+                                            echo('<div style="color:#F6A682"><span class="material-symbols-outlined">monitor heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
+                                                  <span style="font-size:0.9rem;color:#454545">'.$r["sleep"].' steps</span>');
+                                          }
+                                        ?>
+                                      </div>
                                     </div>
-                            </div>
+                                  </div>
+                                  <?php
+                                   }
+                                  ?>
+                                </div>           
+                <div class="mobview_container1" id="container5">
+                <?php
+                                foreach($off as $r){
+                                ?>
+                                <div class="mob_container1_wrapper1" >
 
-                            <div class="row2" style="display:flex ; gap:2rem">
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">1.6 kg</span>
-                                    </div>
-                                    <div class="steps">
-                                        <div class="symbols">
-                                        <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                                        <span style="font-size:0.9rem;color:#454545">7 hrs.</span>
-                                    </div>
-                            </div>
-                     </div>
-                    
-                   
-                       
-            </div>
+                                        <?php
+                                                if($r['steps']!='-1' || $r['heart']!='-1' || $r['weight']!='-1' || $r['sleep']!='-1' ){
+                                                        echo('<span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Client '.$r["name"].'</span></a></span>');
+                                                }
+                                        ?>
 
-            <div class="mobview_container1" id="container5">
-                    <div class="mob_container1_wrapper1" >
-                                    <span><a href="" style=" color:black;font-weight:500; border:none; margin-top:1rem;background-color:white; margin-left:1rem"><span><img src="images/ronald.jpg" style="width:2rem;border-radius:1rem"> Ronald Richards</span></a></span>
-                                    <div class="row1" style="display:flex ; gap:2rem ">
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">2356 steps</span>
-                                            </div>
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#EF80B2"><span class="material-symbols-outlined">monitor_heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Heart Rate</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">150 bpm</span>
-                                            </div>
-                                    </div>
+                                        <div class="row1" style="display:flex ; gap:2rem ">
+                                                <div class="steps">
+                                                        <div class="symbols">
+                                                                <?php
+                                                                        if($r['steps']!='-1'){
+                                                                                echo('<div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
+                                                                                                <span style="font-size:0.9rem;color:#454545">'.$r["heart"].' steps</span>');
+                                                                        }
+                                                                ?>
+                                                        </div>
+                                                        <div class="steps">
+                                                        <div class="symbols">
+                                                                <?php
+                                                                        if($r['heart']!='-1'){
+                                                                                echo('<div style="color:#F6A682"><span class="material-symbols-outlined">monitor heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Steps</span></div></div>
+                                                                                                <span style="font-size:0.9rem;color:#454545">'.$r["heart"].' steps</span>');
+                                                                        }
+                                                                ?>
+                                                        </div>
+                                        </div>
 
-                                    <div class="row2" style="display:flex ; gap:2rem">
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#788F96"><span class="material-symbols-outlined">weight</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">1.6 kg</span>
-                                            </div>
-                                            <div class="steps">
-                                                <div class="symbols">
-                                                <div style="color:#7550E2"><span class="material-symbols-outlined">bedtime</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
-                                                <span style="font-size:0.9rem;color:#454545">7 hrs.</span>
-                                            </div>
-                                    </div>
-                    </div>
+                                        <div class="row2" style="display:flex ; gap:2rem">
+                                        <div class="steps">
+                                                        <div class="symbols">
+                                                                <?php
+                                                                        if($r['weight']!='-1'){
+                                                                                echo('<div style="color:#F6A682"><span class="material-symbols-outlined">footprint</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Weight</span></div></div>
+                                                                                                <span style="font-size:0.9rem;color:#454545">'.$r["weight"].' steps</span>');
+                                                                        }
+                                                                ?>
+                                                        </div>
+                                                        <div class="steps">
+                                                        <div class="symbols">
+                                                                <?php
+                                                                        if($r['sleep']!='-1'){
+                                                                                echo('<div style="color:#F6A682"><span class="material-symbols-outlined">monitor heart</span></div><div style="margin-top:0.2rem; font-weight:500"><span>Sleep</span></div></div>
+                                                                                                <span style="font-size:0.9rem;color:#454545">'.$r["sleep"].' steps</span>');
+                                                                        }
+                                                                ?>
+                                                        </div>
+                                        </div>
 
-
-                    
-                 
-
-
-
-                 
-            </div>
+                                </div>
+                                <?php
+                        }
+                        ?> 
+                </div>
       </div>
   </div>
     
@@ -832,6 +867,8 @@ display: none;
   <script>
 
 function load_data(search = ''){
+
+        // console.log("hihihihihihihi");
    let xhr = new XMLHttpRequest();
   xhr.open("GET", "searching.php?search="+search,true);
   xhr.onload = function(){
@@ -842,9 +879,11 @@ function load_data(search = ''){
 
 
 
+
 }
 
 load_data();
+
 
 
 // const searchBar = document.querySelector('#search_bar');
@@ -857,6 +896,7 @@ load_data();
 // searchBar.addEventListener('blur', function() {
 //   recommendationBox.classList.add('recommendBox');
 // });
+
 
 
 

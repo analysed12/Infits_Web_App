@@ -1,22 +1,23 @@
 @font-face {
-    font-family: "NATS";
-    src: url("font/NATS.ttf.woff") format("woff"), url("font/NATS.ttf.svg#NATS") format("svg"), url("font/NATS.ttf.eot"), url("font/NATS.ttf.eot?#iefix") format("embedded-opentype");
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
     font-weight: normal;
     font-style: normal;
 }
 
-::placeholder {
-    color: #bbbbbb;
-    opacity: 1;
-}
-
 body {
-    font-family: "NATS", sans-serif;
+    font-family: "NATS", sans-serif !important;
     letter-spacing: 1px;
-    font-weight: 400;
-    margin-bottom: 2rem;
+    font-weight: 400;   
     background-color: #2b0e0e;
     color: black;
+    position: relative;
+}
+.heading{
+    margin-left:50px;
 }
 
 .tabcontent {
@@ -46,6 +47,7 @@ body {
 
 #myDIV {
     margin-right: 0px;
+ 
 }
 
 #myDIV1 {
@@ -56,50 +58,79 @@ body {
     /* border: 2px solid red; */
 }
 
+#topnav-content-1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+}
+
+#topnav-content-2 {
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 12px;
+    margin-bottom:6px;
+}
+
+
 .card {
     background: #FFFFFF;
-    border-radius: 15.8334px;
+    border-radius: 17.8334px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-    margin: 60px;
+    margin-right: 40px;
+    bottom:20px;
+    padding:15px;
+    width:350px; 
+    height:250px;
+    border-radius:16px; 
+    margin-left:10px;
+    margin-right:-5px;
+    margin-top:30px;
 }
 
 .card-upper-text {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 15px;
     padding: 5px 10px;
     background-color: #FEA945;
     box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.75);
     border-radius: 8px;
     color: white;
-    font-weight: 500;
-    font-size: 12px;
     line-height: 18px;
 }
 .card-food {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 27px;
+    font-size: 23px;
+    font-weight: 580;
+    line-height: 18px;
     letter-spacing: -0.11428570002317429px;
     text-align: left;
+    margin-top: -20px;
+    width:400px;
+    margin-bottom: 5px;
 }
 
 .card-calorie {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: normal;
     line-height: 12px;
     letter-spacing: 0em;
     text-align: left;
     align-items: center;
-    /* or 8px */
+    margin-top: 5px;
     display: flex;
     color: #A3A1A1;
 }
 
 .card-num-circle {
     background: #9C74F5;
-    border-radius: 50px;
+    border-radius: 50%;
     color: white;
-    padding: 5px
+    padding: 5px;
+    height: 25px;
+    width:25px;
+    margin-top: -5px;
+    
 }
 
 .card-num {
@@ -108,18 +139,12 @@ body {
     font-size: 14px;
     line-height: 18px;
     color: #9C74F5;
+    text-align:center;
+    
 }
-
-.recipe-add-btn {
-    position: inherit;
-    justify-content: flex-end;
-    display: flex;
-    margin: 0px -60px 0px -60px;
-    margin-bottom: 100px;
-}
-
 .dropdown {
     position: absolute;
+    margin-top: -27px;
     display: inline-block;
     right: 0.4em;
 }
@@ -189,15 +214,21 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
+
 .container1{
     display: grid;
     grid-template-columns: auto auto auto auto;
     margin-top: 32px;
-    gap: 2rem;
+    margin-left: 10px;
     width: auto;
     height: max-content;
     padding: 4px;
-    overflow-x: scroll;
+    overflow-x:auto;
+   
+}
+.container1::-webkit-scrollbar{
+    display: none;
+   
 }
 .container1 .top-card{
     overflow: hidden;
@@ -218,7 +249,7 @@ body {
     width: 150px;
     height: 200px;
     top: -8px;
-    right: 2px;
+    right: 0px;
 }
 .container1 .top-card .im2{
     width: 170.01px;
@@ -308,19 +339,18 @@ body {
     line-height: 88%;
 }
 .recipe-add-btn{
-    position: inherit;
+    position: absolute;
     justify-content: flex-end;
     display: flex;
-    margin-bottom: 80px;
-    width: 320px;
+    margin-left:120rem;
+    bottom:20px;
+    top:85rem;
+    width: 250px;
     height: 80px;
     background: #FFFFFF;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
-    margin-left: 1100px;
-    margin-right: 100px;
-    margin-top: 50px;
-}
+    }
 
 .btn{
     margin-top: 10px;
@@ -341,30 +371,105 @@ body {
     font-size: 40px;
 }
 
-@media only screen and (min-width:300px) and (max-width:600px){
-    .header{
-        flex-direction: column !important;
-        margin-top: 20px;
+@media screen and (min-width: 720px) and (max-width:1500px) {
+.header{
+    
+    margin-top: 9px;
+}
+.searchbox{
+    margin-left:-250px;
+    margin-top: auto;
+    width: 300px;
+}
+.card {
+    bottom:20px;
+    left:50px;
+}
+.card-food {
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 20px;
+    min-width: 180px;
+    margin-bottom: 5px;
+}
+.card-calorie {
+    margin-top: 5px;
+  }
+.dropdown-content {
+    left:-40px;
+}
+.recipe-add-btn {
+    position: inherit;
+    margin-left:37rem;
+    top:0.2rem;
+    
+}
+}
+@media screen and (min-width:0px) and (max-width:720px){
+    .heading{
+        margin-left:2rem;
     }
-
+    .row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .header{
+    margin-left: 120px;
+    margin-top: 8px;
+    }
+    .searchbox{
+        margin-left:-250px;
+        margin-top: 70px;
+        width: 320px;
+    }
+    .header h1{
+        font-size: 50px;
+        margin-left:50px;
+       }
     .container1{
         grid-template-columns: auto auto auto auto;
-        margin: 34px 15px;
+        left: -1px;
         margin-right: 420px;
-        gap: 1.5rem;
+        gap: 0.5rem;
     }
-
-    .category{
-        width:100%;
-        overflow-x:scroll
-    }
-
-    .recipe-add-btn{
-        margin-left: 100px;
+    .recipe{
+        margin-left: -200px;
         }
-    
-    .btn{
-        margin-top: 120px;
-        margin-left: 350px;
+    .middle_wrapper a {
+        margin-right: -60px;
+       margin-top:-5px;    
+          }
+             
+   .card{
+    left: 40px;
+    bottom: 10px;
+}
+ .card-food {
+    font-size: 21.5px;
+    font-weight: 500;
+    line-height: 20px;
+    min-width: 180px;
+    margin-bottom: 5px;
+}
+
+.card-calorie {
+    margin-top: 5px;
+  }
+
+
+.recipe-add-btn{
+    position: inherit;
+    left: -1080px;
+    top:30px;
+    margin-bottom:10px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    margin-top: 0px;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    left:-90px;
     }
 }

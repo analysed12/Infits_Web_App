@@ -61,19 +61,405 @@ if (isset($_SESSION['dietitianuserID'])) {
         <link rel="stylesheet" href="css/chat_style.css">
         <link rel="icon" href="images/logo.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- <style>
+            .hide-input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                width: 0;
+                height: 0;
+                visibility: hidden;
+            }
+            .w-300{
+                width:300px !important;
+            }
+            @media (min-width: 75px){
+                body{
+                    overflow-x: hidden !important;
+                }
+                .hr-mid hr{
+                    margin-left: 55px;
+                    margin-right: 55px;
+
+                }
+            }
+            
+            /* For screens smaller than 576px (extra small screens) */
+            @media (min-width: 215px) and (max-width: 387.98px) { 
+            /* CSS rules for extra small screens */
+            
+                .d-flex.flex-row{
+                    margin: 0;
+                    height: 100%;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    overflow: hidden !important;
+                    /* width:665px !important; */
+                }
+                d-flex.flex-column.flex-fill.chat{
+                    margin-top: -250px !important; 
+                    width: 95% !important;
+                    align-self: center !important;
+                }
+                div.d-flex.flex-coloumn.vh-100.chat{
+                    margin-top: -230px !important; 
+                    width: 95% !important;
+                    align-self: center !important;
+                    outline: none !important;
+                }
+                div.w-300{
+                    width: 95% !important;
+                    align-self: center !important;
+                    margin-top: 80px;
+                }
+                /* .input-group.align-items-center.chat-end-align{
+                    margin-bottom: -700px;
+                    width: 160% !important;
+                }
+                .d-flex.mb-2.p-2.justify-content-between{
+                margin-top: -240px !important;
+                }*/
+                .scroll{
+                overflow: hidden !important;
+                } 
+                .chat-box {
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    max-height: 11vh;
+                }
+                .chat {
+                    margin-top: -116px !important;
+                    padding: 11px !important;
+                }
+                .w-1st{
+                margin-top: -55px !important;
+                }
+                .d-flex.flex-row.justify-content-between{
+                    display: flex !important;
+                    flex-direction: row !important;
+                }
+                .hr-mid hr{
+                    margin-top: -213px;
+                    color: darkorchid;
+                    height: 3px;
+                }
+            }
+            @media (max-width: 575.98px) and (min-width: 388px) { 
+            /* CSS rules for extra small screens */
+            
+                .d-flex.flex-row{
+                    margin-top: -10px;
+                    height: 100%;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    overflow: hidden !important;
+                    /* width:665px !important; */
+                }
+                d-flex.flex-column.flex-fill.chat{
+                    margin-top: -230px !important; 
+                    width: 95% !important;
+                    align-self: center !important;
+                }
+                div.d-flex.flex-coloumn.vh-100.chat{
+                    margin-top: -250px !important; 
+                    width: 95% !important;
+                    align-self: center !important;
+                    outline: none !important;
+                }
+                div.w-300{
+                    width: 95% !important;
+                    align-self: center !important;
+                }
+                /* .input-group.align-items-center.chat-end-align{ */
+                    /* margin-bottom: -700px; */
+                    /* width: 160% !important; */
+                /* } */
+                /* .d-flex.mb-2.p-2.justify-content-between{ */
+                /* margin-top: -240px !important; */
+                /* } */
+                .scroll{
+                overflow: hidden !important;
+                }
+                .chat-box {
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    max-height: 130px;
+                }
+                .chat {
+                    margin-top: -106px !important;
+                    padding: 11px !important;
+                }
+                .w-1st{ 
+                margin-top: 25px !important;
+                }
+                .d-flex.flex-row.justify-content-between{
+                    display: flex !important;
+                    flex-direction: row !important;
+                }
+                .hr-mid hr{
+                    margin-top: -209px;
+                    color: darkorchid;
+                    height: 3px;
+                }
+            }
+
+            /* For screens larger than or equal to 576px (small screens) */
+            @media (min-width: 576px) and (max-width: 767.99px) {
+            /* CSS rules for small screens */
+            .d-flex.flex-row{
+                    margin-top: -100px;
+                    height: 100%;
+                    display: flex !important;
+                    flex-direction: column !important;
+                }
+                d-flex.flex-column.flex-fill.chat{
+                    margin-top: -200px !important; 
+                    width: 95% !important;
+                    align-self: center !important;
+                }
+                .chat-box {
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    max-height: 160px;
+                }
+                .chat {
+                    margin-top: -126px !important;
+                    padding: 11px !important;
+                }
+            .scroll{
+                overflow: hidden !important;
+            }
+            /* .input-group.align-items-center.chat-end-align{ */
+                    /* margin-bottom: -780px; */
+            /* } */
+            .d-flex.mb-2.p-2.justify-content-between{
+                /* width: 145% !important; */
+                /* margin-left: 20px !important; */
+                align-items: center !important;
+            }
+            div.w-300{
+                    width: 145% !important;
+                    align-self: center !important;
+                    margin-top: -95px !important;
+                }
+            .w-1st{
+                margin-top: -135px !important;
+            }
+            .d-flex.flex-row.justify-content-between{
+                    display: flex !important;
+                    flex-direction: row !important;
+                }
+                .hr-mid hr{
+                    margin-top: -343px;
+                    color: darkorchid;
+                    height: 3px;
+                }
+            }
+
+            /* For screens larger than or equal to 768px (medium screens) */
+            @media (min-width: 768px) {
+            /* CSS rules for medium screens */
+            .hr-mid hr{
+                    display: none !important;
+                    opacity: 0 !important;
+                }
+            }
+
+            /* For screens larger than or equal to 992px (large screens) */
+            @media (min-width: 992px) {
+            /* CSS rules for large screens */
+            }
+
+            /* For screens larger than or equal to 1200px (extra large screens) */
+            @media (min-width: 1200px) {
+            /* CSS rules for extra large screens */
+            }
+        </style> -->
+        <style>
+            .hide-input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                width: 0;
+                height: 0;
+                visibility: hidden;
+            }
+            .w-300{
+                width:300px !important;
+            }
+
+            @media (min-width: 76px) and (max-width: 767.99px) {
+                div.d-flex.flex-coloumn.vh-100.chat{
+                outline: none !important;
+            }
+            }
+            @media (min-width: 75px){
+                body{
+                    overflow-x: hidden !important;
+                }
+                .vh-100{
+                    height: 25% !important;
+                }
+            }
+            
+         
+            @media (min-width: 215px) and (max-width: 387.98px) { 
+         
+            
+                .vh-100{
+                    min-height: 50px !important;
+                }
+                .d-flex.flex-row{
+                    margin: 0;
+                    height: 100%;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    overflow: hidden !important;
+                    /* width:665px !important; */
+                }
+                d-flex.flex-column.flex-fill.chat{
+                    /* margin-top: -250px !important;  */
+                    width: 95% !important;
+                    align-self: center !important;
+                }
+                div.d-flex.flex-coloumn.vh-100.chat{
+                    /* margin-top: -230px !important;  */
+                    width: 95% !important;
+                    align-self: center !important;
+                    outline: none !important;
+                }
+                div.w-300{
+                    width: 95% !important;
+                    align-self: center !important;
+                    /* margin-top: 80px; */
+                }
+                /* .input-group.align-items-center.chat-end-align{
+                    margin-bottom: -700px;
+                    width: 160% !important;
+                }
+                .d-flex.mb-2.p-2.justify-content-between{
+                margin-top: -240px !important;
+                }*/ 
+                .scroll{
+                overflow-y: auto !important;
+                max-height: 120px;
+            } 
+                .chat-box {
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    max-height: 60px;
+                }
+                .chat {
+                    /* margin-top: -110px !important; */
+                    padding: 11px !important;
+                }
+                
+                .d-flex.flex-row.justify-content-between{
+                    display: flex !important;
+                    flex-direction: row !important;
+                }
+            }
+            @media (max-width: 575.98px) and (min-width: 375px) { 
+            /* CSS rules for extra small screens */
+            
+            .d-flex.flex-row{
+                height: 100%;
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+            }
+            .vh-100{
+                min-height: 100px !important;
+            }
+            d-flex.flex-column.flex-fill.chat{
+                width: 95% !important;
+                align-self: center !important;
+            }
+            div.d-flex.flex-coloumn.vh-100.chat{
+                width: 95% !important;
+                align-self: center !important;
+                outline: none !important;
+            }
+            div.w-300{
+                width: 95% !important;
+                align-self: center !important;
+            }
+            .scroll{
+                overflow-y: auto !important;
+                max-height: 150px;
+            }
+            .chat {
+                padding: 11px !important;
+            }
+            .chat-box {
+                overflow-y: auto;
+                overflow-x: hidden;
+                max-height: 110px;
+            }
+                           
+            .d-flex.flex-row.justify-content-between{
+                display: flex !important;
+                flex-direction: row !important;
+            }
+            }
+
+            @media (min-width: 576px) and (max-width: 767.99px) {
+            .d-flex.flex-row{
+                height: 100%;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            d-flex.flex-column.flex-fill.chat{
+                
+                width: 95% !important;
+                align-self: center !important;
+            }
+            .chat-box {
+                overflow-y: auto;
+                overflow-x: hidden;
+                max-height: 130px;
+            }
+            .chat {
+                padding: 11px !important;
+            }
+            .scroll{
+                overflow-y: auto !important;
+                max-height: 175px;
+            }
+            .d-flex.mb-2.p-2.justify-content-between{
+                align-items: center !important;
+            }
+            div.w-300{
+                    width: 145% !important;
+                    align-self: center !important;
+                }
+            .vh-100{
+                    min-height: 100px !important;
+                }
+            .d-flex.flex-row.justify-content-between{
+                    display: flex !important;
+                    flex-direction: row !important;
+                }
+            }
+        </style>
+        
+        </style>
     </head>
 
-    <body>
+    <body style="overflow: hidden">
         <div class="d-flex flex-row" style="margin: 0; height: 100%; overflow: hidden">
+        
             <div class="d-flex
                 flex-coloumn
                 vh-100 chat" style="outline: 2px solid #EEEEEE; padding:20px!important;">
-                <div class="w-300" style="width:300px">
-                    <div>
+                <div class="w-300" >
+                    <div class="w-1st">
                         <div class="d-flex
     		            mb-2 p-2 
 			            justify-content-between
-			            ">
+			            " >
 
                             <!-- Use this for profile dp and name -->
                             <!-- <div class="d-flex
@@ -87,12 +473,24 @@ if (isset($_SESSION['dietitianuserID'])) {
                             <!-- <a href="logout.php" class="btn fs-xs">L </a> -->
                         </div>
 
-                        <div class="input-group mb-3 bt-outline ">
-                            <button class="btn  grey-color text-secondary" id="serachBtn">
+                       <!--  <div class="card-body dig searchbox">
+                            <form method="POST" class="search-form form-inline " style="display: flex; border: none; border-radius: 0.6rem; font-size: 20px; font-weight: 400; padding-top: 0.5rem; padding-right: 0.5rem; color: #BBBBBB; background-color: white; box-shadow: 0.6px 0.6px 2px 1px #ccc;">
+                            //<button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
+                              //          class="fa-solid fa-magnifying-glass"></i></button>
+                                //<input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
+                                  //  name="search" >  NOT NEEDE FRom start
+                                    <button style="background-color:white;border:none;" id="btn_search" class="search-icon" name="search-btn"><img src="images/vec_search.png" alt=""></button> 
+                                    <input type="text" placeholder="Search client" class="search-box form-control w-50" id="search" name="search" style="border:none;font-size:1rem;margin-left:1rem  ">
+                                
+                                <div id="display">
+                                </div>
+                            </form>
+                        </div>-->
+                        <div class="input-group mb-3 bt-outline " style="display: flex; border: none; border-radius: 0.6rem; font-size: 20px; font-weight: 400; padding-top: 0.5rem; padding-right: 0.5rem; color: #BBBBBB; background-color: white; box-shadow: 0.6px 0.6px 2px 1px #ccc;">
+                            <button class="btn  grey-color text-secondary" style="background-color:white !important;border:none;" id="serachBtn">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <input type="text" placeholder="Search" id="searchText" class="form-control bg-light text-secondary">
-
+                            <input type="text" placeholder="Search" id="searchText"  style="background-color:white !important;border:none;" class="form-control bg-light text-secondary">
                         </div>
                         <div class="scroll">
                             <ul id="chatList" class="list-group mvh-50">
@@ -208,6 +606,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                 flex-fill
               chat">
                 <div class="  d-inline-block p-2 flex-fill justify-content-between chat">
+                
                     <!-- <a href="home.php" class="fs-4 link-dark">&#8592;</a> -->
                     <div class="d-flex flex-row justify-content-between">
                         <div class="d-flex  align-items-center">
@@ -447,18 +846,8 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                     });
                 </script>
-                <style>
-                    .hide-input {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        opacity: 0;
-                        width: 0;
-                        height: 0;
-                        visibility: hidden;
-                    }
-                </style>
             </div>
+            
         </div>
 
     </body>

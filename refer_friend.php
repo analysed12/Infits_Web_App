@@ -228,7 +228,7 @@
             <div class="friend-list-box">
                 <div class="heading-box">
                     <h3>Invite a friend</h3>
-                    <img src="icons/search.svg" alt="Search">
+                    <img src="icons/search.svg" alt="Search" style="border-radius:100%;border:1px solid black;padding:8px;cursor:pointer; color:#051532;">
                 </div>
                 <ul>
 

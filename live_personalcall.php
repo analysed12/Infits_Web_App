@@ -305,7 +305,7 @@ padding-top:0.5rem;
     }
     .buttons1{
         display:flex;
-        gap:auto;
+        gap:0.2rem;
     }
   
     
@@ -315,7 +315,7 @@ padding-top:0.5rem;
 <body>
     <div class="live_personalcall">
     <div style="display:flex;gap:1rem"><img src="images/liveprofile.png" style="width: 40.91px;height: 40.91px;border-radius:50%"> <span style="font-size:30px">John Wayne</span></div>
-    <div><img src="images/ronald_large.png" class="ronald"></div>
+    <div><img src="images/ronald_large.png" style="height:70%;width:70%" class="ronald"></div>
 
          <div class="bottom_buttons">
 
