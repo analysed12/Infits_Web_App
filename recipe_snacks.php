@@ -655,7 +655,7 @@ body {
         </div>
         <div class="filter-outline" style="display:flex; justify-content:space-between; align-items:center; margin:10px; margin-left:20px;">
             <div class="filter-text">Sandwich</div> 
-            <img class="filter-line" src="./images/image 4.png" style="width:55px;" alt="">
+            <img class="filter-line" src="./images/image 4-3.png" style="width:55px;" alt="">
         </div>
         <div class="filter-outline" style="display:flex; justify-content:space-between; align-items:center; margin:10px; margin-left:20px;">
             <div class="filter-text">Oatmeal</div>

@@ -1,5 +1,6 @@
 <?php
-include('navbar.php');?>
+include('navbar.php');
+?>
 <style>
 <?php
 include 'css/all_recipes.css'; 
@@ -48,7 +49,7 @@ include 'css/all_recipes.css';
     
     <div class="header" style="">
     <div class="heading">
-        <h1 style=" ;font-family:'NATS';font-style: normal;">Recipes</h1>
+        <h1 style="margin-left:50px ;font-family:'NATS';font-style: normal;">Recipes</h1>
     </div>
         <div class="search" style="margin-right:50px; display:flex; gap:1.5rem; margin-top:18px;">
             <div class="searchbox">
@@ -66,8 +67,8 @@ include 'css/all_recipes.css';
                 <img src="./images/breakfast-waffles-realistic-top-view-image_1284-14471-removebg-preview 1.png" class="imag im1">
                 <h3 style="margin-bottom:10px;margin-right:135px;color: #000000;font-weight: 400;font-size:35px;">Breakfast</h3>
                 <p style="margin-bottom:100px;margin-right:100px;color: #6A6A6A;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/tree branch.png" class="imag im2 im2-2" style="left: -110px;bottom: 18px;">
-                <img src="./images/tree branch.png" class="imag im2 " style="left: -25px;bottom: 18px;">
+                <img src="./images/tree branch.png" class="imag im2 im2-2" style="left:-90px;bottom:25px;">
+                <img src="./images/tree branch.png" class="imag im2 " style="left:-13px;bottom:11px;">
             </div>
     </a>
     
@@ -77,7 +78,7 @@ include 'css/all_recipes.css';
                 <img src="./images//detailed-bento-box-illustrated_23-2148879878-removebg-preview 1.png" class="imag im1">
                 <h3 style="margin-bottom:10px;margin-right:180px;color: #000000;font-weight:400;font-size:35px;">Lunch</h3>
                 <p style="margin-bottom:100px;margin-right:100px;color: #6A6A6A;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/book-of-recipes-concept-vector-14744961-removebg-preview 1.png" class="imag im2" style="bottom:20px;left:30px;width:100px">
+                <img src="./images/book-of-recipes-concept-vector-14744961-removebg-preview 1.png" class="imag im2" style="width:35%;height:35%;left:6px;bottom:0px;transform:rotate(1deg);">
             </div>
     </a>
 
@@ -87,7 +88,7 @@ include 'css/all_recipes.css';
                 <img src="./images/istockphoto-1339640372-612x612-removebg-preview 1.png" class="imag im1">
                 <h3 style="margin-bottom:10px;margin-right:168px;color: #000000;font-weight: 400;font-size:35px;">Snacks</h3>
                 <p style="margin-bottom:100px;margin-right:100px;color: #6A6A6A;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/snac.png" class="imag im2" style="bottom:20px;left:30px;width:100px">
+                <img src="./images/snac.png" class="imag im2" style="width:35%;height:35%;left:3px;bottom:0px;transform:rotate(1deg);">
             </div>
     </a>
 
@@ -98,7 +99,7 @@ include 'css/all_recipes.css';
                 <img src="./images/istockphoto-689896272-612x612-removebg-preview 1.png" class="imag im1" style="top:-80px">
                 <h3 style="margin-bottom:10px;margin-right:170px;color: #000000;font-weight: 400;font-size:35px;">Dinner</h3>
                 <p style="margin-bottom:100px;margin-right:100px;color:#6A6A6A;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/bowl.png" class="imag im2" style="bottom:20px;left:30px;width:80px">
+                <img src="./images/bowl.png" class="imag im2" style="bottom:9px;left:20px;width:60px;height:40px;">
             </div>
 </a>
         </div>
@@ -114,7 +115,7 @@ include 'css/all_recipes.css';
     $res = mysqli_query($conn, $sql);
     ?>
 
-    <div class="flex row"  >
+    <div class="flex row" >
         <?php $counter = 0;
         while ($d = mysqli_fetch_assoc($res)) {
             $drecipe_recipe = explode(',', $d['drecipe_recipe']);

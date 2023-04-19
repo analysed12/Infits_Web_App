@@ -16,9 +16,6 @@ body {
     color: black;
     position: relative;
 }
-.heading{
-    margin-left:50px;
-}
 
 .tabcontent {
     padding: 6px 30px;
@@ -373,7 +370,7 @@ body {
 
 @media screen and (min-width: 720px) and (max-width:1500px) {
 .header{
-    
+    margin-left: 120px;
     margin-top: 9px;
 }
 .searchbox{
@@ -406,14 +403,6 @@ body {
 }
 }
 @media screen and (min-width:0px) and (max-width:720px){
-    .heading{
-        margin-left:2rem;
-    }
-    .row{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
     .header{
     margin-left: 120px;
     margin-top: 8px;
