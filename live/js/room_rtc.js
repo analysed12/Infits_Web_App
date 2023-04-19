@@ -1,4 +1,4 @@
-const APP_ID = "73a86d1cc00549b795e5e859da0062a1"
+const APP_ID = "33c3c208a59c47669172ae12e26270ed"
 
 let uid = sessionStorage.getItem('uid')
 if (!uid) {
@@ -251,7 +251,7 @@ document.getElementById('camera-btn').addEventListener('click', toggleCamera)
 document.getElementById('mic-btn').addEventListener('click', toggleMic)
 document.getElementById('screen-btn').addEventListener('click', toggleScreen)
 document.getElementById('join-btn').addEventListener('click', joinStream)
-document.getElementById('leave-btn').addEventListener('click', leaveStream)
+    // document.getElementById('leave-btn').addEventListener('click', leaveStream)
 
 
 joinRoomInit()

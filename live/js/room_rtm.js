@@ -74,8 +74,10 @@ let handleChannelMessage = async(messageData, MemberId) => {
 let sendMessage = async(e) => {
     e.preventDefault()
 
-    let message = e.target.message.value
-    channel.sendMessage({ text: JSON.stringify({ 'type': 'chat', 'message': message, 'displayName': displayName }) })
+    let message = e.target.message.value;
+    console.log(message);
+    console.log(displayName);
+    channel.sendMessage({ text: JSON.stringify({ 'type': 'chat', 'message': message, 'displayName': displayName }) });
     addMessageToDom(displayName, message)
     e.target.reset()
 }
