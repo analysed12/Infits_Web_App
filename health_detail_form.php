@@ -646,22 +646,22 @@ if ($conn->connect_error) {
         let popup = document.querySelector("#addDocumentPopup");
         let shareBtn = document.querySelectorAll(".shareBtn");
         let sharePopup = document.querySelector("#sharePopup");
-
         // formDocuments.style.display = "none";
         <?php
-        $url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 
-        $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+        // $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
 
-        $url_components = parse_url($url);
-        parse_str($url_components['query'], $params);
-
-        if ($params['form'] === 'show') {
+        // $url_components = parse_url($url);
+        // parse_str($url_components['query'], $params);
+        
+        if (isset($_GET['form'])) {
             ?>
             formDocuments.style.display = "none";
         <?php
-        } elseif ($params['documents'] === 'show') {
+        } elseif (isset($_GET['documents'])) {
             ?>
+            console.log('doc');
             formDetails.style.display = "none";
             borderBottom.classList.add("right");
             borderBottom.classList.remove("left");
