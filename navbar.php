@@ -21,7 +21,8 @@ if (isset($_GET['logout'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infits</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -187,14 +188,14 @@ if (isset($_GET['logout'])) {
     }
 
     .topnav-icons {
-    height: 100%;
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    position: relative;
-    padding-right: 30px;
-    justify-content: flex-end;
-}
+        height: 100%;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        position: relative;
+        padding-right: 30px;
+        justify-content: flex-end;
+    }
 
 
     a.sidenavlink:hover,
@@ -239,6 +240,7 @@ if (isset($_GET['logout'])) {
         .sidenav {
             display: none;
         }
+
         .topnav-icons {
             padding-right: 0;
         }
@@ -390,9 +392,9 @@ if (isset($_GET['logout'])) {
         <a id="index"
             class="sidenavlink nav-index nav-task_list nav-track_stats_steps nav-track_stats_water nav-track_stats_heart nav-track_stats_sleep nav-track_stats_weight nav-track_stats_calorie"
             href="index.php"><img src="images/vec_dashboard.png" class="nav-icon">Dashboard</a>
-        <a id="messages" class="sidenavlink nav-chat_home" href="chat_home.php"><img src="images/vec_messages.svg"
+        <a id="messages" class="sidenavlink nav-chat_home nav-chat_messages" href="chat_home.php"><img src="images/vec_messages.svg"
                 class="nav-icon">Messages</a>
-        <a id="live" class="sidenavlink" href="live.php"><img src="images/vec_live.svg" class="nav-icon">Live</a>
+        <a id="live" class="sidenavlink nav-live" href="live.php"><img src="images/vec_live.svg" class="nav-icon">Live</a>
         <a id="calendar_of_events" class="sidenavlink nav-calendar_of_events" href="calendar_of_events.php"><img
                 src="images/vec_appointments.svg" class="nav-icon">Appoinments</a>
         <a id="client_list"
@@ -622,10 +624,36 @@ if (isset($_GET['logout'])) {
         // get the url and add active to page 
         const currentPath = window.location.pathname;
         const lastPage = currentPath.split('/').pop().split('.').shift();
-        console.log(lastPage);
-        // document.getElementById(lastPage).classList.add('navactive');
-        // document.getElementsByClassName('nav-' + lastPage)[0].classList.add('navactive');
+        document.getElementsByClassName('nav-' + lastPage)[0].classList.add('navactive');
 
+        const active_bar =document.querySelector('.navactive');
+        iconChange(active_bar);
+        
+        function iconChange(el,active="__active"){
+            
+            const src = el.firstElementChild.getAttribute('src');
+            let new_src = src.split('/').pop().split('.').shift();
+            if(active==""){
+                new_src = src.split('/').pop().split('.').shift().split('__').shift();
+            }
+            el.firstElementChild.setAttribute('src',`images/${new_src}${active}.svg`);
+
+        }
+        const side_links_hover =document.querySelectorAll('.sidenavlink');
+        side_links_hover.forEach(el => {
+            el.addEventListener('mouseover',()=>{
+                if(el.classList.contains('navactive')){
+                    return true;
+                }
+                iconChange(el);
+            });
+            el.addEventListener('mouseout',()=>{
+                if(el.classList.contains('navactive')){
+                    return true;
+                }
+                iconChange(el,"");
+            })
+        });
     // $(document).ready(function(){
     //         $('#search-box').on('input', function(){
     //             var query = $(this).val();
