@@ -406,7 +406,7 @@ if (isset($_GET['logout'])) {
                 src="images/vec_payments.svg" class="nav-icon">Payments</a>
         <a id="create_recipe" class="sidenavlink nav-all_recipes nav-create_recipe" href="all_recipes.php"><img
                 src="images/vec_recipies.svg" class="nav-icon">Recipes</a>
-        <a id="healthform" class="sidenavlink nav-healthform" href="#"><img src="images/vec_health_form.svg"
+        <a id="healthform" class="sidenavlink nav-healthform" href="forms_and_documents.php"><img src="images/vec_health_form.svg"
                 class="nav-icon">Health Form</a>
 
         <div class="menu-bottom">
@@ -573,18 +573,18 @@ if (isset($_GET['logout'])) {
             <img src="images/logo.png" id="logo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="index.php" id="defaultOpen"><img src="images/vec_dashboard.png">&nbsp&nbsp Dashboard</a>
-            <a href="#"><img src="images/vec_messages.png">&nbsp&nbsp Messages</a>
-            <a href="#"><img src="images/vec_live.png">&nbsp&nbsp Live</a>
-            <a href="#"><img src="images/vec_appointments.png">&nbsp&nbsp Appoinments</a>
-            <a href="#"><img src="images/vec_client_list.png">&nbsp&nbsp Clients</a>
+            <a href="chat_home.php"><img src="images/vec_messages.png">&nbsp&nbsp Messages</a>
+            <a href="live.php"><img src="images/vec_live.png">&nbsp&nbsp Live</a>
+            <a href="calendar_of_events.php"><img src="images/vec_appointments.png">&nbsp&nbsp Appoinments</a>
+            <a href="client_list.php"><img src="images/vec_client_list.png">&nbsp&nbsp Clients</a>
             <a href="myplan.php"><img src="images/vec_recipies.png">&nbsp&nbsp Diet Plans</a>
-            <a href="#"><img src="images/vec_mail.png">&nbsp&nbsp Payments</a>
-            <a href="#"><img src="images/vec_recipies.png">&nbsp&nbsp Recipies</a>
-            <a href="#"><img src="images/vec_recipies.png">&nbsp&nbsp Health Form</a>
+            <a href="billingAndInvoices.php"><img src="images/vec_mail.png">&nbsp&nbsp Payments</a>
+            <a href="all_recipes.php"><img src="images/vec_recipies.png">&nbsp&nbsp Recipies</a>
+            <a href="forms_and_documents.php"><img src="images/vec_recipies.png">&nbsp&nbsp Health Form</a>
 
-            <a href="#"><img src="images/vec_gethelp.png">&nbsp&nbsp Get Help</a>
-            <a href="#"><img src="images/vec_settings.png">&nbsp&nbsp Settings</a>
-            <a href="#"><img src="images/vec_logout.png">&nbsp&nbsp Log Out</a>
+            <a href="help.php"><img src="images/vec_gethelp.png">&nbsp&nbsp Get Help</a>
+            <a href="settings.php"><img src="images/vec_settings.png">&nbsp&nbsp Settings</a>
+            <a href="logout.php"><img src="images/vec_logout.png">&nbsp&nbsp Log Out</a>
         </div>
         <span style="font-size:30px;cursor:pointer; margin: 5px;" onclick="openNav()" id="navbar-res">&#9776;</span>
     </div>
