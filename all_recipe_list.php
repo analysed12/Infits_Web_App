@@ -21,6 +21,7 @@ $res = mysqli_query($conn, $sql);
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        
         body{
             overflow-x: hidden;
         }
@@ -78,7 +79,6 @@ $res = mysqli_query($conn, $sql);
             letter-spacing: 0em;
             text-align: left;
             align-items: center;
-            /* or 8px */
             display: flex;
             color: #A3A1A1;
         }

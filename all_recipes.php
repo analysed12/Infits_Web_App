@@ -49,12 +49,12 @@ include 'css/all_recipes.css';
     
     <div class="header" style="">
     <div class="heading">
-        <h1 style="margin-left:50px ;font-family:'NATS';font-style: normal;">Recipes</h1>
+        <h1 style="margin-left:3rem ;font-family: 'NATS';font-style: normal;font-weight: 500;">Recipes</h1>
     </div>
-        <div class="search" style="margin-right:50px; display:flex; gap:1.5rem; margin-top:18px;">
+     <div class="search" style="margin-right:2.2rem;display:flex;gap:1.5rem">
             <div class="searchbox">
-                <button style="background-color:white;border:none; " id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
-                <input type="search" name="sinput" placeholder="Search here" style="border:none;margin-top:4px; font-size:1.8rem; margin-left:1rem; width:200px;">
+                <button style="background-color:white;border:none;" id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
+                <input type="search" name="input" placeholder="Search here" style="border:none;font-size:1.3rem;margin-left:1rem;width:60%;height:45px;margin-top:-5px">
 
             </div>
         </div>
@@ -106,7 +106,7 @@ include 'css/all_recipes.css';
    
 
     <!-- all recipes -->
-    <div class="middle_wrapper" style="display:flex;justify-content:space-between;margin-top:30px;margin-left:5rem;margin-right:2.5rem">
+    <div class="middle_wrapper" style="display:flex;justify-content:space-between;margin-top:30px;margin-right:2.5rem">
         <h3 class="recipe" style="margin-left:50px; color:black;font-family:'NATS';">All Recipes</h3>
         <a href="all_recipe_list.php" style="background-color:none;border:nome;color: #818181"><h6 style="font-family:'NATS'; font-size:17px;margin-top:30px; margin-right:40px;">View all</h6></a>
     </div>
@@ -115,7 +115,7 @@ include 'css/all_recipes.css';
     $res = mysqli_query($conn, $sql);
     ?>
 
-    <div class="flex row" >
+    <div class="main" >
         <?php $counter = 0;
         while ($d = mysqli_fetch_assoc($res)) {
             $drecipe_recipe = explode(',', $d['drecipe_recipe']);
@@ -137,7 +137,7 @@ include 'css/all_recipes.css';
             $counter++;
 
         ?>
-            <div class="card d-flex" style="padding:15px; width:350px; height:230px;border-radius:16px; margin-left:45px;margin-right:-5px;margin-top:30px;">
+            <div class="card d-flex" style="padding:15px; width:350px; height:230px;border-radius:16px;margin-right:-5px;">
                 <div class="card-upper d-flex justify-content-between">
                     <p id="bu" class="card-upper-text"> Medium </p>
                     <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>

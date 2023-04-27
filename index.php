@@ -188,14 +188,13 @@ function fetchInformation($client_id){
         margin:0;
     }
 .dashboard{
-    margin-top: 1rem;
-    margin-left: 17rem;
-    margin-right:0;
-    
+  margin-top:2rem;
+  margin-left: 17rem;
+ 
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    /* margin-bottom: 1rem;  */
+    
 }
 .dashboard_comtainer1{
     display: flex;
@@ -205,7 +204,7 @@ function fetchInformation($client_id){
 .container2_rightside {
 	display: flex;
 	gap: 1rem;
-	margin-right: 25px;
+	margin-right: 4rem;
 	margin-top: 10px;
 }
 .btn-add {
@@ -351,7 +350,7 @@ function fetchInformation($client_id){
     justify-content: space-between;
     gap: 1rem;
     border: none;
-    margin-right: 2rem;
+    margin-right: 3.9rem;
     font-size: 20px;
 }
 .dashboard_container3 {
@@ -385,7 +384,8 @@ function fetchInformation($client_id){
 }
 .symbols{
     display: flex;
-    gap:0.2rem;
+    gap:0.7rem;
+    margin-right: 5px;
 }
 .symbols.col-2 img {
 	scale: 0.8;
@@ -402,6 +402,8 @@ function fetchInformation($client_id){
     margin-top: 1rem;
     justify-content: space-between;
     width: 95%;
+    margin-left: -4px;
+
 }
 .values{
     margin-top: 2rem;
@@ -439,7 +441,7 @@ function fetchInformation($client_id){
     padding: 0.5rem;
     padding-left: 4rem;
     padding-right: 4rem;
-    font-weight: 400;
+    font-weight: 500;
     border-radius: 0.6rem;
 }
 #btn6:hover{
@@ -454,7 +456,7 @@ function fetchInformation($client_id){
     padding: 0.5rem;
     padding-left: 4rem;
     padding-right: 4rem;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 0.6rem;
 }
 #btn7:hover{
@@ -546,7 +548,9 @@ function fetchInformation($client_id){
     background-color: #7282FB;
     color:white;
 }
-
+h3{
+    font-size: 1.5rem;
+}
 @media screen and (max-width: 920px) {
     .dashboard_container4{
         display: none;
@@ -713,8 +717,8 @@ function fetchInformation($client_id){
 
         <div class="dashboard_comtainer1">
             <div class="container1_leftside">
-                <p style="font-size: 40px;font-weight:400;margin-bottom: 0;">Dashboard</p>
-                <p style="font-weight:400;font-size:25px">Upcoming Events</p>
+                <p style="font-size: 40px;font-weight:600;margin-bottom: 0;">Dashboard</p>
+                <p style="font-weight:600;font-size:1.5rem">Upcoming Events</p>
                 
             </div>
             <div class="container2_rightside" >
@@ -775,7 +779,7 @@ if(!empty($up_event)){
 </div>
 
         <div class="dashboard_container3">
-            <div style="font-size:35px; font-weight:400"> Client Progress</div>
+            <div style="font-size:1.5rem; font-weight:600;margin-left: 2.5px;"> Client Progress</div>
             <div class="details">
                 <a href="client_progress.php"><button id="details">View All</button></a>
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
@@ -904,12 +908,12 @@ if(!empty($data)){
         <div class="dashboard_container5">
             <div class="container5_wrapper1">
                 <div class="tasklist">
-                    <p style="font-size:1.3rem ; font-weight:600">My Task List</p>
+                    <p style="font-size:1.5rem ; font-weight:600; margin-top: -5px;margin-left: 2.5px;">My Task List</p>
                     <span class="down"><a href="task_list.php" style="background-color:white; color:#717171; border:none" >View All</a></span> 
                 </div>
                 <div class="list_tasklist">
-                    <button id="btn6" class="task-btn" onclick="openTask('btn6','today_tasks')"><strong>Today</strong></button>
-                    <button id="btn7" class="btn6 task-btn" onclick="openTask('btn7','upcoming_tasks')">Upcoming</button>
+                    <button id="btn6" style="font-size: 20px;"  class="task-btn" onclick="openTask('btn6','today_tasks')">Today</button>
+                    <button id="btn7" style="font-size: 20px;" class="btn6 task-btn" onclick="openTask('btn7','upcoming_tasks')">Upcoming</button>
                     <div id="today_tasks">
 <?php 
 $query = "SELECT * FROM `dietition_tasks` WHERE dietitianuserID = '{$dietitian_id}' AND date = '{$today->format('Y-m-d')}' ORDER BY date,start_time LIMIT 3";
@@ -1044,7 +1048,7 @@ if (mysqli_num_rows($result) > 0) {
 
 <div class="container5_wrapper2">
                 <div class="tasklist">
-                    <p style="font-size:1.3rem ; font-weight:600">Messages</p>
+                    <p style="font-size:1.5rem ; font-weight:600;margin-top: -5px">Messages</p>
 
                     <span class="down2"><a href="chat_home.php" style=" color:#717171 ; border:none">View All</a></span>
                 </div>
