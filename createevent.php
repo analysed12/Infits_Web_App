@@ -151,6 +151,11 @@ include("navbar.php");
     text-align: center;
     padding-top: 5px;
 }
+.rem-item {
+    color: #4B9AFB;
+    font-size: 17px;
+
+}
 /* @media only screen and (max-width: 600px){
     #mobile_btn{
         padding: 30px 0px;        
@@ -160,7 +165,23 @@ include("navbar.php");
     } 
     
 } */
+.event_title{
+    font-family: 'NATS';
+font-style: normal;
+font-weight: 400;
+font-size: 28px;
+line-height: 59px;
+text-transform: capitalize;
 
+color: #000000;
+
+}
+/* @media only screen and (max-width: 600px){
+
+.form_btn1{
+    padding-bottom: 40px;
+}
+} */
 </style>
 
 <body>
@@ -168,7 +189,7 @@ include("navbar.php");
 
     <!-- Contents Start -->
     <div id="content">
-        <h4 style="margin:20px;margin-bottom:0;font-weight:500;font-size:30px">Add Event</h4>
+        <p style="margin-left:1.7rem;margin-top:1.5rem;font-weight:500;font-size:30px">Add Event</p>
         <div class="event-form">
             <div class="ev-img">
                 <img class="event-image" src="images/event_image.svg" alt="">
@@ -176,10 +197,10 @@ include("navbar.php");
 
             
             <form action="#" method="post">
-                <div class="eve_form" style="color:#4B9AFB">
+                <div class="eve_form" style="">
                     <!-- Event name field -->
-                    <label for="subject" class="event_title">EVENT NAME</label>
-                    <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 0px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+                    <label for="subject" class="event_title">Event Name</label>
+                    <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
 border-radius: 10px; border: 1px solid #F1F1F1;"
                         required>
                         <option value="Consultation">Consultation</option>
@@ -190,32 +211,25 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
                     <!-- Reminder types display -->
                     <!--***** Add an array to store these values -->
                     <div class="reminder">
-                        <div class="event_title">REMINDER TYPE</div>
+                        <div class="event_title">Reminder Type</div>
                         <div class="rem">
-                            <div style="display: inline-block;" class="rem-item"><i
-                                    class="fa-solid fa-suitcase rem_icon"></i>Consultation</div>
-                            <div style="display: inline-block;" class="rem-item"><i
-                                    class="fa-solid fa-apple-whole rem_icon"></i>Diet Plan</div>
-                            <div style="display: inline-block;" class="rem-item"><i
-                                    class="fa-solid fa-phone rem_icon"></i>Call
-                            </div>
-                            <div style="display: inline-block;" class="rem-item"><i
-                                    class="fa-solid fa-add rem_icon"></i>Others
-                            </div>
+                            <div style="display: inline-block;" class="rem-item"><img src="images/Toolbox.svg"> Consultation</div>
+                            <div style="display: inline-block;" class="rem-item"><img src="images/Healthy Eating.svg"> Diet Plan</div>
+                            <div style="display: inline-block;" class="rem-item"><img src="images/Ringer Volume.svg">Call</div>
+                            <div style="display: inline-block;" class="rem-item"><img src="images/Plus Math.svg">Others </div>
                         </div>
                     </div>
                     <br>
 
                     <!-- Main event details form -->
-                    <div class=" event_title">EVENT DETAILS</div>
+                    <div class=" event_title"> Event Details</div>
 
                     <div style="max-width:100%;margin:auto">
 
                         <!-- Add client fields -->
                         <div class="input-icons">
-                            <i class="fa-solid fa-user icon">
-                            </i>
-                            <select style="border-top:none;border-left:none;border-right:none; border-bottom:none;" name="clientname"
+                        <img class="icon" style="position:absolute;min-width: 0px;" src="images/Group 3.svg">
+                            <select style="border-top:none;border-left:none;border-right:none;border-bottom: 1px solid #EFEFEF;" name="clientname"
                                 class="input-field" required>
                                 <option value="" disabled selected>Add Client</option>
                                 <?php
@@ -232,9 +246,9 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
 
                         <!-- Meeting type fields -->
                         <div class="input-icons">
-                            <i class="fa-solid fa-suitcase icon">
-                            </i>
-                            <select style="border-top:none;border-left:none;border-right:none;border-bottom:none;" name="meetingtype"
+                        <img class="icon" style="position:absolute;min-width: 0px;" src="images/briefcase.svg">
+
+                            <select style="border-top:none;border-left:none;border-right:none;border-bottom: 1px solid #EFEFEF;" name="meetingtype"
                                 class="input-field" required>
                                 <option value="" disabled selected>Meeting Type</option>
                                 <option value="Videocall">Video Call</option>
@@ -245,10 +259,10 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
 
 
                         <!-- Date and Time fields -->
-                        <div class="txt button"  id="button">
-                            <i class="fa-solid fa-calendar-days txticon" style="display:inline-block;color:black !important">
-                            </i>
-                            <p style="display:inline-block;color:black !important">Date and Time</p>
+                        <div class="txt button"  id="button" style="border-bottom: 1px solid #EFEFEF;">
+                            <img  src="images/Schedule.svg" class="fa-solid fa-calendar-days txticon" style="display:inline-block; padding:0px; color:black  !important">
+                            
+                            <p style="display:inline-block;padding-left: 10px;">Date and Time</p>
                         </div>
 
                         <!-- Date and Time Pop up style="border-bottom:1.8px solid black;" -->
@@ -271,24 +285,24 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
 
                         <!-- Place of meeting field -->
                         <div class="input-icons">
-                            <i class="fa-solid fa-location icon">
-                            </i>
-                            <input style="border-top:none;border-left:none;border-right:none;border-bottom:none;" class="input-field"
+                        <img class="icon" style="position:absolute;min-width: 0px;" src="images/briefcase.svg">
+
+                            <input style="border-top:none;border-left:none;border-right:none;border-bottom: 1px solid #EFEFEF;" class="input-field"
                                 type="text" placeholder="Place of meeting" name="placeofmeeting">
                         </div>
 
                         <!-- Add Description Field -->
                         <div class="input-icons">
-                            <i class="fa-solid fa-bars icon">
-                            </i>
-                            <input style="border-top:none;border-left:none;border-right:none;border-bottom:none;" class="input-field"
+                        <img class="icon" style="position:absolute;min-width: 0px;" src="images/align-left.svg">
+                            
+                            <input style="border-top:none;border-left:none;border-right:none;border-bottom: 1px solid #EFEFEF;" class="input-field"
                                 type="text" placeholder="Add Description" name="description" required>
                         </div>
 
                         <!-- Add attachment field -->
                         <div class="input-icons">
-                            <i class="fa-solid fa-paperclip icon">
-                            </i>
+                             <img class="icon" style="position:absolute;min-width: 0px;" src="images/Attach.svg">
+
                             <input style="border-top:none;border-left:none;border-right:none;border-bottom:none;" class="input-field"
                                 type="text" placeholder="Attachment" name="attachment" required>
                         </div>
@@ -296,7 +310,7 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
 
                     <div style="width:100%; margin-left:10%; margin-right:10%">
                         <a href="createevent.php"><input style="display:inline-block; color:black; background:white;"
-                                class="form_btn " id='mobile_btn' placeholder="Cancel"></input></a>
+                                class="form_btn form_btn1" id='mobile_btn' placeholder="Cancel"></input></a>
                         <button style="display:inline-block; background: #4B9AFB;" id='new_btn' class="form_btn" name="submit"
                             type="submit">Book Appointment</button>
                     </div>
