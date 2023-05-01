@@ -289,6 +289,18 @@ if (isset($_SESSION['dietitianuserID'])) {
             .w-300{
                 width:300px !important;
             }
+            .search__div{
+                border-radius: 0.6rem;
+                padding: 3px;
+                background: white;
+                box-shadow: 0.6px 0.6px 2px 1px #ccc;
+                color: #BBBBBB;
+
+            }
+            ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+              color: #BBBBBB;
+              opacity: 1; /* Firefox */
+            }
 
             @media (min-width: 76px) and (max-width: 767.99px) {
                 div.d-flex.flex-coloumn.vh-100.chat{
@@ -455,7 +467,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                 flex-coloumn
                 vh-100 chat" style="outline: 2px solid #EEEEEE; padding:20px!important;">
                 <div class="w-300" >
-                    <div class="w-1st">
+                    <div class="w-1st" style="margin-left:1rem;">
                         <div class="d-flex
     		            mb-2 p-2 
 			            justify-content-between
@@ -468,7 +480,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 								<h3 class="fs-xs m-2"><?= $user['name'] ?></h3>
 							</div> -->
                             <div class="mt-1">
-                                <h5 class="chat-message-header">Messages</h5>
+                                <h5 class="chat-message-header" style="">Messages</h5>
                             </div>
                             <!-- <a href="logout.php" class="btn fs-xs">L </a> -->
                         </div>
@@ -486,11 +498,11 @@ if (isset($_SESSION['dietitianuserID'])) {
                                 </div>
                             </form>
                         </div>-->
-                        <div class="input-group mb-3 bt-outline " style="display: flex; border: none; border-radius: 0.6rem; font-size: 20px; font-weight: 400; padding-top: 0.5rem; padding-right: 0.5rem; color: #BBBBBB; background-color: white; box-shadow: 0.6px 0.6px 2px 1px #ccc;">
-                            <button class="btn  grey-color text-secondary" style="background-color:white !important;border:none;" id="serachBtn">
+                        <div class="input-group mb-3  d-flex align-items-center search__div">
+                            <button class="btn  grey-color text-secondary" style="background: white !important; border:none;" id="serachBtn">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <input type="text" placeholder="Search" id="searchText"  style="background-color:white !important;border:none;" class="form-control bg-light text-secondary">
+                            <input type="text" placeholder="Search" id="searchText"  style="background: white !important; border:none;" class="form-control bg-light ">
                         </div>
                         <div class="scroll">
                             <ul id="chatList" class="list-group mvh-50">
@@ -608,8 +620,8 @@ if (isset($_SESSION['dietitianuserID'])) {
                 <div class="  d-inline-block p-2 flex-fill justify-content-between chat">
                 
                     <!-- <a href="home.php" class="fs-4 link-dark">&#8592;</a> -->
-                    <div class="d-flex flex-row justify-content-between">
-                        <div class="d-flex  align-items-center">
+                    <div class="d-flex flex-row justify-content-between  mx-4">
+                        <div class="d-flex  align-items-center  ">
                             <img src="chat/uploads/<?= $chatWith['p_p'] ?>" class="rounded-circle" style="width:50px">
                            
                             <h6 class="display-4 fs-sm m-2">
@@ -622,7 +634,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                                         <div class="fs-xs p-1 online-text" style="color: #0177FD">Online</div>
                                     <?php } else { ?>
-                                        <small class="d-block p-1">
+                                        <small style="font-size:14px !important; font-weight:400 !important; font-family: 'NATS';font-style: normal;" class="d-block ">
                                             Last seen:
                                             <?= last_seen($chatWith['last_seen']) ?>
                                         </small>
@@ -634,8 +646,10 @@ if (isset($_SESSION['dietitianuserID'])) {
                         </div>
 
                         <div class="d-flex  align-items-center ">
-                            <div onclick="videocall('<?= $chatWith['clientuserID'] ?>', '<?=  $_SESSION['name']?>')"><img class="m-2" src="icons/videocall.png" style="width:20px"/></div>
-                            <img class="m-2 mr-5" src="icons/vector-i.png" style="width:20px">
+                            <div onclick="videocall('<?= $chatWith['clientuserID'] ?>', '<?=  $_SESSION['name']?>')">
+                                <img class="" src="icons/videocall.png" style="width:20px;margin-right:24px; cursor: pointer;"/>
+                            </div>
+                            <img class=" "  src="icons/vector-i.png" style="width:20px;margin-right:5px; cursor: pointer;">
                           
 
                         </div>
@@ -645,9 +659,9 @@ if (isset($_SESSION['dietitianuserID'])) {
 
 
                     <div d-flex>
-                        <div class=" p-4 rounded
+                        <div class=" p-4  rounded
     	               d-flex flex-column
-    	               mt-2 chat-box" id="chatBox">
+    	               mt-2  chat-box" id="chatBox">
                             <?php
                             // print_r($chats);
 
@@ -713,8 +727,12 @@ if (isset($_SESSION['dietitianuserID'])) {
 
                         <form id="form_input" action="app/ajax/upload.php" method="post" enctype="multipart/form-data">
 
-                            <label for="file-input" class="file-input-label" style="margin-left: 20px">
-                                <i class="fa fa-paperclip "></i>
+                            <label for="file-input" class="file-input-label" style="margin-left: 20px; cursor: pointer;">
+                                <!-- <i class="fa fa-paperclip "></i> -->
+                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.28803 7.61053C1.16352 7.48601 1.09357 7.31713 1.09357 7.14103C1.09357 6.96494 1.16352 6.79606 1.28803 6.67153L5.98203 1.98053C6.41129 1.54024 6.92371 1.18956 7.48955 0.948841C8.05539 0.708119 8.6634 0.582142 9.2783 0.57822C9.89321 0.574297 10.5028 0.692506 11.0716 0.925989C11.6405 1.15947 12.1573 1.50358 12.5922 1.93836C13.027 2.37314 13.3712 2.88994 13.6048 3.45877C13.8384 4.0276 13.9567 4.63714 13.9528 5.25205C13.949 5.86696 13.8231 6.47498 13.5825 7.04086C13.3419 7.60674 12.9913 8.1192 12.551 8.54853L6.45103 14.6485C5.82609 15.2579 4.9862 15.5965 4.11335 15.5909C3.2405 15.5853 2.40502 15.236 1.78794 14.6186C1.17086 14.0013 0.821903 13.1657 0.816679 12.2928C0.811456 11.42 1.15039 10.5802 1.76003 9.95553L6.92103 4.79453C7.29596 4.42855 7.80004 4.2251 8.32398 4.22831C8.84791 4.23152 9.34947 4.44112 9.71988 4.81168C10.0903 5.18223 10.2997 5.68385 10.3028 6.20779C10.3058 6.73172 10.1021 7.23573 9.73603 7.61053L5.98203 11.3635C5.85765 11.4879 5.68894 11.5578 5.51303 11.5578C5.33712 11.5578 5.16842 11.4879 5.04403 11.3635C4.91965 11.2391 4.84977 11.0704 4.84977 10.8945C4.84977 10.7186 4.91965 10.5499 5.04403 10.4255L8.79703 6.67153C8.85862 6.60994 8.90748 6.53683 8.94081 6.45635C8.97414 6.37588 8.9913 6.28963 8.9913 6.20253C8.9913 6.11543 8.97414 6.02918 8.94081 5.94871C8.90748 5.86824 8.85862 5.79512 8.79703 5.73353C8.73544 5.67194 8.66232 5.62309 8.58185 5.58976C8.50138 5.55642 8.41513 5.53927 8.32803 5.53927C8.24093 5.53927 8.15468 5.55642 8.07421 5.58976C7.99374 5.62309 7.92062 5.67194 7.85903 5.73353L2.69803 10.8945C2.32474 11.2678 2.11503 11.7741 2.11503 12.302C2.11503 12.5634 2.16651 12.8223 2.26654 13.0638C2.36658 13.3053 2.5132 13.5247 2.69803 13.7095C2.88287 13.8944 3.1023 14.041 3.3438 14.141C3.5853 14.2411 3.84414 14.2925 4.10553 14.2925C4.63345 14.2925 5.13974 14.0828 5.51303 13.7095L11.613 7.60953C11.9333 7.30423 12.1892 6.93796 12.3658 6.53228C12.5424 6.12659 12.636 5.68969 12.6413 5.24727C12.6465 4.80485 12.5632 4.36585 12.3963 3.95611C12.2293 3.54636 11.9821 3.17414 11.6692 2.86135C11.3563 2.54855 10.9839 2.30151 10.5741 2.13474C10.1643 1.96797 9.72527 1.88486 9.28286 1.89028C8.84044 1.8957 8.40357 1.98955 7.99797 2.16631C7.59236 2.34307 7.2262 2.59917 6.92103 2.91953L2.22903 7.61053C2.10455 7.73474 1.93588 7.8045 1.76003 7.8045C1.58418 7.8045 1.41551 7.73474 1.29103 7.61053" fill="black" fill-opacity="0.45"/>
+                                    </svg>
+
                             </label>
                             <input type="file" id="file-input" name="my_image" class="hide_input" style="position: absolute;top: 0;
 								left: 0;

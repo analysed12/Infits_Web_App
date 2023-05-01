@@ -1,6 +1,5 @@
 <?php
 
-
 if(isset($_SESSION['dietitianuserID'])){
     $conn = new mysqli("localhost", "root", "", "infits");
     if($conn->connect_error){
@@ -31,9 +30,10 @@ if(isset($_SESSION['dietitianuserID'])){
 
     <style>
     @import url('https://fonts.googleapis.com/earlyaccess/nats.css');
+
     @font-face {
     font-family: 'NATS';
-    src:url('font/NATS.ttf.woff') format('woff'),
+            src: url('font/NATS.ttf.woff') format('woff'),
         url('font/NATS.ttf.svg#NATS') format('svg'),
         url('font/NATS.ttf.eot'),
         url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
@@ -50,22 +50,26 @@ if(isset($_SESSION['dietitianuserID'])){
         /* background-color: dodgerblue; */
         color: black;
         padding: 1rem;
-        height: 440px;
-        width: 480px;
+            /* height: auto;
+        width: auto; */
+            width: 475px;
+            height: 318px;
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
-       
+            border-radius: 1.25rem !important;
+            border: none !important;
     }
 
     .cards {
-        max-width: 1000px;
+            /* max-width: 1000px; */
         margin: 0 auto;
-        display: grid;
-        /* flex-wrap:wrap; */
-        gap: 1.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-        /* border:2px solid black; */
+            /* display: grid; */
+            gap: 3.5rem;
+            /* grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
     }
 
     .card-upper {
@@ -88,8 +92,13 @@ if(isset($_SESSION['dietitianuserID'])){
 
     .card-upper-options {
         /* background-color: blue; */
-        /* width: 20%; */
-        display: inline;
+            width: 20% !important;
+            /* border: 1px solid red; */
+            /* display: flex;
+        flex-direction: row !important;
+        border: 1px solid red; */
+            display: flex;
+            justify-content: end;
     }
 
     .card-upper-image img {
@@ -104,21 +113,24 @@ if(isset($_SESSION['dietitianuserID'])){
         color: white;
         margin: 5px;
         padding: 5px;
-        border-radius: 5px;
+            border-radius: 10px;
+            margin:1rem 0rem 1rem 1rem  !important;
     }
 
     .card-middle {
-        padding: 1rem;
+            padding-left: 1rem;
     }
 
     .card-below {
         /* margin-top: 5px; */
-        padding: 1rem;
+            padding: 0.5rem 1rem;
         /* background-color: red; */
     }
 
     .search-box {
         border: none !important;
+
+
     }
 
     input:focus {
@@ -150,7 +162,7 @@ if(isset($_SESSION['dietitianuserID'])){
 
     a:hover {
         cursor: pointer;
-        background-color: lightblue;
+            background-color: yellow;
     }
 
     .box input {
@@ -169,23 +181,25 @@ if(isset($_SESSION['dietitianuserID'])){
 
     
     
-    #btn1{
+        #btn1 {
     border: none;
     background-color: #0177FD;
     color: white;
-    
     border-radius: 100%;
-    font-size:2.7rem;
+            font-size: 2.7rem;
     padding-left: 1.4rem;
     padding-right: 1.4rem;
-    position:relative;
-    margin-left:93%;
+            position: relative;
+            /* margin-left:93%; */
     overflow: hidden;
     margin-bottom: 1rem;
 }
+
 .searchbox {
-    width: 270px;
-    height: 45px;
+            /* width: 400px; */
+            height: 48px;
+            width:343px !important;
+            /* margin-left: 10rem; */
     background: #ffffff;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -193,102 +207,77 @@ if(isset($_SESSION['dietitianuserID'])){
 }
 
 
-.row5{
-    /* border:1px solid black; */
-    width: 48px;
-    display: flex;
-    justify-content: space-between;
-    margin-left: -21px;
-}
-.toptext{
-    display:flex;
-    justify-content:space-between;
-    height:56px;
-    align-items:center;
-   padding: 30px 5%;
-   margin:20px 10px;
-}
-#heading{
-    font-size:45px ;
+        @media screen and (max-width: 763px) {
+            #heading {
+                font-size: 35px !important;
 }
 
-@media screen and (max-width: 1190px) {
-    .card{
-        margin: auto;
+            .head-sec {
+                margin-left: 0rem !important;
+                display: flex;
+                flex-direction: column;
+                padding: 0px !important;
     }
-    .searchbox{
-        width:200px;
+            .search{
+                margin-bottom: 2rem !important;
     }
-    .left{
-        margin-left:10px;
     }
-    .cards{
-        margin-left:10px;
 
-    }
-}
-@media screen and (max-width: 480px){
-   .container{
-    width:auto;
-   }
-    .cards{
-    width:auto;
-   }
-    .card{
-    width:auto;
-   }
-   #heading{
-        font-size:25px !important;
-    }
-}
-@media (max-width: 414px){
-.toptext{
-    width: 125%;
-}
-}
 @media screen and (max-width: 720px) {
-    #heading{
-        font-size:45px !important;
+            .card {
+                /* margin: auto; */
+                width: 100%;
+                padding-right: 2rem;
+
     }
-    .container{
-        padding:0;
-    }
-    .cards{
-        margin:0;
+
+            .cards {
+                place-items: center;
     }
     
+            .card-sec {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 0rem !important;
 }
-#search{
-    margin-top:2px;
 }
+
 @media screen and (max-width: 720px) {
-   .card{
-     margin: auto;
-     width:90%;
-     padding-right: 2rem;
-    }
-}
-@media screen and (max-width: 720px) {
-    .searchbox{
+            .searchbox {
         /* width: 2rem; */
         margin: auto;
-        width: 12rem;
+        width: auto;
     }
 }
+
 @media screen and (max-width: 720px) {
-    #btn1{
+            #btn1 {
         
        right: 3rem;
     }
 }
-
-
-.bord{
-    border:1px solid black;
+     /****************************media query for mediun devices**************************************/
+        @media screen and (min-width: 720px) and (max-width: 1200px) {
+            .cards {
+                place-items: center;
 }
+            .search-bar{
+                width: 50% !important;
+            }
+        }
+        @media screen and (min-width: 763px) and (max-width: 767px) {
+           .search-bar{
+            width:100% !important;
+           }
+           .search{
+            width: 50% !important;
+           }
+        }
+
     </style>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
     </script>
@@ -301,18 +290,20 @@ include "navbar.php";
 
 
 
-<!-- <div class="toptext" style="padding:1rem;">
-        <div class="col-6" id="heading"style="font-weight:400;font-size:48px;color:black !important">Diet Plans</div>
-        <div class="col-6" style="margin-top: 15px;">
-            <div class="card-body dig searchbox">
-                <form method="POST" class="search-form form-inline " >
-                 <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
+
+    <div class="head-sec" style="padding:1rem; margin-left: 15rem; display: flex;  justify-content: space-between;">
+        <div class="col-6" id="heading" style="font-weight:400;font-size:40px;color:black !important;margin-left:0.3rem !important;margin-top:1rem;">Plans</div>
+        <div class="search col-lg-6 col-sm-12 col-md-6 d-flex justify-content-center align-items-center" style="text-align:right">
+            <div class="card-body dig searchbox col-12">
+                <form method="POST" class="search-form form-inline">
+                    <!-- <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
                             class="fa-solid fa-magnifying-glass"></i></button>
                     <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
-                        name="search" > 
-                        <button style="background-color:white;border:none;" id="btn_search"  class="search-icon" name="search-btn"><img src="images/vec_search.png" alt=""></button>
-                         <input type="text"  placeholder="Search plan" class="search-box form-control w-50" id="search"
-                        name="search" style="margin-top: 3px;border:none;font-size:1rem;margin-left:1rem  ">
+                        name="search" > -->
+                    <button style="background-color:white;border:none;" id="btn_search" class="search-icon ms-2"
+                        name="search-btn"><img src="images/vec_search.png" alt=""></button>
+                    <input type="text" placeholder="Search" class="search-box form-control w-50" id="search"
+                        name="search" style="border:none;font-size:20px;margin-left:1rem  ">
        
                     <div id="display">
                     </div>
@@ -322,35 +313,17 @@ include "navbar.php";
                 <div class="list-group list-group-item-action" id="content">
                 </div>
             </div>
-
         </div>
+        <!----------------SEARCH BAR---------------------->
+        <!-- <div class="input-group search-bar mb-3 col-lg-6 col-md-6 col-sm-12 mt-3" >
+            <span class="input-group-text border-end-0 bg-white" style="height: 48px; border-radius: 10px 0px 0px 10px; border: 2px solid #E8ECF5;" id="basic-addon1"><i class="fa-solid fa-magnifying-glass" style="color: #667080; "></i></span>
+            <input type="text" class="form-control border-start-0 ps-0"  style="height: 48px; border-radius: 0px 10px 10px 0px; border: 2px solid #E8ECF5;font-size:20px; " placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
     </div> -->
-    <div class="toptext">
-          <div class="left" id="heading">Diet Plans</div>
-           <div class="right">
-           <div class="card-body dig searchbox">
-                <form method="POST" class="search-form form-inline " >
-                 <button type="submit" style="background-color:white;border:none;margin-top:11px" id="btn_search" class="search-icon" name="search-btn"><i
-                            class="fa-solid fa-magnifying-glass"></i></button>
-                    <input type="text" placeholder="Search plan" class="search-box form-control w-75" id="search"
-                        name="search" > 
-                        
-                    <div id="display">
-                    </div>
-                </form>
-            </div>
-            <div class="card-body">
-                <div class="list-group list-group-item-action" id="content">
-                </div>
             </div>
 
-        </div>
-        </div>
-    </div>
-
-    <div class="row">
+    <div class="card-sec" style="display: flex; justify-content:center;">
         <div class="col-md-12">
-            <div class="container">
+            <div class="">
                 <div class="cards">
                     <?php
 
@@ -373,14 +346,22 @@ if(isset($_POST['search-btn']))
                             <div class="card-upper-details col-8">
                                 <div class="row">
                                     <div class="col"
-                                        style="margin-top:5px;margin-bottom:5px; font-size:30px;font-weight:400 !important;">
-                                        <?php echo $row1['name']?></div>
+                                        style=" font-size:30px;font-weight:400 !important;">
+                                        <p>
+                                            <?php echo $row1['name']?>
+                                        </p>
+
+                                    </div>
+
+
                                     <div class="w-100"></div>
                                     <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
-                                            style="font-weight:bold">Rs.<?php echo $row1['price'] ?></span>/month
+                                            style="font-weight:bold">Rs.
+                                            <?php echo $row1['price'] ?>
+                                        </span>/month
                                     </div>
                                     <div class="col-7"
-                                        style="margin-top:5px;margin-bottom:15px;font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;">
+                                        style="margin-top:5px;font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;">
                                         <?php $orgDate = $row1['start_date']; $newDate = date("d/m/Y", strtotime($orgDate)); echo $newDate ?>
                                         to
                                         <?php $orgDate = $row1['end_date']; $newDate = date("d/m/Y", strtotime($orgDate)); echo $newDate ?>
@@ -395,33 +376,25 @@ if(isset($_POST['search-btn']))
 
                                 </div>
                             </div>
-                            <div class="card-upper-options col-1">
- hi
-                            <div class="r">
-                                    <!-- <div>
-                                        ho
-                                      <span class="fa fa-pencil"></span>
-                                    </div>
-                                    <div>
-                                      <span class="fa fa-trash "></span>
-                                    </div> -->
-                                   <!-- style="display:inline-block" -->
-                                    <!-- <div  >
+                            <!-- <div class="card-upper-options">
+                                <div class="">
+                                    <div style="">
                                         <a href="update_plan.php?id=<?php echo $row1['plan_id'] ?>"
                                             title="Update Record" style="color#7282FB" data-toggle="tooltip"><span
                                                 class="fa fa-pencil"></span></a>
                                     </div>
-                                     style="display:inline-block" -->
-                                    <!-- <div >
+                                    <div style="">
                                         <a onclick="return confirm('Are you sure?')"
                                             href="delete_plan.php?id=<?php echo $row1['plan_id'] ?>"
                                             title="Delete Record" style="color:#7282FB" data-toggle="tooltip"><span
                                                 class="fa fa-trash "></span></a>
-                                    </div>-->
                                 </div>
                             </div>
+                            </div> -->
                         </div>
-                        <div class="card-middle row" style="color:#919191 !important"><?php echo $row1['description']?></div>
+                        <div class="card-middle row" style="color:#919191 !important">
+                            <?php echo $row1['description']?>
+                        </div>
                         <div class="card-below row">
                             <div class="col">
                                 <div class="row">FEATURES</div>
@@ -459,17 +432,36 @@ else{
                             <div class="card-upper-image col-3">
                                 <img src="images/fruit_salad.svg" alt="">
                             </div>
-                            <div class="card-upper-details col-8">
+                            <div class="card-upper-details col-9">
                                 <div class="row">
-                                    <div class="col"
+                                    <div
+                                        style=" display: flex; justify-content: space-between; align-items: center;">
+                                        <div class="col ps-0"
                                         style="margin-top:5px;margin-bottom:5px; font-size:30px;font-weight:400;">
-                                        <?php echo $row['name']?></div>
+                                            <?php echo $row['name']?>
+                                        </div>
+                                        <span class="border-1 ">
+                                            <a href="update_plan.php?id=<?php echo $row['plan_id'] ?>"
+                                                title="Update Record"
+                                                style="color:#7282FB;height: 30px;border-radius: 8px;"
+                                                data-toggle="tooltip"><img src="./images/edit-icon.png" alt="">
+                                            </a>
+                                            <a onclick="return confirm('Are you sure?')"
+                                                href="delete_plan.php?id=<?php echo $row['plan_id'] ?>"
+                                                title="Delete Record"
+                                                style="color:#FF3D3D;height: 30px;border-radius: 8px;margin-top:10rem"
+                                                data-toggle="tooltip"><img src="./images/delete-icon.png" alt="">
+                                            </a>
+                                        </span>
+                                    </div>
                                     <div class="w-100"></div>
-                                    <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
-                                            style="font-weight:bold">Rs.<?php echo $row['price'] ?></span>/month
+                                    <div class="col-5" style=" "><span
+                                            style="font-weight:bold">Rs.
+                                            <?php echo $row['price'] ?>
+                                        </span>/month
                                     </div>
                                     <div class="col-7"
-                                        style="margin-top:5px;margin-bottom:15px;font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;">
+                                        style="font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;">
                                         <?php $orgDate = $row['start_date']; $newDate = date("d/m/Y", strtotime($orgDate)); echo $newDate ?>
                                         to
                                         <?php $orgDate = $row['end_date']; $newDate = date("d/m/Y", strtotime($orgDate)); echo $newDate ?>
@@ -489,7 +481,7 @@ else{
                             
                             
                             
-                            <!----<div class="card-upper-options col-1" style="position:relative;display:flex">
+                            <!-- <div class="card-upper-options col-1" style="position:relative;display:flex">
                                 
                             
                                 <div class="row" style="position:absolute;display:flex">
@@ -503,30 +495,24 @@ else{
                                 
                             </div> -->
                             
-                            <div class="card-upper-options col-1">
-                                <div class="row5">
-                                    <!-- <div>
-                                      <span class="fa fa-pencil"></span>
-                                    </div>
-                                    <div>
-                                      <span class="fa fa-trash "></span>
-                                    </div> -->
-                                    <div style="display:inline-block">
+                            <!-- <div class="card-upper-options ">
+                                
+                                <div class="">
                                         <a href="update_plan.php?id=<?php echo $row['plan_id'] ?>" title="Update Record"
-                                            style="color:#7282FB;height: 30px;border-radius: 8px;" data-toggle="tooltip"><span
-                                                class="fa fa-pencil"></span></a>
-                                    </div>
-                                    <div style="display:inline-block;height:100%">
+                                            style="color:#7282FB;padding-left:0.5rem;padding-right:0.5rem;height: 30px;border-radius: 8px;" data-toggle="tooltip"><img src="./images/edit-icon.png" alt=""></a>
+                                    
+                                    
                                         <a onclick="return confirm('Are you sure?')"
                                             href="delete_plan.php?id=<?php echo $row['plan_id'] ?>"
-                                            title="Delete Record" style="color:#FF3D3D;height: 30px;border-radius: 8px;margin-top:10rem" data-toggle="tooltip"><span
-                                                class="fa fa-trash "></span></a>
+                                            title="Delete Record" style="color:#FF3D3D;padding-left:0.5rem;padding-right:0.5rem;height: 30px;border-radius: 8px;margin-top:10rem" data-toggle="tooltip"><img src="./images/delete-icon.png" alt=""></a>
+                                
                                     </div>
+                            </div> -->
+
                                 </div>
+                        <div class="card-middle row" style="color:#919191 !important">
+                            <?php echo $row['description']?>
                             </div>
-                            
-                        </div>
-                        <div class="card-middle row" style="color:#919191 !important"><?php echo $row['description']?></div>
                         <div class="card-below row">
                             <div class="col">
                                 <div class="row">FEATURES</div>
@@ -569,8 +555,8 @@ else{
                 </div>
             </div>
 
-    <div>
-        <button id="btn1" onclick="window.location.href = 'create_plan.php';">+</button>
+            <div class="d-flex  justify-content-end">
+                <a onclick="window.location.href = 'create_plan.php';"><img src="./images/9_plus.png" alt="img"></a>
     </div>
     
 
@@ -581,8 +567,8 @@ function fill(Value) {
     $('#search').val(Value);
     $('#display').hide();
 }
-$(document).ready(function() {
-    $("#search").keyup(function() {
+    $(document).ready(function () {
+        $("#search").keyup(function () {
         var name = $('#search').val();
         if (name == "") {
             $("#display").html("");
@@ -593,7 +579,7 @@ $(document).ready(function() {
                 data: {
                     search: name
                 },
-                success: function(html) {
+                    success: function (html) {
                     $("#display").html(html).show();
                 }
             });

@@ -304,12 +304,18 @@ body{
 .setgoals{
     margin-top: 1rem;
     margin-left: 17rem;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.setgoals p {
+    margin-left: 41px;
 }
 .generalgoals{
     display: flex;
     gap: 2rem;
-    
-    padding-left: 2rem;
+    /* padding-left: 2rem; */
+    margin-left: 75px;
 }
 .tooltip-text {
     visibility: hidden;
@@ -340,13 +346,15 @@ body{
     text-align: center;
   }
   .setgoals_contaner1{
-    margin-left: 4rem;
-    margin-right: 4rem;
+    /* margin-left: 4rem;
+    margin-right: 4rem; */
+    margin-left: 76px;
     padding-bottom: 2rem;
     border-bottom: 2px solid #EFEFEF;
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    /* overflow-x: scroll; */
   }
   .setgoals_button{
     color: white;
@@ -401,10 +409,12 @@ border: 1.31578px solid #E3738D !important;
   .block1{
     display: flex;
     gap: 5rem;
+    justify-content: space-around;
   }
   .block2{
     display: flex;
     gap: 5rem;
+    justify-content: space-around;
   }
   .firstbutton{
     display: flex;
@@ -476,6 +486,7 @@ border: 1.31578px solid #E3738D !important;
   .container1_wrapper1{
     display: flex;
     gap: 5rem;
+    flex-wrap: wrap;
   }
   .container1_wrapper2{
     display: flex;
@@ -749,7 +760,9 @@ margin-top: 2.5rem;
         display: none;
       }
      
-      
+      .container1_wrapper2 {
+        justify-content: space-around;
+      }
 
   }
   
@@ -759,7 +772,7 @@ margin-top: 2.5rem;
 
     <div class="setgoals">
         <p style="font-size:2rem; font-weight:400">Set Goals For Clients </p>
-        <div class="generalgoals"><div style="font-size:1.5rem; font-weight:400">General Goals</div>
+        <div class="generalgoals"><div style="font-size:1.5rem; font-weight:400;">General Goals</div>
             <div class="hover-text"style="margin-top:0.3rem" ><span class="material-symbols-outlined" style="color:#9C74F5">error</span>
             <span class="tooltip-text" id="right">Set default daily fitness for all the clients from here!</span></div> 
         </div>

@@ -56,6 +56,16 @@ if (isset($_SESSION['dietitianuserID'])) {
             .w-300{
                     width: 99% !important;
                 }
+                 .search__div{
+                border-radius: 0.6rem;
+                padding: 3px;
+                background: white;
+                box-shadow: 0.6px 0.6px 2px 1px #ccc;
+            }
+            ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
             @media (min-width: 75px){
                 body{
                     overflow-x: hidden !important;
@@ -115,7 +125,7 @@ if (isset($_SESSION['dietitianuserID'])) {
                 flex-coloumn
                 vh-100 chat" style="outline: 2px solid #EEEEEE; padding:20px!important;z-index:0;">
                 <div class="w-300">
-                    <div>
+                    <div style="margin-left:1rem;">
                         <div class="d-flex
     		            mb-2 p-2 
 			            justify-content-between
@@ -128,7 +138,7 @@ if (isset($_SESSION['dietitianuserID'])) {
 								<h3 class="fs-xs m-2"><?= $user['name'] ?></h3>
 							</div> -->
                             <div class="mt-1">
-                                <h5 class="chat-message-header">Messages</h5>
+                                <h3 class="chat-message-header" style="margin-top:1rem">Messages</h3>
                             </div>
                             <!-- <a href="logout.php" class="btn fs-xs">L </a> -->
                         </div>
@@ -151,11 +161,11 @@ if (isset($_SESSION['dietitianuserID'])) {
                                 </div>
                             </form>
                         </div>-->
-                        <div class="input-group mb-3 bt-outline " style="display: flex; border: none; border-radius: 0.6rem; font-size: 20px; font-weight: 400; padding-top: 0.5rem; padding-right: 0.5rem; color: #BBBBBB; background-color: white; box-shadow: 0.6px 0.6px 2px 1px #ccc;">
-                            <button class="btn  grey-color text-secondary" style="background-color:white !important;border:none;" id="serachBtn">
+                        <div class="input-group mb-3 bt-outline d-flex align-items-center search__div" >
+                            <button class="btn  grey-color text-secondary" style="background: white !important; border:none;" id="serachBtn">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <input type="text" placeholder="Search" id="searchText"  style="background-color:white !important;border:none;" class="form-control bg-light text-secondary">
+                            <input type="text" placeholder="Search" id="searchText"  style="background: white !important; border:none;" class="form-control bg-light text-secondary">
                         </div>
                         </div>
                         <div class="scroll">

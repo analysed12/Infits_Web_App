@@ -82,10 +82,10 @@ if (isset($_POST['sidebarselection'])) {
     exit();
 }
 
-if (isset($_POST['update_all'])) {
+if(isset($_POST['update_all'])){
 
-    $conn = new mysqli("localhost", "root", "", "infits");
-    if ($conn->connect_error) {
+    $conn = new mysqli("localhost:3307", "root", "", "infits");
+    if($conn->connect_error){
         die("Connection failed :" . $conn->connect_error);
     }
     if (isset($_POST['water_interval'])) {
@@ -293,17 +293,19 @@ function getClientName($ID, $conn, $dietitianuserID)
 
     body {
         font-family: 'NATS', sans-serif !important;
-        margin-bottom:2rem;
+        /* margin-bottom:2rem; */
         overflow-x:hidden;
-        margin-bottom:2rem;
+        /* margin-bottom:2rem; */
         overflow-x:hidden;
     }
    
     .ml{
-        margin-left: 45px;
+        margin-left: 54px;
+        font-size: 48px;
+        font-weight: 400;
     }
     .pl{
-        padding-left: 40px;
+        padding-left: 80px;
     }
     .heading{
         font-style: normal;
@@ -318,7 +320,7 @@ function getClientName($ID, $conn, $dietitianuserID)
     .sub-heading{
         font-style: normal;
         font-weight: 400;
-        font-size: 25px;
+        font-size: 35px;
         line-height: 74px;
     }
     .cards{
@@ -440,7 +442,8 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     }
     .bottom{
         margin-left: 1rem;
-       
+       /* overflow: hidden; */
+       overflow-y: scroll;
     }
     .client-list-container {
         display: flex;
@@ -555,19 +558,20 @@ box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
         border-radius: 15px;
-        padding:4px;
+        /*padding:4px;
         padding-left:10px;
         padding-right:10px;
-        margin-bottom: 20px;
+        margin-bottom: 20px;*/
+        padding: 7px 34px 13px;
         background: url(images/bottomvec.png);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: bottom right;
         width: 708px;
-        height: 130px;
+        height: 118px;
     }
     .past-card {
-        padding: 15px;
+        /* padding: 15px; */
         display: flex;
         justify-content: space-between;
         
@@ -677,13 +681,19 @@ border-radius: 8.21555px;
 border: 0.996877px solid #DFDFDF;
 box-shadow: 0px 1.99375px 3.98751px rgba(0, 0, 0, 0.08);
 border-radius: 9.96877px;
-color: #DDDDDD;
+    color: rgba(221, 221, 221, 1);
 padding-left:1rem;
 padding-right:1rem;
+    font-size: 17.9px;
+    line-height: 24.48px;
+    font-weight: 700;
+    /* color: #000; */
   }
  
+  select option { color: black; }
+ 
   .pc-btn1{
-    width: 42.5px;
+    width:40px;
 height: 40px;
 border:none;
   
@@ -691,9 +701,9 @@ border:none;
 background: #61A8F8;
 border-radius: 13.3333px;
   }
-  .pc-right{
+  /* .pc-right{
     width:10%
-  }
+  } */
   .pc-bottom{
         display:none;
     }
@@ -704,7 +714,7 @@ border-radius: 13.3333px;
 
     
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 1148px) {
     .header{
         display:flex;
         overflow-x:scroll;
@@ -798,7 +808,7 @@ border-radius: 13.3333px;
     
 <div class="main">
     <!-- top -->
-    <div class="top"style="display:flex;flex-direction:column">
+    <div class="top"style="display:flex;flex-direction:column;">
         <!-- heading  -->
         <div class="row">
             <div class="col">
@@ -809,7 +819,7 @@ border-radius: 13.3333px;
         <!-- sub heading -->
         <div class="row" style="margin-left:1rem">
             <div class="col" style="display:flex">
-                <h3 class="ml sub-heading">General Reminder</h3>
+                <h3 class="ml sub-heading"style="padding-bottom:35px;">General Reminders</h3>
                 <div class="hover-text"style="margin-top:1.3rem" ><span class="material-symbols-outlined" style="color:#9C74F5">error</span>
             <span class="tooltip-text" id="right">Set daily activity reminders for the clients from here!</span></div> 
             </div>
@@ -817,7 +827,7 @@ border-radius: 13.3333px;
         <!-- sub heading -->
 
         <!-- top cards -->
-        <div class="row" style="margin-left:1rem">
+        <div class="row" style="margin-left:1rem;">
             <div class="col">
                 <div class="cards ml">
                     <div class="header">
@@ -838,7 +848,7 @@ border-radius: 13.3333px;
                             <div style="width:100%">
                             <form action="" method="POST">
                                 <div style="margin-top:1rem">
-                                    <span style="color:white;font-size: 14.788px;">Duration(Time Gap Interval)</span> <br>
+                                    <span style="color:white;font-size: 14.788px;">Duration (Time Gap Interval)</span> <br>
                                     <div class="select_option" >
                                         <select name="water_interval" class="select_option1" >
                                             <option value="30 Min">30 Min</option>
@@ -1063,7 +1073,7 @@ border-radius: 13.3333px;
             </div>
         </div>
                     </div>
-        <div class="border" style="border-bottom: 2px solid #EFEFEF;margin-top:3.5rem;margin-left:10%;margin-right:10%"></div>
+        <div class="border" style="border-bottom: 2px solid #EFEFEF;margin-top:3.5rem;margin-left:7%;margin-right:10%;margin-bottom:37px;"></div>
         <!-- top cards -->
         <script>
             function showSetDialog(divid,cardid){
@@ -1097,9 +1107,9 @@ border-radius: 13.3333px;
     <div class="bottom">
         <div class="row" >
             <!-- Sub heading -->
-            <div class="row" style="margin-left:2.9rem">
-            <div class="col" style="display:flex">
-                <h3 class=" sub-heading">Past Reminder</h3>
+            <div class="row">
+            <div class="col" style="display:flex;margin-left:3.7rem;">
+                <h3 class=" sub-heading g-0" style="margin-left:15px">Past Reminders</h3>
                 <div class="hover-text"style="margin-top:1.6rem" ><span class="material-symbols-outlined" style="color:#9C74F5">error</span>
             <span class="tooltip-text" id="right">View all the reminders already set for the clients from here!</span></div> 
             </div>
@@ -1129,7 +1139,7 @@ if (mysqli_num_rows($result_water) > 0) {
                                         <form id="" action="" method="POST">
                                             <div class="past-card">
                                                 <div class="pc-left">
-                                                    <p class="pc-title">Duration(Time gap interval)</p>
+                                                    <p class="pc-title">Duration (Time gap interval)</p>
                                                     <select name="" id="water_interval<?php echo ($i) ?>" class="water_bottom">
                                                         <option selected value="<?php echo ($row['water_interval']) ?>"><?php echo ($row['water_interval']) ?></option>
                                                         <option value="30 Min">30 Min</option>

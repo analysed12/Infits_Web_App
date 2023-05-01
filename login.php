@@ -82,6 +82,7 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
     font-family: 'NATS', sans-serif;
+    /* margin-top: -2rem; */
 }
 
 .top_bar {
@@ -109,7 +110,7 @@ body {
     font-family: 'NATS';
     font-style: normal;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 30px;
    
     color:  #8081F9;
     background-color: #FFFFFF;
@@ -131,7 +132,7 @@ body {
     font-family: 'NATS';
     font-style: normal;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 30px;
     color: #8081F9;
     /* align-item;
     centre; */
@@ -313,11 +314,12 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: -2rem;
 
 }
 .mt-5{
     margin-right: 6.5rem;
-    margin-top: 2rem;
+    margin-top: 1rem !important;
     margin-bottom: 1.5rem;
 }
 
@@ -401,6 +403,7 @@ body {
     /* align-items: center; */
     flex-direction: row;
     padding: 10px;
+    margin-top:-1rem;
 }
 
 .google {
@@ -453,6 +456,7 @@ body {
     /* align-items: center; */
     flex-direction: column;
     padding: 50px;
+    margin-top: -2rem;
 }
 
 #email {
@@ -460,7 +464,7 @@ body {
     border: 1px solid #F9F9FF;
     border-radius: 15px;
     padding: 10px;
-    width: 350px;
+    width: 332px;
     height: 50px;
     margin: 10px;
 }
@@ -470,7 +474,7 @@ body {
 border: 1px solid #EAEAEA;
 border-radius: 15px;
     padding: 10px;
-    width: 350px;
+    width: 332px;
     height: 50px;
     margin: 10px;
 }
@@ -501,6 +505,7 @@ border-radius: 15px;
     align-items: center;
     flex-direction: row;
     color: #B4B4B4;
+    margin-left: 1rem;
     
 
 }
@@ -578,6 +583,9 @@ border-radius: 15px;
     margin-top: 3rem;
     gap:2rem;
 }
+/* .app{
+    margin-top: -5rem;
+} */
 
 @media screen and (max-width: 720px) {
 .sform{
@@ -645,13 +653,13 @@ border-radius: 15px;
 <body>
       
     <div class="top_bar">
-        <div class="left">
+        <div class="left" style="margin-top: -1rem;">
             <div class="bg">
                 <img src="images/Vector3.png" style="width:25rem">
             </div>
-            <img src="images/infits_logo.svg" style="margin-top:0.8rem;margin-left:0.8rem">
+            <img src="images/infits_logo.svg" style="margin-top:0.8rem;margin-left:0.8rem; margin-top:1rem;">
         </div>
-        <div class="up">  
+        <div class="up" style="margin-top: -1rem;">  
             <!--class="right d-none d-sm-block"  -->
             <button id="home" onclick="window.location.href = 'index.php';">Home</button>
             <button class="sign" onclick="window.location.href = 'register.php';">SignUp</button>
@@ -669,7 +677,7 @@ border-radius: 15px;
                     
 
                 </div>
-                <span class="mt-5"><img src="images/Line70.png"><span style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">Sign In With</span></span>
+                <span class="mt-5"><img src="images/Line70.png"><span style="color: #4F1963;font-size: 25px;font-weight: 400;margin-left:0.8rem">Sign In with</span></span>
                 <div class="gf_btns">
                 
                     <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
@@ -707,10 +715,10 @@ border-radius: 15px;
                             <img style="height: 25px; width: 25px;"src="images/shield.svg" alt="">
                             <input name="password" class="input_bar" id="password" type="password"
                                 placeholder="Password">
-                                <img style="cursor: pointer; width: 22px; height: 19px; margin-left:-38px;"src="images/eye.png" id="eyeicon" alt="eye">
+                                <img style="cursor: pointer; width: 22px; height: 19px; margin-left:-45px;"src="images/eye.png" id="eyeicon" alt="eye">
                         </div>
                        
-                        <a href="forgot_password.php" style="display: flex; justify-content: end; margin-right: 30px; text-decoration:none">Forgot password?</a>
+                        <a href="forgot_password.php" style="display: flex; justify-content: end; margin-right: 15px; text-decoration:none">Forgot password?</a>
                         <br><br>
                         <div class="sign_btn_section">
                             <div class="sign_btn" style="background: #4B99FB;border-radius:15px">
@@ -719,7 +727,7 @@ border-radius: 15px;
                             <p></p>
                             <div class="sign_in_sec">
                                 <span style="font-size:20px">Don't have an Account?</span>
-                                <div><a href="register.php" style="text-decoration:none;color:#4F1963;font-weight:500;font-size:20px;">Sign up</a>
+                                <div><a href="register.php" style="text-decoration:none;color:#4F1963;font-weight:500;font-size:20px; margin-left: 7rem;">Sign up</a>
                                 </div>
                             </div>
                         </div>
@@ -728,12 +736,12 @@ border-radius: 15px;
             </div> 
         </div>
         <div class="col-sm-6">
-            <div class="mobile">
+            <div class="mobile" style="margin-top: -1.5rem;">
                 <img src="images/mobile.svg" alt="">
             </div>
            
         </div>
-    <hr  id="hr" style="border: 2px solid #EDEDFE; width: 1204px;">
+    <!-- <hr  id="hr" style="border: 2px solid #EDEDFE; width: 1204px;"> -->
     </div>
     <div class="row" id="parent-lg" style="margin-top:2rem">
         <div class="col-sm-4 " id="btml">
@@ -767,10 +775,10 @@ border-radius: 15px;
                 </div>
                 <div class="col-sm-6">
                     <div class="right_links">
-                    <img class="get-vec" src="images/bg_patch_small.svg" style="width:30rem;height:8rem">
-                        <span style="color: #4F1963;font-size:25px">Get the app</span>
+                    <img class="get-vec" src="images/bg_patch_small.svg" style="width:30rem; height:8rem;">
+                        <span  class="app" style="color: #4F1963;font-size:30px; margin-top:-5rem;">Get the app</span>
                        
-                        <div style="display: flex; gap:1rem;">
+                        <div style="display: flex; gap:1rem; margin-top:2rem;">
                             <a href="#" style="width: 176px;height: 64px;justify-content: space-around;justify-content: center;align-items: center;background: #FFFFFF;border: 2px solid #817FF8;border-radius: 50px; display: flex; flex-direction: row; padding:2px; text-decoration: none;">
                                 <div><img style="margin-right: 0.5rem;" src="images/apple.svg" alt="apple"></div>
                                 <div style="display: flex; flex-direction: column;">
@@ -813,7 +821,7 @@ border-radius: 15px;
              <div class="col-sm-6 mt-5">
                  <div class="right_links">
                  <img class="get-vec" src="images/bg_patch_small.svg" style="width:30rem;height:8rem;">
-                     <span style="color: #4F1963;font-size:30px">Get the app</span> 
+                     <span   style="color: #4F1963;font-size:30px">Get the app</span> 
                      <!-- <img src="images/bg_patch_small.svg" alt=""> -->
                       <div style="display: flex; gap:1rem;">
                          <a href="#" style="width: 176px;height: 64px;justify-content: space-around;justify-content: center;align-items: center;background: #FFFFFF;border: 2px solid #817FF8;border-radius: 50px; display: flex; flex-direction: row; padding:2px; text-decoration: none;">

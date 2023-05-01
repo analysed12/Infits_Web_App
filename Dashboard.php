@@ -381,7 +381,7 @@ element.style{
 
         <div class="dashboard_comtainer1">
             <div class="container1_leftside">
-                <p style="font-size:1.5rem; font-weight:400 !important;">Dashboard</p>
+                <h3 style=" font-weight:400 !important;">Dashboard</h3>
                 <p style="font-weight:600;font-size:1.1rem">Upcoming Events</p>
                 
             </div>
