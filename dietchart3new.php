@@ -133,7 +133,7 @@ body{
        display: flex;
        flex-direction: column;
        height: 90%;
-       font-family: 'Poppins';
+       
        font-style: normal;
        padding: 5px;
        /* margin-top: rem; */
@@ -164,7 +164,7 @@ body{
       .top p{
 
         margin-top: 0%;
-        font-family: 'NATS';
+        
         font-style: normal;
         font-weight: 400;
         font-size: 44px;
@@ -177,7 +177,7 @@ body{
           width: 20px;
           top: 15px;
           margin-top: 20px;
-          margin-left: 30px;
+          /* margin-left: 30px; */
          
          
      }
@@ -200,7 +200,7 @@ body{
         width: 200px !important;
         margin-left: 38rem;
         color: white;
-       font-family: 'Poppins';
+      
        text-align: center;
        text-decoration: none;   
        font-size: 17px;
@@ -227,7 +227,7 @@ border-radius: 10px;
         margin-top: 6rem;
         margin-left: 4rem;
         
-        font-family: 'NATS';
+      
         font-style: normal;
         font-weight: 400;
         font-size: 33px;
@@ -300,7 +300,7 @@ border-radius: 10px;
   padding:10px;
   width: 202.19px;
   height: 48px;  
-  font-family: 'Poppins';
+
   font-size: normal;
   font-weight: 400;
   font-size: 20px;
@@ -364,7 +364,7 @@ border-radius: 10px;
     margin-left: 10px;
     margin-top: 1px;
 
-    font-family: 'Poppins';
+
     font-style: normal;
     font-weight: 500;
     font-size: 26.4156px;
@@ -387,7 +387,7 @@ border-radius: 10px;
   }
 
   .left {
-    font-family: 'Poppins';
+   
     font-style: normal;
     font-weight: 500;
     font-size: 26.4156px;
@@ -399,7 +399,7 @@ border-radius: 10px;
 
   .right h5{
     text-align: right;
-    font-family: 'Poppins';
+  
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -468,8 +468,7 @@ border-radius: 10px;
     display: flex;
     align-items: center;
     color: #000000;
-    font-family: 'NATS';
-    font-style: normal;
+   font-style: normal;
     font-weight: 400;
     font-size: 25px;
     line-height: 53px;
@@ -493,7 +492,7 @@ border-radius: 10px;
 
   .up-right span {
 
-    font-family: 'NATS';
+   
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -664,10 +663,7 @@ border-radius: 10px;
         height: 25px;
         margin-right:20px;
       }
-      .down{
-      margin-top:13px;
-      margin-left: 25px;
-    }
+   
     .button-container{
       display: flex;
       flex-direction: row;
@@ -751,10 +747,7 @@ border-radius: 10px;
         height: 25px;
         margin-right:20px;
       }
-      .down{
-      margin-top:13px;
-      margin-left: 42px;
-    }
+  
     .day-band{  
       margin-left:-3rem;
       }
@@ -790,6 +783,39 @@ border-radius: 10px;
 }
     
   }
+  @media screen and (min-width: 420px) and (max-width: 540px){
+  .top{
+    margin-top:-60px;
+   }
+  .top-right .btn{
+    position:relative;
+    margin-top:-2px;
+    margin-left:-25rem;
+  }
+  .top img {
+          height:20px;
+          width: 20px;
+          margin-top: -43px;
+          margin-left: 20px;
+     } 
+     .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top:100px;
+         width: 50%; 
+      }
+  .top p{
+       width:195px;
+        margin-top:-60px;
+        font-size: 34px;
+        margin-left: auto;
+    }
+    .top-right img{
+      margin-right:217px;
+    }
+}
+
   @media screen and (min-width: 0px) and (max-width: 420px) {
   .day{
     margin-right:0px;
@@ -814,7 +840,7 @@ border-radius: 10px;
        height: 90%;
        width: 100%;
        left: 30px;
-       font-family: 'Poppins';
+     
        font-style: normal;
        padding: 5px;
        /* margin-top: rem; */
@@ -917,18 +943,20 @@ border-radius: 10px;
   
 <?php $client_id = 2 ?>
     <div class="main">
-    <div class="top" style="flex-wrap:no-wrap !important;">
-        <p > New Diet Chart</p>
-        <img src="images/Vector (1) (1).png">
+    <div class="top" style="flex-wrap:no-wrap !important;margin-top:0.5rem;margin-left:3rem !important">
+        <p ><input required type="text" placeholder="New Diet Chart" class="plan_name" name="plan_name" style="border:none; width:fit-content;color:#202224;outline:none;width:285px;height:46px;font-size:40px"
+                        value="New Diet Chart"></p>
+        <img src="images/Vector (1) (1).png" style="color:#7282FB;cursor:pointer;">
      </div>
      <div class="top-right">
         <button class="btn" text="submit">Healthy Diet </button>
            <img id="myimg" src="images/Vector (2) (1).png">
            
     </div>
+    <div class="down">Ronald Richard</div>
+   
      </div>
      <br/>
-   <div class="down">Ronald Richard</div>
    
    <br/>
 <div class="day-band">

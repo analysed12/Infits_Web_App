@@ -45,7 +45,7 @@ body{
        display: flex;
        flex-direction: column;
        height: 90%;
-       font-family: 'Poppins';
+      
        font-style: normal;
        padding: 5px;
        /* margin-top: rem; */
@@ -76,7 +76,7 @@ body{
       .top p{
 
         margin-top: -5px;
-        font-family: 'NATS';
+       
         font-style: normal;
         font-weight: 400;
         font-size: 44px;
@@ -112,7 +112,7 @@ body{
         width: 200px;
         margin-left: 38rem;
         color: #9C74F5;
-       font-family: 'Poppins';
+     
        text-align: center;
        text-decoration: none;   
        font-size: 15px;
@@ -132,7 +132,7 @@ body{
         margin-top: 4.3rem;
         margin-left: 4rem;
         
-        font-family: 'NATS';
+
         font-style: normal;
         font-weight: 400;
         font-size: 33px;
@@ -187,7 +187,7 @@ body{
   padding:10px;
   width: 203.19px;
   height: 48px;  
-  font-family: 'Poppins';
+
   font-size: normal;
   font-weight: 400;
   font-size: 20px;
@@ -256,7 +256,6 @@ body{
   margin-left: 28px;
   margin-top: 1px;
 
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
   font-size: 26.4156px;
@@ -271,7 +270,7 @@ body{
   background: #9C74F5;
   border-radius: 10px ;
   border: 1px solid #9C74F5;
-  font-family: 'NATS';
+
   font-style: normal;
   font-weight: 200;
   font-size: 30px;
@@ -441,6 +440,9 @@ body{
   margin-top:4rem;
   margin-right:10px;
 }
+.demo .up-right{
+  margin-left:35px;
+}
     }
 
 
@@ -452,7 +454,7 @@ body{
        height: 90%;
        width: 100%;
        left: 30px;
-       font-family: 'Poppins';
+ 
        font-style: normal;
        padding: 5px;
        /* margin-top: rem; */
@@ -486,13 +488,13 @@ body{
         border-radius: 10px;
         height: 50px;
         margin-top:-2px;
-        margin-left: 7rem;
+        margin-left: 0.5rem;
       
     }
     .top-right img{
         width: 25x;
         height: 25px;
-        margin-right:20px;
+        margin-right:90px;
       }
       .down{
       margin-top:13px;
@@ -519,11 +521,16 @@ body{
       font-size: 17px;      
     }    
     .box{
-    width: 650px;
+    width:auto;
     height: 170px;
     margin-left: 20px;
     margin-right: 80px;
     top: 200px;
+    overflow:scroll;
+   }
+   .box::-webkit-scrollbar{
+    /* width:800px; */
+    overflow:scroll;
    }
    .btn11{
   width:110px;
@@ -531,7 +538,42 @@ body{
   margin-top:4rem;
   margin-right:14px;
 }
+.demo .up-right{
+  margin-left:35px;
+}
 
+}
+@media screen and (min-width: 420px) and (max-width: 540px){
+  .top{
+    margin-top:-60px;
+   }
+  .top-right .btn{
+    position:relative;
+    margin-top:-2px;
+    margin-left:-25rem;
+  }
+  .top img {
+          height:20px;
+          width: 20px;
+          margin-top: -43px;
+          margin-left: 20px;
+     } 
+     .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top:100px;
+         width: 50%; 
+      }
+  .top p{
+       width:195px;
+        margin-top:-60px;
+        font-size: 34px;
+        margin-left: auto;
+    }
+    .top-right img{
+      margin-right:217px;
+    }
 }
 
 @media screen and (min-width: 0px) and (max-width: 420px) {
@@ -548,7 +590,7 @@ body{
        height: 90%;
        width: 100%;
        left: 30px;
-       font-family: 'Poppins';
+    
        font-style: normal;
        padding: 5px;
        /* margin-top: rem; */
@@ -588,7 +630,7 @@ body{
     .top-right img{
         width: 25x;
         height: 25px;
-        margin-right:20px;
+        margin-right:100px;
       }
     .down{
       margin-top: 13px;
@@ -639,23 +681,31 @@ body{
   margin-left:20px;
 }
 }
+@media screen and  (max-width: 720px){
+  .main{
+    margin-top:2rem;
+  }
+  
+}
 
     </style>
    <body>
     <div class="content">
     <div class="main">
     <div class="top">
-        <p> New Diet Chart</p>
-        <img src="images/Vector (1) (1).png">
+    <p ><input required type="text" placeholder="New Diet Chart" class="plan_name" name="plan_name" style="border:none; width:fit-content;color:#202224;outline:none;width:285px;height:46px;font-size:40px"
+                        value="New Diet Chart"></p>
+        <img src="images/Vector (1) (1).png" style="color:#7282FB;cursor:pointer;">
      </div>
      <div class="top-right">
         <button class="btn" text="submit">Connect to plan </button>
            <img id="myimg" src="images/Vector (2) (1).png">
            
     </div>
+    <div class="down" >Ronald Richard</div>
      </div>
      <br/>
-   <div class="down">Ronald Richard</div>
+  
    
    <br/>
 <div class="day-band">

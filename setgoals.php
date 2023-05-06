@@ -690,10 +690,7 @@ margin-top: 2.5rem;
   background-position: bottom left;
 }
 
-@media screen and (max-width: 1200px){
-    
 
-}
   
   @media screen and (max-width: 720px) {
     .setgoals{
