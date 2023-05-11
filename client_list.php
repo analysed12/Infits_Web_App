@@ -439,8 +439,8 @@ img {
 
         <div class="clients_container2">
             <form action="" method="post">
-                <button class="button-top active-button bottomborder" id="activebtn" name='active-btn'>Active</button>
-                <button class="button-top pending-btn" id="pendingbtn" name="pending-btn" style="margin-left:2rem" >Pending</button>
+                <button class="button-top active-button bottomborder" id="activebtn" name='active-btn' type="button">Active</button>
+                <button class="button-top pending-btn" id="pendingbtn" name="pending-btn" style="margin-left:2rem" type="button">Pending</button>
             </form>
         </div>
         <br><br>
@@ -599,9 +599,9 @@ img {
      function remove(s){
         let a=document.querySelector(`#${s}`);
         // console.log();
-        // alert(a.classList);
+        alert(a.classList);
         a.classList.add('bottomborder');
-        // alert(a.classList);
+        alert(a.classList);
      }
     document.getElementsByClassName('client-item').onclick=function(){
         var checkbox= document.getElementById('chk');

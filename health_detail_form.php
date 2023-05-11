@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 $conn = new mysqli("localhost", "root", "", "infits");
 
 if ($conn->connect_error) {
@@ -44,7 +45,7 @@ if ($conn->connect_error) {
     margin-bottom: 40px;
 }
 
-.content .heading-box h1 {
+.content  {
     font-size: 2.5rem;
 }
 
@@ -278,7 +279,7 @@ if ($conn->connect_error) {
 .content .health-form-container #form-details,
 .content .health-form-container #form-documents {
     position: relative;
-    overflow-y: auto;
+    overflow-y: scroll;
     height: 400px;
     width: 100%;
     /* padding: 10px 0px; */
@@ -290,27 +291,27 @@ if ($conn->connect_error) {
 /* width */
 .content .health-form-container #form-details::-webkit-scrollbar,
 .content .health-form-container #form-documents::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
 }
 
 /* Track */
 .content .health-form-container #form-details::-webkit-scrollbar-track,
 .content .health-form-container #form-documents::-webkit-scrollbar-track {
-    background-color: #EFEFEF;
-    border-radius: 10px;
+    background-color: #F3F3F3;
+    border-radius: 20px;
 }
 
 /* Handle */
 .content .health-form-container #form-details::-webkit-scrollbar-thumb,
 .content .health-form-container #form-documents::-webkit-scrollbar-thumb {
-    background: #C8C8C8;
-    border-radius: 10px;
+   border-radius: 20px;
 }
 
 /* Handle on hover */
 .content .health-form-container #form-details::-webkit-scrollbar-thumb:hover,
 .content .health-form-container #form-documents::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: #E3E3E3;
+    border-radius: 20px;
 }
 
 .content .health-form-container #form-details .details {
@@ -336,7 +337,7 @@ if ($conn->connect_error) {
 }
 
 .content .health-form-container #form-details .details p#question {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 500;
     /* padding-top: 5px; */
 }
@@ -457,15 +458,84 @@ if ($conn->connect_error) {
         .content .health-form-container .title-options-container{
             width:100px;
         }
-
+        .content{
+            overflow: auto;
+        }
+        .heading-box {
+            margin-top: 70px;
+            margin-left:60px;
+        }
+        .content .health-form-container #form-details .details {
+           height: 120px;
+        }
+        .title-options-container{
+            margin-left: 320px;
+            margin-right: 250px;
+        }
+        .border-bottom.left{
+            margin-top: 30px;
+            margin-left: 10px;
+        }
+        .border-bottom.right{
+            margin-left: -56px;
+            margin-top: 30px;
+        }
+        .title-options-container h3{
+            margin-left: 10px;
+        }
+        .heading-box h1{
+            margin-top: 30px;
+            width:auto;
+        }
+        #edit_btn{
+            margin-top: 60px;
+            margin-right:10px;
+            width:300px;
+        }
     }
     @media screen and (max-width: 720px){
-       
+       .content .health-form-container #form-documents .details {
+            height: 200px;
+            width:300px;
+        }
+        .form-documents {
+            height: 500px;
+            width:auto;
+            margin-top: -30px;
+        }
+        .title{
+            margin-top: -30px;
+            margin-left: -20px;
+        }
+        .details .options{
+            margin-top: 100px;
+            margin-left:-300px;
+        }
+        .heading-box {
+            margin-top: -70px;
+            margin-left:60px;
+            margin-right: 20px;
+        }
         .content .health-form-container .title-options-container{
             width:350px;
         }
         .content .health-form-container .title-options-container .border-bottom{
             width:100px;
+            margin-top: 10px;
+        }
+        .border-bottom.right{
+            margin-left: -67px;
+        }
+       .title-options-container{
+            margin-left: 320px;
+            margin-right: 270px;
+        }
+       
+        #healthDocument {
+            font-size: 25px;
+        }
+        #healthFormDetails{
+            font-size: 25px;
         }
         .content .health-form-container .title-options-container .border-bottom.right {
     transform: translate(220px, 20px);
@@ -480,6 +550,32 @@ if ($conn->connect_error) {
     
 }
         
+    }
+    @media screen and (min-width:720px) and (max-width: 780px){
+        .content{
+            overflow:hidden ;
+        }
+        .title-options-container{
+            margin-right:230px;
+            margin-left:300px;
+        }
+        #healthDocument {
+            font-size: 25px;          
+            margin-right: 100px;
+        }
+        #healthFormDetails{ 
+            font-size: 25px;
+            margin-left: 40px;
+        }
+        .border-bottom.left{
+            margin-left: 30px;
+            margin-top: 30px;
+         }
+        .border-bottom.right{
+          
+            margin-top: 30px;
+            margin-left:-100px;
+        }
     }
         </style>
 </head>

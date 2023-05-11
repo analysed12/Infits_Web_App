@@ -376,21 +376,6 @@ if(isset($_POST['search-btn']))
 
                                 </div>
                             </div>
-                            <!-- <div class="card-upper-options">
-                                <div class="">
-                                    <div style="">
-                                        <a href="update_plan.php?id=<?php echo $row1['plan_id'] ?>"
-                                            title="Update Record" style="color#7282FB" data-toggle="tooltip"><span
-                                                class="fa fa-pencil"></span></a>
-                                    </div>
-                                    <div style="">
-                                        <a onclick="return confirm('Are you sure?')"
-                                            href="delete_plan.php?id=<?php echo $row1['plan_id'] ?>"
-                                            title="Delete Record" style="color:#7282FB" data-toggle="tooltip"><span
-                                                class="fa fa-trash "></span></a>
-                                </div>
-                            </div>
-                            </div> -->
                         </div>
                         <div class="card-middle row" style="color:#919191 !important">
                             <?php echo $row1['description']?>
@@ -550,8 +535,6 @@ else{
 }
                         ?>
 
-                    <div>
-                    </div>
                 </div>
             </div>
 

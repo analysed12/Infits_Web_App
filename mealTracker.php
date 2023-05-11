@@ -1,6 +1,6 @@
 <?php
 // session_start();
-error_reporting(0);
+//error_reporting(0);
 include("navbar.php");
 // if(isset($_GET['client_id'])){
 //   $clientId = $_GET['client_id'];
@@ -95,7 +95,6 @@ line-height: 100%;
 .card {
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-   
     bottom:20px;
     padding:15px;
     width:300px; 
@@ -224,15 +223,6 @@ margin-top:-10px;
 margin-bottom: 10px;
 }
 
-/* .day:hover { 
-  border-radius: 100%; 
-  color: white;
-  width:60px;
-  height:100px;
-  text-align: center;
-  background: linear-gradient(180deg, rgba(118, 165, 255, 0.61) 44.58%, #76A5FF 70.62%);
-  cursor: pointer;
- } */
 .sliding-cal::-webkit-scrollbar {
   display: none;
 }
@@ -248,6 +238,7 @@ margin-bottom: 10px;
   }
 .button-container{
   display: flex;
+  overflow-y: hidden  ;
   flex-direction: row;
   overflow-x: auto;
   margin-right: 40px;
@@ -259,17 +250,7 @@ margin-bottom: 10px;
 }
 }
 
-@media screen and (min-width:500px) and (max-width:720px) {
-
-  .sliding-cal {
-  margin-right: -95px;
-  width: auto;
-  margin-left: -55px;
-  margin-top:60px;
-}
-}
-
-@media screen and (min-width:0px) and (max-width:500px) {
+@media screen and (min-width:0px) and (max-width:600px) {
   .main-content{
     overflow: none;
     margin-right:20px;
@@ -278,7 +259,7 @@ margin-bottom: 10px;
     width:auto;
     margin-top: 60px;
     
-  margin-right: -60px;
+  margin-right: -10px;
   width: auto;
   margin-left: -55px;
   margin-top:60px; 
@@ -303,19 +284,19 @@ margin-bottom: 10px;
   display: flex;
   }
 }
-
 @media screen and (min-width:0px) and (max-width:720px) {
  
 .main-content{
-  margin-top:-40px;
+  margin-top:-10px;
   bottom: 20px;
-  margin-left:60px;
+  margin-left:50px;
   overflow: none;
 }
 .left{     
-  margin-top: -25px;
-  margin-left: 40px;
+  margin-top: -15px;
+  margin-left: 20px;
 }
+
 .left h1{
   font-size: 40px;
 }
@@ -327,16 +308,25 @@ margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  margin-right: 30px;
+  overflow-y: hidden;
+  margin-right: 20px;
   margin-left: -65px;
 }
 .btn1{
   margin-left: 20px;
-}
+}}
+
+@media screen and (min-width:360px) and (max-width:720px) {
 .card {
-  display: flex;
   margin-left:1rem;
-margin-right:700px;
+  
+}
+}
+@media screen and (min-width:0px) and (max-width:360px) {
+  .card{
+    width:auto;
+   margin-left: -1rem;
+   
 }
 }
 </style>
