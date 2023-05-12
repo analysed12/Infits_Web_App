@@ -145,9 +145,9 @@ $dietition = $_SESSION['name'];
     display: flex;
     flex-direction: column;
 }
-tst-left-t{
+/* tst-left-t{
     padding-left: 3%;
-}
+} */
 .heading{
     /* width: 145px; */
     height: 68px;
@@ -157,32 +157,38 @@ tst-left-t{
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
-    font-size: 32px;
+    font-size: 40px;
     line-height: 68px;
     /* letter-spacing: -0.114286px; */
     color: #000000;
     margin: 0;
+    padding-left: 12px;
 }
 .card-container{
     display: flex;
     flex-wrap: wrap;
     /* justify-content: space-between; */
     gap: 5%;
-    padding-left: 1%;
+    padding-left: 33.6px;
 }
 .client-card {
-width: 100px;
-height: 120px;
+width: 82px;
+height: 96px;
 background: rgba(255, 255, 255, 0.8);
 box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
 border-radius: 10px;
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;
+/* justify-content: center; */
 text-align: center;
-gap: 15px;
+/* gap: 15px; */
+gap: 8px;
 margin-bottom: 15px;
+}
+
+.client-card img {
+    margin-top: 11px;
 }
 .client-card a{
     display: flex;
@@ -207,15 +213,22 @@ font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
 line-height: 1;
-font-size: 22px;
+font-size: 19px;
     margin: 0;
+width: 100%;
+line-height: 16.15px;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 /* tst-left b */
 .tst-left-b {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    /* padding: 20px; */
+    padding-left: 56px;
     gap: 20px;
 }
 /* Style the buttons that are used to open the tab content */
@@ -225,11 +238,12 @@ border: 1px solid #F8F5F5;
 max-width: 365px;
 width: 100%;
 height: 31px;
-border-top-left-radius: 1em;left
+border-top-left-radius: 1em;
 border-bottom-left-radius: 1em;
 border-top-right-radius: 1em;
 border-bottom-right-radius: 1em;
 position: relative;
+margin-left: 41px;
 }
 .tablinks {
 background: #FFFFFF;
@@ -288,8 +302,8 @@ border-bottom-right-radius: 1em;
   color: white !important;
 }
 .graph {
-    max-width: 487px;
-    max-height: 240px;
+    max-width: 520px;
+    /* max-height: 240px; */
     width: 100%;
     height: 100%;
     background: #FFFFFF;
@@ -399,6 +413,7 @@ height: 166px;
     line-height: 40px;
     color: #633FDD;
     margin-top: -10px;
+    padding-left: 12px;
 }
 .set-goal form{
     display: flex;
@@ -426,14 +441,14 @@ text-align: center;
 #save-goal {
     margin-top: 20px;
     border: none;
-    width: 124px;
-    height: 45px;
+    width: 108px;
+    height: 40px;
     background: linear-gradient(263.28deg, #AB84F0 0%, #9FB0F2 0.01%, #633FDD 93.31%);
     box-shadow: 0px 3.48718px 3.48718px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
     color: #ffffff;
     font-size: 19px;
-    font-family: 'NATS';
+    font-family: 'Nunito';
     font-style: normal;
     font-weight: 700;
 }
@@ -445,14 +460,15 @@ text-align: center;
     width: 100%;
     display: flex;
     flex-wrap:wrap;
-    justify-content: center;
+    /* justify-content: space-between; */
     align-items: center;
     padding :0 10px;
+    gap: 40px;
 }
 .stat-btn{
     /* max-width: 134px;
     max-height: 57.45px; */
-    height: 57.45px;
+    height: 59px;
     /* width: 25%; */
     width: 150px;
     /* height: 100%; */
@@ -468,23 +484,39 @@ text-align: center;
 }
 .stat-data{
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.stat-data div {
+    width: 100%;
 }
 .stat-data .title{
-font-size: 18px;
+    width: 100%;
+font-size: 19px;
 line-height: 0;
 color: #5D5D5D;
-margin-left: 10px;
+/* margin-left: 10px; */
+font-weight: 400;
+/* line-height: 40.15px; */
+margin-left: 12px;
 }
 .stat-data .value{
 font-size: 25px;
 line-height: 0;
 text-align: center;
 color: #000000;
-margin-left: 20px;
+/* margin-left: 20px; */
+}
+.stat-data div:nth-child(2) {
+    text-align: right;
+    margin-right: 20px;
+    font-size: 17px;
 }
 .stat-data .unit{
 font-size: 17px;
@@ -589,12 +621,12 @@ color: #9C74F5;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-end;
+        /* align-items: flex-end; */
     }
     .tsd-right .heading {
         width: 100%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-evenly;
         gap: 30%;
         padding-right: 5%;
     }
@@ -603,16 +635,16 @@ color: #9C74F5;
         line-height: 46px;
         color: #000000;
     }
+     /* .tsd-right .heading span{
+        font-size: 16px;
+        line-height: 46px;
+        color: #C986CF;
+    } */
     .tsd-right .heading span{
-        font-family: 'NATS';
-font-style: normal;
+        font-size: 16px;
+        line-height: 33.81px;
+        color: #9C74F5;
 font-weight: 400;
-font-size: 16px;
-line-height: 34px;
-/* identical to box height */
-
-
-color: #9C74F5;
     }
 .progress-bar-container{
     display: flex;
@@ -740,26 +772,25 @@ border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
     /* background: conic-gradient(#F9E0E7 50% , #E68AA1 0); */
 }
 .progress-circle-fill {
-    width: 175px;
-    height: 175px;
+    /* width: 184px;
+    height: 184px; */
     border-radius: 50%;
-    background: #FFFFFF;
+    background: #fff;
 }
 .progress-circle-value{
-    width: 175px;
-    height: 175px;
+    width: 150px;
+    height: 150px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-   
 }
 .progress-circle-value span{
-    
-    font-size: 20px;
+    font-size: 22px;
     line-height: 35px;
 }
 #progress-percent{
@@ -773,7 +804,7 @@ border-radius: 10px;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 20px;
+    /* padding: 0 20px; */
 }
 .progress-bottom-div{
     display: flex;
@@ -809,25 +840,6 @@ color: #000000;
 }
 /* -------------------- */
 
-/* media */
-@media (max-width:420px) {
-    .tst-left-b {
-    padding: 20px;
-    }
-    .tsd-left-t {
-    padding-left: 0;
-    }
-    .tsd-left-b {
-    padding-left: 0;
-    }
-    .tsd-right {
-    scale: 0.8;
-    }
-    .progress-bar-container {
-    scale: 0.8;
-    }
-}
-
 .client-card-sleep{
     background: linear-gradient(212.32deg, #633FDD 0%, #AB83F0 93.37%);
 }
@@ -839,9 +851,10 @@ color: #000000;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
 border-radius: 10px;
-width: 355px;
+/* width: 355px; */
 height: 108px;
-padding:7px;
+/* padding:7px; */
+width: 100%;
 }
 .heart_beat_box p{
 
@@ -849,12 +862,13 @@ padding:7px;
 font-style: normal;
 font-weight: 400;
 font-size: 24px;
-line-height: 51px;
+/* line-height: 51px; */
 /* identical to box height */
 
 letter-spacing: 0.03em;
 
 color: #6844E2;
+margin: 0;
 }
 .heart_beat_box>div span{
     
@@ -1031,6 +1045,77 @@ content: counter(percentage) '';
     margin: 2%;
 
 }
+@media(max-width:1190px) {
+    .tsd-right {
+        padding: 0;
+    }
+    .tsd-right .heading {
+        padding: 0;
+        justify-content: space-around;
+    }
+    .tsd-left-b .heading{
+        max-width: 100%;
+    }
+    .i-button-box {
+        display: none;
+    }
+    .tst-left-b {
+        /* padding-right: 42px; */
+        padding-left: 2px;
+    }
+    .graph {
+        max-width: 100%;
+    }
+    .heading-border {
+        max-width: 100%;
+    }
+    .tab {
+        margin-left: 10px;
+    }
+    .p-container {
+        justify-content: space-around;
+    }
+    .heading p {
+        padding-left: 12px;
+    }
+}
+
+/* media */
+@media (max-width:420px) {
+    .tst-left-b {
+    padding: 10px !important;
+    }
+    .tsd-left-t {
+    padding-left: 0;
+    }
+    .tsd-left-b {
+    padding-left: 0;
+    }
+    .tsd-right {
+    scale: 0.8;
+    }
+    .progress-bar-container {
+    scale: 0.8;
+    }
+    .card-container {
+        justify-content: space-between;
+        padding-left: 0;
+    }
+    .tab {
+        margin-left: 2px;
+    }
+    .tablinks {
+        font-size: 10px;
+    }
+    .drop {
+        left: 65px;
+        margin-left: 0px;
+    }
+    .heart_beat_box>div span {
+        line-height: 18px;
+        text-align: center;
+    }
+}
 </style>
 <body>
 <div class="content">
@@ -1040,47 +1125,53 @@ content: counter(percentage) '';
 
             <div class="tst-left-t">
                 <div class="heading">
-                    <p style="margin-top: -15px;">Clients Stats</p>
+            <p style="margin-top: -15px; padding-left: 35px;">Clients Stats</p>
                 </div>
                 <div class="card-container">
-                <div class="client-card " style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
                         <a href="track_stats_steps.php?id=<?php echo($clientId) ?>">
-                            <i class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA; rotate: -90deg;"></i>
-                            <p style="color: #FF6C6CCA;">Steps</p>
+            <div class="client-card client-card-steps" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                <!-- <i class="fa-solid fa-shoe-prints" style="color:#FFFFFF; rotate: -90deg;"></i> -->
+                <img src="images/steps.svg" alt="">
+                <p>Steps</p>
+            </div>
                         </a>
-                        </div>
+            <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                        <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
-                            <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
-                            <p style="color:#E266A9;">Heart<br>Rate</p>
-                            </a>
+                <!-- <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i> -->
+                <img src="images/heart_rate.png" alt="">
+                <p>Heart<br>Rate</p>
                         </div>
+            </a>
+            <a href="track_stats_water.php?id=<?php echo($clientId) ?>">
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                        <a href="track_stats_water.php?id=<?php echo($clientId) ?>">
-                        <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
+            <!-- <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i> -->
+            <img src="images/water.svg" alt="image_broken">
                         <p style="color:#52A4FF;">Water</p>
+            </div>
                             </a>
-                        </div>
-                        <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                        <a href="track_stats_weight.php?id=<?php echo($clientId) ?>">
-                            <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i>
-                            <p style="color:#7D5DE6;">Weight<br>Track</p>
+            <a href="track_stats_sleep.php?id=<?php echo($clientId) ?>">
+            <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6; background: linear-gradient(212.32deg, #633FDD 0%, #AB83F0 93.37%);">
+                <!-- <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i> -->
+                <img src="images/sleep.svg" alt="" style="filter: brightness(0) invert();">
+                <p style="color:#fff;">Sleep</p>
+            </div>
                             </a>
-                        </div>
-                        <div class="client-card client-card-sleep" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                        <a href="track_stats_sleep.php?id=<?php echo($clientId) ?>">
-                            <img src="images/moon.svg" alt="">
-                            <p style="color:#FFFFFF;">Sleep</p>
+            <a href="track_stats_weight.php?id=<?php echo($clientId) ?>">
+            <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
+                <!-- <i style="color:#54AFAC;" class="fa-solid fa-moon"></i> -->
+                <img src="images/weight.svg" alt="">
+                <p style="color:rgba(84, 175, 172, 1);">Weight Track</p>
+            </div>
                             </a>
-                        </div>
+            <a href="track_stats_calorie.php?id=<?php echo($clientId) ?>">
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                        <a href="track_stats_calorie.php?id=<?php echo($clientId) ?>">
-                        <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i>
-                            <p style="color:#E3738D;">Calorie<br>Track</p>
+            <!-- <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i> -->
+            <img src="images/track.svg" alt="">
+                <p style="color:#E3738D;">Calorie Track</p>
+            </div>
                             </a>
                         </div>
                 </div>
-            </div>
 
             <div class="tst-left-b">
                 <div class="tab">
@@ -1166,15 +1257,15 @@ content: counter(percentage) '';
         </div>
         <div class="col-lg-4 tst-right">
             <div class="set-goal">
-                <div class="heading Water Intake Goal">
-                    <p>Sleep Goal </p>
-                    <span>Daily Sleep Hours</span>
+        <div class="heading">
+            <p style="font-size: 30px;">Sleep Goal</p>
+            <span>Daily Sleep Hours</span>
                     <span id="g-set-success"></span>
                 </div>
-                <img src="images/sleep_table.svg" alt="">
+        <img src="images/sleep_table.svg" alt="">
                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                     <input hidden name="dietition" value="<?php echo($dietition) ?>">
-                    <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 Hours">
+            <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 BPM">
                     <input name="clientid"  type="hidden" value="<?php echo($clientId) ?>">
                     <button type="submit" name="savegoal" id="save-goal">Set</button>
                 </form>
@@ -1200,32 +1291,32 @@ $pastMonth->modify('-1 month');
 $monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(hrsSlept)'];
 ?>
     <div class="row ts-down">
-        <div class="col-lg-7 tsd-left">
+    <div class="col-xl-8 col-lg-7 tsd-left">
             <div class="tsd-left-t">
                 <div class="stats-btn-container">
                     
                     <div class="stat-btn">
                         <div class="stat-data">
-                            <span class="title">Daily Count</span>
-                            <span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">Hours</span>
+                            <div><span class="title">Daily Count</span></div>
+                            <div><span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">Hours</span></div>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
-                            <span class="title">Weekly Avg</span>
-                            <span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">Hours</span>
+                            <div><span class="title">Weekly Avg</span></div>
+                            <div><span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">Hours</span></div>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
-                            <span class="title">Monthly Avg</span>
-                            <span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">Hours</span>
+                            <div><span class="title">Monthly Avg</span></div>
+                            <div><span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">Hours</span></div>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
-                            <span class="title">Total</span>
-                            <span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">Hours</span>
+                            <div><span class="title">Total</span></div>
+                            <div><span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">Hours</span></div>
                         </div>
                     </div>
                 </div>
@@ -1292,7 +1383,7 @@ if(empty($progressBarData) OR $progressBarData[0]['sleep'] == 0){
 }
 $sleepRemaining = (int) $currentGoal - (int) $sleepConsumed;
 ?>     
-        <div class="col-lg-5 tsd-right">
+        <div class="col-xl-4 col-lg-5 tsd-right">
             <div class="heading">
                 <p>Daily Progress</p>
                 <a href="past_activities_sleep.php?id=<?php echo($clientId) ?>"><span>View Activity</span></a>
@@ -1779,3 +1870,5 @@ new Chart(weeklyChart, {
 </script>
 </body>
 </html>
+
+
