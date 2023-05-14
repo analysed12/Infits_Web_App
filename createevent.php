@@ -82,7 +82,7 @@ include("navbar.php");
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Create Event</title>
-    <link rel="stylesheet" href="createevent.css" />
+   
 </head>
 <style>
 /* Appointment popup */
@@ -95,9 +95,14 @@ include("navbar.php");
     font-weight: normal;
     font-style: normal;
 }
+::placeholder {
+       
+    font-size: 19px !important;
+       
+}
 
     body {
-        font-family: 'NATS', sans-serif;
+        font-family: 'NATS', sans-serif !important;
     }
 .modal {
     display: none !important;
@@ -166,8 +171,7 @@ include("navbar.php");
     
 } */
 .event_title{
-    font-family: 'NATS';
-font-style: normal;
+    
 font-weight: 400;
 font-size: 28px;
 line-height: 59px;
@@ -182,6 +186,227 @@ color: #000000;
     padding-bottom: 40px;
 }
 } */
+html {
+    overflow-x: hidden;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+ 
+    font-style: normal;
+    font-weight: 500;
+    /* font-size: 35px; */
+    padding: 20px;
+}
+
+.event-form {
+    /* width: 50%; */
+    padding: 2%;
+    margin-left: 15%;
+    margin-right: 15%;
+    /* background-color: palegoldenrod; */
+}
+
+.ev-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 260px;
+height: 190px; */
+}
+
+.event-image {
+    width: 150px;
+    height: 120px;
+}
+
+.event_title {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.eve_form {
+    /* background-color: azure; */
+    padding: 10px;
+    /* width: 60%; */
+
+}
+
+.subject {
+    display: block;
+    /* font-size: 18px;
+    font-weight: bold; */
+    width: 100%;
+}
+
+.rem-item {
+    background: #FFFFFF;
+    border: 1px solid #4B9AFB;
+    border-radius: 45px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
+}
+
+.rem_icon {
+    color: #4B9AFB;
+    margin-right: 15px;
+}
+
+
+
+.content-name {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+
+
+.form_btn {
+    width: 40%;
+    border-color: #4B9AFB;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.txt {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.txt p {
+    padding-left: 15px;
+}
+.txt a {
+    padding-left: 15px;
+}
+
+.txticon {
+    padding: 10px;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.icon {
+    padding: 10px;
+    color: black;
+    min-width: 50px;
+}
+
+.input-field {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+}
+
+/* POPUP */
+
+.pop-box .button {
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+
+.bg-popContainer {
+    display: none;
+}
+
+.pop-box {
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+    border: 1px solid rgba(225, 225, 225, 0.66);
+    box-shadow: 0px 11px 25px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+}
+
+.cont {
+    border-radius: 20px;
+}
+
+input {
+    width: 50%;
+    display: block;
+    margin: 15px auto;
+    padding: 5px;
+}
+
+.closer {
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 30px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+::placeholder {
+    color: black;
+    opacity: 1;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: black;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: black;
+}
+
+/* MEDIA QUERY */
+
+
+@media screen and (min-width: 720px) {
+
+    /* Styles go here */
+    .mobile-menu {
+        display: none;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 720px) {
+
+
+    .event-form {
+        /* height: 100%; */
+        margin-left: 0 !important;
+        width: 100%;
+        display: flex;
+        /* justify-content: center; */
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+    }
+
+}
+
 </style>
 
 <body>
@@ -189,7 +414,7 @@ color: #000000;
 
     <!-- Contents Start -->
     <div id="content">
-        <p style="margin-left:1.7rem;margin-top:1.5rem;font-weight:500;font-size:30px">Add Event</p>
+        <p style="margin-left:1.5rem;margin-top:0.7rem;font-weight:400;font-size:40px">Add Event</p>
         <div class="event-form">
             <div class="ev-img">
                 <img class="event-image" src="images/event_image.svg" alt="">
@@ -199,11 +424,11 @@ color: #000000;
             <form action="#" method="post">
                 <div class="eve_form" style="">
                     <!-- Event name field -->
-                    <label for="subject" class="event_title">Event Name</label>
+                    <label for="subject" class="event_title" style="font-size:28px;font-weight:400">Event Name</label>
                     <select class="subject" type="text" name="subject" placeholder="Category" style="padding:10px 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
 border-radius: 10px; border: 1px solid #F1F1F1;"
                         required>
-                        <option value="Consultation">Consultation</option>
+                        <option value="Consultation" style="">Consultation</option>
                         <option value="Dietplan">Diet Plan</option>
                         <option value="Followup">Follow Up</option>
                     </select>
@@ -211,24 +436,24 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
                     <!-- Reminder types display -->
                     <!--***** Add an array to store these values -->
                     <div class="reminder">
-                        <div class="event_title">Reminder Type</div>
+                        <div class="event_title" style="font-size:28px;font-weight:400">Reminder Type</div>
                         <div class="rem">
-                            <div style="display: inline-block;" class="rem-item"><img src="images/Toolbox.svg"> Consultation</div>
-                            <div style="display: inline-block;" class="rem-item"><img src="images/Healthy Eating.svg"> Diet Plan</div>
-                            <div style="display: inline-block;" class="rem-item"><img src="images/Ringer Volume.svg">Call</div>
-                            <div style="display: inline-block;" class="rem-item"><img src="images/Plus Math.svg">Others </div>
+                            <div style="display: inline-block;font-size:19px" class="rem-item"><img src="images/Toolbox.svg"> Consultation</div>
+                            <div style="display: inline-block;font-size:19px" class="rem-item"><img src="images/Healthy Eating.svg"> Diet Plan</div>
+                            <div style="display: inline-block;font-size:19px" class="rem-item"><img src="images/Ringer Volume.svg">Call</div>
+                            <div style="display: inline-block;font-size:19px" class="rem-item"><img src="images/Plus Math.svg">Others </div>
                         </div>
                     </div>
                     <br>
 
                     <!-- Main event details form -->
-                    <div class=" event_title"> Event Details</div>
+                    <div class=" event_title" style="font-size:28px;font-weight:400"> Event Details</div>
 
                     <div style="max-width:100%;margin:auto">
 
                         <!-- Add client fields -->
-                        <div class="input-icons">
-                        <img class="icon" style="position:absolute;min-width: 0px;" src="images/Group 3.svg">
+                        <div class="input-icons" style="font-size:19px;display:flex;align-items:center">
+                        <img class="icon" style="position:absolute;min-width: 0px;" src="images/Group 3.svg" style="display:flex;align-items:center">
                             <select style="border-top:none;border-left:none;border-right:none;border-bottom: 1px solid #EFEFEF;" name="clientname"
                                 class="input-field" required>
                                 <option value="" disabled selected>Add Client</option>
@@ -245,12 +470,12 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
                         </div>
 
                         <!-- Meeting type fields -->
-                        <div class="input-icons">
+                        <div class="input-icons" style="font-size:19px;display:flex;align-items:center">
                         <img class="icon" style="position:absolute;min-width: 0px;" src="images/briefcase.svg">
 
                             <select style="border-top:none;border-left:none;border-right:none;border-bottom: 1px solid #EFEFEF;" name="meetingtype"
                                 class="input-field" required>
-                                <option value="" disabled selected>Meeting Type</option>
+                                <option value="" disabled selected style="font-size:19px">Meeting Type</option>
                                 <option value="Videocall">Video Call</option>
                                 <option value="Call">Call</option>
                                 <option value="In person">In person</option>
@@ -262,14 +487,14 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
                         <div class="txt button"  id="button" style="border-bottom: 1px solid #EFEFEF;">
                             <img  src="images/Schedule.svg" class="fa-solid fa-calendar-days txticon" style="display:inline-block; padding:0px; color:black  !important">
                             
-                            <p style="display:inline-block;padding-left: 10px;">Date and Time</p>
+                            <p style="display:inline-block;padding-left: 10px;font-size:19px">Date and Time</p>
                         </div>
 
                         <!-- Date and Time Pop up style="border-bottom:1.8px solid black;" -->
                         <div id="bg_container" class="bg-popContainer" style="color:black" >
                             <div class="pop-box">
                                 <div id="close" class="closer">+</div>
-                                <div>
+                                <div >
                                     <p style="display:inline-block; margin-right:10px">Start Date</p>
                                     <input style="display:inline-block;" type="datetime-local" name="startdate"
                                         placeholder="StartDate" id="startdate" required>
@@ -308,7 +533,7 @@ border-radius: 10px; border: 1px solid #F1F1F1;"
                         </div>
                     </div>
 
-                    <div style="width:100%; margin-left:10%; margin-right:10%">
+                    <div style="width:100%; margin-left:10%; margin-right:10%;font-size:19px">
                         <a href="createevent.php"><input style="display:inline-block; color:black; background:white;"
                                 class="form_btn form_btn1" id='mobile_btn' placeholder="Cancel"></input></a>
                         <button style="display:inline-block; background: #4B9AFB;" id='new_btn' class="form_btn" name="submit"

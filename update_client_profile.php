@@ -71,41 +71,49 @@ $result = mysqli_query($conn,$sql);
 <style>
 @font-face {
     font-family: 'NATS';
-    src:url('font/NATS.ttf.woff') format('woff'),
+        src: url('font/NATS.ttf.woff') format('woff'),
         url('font/NATS.ttf.svg#NATS') format('svg'),
         url('font/NATS.ttf.eot'),
         url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
     font-weight: normal;
     font-style: normal;
 }
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #BBBBBB;
-  opacity: 1; /* Firefox */
+        opacity: 1;
+        /* Firefox */
 }
+
 body {
-    height: 100vh;
     overflow: auto;
     font-family: 'NATS', sans-serif;
-    font-weight:400;
+        font-weight: 400;
 }
 
 #content {
     display: flex;
     flex-direction: column;
     height: 90%;
-    font-family: 'Poppins';
+        font-family: 'NATS';
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
+        font-size: 20px;
     padding-bottom: 20px;
 }
 
 .input-tag {
+        width: 100%;
+        height: 40px;
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    padding: 7px;
+        border-radius: 7px;
+        padding:0px 0px 0px 1rem;
     color: #C4C4C4;
+        display: flex;
+        align-items: center !important;
+        /* margin-top: 0.3rem; */
 }
 
 
@@ -113,61 +121,114 @@ body {
     width: 100% !important;
 }
 
-.row {
-    width: 87% ;
-    margin-top: 10px ;
-    margin-left:2rem;
+    .cancelbutton {
+        margin-right:24px;
+        color: #7282FB;
+        width:197px;
+        height: 52px;
+        /* padding: 10px; */
+        background: #ffffff;
+        border: 2px solid #7282fb;
+        border-radius: 10px;
+        font-size: 25px;
 }
 
-.editBtn {
-    border: 1px solid #7282FB;
+    .savebutton {
+        border: none;
+        width:197px;
+        height: 52px;
+        background-color: #6883FB;
+        color: white;
+        /* padding: 10px; */
     border-radius: 10px;
-    padding: 10px;
-    background-color: white;
-    color: #7282FB;
-
+        font-size: 25px;
+    }
+    input {
+        border: none;
 }
 
-.editBtn a:hover {
-    outline: none !important;
-}
-
-input {
-    border: none;
-}
-
-@media screen and (max-width: 720px){
-    .row{
-        margin-left:0% !important;
-        width:auto;
-    }
-    h4{
-        margin-bottom:2rem !important;
-    }
-    .ronald{
-        width:90px !important;
-        height:90px !important;
-    }
-    .editBtn{
-        width: 197px !important;
-        height: 52px !important;
-    }
-    .name{
-        margin-top:0 !important;
-    }
-    /* .container {
+    .client-form {
+        display: flex;
+        align-items: center;
         width: 100% !important;
-    } */
+        /* border: 2px solid red; */
+        flex-direction: column;
+        margin-bottom: 4rem;
 }
 
-@media screen and (max-width: 520px){
-    .row {
-        display: block;
-        width: 100%;
+    .form-row {
+        margin-bottom: 1rem;
+        width: 60% !important;
+        gap: 8% !important;
+}
+
+    .form {
+        width: 46%;
     }
-   
-    .cta-select  {
-        margin-top: 10px;
+    .gender-icons{
+        width: 43px;
+     height: 43px;
+     background: #FFFFFF;
+     border: 0.5px solid #F3F3F3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 50%;
+    }
+    .gender-icons:hover{
+    cursor: pointer;
+    }
+    /* Style the selected radio button */
+  input[type="radio"]:checked + label {
+    background-color: #ccc;
+    }
+/*************************************media query for small devices************************************************/
+    @media screen and (max-width: 733px) {
+        h4 {
+            margin-left: 0px !important;
+            margin-bottom: 2rem !important;
+    }
+
+        .ronald {
+            width: 90px !important;
+            height: 90px !important;
+        }
+
+        .cancelbutton, .savebutton{
+            width: 120px !important;
+            height: 45px !important;
+        }
+
+        .name {
+            margin-top: 0 !important;
+        }
+        .form-row {
+        padding: 0rem !important;
+        margin-bottom:0rem !important;
+        width: 100% !important;
+        gap:0rem !important;
+}
+
+       .form {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+       .top-btns{
+        display: none !important;
+       } 
+    }
+    /*************************media query for mediun devices************************************************/
+@media screen and (min-width: 733px) and (max-width: 1200px) {
+    .form-row{
+        /* padding: 0rem !important; */
+        width: 100% !important;
+    }
+    .top-btns{
+        display: none !important;
+       }
+    .bottom-btns{
+        display: block !important;
     }
 }
 </style>
@@ -181,79 +242,116 @@ input {
             <div class="add-client-area">
                 <form method="post" action="">
                     <br>
-                    <h4 style="font-size: 30px;margin-left:2rem">Client Profile</h4>
+                    <div class="d-flex justify-content-between pe-3 ps-3">
+                        <h4 class="heading" style="font-size: 42px;margin-left:2rem;">Edit Client Profile</h4>
+<!------------------------------------------SAVE AND CANCEL BUTTONS------------------------------------------>
+                        
+                       <div class=" top-btns d-flex justify-content-center d-lg-block d-md-none">
+                        <button class="cancelbutton">Cancel</button>
+                        <button class="savebutton">Save</button>
+                       </div>
+                    </div> 
                     <div class="container">
-                        <div class="d-flex justify-content-center align-items-center; margin-top:10px" style="gap:20px">
-                            <div class="" style="display:inline-block;"><img
-                            class="ronald" style="height:150px;weight:150px;border-radius:50%;"  src="images/ronalduser.png"
-                                    alt=""></div>
-                            <div style="font-size: 30px;margin-top:50px"class="name" style="display:inline-block"><?php echo $row['name'] ?></div>
+                        <div class="d-flex justify-content-center align-items-center; margin-top:10px" style="margin: 2rem;">
+                            <div class="" style="display:inline-block;"><img class="ronald"
+                                    style="height:150px;weight:150px;border-radius:50%;" src="images/ronalduser.png"
+                                    alt="">
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Email</div>
-                                <input type="text" name = "email" class="row input-tag" value="<?php echo $row['email'] ?>">
                             </div>
-                            <div class="col">
-                                <div class="row">Phone No.</div>
-                                <input type="text" name = "phone" class="row input-tag" value="<?php echo $row['phone'] ?>">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Gender</div>
-                                <input type="text" name = "gender" class="row input-tag" value="<?php echo $row['gender'] ?>">
-                            </div>
-                            <div class="col">
-                                <div class="row">Height</div>
-                                <input type="text" name = "height" class="row input-tag" value="<?php echo $row['height'] ?>">
+                        <div class="client-form">
+<!-------------------------------------------NAME------------------------------------------------------------------ -->
+                            <div
+                                class="form-row d-flex flex-row w-100 justify-content-center align-items-center">
+                                <div class="w-100 form">
+                                    <div class="">Name</div>
+                                    <input type="text" name="name" class=" input-tag"
+                                        value="<?php echo $row['name'] ?>">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Age</div>
-                                <input type="text" name = "age" class="row input-tag" value="<?php echo $row['age'] ?>">
+<!--------------------------------------------GENDER---------------------------------------------------------------->
+                              <div
+                              class="form-row d-flex flex-row w-100 justify-content-start align-items-center">
+                              <div class="form d-flex gap-4 align-items-center pt-1 pb-1">
+                                  <div class="">Gender</div>
+                                  <!-- <input type="text" name="gender" class=" input-tag"
+                                      value="<?php echo $row['gender'] ?>"> -->
+                                      <input type="radio" name="gender" value="male" id="male" class="d-none">
+                                        <label for="male" class="gender-icons mb-0"><i class="fa fa-mars fs-3"></i></label>
+                                      <input type="radio" name="gender" value="female" id="female" class="d-none">
+                                         <label for="female" onclick="gender" class="gender-icons mb-0"><i class="fa fa-venus fs-3"></i></label>
                             </div>
-                            <div class="col">
-                                <div class="row">About</div>
-                                <input type="text" name = "about" class="row input-tag" value="<?php echo $row['about'] ?>">
                             </div>
+<!--------------------------------------EMAIL AND PHONE NO.-------------------------------------------------------->
+                            <div
+                                class="form-row d-flex flex-row justify-content-center align-items-center">
+                                <div class="form">
+                                    <div class="">Email</div>
+                                    <input type="text" name="email" class=" input-tag"
+                                        value="<?php echo $row['email'] ?>">
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Weight</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row['weight'] ?>">
+                                <div class="form">
+                                    <div class="">Phone No.</div>
+                                    <input type="text" name="phone" class=" input-tag"
+                                        value="<?php echo $row['phone'] ?>">
                             </div>
-                            <div class="col">
-                                <div class="row">Duration</div>
-                                <input  type="text" class="row input-tag" value="<?php echo $months ." "."Months" ?>"> 
                             </div>
+<!-----------------------------------------HEIGHT AND AGE----------------------------------------->
+                            <div
+                                class="form-row d-flex flex-row w-100 justify-content-center align-items-center gap-5">
+                                <div class="form">
+                                    <div class="">Age</div>
+                                    <input type="text" name="age" class="input-tag"
+                                        value="<?php echo $row['age'] ?>">
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Plan</div>
-                                <div class="row">
+                                <div class="form">
+                                    <div class="">Height</div>
+                                    <input type="text" name="height" class=" input-tag"
+                                        value="<?php echo $row['height'] ?>">
+                            </div>
+                            </div>
+<!-----------------------------------------WEIGHT AND ABOUT----------------------------------------->
+                            <div
+                                class="form-row d-flex flex-row w-100 justify-content-center align-items-center gap-5">
+                                <div class="form">
+                                    <div class="">Weight</div>
+                                    <input type="text" class="input-tag" value="<?php echo $row['weight'] ?>">
+                        </div>
+                                <div class="form">
+                                    <div class="">About</div>
+                                    <input type="text" name="about" class="input-tag"
+                                        value="<?php echo $row['about'] ?>">
+                                </div>
+                            </div>
+<!--------------------------------LOCATION AND PLAN------------------------------------------------->
+                            <div
+                                class="form-row d-flex flex-row w-100 justify-content-center align-items-center gap-5">
+                                <div class="form">
+                                    <div class="">Location</div>
+                                    <input type="text" class="input-tag" value="<?php echo $row2['location']; ?>">
+                                </div>
+                                <div class="form">
+                                    <div class="">Plan</div>
+                                    <div class="d-flex justify-content-center align-items-center ">
                                     <div class="input-tag"
-                                        style="display:inline-block;width:50% !important; margin-right:10%;">
-                                        <?php echo $row1['name'] ?></div>
+                                            style="width:50% !important; margin-right:10%;">
+                                            <?php echo $row1['name'] ?>
+                                        </div>
                                         
-                                    <a href="select_client_plan.php?client_id=<?php echo $client_id?>" class="" style="display:inline-block;width:40% !important;background: #FFFFFF;text-align:center;padding-top:5px;
-border: 1px solid #6883FB;
+                                        <a href="select_client_plan.php?client_id=<?php echo $client_id?>" class=""
+                                            style="display:flex;justify-content: center;align-items: center; width:40% !important;height: 40px; background: #FFFFFF;
+                                        border: 1px solid #6883FB;color: #6883FB; text-decoration: none ;
 border-radius: 8px;">Select</a>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="row">Location</div>
-                                <input type="text" class="row input-tag" value="<?php echo $row2['location']; ?>">
+                               
                             </div>
                         </div>
-                        <div class="row d-flex justify-content-center align-items-center">
-
-                            
-
-                            <button class="editBtn" name="update" style="width:20%;margin-top:20px;text-align:center">Confirm Edit</button>
-
-
+<!------------------------------------------SAVE AND CANCEL BUTTONS------------------------------------------>
+                        <div class="bottom-btns d-flex justify-content-center align-items-center d-lg-none d-md-block d-sm-block">
+                            <div class="d-flex justify-content-center align-items-center">
+                            <button class="cancelbutton">Cancel</button>
+                            <button class="savebutton">Save</button>
+                        </div>
                         </div>
 
                     </div>
@@ -261,6 +359,11 @@ border-radius: 8px;">Select</a>
       }?>
                 </form>
             </div>
+            <script>
+                function gender(){
+                    document.getElementById('female').style.cssText = 'background-color:red; color:white;';
+                }
+            </script>
 </body>
 
 </html>

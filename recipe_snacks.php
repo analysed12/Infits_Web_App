@@ -145,7 +145,7 @@ body {
 .card-num {
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 18px;
     color: #9C74F5;
     text-align:center;
@@ -374,11 +374,6 @@ body {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     }
-/* .btn{
-    /* margin-top: 10px; */
-    /* position: relative; */
-    /* margin-left: 1500px; */
-
 
     .butt{
     
@@ -397,14 +392,16 @@ body {
 
 @media screen and (min-width: 720px) and (max-width:1500px) {
 .heading{
-    margin-left: 30px;
-    margin-top: 9px;
+    justify-content:flex-start !important;
+}
+.header{
+    flex-direction:column !important;
 }
 .header h4{
     margin-top:39px;
 }
 .searchbox{
-    margin-left:-250px;
+    margin-left:50px !important;
     margin-top: 10px;
     width: 350px;
     margin-bottom: 20px;
@@ -417,10 +414,13 @@ body {
 .container1{
     left:30px;
 }
-
+.row{
+    margin:0px auto !important;
+}
 .card {
-    bottom:20px;
-    margin-left:30px;
+    margin:10px auto !important;
+    /* bottom:20px;
+    margin-left:30px; */
 }
 .card-food {
     font-size: 23px;
@@ -450,61 +450,10 @@ body {
     font-size: 40px;
 }
 }
-@media screen and (min-width:720px) and (max-width:950px){
-    .heading{
-    margin-left: 30px;
-    margin-top: 9px;
-}
-.searchbox{
-    margin-left:-250px;
-    margin-top: 70px;
-    width: 350px;
-    margin-bottom: 20px;
-}
-}
-
-@media screen and (min-width:650px) and (max-width:710px){
-    .butt{
-    background: #9C74F5;
-      border: 0px;
-      color: white;
-      border-radius: 50%;
-      position: absolute;
-      bottom: 35px;
-      top:202rem;
-      margin-bottom: 20px;
-      right:200px;
-     left:20px;
-      margin:auto;
-      width: 85px;
-      height: 85px;
-      font-size: 40px;
-  }
-}
-@media screen and (min-width:0px) and (max-width:650px){
-    .butt{
-    background: #9C74F5;
-      border: 0px;
-      color: white;
-      border-radius: 50%;
-      position: absolute;
-      bottom: 35px;
-      top:202rem;
-      margin-bottom: 20px;
-      left:160px;
-      margin:auto;
-      width: 85px;
-      height: 85px;
-      font-size: 40px;
-  }
-}
 @media screen and (min-width:0px) and (max-width:720px){
    
     .searchbox{
-    margin-left: -270px;
-    margin-top: -30px;
-    width: 280px;
-    margin-bottom: 20px;
+    margin-left: 20px !important;
     }    
     .category{
         display: flex;
@@ -512,34 +461,34 @@ body {
         overflow-x: auto;
         margin-left: 50px;
     }
-    .heading {
-        margin-left: 70px;
+    .heading{
+    justify-content:flex-start !important;
+    margin-left:-30px;
     }
-   .header h4{
-    margin-top: -60px;
-   }
-    .header h2{
-        font-size: 50px;
-        margin-top: -80px;
-        
-        margin-left:-20px;
+.header{
+    flex-direction:column !important;
        }
     .container1{
         grid-template-columns: auto auto auto auto;
         left: -1px;
         margin-right: 420px;
         gap: 0.5rem;
+        margin-left:-10px !important;
     }
     .recipe{
         margin-left: -200px;
            }
     .middle_wrapper a {
-        margin-right: -40px;
+       
         margin-top:10px;    
     }
+    .row{
+        margin:10px auto !important ;
+    }
     .card{
-    left: 50px;
-    bottom: 10px;
+        margin:10px auto !important;
+    /* left: 50px;
+    bottom: 10px; */
 }
  .card-food {
     font-size: 21.5px;
@@ -561,6 +510,14 @@ body {
     left:-90px;
  }
  }
+ @media screen and (min-width:300px) and (max-width:400px){
+    input[type=search]{
+        width:150px !important;
+    }
+    h3.recipe{
+        margin-left:-20px !important;
+    }
+}
 </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -601,13 +558,13 @@ body {
     <br>
     <div class="header" style="">
         <div class="heading" style="display:flex;justify-content:space-between;margin-top:-5px">
-            <h2 style="margin-left:50px;font-weight:500;font-size: 40px;">Recipes</h2>
+            <h2 style="margin-left:50px;font-weight:500;font-size: 48px;">Recipes</h2>
             <h4 style="margin-left:30px;color:#787885;font-size: 20px;">Snacks</h4>
         </div>
         <div class="search" style="margin-right:8rem;display:flex;gap:1.5rem">
             <div class="searchbox">
                 <button style="background-color:white;border:none;" id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
-                <input type="search" name="sinput" placeholder="Search here" style="border:none;font-size:1.9rem;margin-left:1rem;width:200px;">
+                <input type="search" name="sinput" placeholder="Search" style="border:none;font-size:20px;margin-left:1rem;width:200px;">
 
             </div>
         </div>
@@ -620,8 +577,8 @@ body {
                 <img src="./images/indian-food-composition_1284-11949-removebg-preview 1.png" class="imag im1">
                 <h3 style="margin-bottom:10px;color:#FFFFFF;font-weight: 400;margin-top:30px;margin-right:145px;font-size:32px;">All Recipe</h3>
                 <p style="margin-bottom:80px;color: rgba(255, 255, 255, 0.9);margin-top:5px; margin-right:110px;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/tree branch.png" class="imag im2 im2-2" style="left:-90px;bottom:25px;">
-                <img src="./images/tree branch.png" class="imag im2 " style="left:-13px;bottom:11px;">
+                <img src="./images/treebranch1.png" class="imag im2 im2-2" style="left:-90px;bottom:25px;height:75px;">
+                <img src="./images/tree branch.svg" class="imag im2 " style="left:-27px;bottom:31px;height:84px;">
                </div>
         </a>
 
@@ -647,7 +604,7 @@ body {
     </div>
 
 
-    <div class="category" style="display:flex;justify-content:flex-start;margin:20px;margin-right:30px;">
+    <!-- <div class="category" style="display:flex;justify-content:flex-start;margin:20px;margin-right:30px;">
 
         <div class="filter-outline" style="display:flex; justify-content:space-between; align-items:center; margin:10px; margin-left:55px;padding-top:1px;padding-bottom:1px;">
             <div class="filter-text" >Waffles</div>
@@ -673,7 +630,7 @@ body {
             <div class="filter-text">Croissants</div>
             <img class="filter-line"  src="./images/image 8.png" alt="">
         </div>
-    </div>
+    </div> -->
 
 
     <!-- all recipes -->
@@ -710,13 +667,13 @@ body {
             }
             $counter++;
         ?>
-            <div class="card d-flex" style="padding:15px; width:330px; height:230px;border-radius:16px; margin-left:45px;margin-right:-5px;margin-top:30px;">
+            <div class="card d-flex" style="padding:15px; width:330px; height:210px;border-radius:16px; margin-left:45px;margin-right:-5px;margin-top:30px;">
                 <div class="card-upper d-flex justify-content-between">
                     <p id="bu" class="card-upper-text"> Medium </p>
                     <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
                 </div>
                 <div class="img-dis" style="width:100%; text-align:center;">
-                    <img src="./images/alooparatha-eg.png" style="margin-top:-15px;height:80%; width:65%; margin-left:-20px; object-fit:cover;" />
+                    <img src="images/image 3.svg" style="margin-top:-50px;height:144px; width:144px; margin-left:-20px; object-fit:cover;" />
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-food"><?php echo $d['drecipe_name'] ?></p>
@@ -737,15 +694,13 @@ body {
                     <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> <?php echo $nutritional['Calories'] ?> kcal</p>
                     <div class="d-flex align-items-center card-num">
                         <div class="card-num-circle"><?= $steps ?> </div> &nbsp;
-                        <div class="">Steps</div>
+                        <div class="">steps</div>
                     </div>
                 </div>
             </div>
         <?php } ?>
     </div>
-    <div class="btn">
-            <button class="butt">+</button>
-    </div>
+    <a href="create_recipe.php"><button class="butt" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;">+</button></a>
 
 
 

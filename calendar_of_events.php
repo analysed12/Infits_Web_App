@@ -39,7 +39,7 @@
 body {
         font-family: 'NATS', sans-serif;
         margin-bottom:2rem;
-        overflow-y: hidden;
+        overflow: hidden !important;
         
     }
 html {
@@ -657,7 +657,7 @@ a:hover {
             border-radius: 7px;border: none; color: white; padding:10px;margin-top:2rem">+ Create Schedule</a>
                             </div>
                             <br>
-                            <div id="calendar"></div>
+                            <div id="calendar" style="height:15px !important"></div>
                         </div>
                     </div>
                 </div>

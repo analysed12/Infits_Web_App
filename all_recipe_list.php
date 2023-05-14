@@ -16,18 +16,18 @@ $res = mysqli_query($conn, $sql);
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <style>
         
         body{
-            overflow-x: hidden;
+            overflow-x: hidden !important;
         }
         .header {
             display: flex;
-            flex-direction: row !important;
+            flex-direction: row;
             margin: 10px;
             margin-left: 20px;
             justify-content: space-between;
@@ -66,14 +66,16 @@ $res = mysqli_query($conn, $sql);
 
         .card-food {
             font-size: 20px;
-            font-weight: 500;
-            line-height: 27px;
+            line-height:20px;
             letter-spacing: -0.11428570002317429px;
             text-align: left;
+            font-family:"NATS";
+            font-weight:400;
+            font-style:normal;
         }
 
         .card-calorie {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 400;
             line-height: 12px;
             letter-spacing: 0em;
@@ -81,6 +83,10 @@ $res = mysqli_query($conn, $sql);
             align-items: center;
             display: flex;
             color: #A3A1A1;
+            font-style:normal;
+            font-family:"NATS";
+            margin-top:17px;
+            margin-bottom:0px;
         }
 
         .card-num-circle {
@@ -93,9 +99,11 @@ $res = mysqli_query($conn, $sql);
         .card-num {
             font-style: normal;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 18px;
             line-height: 18px;
             color: #9C74F5;
+            font-family:"NATS";
+            margin-top:20px;
         }
 
         .recipe-container {
@@ -110,24 +118,71 @@ $res = mysqli_query($conn, $sql);
         position: inherit;
         justify-content: flex-end;
         display: flex;
-        margin: 0px -60px 0px -60px;
-        margin-bottom: 200px;
+        padding-bottom:100px;
+        /* margin:0px 21px 40px -60px !important; */
+       
     }
+    @media screen and (min-width:920px) and (max-width:1500px){
+        .card{
+            margin: 20px auto !important;
+        }
+    }
+    @media screen and (min-width:720px) and (max-width:920px) {
+       .header{
+        display:flex;
+        flex-direction:column !important;
+        align-items:flex-start !important;
+       }
+       .searchbox{
+        margin-left:40px;
+       }
+    }
+
+    @media screen and (min-width:0px) and (max-width:720px) {
+        .header{
+        display:flex;
+        flex-direction:column !important;
+        align-items:flex-start !important;
+        
+       }
+        .flex.row{
+            margin:auto;
+            margin-left:auto !important;
+        }
+        .card{
+            margin: 10px auto !important;
+        } 
+        .searchbox{
+            margin-left:20px;
+    }
+        .heading{
+            margin-left:20px !important;
+        }
+        
+    }
+    @media screen and (min-width:0px) and (max-width:420px){
+        .searchbox{
+            width:300px;
+        }
+    }
+   
     </style>
 </head>
 
 <body>
     <div class="header" style="align-items:center;">
-        <div style="font-size:2.5rem;margin-left:3rem ">Recipes <small style="color: #787885; font-size:1rem; margin-left:1rem;"><?php if(isset($_GET['category'])){ echo ucwords($_GET['category']); }else{ echo 'All Recipes'; } ?></small></div>
-        <div style="margin-right:2rem;display:flex;gap:1.5rem">
-            <div class="searchbox">
+    
+        <div class="heading" style="font-size:48px;margin-left:3rem;margin-top:1.2rem;font-family:'NATS'; font-weight:400;">Recipes <small style="color: #787885; font-size:25px; margin-left:1rem;font-family:'NATS';font-weight:400;margin-top:-10px !important;"><?php if(isset($_GET['category'])){ echo ucwords($_GET['category']); }else{ echo 'All Recipes'; } ?></small></div>
+        <div style="display:flex;gap:1.5rem">
+            <div class="searchbox" style="align-items:center;">
                 <button style="background-color:white;border:none;" id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
-                <input type="search" name="sinput" placeholder="Search recipe here" style="border:none;font-size:1rem;margin-left:1rem">
+                <input type="search" name="sinput" placeholder="Search" style="border:none;font-size:20px;margin-left:1rem;font-family:'NATS';font-weight:400;margin-top:-5px;">
             </div>
         </div>
+
     </div>
 
-    <div class="flex row">
+    <div class="flex row" style="margin-left:260px;">
         <?php while ($d = mysqli_fetch_assoc($res)) {
             $drecipe_recipe = explode(',', $d['drecipe_recipe']);
             $steps = count($drecipe_recipe);
@@ -143,34 +198,34 @@ $res = mysqli_query($conn, $sql);
                 $nutritional[$key] = $value;
             }
         ?>
-            <div class="card d-flex" style="padding:15px; width:300px; border-radius:16px;">
+            <div class="card d-flex" style="padding:15px; width:310px; border-radius:16px;height:auto;margin:25px 40px;">
                 <div class="card-upper d-flex justify-content-between">
                     <p id="bu" class="card-upper-text"> Medium </p>
                     <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
                 </div>
                 <div class="img-dis" style="width:100%; text-align:center;">
-                    <img src="./images/alooparatha-eg.png" style="height:100%; width:70%; object-fit:cover;" />
+                    <img src="./images/alooparatha-eg.png" style="height:116px; width:174px; object-fit:cover;margin-top:-52px;margin-left:-13px;" />
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-food"><?php echo $d['drecipe_name'] ?></p>
                     <div class="header">
                         <div class="dropdown ">
                             <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown(event)">
-                                <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                                <img class="" src="./icons/vertical-three-dots.svg" alt="" style="margin-top:-27px;">
                             </div>
 
-                            <div id="myDropdownContent" class="dropdown-content dropdown-card ">
+                            <div id="myDropdownContent" class="dropdown-content dropdown-card " style="display:none;">
                                 <a style="color: white;" class="edit-button" href="#">Edit</a>
                                 <a style="color: white;" class="delete-button" href="#">Delete</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between" style="align-items:center;">
+                <div class="d-flex justify-content-between" style="align-items:center;margin-top:-30px;">
                     <p class="card-calorie"> <img src="./icons/calorie.svg" alt=""> <?php echo $nutritional['Calories'] ?> kcal</p>
                     <div class="d-flex align-items-center card-num">
                         <div class="card-num-circle"><?= $steps ?> </div> &nbsp;
-                        <div class="">Steps</div>
+                        <div class="">steps</div>
                     </div>
                 </div>
             </div>
@@ -178,9 +233,7 @@ $res = mysqli_query($conn, $sql);
         
     </div>
 
-    <div class="recipe-add-btn" style="padding-right:100px">
-        <img src="./images/recipe_add.png" alt="">
-    </div>
+    <button class="but" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:40px;border:none; text-align:center; right:50px;position:fixed;bottom:40px;">+</button>
 
 </body>
 

@@ -149,25 +149,34 @@ function fetchInformation($client_id){
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
-
-.body{
-    font-family: 'NATS', sans-serif;
+@font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family: 'NATS', sans-serif !important;
     font-weight: 400;
 }
 .client_progress{
+    font-family: 'NATS', sans-serif !important;
     margin-top: 2rem;
-    /* margin-left: 18rem; */
+margin-left: 14.8rem;
     
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 1rem;
     width: auto;
 }
 #details{
     color: #717171;
     border: none;
     background-color: white;
+    font-size:18px;
 
 }
 .details{
@@ -299,6 +308,7 @@ function fetchInformation($client_id){
         display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left:2rem;
     
         
     }
@@ -341,7 +351,7 @@ function fetchInformation($client_id){
 <body>
     <div class="client_progress">
     <div class="dashboard_container3">
-            <div style="font-size:1.5rem; font-weight:600">Client Progress</div>
+            <div style="font-size:40px; font-weight:400">Client Progress</div>
             <div class="details">
                 <a href="client_detailed_progress.php"><button id="details">View Detailed Progress</button></a>
             </div>
@@ -374,9 +384,9 @@ if(!empty($data)){
         $infom = fetchInformation($data[$i]['client_id']);
 ?>
              <div class="container4_wrapper2">
-            <div class="show">
+            <div class="show" style="font-size:400">
                 <span style="width: 25%;">
-                <a href="" style="background-color:#FDFDFD; color:black;font-weight:600; font-size:20px; border:none; margin-top:1rem">
+                <a href="" style="background-color:#FDFDFD; color:black;font-weight:400; font-size:20px; border:none; margin-top:1rem">
                 <img src="images/ronald.jpg" style="width:2rem; background-color:#FDFDFD;border-radius:1rem"> <?php echo($data[$i]['name']) ?></a>
                 </span>
                 </div>
@@ -451,6 +461,7 @@ if(!empty($data)){
                 </div>
             </div>
         </div>
+    </div>
 <?php
     }
 }

@@ -49,12 +49,12 @@ include 'css/all_recipes.css';
     
     <div class="header" style="">
     <div class="heading">
-        <h1 style="margin-left:3rem ;font-family: 'NATS';font-style: normal;font-weight: 500;">Recipes</h1>
+        <h1 style="margin-left:3rem ;font-family: 'NATS';font-style: normal;font-weight: 500;font-size:48px;">Recipes</h1>
     </div>
      <div class="search" style="margin-right:2.2rem;display:flex;gap:1.5rem">
             <div class="searchbox">
                 <button style="background-color:white;border:none;" id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
-                <input type="search" name="input" placeholder="Search here" style="border:none;font-size:1.3rem;margin-left:1rem;width:60%;height:45px;margin-top:-5px">
+                <input type="search" name="input" placeholder="Search" style="border:none;font-size:20px;margin-left:1rem;width:60%;height:45px;margin-top:-5px;font-weight:400;">
 
             </div>
         </div>
@@ -64,31 +64,31 @@ include 'css/all_recipes.css';
     <a href="recipe_breakfast.php" style="color: inherit; margin-left: -5px;" class="breakfast" id="btn1">
             <div class="top-card" style=" background-color: #61de99;">
                 <span class="ci ci1" style="background-color:#CCF5CD;"></span><span class="ci ci2" style="background-color: #CCF5CD"></span>
-                <img src="./images/breakfast-waffles-realistic-top-view-image_1284-14471-removebg-preview 1.png" class="imag im1">
-                <h3 style="margin-bottom:10px;margin-right:135px;color: #000000;font-weight: 400;font-size:35px;">Breakfast</h3>
-                <p style="margin-bottom:100px;margin-right:100px;color: #6A6A6A;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/tree branch.png" class="imag im2 im2-2" style="left:-90px;bottom:25px;">
-                <img src="./images/tree branch.png" class="imag im2 " style="left:-13px;bottom:11px;">
+                <img src="./images/breakfast-waffles-realistic-top-view-image_1284-14471-removebg-preview 1.png" class="imag im1" style="width:200px;height:179px;">
+                <h3 style="margin-bottom:10px;margin-right:135px;color: #000000;font-weight: 400;font-size:35px;margin-top:35px;">Breakfast</h3>
+                <p style="margin-bottom:100px;margin-right:100px;color: #6A6A6A;font-size:19px;">Free menu planning<br/>to suit your needs</p>
+                <img src="./images/treebranch1.png" class="imag im2 im2-2" style="left:-90px;bottom:25px;height:75px;">
+                <img src="./images/tree branch.svg" class="imag im2 " style="left:-27px;bottom:31px;height:84px;">
             </div>
     </a>
     
     <a href="recipe_lunch.php" style="color: inherit;" class="lunch" id="btn2">
-            <div class="top-card" style=" background-color: #ebbcbd;">
-                <span class="ci ci1" style="background-color: #F3D1D2;"></span><span class="ci ci2" style="background-color: #F3D1D2;"></span>
-                <img src="./images//detailed-bento-box-illustrated_23-2148879878-removebg-preview 1.png" class="imag im1">
+            <div class="top-card" style=" background-color:#F7C8C9!important;">
+                <span class="ci ci1" style="background-color: #E0B6B6;"></span><span class="ci ci2" style="background-color: #E0B6B6;"></span>
+                <img src="./images/lunchbox.png" class="imag im1" style="width:198px;height:234px;">
                 <h3 style="margin-bottom:10px;margin-right:180px;color: #000000;font-weight:400;font-size:35px;">Lunch</h3>
                 <p style="margin-bottom:100px;margin-right:100px;color: #6A6A6A;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/book-of-recipes-concept-vector-14744961-removebg-preview 1.png" class="imag im2" style="width:35%;height:35%;left:6px;bottom:0px;transform:rotate(1deg);">
+                <img src="./images/book-of-recipes-concept-vector-14744961-removebg-preview 1.png" class="imag im2" style="width:35%;height:35%;left:10px;bottom:11px;transform:rotate(1deg);">
             </div>
     </a>
 
     <a href="recipe_snacks.php" style="color: inherit;" class="snacks" id="btn3">
             <div class="top-card" style=" background-color: #a6d5ee;">
-                <span class="ci ci1" style="background-color: #B8DDF1"></span><span class="ci ci2" style="background-color: #B8DDF1;"></span>
-                <img src="./images/istockphoto-1339640372-612x612-removebg-preview 1.png" class="imag im1">
+                <span class="ci ci1" style="background-color: #B8DDF1;z-index:1;"></span><span class="ci ci2" style="background-color: #B8DDF1;z-index:1;"></span>
+                <img src="./images/istockphoto-1339640372-612x612-removebg-preview 1.png" class="imag im1" style="width:205px;height:218px;">
                 <h3 style="margin-bottom:10px;margin-right:168px;color: #000000;font-weight: 400;font-size:35px;">Snacks</h3>
                 <p style="margin-bottom:100px;margin-right:100px;color: #6A6A6A;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/snac.png" class="imag im2" style="width:35%;height:35%;left:3px;bottom:0px;transform:rotate(1deg);">
+                <img src="./images/snac.png" class="imag im2" style="width:35%;height:35%;left:3px;bottom:10px;transform:rotate(1deg);">
             </div>
     </a>
 
@@ -96,10 +96,10 @@ include 'css/all_recipes.css';
             <div class="top-card" style=" background-color: #e39494;">
                 <span class="ci ci1" style="background-color: 
                 #EDB2B2"></span><span class="ci ci2" style="background-color: #EDB2B2"></span>
-                <img src="./images/istockphoto-689896272-612x612-removebg-preview 1.png" class="imag im1" style="top:-80px">
+                <img src="./images/istockphoto-689896272-612x612-removebg-preview 1.png" class="imag im1" style="top:-80px;width:184px;height:192px;">
                 <h3 style="margin-bottom:10px;margin-right:170px;color: #000000;font-weight: 400;font-size:35px;">Dinner</h3>
                 <p style="margin-bottom:100px;margin-right:100px;color:#6A6A6A;font-size:20px;">Free menu planning<br/>to suit your needs</p>
-                <img src="./images/bowl.png" class="imag im2" style="bottom:9px;left:20px;width:60px;height:40px;">
+                <img src="./images/bowl.png" class="imag im2" style="bottom:19px;left:20px;width:60px;height:40px;">
             </div>
 </a>
         </div>
@@ -137,20 +137,20 @@ include 'css/all_recipes.css';
             $counter++;
 
         ?>
-            <div class="card d-flex" style="padding:15px; width:350px; height:230px;border-radius:16px;margin-right:-5px;">
+            <div class="card d-flex" style="padding:15px; width:310px; height:208px;border-radius:16px;margin:35px 35px; ">
                 <div class="card-upper d-flex justify-content-between">
                     <p id="bu" class="card-upper-text"> Medium </p>
                     <p id="bu" class="card-upper-text"><i class="fa-solid fa-clock"></i> 20:00 </p>
                 </div>
                 <div class="img-dis" style="width:100%;margin-top:-35px;text-align:center;">
-                    <img src="./images/alooparatha-eg.png" style="height:80%; width:65%; margin-left:-20px; object-fit:cover;" />
+                    <img src="./images/alooparatha-eg.png" style="height:115px; width:170px; margin-left:-20px; object-fit:cover;margin-top:-9px;" />
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-food"><?php echo $d['drecipe_name'] ?></p>
                     <div class="header">
                         <div class="dropdown ">
                             <div id="myDropdownIcon" class="dropbtn" onclick="showDropdown(event)">
-                                <img class="" src="./icons/vertical-three-dots.svg" alt="">
+                                <img class="" src="./icons/vertical-three-dots.svg" alt="" style="margin-top:20px;">
                             </div>
 
                             <div id="myDropdownContent" class="dropdown-content dropdown-card ">
@@ -174,10 +174,7 @@ include 'css/all_recipes.css';
         <?php } ?>
     </div>
 
-        <div class="recipe-add-btn" style="padding-right:40px; cursor:pointer;" >
-            <h3 style="margin-left:15px; margin-top:28px; font-size:25px;color: #4B9AFB;">Create Recipe</h3>
-            <img src="./images/receipe_create.png" alt="" style="width:40px; height:40px; margin-top:20px; margin-right:-10px; margin-left:15px;">
-        </div>
+    <button class="butt" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;">+</button>
 </body>
 
     <script>

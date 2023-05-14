@@ -650,7 +650,7 @@ border-radius: 10px;
         .header {
             margin-left: 2rem !important;
             margin-top: 0px !important;
-            font-size: 25px !important;
+            /* font-size: 25px !important; */
         }
 
         .event_form {
@@ -714,7 +714,7 @@ border-radius: 10px;
                 <div class="event_form">
                     <div class="evt-form">
 
-                        <!-- Different Tags -->
+<!--------------------------------------Different Tags--------------------------------------------------------->
                         <div class="tags">
                             <div class="tag_title">Tags</div>
                             <div class="tag mt-3" style="width: 100%;">
@@ -770,7 +770,7 @@ border-radius: 10px;
                         </div>
                         <!-- Tags end here -->
 
-
+<!----------------------------------PLAN DURATION------------------------------------------------------------------>
                         <br>
                         <label for="" class="subject tag_title">Plan Duration</label>
                         <div class="duration" style="width: 100%;">
@@ -803,7 +803,7 @@ border-radius: 10px;
                         </div>
                         </div>
                         <br>
-
+<!---------------------------------DESCRIPTION-------------------------------------------------------------->
         
                         <label for="" class="subject tag_title">Description</label>
                         <input required id="width" class="subject mt-3" type="text" name="description"
@@ -817,7 +817,7 @@ border-radius: 10px;
                             font-size: 20px;
                             padding:1.5rem; " />
                         <br />
-
+<!------------------------------------------FEATURES------------------------------------------------------>
                         <label for="" class="subject tag_title ">Features</label>
 
                         <div class="features_main mt-2">
@@ -829,7 +829,7 @@ border-radius: 10px;
                                 </div>
 
                             </div>
-                            <!---------------------------FEATURES POP-UP CODE ---------------------------------->
+<!--------------------------------------FEATURES POP-UP CODE----------------------------------------------------->
                             <div class="features-container">
 
                                 <div class="features_right add-feature">
@@ -841,7 +841,7 @@ border-radius: 10px;
 
                             </div>
 
-                            <!-- Pop-up form to add skills -->
+                            <!---------Pop-up form to add skills-------------->
                             <div id="add-feature-modal" class="modal">
                                 <div class="modal-content">
                                     <span class="close d-none">&times;</span>
@@ -853,14 +853,9 @@ border-radius: 10px;
                             </div>
                             <!----------------------FEATURES POP-UP CODE END------------------>
 
-                            <!-- <div class="features_right">
-                                <button type="button" class="plan_btn_add plan_btn add-textbox">
-                                    +
-                                </button>
-                            </div> -->
                         </div>
 
-                       
+<!--------------------------------------------PRICE------------------------------------------------>
 
                         <label for="" class="subject tag_title" id="width">Price</label>
                         <input required class="subject subject-text mt-3" type="number"
@@ -974,7 +969,7 @@ else if(isset($_POST['final_cancel_btn'])){
 
 </body>
 <script>
-$(document).ready(function() {
+    $(document).ready(function () {
     $('#languages').multiselect({
         nonSelectedText: 'Select Tags'
     });
@@ -991,25 +986,111 @@ function showPopup() {
 function hidePopup() {
     popup.classList.remove('open');
 }
-$(document).ready(function() {
-    var max = 10;
-    var cnt = 1;
-    $(".add-textbox").on("click", function(e) {
-        e.preventDefault();
-        if (cnt < max) {
-            cnt++;
-            $(".textbox-wrapper").append(
-                '<div class="input-group"><div class="features_box"><input type="text" name="text_arr[]" placeholder="Type feature here.." /><button type="button" class="remove-textbox"><i class="fa-solid fa-xmark"></i></button></div></div>'
-            );
+// $(document).ready(function() {
+//     var max = 10;
+//     var cnt = 1;
+//     $(".add-textbox").on("click", function(e) {
+//         e.preventDefault();
+//         if (cnt < max) {
+//             cnt++;
+//             $(".textbox-wrapper").append(
+//                 '<div class="input-group"><div class="features_box"><input type="text" name="text_arr[]" placeholder="Type feature here.." /><button type="button" class="remove-textbox"><i class="fa-solid fa-xmark"></i></button></div></div>'
+//             );
+//         }
+//     });
+
+//     $(".textbox-wrapper").on("click", ".remove-textbox", function(e) {
+//         e.preventDefault();
+//         $(this).parents(".input-group").remove();
+//         cnt--;
+//     });
+// });
+</script>
+<!--------------------------------JS FOR FEATURE POP-UP-------------------------- -->
+<script>
+    // Get the modal
+    var modal = document.getElementById("add-feature-modal");
+
+    // Get the button that opens the modal
+    var btn = document.querySelector(".add-feature-btn");
+
+    // Get the <span> element that closes the modal
+    var span = document.querySelector(".close");
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
         }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Get the add skill submit button and skill input field
+    var addSkillSubmitBtn = document.getElementById("add-feature-submit-btn");
+    var skillInput = document.getElementById("skill-input");
+
+    // Get the skills list container
+    var skillsList = document.querySelector(".skills-list");
+
+    // Initialize skills array
+    var skills = [];
+
+    // Function to add skill to the skills array and display it on the page
+    function addSkill(skill) {
+        // Add skill to skills array
+        // alert("hello");
+        skills.push(skill);
+
+        // Clear skills list container
+        skillsList.innerHTML = "";
+
+        // Loop through skills array and display each skill in a box/tag
+        skills.forEach(function (skill) {
+            var skillBox = document.createElement("div");
+            skillBox.classList.add("skill-box");
+            var skillName = document.createTextNode(skill);
+            skillBox.appendChild(skillName);
+
+            // Add remove button to skill box/tag
+            var removeBtn = document.createElement("button");
+            removeBtn.classList.add("remove-skill-btn");
+            var removeIcon = document.createElement("i");
+            removeIcon.classList.add("fas", "fa-times");
+            removeBtn.appendChild(removeIcon);
+            skillBox.appendChild(removeBtn);
+
+            // Add event listener to remove button to remove skill from skills array and skills list
+            removeBtn.addEventListener("click", function () {
+                var index = skills.indexOf(skill);
+                skills.splice(index, 1);
+                skillsList.removeChild(skillBox);
     });
 
-    $(".textbox-wrapper").on("click", ".remove-textbox", function(e) {
-        e.preventDefault();
-        $(this).parents(".input-group").remove();
-        cnt--;
+            skillsList.appendChild(skillBox);
     });
+
+        // Clear skill input field and close modal
+        skillInput.value = "";
+        modal.style.display = "none";
+    }
+
+    // Add event listener to add skill submit button to add skill to skills array and display it on the page
+    addSkillSubmitBtn.addEventListener("click", function () {
+        if (skillInput.value.trim() !== "") {
+            addSkill(skillInput.value.trim());
+        }
 });
+
+
 </script>
 <?php
 $output = ob_get_clean();
@@ -1022,4 +1103,5 @@ header('Cache-Control: no-cache');
 ob_end_flush();
 echo $output;
 ?>
+
 </html>
