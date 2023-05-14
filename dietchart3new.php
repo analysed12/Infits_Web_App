@@ -95,155 +95,242 @@ function update($client_id, $day)
     </script>
 </head>
 <style>
-  .content {
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 90%;
-    font-family: 'Poppins';
-    font-style: normal;
-    padding: 10px;
-    margin-top: 2rem;
-    position: relative;
-
-  }
-
-  .main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .top {
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    margin-left: 20px;
-  }
-
-  .top p {
-    position: relative;
+  
+  @font-face {
     font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
     font-style: normal;
-    font-weight: 400;
-    font-size: 44px;
-    color: #202224;
-
-
+}
+@media screen and(min-width:750px) and(max-width:1500px) {
+    .flex{
+      display:flex;
+      flex-direction:column !important;
+    }
+    .box{
+      width:fit-content;
+    }
+    div.demo{
+      flex-direction:column !important;
+    }
+    .down{
+      margin-top:30px;
+    }
+    .main{
+      display:flex;
+      flex-direction:column !important;
+    }
   }
+body{
+    font-family: 'NATS', sans-serif !important;
+     
+}
+     .content{
+       overflow: hidden;
+       display: flex;
+       flex-direction: column;
+       height: 90%;
+       
+       font-style: normal;
+       padding: 5px;
+       /* margin-top: rem; */
+       position: relative;
+      margin-top:15px;
+     }
+     .main{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* flex-wrap: wrap; */
+        margin-right: 3rem;
+        /* padding-left: 5rem;
+        padding-right: 5rem; */
+        /* width: 100%;
+        height: 30%; */
+     }
+     .top{
+        position: relative;
+        display:flex;
+        justify-content: space-around;
+        margin-left: 4rem; 
+        /* float: left;
+        width: 50%; }
+        */
+     }
+     
+      .top p{
 
-  .top img {
-    height: 20px;
-    width: 20px;
-    top: 15px;
-    margin-top: 20px;
-    margin-left: 30px;
+        margin-top: 0%;
+        
+        font-style: normal;
+        font-weight: 400;
+        font-size: 44px;
+        color: #202224;
+       
 
+     }
+     .top img {
+          height:20px;
+          width: 20px;
+          top: 15px;
+          margin-top: 20px;
+          /* margin-left: 30px; */
+         
+         
+     }
+     .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+         /* margin-right: 20px;  */
+        float: right;
+         width: 50%; }
+       
+     
+      .top-right .btn{
+        position: relative;
+        box-sizing: border-box;
+        border: 1px solid #9C74F5;
+        background-color: #fff; 
+        border-radius: 10px;
+        height: 50px;
+        width: 200px !important;
+        margin-left: 38rem;
+        color: white;
+      
+       text-align: center;
+       text-decoration: none;   
+       font-size: 17px;
+       font-weight:400;
+       background: #9C74F5;
+     }
 
-  }
+     .btn:hover{
+      color:white;
+      background: #9C74F5;
+border-radius: 10px;
+     }
+     .top-right img{
+        width: 25x;
+        height: 25px;
+        /* margin-right: 4px; */
+        margin-left: 1rem;      
+     }
+    
+     .down
+    {
+        position: absolute;
+        margin-left: 20px;
+        margin-top: 6rem;
+        margin-left: 4rem;
+        
+      
+        font-style: normal;
+        font-weight: 400;
+        font-size: 33px;
+        color: #CBCBCB;
+    } 
+      .day-band{
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      margin-left: 1.5rem;
+      font-size: 17px;
+      font-weight: 500;
+      left: -14px;
+      
+    }
+    /* .day{
+      color: black;
+      padding: 10px;
+      border:none;
+      background: none;
+    
+    }
+    .day:hover, .active{
+      color:white;
+      background: linear-gradient(180deg, #9C74F5 0%, rgba(104, 125, 238, 0.52) 100%);
+      width:60px;
+      border-radius:15px;
+      width:60px;
+      height:60px;
+      border-radius:13px;
+      padding:5px 0px !important;
+    } */
+    .day{
+      color: black;
+      /* padding: 10px; */
+      border:none;
+      background: none;
+      margin-right:-100px;
+      margin-left:-100px;
+    height:39px;
+    }
+   
+    .day:active {
+      color:white;
+      background: linear-gradient(180deg, #9C74F5 0%, rgba(104, 125, 238, 0.52) 100%);
+      width:60px;
+      height:60px;
+      border-radius:13px;
+      /* padding:5px 0px !important; */
+    }
+    .day:hover{
+      color:white;
+      background: linear-gradient(180deg, #9C74F5 0%, rgba(104, 125, 238, 0.52) 100%);
+      width:68px;
+      
+      height:39px;
+      border-radius:13px;
+      /* padding:5px 0px !important; */
+    }
+.button-container{
+  display: inline-block;
+  margin-top:-5px;
+  margin-left: 48px;
+ 
+}
+.btn1{
+  margin-left: 70px;
+  margin-bottom:10px;
+  padding:10px;
+  width: 202.19px;
+  height: 48px;  
 
-  .top-right {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 20px;
-    float: right;
-    width: 50%;
-  }
+  font-size: normal;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid #9C74F5;
+  border-radius: 10px;
+  background-color:#fff;
+  color:#9C74F5;
+}
 
-
-  .top-right .btn {
-    position: relative;
-    box-sizing: border-box;
-    border: 1px solid #9C74F5;
-    background-color: #fff;
-    border-radius: 10px;
-    height: 50px;
-    width: 200px;
-    margin-left: 38rem;
-  }
-
-  .top-right span {
-    text-align: center;
-    color: #9C74F5;
-    font-family: 'Poppins';
-    text-align: center;
-    text-decoration: none;
-    font-size: 15px;
-  }
-
-  .top-right img {
-    width: 30px;
-    height: 20px;
-    margin-right: 5px;
-    margin-left: 0px;
-  }
-
-  .down {
-    position: absolute;
-    margin-left: 20px;
-    top: 60px;
-    left=0px;
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 33px;
-    color: #CBCBCB;
-  }
-
-  .day:hover,
-  .active {
-    color: white;
-    background: #9C74F5;
-    border-radius: 10px;
-  }
-
-  .button-container {
-    position: absolute;
-    box-sizing: border-box;
-    display: flex;
-    margin-top: 0px;
-    width: 95%;
-    height: 10%;
-    color: #9C74F5;
-    padding: 0 20px;
-    align-items: center;
-    font-size: 10px;
-    font-family: 'NATS';
-    font-style: normal;
-    margin-left: 7rem;
-    margin-right: 10px;
-    top: 17rem;
-
-
-  }
-
-  .btn-my {
-    font-size: larger;
-  }
-
-  .btn-my:hover {
-    background: linear-gradient(180deg, #9C74F5 0%, rgba(104, 125, 238, 0.52) 100%);
-    border-radius: 13px;
-  }
-
-  .btn-my1 {
-    background: #FFFFFF;
-    border: 0.880519px solid #9C74F5;
-    border-radius: 10px;
-    font-size: larger;
-  }
-
-  .btn-my1:hover {
-    background: #9C74F5;
-    color: white;
-  }
-
+.btn1:focus{
+  background-color: #9C74F5;
+  color:#fff;
+}
+.btn:active{
+  background-color: #9C74F5;
+  color:#fff;
+}
+.btn1:hover{
+  background-color: #9C74F5;
+  color:#fff;
+} 
+.fw-bold {
+  font-size:13px;
+}
   .box {
     border: 1px solid white;
-    width: 1000px;
+    width: 1030px;
     height: 180px;
-    margin-left: 50px;
+    margin-left: 30px;
     margin-bottom: 30px;
     top: 200px;
     padding: 10px;
@@ -264,6 +351,8 @@ function update($client_id, $day)
 
     background: url(Screenshot__136_-removebg-preview.png);
     border-radius: 10px;
+    border: 0.880519px solid #9C74F5;
+    box-shadow: 0px 0.880519px 4.40259px rgba(0, 0, 0, 0.25);
   }
 
   .box h3 {
@@ -275,7 +364,7 @@ function update($client_id, $day)
     margin-left: 10px;
     margin-top: 1px;
 
-    font-family: 'Poppins';
+
     font-style: normal;
     font-weight: 500;
     font-size: 26.4156px;
@@ -298,7 +387,7 @@ function update($client_id, $day)
   }
 
   .left {
-    font-family: 'Poppins';
+   
     font-style: normal;
     font-weight: 500;
     font-size: 26.4156px;
@@ -308,26 +397,50 @@ function update($client_id, $day)
     color: #000000;
   }
 
-  .right {
+  .right h5{
     text-align: right;
-    font-family: 'Poppins';
+  
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 15px;
     line-height: 30px;
     display: flex;
     align-items: center;
     color: #A6A1A1;
+    margin-top: -115px;
+    margin-left: 280px;
+    margin-right:10px;
 
+  }
+  .right img{
+    margin-left:50px !important;
+    margin-top:-180px;
+  }
+  .btn11{box-sizing: border-box;
+  position: relative;
+  width:191px !important;
+  height: 63px !important;
+  margin-top:5rem;
+  /* margin-right: 50px; */
+  cursor: pointer;
+  font-size: 40px;
+  font-weight: 250;
+  color:#DF6293;
+  /* margin-left: 10px; */
+  border-radius: 10px;
+  box-shadow: 0px 0.880519px 4.40259px rgba(0, 0, 0, 0.25);
+  background: #FFFFFF;
+  border:1px solid #9C74F5;
   }
 
   .right img {
     width: 20.73px;
     height: 24px;
-    left: 804px;
-    top: 220px;
-    background: url(7306600-removebg-preview.png);
+    margin-top: -160px;
+    margin-left: 350px;
+    /* background: url(7306600-removebg-preview.png); */
     border-radius: 10px;
+    border:none !important;
   }
 
   .demo {
@@ -343,8 +456,7 @@ function update($client_id, $day)
     width: 176px;
     height: 61px;
     top: 714px;
-    margin-left: 10%;
-
+    margin-left:9.5%;
 
     display: flex;
     align-items: center;
@@ -356,34 +468,31 @@ function update($client_id, $day)
     display: flex;
     align-items: center;
     color: #000000;
-    font-family: 'NATS';
-    font-style: normal;
+   font-style: normal;
     font-weight: 400;
     font-size: 25px;
     line-height: 53px;
-    margin-left: 40px;
+    margin:auto;
+    /* margin-left: 40px; */
   }
+  
+  
 
   .up-right {
     background: #9C74F5;
     border-radius: 10px;
     margin-left: 50%;
-    width: 250px;
-    height: 62px;
-    margin-right: 9%;
-
-
+    width: 250px !important;
+    height: 62px !important;
+    margin-right: 5%;
     display: flex;
     align-items: center;
     border: 0.880519px solid #fff;
-
-
-
   }
 
   .up-right span {
 
-    font-family: 'NATS';
+   
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -391,7 +500,8 @@ function update($client_id, $day)
     display: flex;
     align-items: center;
     color: #F8F8F8;
-    margin-left: 45px;
+    /* margin-left: 45px; */
+    margin:auto;
   }
 
   #LuC,
@@ -411,155 +521,473 @@ function update($client_id, $day)
     box-shadow: 0px 0.880519px 4.40259px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
   }
-
-  @media screen and (min-width: 300px) and (max-width: 600px) {
-    .content {
-      overflow: hidden;
+  @media screen and (min-width: 750px) and (max-width:1500px) {
+  .top p{
+       width:195px;
+        margin-top: 0%;
+        font-size: 34px;
     }
-  }
-
-
-  @media screen and (min-width: 300px) and (max-width: 600px) {
-    .button-container {
-      flex-wrap: wrap;
-      flex-direction: column;
-      grid-template-columns: auto auto auto auto;
-      margin: auto;
-      top: 16.5%;
-      margin-left: 0%;
-      overflow: scroll;
-
-
+     .top img {
+          height:20px;
+          width: 20px;
+          margin-top: 15px;
+          margin-left: 20px;
+     } 
+     .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+          margin-right: -2rem;
+         width: 50%; 
+      }
+      .top-right .btn{
+        position: relative;
+        border-radius: 10px;
+        height: 50px;
+        width: 200px;
+        margin-left: 16rem;
     }
-  }
-
-  @media screen and (max-width: 720px) {
-    .main {
+    .top-right img{
+        width: 25x;
+        height: 25px;
+        margin-right:5rem;      
+     }
+     .down{
+      margin-top: 35px;
+      margin-left: 39px;
+    }
+    .button-container{
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
+      overflow-x: auto;
+      margin-left: 20px;
+      margin-right: 23px;
     }
+    .btn1{
+      margin-left: 15px;
+      padding:10px;
+      width: 216px;
+      height: 48px;  
+      font-size: 17px;      
+    }    
+.box{
+    width:auto;
+    height: auto;
+    margin-left: 35px;
+    margin-right: 80px;
+    top: 200px;
+    overflow:scroll;
+   }
+   .box::-webkit-scrollbar{
+    /* width:800px; */
+    overflow:scroll;
+   }
+   .tabs{
+  margin-top:-20px;
+  padding-left:20px;
+}
+.btn11{
+  width:150px;
+  height: 64px;
+  margin-top:5rem;
+  margin-right:15px;
+}
+.demo .up-right{
+  margin-left:35px;
+}
+/* .d-flex{
+  flex-direction:column;
+} */
+    }
+  @media screen and (min-width: 750px) and (max-width: 890px) {
+    .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+         width: 50%; 
+      }
+      .top-right .btn{
+        border-radius: 10px;
+        height: 50px;
+        width: 200px;
+        margin-left: 5rem;
+    }
+    .top-right img{
+        width: 25x;
+        height: 25px;
+        margin-left: 1rem;      
+     }
+     .box{
+      width:470px;
+      overflow:scroll;
+     }
+     .box::-webkit-scrollbar{
+    /* width:100px; */
+    overflow:scroll;
+   }
+  }
+  @media screen and (min-width: 721px) and (max-width: 750px) {
+  
+  .top{
+    margin-top:-60px;
+   }
+  .top p{
+       width:195px;
+        margin-top:40px;
+        font-size: 34px;
+        margin-left: -15px;
+    }
+    .top img {
+          height:20px;
+          width: 20px;
+          margin-top:55px;
+          margin-left: 20px;
+     } 
+     
+  .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top:8px;
+         width: 50%; 
+      }
+      .top-right .btn{
+        position: relative;
+        border-radius: 10px;
+        height: 50px;
+        margin-top:-2px;
+        margin-left: 3rem;
+      }
+    .top-right img{
+        width: 25x;
+        height: 25px;
+        margin-right:20px;
+      }
+   
+    .button-container{
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      margin-left: 20px;
+      margin-right: 23px;
+    }
+    .btn1{
+      margin-left: 5px;
+      padding:10px;
+      width: 216px;
+      height: 48px;  
+      font-size: 17px;      
+    }    
+    .box{
+    width: 428px;
+    height:auto;
+    margin-left: 20px;
+    margin-right: 80px;
+    top: 200px;
+    overflow:scroll;
+   }
+   .box::-webkit-scrollbar{
+    /* width:100px; */
+    overflow:scroll;
+   }
+   .btn11{
+  width:140px;
+  height: 64px;
+  margin-top:5rem;
+  }
+  .d-flex{
 
   }
+}
+  @media screen and (min-width: 420px) and (max-width: 720px){
+    .top{
+    margin-top:-60px;
+   }
+   
+   .demo{
+    flex-direction:column;
+   }
+   .up{
+    margin:auto !important;
+    margin-top:20px !important;
+   }
+   .up-right{
+    margin:auto !important;
+    margin-top:20px !important;
+   }
+  .top p{
+       width:195px;
+        margin-top:40px;
+        font-size: 34px;
+        margin-left: 1px;
+    }
+     .top img {
+          height:20px;
+          width: 20px;
+          margin-top:55px;
+          margin-left: 20px;
+     } 
+  .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top:8px;
+         width: 50%; 
+      }
+      .top-right .btn{
+        position: relative;
+        border-radius: 10px;
+        height: 50px;
+        margin-top:-2px;
+        margin-left: 7rem;
+      
+    }
+    .top-right img{
+        width: 25x;
+        height: 25px;
+        margin-right:20px;
+      }
+  
+    .day-band{  
+      margin-left:-3rem;
+      }
+      
+    .button-container{
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      margin-left: 5px;
+    
+    }
+    .btn1{
+      margin-left: 5px;
+      padding:10px;
+      width: 150px;
+      height: 48px;  
+      margin-left: 10px;
+      font-size: 17px;      
+    }    
+    .box{
+    width: 536px;
+    height:auto;
+    margin-left: 20px;
+    margin-right: 80px;
+    top: 200px;
+    overflow:scroll;
+   }
+   .btn11{
+  width:110px;
+  height: 64px;
+  margin-top:5rem;
+  margin-right:14px;
+}
+    
+  }
+  @media screen and (min-width: 420px) and (max-width: 540px){
+  .top{
+    margin-top:-60px;
+   }
+  .top-right .btn{
+    position:relative;
+    margin-top:-2px;
+    margin-left:-25rem;
+  }
+  .top img {
+          height:20px;
+          width: 20px;
+          margin-top: -43px;
+          margin-left: 20px;
+     } 
+     .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top:100px;
+         width: 50%; 
+      }
+  .top p{
+       width:195px;
+        margin-top:-60px;
+        font-size: 34px;
+        margin-left: auto;
+    }
+    .top-right img{
+      margin-right:217px;
+    }
+}
 
-  @media screen and (min-width: 300px) and (max-width: 600px) {
-    .top {
+  @media screen and (min-width: 0px) and (max-width: 420px) {
+  .day{
+    margin-right:0px;
+      margin-left:0px;
+    padding:10px;
+  }
+  .demo{
+    flex-direction:column;
+   }
+   .up{
+    margin:auto !important;
+    margin-top:20px !important;
+   }
+   .up-right{
+    margin:auto !important;
+    margin-top:20px !important;
+   }
+  .content{
+       overflow: hidden;
+       display: flex;
+       flex-direction: column;
+       height: 90%;
+       width: 100%;
+       left: 30px;
+     
+       font-style: normal;
+       padding: 5px;
+       /* margin-top: rem; */
+       position: relative;
+      margin-top:-20px;
+     } 
+  .top{
+    margin-top:-60px;
+   }
+  .top p{
+       width:195px;
+        margin-top:-60px;
+        font-size: 34px;
+        margin-left: auto;
+    }
+     .top img {
+          height:20px;
+          width: 20px;
+          margin-top: -43px;
+          margin-left: 20px;
+     } 
+     .top-right{
+          display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top:100px;
+         width: 50%; 
+      }
+      .top-right .btn{
+        position: relative;
+        border-radius: 10px;
+        height: 50px;
+        margin-top:-2px;
+        margin-left:-26rem;
+      
+    }
+    .top-right img{
+        width: 25x;
+        height: 25px;
+        margin-right:20px;
+      }
+    .down{
+      margin-top: 13px;
+      left:42px;
       margin-left: auto;
     }
-
-    .top p {
-      font-size: 20px;
-      text-align: end;
-      margin-top: 1rem;
-    }
-
-    .top img {
-      margin-left: 1rem;
-      width: 20px;
-      margin-top: 1rem;
-    }
-  }
-
-  @media screen and (min-width: 300px) and (max-width: 600px) {
-    .top-right .btn {
-      margin-left: 40px;
-      width: 100%;
-    }
-
-    .top-right img {
-      margin-left: 1rem;
-    }
-  }
-
-  @media screen and (min-width: 300px) and (max-width: 600px) {
-    .down {
-      margin-left: 2rem;
-      font-size: 20px;
-    }
-  }
-
-  @media screen and (min-width: 300px) and (max-width: 600px) {
-    .demo {
+    .day-band{  
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin: auto;
-      margin-right: auto;
-    }
-
-
-  }
-
-  @media screen and (min-width: 300px) and (max-width: 600px) {
-    .up-right {
+      flex-direction: row;
+      overflow-x: auto;
+      margin-top: -10px;
+      margin-left:auto;
+      width:auto;
+      }
+    .button-container{
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      margin: auto;
-      margin-top: 5%;
-      margin-right: auto;
+      flex-direction: row;
+      overflow-x: auto;
+      margin-left: -5px;
+      margin-right: 23px;
     }
+    .btn1{
+      margin-left: 5px;
+      padding:10px;
+      width: 216px;
+      height: 48px;  
+      font-size: 17px;      
+    }    
+.box{
+    width: 390px;
+    height:auto;
+    margin-left: -5px;
+    margin-right: 80px;
+    top: 200px;
+    overflow:scroll;
+   }
+   .box::-webkit-scrollbar{
+    /* width:100px; */
+    overflow:scroll;
+   }
 
-  }
-
-  @media screen and (min-width: 300px) and (max-width: 600px) {
-    .save {
-      padding-right: 4rem;
-    }
-
-  }
+.tabs{
+  margin-top:-20px;
+  padding-left:20px;
+}
+.btn11{
+  width:120px;
+  height: 64px;
+  margin-top:5rem;
+  margin-right:10px;
+}
+.demo .up-right{
+  margin-left:20px;
+}
+}
 </style>
-
 <body>
-  <?php $client_id = 2 ?>
-  <div class="content">
+
+<div class="content">
+  
+<?php $client_id = 2 ?>
     <div class="main">
-      <div class="top">
-        <p> New Diet Chart</p>
-        <img src="images/Vector (1) (1).png">
-      </div>
-      <div class="top-right">
-        <button class="btn" text="submit">
-          <span>Connect to plan</span>
-        </button>
-        <img src="images/Vector (2) (1).png">
-      </div>
-      <br />
-      <span class="down">Ronald Richard</span>
+    <div class="top" style="flex-wrap:no-wrap !important;margin-top:0.5rem;margin-left:3rem !important">
+        <p ><input required type="text" placeholder="New Diet Chart" class="plan_name" name="plan_name" style="border:none; width:fit-content;color:#202224;outline:none;width:285px;height:46px;font-size:40px"
+                        value="New Diet Chart"></p>
+        <img src="images/Vector (1) (1).png" style="color:#7282FB;cursor:pointer;">
+     </div>
+     <div class="top-right">
+        <button class="btn" text="submit">Healthy Diet </button>
+           <img id="myimg" src="images/Vector (2) (1).png">
+           
     </div>
-    <br />
-
-    <div class="ms-auto me-auto" style="width:90%">
-      <div class="d-flex justify-content-around w-75 m-auto mb-3">
-        <button class="btn btn-my tab" tab="monday">Mon</button>
-        <button class="btn btn-my tab" tab="tuesday">Tue</button>
-        <button class="btn btn-my tab" tab="wednesday">Wed</button>
-        <button class="btn btn-my tab" tab="thursday">Thu</button>
-        <button class="btn btn-my tab" tab="friday">Fri</button>
-        <button class="btn btn-my tab" tab="saturday">Sat</button>
-        <button class="btn btn-my tab" tab="sunday">Sun</button>
-      </div>
-
-      <div id="monday" class="tab-content">
+    <div class="down">Ronald Richard</div>
+   
+     </div>
+     <br/>
+   
+   <br/>
+<div class="day-band">
+  <button class="day" tab="monday" id="daybtn">Mon</button>
+  <button class="day" tab="tuesday" id="daybtn">Tue</button>
+  <button class="day" tab="wedday" id="daybtn">Wed</button>
+  <button class="day" tab="thursday" id="daybtn">Thu</button>
+  <button class="day"  tab="friday" id="daybtn">Fri</button>
+  <button class="day" tab="saturday" id="daybtn">Sat</button>
+  <button class="day" tab="sunday" id="daybtn">Sun</button>
+</div>
+<br/>
+<br/>
+<div id="monday" class="tab-content">
         <?php $info = update($client_id, "monday"); ?>
-        <div>
-          <div class="d-flex mb-5" style="position:relative">
-            <button class="btn btn-my1 px-5 m-auto Br tabm" tab="brm">Breakfast</button>
-            <button class="btn btn-my1 px-5 m-auto Lu tabm" tab="lum">Lunch</button>
-            <button class="btn btn-my1 px-5 m-auto Sn tabm" tab="snm">Snacks</button>
-            <button class="btn btn-my1 px-5 m-auto Di tabm" tab="dim">Dinner</button>
-          </div>
-          <div class="container BrC tabm-content" id="brm">
+<div class="button-container">
+  <button class="btn1">Breakfast</button>
+  <button class="btn1">Lunch</button>
+  <button class="btn1">Snack</button>
+  <button class="btn1">Dinner</button>
+</div>
+<br/>
+<br/>
+     <div class="container BrC tabm-content" id="brm">
             <div class="box">
               <div class="cont">
                 <div>
                   <div class="left">
                     <h3> In Morning </h3>
                   </div>
-                  <div class="d-flex">
+                  <div class="flex" style=" display:flex;">
                     <?php compute($info, "breakfast", "breakfast_morning") ?>
                   </div>
 
@@ -568,11 +996,12 @@ function update($client_id, $day)
                 <div class="right">
                   <button class="btn11"
                     onclick="redirectTo('<?php echo $client_id ?>','monday','breakfast','breakfast_morning')">+</button>
+                    
                   <img src="images/7306600-removebg-preview 2.png"
-                    style="width: 20.73px,height: 24px,left: 804px,top: 220px;">
+                    style="width: 20.73px;height: 24px;">
                   <h5
-                    style="text-align : right , margin-right:0% , margin-left:100% , font-size: 5px , font-weight: 200; ">
-                    200kcal </h5>
+                    style="text-align : right ; font-size:15px ; font-weight: 400; width:191px; margin-right:50px;">
+                    200 Kcal </h5>
                 </div>
 
               </div>
@@ -595,8 +1024,8 @@ function update($client_id, $day)
                   <img src="images/7306600-removebg-preview 2.png"
                     style="width: 20.73px,height: 24px,left: 804px,top: 220px;">
                   <h5
-                    style="text-align : right , margin-right:0% , margin-left:100% , font-size: 5px , font-weight: 200; ">
-                    200kcal </h5>
+                    style="text-align : right ;  font-size: 15px ; font-weight: 400;margin-right:25px; ">
+                    200 Kcal </h5>
                 </div>
               </div>
             </div>
@@ -695,7 +1124,7 @@ function update($client_id, $day)
             </div>
           </div>
           <div class="demo">
-            <button class="up"> <span>+ Add </span></button>
+            <button class="up"> <span>+ Add a note</span></button>
             <button class="up-right"> <span class="save"> Save Plan </span></button>
           </div>
         </div>
@@ -723,13 +1152,9 @@ function update($client_id, $day)
                 </div>
 
                 <div class="right">
-                  <button class="btn11"
-                    onclick="redirectTo('<?php echo $client_id ?>','tuesday','breakfast','breakfast_morning')">+</button>
-                  <img src="images/7306600-removebg-preview 2.png"
-                    style="width: 20.73px,height: 24px,left: 804px,top: 220px;">
-                  <h5
-                    style="text-align : right , margin-right:0% , margin-left:100% , font-size: 5px , font-weight: 200; ">
-                    200kcal </h5>
+                  <button class="btn11" onclick="redirectTo('<?php echo $client_id ?>','tuesday','breakfast','breakfast_morning')">+</button>
+                  <img src="images/7306600-removebg-preview 2.png">
+                  <h5>200kcal </h5>
                 </div>
 
               </div>

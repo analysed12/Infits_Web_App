@@ -1,5 +1,5 @@
 <?php
-include "navbar.php";
+include('navbar.php');
 ?>
 
 <!DOCTYPE html>
@@ -18,11 +18,42 @@ include "navbar.php";
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
-    @import url('https://fonts.googleapis.com/earlyaccess/nats.css');
+    
+    @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+    html::-webkit-scrollbar {
+        width: 0.5rem;
+    }
+    html::-webkit-scrollbar-track {
+        background-color: rgb(190,200,290);
+    }
+    html::-webkit-scrollbar-thumb {
+        background: #7282FB;
+        border-radius: 5rem;
+    }
+    @media (min-width:20px) {
+        html::-webkit-scrollbar {
+        width: 0.5rem;
+    }
+    html::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    html::-webkit-scrollbar-thumb {
+        background: #9C74F5;
+        border-radius: 5rem;
+    }
+    }
 
     body {
         font-family: 'NATS', sans-serif !important;
-        font-style:normal;
+        font-weight:400 !important;
         overflow-x:hidden;
     }
 
@@ -51,9 +82,9 @@ include "navbar.php";
         grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     }
 
-    .card-upper {
-        /* width: 100%; */
-    }
+    /* .card-upper {
+        width: 100%;
+    } */
 
     .card-upper-image {
         /* background-color: pink; */
@@ -182,7 +213,17 @@ include "navbar.php";
         letter-spacing:1.5px;
         
     } 
-   
+    @media (min-width: 336px) and{
+        .container, .container-sm {
+            max-width: 100%;
+            align-self: center !important;
+            display: flow-root !important;
+        }
+        body {
+        display: grid;
+        width: 80% !important;
+        }
+    }
     @media screen and (max-width: 470px){
         .search-form{
            margin-right:20px
@@ -198,7 +239,10 @@ include "navbar.php";
             
         }
         .card{
-            width:95%;
+            width:90%;
+        }
+        body{
+            margin-left: 10%;
         }
 
     }
@@ -232,7 +276,7 @@ include "navbar.php";
     <div class="row" style="padding:1rem 0rem 1rem 1rem;">
         <div class="col-6 " style="font-weight:bold;font-size:40px;letter-spacing:2px;">All Diet Plans</div>
         <div class="col-6" style="text-align:right">
-            <div class="card-body" style="">
+            <div class="card-body" >
                 <form method="POST" class="search-form form-inline" style="width:400px;background: #FFFFFF;box-shadow: 0.6px 0.6px 2px 1px #ccc;
     border-radius: 0.6rem;position:relative;">
                     <input type="text" placeholder="Search Plan" class="search-box form-control w-75" id="search"
@@ -251,7 +295,7 @@ include "navbar.php";
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="align-self:centre;">
         <div class="col-md-12">
             <div class="container">
                 <div class="cards">
@@ -337,7 +381,7 @@ if(isset($_POST['search-btn']))
 }
 else{                       
  $sql = "SELECT * FROM create_plan";
- $client_id = $_GET['client_id'];
+//  $client_id = $_GET['client_id'];
  if($result = mysqli_query($conn, $sql)){
      if(mysqli_num_rows($result) > 0){
              while($row = mysqli_fetch_array($result)){

@@ -27,43 +27,50 @@
 <style>
     @font-face {
     font-family: 'NATS';
-    src:url('font/NATS.ttf.woff') format('woff'),
+        src: url('font/NATS.ttf.woff') format('woff'),
         url('font/NATS.ttf.svg#NATS') format('svg'),
         url('font/NATS.ttf.eot'),
         url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
     font-weight: normal;
     font-style: normal;
 }
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #BBBBBB;
-  opacity: 1; /* Firefox */
+        opacity: 1;
+        /* Firefox */
 }
 
    
 body {
-    height: 100vh;
+        /* height: 100vh; */
     overflow: auto;
     font-family: 'NATS', sans-serif;
-    font-weight:400;
+        font-weight: 400;
 }
 
 #content {
     display: flex;
     flex-direction: column;
     height: 90%;
-    font-family: 'Poppins';
+        font-family:'NATS';
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
+        font-size: 20px;
     padding-bottom: 20px;
 }
 
 .input-tag {
+        height: 40px;
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    padding: 7px;
+        border-radius: 7px;
+        padding:0px 0px 0px 1rem;
     color: #C4C4C4;
+        display: flex;
+        align-items: center;
+        margin-top: 0.3rem;
 }
 
 
@@ -72,50 +79,97 @@ body {
 }
 
 .row {
-    width: 87% ;
-    margin-top: 10px ;
-    margin-left:2rem;
+        width: 100%;
+        /* margin-top: 10px;
+        margin-left: 2rem; */
 }
 
 .editBtn {
-    border: 1px solid #7282FB;
+        border: 2px solid #7282FB;
     border-radius: 10px;
-    padding: 10px;
+        /* padding: 5px; */
     background-color: white;
     color: #7282FB;
-
+        /* width:18%; */
+        width: 197px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none !important;
+}
+    .client-form{
+        display: flex;
+        align-items: center;
+        width: 100% !important;
+        /* border: 2px solid red; */
+        flex-direction: column;
+        margin-bottom: 4rem;
+}
+    .form-row{
+        margin-bottom: 1rem;
+        width: 60% !important;
+    }
+    .form{
+        width: 45%;
+    }
+    @media screen and (max-width: 725px) {
+        .heading{
+            margin-left: 0rem !important;
+            font-size: 30px !important;
+    }
+        .client-form {
+            width:100% ;
+            display: flex !important;
+            flex-direction: column !important;
+    }
+        .form-row {
+            width: 100% !important;
+            flex-direction: column !important; 
+            gap: 0px !important;
+            margin-bottom: 0rem !important;
+    }
+        .form{
+            margin-bottom: 1rem !important;
+            width: 100% !important;
+        }
+        h4 {
+            /* margin-bottom: 2rem !important; */
+            font-size: 25px !important;
 }
 
-.editBtn a:hover {
-    outline: none !important;
-}
-@media screen and (max-width: 720px){
-    .row{
-        margin-left:0% !important;
-        width:auto;
-    }
-    h4{
-        margin-bottom:2rem !important;
-    }
-    .ronald{
-        width:90px !important;
-        height:90px !important;
-    }
-    .editBtn{
-        width: 197px !important;
-height: 52px !important;
-    }
-    .name{
-        margin-top:0 !important;
-    }
-}
-
-@media screen and (max-width: 400px){
-    .row {
-        display: block;
-        width: 100%;
+        .ronald {
+            width: 90px !important;
+            height: 90px !important;
     }
   
+        .editBtn {
+            /* width:25% !important;
+            height: 52px !important; */
+            width: 110px;
+            height: 52px;
+        }
+        .edit-profile{
+            font-size: 20px !important;
+        }
+        .name {
+            margin-top: 0 !important;
+            font-size: 25px !important;
+        }
+    }
+/*********media query for mediun devices*************/
+@media screen and (min-width: 725px) and (max-width: 1200px) {
+    .form-row{
+        width: 100% !important;
+    }
+    /* .edit-profile{
+            font-size: 20px !important;
+        } */
+        /* .editBtn {
+            width:30% !important;
+            height: 52px !important;
+            padding: 0px !important;
+        }   */
 }
 </style>
 
@@ -151,71 +205,104 @@ $result = mysqli_query($conn,$sql);
                             $months++;
             // echo;
         ?>
+                <div class="d-flex justify-content-between align-items-center ps-4 pe-4">
+                    <h4 class="heading" style="font-size: 42px;margin-left:2rem;">Client Profile</h4>
+                    <!-----------------------------EDIT BUTTON---------------------------------->
 
-                    <h4 style="font-size: 30px;margin-left:2rem">Client Profile</h4>
+
+                        <a class="editBtn" name="edit_client" 
+                            href="update_client_profile.php?client_id=<?php echo $client_id?>"><p class="mb-0 edit-profile" style="font-size: 27px;" > Edit Profile</p></a>
+                   
+                </div>    
                     <div class="container">
-                        <div class="d-flex justify-content-center align-items-center; margin-top:10px" style="gap:20px">
+                        <div class="d-flex justify-content-center align-items-center" style="gap:20px; margin: 2rem;">
                             <div class="" style="display:inline-block;"><img class="ronald"
                                     style="height:150px;width:150px;border-radius:50%;" src="images/ronalduser.png"
                                     alt=""></div>
-                            <div style="font-size: 30px;margin-top:50px"class="name" style="display:inline-block"><?php echo $row['name'] ?></div>
+                            <div style="font-size: 30px;display: flex; align-items: center;" class="name" style="display:inline-block">
+                                <?php echo $row['name'] ?>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Email</div>
-                                <div class="row input-tag"><?php echo $row['email'] ?></div>
+                    </div >
+                        <div class="client-form">
+                        <div class=" form-row d-flex flex-row w-100 justify-content-center align-items-center gap-5">
+                            <div class="form">
+                                <div>Email</div>
+                                <div class=" input-tag">
+                                    <?php echo $row['email'] ?>
                             </div>
-                            <div class="col">
-                                <div class="row">Phone No.</div>
-                                <div class="row input-tag"><?php echo $row['phone'] ?></div>
                             </div>
+                            <div class="form">
+                                <div class="">Phone No.</div>
+                                <div class=" input-tag">
+                                    <?php echo $row['phone'] ?>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Gender</div>
-                                <div class="row input-tag"><?php echo $row['gender'] ?></div>
                             </div>
-                            <div class="col">
-                                <div class="row">Height</div>
-                                <div class="row input-tag"><?php echo $row['height'] ?></div>
                             </div>
+                        <div class="form-row  d-flex flex-row w-100 justify-content-center align-items-center gap-5">
+                            <div class="form">
+                                <div class="">Gender</div>
+                                <div class=" input-tag">
+                                    <?php echo $row['gender'] ?>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Age</div>
-                                <div class="row input-tag"><?php echo $row['age'] ?></div>
                             </div>
-                            <div class="col">
-                                <div class="row">About</div>
-                                <div class="row input-tag"><?php echo $row['about'] ?></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Weight</div>
-                                <div class="row input-tag"><?php echo $row['weight'] ?></div>
-                            </div>
-                            <div class="col">
-                                <div class="row">Duration</div>
-                                <div class="row input-tag"><?php echo $months ?> Months</div>
+                            <div class="form">
+                                <div class="">Height</div>
+                                <div class="input-tag">
+                                    <?php echo $row['height'] ?>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">Plan</div>
-                                <div class="row input-tag"><?php echo $row1['name'] ?></div>
                             </div>
-                            <div class="col">
-                                <div class="row">Location</div>
-                                <div class="row input-tag"><?php echo $row2['location'] ?></div>
+                        <div class="form-row  d-flex flex-row w-100 justify-content-center align-items-center gap-5">
+                            <div class="form">
+                                <div class="">Age</div>
+                                <div class=" input-tag">
+                                    <?php echo $row['age'] ?>
                             </div>
                         </div>
-                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="form">
+                                <div class="">About</div>
+                                <div class=" input-tag">
+                                    <?php echo $row['about'] ?>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="form-row  d-flex flex-row w-100 justify-content-center align-items-center gap-5">
+                            <div class="form">
+                                <div class="">Weight</div>
+                                <div class=" input-tag">
+                                    <?php echo $row['weight'] ?>
+                                </div>
+                            </div>
+                            <div class="form">
+                                <div class="">Duration</div>
+                                <div class=" input-tag">
+                                    <?php echo $months ?> Months
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row  d-flex flex-row w-100 justify-content-center align-items-center gap-5">
+                            <div class="form">
+                                <div class="">Plan</div>
+                                <div class=" input-tag">
+                                    <?php echo $row1['name'] ?>
+                                </div>
+                            </div>
+                            <div class="form">
+                                <div class="">Location</div>
+                                <div class=" input-tag">
+                                    <?php echo $row2['location'] ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-----------------------------EDIT BUTTON---------------------------------->
+                        <!-- <div class="row d-flex justify-content-center align-items-center">
 
-                            <a class="editBtn" name="edit_client" style="width:20%;margin-top:20px;text-align:center" href="update_client_profile.php?client_id=<?php echo $client_id?>">Edit Profile</a>
+                            <a class="editBtn" name="edit_client" style="width:20%;text-align:center"
+                                href="update_client_profile.php?client_id=<?php echo $client_id?>">Edit Profile</a>
 
 
-                        </div>
+                        </div> -->
 
                     </div>
                     <?php

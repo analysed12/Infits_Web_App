@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 $conn = new mysqli("localhost", "root", "", "infits");
 
 if ($conn->connect_error) {
@@ -25,6 +26,9 @@ if ($conn->connect_error) {
     box-sizing: border-box;
 }
 
+body{
+    overflow: hidden;
+}
 .content {
     display: flex;
     align-items: center;
@@ -48,9 +52,9 @@ if ($conn->connect_error) {
     font-weight: 400;
 }
 
-.content .heading-box .search-box {
+.content .heading-box .search-box1 {
     /* height: 30px; */
-    width: 320px;
+    width: 380px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,7 +70,7 @@ if ($conn->connect_error) {
 /* .content .search-box img{
     border: 1px solid red;
 } */
-.content .heading-box .search-box input {
+.content .heading-box .search-box1 input {
     width: 100%;
     font-size: 1.2rem;
     padding: 5px 10px;
@@ -74,7 +78,7 @@ if ($conn->connect_error) {
     border: none;
 }
 
-.content .heading-box .search-box input:focus {
+.content .heading-box .search-box1 input:focus {
     outline: none;
 }
 
@@ -129,17 +133,32 @@ if ($conn->connect_error) {
 .content .created-form-container .form-card-container,
 .content .created-client-form-container .client-card-container {
     /* border: 1px solid red; */
-    width: 100%;
+    width: 110%;
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
 
 }
+.form-cards{
+    margin-right: 30px;
+ }
+.option-popup{
+    margin-left: 55px;
+}
+.option-popup button{
+    width: 100px;
+}
+.form-content{
+    margin-left: 20px;
+}
+.options{
+    margin-right: 20px;
+}
 
 .content .created-form-container .form-card-container .form-cards {
     position: relative;
     height: 100px;
-    max-width: 450px;
+    max-width: 500px;
     width: 45%;
     min-width: 350px;
     display: flex;
@@ -177,7 +196,7 @@ if ($conn->connect_error) {
 .content .created-form-container .form-card-container .form-cards .form-content h4 {
     /* border: 1px solid red; */
     /* height: 30px; */
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 400;
 }
 
@@ -282,7 +301,6 @@ if ($conn->connect_error) {
     align-items: center;
     justify-content: space-evenly;
 }
-
 .content .created-client-form-container .client-card-container .client-cards img.vector {
     /* border: 1px solid red; */
     position: absolute;
@@ -303,6 +321,7 @@ if ($conn->connect_error) {
     font-size: 1.5rem;
     font-weight: 500;
     z-index: 1;
+    
 }
 
 .content .created-client-form-container .client-card-container .client-cards .card-content .btn-box {
@@ -312,13 +331,16 @@ if ($conn->connect_error) {
     align-items: center;
     justify-content: space-evenly;
     z-index: 1;
+    
+    
 }
 
-.content .created-client-form-container .client-card-container .client-cards .card-content .btn-box button {
+.content .created-client-form-container .client-card-container .client-cards .card-content .btn-box a {
     border: none;
     background-color: #4B9AFB;
     color: #ffffff;
     padding: 5px 15px;
+    text-decoration: none;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -327,28 +349,109 @@ if ($conn->connect_error) {
 }
 .create_btn{
     position: absolute;
-width: 85px;
-height: 85px;
-left: 88%;
-top: 120%;
+width: 70px;
+height: 70px;
+left: 90%;
+top: 82%;
 border:none;
 border-radius:50%;
+font-style:normal;
+font-weight:100;
 font-size:40px;
 color:white;
 background: #9C74F5;
 box-shadow: 0px 0px 68px rgba(0, 0, 0, 0.3);
 padding-bottom:0.5rem;
 }
-
-@media screen and (max-width: 720px){
-    .create_btn{
-        left: 78%;
-top: 70%;
-
-
-    }
+.sub-content {
+    padding:10px;
+  height: 550px; 
+  margin-left: 50px;
+  margin-right: 45px;/* Adjust the height as needed */
+  overflow-y: scroll;
 
 }
+.sub-content::-webkit-scrollbar{
+    width:10px; 
+}
+.sub-content::-webkit-scrollar-thumb{
+  background: #888;
+}
+.sub-content::-webkit-scrollbar-track {
+  background: #F3F3F3; 
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+.sub-content::-webkit-scrollbar-thumb:hover {
+  background:  #E3E3E3;
+  border-radius: 20px; 
+}
+ .heading-box button{
+    margin-right: -50px;
+ }
+ img.vector{
+    border-bottom-right-radius:15px;
+}
+@media screen and (max-width: 1200px){
+    .heading-box h1{
+        width:430px;
+        margin-right: 20px;
+    }
+    .create_btn{
+        left:84%;
+        right: auto;
+    }
+    .option-popup{
+        width: 30px;
+        margin-top:40px;
+    }
+}
+@media screen and (max-width: 720px){
+  .heading-box{
+    margin-top:-40px;
+    margin-left:20px;
+  }
+  .sub-content .heading-box{
+    margin-top:1px;
+  }
+}
+ @media screen and (max-width:450px){
+    .sub-content{
+        width: 300px;
+        margin-right: 30px;
+    }
+
+    .heading-box h1{
+        margin-left: 20px;
+        width: 500px;
+        margin-top:40px;
+    }    
+        .create_btn{
+        margin-left:-30px;
+        z-index: 2;
+    }
+} 
+@media screen and (max-width:550px) {
+     .content{
+        overflow: hidden;
+     }
+    .sub-content{
+        margin-top: 70px;
+        margin-right: 80px;
+    margin-left: 70px;
+    }
+
+    .search-box1{
+        margin-top: 170px;
+        margin-left: -300px;
+        margin-right: 30px;
+}
+    .create_btn{
+        top:86%;
+   }
+}
+ 
    </style>
 </head>
 
@@ -358,11 +461,13 @@ top: 70%;
     <div class="content">
         <div class="heading-box">
             <h1>Forms and Documents</h1>
-            <div class="search-box">
+            <div class="search-box1">
                 <img src="icons/search.svg" alt="#">
                 <input type="search" name="form" id="form" placeholder="Search forms or clients">
             </div>
         </div>
+
+    <div class="sub-content">
         <div class="created-form-container">
             <div class="heading-box">
                 <h2>My Forms</h2>
@@ -370,10 +475,13 @@ top: 70%;
             </div>
             <div class="form-card-container">
 
+            <?php
+                    for ($i = 0; $i < 3; $i++) {
+                ?>
                 <div class="form-cards">
                     <img class="vector" src="icons/form-card-vector.svg">
                     <div class="form-content">
-                        <h4>Form 1(Default)</h4>
+                    <h4>Form 1 (Default)</h4>
                         <p><span>20</span> Question</p>
                     </div>
                     <div class="options" onclick="showPopup(this)">
@@ -384,37 +492,9 @@ top: 70%;
                         <button>Edit</button>
                     </div>
                 </div>
-
-
-                <div class="form-cards">
-                    <img class="vector" src="icons/form-card-vector.svg">
-                    <div class="form-content">
-                        <h4>Form 1(Default)</h4>
-                        <p><span>20</span> Question</p>
-                    </div>
-                    <div class="options" onclick="showPopup(this)">
-                        <img src="icons/3dots.svg" alt="options" title="options">
-                    </div>
-                    <div class="option-popup">
-                        <button>Delete</button>
-                        <button>Edit</button>
-                    </div>
-                </div>
-
-                <div class="form-cards">
-                    <img class="vector" src="icons/form-card-vector.svg">
-                    <div class="form-content">
-                        <h4>Form 1(Default)</h4>
-                        <p><span>20</span> Question</p>
-                    </div>
-                    <div class="options" onclick="showPopup(this)">
-                        <img src="icons/3dots.svg" alt="options" title="options">
-                    </div>
-                    <div class="option-popup">
-                        <button>Delete</button>
-                        <button>Edit</button>
-                    </div>
-                </div>
+            <?php
+                }
+            ?>
 
             </div>
         </div>
@@ -438,8 +518,8 @@ top: 70%;
                                 <img src="images/client.png" alt="Profile" id="clientProfile">
                                 <p> <?php echo $row["ClientName"]; ?> </p>
                                 <div class="btn-box">
-                                    <button id="clientForm">Form</button>
-                                    <button id="clientDocument">Documents</button>
+                                    <a href="health_detail_form.php?form=show" id="clientForm">Form</a>
+                                    <a href="health_detail_form.php?document=show" id="clientDocument">Documents</a>
                                 </div>
                             </div>
                         </div>
@@ -450,7 +530,7 @@ top: 70%;
             </div>
         </div>
     </div>
-
+                </div>
     <div class="button">
         <a style="background-color:none"href="health_detail_form_create.php"><button class="create_btn">+</button></a>
         

@@ -59,7 +59,16 @@ include('navbar.php');
             margin-top: 1rem;
             padding: 15px;
         }
-
+       .schedule{
+        font-size:30px;
+        font-weight:400;
+       }
+       .calanderdatesize{
+        font-size:25px;
+        font-weight:400;
+        margin-bottom: 15px;
+        margin-top: -8px;
+       }
         .go_live {
             width: 114px;
             height: 35px;
@@ -114,7 +123,12 @@ include('navbar.php');
             margin: 2rem;
 
         }
-
+        .live_rightside h4{
+            font-size:28px;
+            font-weight:400;
+            padding-left: 12px;
+            margin-bottom:17px;
+        }
         .rightside_middle {
             margin-top: 1rem;
             display: flex;
@@ -137,7 +151,7 @@ include('navbar.php');
             border-radius: 50%;
             background: linear-gradient(180deg, #3666FD 0%, #C855E9 100%);
             margin-left: 1rem;
-
+            margin-top: 5px;
         }
 
         .live_footer {
@@ -148,10 +162,10 @@ include('navbar.php');
             border-radius: 50px;
             color: #4B9AFB;
             font-size: 30px;
-            padding: 10px;
+            padding: 18px 28px;
             display: flex;
             justify-content: center;
-            padding-top: 1.5rem;
+            padding-top: 19px;
         }
 
         .calendar {
@@ -182,8 +196,56 @@ include('navbar.php');
             border-radius: 17px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
 
+/**//88/ */8****/** */
 
+ .day:first-child {
+  grid-column-start: 4;
+}
+.day {
+  padding: 0.5em;
+  text-align: center;
+}
+.day::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+.day[data-selected]::before {
+  border-radius: 0.5em;
+}
+.day[data-selected="start"]::before {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.day[data-selected],
+.day[data-selected] ~ .day {
+  color: white;
+}
+.day[data-selected]::before,
+.day[data-selected] ~ .day::before {
+  background-color: var(--color-primary);
+}
+.day[data-selected="start"] ~ .day:not([data-selected="end"])::before {
+  opacity: 0.5;
+}
+.day[data-selected="end"][data-selected="end"]::before {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.day[data-selected="end"] ~ .day {
+  color: inherit;
+}
+.day[data-selected="end"] ~ .day::before {
+  background-color: transparent;
+}
 
+//**
+
+ */
 
 
 
@@ -314,7 +376,8 @@ include('navbar.php');
         .sliding-cal {
 
             position: relative;
-
+            font-size:24px;
+            font-weight:400;
             width: 495px;
             height: 86px;
             overflow: scroll;
@@ -525,17 +588,17 @@ include('navbar.php');
             padding: 5px;
             text-align: center;
             transition: all 0.2s ease-in-out;
-            border-radius: 50%;
+            /* border-radius: 50%; */
 
         }
 
         td:hover {
             transform: scale(1.2);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            /* background-color:blue; */
+            color:black;
+            border-radius: 50%;
         }
-
-
-
         th {
 
 
@@ -552,7 +615,23 @@ include('navbar.php');
             color: #fff; */
             border: 2px solid #3e90ff;
         }
-
+        .leftside{
+            /* border-radius:0 !important; */
+    background-color:rgba(114, 130, 251, 1) !important;
+    /* border-radius: 50% ; */
+    border-bottom-left-radius: 28% ;
+    border-top-left-radius: 28% ;
+}
+.rightside{
+    /* border-radius:0 !important; */
+    background-color:rgba(114, 130, 251, 1)!important;
+    border-top-right-radius: 28%;
+    border-bottom-right-radius: 28%;
+}
+.color1{
+    background-color:rgba(179, 188, 251, 1)  !important;
+    border-radius:0 !important;
+}
         /***************************calendar style end*********************************/
 
         @media screen and (max-width: 1200px) {
@@ -724,7 +803,7 @@ include('navbar.php');
                     <p style="font-size: 24px;line-height: 25px;"><?php echo $_SESSION["name"]; ?></p>
                     <div>
                         <div style="display:flex;justify-content:center;gap:0.3rem"><img src="images/calenderlive.png" style="width:17%"> <span>09/05/2022</span></div>
-                        <div style="display:flex;justify-content:center;gap:0.3rem;margin-top:0.3rem"> <img src="images/clocklive.png" style="width:15%;height:15%"> <span>2:00 p.m.</span></div>
+                        <div style="display:flex;gap:0.3rem;margin-top:0.3rem;padding: 0px 19px;"> <img src="images/clocklive.png" style="width:27%;"> <span>2:00 p.m.</span></div>
                     </div>
                     <a href="live_joincall.php" style="background-color:none"> <button class="btn_joincall">Join Call</button></a>
                     <button class="btn_setreminder">Set Reminder</button>
@@ -755,8 +834,6 @@ include('navbar.php');
                             <div class="prev-year">&laquo;</div>
                             <div class="year"></div>
                             <div class="next-year">&raquo;</div>
-
-
                         </div>
                     </div>
                 </div>
@@ -1146,15 +1223,9 @@ include('navbar.php');
                                 <div style="display:flex;justify-content:center;gap:0.4rem"><img src="images/calenderlive.png" style="width:27%"><span>09/05/2022</span></div>
                                 <div style="display:flex;justify-content:center;gap:0.4rem"><img src="images/clocklive.png" style="width:22%"><span>2:00 p.m.</span></div>
                             </div>
-
                         </div>
                     </div>
-
-
-
-
                 </div>
-
             </div>
             <div class="create-meet-btn d-flex justify-content-end">
                 <div class="live_footer" style="margin-top:1rem">
@@ -1163,11 +1234,7 @@ include('navbar.php');
                             style="width:99.5%; display: flex; align-items: center;"></button>
                 </div>
             </div>
-
-
-
         </div>
-
         <!------------------------------RIGHTSIDE------------------------------------->
 
     </div>
@@ -1179,8 +1246,8 @@ include('navbar.php');
         <!--Modal content-->
         <div class="modal-content">
             <div style="margin-top:1rem;">
-                <h2 style="text-align:center">Scheduling live</h2>
-                <h4 style="text-align:center;color: #7C7C7C;">
+                <h2 style="text-align:center" class="schedule">Scheduling live</h2>
+                <h4 style="text-align:center;color: #7C7C7C;" class="calanderdatesize">
                     <script>
                         // Creating a date object
                         var today = new Date();
@@ -1222,7 +1289,7 @@ include('navbar.php');
                     </div>
                     </form>
                 </div>
-                <div style="display:flex;flex-direction:column;align-items:center;margin-top:1rem">
+                <div style="display:flex;flex-direction:column;align-items:center;margin-top:1rem;position: absolute;left: 63%;">
                     <label class="switch">
                         <input type="checkbox">
                         <span class="slider round"></span>
@@ -1458,11 +1525,12 @@ calendarBody.appendChild(row);
             row = $("<tr>");
             for (let j = 0; j < 7; j++) {
                 if ((i === 0 && j < firstDay.getDay()) || date > lastDay.getDate()) {
-                    let td = $("<td>");
+                    let td = $(`<td>`);
                     row.append(td);
                 } 
                 else {
-                    let td = $("<td>").text(date);
+                    let td = $(`<td class="d" id="${date}" data-day="${date}">`).text(date);
+                    //  console.log(text.data);
                     if (selectedMonth === months[todays.getMonth()] && selectedYear === todays.getFullYear() && date === todays.getDate()) {
                         td.addClass("todays");
                     }
@@ -1476,6 +1544,7 @@ calendarBody.appendChild(row);
         $("#calendar").html(table);
 
         function updateSelectedMonthYear(month, year) {
+            
             selectedMonth = month;
             selectedYear = year;
             $("#selected-month-year").text(selectedMonth + " " + selectedYear);
@@ -1499,10 +1568,10 @@ calendarBody.appendChild(row);
                 row = $("<tr>");
                 for (let j = 0; j < 7; j++) {
                     if ((i === 0 && j < firstDay.getDay()) || date > lastDay.getDate()) {
-                        let td = $("<td>");
+                        let td = $(`<td>`);
                         row.append(td);
                     } else {
-                        let td = $("<td>").text(date);
+                        let td = $(`<td class="d" id="${date}" data-day="${date}">`).text(date);
                         if (selectedMonth === months[today.getMonth()] && selectedYear === today.getFullYear() && date === today.getDate()) {
                             td.addClass("today");
                         }
@@ -1516,10 +1585,14 @@ calendarBody.appendChild(row);
             }
             table.append(tbody);
             $("#calendar").html(table);
+            newfun();
         }
+////****** */
 
+///////***** */
         // Update the displayed year and months in the dropdown
         function updateDropdownYear(year) {
+
 
             $(".dropdown-menu .year").text(year);
             $(".dropdown-menu .row:not(:first-child)").remove();
@@ -1594,11 +1667,20 @@ calendarBody.appendChild(row);
 // <- onPointerUp
 
 /* NOTE: We retooled the data to be based on first selection and second selection. We'll calculate which is the start & end date later in the `updateDOM` function. */
+let allDayEls;
 const data = {
   firDate: null,
   secondDate: null
 };
-
+let prev=0;
+function erase(d){
+    for (let i = 1; i <=d; i++) {
+        document.getElementById(i).classList.remove('leftside');
+        document.getElementById(i).classList.remove('color1');
+        document.getElementById(i).classList.remove('rightside');
+    }
+    // console.log(d);
+}
 const machine = {
   initial: 'idle',
   states: {
@@ -1607,6 +1689,7 @@ const machine = {
         pointerdown: (data, event) => {
           data.firDate = +event.currentTarget.dataset.day;
           data.secondDate = null;
+        //   console.log("machine");
           return 'dragging';
         }
       }
@@ -1616,6 +1699,20 @@ const machine = {
         pointerover: (data, event) => {
           data.secondDate = +event.currentTarget.dataset.day;
           
+          if(data.firDate<data.secondDate){
+console.log( data.firDate+" "+data.secondDate);
+erase(prev);
+prev=data.secondDate;
+document.getElementById(data.firDate).classList.add('leftside');
+for (let i=data.firDate+1;i<data.secondDate; i++) {
+    const element =document.getElementById(`${i}`);
+    // console.log(element);
+    element.classList.add('color1'); 
+     }
+     document.getElementById(data.secondDate).classList.add('rightside');
+    }
+
+
           return 'dragging';
         },
         pointerup: 'idle',
@@ -1629,6 +1726,8 @@ const machine = {
 let currentState = machine.initial;
 
 function send(event) {
+    // console.log(event);
+    // console.log(event.type);
   const transition = machine
     .states[currentState]
     .on[event.type];
@@ -1642,10 +1741,20 @@ function send(event) {
   }
 }
 
+
 /* ---------------------------------- */
+function newfun(){
+//   machine.states='idle';
+currentState=machine.initial;
+    allDayEls=document.querySelectorAll('[data-day]');
 
-const allDayEls = document.querySelectorAll('[data-day]');
-
+allDayEls.forEach(dayEl => {
+  dayEl.addEventListener('pointerdown', send);
+  dayEl.addEventListener('pointerover', send);
+});
+}
+allDayEls = document.querySelectorAll('[data-day]');
+// console.log(machine.states);
 allDayEls.forEach(dayEl => {
   dayEl.addEventListener('pointerdown', send);
   dayEl.addEventListener('pointerover', send);
@@ -1661,11 +1770,11 @@ function updateDOM(){
       delete el.dataset.selected
     });
   
-  const strtDate = Math.min(data.firDate, data.secondDate);
+  const startDate = Math.min(data.firDate, data.secondDate);
   const endDate = Math.max(data.firDate, data.secondDate);
   
   if ( startDate ) {
-    const startDateEl = document.querySelector(`[data-day="${strtDate}"]`);
+    const startDateEl = document.querySelector(`[data-day="${startDate}"]`);
     startDateEl.dataset.selected = "start";
   }
   
@@ -1674,10 +1783,6 @@ function updateDOM(){
     endDateEl.dataset.selected = "end";
   }
 }
-
-
-
-
 
     </script>
 

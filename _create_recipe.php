@@ -1,7 +1,6 @@
 <?php include('navbar.php');
-if(isset($_POST['saveRec'])){
-    var_dump($_POST);
-} ?>
+
+ ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -177,24 +176,184 @@ ul li::before {
 li.direction {
     margin-bottom: 10px;
 }
+
 </style>
   </head>
   <body>
-      <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+     <?php 
+        $rid = $_POST['RID'];  
+        $tableName = isset($_POST['tableName']); 
+        
+        
+        // exit;
+
+           
+            if(!$rid || $rid == null){   // check weather id is present or not...
+                session_start();
+                $_SESSION['NoID'] = "Oops! need recipes id to edit.";
+                header('location: all_recipes.php');
+                return;
+            }  
+
+            // fetching and rendering the data here...
+            // $sql;
+
+            if($tableName == 'default'){
+                $sql= "select * from `default_recipes` where `drecipe_id` = '$rid'";                
+            }else{
+                $sql= "select * from `custom_recipes` where `drecipe_id` = '$rid'";
+            }
+            $result = $conn ->query($sql);
+            if($result ->num_rows > 0){
+              while($row= $result ->fetch_assoc()){
+                
+                $ingredient = json_decode($row['drecipe_nutritional_information'],true);
+              
+                $Rname =  $row['drecipe_name'];                           
+                $category =   $row['drecipe_category'];
+
+              
+                // $ext= explode('|',$row['image']);
+                // $path = $ext[1];
+
+                // $time1 = explode('|',$row['time']);
+
+                // $GLOBALS['dirid'] = $row['instruction'];
+                // $GLOBALS['ingid'] = $row['ingredient'];
+            }}
+
+
+            // update or edit recipe code start here...
+
+            if(isset($_POST['editRcp'])){
+                $rname = $_POST['recipeName'];
+                $name1 = $_POST['name1'];
+                echo $rname.$name1;
+
+                $Calories = $_POST['Calories'];
+                $fat = $_POST['fat'];
+                $saturates = $_POST['saturates'];
+                $Carbohydrates = $_POST['Carbohydrates'];
+                $sugars = $_POST['sugars'];
+                $Fibre = $_POST['Fibre'];
+                $Protein = $_POST['Protein'];
+                $Salt = $_POST['Salt'];
+
+                $category = $_POST['category'];
+
+             
+                $obj = array(
+                    'Calories'=>$Calories,
+                    'Fat (g)'=>$fat,
+                    'of which saturates (g)'=>$saturates,
+                    'Carbohydrates (g)'=>$Carbohydrates,
+                    'of which sugars (g)' => $sugars,
+                    'Fibre (g)' => $Fibre,
+                    'Protein (g)' => $Protein,
+                    'Salt (mg)' => $Salt,
+                );
+                $nutritionData = json_encode($obj);
+                
+
+                $sql = "UPDATE `custom_recipes` set `drecipe_name` = '$name1',`drecipe_category` = '$category', `drecipe_nutritional_information` = '$nutritionData' where `drecipe_id` = '$rid'";
+
+                if($conn -> query($sql)==true){
+                   echo '<div class="alert alert-primary" role="alert" style="text-align:center;">
+                        Recipes Updated;
+                      </div>';
+                      header('location: all_recipes.php');
+                  
+                    } else {
+                
+                    echo  '<div class="alert alert-primary" role="alert" style="text-align:center;">
+                        Recipes not updated;
+                      </div>';
+
+
+                  }
+            }
+
+
+             // add new recipe code start here...
+
+            if(isset($_POST['saveRec'])){
+                $rname = $_POST['recipeName'];
+                $name1 = $_POST['name1'];
+                // echo $rname.$name1;
+
+                $Calories = $_POST['Calories'];
+                $fat = $_POST['fat'];
+                $saturates = $_POST['saturates'];
+                $Carbohydrates = $_POST['Carbohydrates'];
+                $sugars = $_POST['sugars'];
+                $Fibre = $_POST['Fibre'];
+                $Protein = $_POST['Protein'];
+                $Salt = $_POST['Salt'];
+
+                $category = $_POST['category'];
+
+             
+                $obj = array(
+                    'Calories'=>$Calories,
+                    'Fat (g)'=>$fat,
+                    'of which saturates (g)'=>$saturates,
+                    'Carbohydrates (g)'=>$Carbohydrates,
+                    'of which sugars (g)' => $sugars,
+                    'Fibre (g)' => $Fibre,
+                    'Protein (g)' => $Protein,
+                    'Salt (mg)' => $Salt,
+                );
+                $nutritionData = json_encode($obj);
+                
+
+
+
+                // $Newsql = "INSERT INTO `custom_recipes` (drecipe_name,drecipe_category,drecipe_nutritional information) VALUES ('$rname','$category','$nutritionData')";
+
+                $Newsql = "INSERT INTO `custom_recipes` (drecipe_name,drecipe_category,drecipe_nutritional_information) VALUES ('$rname','$category','$nutritionData')";
+
+                if($conn -> query($Newsql)==true){
+                   echo '<div class="alert alert-primary" role="alert" style="text-align:center;">
+                        Recipes Updated;
+                      </div>';
+                  header('location: all_recipes.php');
+                  
+                    } else {
+                
+                    echo  '<div class="alert alert-primary" role="alert" style="text-align:center;">
+                        Recipes not updated;
+                      </div>';
+
+
+                  }
+
+            }
+            
+
+ 
+      
+ ?>
+      <form action="" method="post">
         <div id="content">
             <div class="row">
                 <div class="col cheader d-flex justify-content-between">
                     <span>New Recipe</span>
-                    <button name="saveRec" type="submit" class="btn btn-save">Save</button>
+                    <button name='<?php if($rid == 'new'){ echo "saveRec";} else { echo "editRcp";}?>' type="submit" id='submit_btn' class="btn btn-save"><?php if($rid == 'new'){ echo "save";} else { echo "edit";}?></button>
                 </div>
             </div>
             <div class="ctop">
                 <div class="left uploadImg">
                     <img src="images/camera.svg" alt="" id="camera" style="width:60%">
+                   
                     <input type="file"  id="recipeImg" style="display:none"  name="recipeImg">
                 </div>
                 <div class="right">
-                    <input class="form-control" type="text" name="recipeName" id="" placeholder="Recipe Name">
+
+                    <input class="form-control" type="text" value="<?php if($rid == 'new'){
+                        echo '';
+                    }else{
+                        echo $Rname;
+                    }  ?>" name="recipeName" id="" placeholder="Recipe Name">
                     <span>(auto sync)</span>
                 </div>
             </div>
@@ -209,43 +368,60 @@ li.direction {
                         <div class="d-flex align-items-center justify-content-center flex-column gap-3">
                             <div class="row w-100">
                                 <div class="col">
-                                    <input name="name1" class="form-control" type="text" class="form-control" placeholder="First name">
+                                    <input name="name1" class="form-control" type="text" class="form-control" placeholder="recipeName" value="<?php if($rid == 'new'){
+                                        echo '';
+                                    }else{
+                                        echo $Rname;
+                                    }  ?>">
                                 </div>
                                 <div class="col">
-                                    <input name="name2" class="form-control" type="text" class="form-control" placeholder="Last name">
+                                    <input name="sugars" class="form-control" type="text" class="form-control" placeholder="sugars" value="<?php
+                                    if($rid == 'new'){
+                                        echo '';
+                                    }else{
+                                        echo $ingredient['of which sugars (g)'];
+                                    }   ?>">
                                 </div>
                             </div>
                             <div class="row w-100">
                                 <div class="col">
-                                    <input name="name3" class="form-control" type="text" class="form-control" placeholder="First name">
+                                    <input name="Fibre" class="form-control" type="text" class="form-control" placeholder="Fibre" value="<?php
+                                    if($rid == 'new'){
+                                        echo '';}
+                                        else{
+                                            echo $ingredient['Fibre (g)'];
+                                        }
+                                     ?>">
+                                    }
                                 </div>
                                 <div class="col">
-                                    <input name="name4" class="form-control" type="text" class="form-control" placeholder="Last name">
+                                    <input name="Protein" class="form-control" type="text" class="form-control" placeholder="Protein" value="<?php if($rid == 'new'){echo '';}else{ echo $ingredient['Protein (g)'];}?>">
                                 </div>
                             </div>
                             <div class="row w-100">
                                 <div class="col">
-                                    <input name="name5" class="form-control" type="text" class="form-control" placeholder="First name">
+                                    <input name="Salt" class="form-control" type="text" class="form-control" placeholder="Salt" value="<?php if($rid=='new'){echo'';}else{ echo $ingredient['Salt (mg)'];}?>">
                                 </div>
                                 <div class="col">
-                                    <input name="name6" class="form-control" type="text" class="form-control" placeholder="Last name">
+                                    <input name="category" class="form-control" type="text" class="form-control" placeholder="category" value="<?php if($rid=='new'){echo'';}else{ echo $category;}?>">
                                 </div>
                             </div>
                             <h3 class="text-center">Nutritional Details</h3>
                             <div class="row w-75">
                                 <div class="col">
-                                    <input name="name7" class="form-control" type="text" class="form-control" placeholder="First name">
+                                    <input name="Calories" class="form-control" type="text" class="form-control" placeholder="Calories" value="<?php if($rid=='new'){echo'';}else{ echo $ingredient['Calories'] ;}?>">
                                 </div>
                                 <div class="col">
-                                    <input name="name8" class="form-control" type="text" class="form-control" placeholder="Last name">
+                                    <input name="fat" class="form-control" type="text" class="form-control" value="<?php if($rid=='new'){echo'';}else{ echo $ingredient['Fat (g)'];} ?>" placeholder="fat">
                                 </div>
                             </div>
                             <div class="row w-75">
                                 <div class="col">
-                                    <input name="name9" class="form-control" type="text" class="form-control" placeholder="First name">
+                                    <input name="saturates" class="form-control" type="text" class="form-control" placeholder="saturates" value="<?php if($rid=='new'){echo'';}else{ echo $ingredient['of which saturates (g)'] ;}?>">
                                 </div>
                                 <div class="col">
-                                    <input name="name10" class="form-control" type="text" class="form-control" placeholder="Last name">
+                                    <input name="Carbohydrates" class="form-control" type="text" class="form-control" placeholder="Carbohydrates" value="<?php if($rid=='new'){echo'';}else{echo $ingredient['Carbohydrates (g)'] ;}?>">
+                                     <input name="RID" hidden  type="text"   value="<?php echo $rid; ?>">
                                 </div>
                             </div>
                         </div>
@@ -325,6 +501,8 @@ li.direction {
 
 
     });
+
+
     </script>
   </body>
 </html>

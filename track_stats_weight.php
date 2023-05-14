@@ -125,9 +125,9 @@ $dietition = $_SESSION['name'];
     display: flex;
     flex-direction: column;
 }
-tst-left-t{
+/* .tst-left-t{
     padding-left: 3%;
-}
+} */
 .heading{
     /* width: 145px; */
     height: 68px;
@@ -137,32 +137,39 @@ tst-left-t{
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
-    font-size: 32px;
+    font-size: 40px;
     line-height: 68px;
     /* letter-spacing: -0.114286px; */
     color: #000000;
     margin: 0;
+    padding-left: 12px;
 }
 .card-container{
     display: flex;
     flex-wrap: wrap;
     /* justify-content: space-between; */
     gap: 5%;
-    padding-left: 1%;
+    padding-left: 33.6px;
 }
 .client-card {
-width: 100px;
-height: 120px;
+width: 82px;
+height: 96px;
 background: rgba(255, 255, 255, 0.8);
 box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
 border-radius: 10px;
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;
+/* justify-content: center; */
 text-align: center;
-gap: 15px;
+/* gap: 15px; */
+gap: 8px;
 margin-bottom: 15px;
+}
+
+
+.client-card img {
+    margin-top: 11px;
 }
 .client-card a{
     display: flex;
@@ -188,15 +195,22 @@ font-family: 'NATS';
 font-style: normal;
 font-weight: 400;
 line-height: 1;
-font-size: 22px;
+font-size: 19px;
     margin: 0;
+width: 100%;
+line-height: 16.15px;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 /* tst-left b */
 .tst-left-b {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    /* padding: 20px; */
+    padding-left: 56px;
     gap: 20px;
 }
 /* Style the buttons that are used to open the tab content */
@@ -211,6 +225,7 @@ border-bottom-left-radius: 1em;
 border-top-right-radius: 1em;
 border-bottom-right-radius: 1em;
 position: relative;
+margin-left: 41px;
 }
 .tablinks {
 background: #FFFFFF;
@@ -228,7 +243,6 @@ font-style: normal;
 font-weight: 400;
 font-size: 13px;
 line-height: 27px;
-
 color: #4D4D4D;
 }
 /* border for side buttons */
@@ -236,6 +250,9 @@ color: #4D4D4D;
     border-top-left-radius: 1em;
 border-bottom-left-radius: 1em;
 width: 28%;
+}
+.graph-container {
+    display: flex;
 }
 .drop{
     position: absolute;
@@ -269,8 +286,8 @@ border-bottom-right-radius: 1em;
   color: white !important;
 }
 .graph {
-    max-width: 487px;
-    max-height: 240px;
+    max-width: 520px;
+    /* max-height: 240px; */
     width: 100%;
     height: 100%;
     background: #FFFFFF;
@@ -290,10 +307,29 @@ border-bottom-right-radius: 1em;
     height: 100%;
 }
 .i-button {
-    position: absolute;
-    top: -4%;
+    position: relative;
+    /* top: -4%; */
     right: -12%;
     cursor: pointer;
+}
+.i-button-box {
+    position: absolute;
+    top: 1%;
+    right: -17%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding-left: 34.44px;
+}
+.i-button-box span{
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    color: #9C74F5;
+}
+.i-button-box img {
+    width: 23.33px;
 }
 .i-pop {
     background: #ffffff;
@@ -322,7 +358,7 @@ border-bottom-right-radius: 1em;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin: 25px 0;
+    margin: 55px 0 25px;
 }
 .set-goal {
     width: 100%;
@@ -369,8 +405,9 @@ height: 166px;
     font-weight: 400;
     font-size: 23px;
     line-height: 40px;
-    color: #788F97;
+    color: rgba(120, 143, 151, 1);
     margin-top: -10px;
+    padding-left: 12px;
 }
 .set-goal form{
     display: flex;
@@ -387,11 +424,11 @@ border-radius: 10px;
 padding: 8px 25px;
 }
 .set-goal input::placeholder{
-font-family: 'Nunito';
+font-family: 'NATS';
 font-style: normal;
 font-weight: 700;
-font-size: 18px;
-line-height: 25px;
+font-size: 15.69px;
+line-height: 21.4px;
 color: #ABA3A3;
 text-align: center;
 }
@@ -400,12 +437,12 @@ text-align: center;
     border: none;
     width: 124px;
     height: 45px;
-    background: linear-gradient(263.28deg, #8EC2C1 0%, #8CBFBE 0.01%, #788F97 93.31%);;
+    background: linear-gradient(263.28deg, #8EC2C1 0%, #8CBFBE 0.01%, #788F97 93.31%);
     box-shadow: 0px 3.48718px 3.48718px rgba(0, 0, 0, 0.28);
     border-radius: 10px;
     color: #ffffff;
     font-size: 19px;
-    font-family: 'Nunito';
+    font-family: 'NATS';
     font-style: normal;
     font-weight: 700;
 }
@@ -417,14 +454,15 @@ text-align: center;
     width: 100%;
     display: flex;
     flex-wrap:wrap;
-    justify-content: flex-start;
+    /* justify-content: space-between; */
     align-items: center;
     padding :0 10px;
+    gap: 40px;
 }
 .stat-btn{
     /* max-width: 134px;
     max-height: 57.45px; */
-    height: 57.45px;
+    height: 59px;
     /* width: 25%; */
     width: 150px;
     /* height: 100%; */
@@ -440,23 +478,39 @@ text-align: center;
 }
 .stat-data{
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.stat-data div {
+    width: 100%;
 }
 .stat-data .title{
-font-size: 18px;
+    width: 100%;
+font-size: 19px;
 line-height: 0;
 color: #5D5D5D;
-margin: 0 15px;
+/* margin-left: 10px; */
+font-weight: 400;
+/* line-height: 40.15px; */
+margin-left: 12px;
 }
 .stat-data .value{
 font-size: 25px;
 line-height: 0;
 text-align: center;
 color: #000000;
-margin-left: 30px;
+/* margin-left: 20px; */
+}
+.stat-data div:nth-child(2) {
+    text-align: right;
+    margin-right: 20px;
+    font-size: 17px;
 }
 .stat-data .unit{
 font-size: 17px;
@@ -560,9 +614,10 @@ margin-left: 5px;
     .tsd-right .heading {
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         gap: 30%;
         padding-right: 5%;
+        margin-top: 55px;
     }
     .tsd-right .heading p{
         font-size: 22px;
@@ -571,8 +626,9 @@ margin-left: 5px;
     }
     .tsd-right .heading span{
         font-size: 16px;
-        line-height: 46px;
+        line-height: 33.81px;
         color: #7E969E;
+        font-weight: 400;
     }
 .progress-bar-container{
     font-family: 'NATS';
@@ -659,9 +715,57 @@ margin-left: 5px;
 /* -------------------- */
 
 /* media */
+@media (max-width:1250px) {
+    .i-button-box {
+        display: none;
+    }
+    .heart_beat_box {
+        width: 100%;
+    }
+    .tst-left-b {
+        padding-left: 0;
+    }
+}
+
+@media(max-width:1190px) {
+    .tsd-right {
+        padding: 0;
+    }
+    .tsd-right .heading {
+        padding: 0;
+        justify-content: space-around;
+    }
+    .tsd-left-b .heading{
+        max-width: 100%;
+    }
+    .i-button-box {
+        display: none;
+    }
+    .tst-left-b {
+        /* padding-right: 42px; */
+        padding-left: 2px;
+    }
+    .graph {
+        max-width: 100%;
+    }
+    .heading-border {
+        max-width: 100%;
+    }
+    .tab {
+        margin-left: 10px;
+    }
+    .p-container {
+        justify-content: space-around;
+    }
+    .heading p {
+        padding-left: 12px;
+    }
+}
+
+/* media */
 @media (max-width:420px) {
     .tst-left-b {
-    padding: 20px;
+    padding: 10px !important;
     }
     .tsd-left-t {
     padding-left: 0;
@@ -675,6 +779,20 @@ margin-left: 5px;
     .progress-bar-container {
     scale: 0.8;
     }
+    .card-container {
+        justify-content: space-between;
+        padding-left: 0;
+    }
+    .tab {
+        margin-left: 2px;
+    }
+    .tablinks {
+        font-size: 10px;
+    }
+    .drop {
+        left: 65px;
+        margin-left: 0px;
+    }
 }
 </style>
 <body>
@@ -685,47 +803,53 @@ margin-left: 5px;
 
             <div class="tst-left-t">
                 <div class="heading">
-                    <p style="margin-top: -15px;">Clients Stats</p>
+                    <p style="margin-top: -15px; padding-left: 35px;">Clients Stats</p>
                 </div>
                 <div class="card-container">
-                <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
-                        <a href="track_stats_steps.php?id=<?php echo ($clientId) ?>">
-                            <i class="fa-solid fa-shoe-prints" style="color:#FF6C6CCA; rotate: -90deg;"></i>
-                            <p style="color: #FF6C6CCA;">Steps</p>
-                        </a>
+                <a href="track_stats_steps.php?id=<?php echo($clientId) ?>">
+                    <div class="client-card client-card-steps" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
+                        <!-- <i class="fa-solid fa-shoe-prints" style="color:#FFFFFF; rotate: -90deg;"></i> -->
+                        <img src="images/steps.svg" alt="">
+                        <p style="">Steps</p>
                         </div>
+                    </a>
+                    <a href="track_stats_heart.php?id=<?php echo($clientId) ?>">
                         <div class="client-card" style="color:#E266A9; border: 1px solid #E266A9;">
-                        <a href="track_stats_heart.php?id=<?php echo ($clientId) ?>">
-                            <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i>
+                        <!-- <i style="color:#E266A9;" class="fa-solid fa-heart-pulse"></i> -->
+                        <img src="images/heart_rate.png" alt="">
                             <p style="color:#E266A9;">Heart<br>Rate</p>
-                            </a>
                         </div>
+                    </a>
+                    <a href="track_stats_water.php?id=<?php echo($clientId) ?>">
                         <div class="client-card" style="color:#52A4FF; border: 1px solid #52A4FF;">
-                        <a href="track_stats_water.php?id=<?php echo ($clientId) ?>">
-                            <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i>
+                    <!-- <i style="color:#52A4FF;" class="fa-solid fa-droplet"></i> -->
+                    <img src="images/water.svg" alt="image_broken">
                             <p style="color:#52A4FF;">Water</p>
+                    </div>
                             </a>
+                    <a href="track_stats_sleep.php?id=<?php echo($clientId) ?>">
+                    <div class="client-card" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
+                        <!-- <i style="color:#7D5DE6;" class="fa-solid fa-weight-hanging"></i> -->
+                        <img src="images/sleep.svg" alt="">
+                        <p style="color:rgba(104, 68, 226, 1);">Sleep</p>
                         </div>
-                        <div class="client-card client-card-weight" style="color:#7D5DE6; border: 1px solid #7D5DE6;">
-                        <a href="track_stats_weight.php?id=<?php echo ($clientId) ?>">
-                            <img src="images/weight_selected.svg" alt="">
-                            <p style="color:#FFFFFF;">Weight<br>Track</p>
                             </a>
-                        </div>
-                        <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC;">
-                        <a href="track_stats_sleep.php?id=<?php echo ($clientId) ?>">
-                            <i style="color:#54AFAC;" class="fa-solid fa-moon"></i>
-                            <p style="color:#54AFAC;">Sleep</p>
+                    <a href="track_stats_weight.php?id=<?php echo($clientId) ?>">
+                    <div class="client-card" style="color:#54AFAC; border: 1px solid #54AFAC; background: linear-gradient(38.98deg, #768B93 7.65%, #8FC4C3 87.93%);">
+                        <!-- <i style="color:#54AFAC;" class="fa-solid fa-moon"></i> -->
+                        <img src="images/weight.svg" alt="" style="filter: brightness(0) invert();">
+                        <p style="color:#fff;">Weight Track</p>
+                    </div>
                             </a>
-                        </div>
+                    <a href="track_stats_calorie.php?id=<?php echo($clientId) ?>">
                         <div class="client-card" style="color:#E3738D; border: 1px solid #E3738D;">
-                        <a href="track_stats_calorie.php?id=<?php echo ($clientId) ?>">
-                            <i style="color:#E3738D;" class="fa-solid fa-stopwatch-20"></i>
-                            <p style="color: #E3738D;">Calorie<br>Track</p>
+                    <!-- <i class="fa-solid fa-stopwatch-20" style="color:#E3738D" ></i> -->
+                    <img src="images/track.svg" alt="">
+                        <p style="color:#E3738D;">Calorie Track</p>
+                    </div>
                             </a>
                         </div>
                 </div>
-            </div>
 
             <div class="tst-left-b">
                 <div class="tab">
@@ -743,28 +867,40 @@ margin-left: 5px;
                     <div id="London" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChart"></canvas>
+                    <div class="i-button-box">
                     <img class="i-button" src="./images/i-button.svg" alt="">
+                        <span>info</span>
+                    </div>
                     <div id="london_pop" class="i-pop"></div>
                     </div>
                     
                     <div id="Year" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartYearly"></canvas>
+                    <div class="i-button-box">
                     <img class="i-button" src="./images/i-button.svg" alt="">
+                        <span>info</span>
+                    </div>
                     <div id="year_pop" class="i-pop"></div>
                     </div>
 
                     <div id="Month" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartMonthly"></canvas>
+                    <div class="i-button-box">
                     <img class="i-button" src="./images/i-button.svg" alt="">
+                        <span>info</span>
+                    </div>
                     <div id="month_pop" class="i-pop"></div>
                     </div>
                     
                     <div id="Week" class="tab_content">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                     <canvas id="myChartWeekly"></canvas>
+                    <div class="i-button-box">
                     <img class="i-button" src="./images/i-button.svg" alt="">
+                        <span>info</span>
+                    </div>
                     <div id="week_pop" class="i-pop"></div>
                     </div>
                 
@@ -800,7 +936,7 @@ margin-left: 5px;
         <div class="col-lg-4 tst-right">
             <div class="set-goal">
                 <div class="heading">
-                    <p>Set Goals</p>
+                    <p>Weight Goal</p>
                     <span>Daily Weight Count</span>
                     <span id="g-set-success"></span>
                 </div>
@@ -827,32 +963,32 @@ $pastMonth->modify('-1 month');
 $monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('Y-m-d'),3)[0]['avg(weight)'];
 ?>
     <div class="row ts-down">
-        <div class="col-lg-8 tsd-left">
+        <div class="col-xl-8 col-lg-7 tsd-left">
             <div class="tsd-left-t">
                 <div class="stats-btn-container">
                     
                     <div class="stat-btn">
                         <div class="stat-data">
-                            <span class="title">Daily Count</span>
-                            <span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">Kgs</span>
+                            <div><span class="title">Daily Count</span></div>
+                            <div><span id="daily-count" class="value"><?php echo(ceil($todayData)) ?></span><span class="unit">Hours</span></div>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
-                            <span class="title">Weekly Avg</span>
-                            <span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">Kgs</span>
+                            <div><span class="title">Weekly Avg</span></div>
+                            <div><span id="weekly-avg" class="value"><?php echo(ceil($weekAvg)) ?></span><span class="unit">Hours</span></div>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
-                            <span class="title">Monthly Avg</span>
-                            <span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">Kgs</span>
+                            <div><span class="title">Monthly Avg</span></div>
+                            <div><span id="monthly-avg" class="value"><?php echo(ceil($monthAvg)) ?></span><span class="unit">Hours</span></div>
                         </div>
                     </div>
                     <div class="stat-btn">
                         <div class="stat-data">
-                            <span class="title">Total</span>
-                            <span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">Kgs</span>
+                            <div><span class="title">Total</span></div>
+                            <div><span id="total" class="value"><?php echo(ceil($allDataSum)) ?></span><span class="unit">Hours</span></div>
                         </div>
                     </div>
                 </div>
@@ -895,7 +1031,7 @@ while($k<$j){
 <?php
 $progressBarData = fetchDataSql($clientId, "", $today->format('Y-m-d'), 2);
 ?>     
-        <div class="col-lg-4 tsd-right">
+        <div class="col-xl-4 col-lg-5 tsd-right">
             <div class="heading">
                 <p>Daily Progress</p>
                 <a href="past_activities_weight.php?id=<?php echo ($clientId) ?>"><span>View Activity</span></a>
@@ -905,6 +1041,18 @@ $progressBarData = fetchDataSql($clientId, "", $today->format('Y-m-d'), 2);
                     <div class="progress-circle-fill">
                         <div class="progress-circle-value"><span id="progress-percent"><?php echo($progressBarData[0]['avg(weight)']) ?> Kg</span><span>New Weight</span></div>
                     </div>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                    <div class="left">
+                        
+                                <div role="progressbar" style="--value:<?php $value = $progressPercenta; echo $value; ?>"></div>
+                                <div class="light_sleep" role="progressbar1" style="--value:<?php $value = $sleepConsumedl; echo $value; ?>"></div>
+                                <div class="deep_sleep" role="progressbar2" style="--value:<?php $value = $progressPercent; echo $value;  ?>"></div>
+                         
+                    </div>
+                    <div class="right">
+                        
                 </div>
             </div>
             <?php

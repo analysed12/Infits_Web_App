@@ -28,6 +28,14 @@ include "navbar.php"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
+     body {
+        font-family: 'NATS', sans-serif !important;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 html {
     overflow-x: hidden;
     font-size: 13px !important;
@@ -37,7 +45,7 @@ html {
     display: flex;
     flex-direction: column;
     height: 90%;
-    font-family: "Poppins";
+    
     font-style: normal;
     font-weight: 500;
     font-size: 13px !important;
@@ -79,11 +87,11 @@ html {
 
 .event_form {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+    align-items: center !important;
     margin-left: 20%;
     width: 60%;
-    /* margin-right: 10%; */
+    margin-right: 10%;
     /* background-color: brown; */
     /* margin-top: 5%;
     padding: 2%; */
@@ -95,11 +103,14 @@ html {
 }
 
 input{
-    padding-left:10px !important;
+    /* padding-left:10px !important; */
+    padding: 1.5rem !important;
 }
-
+.subject tag_title{
+ color:black;
+}
 .tag_title {
-    /* font-size: 15px; */
+    font-size: 15px;
     letter-spacing: 1.5px;
     text-transform: capitalize;
     font-weight: 600;
@@ -120,14 +131,19 @@ input{
     display: block;
     /* font-size: 18px; */
     /* box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25) !important; */
-/* height:35px; */
+/* height:40px; */
     width: 100%;
+    /* padding: 1.5rem !important; */
 }
 
 .subject-text {
     font-size: 13px;
+   
 }
+.btns{
+    display: flex;
 
+}
 .btns button {
     width:40%;
     margin-left:20px;
@@ -204,10 +220,13 @@ input{
     border-left: none !important;
     border-right: none !important;
     outline: none;
-    font-size: 12px !important;
+    font-size: 20px !important;
+    width: 144px
     /* margin-top: 10px; */
 }
-
+.plan_name:focus{
+    width: auto !important;
+}
 .plan_name_box {
     text-align: center !important;
 }
@@ -228,7 +247,9 @@ input{
         margin-left: 0% !important;
         width: 100%;
     }
-
+    .evt-form {
+    width: 90%;
+}
     .tag_title {
         font-size: 12px !important;
     }
@@ -245,16 +266,56 @@ input{
 .btn-default {
     text-shadow: none !important;
 }
-
+.btn-group{
+    width: 100%;
+}
+.dropdown-toggle::after {
+    color: #7282FB;
+    /* height: 5px;
+    width: 10px; */
+/* font-size: 10px; */
+}
 .multiselect {
     background: none !important;
     border:none !important;
     color: black !important;
     padding: 10px !important;
-    font-size: 12px !important;
+    font-size: 20px !important;
+    width:100% !important;
+    height: 40px;
+    position:relative !important;
+    
+}
+.multiselect-container{
+    position: relative;
     width: 100% !important;
 }
+.multiselect.dropdown-toggle.btn.btn-default{
+    position: relative;
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1.5rem !important;
 
+}
+.multiselect-selected-text{
+    font-size: 12px;
+}
+.dropdown-menu>.active>a{
+    background-color: white !important;
+}
+.dropdown-menu {
+    border: none;
+}
+.multiselect-container>li>a>label.checkbox {
+    margin: 0;
+    background-color: white;
+    color: black;
+    border: none !important;
+    padding: 1rem;
+    padding-left: 3rem;
+}
 /* Add Tags Popup */
 .popup {
     display: none;
@@ -276,8 +337,6 @@ input{
 }
 
 .popup .contents {
-
-    border: 1px solid #ccc;
     border-radius: 5px;
     width: auto;
     height: auto;
@@ -290,16 +349,24 @@ input{
     left: 50vw;
     transform: translate(-50%, -50%);
     padding: 20px;
+    z-index: 999;
 }
 
 .popup .contents p {
     text-align: center;
     margin-top: 5px;
+    font-size: 20px;
+    font-weight:500;
 }
 
 .popup .contents input {
+    border: 1px solid #ccc !important;
     text-align: center;
     margin-top: 5px;
+    height: 40px;
+    padding: 1px !important;
+    border-radius: 7px;
+    font-size: 13px;
     /* margin-left:5px;
   margin-right:5px; */
 }
@@ -310,7 +377,7 @@ input{
     margin-left: 30%;
     text-decoration: none;
     border: none;
-    background-color: #6883FB;
+    background: #7D96F8;
     color: white;
     padding: 5px;
     width: 40%;
@@ -351,12 +418,12 @@ input{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 6px;
-    height: 35px;
+    padding: 15px;
+    height: 40px;
     width: 70%;
     background: #FFFFFF;
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+    border-radius: 7px;
     margin: 5px;
 }
 
@@ -387,7 +454,7 @@ input{
     padding-bottom: 15px;
     padding-left: 5px;
     padding-right: 5px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
@@ -401,10 +468,12 @@ input{
     text-align: right;
     letter-spacing: 0.44px;
 }
-
+.plan_name::-webkit-input-placeholder {
+    color: #000;
+}
 .input-group input {
     border: none;
-    width:50%;
+    width:78%;
 }
 
 .input-group input:focus {
@@ -433,6 +502,110 @@ input[type="date"]::-webkit-datetime-edit-day-field,
 input[type="date"]::-webkit-datetime-edit-year-field {
   color: #bbbbbb;
 }
+/***********************FEATURE POPUP STYLES *******************************/
+
+/* Style for pop-up form */
+.modal {
+  display: none; /* Hide the modal by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black with opacity */
+}
+
+.modal-content {
+  border-radius: 5px;
+    width: auto;
+    height: auto;
+    display: flex-box;
+    align-items: center;
+    justify-content: center;
+    background: #FFF;
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    z-index: 999;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.skill-box{
+    box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
+    height: 40px;
+    /* text-align: center; */
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 7px;
+}
+.remove-skill-btn{
+    border: none;
+    background-color: white;
+}
+#skill-input{
+    border: 1px solid #ccc !important;
+    text-align: center;
+    margin-top: 5px;
+    height: 40px;
+    padding: 1px !important;
+    border-radius: 7px;
+    font-size: 13px;
+}
+#add-feature-submit-btn{
+    text-align: center;
+    margin-top: 15px;
+    /* margin-left: 30%; */
+    text-decoration: none;
+    border: none;
+    background: #7D96F8;
+    color: white;
+    padding: 5px;
+    width: 40%;
+    border-radius: 5px;
+}
+/*************************MEDIA QUERY FOR SMALL DEVICES ******************************/
+@media screen and (max-width: 720px) {
+    .edit-plan-img{
+       margin-top: 4rem !important;
+       width: 11rem !important;
+    }
+    .header{
+        margin-left: 2rem !important;
+        margin-top:0px !important;
+        font-size: 25px !important;
+    }
+    .event_form{
+        width: 100%;
+    }
+}
+/****************************media query for mediun devices**************************************/
+@media screen and (min-width: 720px) and (max-width: 1200px) {
+    .tag-item{
+        margin-left: 2px !important;
+    }
+    .evt-form{
+        width: 100%;
+    }
+}
 
 </style>
 
@@ -444,23 +617,24 @@ input[type="date"]::-webkit-datetime-edit-year-field {
     <!-- Contents Start -->
     <div id="content">
 
-        <h4 style="font-size:30px;margin-left:3rem;margin-top:1rem" class="header">Create Plan</h4>
+        <h4 style="font-size:40px;margin-left:3.5rem !important;margin-top:3.3rem;font-weight:400 !important" class="header">Create Plan</h4>
 
         <!-- Other content -->
         <div class="plan_form">
             <!-- Person image -->
             <div class="event-image">
                 <div class="ev-img" style="position:relative">
-                <div style="background: #7282FB;border-radius:100px;padding:0.5rem; z-index:2;margin-top:1rem;cursor:pointer;"> <img src="images/pencil.png" alt=""></div>
-                    <img src="images/create_edit_plan.svg"  style="position:absolute;width:15rem;margin-top:2rem" >
+                <div style="background: #7282FB;border-radius:100px;padding:0.5rem;margin-top:3rem;cursor:pointer;"> <img src="images/pencil.png" alt=""></div>
+                    <img src="images/create_edit_plan.svg" class="edit-plan-img"  style="position:absolute;width:15rem;margin-top:2rem; z-index:-2; width: 144px;
+                    height: 110px;" >
                 </div>
                 </div>
             </div>
             <br>
             <form action="create_plan.php" method="post">
                 <!-- Plan name -->
-                <div style="text-align:center; !important;;margin-top:2rem;" class="plan_name_box">
-                    <input type="text" placeholder="Plan Name" class="plan_name" name="plan_name" style="border:none;" required><i class="fa-solid fa-pen" style="color:#7282FB;cursor:pointer;"></i>
+                <div style="text-align:center !important;margin-top:2rem;" class="plan_name_box">
+                    <input type="text" placeholder="Plan Name" class="plan_name p-0" name="plan_name" style="border:none;" required><i class="fa-solid fa-pen" style="color:#7282FB;cursor:pointer;"></i>
                 </div>
                 <!-- Main form starts -->
                 <div class="event_form">
@@ -468,14 +642,14 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 
                         <!-- Different Tags -->
                         <div class="tags" style="margin-top:1rem">
-                            <div class="tag_title">Tags</div>
-                            <div class="tag" style="width:100%;">
+                            <div class="tag_title" style="font-size:25px !important; font-weight:400 !important">Tags</div>
+                            <div class="tag mt-3" style="width:100%;">
                                 <div
-                                    style="display: inline-block; border:none;font-size: 12px; width: 80%;background: white !important;
-    border-radius: 10px !important;
+                                    style=" height: 40px; display: inline-block; border:none;font-size: 12px; width: 80%; background: white !important;
+    border-radius: 7px !important;
     /* border: 1px solid black !important; */
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25) !important;">
-                                    <select id="fields_u" name="languages[]" multiple >
+                                    <select id="fields_u" style="position: relative;" name="languages[]" multiple >
                                         <option value="Keto Diet">Keto Diet</option>
                                         <option value="Vegan Diet">Vegan Diet</option>
                                         <option value="Diet Chart">Diet Chart</option>
@@ -507,8 +681,8 @@ input[type="date"]::-webkit-datetime-edit-year-field {
                                 </script>
 
 
-                                <button onclick="showPopup()" style="float:right;display: inline-block;width:10%; border:none;"
-                                    class="tag-item openButton openBtn">+</button>
+                                <button onclick="showPopup()" style="float:right;display: inline-block;width:40px; height: 40px; border:none; text-align: center;"
+                                    class="tag-item openButton openBtn"><i class="fas fa-plus"style="font-size:15px;"></i></button>
                                 <div class="popup">
                                     <div class="blocker" onclick="hidePopup()"></div>
                                     <div class="contents">
@@ -524,63 +698,108 @@ input[type="date"]::-webkit-datetime-edit-year-field {
                         </div>
                         <!-- Tags end here -->
 
-
+<!-------------------------------------PLAN DURATION TAG--------------------------------------------->
                         <br>
-                        <label for="" class="subject tag_title">Plan Duration</label>
+                        <label for="" class="subject tag_title" style="font-size:25px !important; font-weight:400 !important">Plan Duration</label>
                         <div style="width:100%;">
-                            <div style="display:inline-block;width:45%; margin-right:6%;">
-                                <p style="font-size:12px;">Start Time</p>
-                                <input class="subject subject-text" type="date" name="start_date" style="height: 35px; background: #FFFFFF;
+                            <div style="display:inline-block;width:46%; margin-right:6%;">
+                                <p style="font-size:12px;">From</p>
+                                <input class="subject subject-text" type="text" placeholder="MM / DD / YYYY" onfocus="this.type='date'" onblur="this.type='text'" name="start_date" style="height: 40px; background: #FFFFFF;
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border:none;" />
+    border-radius: 7px;
+    border:none;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    "
+     />
                             </div>
-                            <div style="display:inline-block;width:45%;">
-                                <p style="font-size:12px; margin-top:10px;">End Time</p>
-                                <input class="subject subject-text" type="date" name="end_date" style="height: 35px; background: #FFFFFF;
+                            <div style="display:inline-block;width:46%;">
+                                <p style="font-size:12px; margin-top:10px;">To</p>
+                                <input class="subject subject-text" type="text" placeholder="MM / DD / YYYY" onfocus="this.type='date'" onblur="this.type='text'"  name="end_date" style="height: 40px; background: #FFFFFF;
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border:none;" />
+    border-radius: 7px;
+    border:none;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    " />
                             </div>
                         </div>
                         <br>
+<!-------------------------------------FEATURES TAG--------------------------------------------->
+                        <label for="" class="subject tag_title" style="font-size:25px !important; font-weight:400 !important">Features</label>
 
-                        <label for="" class="subject tag_title">Features</label>
-
-                        <div class="features_main">
+                        <div class="features_main mt-2">
                             <div class="features_left textbox-wrapper">
                                 <div class="input-group">
-
+                                    <div class="skills-list">
+                                        <!-- Skills added dynamically using JavaScript -->
+                                      </div>
                                 </div>
 
                             </div>
-                            <div class="features_right">
-                                <button style="font-size:15px" type="button" class="plan_btn_add plan_btn add-textbox">
-                                    +
+                    
+                           <!---------------------------FEATURES POP-UP CODE ---------------------------------->
+                           <div class="features-container">
+                            
+                            <div class="features_right add-feature">
+                                <button style="font-size:15px" type="button" class="plan_btn_add plan_btn add-textbox add-feature-btn">
+                                <i class="fas fa-plus"></i>
                                 </button>
                             </div>
+                            
+                          </div>
+                          
+                          <!-- Pop-up form to add skills -->
+                          <div id="add-feature-modal" class="modal">
+                            <div class="modal-content">
+                              <span class="close d-none">&times;</span>
+                              <h2 style="font-size: 20px;
+                              font-weight: 500;">Add a Feature</h2>
+                              <input type="text" id="skill-input" placeholder="Type a Feature here...">
+                              <button id="add-feature-submit-btn">Add</button>
+                            </div>
+                          </div>
+                          <!----------------------FEATURES POP-UP CODE END------------------>                         
+
+                            
                         </div>
 
                         <br>
-                        <label for="" class="subject tag_title">Description</label>
-                        <input class="subject " placeholder="Description" type="text" name="description" style="height: 35px;  background: #FFFFFF;
+                        <!-------------------------------------DESSCRIPTION TAG--------------------------------------------->
+                        <label for="" class="subject tag_title" style="font-size:25px !important; font-weight:400 !important">Description</label>
+                        <input class="subject mt-3" placeholder="Description" type="text" name="description" style="height: 40px;  background: #FFFFFF;
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border:none;" />
+    border-radius: 7px;
+    border:none;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    padding:1.5rem; " />
                         <br />
-
-                        <label for="" class="subject tag_title">Price</label>
-                        <input class="subject subject-text" type="number" name="price" placeholder="Rs. /month" style="height: 35px; background: #FFFFFF;
+                      <!-------------------------------------PRICE TAG--------------------------------------------->
+                        <label for="" class="subject tag_title" style="font-size:25px !important; font-weight:400 !important">Price</label>
+                        <input class="subject subject-text mt-3" type="number" name="price" placeholder="Rs. /month" style="height: 40px; background: #FFFFFF;
     box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border:none;" />
+    border-radius: 7px;
+    border:none;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    padding:1.5rem;" />
 
                         <br>
+                        <!-------------------------------------BOTTON BUTTONS--------------------------------------------->
                         <div class="btns">
-                            <button>Cancel</button>
-                            <button style="float: right;background-color:#6883FB;color:white;" name="final_save_btn" type="submit">Save</button>
+                            <button style="color:#7282FB" >Cancel</button>
+                            <button style="background-color:#6883FB;color:white;" name="final_save_btn" type="submit">Save</button>
                         </div>
-                        <br><br><br>
+                        <!-- <br><br><br> -->
                     </div>
 
                 </div>
@@ -627,6 +846,7 @@ if (isset($_POST['final_save_btn'])){
 
     <!-- Pop up ends -->
 
+   
 </body>
 <?php
 $output = ob_get_clean();
@@ -660,7 +880,7 @@ function hidePopup() {
 </script>
 
 
-<script>
+<!-- <script>
 $(document).ready(function() {
     var max = 10;
     var cnt = 1;
@@ -669,7 +889,7 @@ $(document).ready(function() {
         if (cnt < max) {
             cnt++;
             $(".textbox-wrapper").append(
-                '<div class="input-group"><div class="features_box"><input type="text" name="text_arr[]" placeholder="Type feature here.." /><button type="button" class="remove-textbox"><i class="fa-solid fa-xmark"></i></button></div></div>'
+                '<div class="input-group"><div class="features_box"><input type="text" class="p-0" name="text_arr[]" placeholder="Type feature here.." /><button type="button" class="remove-textbox"><i class="fa-solid fa-xmark"></i></button></div></div>'
             );
         }
     });
@@ -680,6 +900,91 @@ $(document).ready(function() {
         cnt--;
     });
 });
+</script> -->
+<!--------------------------------JS FOR FEATURE POP-UP-------------------------- -->
+<script>
+    // Get the modal
+var modal = document.getElementById("add-feature-modal");
+
+// Get the button that opens the modal
+var btn = document.querySelector(".add-feature-btn");
+
+// Get the <span> element that closes the modal
+var span = document.querySelector(".close");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+// Get the add skill submit button and skill input field
+var addSkillSubmitBtn = document.getElementById("add-feature-submit-btn");
+var skillInput = document.getElementById("skill-input");
+
+// Get the skills list container
+var skillsList = document.querySelector(".skills-list");
+
+// Initialize skills array
+var skills = [];
+
+// Function to add skill to the skills array and display it on the page
+function addSkill(skill) {
+  // Add skill to skills array
+  skills.push(skill);
+  
+  // Clear skills list container
+  skillsList.innerHTML = "";
+  
+  // Loop through skills array and display each skill in a box/tag
+  skills.forEach(function(skill) {
+    var skillBox = document.createElement("div");
+    skillBox.classList.add("skill-box");
+var skillName = document.createTextNode(skill);
+skillBox.appendChild(skillName);
+
+// Add remove button to skill box/tag
+var removeBtn = document.createElement("button");
+removeBtn.classList.add("remove-skill-btn");
+var removeIcon = document.createElement("i");
+removeIcon.classList.add("fas", "fa-times");
+removeBtn.appendChild(removeIcon);
+skillBox.appendChild(removeBtn);
+
+// Add event listener to remove button to remove skill from skills array and skills list
+removeBtn.addEventListener("click", function() {
+  var index = skills.indexOf(skill);
+  skills.splice(index, 1);
+  skillsList.removeChild(skillBox);
+});
+
+skillsList.appendChild(skillBox);
+});
+
+// Clear skill input field and close modal
+skillInput.value = "";
+modal.style.display = "none";
+}
+
+// Add event listener to add skill submit button to add skill to skills array and display it on the page
+addSkillSubmitBtn.addEventListener("click", function() {
+if (skillInput.value.trim() !== "") {
+addSkill(skillInput.value.trim());
+}
+});
+
+
 </script>
 
 </html>
