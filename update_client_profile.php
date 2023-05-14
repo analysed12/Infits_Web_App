@@ -338,9 +338,9 @@ while ($row = mysqli_fetch_array($result)) {
                                             $newPlanDetails = mysqli_fetch_assoc($res);
 
                                         }  ?>
-                                        <input hidden readonly name="plan" value="<?php if($newPlanDetails){echo $newPlanDetails['plan_id'];}else{ echo $row1['plan_id']; } ?>" >
+                                        <input hidden readonly name="plan" value="<?php if(isset($_GET['plan_id'])){echo $newPlanDetails['plan_id'];}else{ echo $row1['plan_id']; } ?>" >
 
-                                        <input readonly type="text" name="" value="<?php if($newPlanDetails){echo $newPlanDetails['name'];}else{ echo $row1['name']; } ?>" class="input-tag" style="width:50% !important; margin-right:10%;" id="">
+                                        <input readonly type="text" name="" value="<?php if(isset($_GET['plan_id'])){echo $newPlanDetails['name'];}else{ echo $row1['name']; } ?>" class="input-tag" style="width:50% !important; margin-right:10%;" id="">
                                         <a href="select_client_plan.php?client_id=<?php echo $client_id ?>" class=""
                                             style="display:flex;justify-content: center;align-items: center; width:40% !important;height:40px; background: #FFFFFF;border: 1px solid #6883FB;color: #6883FB; text-decoration:none ;border-radius: 8px;">Select</a>
                                     </div>

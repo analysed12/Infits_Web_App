@@ -291,7 +291,7 @@ if(isset($_POST['search-btn']))
   if(!empty($_POST['search']))
 	{
     $search = $_POST['search'];
-    $sql1 = "SELECT * FROM create_plan WHERE name='$search'";
+    $sql1 = "SELECT * FROM create_plan WHERE name like '%$search%' and dietitianuserID = '{$_SESSION['dietitianuserID']}'";
  if($result1 = mysqli_query($conn, $sql1)){
      if(mysqli_num_rows($result1) > 0){
              while($row1 = mysqli_fetch_array($result1)){
