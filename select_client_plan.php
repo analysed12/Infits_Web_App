@@ -226,9 +226,6 @@ include('navbar.php');
         .card{
             width:90%;
         }
-        body{
-            margin-left: 10%;
-        }
 
     }
     @media screen and (max-width: 720px) {
@@ -456,6 +453,9 @@ else{
                     <div>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex  justify-content-end">
+                <a onclick="window.location.href = 'create_plan.php';"><img src="./images/9_plus.png"alt="img"></a>
             </div>
            
 </body>
