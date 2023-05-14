@@ -18,16 +18,6 @@ include('navbar.php');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
-    
-    @font-face {
-    font-family: 'NATS';
-    src:url('font/NATS.ttf.woff') format('woff'),
-        url('font/NATS.ttf.svg#NATS') format('svg'),
-        url('font/NATS.ttf.eot'),
-        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
     html::-webkit-scrollbar {
         width: 0.5rem;
     }
@@ -57,11 +47,6 @@ include('navbar.php');
         overflow-x:hidden;
     }
 
-    .sidenav .sidenavlink{
-        font-weight:600!important;
-        font-size:20px;
-        letter-spacing:2.4px!important;
-    }
     .card {
         /* background-color: dodgerblue; */
         color: black;
@@ -209,7 +194,7 @@ include('navbar.php');
     }
     .row{
         font-size:17px;
-        font-weight:600!important;
+        font-weight:400!important;
         letter-spacing:1.5px;
         
     } 
@@ -274,13 +259,13 @@ include('navbar.php');
 
 
     <div class="row" style="padding:1rem 0rem 1rem 1rem;">
-        <div class="col-6 " style="font-weight:bold;font-size:40px;letter-spacing:2px;">All Diet Plans</div>
+        <div class="col-6 " style="font-weight:400;font-size:40px;letter-spacing:2px;">All Diet Plans</div>
         <div class="col-6" style="text-align:right">
             <div class="card-body" >
                 <form method="POST" class="search-form form-inline" style="width:400px;background: #FFFFFF;box-shadow: 0.6px 0.6px 2px 1px #ccc;
     border-radius: 0.6rem;position:relative;">
                     <input type="text" placeholder="Search Plan" class="search-box form-control w-75" id="search"
-                        name="search" style="color: #667080;font-weight:600!important;font-size:20px;margin-left:30px;letter-spacing:1.5px;">
+                        name="search" style="color: #667080;font-weight:400!important;font-size:20px;margin-left:30px;letter-spacing:1.5px;">
                     <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
                             class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;margin-top:-8px;color:#667080;"></i></button>
                     <div id="display">
@@ -326,14 +311,14 @@ if(isset($_POST['search-btn']))
                             <div class="card-upper-details col-8">
                                 <div class="row">
                                     <div class="col"
-                                        style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:bold;">
+                                        style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:400;">
                                         <?php echo $row1['name']?></div>
                                     <div class="w-100"></div>
                                     <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
-                                            style="font-weight:bold">Rs.<?php echo $row1['price'] ?></span>/months
+                                            style="font-weight:400">Rs.<?php echo $row1['price'] ?></span>/months
                                     </div>
                                     <div class="col-7"
-                                        style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:bold;display:flex;align-items:center;justify-content:center;">
+                                        style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:400;display:flex;align-items:center;justify-content:center;">
                                         <?php echo $months ?> Months
                                     </div>
                                     <div class="w-100"></div>
@@ -380,7 +365,7 @@ if(isset($_POST['search-btn']))
   }
 }
 else{                       
- $sql = "SELECT * FROM create_plan";
+ $sql = "SELECT * FROM create_plan where dietitianuserID = '{$_SESSION['dietitianuserID']}'";
 //  $client_id = $_GET['client_id'];
  if($result = mysqli_query($conn, $sql)){
      if(mysqli_num_rows($result) > 0){
@@ -402,14 +387,14 @@ else{
                                 <div class="card-upper-details col-8">
                                     <div class="row">
                                         <div class="col"
-                                            style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:bold;">
+                                            style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:400;">
                                             <?php echo $row['name']?></div>
                                         <div class="w-100"></div>
                                         <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
-                                                style="font-weight:bold">Rs.<?php echo $row['price'] ?></span>/month
+                                                style="font-weight:400">Rs.<?php echo $row['price'] ?></span>/month
                                         </div>
                                         <div class="col-7"
-                                            style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:bold;display:flex;align-items:center;justify-content:center;">
+                                            style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:400;display:flex;align-items:center;justify-content:center;">
                                             <?php echo $months ?> Month
                                         </div>
                                         <div class="w-100"></div>
@@ -435,7 +420,7 @@ else{
 
                                                 // echo '<div>';
                                                 echo '<div style="display:inline-block;width:auto;margin-right:5px; "><i style="color:black;" class="fa-regular fa-circle-check"></i></div>';
-                                                echo '<div style="display:inline-block;width:auto; margin-right:20px;font-style:normal; font-size:20px;font-weight:600!important;letter-spacing:0.9px;">'.$out.'</div>';
+                                                echo '<div style="display:inline-block;width:auto; margin-right:20px;font-style:normal; font-size:20px;font-weight:400!important;letter-spacing:0.9px;">'.$out.'</div>';
                                                 // echo '</div>';
                                             
                                             }
@@ -446,7 +431,7 @@ else{
                             <div class="" style="display:flex; align-items:center;justify-content:center; ">
                                 <a class="planBtn1" href="update_client_plan.php?plan_id=<?php echo $row['plan_id'] ?>">Edit
                                     Plan</a>
-                                <a class="planBtn2" href="choose_plan.php?client_id=<?php echo $client_id?>&plan_id=<?php echo $row['plan_id'] ?>">Choose Plan</a>
+                                <a class="planBtn2" href="<?=$_SERVER['HTTP_REFERER']?>&plan_id=<?=$row['plan_id'] ?>">Choose Plan</a>
                             </div>
                         </form>
                     </div>
