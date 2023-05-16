@@ -191,7 +191,7 @@ li.direction {
             if(!$rid || $rid == null){   // check weather id is present or not...
                 session_start();
                 $_SESSION['NoID'] = "Oops! need recipes id to edit.";
-                header('location: all_recipes.php');
+                //header('location: all_recipes.php');
                 return;
             }  
 
@@ -261,7 +261,7 @@ li.direction {
                    echo '<div class="alert alert-primary" role="alert" style="text-align:center;">
                         Recipes Updated;
                       </div>';
-                      header('location: all_recipes.php');
+                      //header('location: all_recipes.php');
                   
                     } else {
                 
@@ -316,7 +316,7 @@ li.direction {
                    echo '<div class="alert alert-primary" role="alert" style="text-align:center;">
                         Recipes Updated;
                       </div>';
-                  header('location: all_recipes.php');
+                  //header('location: all_recipes.php');
                   
                     } else {
                 

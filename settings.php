@@ -35,7 +35,7 @@ $name =  explode(" ", $row['dietitianuserID'] );
 
 
 body {
-    
+   
         font-family: 'NATS', sans-serif !important;
         
 }
@@ -55,6 +55,8 @@ body {
 }
 
 .section {
+    max-width: 1100px;
+    margin-top:30px;
     
     display: flex;
     justify-content: center;
@@ -63,11 +65,13 @@ body {
 }
 
 .grid {
-    display: grid;
+    margin: 0 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
     text-align: center;
-    gap:auto;
-    
-    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    width: 100%;
+    flex-wrap: wrap;
     justify-content: center;
 
 }
@@ -93,9 +97,6 @@ body {
     box-shadow: 0px 4px 8px 0px #00000040;
     /* border: none; */
     border-radius: 20px;
-
-   
-
 }
 
 .box {
@@ -130,7 +131,7 @@ body {
     justify-content: center;
 }
 
-.logout1 {
+.logout {
    
     background-color: #ff0000;
     color: #fff;
@@ -138,8 +139,9 @@ body {
     font-size: 1.2rem;
     border: none;
     border-radius: 10px;
-    right: 5%;
-    float: right;
+    float:right;
+/* margin-top:1rem; */
+
 }
 
 .img-1 {
@@ -151,7 +153,7 @@ body {
     border-radius: 20px;
     box-shadow: 2px 2px rgb(0, 0, 0)888;
     text-align:center;
-    width: 160px;
+    width: 171px;
     height: 171px !important;
 
 }
@@ -256,65 +258,57 @@ body {
 border-radius: 1.2rem;
 
 }
-.logout{
+/* .logout{
 width: 178px;
 height: 52px;
-
-float:right;
-right: 4%;
+position:absolute;
+margin-right:3%;
+margin-top:1rem;
+margin-bottom:1rem !important;
 background: #FF0000;
 border-radius: 10px;
-border:none;
-}
+} */
 .mobview{
     display:none;
 }
 .mob_wrapper1{
     margin:10px;
-    
+    margin-left:20px;
     display: flex;
 
-
+     width: 370px;
+height: 52px;
 
 
 background: #F3F5F8;
 border-radius: 18px;
 }
-@media screen and (max-width: 1200px){
-.grid {
-    display: grid;
-    text-align: center;
-    gap:0 !important;
     
-    grid-template-columns: repeat(2, minmax(auto, 1fr));
-    justify-content: center;
+@media screen and (max-width: 988px) {
+    ul{
+        margin-left: 0rem ;
+}
 
 }
-}
-
 @media screen and (max-width: 720px) {
     .webview{
         display:none;
     }
     .mob_wrapper1{
     
-    margin:2rem;
+    margin:0.5rem;
     display: flex;
     
 
-     width: auto;
-height: auto;
+     width: auto !important;
+height: auto !important;
 
 
 
-}
-.logout{
-    display:none
 }
     .mobview{
         display:flex;
         flex-direction:column;
-        
     }
 }
 </style>
@@ -328,18 +322,18 @@ height: auto;
     <div class="webview">
     <div class="container">
         <div class="text-center">
-            <img src="./images/settingDp.svg" style="width:15%"class="rounded" alt="...">
+            <img src="./images/settingDp.svg" class="rounded" alt="...">
 
             <!-- while linking use this  -->
             <!-- <h3 class="display-6 right-float"><br /> <?php echo ($name[0]) ?><br /> <?php echo($name[1])?></h3> -->
 
-            <h3 class="display-6 right-float" style = "margin-left: 25px;font-weight:400"><br /><?php echo ($name[0]) ?> </h3>
+            <h3 class="display-6 right-float" style = "margin-left: 25px;font-weight:400"><br />John <br/> Wayne</h3>
 
         </div>
     </div>
 
     <div class="section">
-        <ul class="grid" >
+        <ul class="grid" style="margin-left:1rem">
              <a href="profile_settings_show.php" style = "text-decoration: none; padding: 0px;">
             <li>
                 <div class="box img-1">
@@ -392,23 +386,24 @@ height: auto;
               </a>
         </ul>
 
-        <!-- <div class="logout-button-box">
-            <button class="logout">Logout</button>
-        </div> -->
-    </div>
     
     </div>
-
+    
+    <div>
         <form action="logout.php">
-            <button tupe="submit" class="logout">Logout</button>
+            <button type="submit" class="logout">Logout</button>
         </form>
+    </div>
+    </div>
+
+    
     
 <!--------------------------------------------------MOBVIEW------------------------------>
 
     <div class="mobview">
         <div class="profileimg" >
         <img src="./images/settingDp.svg" id="pfp" style=" display: block;margin-left: auto;margin-right: auto;width:30%">
-        <p  style = "font-weight:400;font-size:30px;text-align:center"><?php echo ($name[0]) ?></p>
+        <p  style = "font-weight:400;font-size:30px;text-align:center">John Wayne</p>
         </div>
         
          
@@ -429,20 +424,21 @@ height: auto;
             <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">About Us</p>     
         </div>
         <div class="mob_wrapper1">
-            <img src="images/helpus.png" style="width:12%;margin-left:10px">
+            <img src="images/helpus.png" style="width:62px;">
             <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">Help</p>     
         </div>
         <div class="mob_wrapper1">
             <img src="icons/settings/icon1.svg" alt="">
             <p style="margin-top:2px;font-size:28px;margin-left:15px;font-weight:500">Referral Code</p>     
         </div>
+       
         <div>
         <form action="logout.php">
-            <button tupe="submit" class="logout1">Logout</button>
+            <button type="submit" class="logout">Logout</button>
         </form>
     </div>
-        
     </div>
+   
 
 </body>
 

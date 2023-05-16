@@ -5,76 +5,95 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
 </head>
 <style>
-    .text-start{
-        font-weight:500;
-        color:#000000;
-        position:absolute;
-        left:295px;
-        top:100px;
-        line-height:20px;
-        display:flex;
-        align-items:center;
+     body {
+    font-family: "NATS", sans-serif !important;
+    
+    font-weight: 400;   
+    position: relative;
     }
-    .container{
-        margin-top:15vh;
-    }
-    .button{
+.btn{
         background: #FFFFFF;
         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-        border-radius: 50px;
+        border-radius: 50px !important;
         border:1px solid white;
         width:284px;
         height:97px;
-        display:flex;
-        flex-direction:rows;
-        justify-content:space-around;
+        display:flex !important;
+        flex-direction:row !important;
+        justify-content:space-around !important;
         position:absolute;
-        right:10vh;
+        right:10vh !important;
+        bottom:-25vh !important;
+        z-index:2 !important;
     }
-    .button p,img{
-        color:#4B9AFB;
-        font-size:20px;
+    .btn p,img{
+        color:#4B9AFB !important;
+        font-size:35px;
         font-weight:400;
         margin:auto 10px;
     }
-    
-    @media screen and (max-width: 720px){
-        .text-start{
-            margin-top:40px;
+    @media screen and (min-width:720px) and (max-width:1500px){
+        .btns{
+            bottom:-119px !important;
+            padding-bottom:0px !important;
         }
     }
-    @media screen and (max-width:400px){
-        .text-start{
-            margin-top:100px;
-            font-size:18px;
-            font-weight:600;
-            margin-right:20px;
-            flex-wrap:no-wrap;
-            width:100px;
+    @media (min-width: 576px){
+        .container, .container-sm{
+            max-width:none !important;
         }
-        .text-center{
-            margin-left:20px;
         }
+
+    @media screen and (min-width:0px) and (max-width:720px){
+        
+        .title{
+            margin-left:1rem !important;
+            margin-top:-2rem !important;
+        }
+        .container{
+            margin:0px !important;
+        }
+        .btns{
+            bottom:-147px !important;
     }
     
+    }
+    @media screen and (min-width:0px) and (max-width:550px){
+        .image{
+            width:300px !important;
+        }
+        .topnav-icons{
+            gap:10px !important;
+            padding-right:0px !important;
+        }
+    }
+    @media (max-width: 720px){
+        .title{
+           
+            margin-top:1rem !important;
+    }
+    }
 </style>
 <body>
 <?php
-include 'navbar.php';
+        include "navbar.php";
 ?>
+        <div class="container" style="align-items:center;margin:10px;margin-left:13rem;width:auto;">
+        <div class="title" style="font-size:40px;font-weight:400;margin-top:1.7rem;margin-left:3rem;">Diet Plan
+        </div>
+        <div class="" style="margin:auto;">
+        <img src="images/dietplan.png" class="image" alt="..." style="margin:auto;display:flex;">
+        <p style="margin:auto;font-size:33px;display:flex;text-align:center;align-items:center;justify-content:center;">You haven't created any plan yet!</p>
 
-    <h3 class="text-start">Diet Plan</h3>
-
-<div class="container">
-<img src="images/dietplan.png" class="rounded mx-auto d-block" alt="...">
-<h4 class="text-center">You haven't created any plan yet!</h4>
 </div>
-<button type="btn" class="button md-end">
-    <p>Create Plan</p>
-    <img src="images/Vector (9).png" class="" alt="...">
-</button>
+
+</div>
+        <div style="display:flex !important;flex-direction:row !important;position:absolute !important;bottom:-196px;right:30px;width:284px;height:97px;background: #FFFFFF;box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);border-radius: 50px !important;align-items:center;justify-content:center;" class="btns">
+    <p style="color:#4B9AFB;font-size:35px;padding-top:20px">Create Plan</p>
+    <img src="images/Vector (9).png">
+</div>
 </body>
 </html>

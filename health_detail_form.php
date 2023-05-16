@@ -67,6 +67,12 @@ if ($conn->connect_error) {
     color: #FFFFFF;
     text-decoration: none;
 }
+.content .heading-box h1 {
+    font-size: 40px;
+  font-weight: 400;
+ 
+  margin-left: -13px;
+}
 
 /* .content #addDocumentPopup{
     position: fixed;

@@ -1,181 +1,307 @@
+<?php
+include('navbar.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    @import url('https://fonts.googleapis.com/earlyaccess/nats.css');
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
-
-    @font-face {
-        font-family: 'NATS';
-        src: url('./font/NATS.ttf.woff') format('woff'),
-            url('./font/NATS.ttf.svg#NATS') format('svg'),
-            url('./font/NATS.ttf.eot'),
-            url('./font/NATS.ttf.eot?#iefix') format('embedded-opentype');
-        font-weight: normal;
-        font-style: normal;
+    <title>Dashboard</title>
+    
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <style>
+        @font-face {
+    font-family: 'NATS';
+    src:url('font/NATS.ttf.woff') format('woff'),
+        url('font/NATS.ttf.svg#NATS') format('svg'),
+        url('font/NATS.ttf.eot'),
+        url('font/NATS.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+        font-family: 'NATS', sans-serif;
+        
     }
-
-        /*--- Right bottom Div ---*/
-.notification{
-        font-family: 'NATS';
-        font-style: normal;
-        font-weight: 400;
-        display: flex;
-        flex-direction: column;
+element.style{
+    font-weight:400 !important;
 }
-
-#notification-content{
-        font-size: 2.2rem;
-        position: relative;
-        left: 10px;
-        top: 25px;
-}
-
-.all-notification{
-    position: relative;
+    .maincontainer{
+    margin-top: 2rem;
     display: flex;
-    flex-direction: row;
-    width: 63%;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem; 
+}
+.notification_comtainer1{
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 22px;
-    margin: 10px 0 5px 85px; 
 }
+.dltbtn{
+    align-items: center;
 
-.one{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 60%;
-        margin: 0 0 0 120px;
-        font-size: 20px;
-        line-height: .8;
+    background: #FF5555;
+border-radius: 7px;
+color:white;
+border:none;
+padding:4px;
+margin-right:20px;
+padding-right: 9px;
+    padding-left: 9px;
 }
+.dltbtn1 {
+  font-size: 16px; 
+}
+.dltbtn2 {
+  font-size: 16px; 
+  margin-right: 44px;
+}
+.rightside{
+    display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-direction: column;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
+    /* margin-top: 1rem; */
+    flex-wrap: wrap;
+    gap: 4rem;
+}
+.items{
+    /* margin-left:2rem; */
 
-@media all and (max-width: 576px) {
+    display: flex;
+    width: 330px;
+height: 55px;
+margin-bottom:7px;
+/* background: rgba(114, 130, 251, 0.1); */
+border-radius: 15px;
+color:black;
+align-items: center;
+justify-content: space-between;
+font-size: 24px; 
+padding-right: 20px;
+    padding-left: 20px;
+
+}
+.check1{
+    display: inline;
     
-    #notification-content{
-        left: 0;
-        margin: 0 auto 40px auto;
-    }
-
-    .all-notification{
-        width: 60%;
-        margin: 0 auto 20px auto;
-    }
-
-    .one{
-        margin: 0 auto;
-    }
 }
-
-    /*--- Toggle Switch ---*/
-
-input[type="checkbox"].toggle {
-  opacity: 0;
-  position: absolute;
-  left: -9000px;
-  top: -9000px;
-}
-
-input[type="checkbox"].toggle + label {
-  position: relative;
+.check{
+  
   display: flex;
-  align-items: center;
-  cursor: pointer;
+    align-items: center;
+    margin-left: 4rem;
+}
+.send{
+  font-size: 1.3rem;
+
+}
+.time{
+    margin-left: 5rem;
+    color: #6C6C6C;
+    font-size: 13px;
+}
+.label{
+  margin-right: 15px;
+  width: 4rem;
+  margin-left: 1rem
+}
+.msg{
+  font-size: 16px;
+  margin-right: 15px
+}
+.checkbox{
+        width: 18px;
+        height: 18px;
+        background-color: white;
+        border-radius: 7%;
+        vertical-align: middle;
+/* outline:none; */
+}
+.check input[type=checkbox] {
+  /* outline: 2px solid #7282FB; */
+}
+/* .items.active .image {
+  fill: #7282FB;
+} */
+.items.active .image path {
+  fill: red;
 }
 
-input[type="checkbox"].toggle + label::before {
-  content: "";
-  width: 43.96px;
-  height: 22.41px;
-  background-color: #ddd;
-  border-radius: 1em;
-  margin-right: .25em;
-  transition: background-color 200ms ease-in-out;
+.items.active .msg {
+width: 44px;
+height: 25px;
+margin-right: 1px;
+color:white;
+background: #7282FB;
+border-radius: 8px;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
-input[type="checkbox"].toggle + label::after {
+.items.active {
+ background: rgba(114, 130, 251, 0.1);
+color: #7282FB;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  body {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 768px) {
+
+.time{
+    margin-left:0.2rem;
+    font-size: 10px;
+}
+.send{
+  font-size: 1.1rem;
+}
+
+.check{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  content: "";
-  left: .2em;
-  width: 13.79px;
-  height: 13.79px;
-  background-color: #FFFFFF;
-  color: white;
-  border-radius: 1em;
-  transition: background-color 200ms ease-in-out, transform 200ms ease-in-out;
+    align-items: center;
+    margin-left:0.5rem;
 }
-
-input[type="checkbox"].toggle:checked + label::before {
-  background-color: #8C68F8;
+.label {
+    margin-right: 7px;
+    width: 4rem;
+    margin-left: 0.5rem;
 }
-
-input[type="checkbox"].toggle:checked + label::after {
-    left: .45em;
-  content: "";
-  transform: translateX(100%);
-  background-color: #fff;
+}
+@media only screen and (max-width: 600px) {
+  /* .maincontainer {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  } */
+  /* .notification_comtainer1 {
+    flex-direction: column;
+    align-items: center;
+  } */
+  .container1_leftside {
+    margin-bottom: 1rem;
+  }
+  .container1_rightside {
+    margin-left: 33px;
+  }
+  .dltbtn1{
+    margin-bottom: 5PX
+  }
+  
 }
 </style>
+</head>
 <body>
-<?php
-    include("navbar.php")
-    ?>
+    <div class="maincontainer">
+        <div class="notification_comtainer1">
+            <div class="container1_leftside">
+                <p style="font-size:40px; font-weight:400 !important;margin-left: 2.5rem;">Notifications</p>
+             </div>
+             <div class="container1_rightside">
+                <button class="dltbtn dltbtn1"> <img src="images/trash.svg" style="margin-right:5px;width: 10px;" alt="SVG">Delete Selected</button>
 
-<div class="notification">
-        <p id="notification-content">Notification Settings</p>
-            <div class="all-notification">
-                <p>All Notifications</p>
-                <input type="checkbox" id="check1" class="toggle">
-                <label for="check1"></label>
+                <button class="dltbtn dltbtn2"><img src="images/trash.svg" style="margin-right:5px; width: 10px;" alt="SVG">Delete All</button>
+             </div>
             </div>
-                    <div class="one">
-                        <p>Client Updates</p>
-                            <input type="checkbox" id="check2" class="toggle">
-                            <label for="check2"></label>
-                    </div>
-                    <div class="one">
-                        <p>Consultation Reminders</p>
-                            <input type="checkbox" id="check3" class="toggle">
-                            <label for="check3"></label>
-                    </div>
-                    <div class="one">
-                        <p>Appointments</p>
-                            <input type="checkbox" id="check4" class="toggle">
-                            <label for="check4"></label>
-                    </div>
-                    <div class="one">
-                        <p>Notification to clients when going live</p>
-                            <input type="checkbox" id="check5" class="toggle">
-                            <label for="check5"></label>
-                    </div>
-                    <div class="one">
-                        <p>New Message updates</p>
-                            <input type="checkbox" id="check6" class="toggle">
-                            <label for="check6"></label>
-                    </div>
-                    <div class="one">
-                        <p>Payment Notifications</p>
-                            <input type="checkbox" id="check7" class="toggle">
-                            <label for="check7"></label>
-                    </div>
-                    <div class="one">
-                        <p>Upcoming Calls with Clients</p>
-                            <input type="checkbox" id="check8" class="toggle">
-                            <label for="check8"></label>
-                    </div>
-                
-    </div>
-</body>
-</html>
+<div class="container">
+<div class="leftside">
+<div class="items active">
+<div ><img src="images/msg.svg" class="image" style="margin-right: 15px"> Messages</div><div class="msg">100</div></div>
+
+<div class="items">
+<div><img src="images/goal.jpg" class="image" style="margin-right: 15px"> Goals</div><div class="msg">10</div></div>
+
+<div class="items">
+<div><img src="images/Group.svg" class="image" style="margin-right: 15px"> Profile Updates</div><div class="msg">17</div ></div>
+
+<div class="items">
+<div><img src="images/Appiotment.svg" style="margin-right: 15px"> Appointments</div><div class="msg">7</div></div>
+
+<div class="items">
+<div><img src="images/icon _restaurant_.svg" style="margin-right: 15px"> Meal Tracker</div><div class="msg">4</div></div>
+
+<div class="items">
+<div><img src="images/Health.svg" style="margin-right: 15px"> Health Form</div><div class="msg">9</div></div>
+<div class="items">
+<div><img src="images/documents.svg" style="margin-right: 15px"> Documents</div><div class="msg">100</div></div>
+<div class="items">
+<div><img src="images/recipe-icon-png-25 1.svg" style="margin-right: 15px">  Recipe/Diet Plan</div><div class="msg">10</div></div>
+<div class="items">
+<div><img src="images/material-symbols_list-alt-outline-rounded.svg" style="margin-right: 15px">Task List</div><div class="msg">20</div></div>
+
+</div>
+<div class="rightside">
+
+<!-- <form action=""> -->
+<div class="check1 ">
+<!-- <ul class="boxs"> -->
+<div class="check"><input type="checkbox"  class="checkbox">
+     <div><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+     <div class="check"><input type="checkbox"  class="checkbox">
+     <div><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+     <div class="check"><input type="checkbox"  class="checkbox">
+     <div><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+     <div class="check"><input type="checkbox"  class="checkbox">
+     <div><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+     <div class="check"><input type="checkbox"  class="checkbox">
+     <div><label><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+     <div class="check"><input type="checkbox"  class="checkbox">
+     <div><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+     <div class="check"><input type="checkbox"  class="checkbox">
+     <div><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+     <div class="check"><input type="checkbox"  class="checkbox">
+     <div><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+     <div class="check"><input type="checkbox"  class="checkbox">
+     <div><img  src="images/Group 1410112822.svg" class="label" ></div><div class="send">Ronald Richard sent you a message </div><div class="time">1min ago</div>
+     </div>
+
+</div>
+<!-- </form> -->
+</div>
+</div>
+             
+   </div>
+   <script>
+const items = document.querySelectorAll('.items');
+// const ms= document.querySelectorAll('.msg');
+
+items.forEach((item) => {
+  item.addEventListener('click', () => {
+    items.forEach((item) => {
+      item.classList.remove('active');
+    });
+    item.classList.add('active');
+    
+  });
+  
+});
+
+
+   </script>

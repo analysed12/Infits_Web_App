@@ -25,6 +25,7 @@
   font-family: "NATS" !important;
 
 }
+
 .content {
   display: flex;
   align-items: center;
@@ -44,6 +45,19 @@
   font-weight: 400;
   margin-top:2rem;
   margin-left: -25px;
+}
+
+.form-title input{
+  height:34px;
+  width:100%;
+  margin-left:10px;
+  font-size: 25px;
+  font-weight: 100;
+  color:#BDBDBD;
+  font-family: 'NATS';
+  font-style: normal;
+  border: none;
+line-height: 111.34%;
 }
 .content .heading-box button#save {
   background-color: #6883fb;
@@ -75,11 +89,11 @@
   padding: 10px 30px;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  width:85%;
-  margin-left:-10rem;
+  width:70%;
+  margin-left:-11.6rem; 
 }
 .form-values-box .options{
-  margin-left: 380px;
+  margin-left: 500px;
 }
 .content .flex-container {
   position: relative;
@@ -87,6 +101,7 @@
   justify-content: space-around;
   width: 100%;
   margin-top: 30px;
+  margin-left:20%;
 }
 .content .flex-container .form-container {
   width: 60%;
@@ -95,25 +110,13 @@
   flex-direction: column;
   align-items: flex-start;
 }
-.form-title input{
-  height:35px;
-  width:100%;
-  margin-left:10px;
-  font-size: 25px;
-  font-weight: 100;
-  color:#BDBDBD;
-  font-family: 'NATS';
-  font-style: normal;
-  border: none;
-line-height: 111.34%;
-}
-
 .flex-container .form-container .form-title {
-  width: 79%;
-  margin-top: 5px;
+  width: 67%;
   display: flex;
+  margin-left: 90px;
+  /* margin-right: auto; */
+  margin-top: 5px;
   align-items: center;
-  margin-left:10px;
   padding: 10px 20px;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
   border-radius: 13px;
@@ -131,7 +134,6 @@ line-height: 111.34%;
   width: 100%;
   margin-top: 40px;
   display: flex;
-  margin-left: auto;
   flex-direction: column;
   gap: 30px;
   max-height: 500px;
@@ -141,7 +143,7 @@ line-height: 111.34%;
   align-items: center;
   justify-content: space-between;
   padding: 10px 30px;
-}
+  }
 .content .flex-container .form-container .form-question-container .form-value {
   display: flex;
   flex-direction: column;
@@ -162,7 +164,7 @@ line-height: 111.34%;
           user-select: none;
 }
 .content .flex-container .form-container .form-values-box .options {
-  width: 70px;
+  width: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -180,7 +182,7 @@ line-height: 111.34%;
   fill: #FF2929;
 }
 #addQuestion{
-  margin-left: 10px;
+  margin-left: 57%;
 }
 .content .flex-container .form-container button#addQuestion {
   border: 2px solid #6883fb;
@@ -473,7 +475,6 @@ line-height: 111.34%;
 }
 .content .flex-container .share-box h3 {
   font-size: 1.8rem;
-  margin-top: 10px;
 }
 /*   */
 .content .flex-container .share-box {
@@ -523,8 +524,6 @@ line-height: 111.34%;
   width: fit-content;
   padding: 5px 10px;
   border-radius: 15px;
-  font-size: 20px;
-  margin-left: 22px;
 }
 .content .flex-container .share-box #selectedUser-box .selectedUser p.userName {
   margin: 0;
@@ -540,38 +539,16 @@ line-height: 111.34%;
 .content .flex-container .share-box ul#usersList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   height: 300px;
   width: 100%;
   margin-top: 20px;
-  overflow-y: scroll;
-}
-#usersList::-webkit-scrollbar{
-    width:10px; 
-}
-#usersList::-webkit-scrollar-thumb{
-  background: #888;
-}
-#usersList::-webkit-scrollbar-track {
-  background: #F3F3F3; 
-  border-radius: 20px;
-}
-
-/* Handle on hover */
-#usersList::-webkit-scrollbar-thumb:hover {
-  background:  #E3E3E3;
-  border-radius: 20px; 
-}
-#checkBox{
-width:20px;
-height:20px;
-border: 2px solid #7282FB;
-
+  overflow-y: auto;
 }
 .content .flex-container .share-box ul#usersList li {
   display: flex;
   align-items: center;
-  font-size:26px;
+  font-size: 1.8rem;
   position: relative;
 }
 .content .flex-container .share-box ul#usersList li input.checkBox {
@@ -611,68 +588,64 @@ border: 2px solid #7282FB;
   .content{
     overflow-x: hidden;
   }
-  .flex-container{
-    display: flex;
-    gap:30px;
-    flex-direction: column;
-  }
+ 
   .form-values-box{
     width:82%;
   }
   .form-question-container{
     width: auto;
     margin-left: 5%;
-    margin-right: -6%;
+  }
+  .form-container{
+    margin-left: -80px;
+  }
+  .form-title{
+    margin-left:50px !important;
+    width: 76% !important;
   }
   .form-value{
     width:100rem;
   }
   #addQuestion{
-    margin-left: 7%;
+    margin-left: 6.5%;
   }
   .form-values-box .options{
   margin-left: auto;
   gap:20px;
 
 }
-.share-box{
-  margin-left:10%;
+}
+@media screen and (max-width:950px){
+  .form-question-container{
+    margin-left: 70px;
   }
-}
-@media screen and (max-width:450px){
-.flex-container{
-  padding: 20px;
-  margin-left: -80px;
+  #addQuestion{
+    margin-left: 10%;
   }
-.form-values-box{
-  width:280px;
-  margin-left: 15px;
-}
-  .share-box{
-margin-left: 20px;
-width: 10%;
-}
-}    
-@media screen and (max-width:400px){
-.share-box{
-  /* overflow: scroll; */
-  margin-right: 10px;
-}
-.flex-container{
-  overflow: scroll;
- 
-  
-}
-#addQuestion{
-  margin-left:-10px;
-  /* overflow: scroll; */
-}
-.form-values-box{
-  margin-left: 60px;
-  overflow: scroll;
-}
 }
 
+@media screen and (max-width:450px){
+
+.form-question-container{
+ margin-left: 20px;
+ }
+.form-values-box{
+  width:250px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+#addQuestion{
+  margin-left: 65px;
+}
+} 
+@media screen and (max-width:400px){
+  .heading-box h1{
+    margin-top: 30px !important;
+  }
+  .form-values-box{
+   margin-left: 60px;
+ }
+}
     </style>
 
 </head>
@@ -680,7 +653,7 @@ width: 10%;
 <body >
   
     <?php 
-     error_reporting(0);
+    error_reporting(0);
     include 'navbar.php' ?>
 
     <div class="content">
@@ -776,69 +749,6 @@ width: 10%;
                     <button id="popupSave" onclick="savePopup(this)">Save</button>
                 </div>
             </div>
-
-            <div class="share-box">
-                <h3>Assign form to the clients</h3>
-
-                <div class="search-box1">
-                    <img src="icons/search.svg">
-                    <input type="search" name="search" id="search" placeholder="Search clients">
-                </div>
-
-                <div id="selectedUser-box">
-
-                    <!-- Don't Add Elements here Elements are Added With JavaScript -->
-
-
-                    <div class="selectedUser">
-                        <p class="userName">Client 1</p>
-                        <img src="icons/CrossX.svg" alt="Remove" title="Remove">
-                    </div>
-
-                    <div class="selectedUser">
-                        <p class="userName">Client 2</p>
-                        <img src="icons/CrossX.svg" alt="Remove" title="Remove">
-                    </div>
-
-                    <div class="selectedUser">
-                        <p class="userName">Client 3</p>
-                        <img src="icons/CrossX.svg" alt="Remove" title="Remove">
-                    </div>
-
-                    <div class="selectedUser">
-                        <p class="userName">Client 4</p>
-                        <img src="icons/CrossX.svg" alt="Remove" title="Remove">
-                    </div>
-
-                </div>
-
-                <ul id="usersList">
-
-                    <!-- Don't Add Elements here Elements are Added With JavaScript -->
-
-                    <li>
-                        <input type="checkbox" name="checkBox" id="checkBox">
-                        <label for="checkBox" class="userName">Client 1</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="checkBox" id="checkBox">
-                        <label for="checkBox" class="userName">Client 2</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="checkBox" id="checkBox">
-                        <label for="checkBox" class="userName">Client 3</label>
-                    </li> <li>
-                        <input type="checkbox" name="checkBox" id="checkBox">
-                        <label for="checkBox" class="userName">Client 4</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="checkBox" id="checkBox">
-                        <label for="checkBox" class="userName">Client 5</label>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
     <script src="js/health_detail_form_create.js"></script>
 

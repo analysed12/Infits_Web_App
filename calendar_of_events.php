@@ -38,7 +38,6 @@
 }
 body {
         font-family: 'NATS', sans-serif;
-        margin-bottom:2rem;
         overflow: hidden !important;
         
     }
@@ -49,7 +48,7 @@ html {
 #content {
     display: flex;
     flex-direction: column;
-    height: 90%;
+
     /* font-family: 'Poppins'; */
     font-style: normal;
     font-weight: 500;
@@ -76,7 +75,7 @@ html {
 
 .row {
     width: 100% !important;
-    height: 100% !important;
+    
 }
 
 .fc table {
@@ -533,15 +532,37 @@ a:hover {
     background-color:rgba(179, 188, 251, 1)  !important;
     border-radius:0 !important;
 }
+.fc table{
+    height: 100% !important;
+}
 
 
 //* style for the chalender */
-
-
 @media screen and (min-width:720px){
     .flex-item {
     border-left: 2px solid #E8ECF5;
 }
+    
+}
+
+@media screen and (max-width:720px){
+   
+.container-main{
+      display:flex !important; 
+      flex-direction: column !important;
+      gap:26rem;
+  }
+  .light{
+    
+    margin-left:10% !important;
+  }
+  .schedule{
+    margin-left:10% !important;
+  }
+  #content{
+    padding-left: 0 !important;
+  }
+  
 
 }
 @media screen and (max-width:459px){
@@ -594,9 +615,8 @@ a:hover {
 @media screen and (max-width: 920px) {
     
     .container-main{
-        flex-direction:column;
+      
         margin-bottom:20px;
-        margin-left:1rem;
         z-index:-1;
     }
     .schedule{
@@ -652,7 +672,7 @@ a:hover {
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="calender">
-                                <h3 style="display:inline-block;padding:1.5rem;font-size:45px">Calendar</h3>
+                                <h3 style="display:inline-block;margin-left:0.4rem;margin-top:1.8rem;font-size:40px">Calendar</h3>
                                 <a href="createevent.php" class="event_btn" style="display:inline-block; float:right;background: #7A78FD;
             border-radius: 7px;border: none; color: white; padding:10px;margin-top:2rem">+ Create Schedule</a>
                             </div>

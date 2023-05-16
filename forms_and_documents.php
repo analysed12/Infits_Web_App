@@ -48,8 +48,10 @@ body{
 }
 
 .content .heading-box h1 {
-    font-size: 2.3rem;
-    font-weight: 400;
+    font-size: 40px;
+  font-weight: 400;
+  margin-top:1.8rem;
+  margin-left: -10px;
 }
 
 .content .heading-box .search-box1 {

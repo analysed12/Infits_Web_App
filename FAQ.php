@@ -21,10 +21,13 @@ include('navbar.php');
     }
 
     .right__side {
-      flex: 4;
-      height: 100%;
+      display:flex;
+      flex-direction: column;
+      gap:2rem;
       position: relative;
       overflow-y: scroll;
+      margin-left:15rem;
+      margin-top:1rem;
     }
     .faqs {
      
@@ -170,7 +173,10 @@ include('navbar.php');
 
 }
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 720px) {
+  .right__side{
+    margin-left: auto !important;
+  }
 
 
 }
@@ -184,7 +190,7 @@ include('navbar.php');
   </style>
   <body>
     <div class="right__side">
-      <h1 class="faqs">FAQs</h1>
+      <h1 class="faqs" style="font-size:40px;font-weight:400">FAQs</h1>
 
           <div class="input__div">
             <span class="search__icon">

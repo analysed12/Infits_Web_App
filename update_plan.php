@@ -682,7 +682,7 @@ border-radius: 10px;
 
         <!-- Other content -->
         <?php
-        $id = $_GET['id'];
+        $id = $_GET['plan_id'];
         // echo $id ;
         $sql = "SELECT * from `create_plan` where plan_id='$id'";
         $result = mysqli_query($conn,$sql);
@@ -777,13 +777,7 @@ border-radius: 10px;
                             <div style="display:inline-block;width:46%; margin-right:6%;">
                                 <p style="font-size:17px;color: #6C6F71;">From</p>
                                 <input required class="subject subject-text" type="date" name="start_date" style="height: 40px; background: #FFFFFF;
-                        box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-                        border-radius: 7px;
-                        border:none;
-                        font-family: 'NATS';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-size: 20px;
+                        box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 7px;border:none;font-family: 'NATS';font-style: normal;font-weight: 400;font-size: 20px;
                         " id="width" value="<?php echo $row['start_date']?>"
                             style="height: 45px;width: 226px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 10px;border:none;color: #BBBBBB;opacity: 0.5;padding:15px" />
                         
@@ -791,15 +785,7 @@ border-radius: 10px;
                             <div style="display:inline-block;width:46%;">
                                 <p style="font-size:17px;color: #6C6F71; margin-top:10px;">To</p>
                         <input required class="subject subject-text" type="date" name="end_date" id="width"
-                                    value="<?php echo $row['end_date']?>" style="height: 40px; background: #FFFFFF;
-    box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 7px;
-    border:none;
-    font-family: 'NATS';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    " />
+                                    value="<?php echo $row['end_date']?>" style="height: 40px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 7px;border:none;font-family: 'NATS';font-style: normal;font-weight: 400;font-size: 20px; " />
                         </div>
                         </div>
                         <br>
@@ -859,15 +845,7 @@ border-radius: 10px;
 
                         <label for="" class="subject tag_title" id="width">Price</label>
                         <input required class="subject subject-text mt-3" type="number"
-                            value="<?php echo $row['price']?>" name="price" placeholder="₹000 / month" style="height: 40px; background: #FFFFFF;
-                            box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);
-                            border-radius: 7px;
-                            border:none;
-                            font-family: 'NATS';
-                            font-style: normal;
-                            font-weight: 400;
-                            font-size: 20px;
-                            padding:1.5rem;" />
+                            value="<?php echo $row['price']?>" name="price" placeholder="₹000 / month" style="height: 40px; background: #FFFFFF;box-shadow: 0px 1.7px 5px rgba(0, 0, 0, 0.25);border-radius: 7px;border:none;font-family: 'NATS';font-style: normal;font-weight: 400;font-size: 20px;padding:1.5rem;" />
                         <br>
                         <div style="display:flex; gap: 5%;">
                             <button name="final_cancel_btn" class="cancelbutton">Cancel</button>
@@ -986,25 +964,6 @@ function showPopup() {
 function hidePopup() {
     popup.classList.remove('open');
 }
-// $(document).ready(function() {
-//     var max = 10;
-//     var cnt = 1;
-//     $(".add-textbox").on("click", function(e) {
-//         e.preventDefault();
-//         if (cnt < max) {
-//             cnt++;
-//             $(".textbox-wrapper").append(
-//                 '<div class="input-group"><div class="features_box"><input type="text" name="text_arr[]" placeholder="Type feature here.." /><button type="button" class="remove-textbox"><i class="fa-solid fa-xmark"></i></button></div></div>'
-//             );
-//         }
-//     });
-
-//     $(".textbox-wrapper").on("click", ".remove-textbox", function(e) {
-//         e.preventDefault();
-//         $(this).parents(".input-group").remove();
-//         cnt--;
-//     });
-// });
 </script>
 <!--------------------------------JS FOR FEATURE POP-UP-------------------------- -->
 <script>
@@ -1092,16 +1051,5 @@ function hidePopup() {
 
 
 </script>
-<?php
-$output = ob_get_clean();
-
-// Modify the headers
-header('Content-Type: text/html');
-header('Cache-Control: no-cache');
-
-// Flush the headers to the browser
-ob_end_flush();
-echo $output;
-?>
 
 </html>

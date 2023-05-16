@@ -8,37 +8,38 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <style>
+     body {
+    font-family: "NATS", sans-serif !important;
+    
+    font-weight: 400;   
+    position: relative;
+}
     .text-start{
         font-weight:500;
         color:#000000;
-        position:absolute;
-        left:295px;
-        top:100px;
+        margin-left:17rem !important;
+        margin-top:3.5rem !important;
         line-height:20px;
         display:flex;
         align-items:center;
+        font-size:48px;
     }
     .container{
-        margin-top:15vh;
+        margin-top:5vh;
     }
 
-    @media screen and (max-width: 720px){
-
+    @media screen and (min-width:0px) and (max-width: 720px){
         .text-start{
-            margin-top:40px;
+            margin-left:2rem !important;
         }
     }
     @media screen and (max-width:400px){
         .text-start{
-            margin-top:100px;
-            font-size:18px;
-            font-weight:600;
-            margin-right:20px;
-            flex-wrap:no-wrap;
-            width:100px;
+            font-size:40px;
         }
-        .text-center{
-            margin-left:20px;
+        .rounded{
+            margin:auto;
+            width:300px;
         }
     }
 
@@ -52,7 +53,7 @@ include 'navbar.php';
 
 <div class="container">
 <img src="images/pay.png" class="rounded mx-auto d-block" alt="...">
-<h4 class="text-center">No bills issued currently!</h4>
+<h4 class="text-center" style="font-size:30px;font-weight:400;">No client payments active/due currently!</h4>
 </div>
 </body>
 </html>

@@ -619,8 +619,8 @@ body {
     <br>
     <div class="header" style="">
         <div class="heading" style="display:flex;justify-content:space-between;margin-top:-5px">
-            <h2 style="margin-left:50px;font-weight:500;font-size: 48px;">Recipes</h2>
-            <h4 style="margin-left:30px;color:#787885;font-size: 20px">Dinner</h4>
+        <h2 style="margin-left:4rem;margin-top:1rem;font-weight:400;font-size: 40px;">Recipes</h2>
+            <h4 style="margin-left:30px;color:#787885;font-size: 23px;margin-top:2.2rem;">Dinner</h4>
         </div>
         <div class="search" style="margin-right:8rem;display:flex;gap:1.5rem">
             <div class="searchbox">
@@ -755,9 +755,12 @@ body {
                 </div>
             </div>
         <?php } ?>
-    </div>
-    <a href="create_recipe.php"><button class="butt" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;">+</button></a>
 
+        <a class="butt" href="_create_recipe.php" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;display:flex;justify-content:center;align-items:center;">+</a>
+   
+
+    </div>
+    
 
     <script>
         function myFunction() {

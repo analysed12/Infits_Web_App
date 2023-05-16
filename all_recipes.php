@@ -49,7 +49,7 @@ include 'css/all_recipes.css';
     
     <div class="header" style="">
     <div class="heading">
-        <h1 style="margin-left:3rem ;font-family: 'NATS';font-style: normal;font-weight: 500;font-size:48px;">Recipes</h1>
+        <h1 style="margin-left:4rem;margin-top:2.4rem ;font-family: 'NATS';font-style: normal;font-weight: 400;font-size:40px;">Recipes</h1>
     </div>
      <div class="search" style="margin-right:2.2rem;display:flex;gap:1.5rem">
             <div class="searchbox">
@@ -174,7 +174,7 @@ include 'css/all_recipes.css';
         <?php } ?>
     </div>
 
-    <button class="butt" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;">+</button>
+    <a class="butt" href="_create_recipe.php" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;display:flex;justify-content:center;align-items:center;">+</a>
 </body>
 
     <script>

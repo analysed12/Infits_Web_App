@@ -8,15 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <style>
+    body {
+    font-weight:400;
+    font-family: 'NATS', sans-serif !important;
+}
     .text-start{
-        font-weight:500;
+        font-weight:400;
         color:#000000;
         position:absolute;
-        left:295px;
-        top:100px;
-        line-height:20px;
+        margin-top: 2.2rem;
+        margin-left: 17rem;
+        
         display:flex;
         align-items:center;
+        font-size:40px;
     }
     .container{
         margin-top:15vh;
@@ -25,19 +30,14 @@
     @media screen and (max-width: 720px){
         
         .text-start{
-            margin-top:40px;
-            margin-right:100px;
-            width:30%;
+            margin-top:2.2rem;
+            margin-left:2rem;
         }
     }
     @media screen and (max-width:400px){
         .text-start{
-            margin-top:100px;
-            font-size:18px;
-            font-weight:600;
-            margin-right:20px;
-            flex-wrap:no-wrap;
-            width:100px;
+            margin-top:2.2rem;
+            margin-left:2rem;
         }
         .text-center{
             margin-left:20px;
