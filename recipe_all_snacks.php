@@ -183,7 +183,7 @@ $res = mysqli_query($conn, $sql);
 
 <body>
     <div class="header" style="align-items:center;">
-        <div class="title"style="font-size:48px;margin-left:3rem;margin-top:1.2rem;">Recipes <small style="color: #787885; font-size:20px; margin-left:1rem;">All Snacks Recipes</small></div>
+        <div class="title"style="font-size:40px;margin-left:2.8rem;margin-top:1.2rem;font-family:'NATS'; font-weight:400;">Recipes <small style="color: #787885; font-size:20px; margin-left:1rem;">All Snacks Recipes</small></div>
         <div style="margin-right:2rem;display:flex;gap:1.5rem">
             <div class="searchbox">
                 <button style="background-color:white;border:none;" id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
@@ -240,7 +240,8 @@ $res = mysqli_query($conn, $sql);
                 </div>
             </div>
         <?php } ?>
-        <button class="but" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:40px;border:none;right:50px;position:fixed;bottom:40px;">+</button>
+    <a class="butt" href="_create_recipe.php" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;display:flex;justify-content:center;align-items:center;">+</a>
+      
 
     </div>
 

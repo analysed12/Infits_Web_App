@@ -368,7 +368,7 @@
         <div class="dashboard_container8">
             <div class="dashboard_container11">
                 <div style="font-size:24px;font-weight:500;color:#434343;">No message yet!</div>
-                <a href="chat_home.php"><button id="today" style="margin-top: 18px;">Start a chat</button>
+                <a href="chat_home.php" id="today" style="margin-top: 18px;">Start a chat</a>
             </div>
         </div>
     </div>

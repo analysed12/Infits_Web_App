@@ -630,8 +630,8 @@ body {
     <br>
     <div class="header" style="">
         <div class="heading" style="display:flex;justify-content:space-between;margin-top:-5px">
-            <h2 style="margin-left:50px;font-weight:500;font-size: 48px;">Recipes</h2>
-            <h4 style="margin-left:30px;color:#787885;font-size: 20px;;">Lunch</h4>
+        <h2 style="margin-left:4rem;margin-top:1rem;font-weight:400;font-size: 40px;">Recipes</h2>
+            <h4 style="margin-left:30px;color:#787885;font-size: 23px;margin-top:2.2rem;">Lunch</h4>
         </div>
         <div class="search" style="margin-right:8rem;display:flex;gap:1.5rem">
             <div class="searchbox">
@@ -700,7 +700,7 @@ body {
     <!-- all recipes -->
     <div class="middle_wrapper" style="display:flex;justify-content:space-between;margin-top:20px;margin-left:5rem;margin-right:2.5rem">
         <h3 class="recipe" style="font-weight:500;margin-left:50px;color:black; font-size: 30px;">All Recipes</h3>
-        <a href="all_recipe_list.php"><h3 style="color:#6A6A6A;font-size:20px; margin-right: 50px;">View All</h3></a>
+        <a href="recipe_all_lunch.php"><h3 style="color:#6A6A6A;font-size:20px; margin-right: 50px;">View All</h3></a>
     </div>
 
     <!-- recipes from db -->

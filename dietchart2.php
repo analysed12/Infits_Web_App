@@ -10,6 +10,9 @@ include('navbar.php');
     <title>Document</title>
 </head>
 <style>
+    body{
+        font-family: 'NATS', sans-serif !important;
+    }
 .items{
     width:307px; 
     /* height:221px; */
@@ -33,8 +36,7 @@ height: 38px;
 left: 52px;
 top: 28px;
 padding-left:8%;
-font-family: 'NATS';
-font-style: normal;
+
 font-weight: 400;
 font-size: 25px;
 line-height: 150%;
@@ -51,14 +53,9 @@ color: #FFFFFF;
 height: 30px;
 left: 32px;
 top: 82px;
-
-font-family: 'NATS';
-font-style: normal;
 font-weight: 400;
 font-size: 20px;
 line-height: 150%;
-/* identical to box height, or 30px */
-
 display: flex;
 align-items: center;
 
@@ -69,9 +66,6 @@ color: #D2D2D2;
 height: 30px;
 left: 32px;
 top: 82px;
-
-font-family: 'NATS';
-font-style: normal;
 font-weight: 400;
 font-size: 20px;
 line-height: 150%;
@@ -86,8 +80,6 @@ color: black;
 height: 23px;
 left: 32px;
 top: 123px;
-font-family: 'NATS';
-font-style: normal;
 font-weight: 400;
 font-size: 18px;
 line-height: 150%;
@@ -123,8 +115,6 @@ top: 162px;
 
 background: #9C74F5;
 border-radius: 8px;
-font-family: 'NATS';
-font-style: normal;
 font-weight: 400;
 font-size: 15px;
 line-height: 32px;
@@ -135,7 +125,7 @@ padding-left:5%;
 color: #FFFFFF;
 }
 .r{
-    font-family: 'NATS';
+
 font-style: normal;
 font-weight: 400;
 font-size: 15px;
@@ -227,19 +217,19 @@ margin-bottom: 10px;
   scrollbar-width: none;
 }
 .maindiv{
-    display:flex;
-   gap:20px;
-   flex-wrap:wrap;
-   margin-top: 4%;
-    margin-left: 20%;
+  display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    margin-top: 4%;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .main .right{
 height: 74px;
 left: 532px;
 top: 93px;
+margin-top: 7px;
 
-font-family: 'NATS';
-font-style: normal;
 font-weight: 400;
 font-size: 35px;
 line-height: 74px;
@@ -255,7 +245,24 @@ color: #CBCBCB;
 }
 .flex{
   display:flex;
-  gap:50px;
+  margin-top: 1rem;
+  margin-left:16rem;
+
+}
+@media only screen and (max-width: 720px) {
+  
+  .flex{
+  display:flex;
+  margin-top: 1rem;
+  margin-left:2rem;
+
+}
+.main .right{
+margin-top: 2px;
+}
+.sliding-cal{
+  margin-right: 0;
+}
 }
 @media screen and (min-width: 720px) and (max-width:1500px) {
 .sliding-cal {
@@ -279,7 +286,7 @@ color: #CBCBCB;
 @media screen and (min-width:500px) and (max-width:720px) {
 
   .sliding-cal {
-  margin-right: -95px;
+  
   width: auto;
   margin-left: -55px;
   margin-top:60px;
@@ -305,7 +312,7 @@ color: #CBCBCB;
     width:auto;
     margin-top: 60px;
     
-  margin-right: -60px;
+
   width: auto;
   margin-left: -55px;
   margin-top:60px; 
@@ -319,10 +326,10 @@ color: #CBCBCB;
     <div class="main">
     <div> 
      <div class="flex">
-      <div class="left" style="width: 42%;"> 
-        <h1>Diet Chart</h1> 
+      <div class="left" style="width: 22%;"> 
+        <h1 style="margin-top:2rem">Diet Chart</h1> 
       </div> 
-      <div class="right">
+      <div class="right" style="margin-top:1.2rem">
       Ronald Richards
       </div> 
      </div>
@@ -431,9 +438,8 @@ color: #CBCBCB;
            </div>
        </div>
      </div>
-     <div class="d-flex  justify-content-end">
-                <a onclick="window.location.href = 'create_plan.php';"><img src="./images/9_plus.png" alt="img"></a>
-    </div>
+     <a class="butt" href="dietchart1.php" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;display:flex;justify-content:center;align-items:center;">+</a>
+    
     
     </div>
     <script>

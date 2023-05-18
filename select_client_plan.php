@@ -195,7 +195,6 @@ include('navbar.php');
     .row{
         font-size:17px;
         font-weight:400!important;
-        font-weight:400!important;
         letter-spacing:1.5px;
         
     } 
@@ -280,7 +279,6 @@ include('navbar.php');
     border-radius: 0.6rem;position:relative;">
                     <input type="text" placeholder="Search Plan" class="search-box form-control w-75" id="search"
                         name="search" style="color: #667080;font-weight:400!important;font-size:20px;margin-left:30px;letter-spacing:1.5px;">
-                        name="search" style="color: #667080;font-weight:400!important;font-size:20px;margin-left:30px;letter-spacing:1.5px;">
                     <button type="submit" id="btn_search" class="search-icon" name="search-btn"><i
                             class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;margin-top:-8px;color:#667080;"></i></button>
                     <div id="display">
@@ -307,7 +305,6 @@ if(isset($_POST['search-btn']))
 	{
     $search = $_POST['search'];
     $sql1 = "SELECT * FROM create_plan WHERE name like '%$search%' and dietitianuserID = '{$_SESSION['dietitianuserID']}'";
-    $sql1 = "SELECT * FROM create_plan WHERE name like '%$search%' and dietitianuserID = '{$_SESSION['dietitianuserID']}'";
  if($result1 = mysqli_query($conn, $sql1)){
      if(mysqli_num_rows($result1) > 0){
              while($row1 = mysqli_fetch_array($result1)){
@@ -328,15 +325,12 @@ if(isset($_POST['search-btn']))
                                 <div class="row">
                                     <div class="col"
                                         style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:400;">
-                                        style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:400;">
                                         <?php echo $row1['name']?></div>
                                     <div class="w-100"></div>
                                     <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
                                             style="font-weight:400">Rs.<?php echo $row1['price'] ?></span>/months
-                                            style="font-weight:400">Rs.<?php echo $row1['price'] ?></span>/months
                                     </div>
                                     <div class="col-7"
-                                        style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:400;display:flex;align-items:center;justify-content:center;">
                                         style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:400;display:flex;align-items:center;justify-content:center;">
                                         <?php echo $months ?> Months
                                     </div>
@@ -385,7 +379,6 @@ if(isset($_POST['search-btn']))
 }
 else{                       
  $sql = "SELECT * FROM create_plan where dietitianuserID = '{$_SESSION['dietitianuserID']}'";
- $sql = "SELECT * FROM create_plan where dietitianuserID = '{$_SESSION['dietitianuserID']}'";
 //  $client_id = $_GET['client_id'];
  if($result = mysqli_query($conn, $sql)){
      if(mysqli_num_rows($result) > 0){
@@ -408,15 +401,12 @@ else{
                                     <div class="row">
                                         <div class="col"
                                             style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:400;">
-                                            style="margin-top:5px;margin-bottom:5px; font-size:20px;font-weight:400;">
                                             <?php echo $row['name']?></div>
                                         <div class="w-100"></div>
                                         <div class="col-5" style="margin-top:5px;margin-bottom:5px; "><span
                                                 style="font-weight:400">Rs.<?php echo $row['price'] ?></span>/month
-                                                style="font-weight:400">Rs.<?php echo $row['price'] ?></span>/month
                                         </div>
                                         <div class="col-7"
-                                            style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:400;display:flex;align-items:center;justify-content:center;">
                                             style="margin-top:5px;margin-bottom:15px;font-size:17px;font-weight:400;display:flex;align-items:center;justify-content:center;">
                                             <?php echo $months ?> Month
                                         </div>
@@ -443,7 +433,6 @@ else{
 
                                                 // echo '<div>';
                                                 echo '<div style="display:inline-block;width:auto;margin-right:5px; "><i style="color:black;" class="fa-regular fa-circle-check"></i></div>';
-                                                echo '<div style="display:inline-block;width:auto; margin-right:20px;font-style:normal; font-size:20px;font-weight:400!important;letter-spacing:0.9px;">'.$out.'</div>';
                                                 echo '<div style="display:inline-block;width:auto; margin-right:20px;font-style:normal; font-size:20px;font-weight:400!important;letter-spacing:0.9px;">'.$out.'</div>';
                                                 // echo '</div>';
                                             

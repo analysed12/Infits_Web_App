@@ -172,7 +172,7 @@ $res = mysqli_query($conn, $sql);
 <body>
     <div class="header" style="align-items:center;">
     
-        <div class="heading" style="font-size:48px;margin-left:3rem;margin-top:1.2rem;font-family:'NATS'; font-weight:400;">Recipes <small style="color: #787885; font-size:25px; margin-left:1rem;font-family:'NATS';font-weight:400;margin-top:-10px !important;"><?php if(isset($_GET['category'])){ echo ucwords($_GET['category']); }else{ echo 'All Recipes'; } ?></small></div>
+        <div class="heading" style="font-size:40px;margin-left:2.8rem;margin-top:1.2rem;font-family:'NATS'; font-weight:400;">Recipes <small style="color: #787885; font-size:25px; margin-left:1rem;font-family:'NATS';font-weight:400;margin-top:-10px !important;"><?php if(isset($_GET['category'])){ echo ucwords($_GET['category']); }else{ echo 'All Recipes'; } ?></small></div>
         <div style="display:flex;gap:1.5rem">
             <div class="searchbox" style="align-items:center;">
                 <button style="background-color:white;border:none;" id="seabtn" name="seabtn"><img src="images/vec_search.png" alt=""></button>
@@ -233,8 +233,8 @@ $res = mysqli_query($conn, $sql);
         
     </div>
 
-    <a class="butt" href="_create_recipe.php" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;display:flex;justify-content:center;align-items:center;">+</a>
- 
+    <a class="butt" href="_create_recipe.php" style="border-radius:50%;background-color:#9C74F5;width:85px;height:85px;filter: drop-shadow(0px 0px 68px rgba(0, 0, 0, 0.3));color:white;font-size:60px;border:none;position:absolute;right:50px;bottom:60px;display:flex;justify-content:center;align-items:center;padding-bottom:0.5rem">+</a>
+  
 </body>
 
 </html>

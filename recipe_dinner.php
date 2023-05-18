@@ -691,7 +691,7 @@ body {
 
     <!-- all recipes --> <div class="middle_wrapper" style="display:flex;justify-content:space-between;margin-top:20px;margin-left:5rem;margin-right:2.5rem">
         <h3 class="recipe" style="font-weight:500;margin-left:50px;color:black; font-size: 30px;">All Recipes</h3>
-        <a href="all_recipe_list.php"><h3 style="color:#6A6A6A;font-size:20px; margin-right: 50px;">View All</h3></a>
+        <a href="recipe_all_dinner.php"><h3 style="color:#6A6A6A;font-size:20px; margin-right: 50px;">View All</h3></a>
     </div>
 
 
