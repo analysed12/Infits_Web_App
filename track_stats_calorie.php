@@ -11,30 +11,30 @@ function fetchDataSql($clientId,$from_date, $to_date, $isCustom=0){
     }
     // For Sum of All Data Till Today
     if($isCustom==1){
-        $query="SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-                `time` <= '{$to_date} 23:59:59';";
+        $query="SELECT SUM(caloriesConsumed) FROM calorietracker WHERE client_id= '$clientId' AND 
+                `dateandtime` <= '{$to_date} 23:59:59';";
     // for sum of Data between two dates
     }else if($isCustom==2){
-        $query = "SELECT SUM(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-                `time` >= '{$from_date} 00:00:00'
-                AND `time` <= '{$to_date} 23:59:59';";;
+        $query = "SELECT SUM(caloriesConsumed) FROM calorietracker WHERE client_id= '$clientId' AND 
+                `dateandtime` >= '{$from_date} 00:00:00'
+                AND `dateandtime` <= '{$to_date} 23:59:59';";;
     // for average of data end to end (monthly)
     }else if($isCustom==3){
-        $query="SELECT avg(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-            `time` >= '{$from_date} 00:00:00'
-            AND `time` < '{$to_date} 00:00:00';";
+        $query="SELECT avg(caloriesConsumed) FROM calorietracker WHERE client_id= '$clientId' AND 
+            `dateandtime` >= '{$from_date} 00:00:00'
+            AND `dateandtime` < '{$to_date} 00:00:00';";
     // for get latest goal from goals table
     }else if($isCustom==4){
         $query="SELECT calorie FROM goals WHERE client_id = {$clientId}";
     // for getting past actvities 
     }else if($isCustom==5){
-        $query = "SELECT * FROM `calorietracker` WHERE clientID = '$clientId' AND `time` >= '{$from_date} 00:00:00'
-        AND `time` < '{$to_date} 23:59:59' ORDER BY time DESC;" ;
+        $query = "SELECT * FROM `calorietracker` WHERE client_id = '$clientId' AND `dateandtime` >= '{$from_date} 00:00:00'
+        AND `dateandtime` < '{$to_date} 23:59:59' ORDER BY dateandtime DESC;" ;
     // for average of data of one full day
     }else{
-    $query="SELECT avg(caloriesconsumed) FROM calorietracker WHERE clientID= '$clientId' AND 
-            `time` >= '{$from_date} 00:00:00'
-            AND `time` <= '{$to_date} 23:59:59';";
+    $query="SELECT avg(caloriesConsumed) FROM calorietracker WHERE client_id= '$clientId' AND 
+            `dateandtime` >= '{$from_date} 00:00:00'
+            AND `dateandtime` <= '{$to_date} 23:59:59';";
     }
     $result = $conn->query($query) or die("Query Failed");
     $data = array();
@@ -56,7 +56,7 @@ if(isset($_POST['from_date']) AND isset($_POST['to_date'])){
     $clientId = $_POST['client'];
     $CustomData['range'] =  $CustomDay_1->format('d M Y') ." - ". $CustomDay_2->format('d M Y') ;
     while ($CustomDay_2 >= $CustomDay_1) {
-        $CustomDataValue = (int) fetchDataSql($clientId,$CustomDay_1->format('Y-m-d'), $CustomDay_1->format('Y-m-d'),2)[0]['SUM(caloriesconsumed)'];
+        $CustomDataValue = (int) fetchDataSql($clientId,$CustomDay_1->format('Y-m-d'), $CustomDay_1->format('Y-m-d'),2)[0]['SUM(caloriesConsumed)'];
     
         array_push($CustomData['value'], $CustomDataValue);
         array_push($CustomData['date'], $CustomDay_1->format('d'));
@@ -88,7 +88,7 @@ if(isset($_POST['savegoal'])){
         die("Connection failed :" . $conn->connect_error);
     }
     $isSame =false;
-    $query = "SELECT `calorie` FROM `goals` WHERE `client_id` = {$client} AND `dietition_id` = '{$dietition}'";
+    $query = "SELECT `calorie` FROM `goals` WHERE `client_id` = '{$client}'";
     $result = $conn->query($query) or die('Query Failed');
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
@@ -99,7 +99,7 @@ if(isset($_POST['savegoal'])){
         }
     }
     if(!$isSame){
-        $query = "UPDATE `goals` SET `calorie` = $goal WHERE `client_id` = $client";
+        $query = "UPDATE `goals` SET `calorie` = $goal WHERE `client_id` = '$client'";
         $result = $conn->query($query) or die("Query Failed");
         if($conn->affected_rows == 0){
             $query="INSERT INTO `goals`(`dietition_id`, `client_id`, `calorie`) VALUES ('{$dietition}','{$client}','{$goal}')";
@@ -144,8 +144,16 @@ tst-left-t{
 }
 .heading{
     /* width: 145px; */
-    height: 68px;
+    /* height: 68px; */
 
+}
+.title{
+    width: 96%;
+    margin-left: 2rem;
+    font-family: 'NATS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
 }
 .heading p{
     font-family: 'NATS';
@@ -208,9 +216,11 @@ font-size: 22px;
 /* tst-left b */
 .tst-left-b {
     display: flex;
+    justify-content:center;
+    align-items: flex-start;
     flex-direction: column;
     padding: 20px;
-    gap: 20px;
+    gap: 30px;
 }
 /* Style the buttons that are used to open the tab content */
 .tab {
@@ -409,9 +419,9 @@ border-radius: 10px;
 padding: 8px 25px;
 }
 .set-goal input::placeholder{
-font-family: 'Nunito';
+font-family: 'NATS';
 font-style: normal;
-font-weight: 700;
+font-weight: 500;
 font-size: 18px;
 line-height: 25px;
 color: #ABA3A3;
@@ -427,9 +437,9 @@ text-align: center;
     border-radius: 10px;
     color: #ffffff;
     font-size: 19px;
-    font-family: 'Nunito';
+    font-family: 'NATS';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
 }
 /* page down */
 .tsd-left-t {
@@ -582,21 +592,22 @@ margin-left: 5px;
     .tsd-right .heading {
         width: 100%;
         display: flex;
-        justify-content: flex-end;
-        gap: 30%;
-        padding-right: 5%;
+        justify-content:space-evenly;
+        /* gap: 20%; */
+        /* padding-right: 5%; */
     }
     .tsd-right .heading p{
         font-size: 22px;
-        line-height: 46px;
+        line-height: 28px;
         color: #000000;
     }
     .tsd-right .heading span{
         font-size: 16px;
-        line-height: 46px;
+        line-height: 28px;
         color: #E27998;
     }
 .progress-bar-container{
+    padding: 1rem 0rem;
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
@@ -606,7 +617,7 @@ margin-left: 5px;
 .total-consumed {
     position: absolute;
     top: 20px;
-    right: -110px;
+    right: -96px;
 }
 .total-consumed span,
 .total-remaining span{
@@ -624,7 +635,7 @@ margin-left: 5px;
 .total-remaining{
     position: absolute;
     bottom: 0px;
-    left: -110px;
+    left: -101px;
 }
 .progress-circle{
     width: 214px;
@@ -660,7 +671,7 @@ margin-left: 5px;
 /* -------------------- */
 
 /* media */
-@media (max-width:420px) {
+@media (max-width:367px) {
     .tst-left-b {
     padding: 20px;
     }
@@ -676,17 +687,64 @@ margin-left: 5px;
     .progress-bar-container {
     scale: 0.8;
     }
+    .graph_button_left {
+        line-height: 14px;
+    }
+    .i-button-box{
+        right: -21% !important;
+    }
+    .drop{
+        top: 7px;
+    left: 55px
+    }
+    .title{
+        margin-left: 0rem !important;
+    }
 }
+@media screen and (min-width:367px) and (max-width: 720px) {
+    .progress-bar-container {
+    scale: 0.8;
+    }
+    .tsd-right {
+    scale: 0.8;
+    }
+    .title{
+        margin-left: 0rem !important;
+    }
+    .graph_button_left {
+        /* line-height: 14px; */
+    }
+    .drop{
+        top: 15px;
+    margin-left: -43px;
+    }
+    .i-button-box{
+        right: -14% !important;
+    }
+ }
+ /****************************media query for mediun devices**************************************/
+ @media screen and (min-width: 720px) and (max-width: 1220px) {
+    .tsd-right {
+    scale: 0.8;
+    }
+    .i-button-box{
+        right: -10%;
+    }
+    .left{
+        margin-right: 5%;
+    }
+ }
 </style>
 <body>
 <div class="content">
     <div class="row ts-top">
-
+        <!-- <div class="title">
+            <p style="margin:1rem 0rem;">Clients Stats</p>
+        </div> -->
         <div class="col-lg-8 tst-left">
-
-            <div class="tst-left-t">
-                <div class="heading">
-                    <p style="margin-top: -15px;">Clients Stats</p>
+           <div class="tst-left-t">
+                <div class="title">
+                    <p style="margin:1rem 0rem;">Clients Stats</p>
                 </div>
                 <div class="card-container">
                 <div class="client-card" style="color:#FF6C6CCA ;border: 1px solid #FF6C6CCA;">
@@ -810,6 +868,7 @@ margin-left: 5px;
                 </div>
             </div>           
         </div>
+<?php $progressBarData = fetchDataSql($clientId, '', '',4); ?>
         <div class="col-lg-4 tst-right">
             <div class="set-goal">
                 <div class="heading">
@@ -819,7 +878,7 @@ margin-left: 5px;
                 </div>
                 <img src="images/fruits.svg" alt="">
                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                    <input name="setgoal" required min="1" type="number" id="set-goal" placeholder="00000 BPM">
+                    <input name="setgoal" value="<?=$progressBarData[0]['calorie']?>" required min="1" type="number" id="set-goal" placeholder="00000 BPM">
                     <input name="clientid"  type="hidden" value="<?php echo($clientId) ?>">
                     <button type="submit" name="savegoal" id="save-goal">Set</button>
                 </form>
@@ -830,17 +889,17 @@ margin-left: 5px;
 
 
 // All Data Total Sum
-$allDataSum = fetchDataSql($clientId, '', $today->format('Y-3-d'), 1)[0]['SUM(caloriesconsumed)'];
+$allDataSum = fetchDataSql($clientId, '', $today->format('Y-3-d'), 1)[0]['SUM(caloriesConsumed)'];
 // Today Data Sum
-$todayData = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),2)[0]['SUM(caloriesconsumed)'];
+$todayData = fetchDataSql($clientId, $today->format('Y-m-d'), $today->format('Y-m-d'),2)[0]['SUM(caloriesConsumed)'];
 // Week Average
 $pastWeek =new DateTime();
 $pastWeek->modify('-1 week');
-$weekAvg = fetchDataSql($clientId,$pastWeek->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(caloriesconsumed)'];
+$weekAvg = fetchDataSql($clientId,$pastWeek->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(caloriesConsumed)'];
 // Month Average
 $pastMonth = new DateTime();
 $pastMonth->modify('-1 month');
-$monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(caloriesconsumed)'];
+$monthAvg = fetchDataSql($clientId,$pastMonth->format('Y-m-d'), $today->format('Y-m-d'))[0]['avg(caloriesConsumed)'];
 ?>
     <div class="row ts-down">
         <div class="col-lg-7 tsd-left">
@@ -886,7 +945,7 @@ $j = count($pastActivityData);
                 <div class="heading-border"></div>
                 <div class="activity-container">
 <?php while($k<$j){
-    $date = new DateTime($pastActivityData[$k]['time']);
+    $date = new DateTime($pastActivityData[$k]['dateandtime']);
 ?>
                     <div class="activity-box">
                         <div class="activity-date">
@@ -896,7 +955,7 @@ $j = count($pastActivityData);
                         <div class="activity-border"></div>
                         <div class="activity-data">
                             <span class="up"><?php echo (ucwords($pastActivityData[$k]['meal'])) ?></span>
-                            <span class="down"><?php echo ($pastActivityData[$k]['caloriesconsumed']) ?> Kcal</span>
+                            <span class="down"><?php echo ($pastActivityData[$k]['caloriesConsumed']) ?> Kcal</span>
                         </div>
                         <div class="activity-time">
                             <span><?php echo ($date->format('h:i A')) ?></span>
@@ -913,7 +972,7 @@ $calorieConsumed = fetchDataSql($clientId, $today->format('Y-m-d'), $today->form
 if(empty($calorieConsumed)){
     $calorieConsumed = 0;
 }else{
-    $calorieConsumed = $calorieConsumed[0]['SUM(caloriesconsumed)'];
+    $calorieConsumed = $calorieConsumed[0]['SUM(caloriesConsumed)'];
 }
 if(empty($progressBarData) OR $progressBarData[0]['calorie'] == 0 ){
     $currentGoal =  0;
@@ -970,7 +1029,7 @@ while($yearly_last_month >= $yearly_month){
     
     $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
     $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
-    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1, $yearly_Month_2,3)[0]['avg(caloriesconsumed)'];
+    $yearly_Data = (int) fetchDataSql($clientId, $yearly_Month_1, $yearly_Month_2,3)[0]['avg(caloriesConsumed)'];
 
     array_push($wholeYearData['value'], $yearly_Data);
     array_push($wholeYearData['month'], $yearly_month->format('M'));
@@ -991,7 +1050,7 @@ if($today->format('d') == '01'){
     $month_pop = 1;
 }
 while ($monthly_LastDay >= $monthly_Month) {
-    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('Y-m-d'), $monthly_Month->format('Y-m-d'),2)[0]['SUM(caloriesconsumed)'];
+    $monthly_Data = (int) fetchDataSql($clientId,$monthly_Month->format('Y-m-d'), $monthly_Month->format('Y-m-d'),2)[0]['SUM(caloriesConsumed)'];
 
     array_push($wholeMonthData['value'],$monthly_Data);
     array_push($wholeMonthData['date'], $monthly_Month->format('d'));
@@ -1016,7 +1075,7 @@ if($today->format('l')== "Monday"){
 while($weekly_Day <= $weekly_lastDay){
     $weekly_Data = fetchDataSql($clientId, $weekly_Day->format('Y-m-d'), $weekly_Day->format('Y-m-d'),2);
 
-    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(caloriesconsumed)']);
+    array_push($wholeWeekData['value'], (int) $weekly_Data[0]['SUM(caloriesConsumed)']);
     array_push($wholeWeekData['day'], $weekly_Day->format('D'));
     $weekly_Day->modify("+1 day");
 }
