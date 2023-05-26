@@ -36,7 +36,7 @@ if(isset($_POST['dates'])){
         $Custom_Day1 = new DateTime(substr($_POST['dates'][0],4,11));
         $Custom_Day2 = new DateTime(substr($_POST['dates'][1],4,11));
         while($Custom_Day2 >= $Custom_Day1){
-            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+            $query="SELECT * FROM heartrate WHERE  client_id= '$clientId' AND 
                     `dateandtime` >= '".$Custom_Day1->format('Y-m-d')." 00:00:00'
                     AND `dateandtime` <= '".$Custom_Day1->format('Y-m-d')." 23:59:59';";
             $CustomData = fetchPastActivity($clientId,$query);
@@ -103,12 +103,18 @@ if(isset($_POST['dates'])){
 </head>
 <?php include 'navbar.php' ?>
 <style>
+    *{
+        box-sizing: border-box;
+    }
     .heading p {
     font-family: 'NATS';
     font-style: normal;
     font-weight: 400;
-    font-size: 44px;
+    font-size: 40px;
     line-height: 70px;
+}
+a{
+    text-decoration: none !important;
 }
 .tab {
   overflow: hidden;
@@ -128,7 +134,7 @@ if(isset($_POST['dates'])){
 }
 #daterange-btn{
     position: absolute;
-    top: 5px;
+    top: 9px;
     left: 92px;
 }
 .tab_button_side{
@@ -141,7 +147,7 @@ if(isset($_POST['dates'])){
   background-color: #f1f1f1; */
   border: 1px solid #F8F5F5;
   width: 365px;
-height: 27px;
+  height: 35.47px;
 border-top-left-radius: 1em!important;
 border-bottom-left-radius: 1em!important;
 border-top-right-radius: 1em!important;
@@ -152,7 +158,7 @@ border-top-right-radius: 1em!important;
     border: 1px solid #FCFBFB;
     border-radius: 0px;
     width: 85.35px;
-height: 24px;
+    height: 35.47px;
   float: left;
   border: none;
   outline: none;
@@ -223,7 +229,7 @@ border-bottom-left-radius: 1em!important;
     background: linear-gradient(217.35deg, #F97EAA 0%, #C389D5 100%);
     border: 1px solid #E266A9;
     border-radius: 10px;
-    margin: 10px 0 0 0;
+    margin: 28px 0 0 0;
     width: 100px;
     height: 120px;
     display: flex;
@@ -248,7 +254,7 @@ border-bottom-left-radius: 1em!important;
 /* -------------------Calorie Tab Content------------------- */
 .activity-container{
     /* margin: 3%; */
-    padding: 3%;
+    padding: 5%;
 }
 .activity-container p{
     font-family: 'NATS';
@@ -302,7 +308,7 @@ color: #000000;
 }
 /* -----------------------Resposnive New----------------------- */
 .ph-left{
-    padding-left: 3%;
+    padding-left: 5%;
 }
 .ph-right {
     display: flex;
@@ -327,7 +333,7 @@ color: #000000;
     }
     .ph-right{
         position:absolute;
-        top: -45px;
+        top: -70px;
         right: 5px;
         scale: 0.9;
         padding: 0;
@@ -343,6 +349,28 @@ color: #000000;
         right: -40px;
         scale: 0.65;
         padding: 0;
+    }
+}
+/*************************MEDIA QUERY FOR SMALL DEVICES ******************************/
+@media screen and (max-width: 720px) {
+    .flex-box{
+        padding: 0px !important;
+    }
+    .heading p {
+        font-size: 32px;
+    }
+    #daterange-btn {
+        top: 19px;
+    left: 45px;
+}
+}
+/****************************media query for mediun devices**************************************/
+@media screen and (min-width: 720px) and (max-width:815px) {
+    .tab{
+        width:312px;
+    }
+    .tab button{
+        width: 67.35px;
     }
 }
 </style>
@@ -398,7 +426,7 @@ color: #000000;
                                         while($yearly_last_month >= $yearly_month){
                                             $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
                                             $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
-                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                                            $query="SELECT * FROM heartrate WHERE  client_id= '$clientId' AND 
                                                     `dateandtime` >= '".$yearly_Month_1." 00:00:00'
                                                     AND `dateandtime` <= '".$yearly_Month_2." 23:59:59';";
                                             $yearly_Data = fetchPastActivity($clientId,$query);
@@ -458,7 +486,7 @@ color: #000000;
                                         while($yearly_last_month >= $yearly_month){
                                             $yearly_Month_1 = $yearly_month->format('Y-m')."-"."01";
                                             $yearly_Month_2 =  $yearly_month->format('Y-m')."-". $yearly_month->format('t');
-                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                                            $query="SELECT * FROM heartrate WHERE  client_id= '$clientId' AND 
                                                     `dateandtime` >= '".$yearly_Month_1." 00:00:00'
                                                     AND `dateandtime` <= '".$yearly_Month_2." 23:59:59';";
                                             $yearly_Data = fetchPastActivity($clientId,$query);
@@ -516,7 +544,7 @@ color: #000000;
                                         }
                                         
                                         while($monthly_LastDay >= $monthly_Month){
-                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                                            $query="SELECT * FROM heartrate WHERE  client_id= '$clientId' AND 
                                                     `dateandtime` >= '".$monthly_Month->format('Y-m-d')." 00:00:00'
                                                     AND `dateandtime` <= '".$monthly_Month->format('Y-m-d')." 23:59:59';";
                                             $monthly_Data = fetchPastActivity($clientId,$query);
@@ -574,7 +602,7 @@ color: #000000;
                                         }
                                         
                                         while($weekly_Day <= $weekly_lastDay){
-                                            $query="SELECT * FROM heartrate WHERE clientID= '$clientId' AND 
+                                            $query="SELECT * FROM heartrate WHERE  client_id= '$clientId' AND 
                                                     `dateandtime` >= '".$weekly_Day->format('Y-m-d')." 00:00:00'
                                                     AND `dateandtime` <= '".$weekly_Day->format('Y-m-d')." 23:59:59';";
                                             $weekly_Data = fetchPastActivity($clientId,$query);
