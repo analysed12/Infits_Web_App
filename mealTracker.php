@@ -25,7 +25,8 @@ function fetchData($client_id)
 
 function fetchInformation($result, $day)
 {
-  if ($result->num_rows > 0) {
+    $total=mysqli_num_rows($result);
+  if ($total > 0) {
     while ($row = $result->fetch_assoc()) {
       // Decode the JSON data for each day
       $daydata = json_decode($row[$day], true);
@@ -39,7 +40,8 @@ function compute($info, $time, $subtime)
   foreach ($info[$time][$subtime] as $value) {
     $sqld = "SELECT * FROM default_recipes WHERE drecipe_id = $value";
     $resultd = mysqli_query($conn, $sqld);
-    if (mysqli_num_rows($resultd) > 0) {
+    $total=mysqli_num_rows($resultd);
+    if ($total > 0) {
       while ($row = mysqli_fetch_assoc($resultd)) {
         ?>
 <div class="d-flex justify-content-center flex-column justify-content-center text-center me-4">
@@ -429,8 +431,10 @@ function update($client_id, $day)
  <!--------------breakfast recipes---------->
     <?php
     $sql = "SELECT * FROM `default_recipes` where drecipe_category='breakfast'";
-    echo $sql;
+    // echo $sql;
     $res = mysqli_query($conn, $sql);
+    $total=mysqli_num_rows($res);
+    if($total>0){
     ?>
     <div class="flex row">
         <?php $counter = 0;
@@ -476,7 +480,18 @@ function update($client_id, $day)
                     <p>10:52 a.m.</p>
                 </div>
             </div>
-            <?php } ?>
+            <?php }
+            }
+                else{?>
+                    
+
+  
+                    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                        <img src="images/Thanksgiving Day.svg" class="image">
+                        <p style="font-size:40px;text-align:center; color: black;">No image shared by the client yet!</p> 
+                    </div>
+<!-----------------------------Calender--------------------------------><?php
+                 } ?>
         </div>
 </div>
 
@@ -486,8 +501,10 @@ function update($client_id, $day)
  <!--------------Lunch recipes---------->
     <?php
     $sql = "SELECT * FROM `default_recipes` where drecipe_category='lunch'";
-    echo $sql;
+    // echo $sql;
     $res = mysqli_query($conn, $sql);
+    $total1=mysqli_num_rows($res);
+    if($total1>0){
     ?>
     <div class="flex row">
         <?php $counter = 0;
@@ -533,7 +550,21 @@ function update($client_id, $day)
                     <p>10:52 a.m.</p>
                 </div>
             </div>
-            <?php } ?>
+            <?php } 
+            }
+            else{
+                ?>                    
+
+  
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                  <img src="images/Thanksgiving Day.svg" class="image">
+                  <p style="font-size:40px;text-align:center; color: black;">No image shared by the client yet!</p> 
+                  
+                </div>
+                       
+            <!-----------------------------Calender--------------------------------><?php
+                            
+                    }        ?>
         </div>
 </div>
 
@@ -541,8 +572,11 @@ function update($client_id, $day)
     <!--------------snacks recipes---------->
     <?php
     $sql = "SELECT * FROM `default_recipes` where drecipe_category='snacks'";
-    echo $sql;
+    // echo $sql;
     $res = mysqli_query($conn, $sql);
+    
+    $total2=mysqli_num_rows($res);
+    if($total2>0){
     ?>
     <div class="flex row">
         <?php $counter = 0;
@@ -588,7 +622,16 @@ function update($client_id, $day)
                     <p>10:52 a.m.</p>
                 </div>
             </div>
-            <?php } ?>
+            <?php } }
+            else {?>
+                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                  <img src="images/Thanksgiving Day.svg" class="image">
+                  <p style="font-size:40px;text-align:center; color: black;">No image shared by the client yet!</p> 
+                  
+                </div>
+                <?php
+            
+            } ?>
         </div>
 </div>
 
@@ -596,8 +639,11 @@ function update($client_id, $day)
  <!--------------dinner recipes---------->
     <?php
     $sql = "SELECT * FROM `default_recipes` where drecipe_category='dinner'";
-    echo $sql;
+    // echo $sql;
     $res = mysqli_query($conn, $sql);
+    
+    $total3=mysqli_num_rows($res);
+    if($total3>0){
     ?>
     <div class="flex row">
         <?php $counter = 0;
@@ -643,7 +689,17 @@ function update($client_id, $day)
                     <p>10:52 a.m.</p>
                 </div>
             </div>
-            <?php } ?>
+            <?php }}
+            else{
+                ?>
+                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                  <img src="images/Thanksgiving Day.svg" class="image">
+                  <p style="font-size:40px;text-align:center; color: black;">No image shared by the client yet!</p> 
+                  
+                </div>
+                <?php
+            
+            } ?>
         </div>
 </div>
 <script>

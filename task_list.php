@@ -504,7 +504,13 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
             </div>
         </div>
-<?php } ?>
+<?php 
+ }
+ else{
+    echo '<script>window.location.href = "tasklist.php";</script>';
+
+}
+ ?>
         <div class="row">
             <div class="col">
                 <div class="create-task">

@@ -223,8 +223,9 @@ margin-bottom: 10px;
   overflow: none;
 }
 .left{     
-  /* margin-top: -25px; */
-  margin-left: 40px;
+  
+ 
+  margin-top:2rem;
 }
 .left h1{
   font-size: 40px;
@@ -282,7 +283,7 @@ line-height: 45px;
       <div id="slider-content"> </div>
     </div>
 
-    <div class="images" style="display:flex;flex-wrap:wrap;width:100%; margin-top:50px;flex-direction:row !important; margin:30px auto auto 0px">
+    <div class="images" style="display:flex;flex-wrap:wrap;width:100%; margin-top:50px;flex-direction:row !important; justify-content: center">
         <div class="img "style="background: linear-gradient(208.27deg, rgba(255, 108, 108, 0.891) 40.23%, rgba(255, 92, 0, 0.468) 95.3%);border-radius: 20px;width: 274.26px;height: 270.88px; margin:30px 65px;">
         <div class="" style="flex-direction:column;display:flex;">
 
