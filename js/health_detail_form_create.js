@@ -199,8 +199,8 @@ function closePopup() {
 
 // OnClick Function to Save Popup Details
 function savePopup(e) {
-    console.log(e);
-    console.log(popup);
+    // console.log(e);
+    // console.log(popup);
 
     const queId = popup.getAttribute("data-queId");
     const queNumber = popup.getAttribute("data-que-number");
@@ -213,8 +213,11 @@ function savePopup(e) {
         "Question Value" : question,
         "Question Answer Type" : ansType
     }
+    // newQuestion(1, 1, 1);
+    // addQuestionOption();
 
-    console.table(questionDetails);
+console.log('sdksncksnc');
+    console.log(questionDetails);
 }
 
 // For Checking Popup Options Input Type
@@ -291,9 +294,9 @@ function newQuestionOption(container, divClass, optionId, number, value) {
 
     let OptionContent = `<p>${value} ${number}</p>
 
-                            <img src="icons/edit-pencile.svg" title="Edit" onclick="editInputRow(this)">
-                            <img src="icons/tick_button.svg" alt="Save" title="Save" id="saveValue" onclick="getEditInputRow(this)">
-                            <img src="icons/delete.svg" alt="Delete" title="Delete" id="deleteInput" onclick="rm(this)">`
+    <img src="icons/edit-pencile.svg" title="Edit" onclick="editInputRow(this)">
+    <img src="icons/tick_button.svg" alt="Save" title="Save" id="saveValue" onclick="getEditInputRow(this)">
+    <img src="icons/delete.svg" alt="Delete" title="Delete" id="deleteInput" onclick="rm(this)">`
 
     newQuestionOption.innerHTML = OptionContent;
     // document.querySelector(".custom-input-row").appendChild(newQuestionOption);

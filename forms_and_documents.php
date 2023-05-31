@@ -1,10 +1,10 @@
 <?php
-error_reporting(0);
 $conn = new mysqli("localhost", "root", "", "infits");
 
 if ($conn->connect_error) {
     die("Connection Failed: " . $conn->connect_error);
 }
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -371,6 +371,7 @@ padding-bottom:0.5rem;
   margin-left: 50px;
   margin-right: 45px;/* Adjust the height as needed */
   overflow-y: scroll;
+  width: 100%;
 
 }
 .sub-content::-webkit-scrollbar{
@@ -476,22 +477,23 @@ padding-bottom:0.5rem;
                 <button><a href="health_viewall_forms.php">View all</a></button>
             </div>
             <div class="form-card-container">
-
             <?php
-                    for ($i = 0; $i < 3; $i++) {
+            $sql = "SELECT * from dietitian_forms where dietitianuserID = '{$_SESSION['dietitianuserID']}'";
+            $result = $conn->query($sql);
+                while($form = $result->fetch_assoc()) {
                 ?>
                 <div class="form-cards">
                     <img class="vector" src="icons/form-card-vector.svg">
                     <div class="form-content">
-                    <h4>Form 1 (Default)</h4>
-                        <p><span>20</span> Question</p>
+                    <h4><?=$form['form_name']?></h4>
+                        <p><span><?=$form['total_que']?></span> Question</p>
                     </div>
                     <div class="options" onclick="showPopup(this)">
                         <img src="icons/3dots.svg" alt="options" title="options">
                     </div>
                     <div class="option-popup">
-                        <button>Delete</button>
-                        <button>Edit</button>
+                        <button class="formDelete">DELTE</button>
+                        <button class="formEdit"  data-form-id="<?=$form['form_id']?>"><a href="health_detail_form_edit.php?id=<?=$form['form_id']?>">EDIT</a></button>
                     </div>
                 </div>
             <?php
@@ -508,7 +510,7 @@ padding-bottom:0.5rem;
             <div class="client-card-container">
                 
                 <?php
-                    $sql = "SELECT DISTINCT ClientName FROM `clientcon` LIMIT 8";
+                    $sql = "SELECT * FROM client_forms_docs WHERE dietitianuserID = '{$_SESSION['dietitianuserID']}'";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -518,7 +520,7 @@ padding-bottom:0.5rem;
                             <img class="vector" src="icons/client-card-vector.svg">
                             <div class="card-content">
                                 <img src="images/client.png" alt="Profile" id="clientProfile">
-                                <p> <?php echo $row["ClientName"]; ?> </p>
+                                <p> <?=$row['clientuserID']?> </p>
                                 <div class="btn-box">
                                     <a href="health_detail_form.php?form=show" id="clientForm">Form</a>
                                     <a href="health_detail_form.php?document=show" id="clientDocument">Documents</a>
@@ -555,6 +557,7 @@ padding-bottom:0.5rem;
         clientDocument.addEventListener("click", () => {
             document.location.href = 'health_detail_form.php?documents=show';
         });
+
     </script>
 </body>
 

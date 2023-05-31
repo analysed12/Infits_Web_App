@@ -406,7 +406,7 @@ if (isset($_GET['logout'])) {
                 src="images/vec_payments.svg" class="nav-icon">Payments</a>
         <a id="create_recipe" class="sidenavlink nav-all_recipes nav-create_recipe" href="all_recipes.php"><img
                 src="images/vec_recipies.svg" class="nav-icon">Recipes</a>
-        <a id="healthform" class="sidenavlink nav-healthform" href="forms_and_documents.php"><img src="images/vec_health_form.svg"
+        <a id="healthform" class="sidenavlink nav-healthform nav-forms_and_documents nav-health_detail_form_edit" href="forms_and_documents.php"><img src="images/vec_health_form.svg"
                 class="nav-icon">Health Form</a>
 
         <div class="menu-bottom">

@@ -671,7 +671,15 @@ line-height: 111.34%;
                 </div>
 
                 <div class="form-question-container">
+                <div class="form-value">
+                                <h4 class="question" data-queId="${queId}" data-que-number="${number}">Question ${number}</h4>
+                                <p class="answer">Answer</p>
+                            </div>
 
+                        <div class="options">
+                            <img src="icons/edit-pencile.svg" alt="Edit" class="option editQuestion" title="Edit Question" onClick="editQuestion(this)">
+                            <img src="icons/delete.svg" alt="Delete" class="option deleteQuestion" title="Delete Question" onCLick="deleteQuestion(this)">
+                        </div>
                     <!-- Don't Add Elements here Elements are Added With JavaScript -->
 
                 </div>
@@ -754,28 +762,6 @@ line-height: 111.34%;
 
     <?php
 
-    $conn = new mysqli("localhost", "root", "", "infits");
-
-    if ($conn->connect_error) {
-        die("Connection Failed: " . $conn->connect_error);
-    }
-
-    $uniqueFormID = uniqid();
-
-    echo $uniqueFormID;
-
-
-    if(isset($_POST['formName'])){
-        $formName = $_POST['formName'];
-
-        $sql = "INSERT INTO `health_form_details`(`formID`, `formName`, `uniqueFormID`, `dietitianID`, `createdAt`, `updatedAt`) VALUES (null,'$formName','$uniqueFormID','13',null,null)";
-
-        $result = $conn->query($sql);
-
-        if($result){
-            echo "fORM nAME cREATED";
-        }
-    }
     ?>
 </body>
 
