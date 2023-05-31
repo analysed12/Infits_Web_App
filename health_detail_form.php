@@ -5,6 +5,11 @@ $conn = new mysqli("localhost", "root", "", "infits");
 if ($conn->connect_error) {
     die("Connection Failed: " . $conn->connect_error);
 }
+if(isset($_GET['client_id'])){
+
+    $client_id = $_GET['client_id'];
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -647,50 +652,51 @@ if ($conn->connect_error) {
             <div id="form-details">
 
             <?php
-            $QueAns = "SELECT `question`, `answers` FROM `clientcon`";
-            $result = $conn->query($QueAns);
+            $sql = "SELECT * FROM client_forms_docs WHERE client_id = '$client_id' and dietitianuserID = '{$_SESSION['dietitianuserID']}'";
+            $result = $conn->query($sql);
             if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    if ($row["question"] == "Biochemical dataReport image") {
-                        continue ;
-                    }
-                ?>
+                $data = $result->fetch_assoc()['form_data'];
+                $data = json_decode($data,true);
+
+                foreach($data as $que) { ?>
                 <div class="details">
-                    <p id="question"><?php echo $row["question"]; ?></p>
-                    <p id="answer"><?php echo $row["answers"]; ?></p>
+                    <p id="question"><?php echo $que["que"]; ?></p>
+                    <p id="answer"><?php echo $que["ans"]; ?></p>
                 </div>
-                <?php
-                  }
-            }
-            ?>
+            <?php } } ?>
 
             </div>
 
             <div id="form-documents">
 
                 <?php
-                for ($i = 0; $i < 6; $i++) {
-
-                    ?>
+                $sql = "SELECT * FROM client_forms_docs WHERE client_id = '$client_id' and dietitianuserID = '{$_SESSION['dietitianuserID']}'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    $data = $result->fetch_assoc()['docs'];
+                    $data = json_decode($data,true);
+    
+                    foreach($data as $doc) { ?>
                     <div class="details">
                         <div class="title">
                             <img src="icons/pdf.svg" alt="PDF">
                             <div class="info-box">
-                                <p class="name">Diabetes Report</p>
+                                <p class="name"><?=$doc['docName']?></p>
                                 <div class="minor-details">
-                                    <span>11 Aug,2022</span>
-                                    <span>2.6MB</span>
+                                    <span><?=$doc['uploadedOn']?></span>
+                                    <span><?=$doc['fileSize']?></span>
                                 </div>
                             </div>
                         </div>
                         <div class="options">
-                            <img src="icons/download.svg" alt="Download" title="Download">
+                            <a href="<?=$doc['fileLink']?>"  download ><img src="icons/download.svg" alt="Download" title="Download"></a>
                             <button id="popup_btn" style="background-color:white;border:none"><img src="icons/share.svg" alt="Share" title="Share" class="shareBtn"></button>
                             <img src="icons/delete.svg" alt="Delete" title="Delete">
                         </div>
                     </div>
                 <?php
                 }
+            }
 
                 ?>
                 <div id="myModal" class="modal">
